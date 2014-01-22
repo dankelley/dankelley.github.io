@@ -19,7 +19,7 @@
 {% endif %}
 
 <p><i>Tags:</i>
-{% for tag in page.tags %} <a href="FUCK{{ site.url }}/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
+{% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
 {% endfor %}
 
 {% if page.comments %}
