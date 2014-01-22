@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/style.css' />
+<head>
+<title>{{ page.title }}</title>
+</head>
+<body>
+{% if page.previous.url %}
+<a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">
+    Previous
+</a>
+{% endif %}
+| <a href='/'>Home</a> |
+{% if page.next.url %}
+<a href="{{page.next.url}}" title="Next Post: {{page.next.title}}">
+    Next
+</a>
+{% endif %}
+
+<p><i>Tags:</i>
+{% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
+{% endfor %}
+</p>
+
+{{ content }}
+</body>
+</html>
+

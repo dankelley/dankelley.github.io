@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<head>
+<title>colourizing along a trajectory</title>
+</head>
+<body>
+
+| <a href='/'>Home</a> |
+
+<a href="/r/2014/01/22/1D-optimization-in-R.html" title="Next Post: 1D optimization in R">
+    Next
+</a>
+
+
+<p><i>Tags:</i>
+ <a href="/tags/R" title="View posts tagged with &quot;R&quot;">R</a>
+
+</p>
+
+<p><em>Abstract.</em> Demonstrate how to colourize an (x,y) curve according to z.</p>
+
+<p><strong>1. Introduction.</strong></p>
+
+<p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this generally with fake data.</p>
+
+<p><strong>2. Methods.</strong></p>
+
+<p>The R code given below demonstrates this with fake data. The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
+x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>50</span>
+y <span class='o'>&lt;-</span> x <span class='o'>*</span> <span class='m'>2</span><span class='o'>/</span><span class='m'>10</span> <span class='o'>+</span> x<span class='o'>^</span><span class='m'>2</span><span class='o'>/</span><span class='m'>10</span>
+z <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> length.out <span class='o'>=</span> length<span class='p'>(</span>x<span class='p'>))</span>
+zlim <span class='o'>&lt;-</span> range<span class='p'>(</span>z<span class='p'>)</span>
+npalette <span class='o'>&lt;-</span> <span class='m'>10</span>
+
+palette <span class='o'>&lt;-</span> oceColorsJet<span class='p'>(</span>npalette<span class='p'>)</span>
+drawPalette<span class='p'>(</span>zlim <span class='o'>=</span> zlim<span class='p'>,</span> col <span class='o'>=</span> palette<span class='p'>)</span>
+plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+segments<span class='p'>(</span>head<span class='p'>(</span>x<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span> head<span class='p'>(</span>y<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span>
+  tail<span class='p'>(</span>x<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span> tail<span class='p'>(</span>y<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span>
+  col <span class='o'>=</span> palette<span class='p'>[</span>findInterval<span class='p'>(</span>z<span class='p'>,</span> 
+    seq<span class='p'>(</span>zlim<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> zlim<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> length.out <span class='o'>=</span> npalette<span class='p'>))],</span>
+  lwd <span class='o'>=</span> <span class='m'>10</span><span class='p'>)</span>
+points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> pch <span class='o'>=</span> <span class='m'>20</span><span class='p'>)</span>
+</code></pre></div>
+<p><strong>3. Results.</strong></p>
+
+<p>The graph shows that this works reasonably well. The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
+
+<p><img src="/assets/colorline.png" alt="figure" /></p>
+
+<p>The method works well, and is flexible in terms of colour schemes.</p>
+
+<p><em>Appendix 1: exercises</em> find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
+</body>
+</html>
+
