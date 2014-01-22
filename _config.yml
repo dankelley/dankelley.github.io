@@ -1,2 +1,4 @@
 pygments: true
 baseurl: /
+comments: true
+
