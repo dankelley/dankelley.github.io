@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<head>
+<title>1D optimization in R</title>
+</head>
+<body>
+
+<a href="/r/2014/01/18/using-the-plyr-package.html" title="Previous Post: using the plyr package">
+    Previous
+</a>
+
+| <a href='/'>Home</a> |
+
+
+<p><i>Tags:</i>
+ <a href="/tags/R" title="View posts tagged with &quot;R&quot;">R</a>
+ <a href="/tags/oceanography" title="View posts tagged with &quot;oceanography&quot;">oceanography</a>
+
+
+
+
+
+</p>
+
+<a href="http://dankelley.github.io#disqus_thread" data-disqus-identifier=""></a>
+
+<p><em>Abstract.</em> The method of one-dimensional optimization is explained in the context of capillary waves.</p>
+
+<p><strong>1. Introduction.</strong></p>
+
+<p>R provides functions for both one-dimensional and multi-dimensional optimization. The second topic is much more complicated than the former (see e.g. Nocedal 1999) and will be left for another day.</p>
+
+<p>A convenient function for 1D optimization is <code>optimize()</code>, also known as <code>optimise()</code>. Its first argument is a function whose minimum (or maximum) is sought, and the second is a two-element vector giving the range of values of the independent variable to be searched. (See <code>?optimize</code> for more.)</p>
+
+<p><strong>2. Application.</strong></p>
+
+<p>As an example, consider the phase speed of deep gravity-capillary waves, which is given by $\omega/k$ where $\omega$ is the frequency and $k$ is the wavenumber, and the two are bound together with the dispersion relationship $\omega^2=gk+\sigma k^3/\rho$, where $g$ is the acceleration due to gravity, $\sigma$ is the surface tension parameter (0.074 N/m for an air-water interface) and $\rho$ is the water density (1000 kg/m^3 for fresh water). This yields wave speed given by the following R function.</p>
+<div class='highlight'><pre><code class='r'>phaseSpeed <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>k<span class='p'>)</span> <span class='p'>{</span>
+    g <span class='o'>&lt;-</span> <span class='m'>9.8</span>
+    sigma <span class='o'>&lt;-</span> <span class='m'>0.074</span>  <span class='c1'># water-air</span>
+    rho <span class='o'>&lt;-</span> <span class='m'>1000</span>  <span class='c1'># fresh water</span>
+    omega2 <span class='o'>&lt;-</span> g <span class='o'>*</span> k <span class='o'>+</span> sigma <span class='o'>*</span> k<span class='o'>^</span><span class='m'>3</span><span class='o'>/</span>rho
+    sqrt<span class='p'>(</span>omega2<span class='p'>)</span><span class='o'>/</span>k
+<span class='p'>}</span>
+</code></pre></div>
+<p>Readers with a background in the topic of waves may know that there is a minimum phase speed at wavelengths of about 2 cm, or a $k$ of approximately $2\pi/0.02$ which is about 300. It always makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.</p>
+<div class='highlight'><pre><code class='r'>k <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>100</span><span class='p'>,</span> <span class='m'>1000</span><span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>100</span><span class='p'>)</span>
+par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
+plot<span class='p'>(</span>k<span class='p'>,</span> phaseSpeed<span class='p'>(</span>k<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> xlab <span class='o'>=</span> <span class='s'>&quot;Wavenumber&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Phase speed&quot;</span><span class='p'>)</span>
+</code></pre></div>
+<p><img src="/assets/2014-01-22-1D.png" alt="graph" /></p>
+
+<p>The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to <code>optimize()</code>.</p>
+<div class='highlight'><pre><code class='r'>o <span class='o'>&lt;-</span> optimize<span class='p'>(</span>phaseSpeed<span class='p'>,</span> range<span class='p'>(</span>k<span class='p'>))</span>
+phaseSpeed<span class='p'>(</span>o<span class='o'>$</span>minimum<span class='p'>)</span>
+<span class='c1'>## [1] 0.2321</span>
+</code></pre></div>
+<p>This speed is not especially fast; it would take about a heartbeat to move past your hand.</p>
+
+<p><strong>3. Exercises</strong></p>
+
+<ol>
+<li>
+<p>Use <code>str(o)</code> to learn about the contents of the optimized solution.</p>
+</li>
+
+<li>
+<p>Use <code>abline()</code> to indicate the wavenumber at the speed minimum.</p>
+</li>
+
+<li>
+<p>Try other functions that are of interest to you.</p>
+</li>
+
+<li>
+<p>Use the multi-dimensional optimizer named <code>optim()</code> on this problem.</p>
+</li>
+</ol>
+
+<p><em>References</em></p>
+
+<p>Jorge Nocedal and Stephen J. Wright, 1999. <em>Numerical optimization.</em> Springer series in operations research. Springer-Verlag, New York, NY, USA.</p>
+
+
+</body>
+</html>
+

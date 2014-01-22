@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<head>
+<title>using the plyr package</title>
+</head>
+<body>
+
+<a href="/r/2014/01/15/colourizing-along-a-trajectory.html" title="Previous Post: colourizing along a trajectory">
+    Previous
+</a>
+
+| <a href='/'>Home</a> |
+
+<a href="/r/2014/01/22/1D-optimization-in-R.html" title="Next Post: 1D optimization in R">
+    Next
+</a>
+
+
+<p><i>Tags:</i>
+ <a href="/tags/R" title="View posts tagged with &quot;R&quot;">R</a>
+
+
+
+
+
+</p>
+
+<a href="http://dankelley.github.io#disqus_thread" data-disqus-identifier=""></a>
+
+<p><em>Abstract.</em> The merits of the <code>plyr</code> package are illustrated.</p>
+
+<p><strong>1. Introduction.</strong></p>
+
+<p>The base R system provides <code>lapply()</code> and related functions, and the package <code>plyr</code> provides alternatives that are worth considering. It will be assumed that readers are familiar with <code>lapply()</code> and are willing to spend a few moments reading the <code>plyr</code> documentation, to see why the illustration here will use the <code>ldply()</code> function.</p>
+
+<p>The test task will be extraction of latitude (and then both latitude and longitude) from the <code>section</code> dataset in the <code>oce</code> package. (Users of that package may be aware that there is a built-in accessor for doing this, so results can easily be checked.)</p>
+
+<p><strong>2. Methods</strong></p>
+
+<p>First, load the data</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
+data<span class='p'>(</span>section<span class='p'>)</span>
+</code></pre></div>
+<p>Next, find latitudes using <code>lapply</code></p>
+<div class='highlight'><pre><code class='r'>lat <span class='o'>&lt;-</span> unlist<span class='p'>(</span>lapply<span class='p'>(</span>section<span class='p'>[[</span><span class='s'>&quot;station&quot;</span><span class='p'>]],</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>)</span> x<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]]))</span>
+</code></pre></div>
+<p>Next, find latitudes with <code>ldply</code></p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>plyr<span class='p'>)</span>
+lat <span class='o'>&lt;-</span> ldply<span class='p'>(</span>section<span class='p'>[[</span><span class='s'>&quot;station&quot;</span><span class='p'>]],</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>)</span> x<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]])</span>
+</code></pre></div>
+<p><strong>3. Results</strong></p>
+
+<p>The reader can check that the results match, although <code>ldply()</code> returns a data frame, not a vector as in the first method. Tests of speed</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>microbenchmark<span class='p'>)</span>
+microbenchmark<span class='p'>(</span>ldply<span class='p'>(</span>section<span class='p'>[[</span><span class='s'>&quot;station&quot;</span><span class='p'>]],</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>)</span> x<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]])</span><span class='o'>$</span>V1<span class='p'>,</span> 
+    unlist<span class='p'>(</span>lapply<span class='p'>(</span>section<span class='p'>[[</span><span class='s'>&quot;station&quot;</span><span class='p'>]],</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>)</span> x<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]])))</span>
+</code></pre></div><div class='highlight'><pre><code class='r'><span class='c1'>## Unit: milliseconds</span>
+<span class='c1'>##                                                               expr   min</span>
+<span class='c1'>##        ldply(section[[&quot;station&quot;]], function(x) x[[&quot;latitude&quot;]])$V1 18.99</span>
+<span class='c1'>##  unlist(lapply(section[[&quot;station&quot;]], function(x) x[[&quot;latitude&quot;]])) 18.36</span>
+<span class='c1'>##     lq median    uq   max neval</span>
+<span class='c1'>##  20.26  20.56 21.02 36.05   100</span>
+<span class='c1'>##  19.71  19.93 20.64 63.18   100</span>
+</code></pre></div>
+<p>indicate such a difference too small to be of much interest, at least in this case.</p>
+
+<p><strong>4. Discussion</strong></p>
+
+<p>Since <code>ldply()</code> returns a data frame, it is more flexible than <code>unlist()</code>, which returns a vector. For example, the following creates a data frame with columns for lat and lon:</p>
+<div class='highlight'><pre><code class='r'>latlon <span class='o'>&lt;-</span> ldply<span class='p'>(</span>section<span class='p'>[[</span><span class='s'>&quot;station&quot;</span><span class='p'>]],</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>)</span> c<span class='p'>(</span>x<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]],</span> x<span class='p'>[[</span><span class='s'>&quot;longitude&quot;</span><span class='p'>]]))</span>
+</code></pre></div>
+<p>A station plot is produced as follows.</p>
+<div class='highlight'><pre><code class='r'>mapPlot<span class='p'>(</span>coastlineWorld<span class='p'>,</span> projection <span class='o'>=</span> <span class='s'>&quot;orthographic&quot;</span><span class='p'>,</span> orientation <span class='o'>=</span> c<span class='p'>(</span><span class='m'>20</span><span class='p'>,</span> <span class='m'>-40</span><span class='p'>,</span> 
+    <span class='m'>0</span><span class='p'>))</span>
+mapPoints<span class='p'>(</span>latlon<span class='o'>$</span>V2<span class='p'>,</span> latlon<span class='o'>$</span>V1<span class='p'>,</span> pch <span class='o'>=</span> <span class='s'>&quot;+&quot;</span><span class='p'>,</span> cex <span class='o'>=</span> <span class='m'>1</span><span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
+</code></pre></div>
+<p><img src="/assets/plyr.png" alt="figure" /></p>
+
+<p><strong>5. Conclusions</strong></p>
+
+<p>The effort of learning how to use the <code>plyr</code> package is likely to pay off in more flexible code, particularly because of the use of data frames in that package. On this theme, note that the author of <code>plyr</code> is developing a similar package called <code>dplry</code>, which centres more closely on data frames and offers many new features; see <a href="http://blog.rstudio.org/2014/01/17/introducing-dplyr/">http://blog.rstudio.org/2014/01/17/introducing-dplyr/</a> for a blog item introducing <code>dplyr</code>.</p>
+
+
+</body>
+</html>
+
