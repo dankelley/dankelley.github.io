@@ -1,6 +1,6 @@
 ---
 layout: post
-title: colourizing along a trajectory
+title: Colourizing along a trajectory
 tags: R
 category: R
 year: 2014

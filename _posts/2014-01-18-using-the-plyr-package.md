@@ -1,6 +1,6 @@
 ---
 layout: post
-title: using the plyr package
+title: Using the plyr package in R
 tags: R
 category: R
 year: 2014

@@ -44,7 +44,7 @@ h1 {
     color:#444444;
     line-height:140%;
     margin-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 1ex;
 }
 
 h2 {
@@ -52,7 +52,7 @@ h2 {
     line-height:100%;
     color:#444444;
     margin-top: 0em;
-    margin-bottom: 1em;
+    margin-bottom: -0.5em;
 }
 
 
