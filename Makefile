@@ -1,4 +1,5 @@
 build:
 	jekyll build --trace
-	mv _site/tags .
+	rm -rf tags/*
+	mv _site/tags/* ./tags
 
