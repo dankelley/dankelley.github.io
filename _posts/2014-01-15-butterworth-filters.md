@@ -12,11 +12,11 @@ description: A series of examples with a tophat function illustrate the problem 
 
 *Abstract.* Demonstrate overshoot for butterworth filters in R.
 
-**1. Introduction.**
+# Introduction
 
 Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases.  For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical.  This post simply illustrates this with made-up data that the reader can experiment with.  
 
-**2. Methods.**
+# Methods
 
 First, create and plot some fake data, a top-hat function.  (Note the use of ``par`` to tighten the margins.)
 
@@ -51,22 +51,21 @@ b3 <- butter(3, W)
 y3 <- filtfilt(b3, y)
 points(x, y3, type='o', pch=20, col='forestgreen')
 
-legend("topright", lwd=2, col=c("black", "red", "blue", "green"),
+legend("topright", lwd=2, pch=20, 
+        col=c("black", "red", "blue", "forestgreen"),
         legend=c("Signal", "Order 1", "Order 2", "Order 3"))
 
 
 {% endhighlight %}
 
-**3. Results**
-
+# Results
 
 ![graph]({{ site.url }}/assets/butter.png)
 
-The graph illustrates; for the colour coding, see the code above.
 
 
-**4. Conclusions**
+# Conclusions
 
-Be careful in using butterworth filters of order 2 and higher.
+Be careful in using butterworth filters of order 2 and higher, at least in applications that are sensitive to overshoot (e.g. kinetic-energy timeseries).
 
 

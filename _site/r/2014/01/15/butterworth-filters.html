@@ -29,11 +29,11 @@
 
 <p><em>Abstract.</em> Demonstrate overshoot for butterworth filters in R.</p>
 
-<p><strong>1. Introduction.</strong></p>
+<h1 id="introduction">Introduction</h1>
 
 <p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases. For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical. This post simply illustrates this with made-up data that the reader can experiment with.</p>
 
-<p><strong>2. Methods.</strong></p>
+<h1 id="methods">Methods</h1>
 
 <p>First, create and plot some fake data, a top-hat function. (Note the use of <code>par</code> to tighten the margins.)</p>
 <div class='highlight'><pre><code class='r'>library<span class='p'>(</span>signal<span class='p'>)</span>
@@ -59,18 +59,17 @@ b3 <span class='o'>&lt;-</span> butter<span class='p'>(</span><span class='m'>3<
 y3 <span class='o'>&lt;-</span> filtfilt<span class='p'>(</span>b3<span class='p'>,</span> y<span class='p'>)</span>
 points<span class='p'>(</span>x<span class='p'>,</span> y3<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;forestgreen&#39;</span><span class='p'>)</span>
 
-legend<span class='p'>(</span><span class='s'>&quot;topright&quot;</span><span class='p'>,</span> lwd<span class='o'>=</span><span class='m'>2</span><span class='p'>,</span> col<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;black&quot;</span><span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>,</span> <span class='s'>&quot;green&quot;</span><span class='p'>),</span>
+legend<span class='p'>(</span><span class='s'>&quot;topright&quot;</span><span class='p'>,</span> lwd<span class='o'>=</span><span class='m'>2</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> 
+        col<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;black&quot;</span><span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>,</span> <span class='s'>&quot;forestgreen&quot;</span><span class='p'>),</span>
         legend<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;Signal&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 1&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 2&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 3&quot;</span><span class='p'>))</span>
 </code></pre></div>
-<p><strong>3. Results</strong></p>
+<h1 id="results">Results</h1>
 
 <p><img src="/assets/butter.png" alt="graph" /></p>
 
-<p>The graph illustrates; for the colour coding, see the code above.</p>
+<h1 id="conclusions">Conclusions</h1>
 
-<p><strong>4. Conclusions</strong></p>
-
-<p>Be careful in using butterworth filters of order 2 and higher.</p>
+<p>Be careful in using butterworth filters of order 2 and higher, at least in applications that are sensitive to overshoot (e.g. kinetic-energy timeseries).</p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
