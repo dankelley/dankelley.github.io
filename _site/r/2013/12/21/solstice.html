@@ -28,33 +28,33 @@
 <p>The <code>sunAngle()</code> function in the <code>oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
 
 <h1 id="methods">Methods</h1>
-<div class='highlight'><pre><code class='r'><span class='c1'>## Map with lines for sunrise/sunset direction on 2013 winter solstice.</span>
 
-<span class='c1'># should not need to edit below the next four lines</span>
-t <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21 17:11:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span> <span class='c1'># winter solstice</span>
+<p>First, set up the problem; these may be the only lines that need editing for other places or times.</p>
+<div class='highlight'><pre><code class='r'>t <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21 17:11:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span> <span class='c1'># winter solstice</span>
 xy <span class='o'>&lt;-</span> list<span class='p'>(</span>x<span class='o'>=</span><span class='m'>-63.60</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>44.65</span><span class='p'>)</span>          <span class='c1'># centre of map (Halifax)</span>
 D <span class='o'>&lt;-</span> <span class='m'>6</span>                                 <span class='c1'># map span in km</span>
-
-library<span class='p'>(</span>oce<span class='p'>)</span>
-library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
-
+</code></pre></div>
+<p>Next, use <code>sunAngle()</code> from the <code>oce</code> package to find the time of the sunrise and the azimuth at that moment. Here, <code>uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we start searching a quarter-day before the time of the actual solstice.</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
 t0 <span class='o'>&lt;-</span> t <span class='o'>-</span> <span class='m'>86400</span> <span class='o'>/</span> <span class='m'>4</span>
 sunrise <span class='o'>&lt;-</span> uniroot<span class='p'>(</span><span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span>
                    sunAngle<span class='p'>(</span>t<span class='p'>,</span> lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='p'>)</span><span class='o'>$</span>altitude<span class='p'>,</span>
                    interval<span class='o'>=</span>as.numeric<span class='p'>(</span>c<span class='p'>(</span>t0<span class='p'>,</span> t<span class='p'>)))</span><span class='o'>$</span>root
 sunrise <span class='o'>&lt;-</span> numberAsPOSIXct<span class='p'>(</span>sunrise<span class='p'>)</span>
-print<span class='p'>(</span>sunrise<span class='p'>)</span>
 azimuth <span class='o'>&lt;-</span> <span class='m'>90</span> <span class='o'>-</span> sunAngle<span class='p'>(</span>sunrise<span class='p'>,</span> lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='p'>)</span><span class='o'>$</span>azimuth
-D <span class='o'>&lt;-</span> D <span class='o'>/</span> <span class='m'>111</span>                           <span class='c1'># deg</span>
+</code></pre></div>
+<p>Now it is time to start with the mapping, which uses the <code>OpenStreetMap</code> package. Note the conversion of <code>D</code> from kilometres to degrees of latitude and longitude.</p>
+<div class='highlight'><pre><code class='r'>D <span class='o'>&lt;-</span> D <span class='o'>/</span> <span class='m'>111</span>                           <span class='c1'># deg</span>
 Dlon <span class='o'>&lt;-</span> D <span class='o'>/</span> cos<span class='p'>(</span>xy<span class='o'>$</span>y <span class='o'>*</span> pi <span class='o'>/</span> <span class='m'>180</span><span class='p'>)</span>
+</code></pre></div><div class='highlight'><pre><code class='r'>library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
 map <span class='o'>&lt;-</span> openmap<span class='p'>(</span>c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>+</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>-</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>-</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>+</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                minNumTiles<span class='o'>=</span><span class='m'>9</span><span class='p'>)</span>
 plot<span class='p'>(</span>map<span class='p'>)</span>
-<span class='c1'>## cx and cy are in &quot;map units&quot;, needed for lines</span>
-cx <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>2</span><span class='p'>])</span>
+</code></pre></div>
+<p>Now, it remains to draw the sunrise/sunset lines. The variables <code>cx</code> and <code>cy</code> are the centre points of the map, in map units (not latitude and longitude).</p>
+<div class='highlight'><pre><code class='r'>cx <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>2</span><span class='p'>])</span>
 cy <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span>
-points<span class='p'>(</span>cx<span class='p'>,</span> cy<span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
 d <span class='o'>&lt;-</span> diff<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span> <span class='c1'># scales as the map</span>
 <span class='kr'>for</span> <span class='p'>(</span>o <span class='kr'>in</span> d<span class='o'>*</span>seq<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> length.out<span class='o'>=</span><span class='m'>30</span><span class='p'>))</span> <span class='p'>{</span>
     lines<span class='p'>(</span>cx<span class='o'>+</span>c<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>)</span><span class='o'>*</span>d<span class='o'>*</span>cos<span class='p'>(</span>azimuth<span class='o'>*</span>pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span>
