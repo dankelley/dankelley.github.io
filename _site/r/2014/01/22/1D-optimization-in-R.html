@@ -51,7 +51,7 @@
 par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 plot<span class='p'>(</span>k<span class='p'>,</span> phaseSpeed<span class='p'>(</span>k<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> xlab <span class='o'>=</span> <span class='s'>&quot;Wavenumber&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Phase speed&quot;</span><span class='p'>)</span>
 </code></pre></div>
-<p><img src="/assets/2014-01-22-1D.png" alt="graph" /></p>
+<p><img src="/assets/optimize.png" alt="graph" /></p>
 
 <p>The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to <code>optimize()</code>.</p>
 <div class='highlight'><pre><code class='r'>o <span class='o'>&lt;-</span> optimize<span class='p'>(</span>phaseSpeed<span class='p'>,</span> range<span class='p'>(</span>k<span class='p'>))</span>

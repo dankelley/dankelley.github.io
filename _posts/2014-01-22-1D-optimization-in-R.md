@@ -45,7 +45,7 @@ par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
 plot(k, phaseSpeed(k), type = "l", xlab = "Wavenumber", ylab = "Phase speed")
 {% endhighlight %}
 
-![graph]({{ site.url }}/assets/2014-01-22-1D.png) 
+![graph]({{ site.url }}/assets/optimize.png) 
 
 The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to ``optimize()``.
 
