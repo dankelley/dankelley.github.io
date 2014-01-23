@@ -20,5 +20,5 @@ I read through the jekyll docs to get a general idea, and made a blog.  Of cours
 
 ## Status
 
-Tagging works locally (with a local jekyll serving the pages) but not on github.  I have no idea why, but I suspect that the problem is that I must tell jekyll to serve up pages in _site/tags, or that the tag files need another name, or some damned thing.  Frustrating ...
+Tagging works locally (with a local jekyll serving the pages) but not on github.  I have no idea why, but I suspect that the problem is that I must tell jekyll to serve up pages in ``_site/tags``, or that the tag files need another name, or some damned thing.  OH, UPDATE -- I see from erjjones that you have to do ``mv _site/tags .`` for it to work (i.e. ``tags``) has to be at the top level.  I will do that in a Makefile.
 
