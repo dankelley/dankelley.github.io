@@ -1,6 +1,7 @@
 html,body{
     height:100%;
-    color:black;
+    color:#444444;
+    line-height: 24px;
 }
 a, a:visited {
     color: #0000FF;
