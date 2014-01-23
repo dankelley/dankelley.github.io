@@ -30,7 +30,6 @@ pre{
     background-color: #F0F0F9;
 }
 
-body *{line-height:1.4em;}
 table.gallery {
     text-align: center;
 }
@@ -45,7 +44,6 @@ div.center a {
     font-weight: normal;
 }
 h1 {
-    font-size: 110%;
     font-weight: bold;
     padding: 0em 0em 0em 0em;
     margin-top: -0.5em;
