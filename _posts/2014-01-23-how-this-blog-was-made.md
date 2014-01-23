@@ -20,8 +20,18 @@ I read through the jekyll docs to get a general idea, and made a blog.  Of cours
 
 ## Some snags and how to deal with them:
 
-Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading.  The solution is simple: run a local jekyll server with the unix command {% highlight bash %}jekyll serve --watch{% endhighlight %} (the last word means that it should automatically regenerate files if it sees that any sourcefile has changed).  Once things work well locally, do 
+Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading.  The solution is simple: run a local jekyll server with the unix command
 
+{% highlight bash %}
+jekyll serve --watch
+{% endhighlight %}
+
+If there are errors, try stopping the server and running
+{% highlight bash %}
+jekyll build --trace
+{% endhighlight %}
+
+Once things work well locally, do 
 {% highlight bash %}
 make
 git add .

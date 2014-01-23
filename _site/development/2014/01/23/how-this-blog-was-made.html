@@ -35,7 +35,10 @@
 <p>Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading. The solution is simple: run a local jekyll server with the unix command</p>
 <div class='highlight'><pre><code class='bash'>jekyll serve --watch
 </code></pre></div>
-<p> (the last word means that it should automatically regenerate files if it sees that any sourcefile has changed). Once things work well locally, do</p>
+<p>If there are errors, try stopping the server and running</p>
+<div class='highlight'><pre><code class='bash'>jekyll build --trace
+</code></pre></div>
+<p>Once things work well locally, do</p>
 <div class='highlight'><pre><code class='bash'>make
 git add .
 git commit -m MSG
