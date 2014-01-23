@@ -45,7 +45,7 @@ div.center a {
 }
 
 h1 {
-    font-size:22px;
+    font-size:140%;
     font-weight:400;
     color:#444444;
     line-height:26.4px;
@@ -54,7 +54,7 @@ h1 {
 }
 
 h2 {
-    font-size: 14px;
+    font-size:120%;
     line-height:24px;
     color:#444444;
     margin-top: 0em;
