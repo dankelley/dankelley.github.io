@@ -1,15 +1,15 @@
-html,body{
+html {
     height:100%;
-    color:#444444;
-    line-height: 24px;
 }
 a, a:visited {
     color: #0000FF;
     text-decoration: underline;
 }
-body{
+body {
     font-family: helvetica,arial,freesans,clean,sans-serif;
     font-size:14px;
+    color: #444444;
+    line-height: 24px;
 }
 
 tt{
