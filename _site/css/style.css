@@ -8,12 +8,11 @@ a, a:visited {
 }
 body{
     font-family: helvetica,arial,freesans,clean,sans-serif;
-    font-size:small;
+    font-size:14px;
 }
 
 tt{
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    font-size:90%;
 }
 
 code{
