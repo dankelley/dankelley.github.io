@@ -24,10 +24,10 @@ code{
 pre{
     margin-top: 0.2em;
     margin-bottom: 0.2em;
-    margin-left: 1.5em;
+    margin-left: 1em;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     font-size:100%;
-    background-color: #F0F0F0;
+    background-color: #F0F0F9;
 }
 
 body *{line-height:1.4em;}
