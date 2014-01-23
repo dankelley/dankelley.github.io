@@ -20,7 +20,7 @@ I read through the jekyll docs to get a general idea, and made a blog.  Of cours
 
 Some snags and how to deal with them:
 
-1. Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading.  The solution is simple: run a local jekyll server with the unix command ``jekyll serve --auto`` (the last word means that it should automatically regenerate files if it sees that any sourcefile has changed).  Once things work well locally, do ``make`` and then the usual ``git add/commit/push`` to upload to github.
+1. Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading.  The solution is simple: run a local jekyll server with the unix command ``jekyll serve --watch`` (the last word means that it should automatically regenerate files if it sees that any sourcefile has changed).  Once things work well locally, do ``make`` and then the usual ``git add/commit/push`` to upload to github.
 
 2. The method of generating tags (which I got from ocramius, who got it from erjjones) puts the tag-list files into ``_site/tags`` but jekyll will not serve the files from there.  They must go into ``tags`` at the top level.  The solution I am using is to continue using the ruby script that I found for creating tags, but to use a Makefile to shift the file locations.
 
