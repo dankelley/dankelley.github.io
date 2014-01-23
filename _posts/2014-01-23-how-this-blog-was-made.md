@@ -1,6 +1,6 @@
 ---
 layout: post
-title: how this blog was made
+title: How this blog was made
 tags: blogging
 category: development
 year: 2014
