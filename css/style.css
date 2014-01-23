@@ -48,14 +48,14 @@ h1 {
     font-size:140%;
     font-weight:400;
     color:#444444;
-    line-height:26.4px;
+    line-height:140%;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
 h2 {
-    font-size:120%;
-    line-height:24px;
+    font-size:100%;
+    line-height:100%;
     color:#444444;
     margin-top: 0em;
     margin-bottom: 1em;
