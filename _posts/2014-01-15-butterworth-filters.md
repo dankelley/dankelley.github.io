@@ -18,13 +18,14 @@ Butterworth filters with order other than 1 have an overshoot phenomenon that ca
 
 **2. Methods.**
 
-First, create and plot some fake data, a top-hat function.
+First, create and plot some fake data, a top-hat function.  (Note the use of ``par`` to tighten the margins.)
 
 {% highlight R %}
 library(signal)
 n <- 100
 x <- 1:n
 y <- ifelse(0.3*n < x & x < 0.7*n, 1, 0)
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 plot(x, y, type='o', pch=20, ylim=c(-0.1, 1.1))
 {% endhighlight %}
 
