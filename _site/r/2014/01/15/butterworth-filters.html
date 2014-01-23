@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<title>butterworth filters</title>
+</head>
+<body>
+
+| <a href='/'>Home</a> |
+
+<a href="/r/2014/01/15/colourizing-along-a-trajectory.html" title="Next Post: colourizing along a trajectory">
+    Next
+</a>
+
+
+<p><i>Tags:</i>
+ <a href="/tags/time-series/index.html" title="View posts tagged with &quot;time-series&quot;">time-series</a>
+
+
+
+
+
+<p><em>Abstract.</em> Demonstrate overshoot for butterworth filters in R.</p>
+
+<p><strong>1. Introduction.</strong></p>
+
+<p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases. For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical. This post simply illustrates this with made-up data that the reader can experiment with.</p>
+
+<p><strong>2. Methods.</strong></p>
+
+<p>First, create and plot some fake data, a top-hat function.</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>signal<span class='p'>)</span>
+n <span class='o'>&lt;-</span> <span class='m'>100</span>
+x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span>n
+y <span class='o'>&lt;-</span> ifelse<span class='p'>(</span><span class='m'>0.3</span><span class='o'>*</span>n <span class='o'>&lt;</span> x <span class='o'>&amp;</span> x <span class='o'>&lt;</span> <span class='m'>0.7</span><span class='o'>*</span>n<span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
+plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> ylim<span class='o'>=</span>c<span class='p'>(</span><span class='m'>-0.1</span><span class='p'>,</span> <span class='m'>1.1</span><span class='p'>))</span>
+</code></pre></div>
+<p>Next, decide on the cutoff frequency for a low-pass filter. Setting <code>W</code> to 0.1 means a cutoff at 1/10-th of the Nyquist frequency.</p>
+<div class='highlight'><pre><code class='r'>W <span class='o'>&lt;-</span> <span class='m'>0.1</span>
+</code></pre></div>
+<p>Finally, filter with orders 1, 2 and 3, and add coloured lines indicating the results</p>
+<div class='highlight'><pre><code class='r'>b1 <span class='o'>&lt;-</span> butter<span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> W<span class='p'>)</span>
+y1 <span class='o'>&lt;-</span> filtfilt<span class='p'>(</span>b1<span class='p'>,</span> y<span class='p'>)</span>
+points<span class='p'>(</span>x<span class='p'>,</span> y1<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
+
+b2 <span class='o'>&lt;-</span> butter<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> W<span class='p'>)</span>
+y2 <span class='o'>&lt;-</span> filtfilt<span class='p'>(</span>b2<span class='p'>,</span> y<span class='p'>)</span>
+points<span class='p'>(</span>x<span class='p'>,</span> y2<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;blue&#39;</span><span class='p'>)</span>
+
+b3 <span class='o'>&lt;-</span> butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> W<span class='p'>)</span>
+y3 <span class='o'>&lt;-</span> filtfilt<span class='p'>(</span>b3<span class='p'>,</span> y<span class='p'>)</span>
+points<span class='p'>(</span>x<span class='p'>,</span> y3<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;forestgreen&#39;</span><span class='p'>)</span>
+
+legend<span class='p'>(</span><span class='s'>&quot;topright&quot;</span><span class='p'>,</span> lwd<span class='o'>=</span><span class='m'>2</span><span class='p'>,</span> col<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;black&quot;</span><span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>,</span> <span class='s'>&quot;green&quot;</span><span class='p'>),</span>
+        legend<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;Signal&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 1&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 2&quot;</span><span class='p'>,</span> <span class='s'>&quot;Order 3&quot;</span><span class='p'>))</span>
+</code></pre></div>
+<p><strong>3. Results</strong></p>
+
+<p><img src="/assets/butter.png" alt="graph" /></p>
+
+<p>The graph illustrates; for the colour coding, see the code above.</p>
+
+<p><strong>4. Conclusions</strong></p>
+
+<p>Be careful in using butterworth filters of order 2 and higher.</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</body>
+</html>
+
