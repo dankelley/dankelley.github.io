@@ -49,15 +49,15 @@ div.center a {
 h1 {
     font-weight: bold;
     padding: 0em 0em 0em 0em;
-    margin-top: -0.5em;
-    margin-bottom: -1.0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 h2 {
     font-weight: bold;
     padding: 0em 0em 0em 0em;
-    margin-top: -0.5em;
-    margin-bottom: -1.0em;
+    margin-top: 0.5em;
+    margin-bottom: 1.0em;
 }
 
 
