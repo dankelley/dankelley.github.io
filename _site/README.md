@@ -6,4 +6,4 @@ Late January 2014: trying out blogging on github.  Pros: all soruces are local, 
 
 - FROM JAN 2014: 'smoothing hydrographic profiles' 'inferring halocline depth' 'PISA scores'
 
-- FROM DEC 2013: 'installing oce', 'r interface to webtide' 'webtide' 'sundial' 'analemma' 'coastlinein in oce package' 'day length'
+- FROM DEC 2013: 'r interface to webtide' 'webtide' 'sundial' 'analemma' 'coastline in oce package' 'day length'
