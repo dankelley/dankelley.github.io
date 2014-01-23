@@ -16,7 +16,7 @@ After using wordpress for a month or so, I got tired of the divergence that alwa
 
 ## Methods
 
-I read through the jekyll docs to get a general idea, and made a blog.  Of course it did not work, so I started searching for hints.  I do not even recall the original problem, but in any case I solved it, and along the way I ran across ![http://ocramius.github.io](http://ocramius.github.io), a site that had what I wanted (especially tags, which the jekyll docs do not discuss), so I started using that as a resource.  Then I noticed that it was in turn based on ![http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/](http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/), so that became my go-to source for practical hints.
+I read through the jekyll docs to get a general idea, and made a blog.  Of course it did not work, so I started searching for hints.  I do not even recall the original problem, but in any case I solved it, and along the way I ran across [http://ocramius.github.io](http://ocramius.github.io), a site that had what I wanted (especially tags, which the jekyll docs do not discuss), so I started using that as a resource.  Then I noticed that it was in turn based on [http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/](http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/), so that became my go-to source for practical hints.
 
 ## Status
 
