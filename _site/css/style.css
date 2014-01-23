@@ -47,17 +47,20 @@ div.center a {
 }
 
 h1 {
-    font-weight: bold;
-    padding: 0em 0em 0em 0em;
-    margin-top: 1em;
-    margin-bottom: 2em;
+    font-size:22px;
+    font-weight:400;
+    color:#444444;
+    line-height:26.4px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
-    font-weight: bold;
-    padding: 0em 0em 0em 0em;
-    margin-top: 0.5em;
-    margin-bottom: 1.0em;
+    font-size: 14px;
+    line-height:24px;
+    color:#444444;
+    margin-top: 0em;
+    margin-bottom: 1em;
 }
 
 
