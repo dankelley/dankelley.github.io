@@ -29,26 +29,26 @@ S <- ctd[['salinity']]
 p <- ctd[['pressure']]
 {% endhighlight %}
 
-Create equispaced data for filtering to make sense.
+Next, one must create equispaced data, for filtering to make any sense at all.
 {% highlight r %}
 dp <- median(diff(p))
 pp <- seq(min(p), max(p), dp)
 S0 <- approx(p, S, pp)$y
 {% endhighlight %}
 
-Set critical frequency for the filter (as a ratio to Nyquist)
+Now comes something that must be established by the actual task at hand: setting the critical frequency for the filter (as a ratio to Nyquist).  In this case, a somewhat arbitrary frequency is selected, and then both first-order and second-order filters are created.
 {% highlight r %}
 W <- dp / 2
 f1 <- butter(1, W)
 f2 <- butter(2, W)
 {% endhighlight %}
 
-Set up for a three-panel plot.
+Now, set up for a three-panel plot.
 {% highlight r %}
 par(mfrow=c(1, 3))
 {% endhighlight %}
  
-Filter the raw profile, and plot as the left-hand panel.
+For the left-hand panel, show the raw data in black, and the two filters in red and blue.
 {% highlight r %}
 plotProfile(ctd, xtype="salinity", type='l')
 S0f1 <- filtfilt(f1, S0)
@@ -58,7 +58,7 @@ lines(S0f2, pp, col='blue')
 mtext("(a) ", side=3, adj=1, line=-5/4, cex=3/4)
 {% endhighlight %}
 
-Middle panel: filter the detrended profile.
+For the middle panel, detrended the profile, and then filter.
 {% highlight r %}
 plotProfile(ctd, xtype="salinity", type='l')
 Sd <- detrend(pp, S0)
@@ -69,7 +69,7 @@ lines(S1f2, pp, col='blue')
 mtext("(b) ", side=3, adj=1, line=-5/4, cex=3/4)
 {% endhighlight %}
 
-Right panel: show the results of a smoothing spline.
+For the right-hand panel, use a smoothing spline instead of a filter.
 {% highlight r %}
 spline <- smooth.spline(pp, S0, df=3/W)
 S2 <- predict(spline)$y
@@ -80,6 +80,6 @@ mtext("(c) ", side=3, adj=1, line=-5/4, cex=3/4)
 
 # Results
 
-Filtering a non-detrended profile is a bad idea because there is almost always a zero-offset problem, and also most properties vary dramatically with depth, so detrending is required as well as zero offsetting.
+Filtering a non-detrended profile is a generally a bad idea.  There is almost always a zero-offset problem, and also most properties vary dramatically with depth, so detrending is required as well as zero offsetting.  The advantage of detrending is illustrated in the left-hand and middle panels.
 
-Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required.  A downside is that there is no simple way to describe the spline to those who are not familiar with them.  For example, spline the smoothness is here controlled by setting the ``df`` argument; there is no way to specify a half-power frequency as there is for a filter.
+Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required.  However, a disadvantage of splines is that there is no simple way to describe the method to those who are not familiar with them.  In some branches of the literature, splines will be understood by readers, and in others, they will be a mystery that will waste a review cycle for the education of referees. There is also a problem in describing the spline simply in terms that have physical meaning.  For example, spline smoothness is here controlled by setting the ``df`` argument, but this has no simple analogy to physics, as perhaps the half-power frequency of a filter might (in terms of spectral models of finestructure, say).
