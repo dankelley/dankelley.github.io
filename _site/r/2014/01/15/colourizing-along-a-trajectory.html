@@ -26,13 +26,11 @@
 
 <h1>Colourizing along a trajectory</h1>
 
-<p><em>Abstract.</em> Demonstrate how to colourize an (x,y) curve according to z.</p>
-
-<p><strong>1. Introduction.</strong></p>
+<h1 id="introduction">Introduction</h1>
 
 <p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this generally with fake data.</p>
 
-<p><strong>2. Methods.</strong></p>
+<h1 id="methods">Methods</h1>
 
 <p>The R code given below demonstrates this with fake data. The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
 <div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
@@ -52,7 +50,7 @@ segments<span class='p'>(</span>head<span class='p'>(</span>x<span class='p'>,</
   lwd <span class='o'>=</span> <span class='m'>10</span><span class='p'>)</span>
 points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> pch <span class='o'>=</span> <span class='m'>20</span><span class='p'>)</span>
 </code></pre></div>
-<p><strong>3. Results.</strong></p>
+<h1 id="results">Results</h1>
 
 <p>The graph shows that this works reasonably well. The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
 
@@ -60,7 +58,9 @@ points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span
 
 <p>The method works well, and is flexible in terms of colour schemes.</p>
 
-<p><em>Appendix 1: exercises</em> find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
+<h1 id="exercises">Exercises</h1>
+
+<p>Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

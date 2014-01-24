@@ -16,9 +16,9 @@ This post provides R that calculates and graphs day length and its variation, us
 
 The day of the solstice is indicated with vertical lines. All times are in UTC, which is the conventional system for scientific work and the one required by ``sunAngle()``.
 
-**Exercises.** (a) Alter line 2 for another location, or line 13 for another month. (b) Remove the need for t0 to be during local daylight hours, perhaps by using the longitude, or by checking sun altitude trends as the horizon is crossed.
-
 ![daylength graph]({{ site.url }}/assets/daylength.png)
+
+The first step in making the graph shown above is to load the ``oce`` library and create a function that measures daylength by finding sunrise and sunset times.  Note that ``uniroot()``, which is used to find times of zero solar altitude, needs lower and upper limits on ``t``, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.
 
 {% highlight r %}
 library(oce)
@@ -31,22 +31,30 @@ daylength <- function(t, lon=-63.60, lat=44.65)
     set <- uniroot(alt, lower=t, upper=t+86400/2)$root
     set - rise
 }
+{% endhighlight %}
+
+Next, use ``lappy()`` to find the daylength for a month.
+{% highlight r %}
 ## December 2013
-solstice <- as.POSIXct("2013-12-21", tz="UTC")
 t0 <- as.POSIXct("2013-12-01 12:00:00", tz="UTC")
 t <- seq.POSIXt(t0, by="1 day", length.out=1*31)
 dayLength <- unlist(lapply(t, daylength))
+{% endhighlight %}
 
-## Two panels, with tightened margins
+Set up to plot two panels, with narrowed margins.
+{% highlight r %}
 par(mfrow=c(2,1), mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+{% endhighlight %}
 
-## Top panel: day length
+Plot daylength in the top panel, and daylength-difference in the bottom one, indicating the day of the solstice with vertical lines.
+
+{% highlight r %}
 plot(t, dayLength/3600, type='o', pch=20,
      xlab="", ylab="Day length (hours)")
 grid()
+solstice <- as.POSIXct("2013-12-21", tz="UTC")
 abline(v=solstice+c(0, 86400))
 
-## Bottom panel: daily change in day length
 plot(t[-1], diff(dayLength), type='o', pch=20,
      xlab="Day in 2013", ylab="Seconds gained per day")
 grid()

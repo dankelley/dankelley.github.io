@@ -11,13 +11,11 @@ description: Use ``segments()`` to colourize along a line.
 ---
 
 
-*Abstract.* Demonstrate how to colourize an (x,y) curve according to z.
-
-**1. Introduction.**
+# Introduction
 
 In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory.  For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this generally with fake data.
 
-**2. Methods.**
+# Methods
 
 The R code given below demonstrates this with fake data.  The core idea is to use ``segments()``, here with ``head()`` and ``tail()`` to chop up the trajectory.
 
@@ -41,7 +39,7 @@ points(x, y, pch = 20)
 {% endhighlight %}
 
 
-**3. Results.**
+# Results
 
 The graph shows that this works reasonably well.  The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.
 
@@ -49,5 +47,6 @@ The graph shows that this works reasonably well.  The dots will probably not be 
 
 The method works well, and is flexible in terms of colour schemes.
 
+# Exercises
 
-*Appendix 1: exercises* find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using ``approx()``.
+Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using ``approx()``.
