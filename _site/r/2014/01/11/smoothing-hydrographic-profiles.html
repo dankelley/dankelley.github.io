@@ -42,6 +42,8 @@
 <p>The first step in making the graph shown above is to load the <code>oce</code> library and create a function that measures daylength by finding sunrise and sunset times. Note that <code>uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code>t</code>, and these are calculated by looking back and then forward a half-day. This works well for application to Halifax, but in other timezones other offsets would be needed. Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
 
 <h1 id="methods">Methods</h1>
+
+<p>The first step is to load the data and extract dependent and independent variables, here <em>S</em> and $p$.</p>
 <div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
 library<span class='p'>(</span>signal<span class='p'>)</span>
 data<span class='p'>(</span>ctd<span class='p'>)</span>
