@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<title>How entries are added to this blog</title>
+</head>
+<body>
+
+<a href="/development/2014/01/23/how-this-blog-was-made.html" title="Previous Post: How this blog was made">
+    Previous
+</a>
+
+| <a href='/'>Home</a> |
+
+
+<p><i>Tags:</i>
+ <a href="/tags/blogging/index.html" title="View posts tagged with &quot;blogging&quot;">blogging</a>
+
+
+
+
+<h1>How entries are added to this blog</h1>
+
+<p>Entries are added to this blog simpy by creating files in the <code>_posts/</code> directory. There is an important convention on the file names: they must start with the year, followed by a dash, followed by the decimal number (with leading zero if appropriate), followed by the day, followed by a dash and then followed by some title words, and with <code>.md</code> at the end.</p>
+
+<p>The format of the blog entries is markdown for the main body, but the first part must be a preface in so-called YAML format. See any existing blog entry for the format, which should be simple to understand.</p>
+
+<p>Since Markdown errors will cause non-display of the item when it is eventually uploaded to github, it is important to test things locally first. This is very easy. In the commandline, type</p>
+<div class='highlight'><pre><code class='bash'>jekyll serve --watch
+</code></pre></div>
+<p>to start a server. It will state a local URL that holds the blog. Cut and past that URL in a browser, and you will see a local copy of the blog. Every time you edit a file, <code>jekyll</code> will update the blog, but you will need to do a browser refresh to see the results.</p>
+
+<p>Once things work well locally, type the following in a terminal to upload the blog to github.</p>
+<div class='highlight'><pre><code class='bash'>make
+git add .
+git commit -m MSG
+git push
+</code></pre></div>
+<p>PS. the <code>make</code> part of the above is important, because it moves a tags file from a location where github will not find it, to another where it will be found. Simply using <code>git</code> to upload files will give a blog that works in all respects except for tagging, but what would be the point of that?</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</body>
+</html>
+
