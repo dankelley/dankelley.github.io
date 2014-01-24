@@ -6,7 +6,7 @@ category: development
 year: 2014
 month: 1
 day: 24
-summary: How entries are added to this blog
+summary: The system for adding entries to the blog is explained, and hints are given for debugging the formatting.
 description: How entries are added to this blog
 ---
 

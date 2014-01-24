@@ -6,7 +6,7 @@ category: development
 year: 2014
 month: 1
 day: 23
-summary: How this blog was made
+summary: Ongoing notes on the construction of this blog.
 description: Ongoing notes on the construction of this blog.
 ---
 
