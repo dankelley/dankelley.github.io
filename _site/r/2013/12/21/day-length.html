@@ -43,9 +43,8 @@ daylength <span class='o'>&lt;-</span> <span class='kr'>function</span><span cla
     set <span class='o'>-</span> rise
 <span class='p'>}</span>
 </code></pre></div>
-<p>Next, use <code>lappy()</code> to find the daylength for a month.</p>
-<div class='highlight'><pre><code class='r'><span class='c1'>## December 2013</span>
-t0 <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
+<p>Next, use <code>lappy()</code> to find the daylength for December, 2013.</p>
+<div class='highlight'><pre><code class='r'>t0 <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
 t <span class='o'>&lt;-</span> seq.POSIXt<span class='p'>(</span>t0<span class='p'>,</span> by<span class='o'>=</span><span class='s'>&quot;1 day&quot;</span><span class='p'>,</span> length.out<span class='o'>=</span><span class='m'>1</span><span class='o'>*</span><span class='m'>31</span><span class='p'>)</span>
 dayLength <span class='o'>&lt;-</span> unlist<span class='p'>(</span>lapply<span class='p'>(</span>t<span class='p'>,</span> daylength<span class='p'>))</span>
 </code></pre></div>

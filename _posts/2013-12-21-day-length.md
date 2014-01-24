@@ -33,9 +33,8 @@ daylength <- function(t, lon=-63.60, lat=44.65)
 }
 {% endhighlight %}
 
-Next, use ``lappy()`` to find the daylength for a month.
+Next, use ``lappy()`` to find the daylength for December, 2013.
 {% highlight r %}
-## December 2013
 t0 <- as.POSIXct("2013-12-01 12:00:00", tz="UTC")
 t <- seq.POSIXt(t0, by="1 day", length.out=1*31)
 dayLength <- unlist(lapply(t, daylength))
