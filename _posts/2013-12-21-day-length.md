@@ -6,7 +6,7 @@ category: R
 year: 2013
 month: 12
 day: 21
-summary: Day length is calculated for a month
+summary: A method is illustrated for calculating day length, and representing it and its variation graphically.
 description: Day length is calculated for a month
 ---
 

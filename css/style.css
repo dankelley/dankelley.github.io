@@ -1,27 +1,29 @@
 html {
     height:100%;
 }
+
 a, a:visited {
     color: #0000FF;
     text-decoration: underline;
 }
+
 body {
     font-family: helvetica,arial,freesans,clean,sans-serif;
     font-size:14px;
     color: #444444;
-    line-height: 24px;
+    line-height: 2.5ex;
 }
 
-tt{
+tt {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 }
 
-code{
+code {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 }
 
 
-pre{
+pre {
     margin-top: 0.2em;
     margin-bottom: 0.2em;
     margin-left: 1em;
@@ -30,27 +32,46 @@ pre{
     font-weight: 400;
 }
 
-div.center {
-    text-align:center;
+div.slug {
+    margin-left: 1em;
+    color: black;
+    font-size:90%;
+    margin-bottom:1.5ex;
+}
+div.post_title {
+    font-size:160%;
+    line-height:110%;
+    font-weight:400;
+    color:black;
+    line-height:140%;
+    margin-top: 1ex;
+    margin-bottom: 0ex;
 }
 
-div.center a {
-    font-weight: normal;
+div.post_date {
+    margin-bottom: 0ex;
+}
+
+div.post_summary {
+    font-style: italic;
+    margin-bottom: 0ex;
+}
+
+div.post_tags {
+    margin-bottom: 0ex;
 }
 
 h1 {
     font-size:140%;
     font-weight:400;
-    color:#444444;
     line-height:140%;
     margin-top: 0px;
-    margin-bottom: 1ex;
+    margin-bottom: -0.5ex;
 }
 
 h2 {
     font-size:100%;
     line-height:100%;
-    color:#444444;
     margin-top: 0em;
     margin-bottom: -0.5em;
 }

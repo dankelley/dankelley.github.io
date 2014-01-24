@@ -6,7 +6,7 @@ category: R
 year: 2014
 month: 1
 day: 22
-summary: Illustrate 1D optimization in the context of capillary waves.
+summary: The method of performing 1D optimization in R is illustrated in the context of gravity-capillary waves.
 description: Gravity-capillary waves have a minimum phase speed at a few-centimetre scale.  This scale is found here by using the R function ``optimize()`` to find the minimum speed.
 ---
 

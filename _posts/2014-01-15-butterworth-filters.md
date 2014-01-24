@@ -6,11 +6,9 @@ category: R
 year: 2014
 month: 1
 day: 15
-summary: Butterworth filters with order exceeding 1 suffer an overshooting problem.
-description: A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters.
+summary: A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.
+description: A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.
 ---
-
-*Abstract.* Demonstrate overshoot for butterworth filters in R.
 
 # Introduction
 

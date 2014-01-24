@@ -18,10 +18,6 @@
 </a>
 {% endif %}
 
-<p><i>Tags:</i>
-{% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
-{% endfor %}
-
 {% if page.comments %}
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -41,7 +37,16 @@
 
 {% endif %}
 
-<h1>{{page.title}}</h1>
+<div class=post_title>{{page.title}}</div>
+
+<div class=slug>
+<div class=post_date>Posted {{ page.date | date: "%B %e, %Y" }}, tagged
+{% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
+{% endfor %}
+</div>
+
+<div class=post_summary>{{ page.summary }}</div>
+</div>
 
 {{ content }}
 
