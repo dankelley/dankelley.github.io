@@ -4,4 +4,4 @@ Late January 2014: trying out blogging on github.  Pros: all sources are local, 
 
 *Plans* convert the following from wordpress (delete when done):
 
-- FROM DEC 2013: 'r interface to webtide' 'webtide' 'sundial' 'analemma' 'coastline in oce package'
+- FROM DEC 2013: 'webtide' 'sundial' 'analemma' 'coastline in oce package'
