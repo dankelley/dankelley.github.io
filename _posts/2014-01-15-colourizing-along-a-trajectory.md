@@ -6,7 +6,7 @@ category: R
 year: 2014
 month: 1
 day: 22
-summary: Colourize along a line in R
+summary: A method is shown for colourizing a line (x,y) in terms of the value of a variable z=z(x,y).
 description: Use ``segments()`` to colourize along a line.
 ---
 
