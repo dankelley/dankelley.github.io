@@ -52,14 +52,15 @@ dayLength <span class='o'>&lt;-</span> unlist<span class='p'>(</span>lapply<span
 <p>Set up to plot two panels, with narrowed margins.</p>
 <div class='highlight'><pre><code class='r'>par<span class='p'>(</span>mfrow<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 </code></pre></div>
-<p>Plot daylength in the top panel, and daylength-difference in the bottom one, indicating the day of the solstice with vertical lines.</p>
+<p>Plot daylength in the top panel, indicating the day of the solstice with vertical lines.</p>
 <div class='highlight'><pre><code class='r'>plot<span class='p'>(</span>t<span class='p'>,</span> dayLength<span class='o'>/</span><span class='m'>3600</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
      xlab<span class='o'>=</span><span class='s'>&quot;&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Day length (hours)&quot;</span><span class='p'>)</span>
 grid<span class='p'>()</span>
 solstice <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>
-
-plot<span class='p'>(</span>t<span class='p'>[</span><span class='m'>-1</span><span class='p'>],</span> diff<span class='p'>(</span>dayLength<span class='p'>),</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
+</code></pre></div>
+<p>Plot daylength difference in the bottom panel, again indicating the solstice.</p>
+<div class='highlight'><pre><code class='r'>plot<span class='p'>(</span>t<span class='p'>[</span><span class='m'>-1</span><span class='p'>],</span> diff<span class='p'>(</span>dayLength<span class='p'>),</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
      xlab<span class='o'>=</span><span class='s'>&quot;Day in 2013&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Seconds gained per day&quot;</span><span class='p'>)</span>
 grid<span class='p'>()</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>

@@ -46,7 +46,7 @@ Set up to plot two panels, with narrowed margins.
 par(mfrow=c(2,1), mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 {% endhighlight %}
 
-Plot daylength in the top panel, and daylength-difference in the bottom one, indicating the day of the solstice with vertical lines.
+Plot daylength in the top panel, indicating the day of the solstice with vertical lines.
 
 {% highlight r %}
 plot(t, dayLength/3600, type='o', pch=20,
@@ -54,7 +54,10 @@ plot(t, dayLength/3600, type='o', pch=20,
 grid()
 solstice <- as.POSIXct("2013-12-21", tz="UTC")
 abline(v=solstice+c(0, 86400))
+{% endhighlight %}
 
+Plot daylength difference in the bottom panel, again indicating the solstice.
+{% highlight r %}
 plot(t[-1], diff(dayLength), type='o', pch=20,
      xlab="Day in 2013", ylab="Seconds gained per day")
 grid()
