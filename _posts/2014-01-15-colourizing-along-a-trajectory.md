@@ -13,7 +13,7 @@ description: Use ``segments()`` to colourize along a line.
 
 # Introduction
 
-In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory.  For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this generally with fake data.
+In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory.  For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.
 
 # Methods
 
