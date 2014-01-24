@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Smoothing hydrographic profiles
-tags: [astronomy, R]
+tags: [oceanography, time-series, R]
 category: R
 year: 2014
 month: 01
