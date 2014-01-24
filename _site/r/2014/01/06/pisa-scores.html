@@ -36,6 +36,8 @@
 <p><a href="/assets/pisa-scores.png"><img src="/assets/pisa-scores-thumbnail.png" alt="graph" /></a></p>
 
 <h1 id="code_that_makes_the_graph">Code that makes the graph</h1>
+
+<p>First, read the data and set up axes.</p>
 <div class='highlight'><pre><code class='r'>regionHighlight <span class='o'>&lt;-</span> <span class='s'>&quot;Canada&quot;</span>
 d <span class='o'>&lt;-</span> read.csv<span class='p'>(</span><span class='s'>&#39;PISA-summary-2012.csv&#39;</span><span class='p'>,</span> skip<span class='o'>=</span><span class='m'>16</span><span class='p'>,</span> header<span class='o'>=</span><span class='kc'>FALSE</span><span class='p'>,</span>
               col.names<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;rank&quot;</span><span class='p'>,</span><span class='s'>&quot;region&quot;</span><span class='p'>,</span>
@@ -50,14 +52,15 @@ plot<span class='p'>(</span>c<span class='p'>(</span><span class='m'>0</span><sp
      ylab<span class='o'>=</span><span class='s'>&quot;PISA Score (2012)&quot;</span><span class='p'>)</span>
 axis<span class='p'>(</span><span class='m'>2</span><span class='p'>)</span>
 box<span class='p'>()</span>
-dy <span class='o'>&lt;-</span> diff<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span> <span class='o'>/</span> <span class='m'>50</span> <span class='c1'># vertical offset</span>
- 
+</code></pre></div>
+<p>Next, set parameters for label placement.</p>
+<div class='highlight'><pre><code class='r'>dy <span class='o'>&lt;-</span> diff<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span> <span class='o'>/</span> <span class='m'>50</span>
 x0 <span class='o'>&lt;-</span> <span class='m'>0</span>
 dx <span class='o'>&lt;-</span> <span class='m'>1</span>
 cex <span class='o'>&lt;-</span> <span class='m'>0.65</span>
- 
-<span class='c1'>## Math</span>
-o <span class='o'>&lt;-</span> order<span class='p'>(</span>d<span class='o'>$</span>math<span class='p'>,</span> decreasing<span class='o'>=</span><span class='kc'>TRUE</span><span class='p'>)</span>
+</code></pre></div>
+<p>Show Mathematics scores. The gist is in the line containing the call to <code>approx()</code>, followed by the one calling <code>segments()</code>; this scheme draws lines between a numerical scale and evenly-spaced labels. Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements. For example, there is a remarkable gap in each measure, between the top performer and the second-top one.</p>
+<div class='highlight'><pre><code class='r'>o <span class='o'>&lt;-</span> order<span class='p'>(</span>d<span class='o'>$</span>math<span class='p'>,</span> decreasing<span class='o'>=</span><span class='kc'>TRUE</span><span class='p'>)</span>
 y <span class='o'>&lt;-</span> approx<span class='p'>(</span><span class='m'>1</span><span class='o'>:</span>n<span class='p'>,</span> seq<span class='p'>(</span>range<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span>range<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span>length.out<span class='o'>=</span>n<span class='p'>),</span> <span class='m'>1</span><span class='o'>:</span>n<span class='p'>)</span><span class='o'>$</span>y
 segments<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='p'>,</span> n<span class='p'>),</span> d<span class='o'>$</span>math<span class='p'>[</span>o<span class='p'>],</span> rep<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> n<span class='p'>),</span> y<span class='p'>,</span> 
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;gray&quot;</span><span class='p'>))</span>
@@ -65,9 +68,9 @@ lines<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='p'>,</spa
 text<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> n<span class='p'>),</span> y<span class='p'>,</span> d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>],</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span>
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;black&quot;</span><span class='p'>))</span>
 text<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> range<span class='p'>[</span><span class='m'>2</span><span class='p'>]</span><span class='o'>+</span>dy<span class='p'>,</span> <span class='s'>&quot;Maths&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>1.2</span><span class='p'>)</span>
- 
-<span class='c1'>## Reading</span>
-x0 <span class='o'>&lt;-</span> x0 <span class='o'>+</span> <span class='m'>2</span> <span class='o'>*</span> dx 
+</code></pre></div>
+<p>Show Reading scores</p>
+<div class='highlight'><pre><code class='r'>x0 <span class='o'>&lt;-</span> x0 <span class='o'>+</span> <span class='m'>2</span> <span class='o'>*</span> dx 
 o <span class='o'>&lt;-</span> order<span class='p'>(</span>d<span class='o'>$</span>reading<span class='p'>,</span> decreasing<span class='o'>=</span><span class='kc'>TRUE</span><span class='p'>)</span>
 segments<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='p'>,</span> n<span class='p'>),</span> d<span class='o'>$</span>reading<span class='p'>[</span>o<span class='p'>],</span> rep<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> n<span class='p'>),</span> y<span class='p'>,</span> 
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;gray&quot;</span><span class='p'>))</span>
@@ -75,9 +78,9 @@ lines<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='p'>,</spa
 text<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> n<span class='p'>),</span> y<span class='p'>,</span> d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>],</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span>
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;black&quot;</span><span class='p'>))</span>
 text<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> range<span class='p'>[</span><span class='m'>2</span><span class='p'>]</span><span class='o'>+</span>dy<span class='p'>,</span> <span class='s'>&quot;Reading&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>1.2</span><span class='p'>)</span>
- 
-<span class='c1'>## Science </span>
-x0 <span class='o'>&lt;-</span> x0 <span class='o'>+</span> <span class='m'>2</span> <span class='o'>*</span> dx 
+</code></pre></div>
+<p>Finally, show Science scores.</p>
+<div class='highlight'><pre><code class='r'>x0 <span class='o'>&lt;-</span> x0 <span class='o'>+</span> <span class='m'>2</span> <span class='o'>*</span> dx 
 o <span class='o'>&lt;-</span> order<span class='p'>(</span>d<span class='o'>$</span>science<span class='p'>,</span> decreasing<span class='o'>=</span><span class='kc'>TRUE</span><span class='p'>)</span>
 segments<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='p'>,</span> n<span class='p'>),</span> d<span class='o'>$</span>science<span class='p'>[</span>o<span class='p'>],</span> rep<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> n<span class='p'>),</span> y<span class='p'>,</span> 
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;gray&quot;</span><span class='p'>))</span>
@@ -86,7 +89,9 @@ text<span class='p'>(</span>rep<span class='p'>(</span>x0<span class='o'>+</span
      col<span class='o'>=</span>ifelse<span class='p'>(</span>d<span class='o'>$</span>region<span class='p'>[</span>o<span class='p'>]</span><span class='o'>==</span>regionHighlight<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;black&quot;</span><span class='p'>))</span>
 text<span class='p'>(</span>x0<span class='o'>+</span>dx<span class='p'>,</span> range<span class='p'>[</span><span class='m'>2</span><span class='p'>]</span><span class='o'>+</span>dy<span class='p'>,</span> <span class='s'>&quot;Science&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>1.2</span><span class='p'>)</span>
 </code></pre></div>
-<h1 id="data_for_the_analysis">Data for the analysis</h1>
+<h1 id="csv_data_used_in_this_analysis">CSV data used in this analysis</h1>
+
+<p>The data can be downloaded from a link given above, but it requires google login.</p>
 <div class='highlight'><pre><code class='bash'>,,<span class='s2'>&quot;Mean score</span>
 <span class='s2'>in PISA 2012, MATHS&quot;</span>,<span class='s2'>&quot;Share</span>
 <span class='s2'>of low achievers</span>

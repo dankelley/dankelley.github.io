@@ -22,6 +22,7 @@ The [Guardian Newspaper](http://www.theguardian.com/news/datablog/2013/dec/03/pi
 
 # Code that makes the graph
 
+First, read the data and set up axes.
 {% highlight r %}
 regionHighlight <- "Canada"
 d <- read.csv('PISA-summary-2012.csv', skip=16, header=FALSE,
@@ -37,13 +38,18 @@ plot(c(0, 6), range,
      ylab="PISA Score (2012)")
 axis(2)
 box()
-dy <- diff(par('usr')[3:4]) / 50 # vertical offset
- 
+{% endhighlight %}
+
+Next, set parameters for label placement.
+{% highlight r %}
+dy <- diff(par('usr')[3:4]) / 50
 x0 <- 0
 dx <- 1
 cex <- 0.65
+{% endhighlight %}
  
-## Math
+Show Mathematics scores.  The gist is in the line containing the call to ``approx()``, followed by the one calling ``segments()``; this scheme draws lines between a numerical scale and evenly-spaced labels.  Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements.  For example, there is a remarkable gap in each measure, between the top performer and the second-top one.
+{% highlight r %}
 o <- order(d$math, decreasing=TRUE)
 y <- approx(1:n, seq(range[2],range[1],length.out=n), 1:n)$y
 segments(rep(x0, n), d$math[o], rep(x0+dx, n), y, 
@@ -52,8 +58,10 @@ lines(rep(x0, 2), range(d$math))
 text(rep(x0+dx, n), y, d$region[o], pos=4, cex=cex,
      col=ifelse(d$region[o]==regionHighlight, "red", "black"))
 text(x0+dx, range[2]+dy, "Maths", pos=4, cex=1.2)
+{% endhighlight %}
  
-## Reading
+Show Reading scores
+{% highlight r %}
 x0 <- x0 + 2 * dx 
 o <- order(d$reading, decreasing=TRUE)
 segments(rep(x0, n), d$reading[o], rep(x0+dx, n), y, 
@@ -62,8 +70,10 @@ lines(rep(x0, 2), range(d$reading))
 text(rep(x0+dx, n), y, d$region[o], pos=4, cex=cex,
      col=ifelse(d$region[o]==regionHighlight, "red", "black"))
 text(x0+dx, range[2]+dy, "Reading", pos=4, cex=1.2)
+{% endhighlight %}
  
-## Science 
+Finally, show Science scores.
+{% highlight r %}
 x0 <- x0 + 2 * dx 
 o <- order(d$science, decreasing=TRUE)
 segments(rep(x0, n), d$science[o], rep(x0+dx, n), y, 
@@ -74,7 +84,10 @@ text(rep(x0+dx, n), y, d$region[o], pos=4, cex=cex,
 text(x0+dx, range[2]+dy, "Science", pos=4, cex=1.2)
 {% endhighlight %}
 
-# Data for the analysis
+# CSV data used in this analysis
+
+The data can be downloaded from a link given above, but it requires google login.
+
 {% highlight bash %}
 ,,"Mean score
 in PISA 2012, MATHS","Share
