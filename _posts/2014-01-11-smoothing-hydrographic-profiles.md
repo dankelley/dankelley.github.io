@@ -6,8 +6,8 @@ category: R
 year: 2014
 month: 01
 day: 11
-summary: Smoothing hydrographic profiles.
-description: Methods are presented for smoothing hydrographic profiles.
+summary: Filtering and spline-based approaches to the smoothing of hydrographic profiles are outlined, and recommendations are made.
+description: Filtering and spline-based approaches to the smoothing of hydrographic profiles are outlined, and recommendations are made.
 ---
 
 # Introduction
