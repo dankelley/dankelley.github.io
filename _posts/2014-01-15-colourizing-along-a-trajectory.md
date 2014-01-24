@@ -43,7 +43,7 @@ points(x, y, pch = 20)
 
 The graph shows that this works reasonably well.  The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.
 
-![figure]({{ site.url }}/assets/colorline.png)
+[![graph]({{ site.url }}/assets/colorline-thumbnail.png)]({{ site.url }}/assets/colorline.png)
 
 The method works well, and is flexible in terms of colour schemes.
 
