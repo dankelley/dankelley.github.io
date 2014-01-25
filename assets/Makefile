@@ -1,4 +1,4 @@
-thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.png colorline-thumbnail.png webtideosx1-thumbnail.png webtideosx2-thumbnail.png sundial_with_gnomon-thumbnail.png
+thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.png colorline-thumbnail.png webtideosx1-thumbnail.png webtideosx2-thumbnail.png sundial_with_gnomon-thumbnail.png analemma-thumbnail.png
 
 
 pisa-scores-thumbnail.png: force
@@ -15,7 +15,8 @@ colorline-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 colorline.png colorline-thumbnail.png;
 sundial_with_gnomon-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 sundial_with_gnomon.png sundial_with_gnomon-thumbnail.png;
-
+analemma-thumbnail.png: force
+	/usr/local/bin/convert -thumbnail 400x400 analemma.png analemma-thumbnail.png;
 
 force:
 
