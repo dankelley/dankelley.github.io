@@ -12,12 +12,16 @@ description: A diagram is constructed to show how vote-splitting ensured a Conse
 
 # Analysis
 
-District-by-district data reveal that if the NDP, Liberals and Bloc Quebecois parties were to have been united, the Conservative party would have lost the 41st Canadian election by a dramatic measure, instead of winning a majority.
+District-by-district data reveal that if the Bloc Quebecois, Green, Liberal, and NDP parties were to have been united, the Conservative party would have lost the 41st Canadian election by a dramatic measure, instead of winning a majority.
 
 The graph given below shows the results by naming the ridings.  Clicking on the graph will let you see results riding by riding, but the overview is also useful.  The first two columns show the actual election results, with those that went Conservative (in the first-past-the-post system) to the left, and those that went to another party to the right.  A clear majority is seen at a glance.  The two columns on the right are analogous, but under the scenario that the non-Conservative parties were to form a new party.
 
 
 [![graph]({{ site.url }}/assets/vote-split-thumbnail.png)]({{ site.url }}/assets/vote-split.png)
+
+(Note that a few fringe parties were removed from the analysis.)
+
+
 # R code that made the graph
 
 {% highlight r linenos=table %}
