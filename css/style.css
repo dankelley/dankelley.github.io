@@ -115,6 +115,12 @@ h2 {
 
 
 /* TESTING */
-[class*="span"]{float:left;margin-left:20px;}
-.span4{width:300px;}
+[class*="span"]{
+    float:left;
+    margin-left:20px;
+}
+.span4 {
+    width:300px;
+    background-color: #F0FFFF;
+}
 .span8{width:620px;}
