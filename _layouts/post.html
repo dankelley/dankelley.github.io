@@ -41,8 +41,13 @@
 
 <div class=slug>
 <div class=post_date>Posted {{ page.date | date: "%B %e, %Y" }}, tagged
-{% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
+    <span class=tag>
+        {% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a></span>
+    {% if forloop.last != true %}
+    &#183;
+    {% endif %}
 {% endfor %}
+
 </div>
 
 <div class=post_summary>{{ page.summary }}</div>
