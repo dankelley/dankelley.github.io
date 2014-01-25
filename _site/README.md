@@ -1,7 +1,16 @@
 Github page
 
-Late January 2014: trying out blogging on github.  Pros: all sources are local, so no worries if wordpress goes out of business (or floods us with adverts).  Cons: markdown errors are handled poorly, wordpress users have no easy way to follow.
+Late January 2014: trying out blogging on github. There are pros and cons to this, and I intend to decide by mid February 2014 whether to continue blogging on github.
 
-*Plans* convert the following from wordpress (delete when done):
+* **Pros:** 
 
-- FROM DEC 2013: 'analemma' 'coastline in oce package'
+- All sources are local and can be redeployed locally or anywhere else.  This means there is no reliance on a commercial enterprise, which might go bankrupt or might start flooding readers with adverts.
+
+- A normal text editor can be used for writing, which reduces greatly the pain of writing (and especially editing).
+
+* **Cons:** 
+
+- Markdown errors are handled poorly, resulting in blank pages, and so using this system requires some care.
+
+- Wordpress users have no easy way to follow such a blog.
+
