@@ -64,4 +64,3 @@ abline(v=solstice+c(0, 86400))
 {% endhighlight %}
 
 
-
