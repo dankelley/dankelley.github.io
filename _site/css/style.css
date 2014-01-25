@@ -7,6 +7,23 @@ a, a:visited {
     text-decoration: underline;
 }
 
+a:hover {
+    color: red;
+}
+
+/* tag links are styled differently */
+a.tag:link, a.tag:visited {
+    color: blue;
+}
+
+a.tag:hover {
+    color: red;
+}
+
+span.topnav {
+    font-size:120%;
+}
+
 body {
     font-family: helvetica,arial,freesans,clean,sans-serif;
     font-size:14px;

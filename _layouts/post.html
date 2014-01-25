@@ -6,6 +6,7 @@
 <title>{{ page.title }}</title>
 </head>
 <body>
+<span class=topnav>
 {% if page.previous.url %}
 <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">
     Previous
@@ -17,6 +18,7 @@
     Next
 </a>
 {% endif %}
+</span>
 
 {% if page.comments %}
     <div id="disqus_thread"></div>
@@ -41,12 +43,10 @@
 
 <div class=slug>
 <div class=post_date>Posted {{ page.date | date: "%B %e, %Y" }}, tagged
-    <span class=tag>
-        {% for tag in page.tags %} <a href="{{ site.url }}/tags/{{ tag }}/index.html" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a></span>
-    {% if forloop.last != true %}
-    &#183;
-    {% endif %}
-{% endfor %}
+        {% for tag in page.tags %}
+        <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag" title="View posts tagged with &quot;{{ tag }}&quot;">{{ tag }}</a>
+        {% if forloop.last != true %} &#183; {% endif %}
+        {% endfor %}
 
 </div>
 
