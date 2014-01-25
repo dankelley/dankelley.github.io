@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Overshoot in Butterworth filters</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,23 +26,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Overshoot in Butterworth filters</div>
-
-<div class=slug>
-<div class=post_date>Posted January 15, 2014, tagged
-        
-        <a href="/tags/time-series/index.html" class="tag">time-series</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.</div>
-</div>
-
 <h1 id="introduction">Introduction</h1>
 
 <p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases. For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical. This post simply illustrates this with made-up data that the reader can experiment with.</p>
@@ -80,6 +72,25 @@ legend<span class='p'>(</span><span class='s'>&quot;topright&quot;</span><span c
 <h1 id="conclusions">Conclusions</h1>
 
 <p>Be careful in using butterworth filters of order 2 and higher, at least in applications that are sensitive to overshoot (e.g. kinetic-energy timeseries).</p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted January 15, 2014</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/time-series/index.html" class="tag">time-series</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -95,7 +106,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

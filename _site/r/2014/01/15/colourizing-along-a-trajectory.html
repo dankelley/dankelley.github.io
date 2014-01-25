@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Colourizing along a trajectory</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,20 +26,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Colourizing along a trajectory</div>
-
-<div class=slug>
-<div class=post_date>Posted January 15, 2014, tagged
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>A method is shown for colourizing a line (x,y) in terms of the value of a variable z=z(x,y).</div>
-</div>
-
 <h1 id="introduction">Introduction</h1>
 
 <p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.</p>
@@ -71,6 +66,22 @@ points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span
 <h1 id="exercises">Exercises</h1>
 
 <p>Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted January 15, 2014</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -86,7 +97,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

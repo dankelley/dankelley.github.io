@@ -22,6 +22,7 @@ a.tag:hover {
 
 span.topnav {
     font-size:120%;
+    margin-left: 0px;
 }
 
 body {
@@ -73,6 +74,7 @@ div.post_title {
 }
 
 div.post_date {
+    margin-left: 0ex;
     margin-bottom: 0ex;
 }
 
@@ -111,3 +113,8 @@ h2 {
     }
 }
 
+
+/* TESTING */
+[class*="span"]{float:left;margin-left:20px;}
+.span4{width:300px;}
+.span8{width:620px;}

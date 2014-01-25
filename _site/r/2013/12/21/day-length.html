@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Day length calculation</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -18,23 +22,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Day length calculation</div>
-
-<div class=slug>
-<div class=post_date>Posted December 21, 2013, tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">astronomy</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>A method is illustrated for calculating day length, and representing it and its variation graphically.</div>
-</div>
-
 <p>The winter solstice has been on many minds lately. The days are about to start getting longer … but just how fast will they do that?</p>
 
 <p>This post provides R that calculates and graphs day length and its variation, using <code>uniroot()</code> to find sunrises and sunsets as indicated by solar altitude that is calculated with <code>sunAngle()</code> in the oce package.</p>
@@ -76,6 +68,25 @@ abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+
 grid<span class='p'>()</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>
 </code></pre></div>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted December 21, 2013</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/astronomy/index.html" class="tag">astronomy</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -91,7 +102,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

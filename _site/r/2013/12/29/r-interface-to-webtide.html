@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>R interface to WebTide</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,26 +26,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>R interface to WebTide</div>
-
-<div class=slug>
-<div class=post_date>Posted December 29, 2013, tagged
-        
-        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-         &#183; 
-        
-        <a href="/tags/tides/index.html" class="tag">tides</a>
-        
-        
-
-</div>
-
 <div class=post_summary>R interface to WebTide</div>
-</div>
-
 <p>A previous posting explained how to install WebTide on an OSX machine. This one shows how to hook up to an installed WebTide database, so that R code can get tidal predictions.</p>
 
 <p>The following code in the R language will produce a graph in which the top panel mimics the tidal-elevation graph produced by WebTide itself (see previous blog posting for comparison).</p>
@@ -63,6 +52,28 @@ y <span class='o'>&lt;-</span> dt <span class='o'>*</span> cumsum<span class='p'
 plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> asp<span class='o'>=</span><span class='m'>1</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&quot;o&quot;</span><span class='p'>)</span>
 </code></pre></div>
 <p><a href="/assets/webtide2.png"><img src="/assets/webtide-thumbnail2.png" alt="graph" /></a></p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted December 29, 2013</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+         &#183; 
+        
+        <a href="/tags/tides/index.html" class="tag">tides</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -78,7 +89,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

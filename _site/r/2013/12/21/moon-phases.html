@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Moon phase calculation</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,23 +26,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Moon phase calculation</div>
-
-<div class=slug>
-<div class=post_date>Posted December 21, 2013, tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">astronomy</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>Moon phase is calculated using percent illumination.</div>
-</div>
-
 <p>The illuminated fraction of the moon can be calculated with <code>moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
 <div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
 par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span> <span class='c1'># tighten margins</span>
@@ -56,6 +48,25 @@ mtext<span class='p'>(</span><span class='s'>&quot;full&quot;</span><span class=
 <p><img src="/assets/moon.png" alt="moon phase diagram" /></p>
 
 <p><em>Exercises</em> (a) Try this for other locations. (b) Detect full moon by using uniroot() on the rate of change of illumination.</p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted December 21, 2013</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/astronomy/index.html" class="tag">astronomy</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -71,7 +82,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

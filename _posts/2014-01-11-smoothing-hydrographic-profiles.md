@@ -14,7 +14,7 @@ description: Filtering and spline-based approaches to the smoothing of hydrograp
 
 Smoothing hydrographic profiles with conventional time-series methods is problematic for two reasons: (a) the data are commonly not equi-spaced in depth and (b) the data seldom lack trends in depth. The issues and their solutions are illustrated without much discussion here.
 
-![daylength graph]({{ site.url }}/assets/smooth-hydrographic.png)
+[![graph]({{ site.url }}/assets/smooth-profile-thumbnail.png)]({{ site.url }}/assets/smooth-profile.png)
 
 The first step in making the graph shown above is to load the ``oce`` library and create a function that measures daylength by finding sunrise and sunset times.  Note that ``uniroot()``, which is used to find times of zero solar altitude, needs lower and upper limits on ``t``, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.
 

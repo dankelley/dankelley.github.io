@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Inferring halocline depth</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,23 +26,11 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Inferring halocline depth</div>
-
-<div class=slug>
-<div class=post_date>Posted January 11, 2014, tagged
-        
-        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>A method given for inferring halocline depths based on derivatives calculated with a smoothing spline.</div>
-</div>
-
 <h1 id="introduction">Introduction</h1>
 
 <p>There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which <em>dS/dp</em> is largest, where <em>S</em> is salinity and <em>p</em> is pressure (Kelley 2014 chapter 5). Calculating the derivative using e.g. <code>diff(S)/diff(p)</code> can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.</p>
@@ -85,6 +77,25 @@ findHalocline<span class='p'>(</span>ctd<span class='p'>,</span> <span class='m'
 <h1 id="discussion">Discussion</h1>
 
 <p>Lacking further information about the data or a statistical model of the variation, the choice of deltap is somewhat open, and one interpretation of the results would be to state that the halocline depth is likely to be between 4 and 5 m.</p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted January 11, 2014</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -100,7 +111,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 

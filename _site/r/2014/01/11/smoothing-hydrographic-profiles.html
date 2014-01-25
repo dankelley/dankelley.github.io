@@ -3,8 +3,12 @@
 <head>
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+
+
 <title>Smoothing hydrographic profiles</title>
 </head>
+
 <body>
 <span class=topnav>
 
@@ -22,31 +26,16 @@
 
 
 
+
+
+<div class="span8">
 <div class=post_title>Smoothing hydrographic profiles</div>
-
-<div class=slug>
-<div class=post_date>Posted January 11, 2014, tagged
-        
-        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
-         &#183; 
-        
-        <a href="/tags/time-series/index.html" class="tag">time-series</a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">R</a>
-        
-        
-
-</div>
-
 <div class=post_summary>Filtering and spline-based approaches to the smoothing of hydrographic profiles are outlined, and recommendations are made.</div>
-</div>
-
 <h1 id="introduction">Introduction</h1>
 
 <p>Smoothing hydrographic profiles with conventional time-series methods is problematic for two reasons: (a) the data are commonly not equi-spaced in depth and (b) the data seldom lack trends in depth. The issues and their solutions are illustrated without much discussion here.</p>
 
-<p><img src="/assets/smooth-hydrographic.png" alt="daylength graph" /></p>
+<p><a href="/assets/smooth-profile.png"><img src="/assets/smooth-profile-thumbnail.png" alt="graph" /></a></p>
 
 <p>The first step in making the graph shown above is to load the <code>oce</code> library and create a function that measures daylength by finding sunrise and sunset times. Note that <code>uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code>t</code>, and these are calculated by looking back and then forward a half-day. This works well for application to Halifax, but in other timezones other offsets would be needed. Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
 
@@ -101,6 +90,28 @@ mtext<span class='p'>(</span><span class='s'>&quot;(c) &quot;</span><span class=
 <p>Filtering a non-detrended profile is a generally a bad idea. There is almost always a zero-offset problem, and also most properties vary dramatically with depth, so detrending is required as well as zero offsetting. The advantage of detrending is illustrated in the left-hand and middle panels.</p>
 
 <p>Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required. However, a disadvantage of splines is that there is no simple way to describe the method to those who are not familiar with them. In some branches of the literature, splines will be understood by readers, and in others, they will be a mystery that will waste a review cycle for the education of referees. There is also a problem in describing the spline simply in terms that have physical meaning. For example, spline smoothness is here controlled by setting the <code>df</code> argument, but this has no simple analogy to physics, as perhaps the half-power frequency of a filter might (in terms of spectral models of finestructure, say).</p>
+</div>
+
+<div class="span4">
+<div class=slug>
+<div class=post_date>Posted January 11, 2014</div>
+<div class=post_date>Tagged
+        
+        <a href="/tags/oceanography/index.html" class="tag">oceanography</a>
+         &#183; 
+        
+        <a href="/tags/time-series/index.html" class="tag">time-series</a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">R</a>
+        
+        
+</div>
+
+</div>
+
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -116,7 +127,6 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
 </body>
 </html>
 
