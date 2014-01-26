@@ -14,26 +14,54 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2013/12/21/day-length.html" title="Previous Post: Day length calculation">
+<a href="/r/2013/12/21/day-length.html" title="Day length calculation">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2013/12/21/solstice.html" title="Next Post: Sunrise-sunset orientation during winter solstice">
+<a href="/r/2013/12/21/solstice.html" title="Sunrise-sunset orientation during winter solstice">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Moon phase calculation</div>
-<div class=post_summary>Moon phase is calculated using percent illumination.</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Dec 21, 2013
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: Moon phase is calculated using percent illumination.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <p>The illuminated fraction of the moon can be calculated with <code>moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
 <div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
 par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span> <span class='c1'># tighten margins</span>
@@ -51,30 +79,6 @@ mtext<span class='p'>(</span><span class='s'>&quot;full&quot;</span><span class=
 <p><img src="/assets/moon.png" alt="moon phase diagram" /></p>
 
 <p><em>Exercises</em> (a) Try this for other locations. (b) Detect full moon by using uniroot() on the rate of change of illumination.</p>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted December 21, 2013</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">
-            astronomy/5
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

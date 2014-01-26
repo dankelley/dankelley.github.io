@@ -14,26 +14,49 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/development/2014/01/23/how-this-blog-was-made.html" title="Previous Post: How this blog was made">
+<a href="/development/2014/01/23/how-this-blog-was-made.html" title="How this blog was made">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2014/01/25/canada-election-split.html" title="Next Post: vote splitting in Canada">
+<a href="/r/2014/01/25/canada-election-split.html" title="vote splitting in Canada">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>How entries are added to this blog</div>
-<div class=post_summary>The system for adding entries to the blog is explained, and hints are given for debugging the formatting.</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Jan 24, 2014
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/blogging/index.html" class="tag">
+            blogging
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: The system for adding entries to the blog is explained, and hints are given for debugging the formatting.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <p>Entries are added to this blog simpy by creating files in the <code>_posts/</code> directory. There is an important convention on the file names: they must start with the year, followed by a dash, followed by the decimal number (with leading zero if appropriate), followed by the day, followed by a dash and then followed by some title words, and with <code>.md</code> at the end.</p>
 
 <p>The format of the blog entries is markdown for the main body, but the first part must be a preface in so-called YAML format. See any existing blog entry for the format, which should be simple to understand.</p>
@@ -50,25 +73,6 @@ git commit -m MSG
 git push
 </code></pre></div>
 <p>PS. the <code>make</code> part of the above is important, because it moves a tags file from a location where github will not find it, to another where it will be found. Simply using <code>git</code> to upload files will give a blog that works in all respects except for tagging, but what would be the point of that?</p>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted January 24, 2014</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/blogging/index.html" class="tag">
-            blogging/2
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

@@ -14,22 +14,50 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2013/12/21/moon-phases.html" title="Next Post: Moon phase calculation">
+<a href="/r/2013/12/21/moon-phases.html" title="Moon phase calculation">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Day length calculation</div>
-<div class=post_summary>A method is illustrated for calculating day length, and representing it and its variation graphically.</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Dec 21, 2013
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: A method is illustrated for calculating day length, and representing it and its variation graphically.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <p>The winter solstice has been on many minds lately. The days are about to start getting longer … but just how fast will they do that?</p>
 
 <p>This post provides R that calculates and graphs day length and its variation, using <code>uniroot()</code> to find sunrises and sunsets as indicated by solar altitude that is calculated with <code>sunAngle()</code> in the oce package.</p>
@@ -71,30 +99,6 @@ abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+
 grid<span class='p'>()</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>
 </code></pre></div>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted December 21, 2013</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">
-            astronomy/5
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

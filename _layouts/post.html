@@ -31,46 +31,50 @@
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 {% endif %}
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 {% if page.previous.url %}
-<a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">
+<a href="{{page.previous.url}}" title="{{page.previous.title}}">
 &larr; Previous
 </a>
 {% endif %}
 | <a href='/blog'>Home</a> |
 {% if page.next.url %}
-<a href="{{page.next.url}}" title="Next Post: {{page.next.title}}">
+<a href="{{page.next.url}}" title="{{page.next.title}}">
 Next &rarr;
 </a>
 {% endif %}
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>{{page.title}}</div>
-<div class=post_summary>{{ page.summary }}</div>
-{{ content }}
-</div>
+<!-- </div> --> <!-- span8 -->
 
-<div class="span4">
+<!-- <div class="span4"> -->
 
 <div class=slug>
-<div class=post_date>Posted {{ page.date | date: "%B %e, %Y" }}</div>
-<div class=post_date>Tagged
+    <div class=post_date>
+        Posted: {{ page.date | date: "%b %e, %Y" }}
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
         {% for tag in page.tags %}
         <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag">
-            {{ tag }}/{{ site.tags[tag].size }}
+            {{ tag }}
         </a>
         {% if forloop.last != true %} &#183; {% endif %}
         {% endfor %}
-</div>
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: {{ page.summary }}
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
 
-
-
+{{ content }}
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

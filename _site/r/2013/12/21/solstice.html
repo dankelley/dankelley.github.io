@@ -14,26 +14,54 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2013/12/21/moon-phases.html" title="Previous Post: Moon phase calculation">
+<a href="/r/2013/12/21/moon-phases.html" title="Moon phase calculation">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2013/12/22/coastline.html" title="Next Post: A new coastline for the Oce package">
+<a href="/r/2013/12/22/coastline.html" title="A new coastline for the Oce package">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Sunrise-sunset orientation during winter solstice</div>
-<div class=post_summary>Sunrise-sunset lines are calculated for the winter solstice in Halifax</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Dec 21, 2013
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: Sunrise-sunset lines are calculated for the winter solstice in Halifax
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <h1 id="introduction">Introduction</h1>
 
 <p>The <code>sunAngle()</code> function in the <code>oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
@@ -54,10 +82,12 @@ sunrise <span class='o'>&lt;-</span> uniroot<span class='p'>(</span><span class=
 sunrise <span class='o'>&lt;-</span> numberAsPOSIXct<span class='p'>(</span>sunrise<span class='p'>)</span>
 azimuth <span class='o'>&lt;-</span> <span class='m'>90</span> <span class='o'>-</span> sunAngle<span class='p'>(</span>sunrise<span class='p'>,</span> lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='p'>)</span><span class='o'>$</span>azimuth
 </code></pre></div>
-<p>Now it is time to start with the mapping, which uses the <code>OpenStreetMap</code> package. Note the conversion of <code>D</code> from kilometres to degrees of latitude and longitude.</p>
+<p>The span <code>D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
 <div class='highlight'><pre><code class='r'>D <span class='o'>&lt;-</span> D <span class='o'>/</span> <span class='m'>111</span>                           <span class='c1'># deg</span>
 Dlon <span class='o'>&lt;-</span> D <span class='o'>/</span> cos<span class='p'>(</span>xy<span class='o'>$</span>y <span class='o'>*</span> pi <span class='o'>/</span> <span class='m'>180</span><span class='p'>)</span>
-</code></pre></div><div class='highlight'><pre><code class='r'>library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
+</code></pre></div>
+<p>Now it is time to start with the mapping, which uses the <code>OpenStreetMap</code> package.</p>
+<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
 map <span class='o'>&lt;-</span> openmap<span class='p'>(</span>c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>+</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>-</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>-</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>+</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                minNumTiles<span class='o'>=</span><span class='m'>9</span><span class='p'>)</span>
@@ -71,36 +101,16 @@ d <span class='o'>&lt;-</span> diff<span class='p'>(</span>par<span class='p'>(<
     lines<span class='p'>(</span>cx<span class='o'>+</span>c<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>)</span><span class='o'>*</span>d<span class='o'>*</span>cos<span class='p'>(</span>azimuth<span class='o'>*</span>pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span>
           cy<span class='o'>+</span>o<span class='o'>+</span>c<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>)</span><span class='o'>*</span>d<span class='o'>*</span>sin<span class='p'>(</span>azimuth<span class='o'>*</span>pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
 <span class='p'>}</span>
-mtext<span class='p'>(</span>sprintf<span class='p'>(</span><span class='s'>&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class='p'>,</span>
+</code></pre></div>
+<p>Finally, add a title so that plot is self-explanatory.</p>
+<div class='highlight'><pre><code class='r'>mtext<span class='p'>(</span>sprintf<span class='p'>(</span><span class='s'>&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class='p'>,</span>
               format<span class='p'>(</span>t<span class='p'>,</span> <span class='s'>&quot;%Y-%m-%d&quot;</span><span class='p'>)),</span> side<span class='o'>=</span><span class='m'>3</span><span class='p'>,</span> line<span class='o'>=</span><span class='m'>2</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>1.5</span><span class='p'>)</span>
 </code></pre></div>
 <h1 id="results">Results</h1>
 
-<p><img src="/assets/solstice_sunrise_sunset.png" alt="graph" /></p>
-</div>
+<p>The graph indicates the results; click it to zoom in.</p>
 
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted December 21, 2013</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">
-            astronomy/5
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
+<p><a href="/assets/solstice_sunrise_sunset.png"><img src="/assets/solstice_sunrise_sunset-thumbnail.png" alt="graph" /></a></p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

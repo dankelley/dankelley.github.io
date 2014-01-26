@@ -14,26 +14,59 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2013/12/29/installing-webtide-in-osx.html" title="Previous Post: Installing WebTide in OSX">
+<a href="/r/2013/12/29/installing-webtide-in-osx.html" title="Installing WebTide in OSX">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2013/12/30/installing-oce.html" title="Next Post: Installing the oce package in R">
+<a href="/r/2013/12/30/installing-oce.html" title="Installing the oce package in R">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>R interface to WebTide</div>
-<div class=post_summary>R interface to WebTide</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Dec 29, 2013
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/tides/index.html" class="tag">
+            tides
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: R interface to WebTide
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <p>A previous posting explained how to install WebTide on an OSX machine. This one shows how to hook up to an installed WebTide database, so that R code can get tidal predictions.</p>
 
 <p>The following code in the R language will produce a graph in which the top panel mimics the tidal-elevation graph produced by WebTide itself (see previous blog posting for comparison).</p>
@@ -55,35 +88,6 @@ y <span class='o'>&lt;-</span> dt <span class='o'>*</span> cumsum<span class='p'
 plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> asp<span class='o'>=</span><span class='m'>1</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&quot;o&quot;</span><span class='p'>)</span>
 </code></pre></div>
 <p><a href="/assets/webtide2.png"><img src="/assets/webtide-thumbnail2.png" alt="graph" /></a></p>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted December 29, 2013</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/oceanography/index.html" class="tag">
-            oceanography/8
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-         &#183; 
-        
-        <a href="/tags/tides/index.html" class="tag">
-            tides/2
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

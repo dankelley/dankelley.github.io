@@ -78,17 +78,8 @@ div.post_title {
     margin-bottom: 0ex;
 }
 
-div.post_date {
+div.post_tags, div.post_date, div.post_summary {
     margin-left: 0ex;
-    margin-bottom: 0ex;
-}
-
-div.post_summary {
-    font-style: italic;
-    margin-bottom: 0ex;
-}
-
-div.post_tags {
     margin-bottom: 0ex;
 }
 
@@ -129,10 +120,14 @@ post.count {
     color: red;
 }
 .span4 { /* for RHS (date, tags, comments) */
+    /*
     width:300px;
     background-color: #F0FFFF;
+    */
 }
 
 .span8 { /* for LHS (main content) */
-    width:620px;
+    /*
+     width:620px;
+     */
 }

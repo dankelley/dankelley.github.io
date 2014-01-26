@@ -14,26 +14,49 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2014/01/15/cabelling.html" title="Previous Post: Cabelling calculations">
+<a href="/r/2014/01/15/cabelling.html" title="Cabelling calculations">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2014/01/18/using-the-plyr-package.html" title="Next Post: Using the plyr package in R">
+<a href="/r/2014/01/18/using-the-plyr-package.html" title="Using the plyr package in R">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Colourizing along a trajectory</div>
-<div class=post_summary>A method is shown for colourizing a line (x,y) in terms of the value of a variable z=z(x,y).</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Jan 15, 2014
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: A method is shown for colourizing a line (x,y) in terms of the value of a variable z=z(x,y).
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <h1 id="introduction">Introduction</h1>
 
 <p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.</p>
@@ -69,25 +92,6 @@ points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span
 <h1 id="exercises">Exercises</h1>
 
 <p>Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted January 15, 2014</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

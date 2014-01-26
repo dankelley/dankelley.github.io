@@ -14,26 +14,54 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2014/01/11/smoothing-hydrographic-profiles.html" title="Previous Post: Smoothing hydrographic profiles">
+<a href="/r/2014/01/11/smoothing-hydrographic-profiles.html" title="Smoothing hydrographic profiles">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2014/01/15/cabelling.html" title="Next Post: Cabelling calculations">
+<a href="/r/2014/01/15/cabelling.html" title="Cabelling calculations">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Overshoot in Butterworth filters</div>
-<div class=post_summary>A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Jan 15, 2014
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/time-series/index.html" class="tag">
+            time-series
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <h1 id="introduction">Introduction</h1>
 
 <p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases. For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical. This post simply illustrates this with made-up data that the reader can experiment with.</p>
@@ -75,30 +103,6 @@ legend<span class='p'>(</span><span class='s'>&quot;topright&quot;</span><span c
 <h1 id="conclusions">Conclusions</h1>
 
 <p>Be careful in using butterworth filters of order 2 and higher, at least in applications that are sensitive to overshoot (e.g. kinetic-energy timeseries).</p>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted January 15, 2014</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/time-series/index.html" class="tag">
-            time-series/2
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

@@ -14,26 +14,54 @@
 
 
 
+<!-- <div class="span8"> -->
 
-
-<div class="span8">
 <span class=topnav>
 
-<a href="/r/2013/12/27/anallema.html" title="Previous Post: Analemma graphs">
+<a href="/r/2013/12/27/anallema.html" title="Analemma graphs">
 &larr; Previous
 </a>
 
 | <a href='/blog'>Home</a> |
 
-<a href="/r/2013/12/29/installing-webtide-in-osx.html" title="Next Post: Installing WebTide in OSX">
+<a href="/r/2013/12/29/installing-webtide-in-osx.html" title="Installing WebTide in OSX">
 Next &rarr;
 </a>
 
-</span>
+</span> <!-- topnav -->
 
 
 <div class=post_title>Sundial calculations</div>
-<div class=post_summary>R code is given for calculating the angles that are required to construct a sundial scale.</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Dec 28, 2013
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: R code is given for calculating the angles that are required to construct a sundial scale.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
 <p>After experimenting with calculations for what I eventually came to realize were analemma-based sundials (with shadow cast by a vertical pole), I remembered that the common sundial has a wedge as the shadow-maker. A bit of research told me that the wedge is called a gnomon. It is a right triangle with one vertex (the centre vertex, shall we say) having angle equal to the local latitude. If this wedge is placed upright on a horizontal plane with the centre vertex aligned south and the 90deg vertex aligned north, then the shadow will produce a line that indicates the hour of the day. This works throughout the year, with approximately quarter-hour adjustments being required through the seasons.</p>
 
 <p>The <a href="http://www.r-project.org">R</a> code given below the diagram creates an outline of the expected edge of the shadow of the gnomon. To illustrate the variation in angle through the year (which relates to the so-called equation of time), colours are used to indicate four significant times during the year.</p>
@@ -208,30 +236,6 @@ sundial <span class='o'>&lt;-</span> <span class='kr'>function</span><span class
     dev.off<span class='p'>()</span>
 </pre></div>
 </td></tr></table>
-</div>
-
-<div class="span4">
-
-<div class=slug>
-<div class=post_date>Posted December 28, 2013</div>
-<div class=post_date>Tagged
-        
-        <a href="/tags/astronomy/index.html" class="tag">
-            astronomy/5
-        </a>
-         &#183; 
-        
-        <a href="/tags/R/index.html" class="tag">
-            R/17
-        </a>
-        
-        
-</div>
-
-</div>
-
-
-
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
