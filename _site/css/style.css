@@ -55,6 +55,11 @@ pre {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     background-color: #F2F2F2;
     font-weight: 400;
+    /* new: messes up with line numbered code */
+    /*width: 620px; /* see span8 */
+    /*display: block; */
+    /*overflow:auto; */
+    /* endnew */
 }
 
 div.slug {
@@ -119,8 +124,15 @@ h2 {
     float:left;
     margin-left:20px;
 }
-.span4 {
+
+post.count {
+    color: red;
+}
+.span4 { /* for RHS (date, tags, comments) */
     width:300px;
     background-color: #F0FFFF;
 }
-.span8{width:620px;}
+
+.span8 { /* for LHS (main content) */
+    width:620px;
+}

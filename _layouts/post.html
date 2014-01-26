@@ -37,13 +37,13 @@
 <span class=topnav>
 {% if page.previous.url %}
 <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">
-    Previous
+&larr; Previous
 </a>
 {% endif %}
 | <a href='/blog'>Home</a> |
 {% if page.next.url %}
 <a href="{{page.next.url}}" title="Next Post: {{page.next.title}}">
-    Next
+Next &rarr;
 </a>
 {% endif %}
 </span>
@@ -60,7 +60,9 @@
 <div class=post_date>Posted {{ page.date | date: "%B %e, %Y" }}</div>
 <div class=post_date>Tagged
         {% for tag in page.tags %}
-        <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag">{{ tag }}</a>
+        <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag">
+            {{ tag }}/{{ site.tags[tag].size }}
+        </a>
         {% if forloop.last != true %} &#183; {% endif %}
         {% endfor %}
 </div>

@@ -53,6 +53,8 @@ microbenchmark(ldply(section[["station"]], function(x) x[["latitude"]])$V1,
     unlist(lapply(section[["station"]], function(x) x[["latitude"]])))
 {% endhighlight %}
 
+yield the following
+
 {% highlight r %}
 ## Unit: milliseconds
 ##                                                               expr   min
@@ -63,7 +65,7 @@ microbenchmark(ldply(section[["station"]], function(x) x[["latitude"]])$V1,
 ##  19.71  19.93 20.64 63.18   100
 {% endhighlight %}
 
-indicate such a difference too small to be of much interest, at least in this case.
+suggesting a difference too small to be of much practical interest.
 
 # Discussion
 
