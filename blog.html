@@ -17,8 +17,8 @@ href="https://github.com/dankelley/dankelley.github.io">github</a>.)</p>
 
 <ul>
     {% for post in site.posts %}
-    <li> <!-- {{ post.date | date: "%B %e, %Y" }} -->
-    {{ post.date | date: "%B %e, %Y" }}
+    <li>
+    {{ post.date | date: "%b %e, %Y" }}
     <a href="{{ post.url }}">{{ post.title }}</a>
     {% if page.showtags %}
     Tags:
