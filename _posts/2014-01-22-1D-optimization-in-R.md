@@ -63,7 +63,7 @@ This speed is not especially fast; it would take about a heartbeat to move past 
 
 2. Use ``abline()`` to indicate the wavenumber at the speed minimum.
 
-3. Try other functions that are of interest to you.
+3. Try other functions that are of interest to you, e.g. optimize $\sin\theta\cos\theta$ to find the throwing angle that makes a rock go furthest in frictionless air on flat terrain.
 
 4. Use the multi-dimensional optimizer named ``optim()`` on this problem.
 
