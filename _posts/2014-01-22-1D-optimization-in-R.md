@@ -34,7 +34,7 @@ phaseSpeed <- function(k) {
 {% endhighlight %}
 
 
-Readers with a background in the topic of waves may know that there is a minimum phase speed at wavelengths of about 2 cm, or a $k$ of approximately $2\pi/0.02$ which is about 300.  It always makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.
+It makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.  Readers who are familiar with gravity-capillary waves may know that the speed is minimum at wavelengths of about 2 cm, or wavenumbers of approximately $2\pi/0.02=300$; this suggests an x range for the plot.  
 
 
 {% highlight r %}
