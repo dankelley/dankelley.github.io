@@ -79,7 +79,7 @@ Next &rarr;
     sqrt<span class='p'>(</span>omega2<span class='p'>)</span><span class='o'>/</span>k
 <span class='p'>}</span>
 </code></pre></div>
-<p>Readers with a background in the topic of waves may know that there is a minimum phase speed at wavelengths of about 2 cm, or a $k$ of approximately $2\pi/0.02$ which is about 300. It always makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.</p>
+<p>It makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step. Readers who are familiar with gravity-capillary waves may know that the speed is minimum at wavelengths of about 2 cm, or wavenumbers of approximately $2\pi/0.02=300$; this suggests an x range for the plot.</p>
 <div class='highlight'><pre><code class='r'>k <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>100</span><span class='p'>,</span> <span class='m'>1000</span><span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>100</span><span class='p'>)</span>
 par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 plot<span class='p'>(</span>k<span class='p'>,</span> phaseSpeed<span class='p'>(</span>k<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> xlab <span class='o'>=</span> <span class='s'>&quot;Wavenumber&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Phase speed&quot;</span><span class='p'>)</span>
@@ -105,7 +105,7 @@ phaseSpeed<span class='p'>(</span>o<span class='o'>$</span>minimum<span class='p
 </li>
 
 <li>
-<p>Try other functions that are of interest to you.</p>
+<p>Try other functions that are of interest to you, e.g. find the angle that maximizes $\sin\theta\cos\theta$, which yields the throwing angle that achieves furthest distance in frictionless air over flat terrain.</p>
 </li>
 
 <li>
