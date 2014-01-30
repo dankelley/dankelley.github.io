@@ -3,7 +3,8 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     sundial_with_gnomon-thumbnail.png analemma-thumbnail.png \
     coastline-switch-1-thumbnail.png coastline-switch-2-thumbnail.png \
     vote-split-thumbnail.png smooth-profile-thumbnail.png \
-    solstice_sunrise_sunset-thumbnail.png gmt-topography-thumbnail.png
+    solstice_sunrise_sunset-thumbnail.png gmt-topography-thumbnail.png \
+    gmt_relief_2-thumbnail.png
 
 pisa-scores-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 pisa-scores.png pisa-scores-thumbnail.png;
@@ -33,6 +34,8 @@ solstice_sunrise_sunset-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 solstice_sunrise_sunset.png solstice_sunrise_sunset-thumbnail.png;
 gmt-topography-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 gmt-topography.png gmt-topography-thumbnail.png
+gmt_relief_2-thumbnail.png: force
+	/usr/local/bin/convert -thumbnail 600x600 gmt_relief_2.png gmt_relief_2-thumbnail.png
 
 force:
 
