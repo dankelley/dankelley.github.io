@@ -6,11 +6,12 @@ category: R
 year: 2014
 month: 01
 day: 30
-summary: The Oce dataset named ``topoWorld`` has some weird patterns in the north Pacific (and elsewhere).  This post offers no explanations, but encourages discussion.
+summary: The Oce dataset named ``topoWorld`` has some intriguing patterns in the north Pacific (and elsewhere).  I think they are just fault lines, but until I plotted them this way I never realized how much they are like Heaviside functions, with an offset on either side of the fault.
 description: The Oce dataset topoWorld has some weird patterns.
 ---
 
-I enjoyed the [blog posting](http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html), which I ran across on R-bloggers, and so I decided to try that author's GMT colourscheme.  This revealed some odd patterns in the Oce dataset named ``topoWorld``.  The following code produces a graph
+I enjoyed the [blog posting](http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html), which I ran across on R-bloggers, and so I decided to try that author's GMT colourscheme.  This revealed some intriguing patterns in the Oce dataset named ``topoWorld``.  The following code produces a graph
+
 
 {% highlight r %}
 ## test GMT colours as suggested by
@@ -38,8 +39,7 @@ imagep(topoWorld, asp=1,
 if (!interactive()) dev.off()
 {% endhighlight %}
 
-I have attached below the results, with some hand-drawn arrows that show the
-odd features of which I speak.
+I have attached below the results, with some hand-drawn arrows that show some of the fault-line features in the North Pacific.  It is amazing how a simple change of a colorscale can sometimes reveal something to the eye.
 
 [![graph]({{ site.url }}/assets/odd-topography-data-thumbnail.png)]({{ site.url }}/assets/odd-topography-data.png)
 

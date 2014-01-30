@@ -55,14 +55,14 @@ Next &rarr;
         
     </div> <!-- post_date -->
     <div class=post_summary>
-        Summary: The Oce dataset named ``topoWorld`` has some weird patterns in the north Pacific (and elsewhere).  This post offers no explanations, but encourages discussion.
+        Summary: The Oce dataset named ``topoWorld`` has some intriguing patterns in the north Pacific (and elsewhere).  I think they are just fault lines, but until I plotted them this way I never realized how much they are like Heaviside functions, with an offset on either side of the fault.
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 
 <!-- </div> -->
 <!-- span4 -->
 
-<p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a>, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some odd patterns in the Oce dataset named <code>topoWorld</code>. The following code produces a graph</p>
+<p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a>, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named <code>topoWorld</code>. The following code produces a graph</p>
 <div class='highlight'><pre><code class='r'><span class='c1'>## test GMT colours as suggested by</span>
 <span class='c1'>## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html</span>
 
@@ -87,7 +87,7 @@ imagep<span class='p'>(</span>topoWorld<span class='p'>,</span> asp<span class='
        col<span class='o'>=</span>c<span class='p'>(</span>ocean.pal<span class='p'>(</span>length<span class='p'>(</span>waterBreaks<span class='p'>)),</span> land.pal<span class='p'>(</span>length<span class='p'>(</span>landBreaks<span class='p'>))))</span>
 <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
 </code></pre></div>
-<p>I have attached below the results, with some hand-drawn arrows that show the odd features of which I speak.</p>
+<p>I have attached below the results, with some hand-drawn arrows that show some of the fault-line features in the North Pacific. It is amazing how a simple change of a colorscale can sometimes reveal something to the eye.</p>
 
 <p><a href="/assets/odd-topography-data.png"><img src="/assets/odd-topography-data-thumbnail.png" alt="graph" /></a></p>
 
