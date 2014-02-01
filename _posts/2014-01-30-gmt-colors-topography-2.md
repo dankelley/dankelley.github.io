@@ -10,8 +10,9 @@ summary: The GMT colour palette is illustrated with ocean topography.
 description: The GMT colour palette is illustrated with ocean topography.
 ---
 
-This follows an item about GMT colours.  In the meantime I have found the
-source of the colour tables, in the [GMT](http://www.beamreach.org/maps/gmt/share/cpt/GMT_relief.cpt) source code.  The palette in question is in a file that is as follows.
+This follows an item about GMT colours.  In the meantime I have found a [website](http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html) illustrating the colours, and also the [definition files](http://www.beamreach.org/maps/gmt/share/cpt) for those palettes.  
+
+The palette in question is named ``GMT_relief``, and it is defined in a file that is as follows.
 
 {% highlight bash %}
 #	$Id: GMT_relief.cpt,v 1.1 2001/09/23 23:11:20 pwessel Exp $

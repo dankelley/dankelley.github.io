@@ -58,7 +58,9 @@
 <!-- </div> -->
 <!-- span4 -->
 
-<p>This follows an item about GMT colours. In the meantime I have found the source of the colour tables, in the <a href="http://www.beamreach.org/maps/gmt/share/cpt/GMT_relief.cpt">GMT</a> source code. The palette in question is in a file that is as follows.</p>
+<p>This follows an item about GMT colours. In the meantime I have found a <a href="http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html">website</a> illustrating the colours, and also the <a href="http://www.beamreach.org/maps/gmt/share/cpt">definition files</a> for those palettes.</p>
+
+<p>The palette in question is named <code>GMT_relief</code>, and it is defined in a file that is as follows.</p>
 <div class='highlight'><pre><code class='bash'><span class='c'>#	$Id: GMT_relief.cpt,v 1.1 2001/09/23 23:11:20 pwessel Exp $</span>
 <span class='c'>#</span>
 <span class='c'># Colortable for whole earth relief used in Wessel topomaps</span>
@@ -85,7 +87,7 @@ F	255	255	255
 B	0	0	0
 N	255	255	255
 </code></pre></div>
-<p>R code to read this file is:</p>
+<p>R code to read this file and construct 16-piece linear ramps between the levels is as follows.</p>
 <div class='highlight'><pre><code class='r'>breakPerLevel <span class='o'>&lt;-</span> <span class='m'>16</span> <span class='c1'># say</span>
 d <span class='o'>&lt;-</span> read.table<span class='p'>(</span><span class='s'>&quot;GMT_relief.cpt&quot;</span><span class='p'>,</span> comment<span class='o'>=</span><span class='s'>&quot;#&quot;</span><span class='p'>,</span> nrows<span class='o'>=</span><span class='m'>17</span><span class='p'>,</span>
                 col.names<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;l&quot;</span><span class='p'>,</span> <span class='s'>&quot;lr&quot;</span><span class='p'>,</span> <span class='s'>&quot;lg&quot;</span><span class='p'>,</span> <span class='s'>&quot;lb&quot;</span><span class='p'>,</span>
