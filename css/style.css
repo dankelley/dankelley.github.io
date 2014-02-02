@@ -93,6 +93,14 @@ h2 {
     margin-bottom: -0.5em;
 }
 
+h3 {
+    font-size:100%;
+    line-height:100%;
+    margin-top: 0em;
+    margin-bottom: -0.5em;
+}
+
+
 
 @media only screen and (max-width: 481px), only screen and (max-device-width: 480px) {
     body{
