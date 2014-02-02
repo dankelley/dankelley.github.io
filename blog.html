@@ -13,6 +13,7 @@ to a commercial site, he started experimenting with github blogging in early
 2014, yielding the entries provided below.  (The source for the blog is at <a
 href="https://github.com/dankelley/dankelley.github.io">github</a>.)</p>
 
+<p><b>Posts</b></p>
 <ul>
     {% for post in site.posts %}
     <li>
@@ -28,4 +29,15 @@ href="https://github.com/dankelley/dankelley.github.io">github</a>.)</p>
     {% endfor %} <!-- post -->
 </ul>
 </p>
+
+<p><b>Tags</b></p>
+<!-- FIXME: should orer the tags but I am not sure how, since
+order:ascending applies to whole tag and we want first element -->
+{% for tag in site.tags %}
+    <a href="{{ site.url }}/tags/{{ tag[0] }}/index.html" class="tag">
+        {{ tag[0] }}/{{ tag[0].size }}
+    </a>
+    {% if forloop.last != true %} &#183; {% endif %}
+{% endfor %}
+
 

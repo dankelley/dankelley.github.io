@@ -1,14 +1,9 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/syntax.css' />
-<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/style.css' />
-</head>
-
-<body>
+---
+layout: default
+---
 
 <span class=topnav>
-<p><a href='/blog'>Home</a></p>
+<p><a href='/blog'>Blog archive</a></p>
 </span>
 
 <p><b>{{page.title}}</b></p>
@@ -37,18 +32,4 @@
     {% endfor %}
 </ul>
 
-<p><b>Tags used on this blog</b></p>
-<!-- FIXME: should orer the tags but I am not sure how, since
-order:ascending applies to whole tag and we want first element -->
-{% for tag in site.tags %}
-    <a href="{{ site.url }}/tags/{{ tag[0] }}/index.html" class="tag">
-        {{ tag[0] }}/{{ tag[0].size }}
-    </a>
-    {% if forloop.last != true %} &#183; {% endif %}
-{% endfor %}
-
-
-
-
-</body>
 
