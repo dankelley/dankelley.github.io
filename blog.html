@@ -32,11 +32,27 @@ to a commercial site, he started experimenting with github blogging in early
 <p><b>Tags</b></p>
 <!-- FIXME: should order the tags but I am not sure how, since
 order:ascending applies to whole tag and we want first element -->
-<!-- FIXME: the count is wrong -->
-{% for tag in site.tags order:descending %}
+
+{% for tag in site.tags %}
     <a href="{{ site.url }}/tags/{{ tag[0] }}/index.html" class="tag">
         {{ tag[0] }}/{{ tag[1].size }}
         <!-- {{ tag[0] }} -->
+    </a>
+    {% if forloop.last != true %} &#183; {% endif %}
+{% endfor %}
+
+<p><b>Tags</b></p>
+
+{% capture tagnames %}
+{% for tag in site.tags %}
+{{ tag[0] }}
+{% endfor %}
+{% endcapture %}
+<!-- NOTE: this assumes no spaces in tags -->
+{% assign sortedtags = tagnames | split:' ' | sort %}
+{% for tag in sortedtags order:ascending %}
+    <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag">
+        {{ tag }}
     </a>
     {% if forloop.last != true %} &#183; {% endif %}
 {% endfor %}
