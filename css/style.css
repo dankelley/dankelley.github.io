@@ -49,6 +49,7 @@ pre {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     background-color: #F2F2F2;
     font-weight: 400;
+    font-size:90%;
     /* new: messes up with line numbered code */
     /*width: 620px; /* see span8 */
     /*display: block; */
