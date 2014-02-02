@@ -5,8 +5,29 @@
 <link rel='stylesheet' type='text/css' href='{{ site.url }}/css/style.css' />
 <title>{{ page.title }}</title>
 </head>
+
 <body>
-{{ content }}
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="nav">
+            <li><a href="/index.html">Dan Kelley</a></li>
+            <li><a href="/publications.html">Publications</a></li>
+            <li><a href="/software.html">Software</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    {{ content }}
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
 </body>
 </html>
 

@@ -1,17 +1,11 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/syntax.css' />
-<link rel='stylesheet' type='text/css' href='{{ site.url }}/css/style.css' />
+---
+layout: default
+---
+
 
 {% if page.latex %}
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
 {% endif %}
-
-<title>{{ page.title }}</title>
-</head>
-
-<body>
 
 
 {% if page.comments %}
@@ -90,6 +84,4 @@ var disqus_shortname = 'dankelleydalhousie'; // required: replace example with y
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</body>
-</html>
 

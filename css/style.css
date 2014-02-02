@@ -40,13 +40,6 @@ code {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 }
 
-/*
- * span.tag {
- *    border: 1px solid;
- *    padding: 2px;
- *    border-top-left-radius: 0.5em;
- *    border-top-right-radius: 0.5em;
- */
 
 pre {
     margin-top: 0.2em;
@@ -130,4 +123,41 @@ post.count {
     /*
      width:620px;
      */
+}
+
+.navbar {
+    display:block;
+    position:relative;
+    bottom:0px;
+    right:0px;
+    width:100%;
+}
+.navbar ul {
+    margin: 0;
+    padding: 0.2em 0.2em;
+    list-style: none;
+    background-color: #036;
+    color: #FFF;
+    width: 100%;
+}
+.navbar li {
+    display:inline;
+}
+.navbar li a {
+    text-decoration:none;
+    font-weight: bold;
+    color: white;
+    padding: 0.5em 0.5em;
+    border-right: 1px solid #fff;
+}
+.navbar li a:hover {
+    background-color: #06C;
+}
+
+#content {
+    margin-top: 1em;
+}
+
+p.footnote {
+    font-size: small;
 }
