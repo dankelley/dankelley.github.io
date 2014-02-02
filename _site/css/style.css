@@ -177,7 +177,7 @@ p.footnote {
 ul.posts {
     list-style-type: none;
     margin-bottom: 0em;
-    margin-left: -2em;
+    margin-left: 0em;
 }
 
 ul.posts li {
