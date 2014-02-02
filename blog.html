@@ -30,11 +30,13 @@ to a commercial site, he started experimenting with github blogging in early
 </p>
 
 <p><b>Tags</b></p>
-<!-- FIXME: should orer the tags but I am not sure how, since
+<!-- FIXME: should order the tags but I am not sure how, since
 order:ascending applies to whole tag and we want first element -->
-{% for tag in site.tags %}
+<!-- FIXME: the count is wrong -->
+{% for tag in site.tags order:descending %}
     <a href="{{ site.url }}/tags/{{ tag[0] }}/index.html" class="tag">
-        {{ tag[0] }}/{{ tag[0].size }}
+        {{ tag[0] }}/{{ tag[1].size }}
+        <!-- {{ tag[0] }} -->
     </a>
     {% if forloop.last != true %} &#183; {% endif %}
 {% endfor %}
