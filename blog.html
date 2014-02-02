@@ -29,17 +29,16 @@ to a commercial site, he started experimenting with github blogging in early
 </ul>
 </p>
 
+<!--
 <p><b>Tags</b></p>
-<!-- FIXME: should order the tags but I am not sure how, since
-order:ascending applies to whole tag and we want first element -->
 
 {% for tag in site.tags %}
     <a href="{{ site.url }}/tags/{{ tag[0] }}/index.html" class="tag">
         {{ tag[0] }}/{{ tag[1].size }}
-        <!-- {{ tag[0] }} -->
     </a>
     {% if forloop.last != true %} &#183; {% endif %}
 {% endfor %}
+-->
 
 <p><b>Tags</b></p>
 
