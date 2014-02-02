@@ -20,7 +20,7 @@ The first step in making the graph shown above is to load the ``oce`` library an
 
 # Methods
 
-The first step is to load the data and extract dependent and independent variables, here *S* and $p$.
+The first step is to load the data and extract dependent and independent variables, here *S* and *p*.
 {% highlight r %}
 library(oce)
 library(signal)
