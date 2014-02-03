@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<title>spline wiggles</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="nav">
+            <li><a href="/index.html">Dan Kelley</a></li>
+            <li><a href="/publications.html">Publications</a></li>
+            <li><a href="/software.html">Software</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<span class=topnav>
+
+<a href="/r/2014/01/30/gmt-colors-topography-2.html" title="GMT colours for topography, part 2">
+&larr; Previous
+</a>
+
+| <a href='/blog'>Home</a> |
+
+</span> <!-- topnav -->
+
+
+<div class=post_title>spline wiggles</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <div class=post_date>
+        Posted: Feb  3, 2014
+    </div> <!-- post_date -->
+    <div class=post_tags>
+        Tagged:
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </div> <!-- post_date -->
+    <div class=post_summary>
+        Summary: spline-fit methods are compared on a difficult problem
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+
+<h1 id="introduction">Introduction</h1>
+
+<p>An interesting paper (Smith and Wessel, 1990) points out a weakness in using splines in cases with data gaps. Their illustration of the problem with isobaths was particularly compelling. I cannot reproduce their Fig 1b here, owing to copyright problems, but I digitized the data so I could test two R functions for splines. Readers can follow along with the code given in this post.</p>
+
+<h1 id="methods">Methods</h1>
+
+<p>The first step is to load the data. (Ignore the extra digits, which simply result from naive copying of digitized values. I suppose the error is of order 2 percent or so, given the scanning of the diagram and my ability to position the pointer on my computer screen.)</p>
+<div class='highlight'><pre><code class='r'> 
+distance <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>23.17400</span><span class='p'>,</span> <span class='m'>25.09559</span><span class='p'>,</span> <span class='m'>31.15092</span><span class='p'>,</span> <span class='m'>40.75568</span><span class='p'>,</span>
+              <span class='m'>46.42938</span><span class='p'>,</span> <span class='m'>124.68628</span><span class='p'>,</span> <span class='m'>132.20556</span><span class='p'>,</span> <span class='m'>136.81277</span><span class='p'>,</span>
+              <span class='m'>141.37564</span><span class='p'>,</span> <span class='m'>145.08263</span><span class='p'>,</span> <span class='m'>149.38977</span><span class='p'>)</span>
+topography <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>-98.99976</span><span class='p'>,</span> <span class='m'>-97.44730</span><span class='p'>,</span> <span class='m'>-100.15198</span><span class='p'>,</span> <span class='m'>-98.66016</span><span class='p'>,</span>
+                <span class='m'>-98.66016</span><span class='p'>,</span> <span class='m'>-193.94266</span><span class='p'>,</span> <span class='m'>-296.89045</span><span class='p'>,</span> <span class='m'>-392.63991</span><span class='p'>,</span>
+                <span class='m'>-493.85330</span><span class='p'>,</span> <span class='m'>-591.21586</span><span class='p'>,</span> <span class='m'>-692.82951</span><span class='p'>)</span>
+</code></pre></div>
+<p>Next, plot the data.</p>
+<div class='highlight'><pre><code class='r'> 
+<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> png<span class='p'>(</span><span class='s'>&quot;splines.png&quot;</span><span class='p'>,</span> width<span class='o'>=</span><span class='m'>7</span><span class='p'>,</span> height<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> unit<span class='o'>=</span><span class='s'>&quot;in&quot;</span><span class='p'>,</span> res<span class='o'>=</span><span class='m'>150</span><span class='p'>,</span> pointsize<span class='o'>=</span><span class='m'>8</span><span class='p'>)</span>
+par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
+plot<span class='p'>(</span>distance<span class='p'>,</span> topography<span class='p'>,</span> ylim<span class='o'>=</span>c<span class='p'>(</span><span class='m'>-700</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>),</span> pch<span class='o'>=</span><span class='m'>16</span><span class='p'>)</span>
+grid<span class='p'>()</span>
+</code></pre></div>
+<p>Now, set up a gird, and show the results of <code>smooth.spline()</code>.</p>
+<div class='highlight'><pre><code class='r'> 
+d <span class='o'>&lt;-</span> seq<span class='p'>(</span>min<span class='p'>(</span>distance<span class='p'>),</span> max<span class='p'>(</span>distance<span class='p'>),</span> length.out<span class='o'>=</span><span class='m'>100</span><span class='p'>)</span>
+s <span class='o'>&lt;-</span> smooth.spline<span class='p'>(</span>topography <span class='o'>~</span> distance<span class='p'>)</span>
+ps <span class='o'>&lt;-</span> predict<span class='p'>(</span>s<span class='p'>,</span> d<span class='p'>)</span>
+lines<span class='p'>(</span>ps<span class='o'>$</span>x<span class='p'>,</span> ps<span class='o'>$</span>y<span class='p'>)</span>
+</code></pre></div>
+<p>Now, load the Akima package to get <code>aspline()</code>, which presumably stems from Akima (1970).</p>
+<div class='highlight'><pre><code class='r'> 
+library<span class='p'>(</span>akima<span class='p'>)</span>
+akima <span class='o'>&lt;-</span> aspline<span class='p'>(</span>distance<span class='p'>,</span> topography<span class='p'>,</span> d<span class='p'>)</span>
+lines<span class='p'>(</span>akima<span class='o'>$</span>x<span class='p'>,</span> akima<span class='o'>$</span>y<span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
+</code></pre></div>
+<p>Finally, draw a legend and finish up.</p>
+<div class='highlight'><pre><code class='r'> 
+legend<span class='p'>(</span><span class='s'>&quot;bottomleft&quot;</span><span class='p'>,</span> lwd<span class='o'>=</span>par<span class='p'>(</span><span class='s'>&#39;lwd&#39;</span><span class='p'>),</span> bg<span class='o'>=</span><span class='s'>&#39;white&#39;</span><span class='p'>,</span>
+       col<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;black&quot;</span><span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>),</span>
+       legend<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;smooth.spline&quot;</span><span class='p'>,</span> <span class='s'>&quot;aspline&quot;</span><span class='p'>))</span>
+<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
+</code></pre></div>
+<h1 id="results">Results</h1>
+
+<p><a href="/assets/splines.png"><img src="/assets/splines-thumbnail.png" alt="graph" /></a></p>
+
+<p>At least on this problem, <code>aspline()</code> does a much better job than <code>smooth.spline()</code>.</p>
+
+<h1 id="citations">Citations</h1>
+
+<p>W. H. F. Smith and P. Wessel, 1990. Gridding with continuous curvature splines in tension. Geophysics, 55(3): 293-305.</p>
+
+<p>Hiroshi Akima, 1970. A new method of interpolation and smooth curve fitting based on local procedures. Journal of the Association for Computing Machinery, 17(4): 589-602.</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
