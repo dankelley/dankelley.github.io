@@ -19,7 +19,7 @@ WebTide comes with a friendly graphical user interface that makes it easy to get
 # Installation
 
 
-Step 1. Download the 'linux without Java VM' version from the [Bedford Institute of Oceanography](http://www.bio.gc.ca/science/research-recherche/ocean/webtide/index-eng.php) website, and store the results in the ``~/Downloads`` directory.
+Step 1. Download the linux-without-Java-VM version from the [Bedford Institute of Oceanography](http://www.bio.gc.ca/science/research-recherche/ocean/webtide/index-eng.php) website, and store the results in the ``~/Downloads`` directory.
 
 Step 2. Open a terminal or console window, and type the following to enter the WebTide directory and start the process of installing WebTide.
 {% highlight bash %}
