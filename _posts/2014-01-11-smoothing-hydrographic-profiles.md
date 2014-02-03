@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Smoothing hydrographic profiles
+title: Smoothing CTD profiles
 tags: [oceanography, time-series, R]
 category: R
 year: 2014

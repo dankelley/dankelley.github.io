@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How entries are added to this blog
+title: How entries are added
 tags: blogging
 category: development
 year: 2014

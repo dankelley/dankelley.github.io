@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Overshoot in Butterworth filters
+title: Butterworth filter overshoot
 tags: [time-series, R]
 category: R
 year: 2014

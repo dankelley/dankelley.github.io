@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A new coastline for the Oce package
+title: A new Oce coastline
 tags: [oceanography, R]
 category: R
 year: 2013
