@@ -8,7 +8,7 @@ par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0), mfrow=c(1,3))
 xx <- seq(0, 15, length.out=200)
 show <- function(x, y)
 {
-    plot(x, y)
+    plot(x, y, pch=20)
     grid()
     akima <- aspline(x, y, xx)
     lines(akima$x, akima$y)
