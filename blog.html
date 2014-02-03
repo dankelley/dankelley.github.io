@@ -12,6 +12,9 @@ WordPress data entry scheme being somewhat arduous, and disliking the lock-in
 to a commercial site, he started experimenting with github blogging in early
 2014, yielding the entries provided below.</p>
 
+<!-- FIXME: why so much space at left -->
+<!-- FIXME: why does iphone have text off left-hand side -->
+<!-- apparently, UL has default 40 px to left -->
     {% for post in site.posts %}
     {% unless post.next %}
     <h3> {{ post.date | date: '%Y' }} posts</h3>
