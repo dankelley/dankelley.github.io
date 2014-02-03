@@ -21,7 +21,7 @@ Setting up a cabelling experiment requires creating two watermasses of equal den
 
 The code given below will do the calculation for specified ``Sa``, ``Ta`` and ``Sb``, where the second letter indicates the watermass.  The code uses ``uniroot()`` to find the temperature ``Tb`` that yields equal densities for watermasses *a* and *b*.  
 
-{% highlight r %}
+{% highlight r linenos=table %}
 # Alter next three lines as desired; a and b are watermasses.
 Sa <- 30
 Ta <- 10
