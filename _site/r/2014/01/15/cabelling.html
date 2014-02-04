@@ -83,7 +83,32 @@ Next &rarr;
 <h1 id="methods">Methods</h1>
 
 <p>The code given below will do the calculation for specified <code>Sa</code>, <code>Ta</code> and <code>Sb</code>, where the second letter indicates the watermass. The code uses <code>uniroot()</code> to find the temperature <code>Tb</code> that yields equal densities for watermasses <em>a</em> and <em>b</em>.</p>
-<div class='highlight'><pre><code class='r'><span class='c1'># Alter next three lines as desired; a and b are watermasses.</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'># Alter next three lines as desired; a and b are watermasses.</span>
 Sa <span class='o'>&lt;-</span> <span class='m'>30</span>
 Ta <span class='o'>&lt;-</span> <span class='m'>10</span>
 Sb <span class='o'>&lt;-</span> <span class='m'>40</span>
@@ -109,7 +134,8 @@ legend<span class='p'>(</span><span class='s'>&quot;topleft&quot;</span><span cl
                       Sa<span class='p'>,</span> Ta<span class='p'>,</span> Sb<span class='p'>,</span> Tb<span class='p'>,</span> drho<span class='p'>,</span> dT<span class='p'>),</span>
        bg<span class='o'>=</span><span class='s'>&quot;white&quot;</span><span class='p'>)</span>
 <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>If run non-interactively, the code will produce a PNG file like that given below.</p>
 
 <h1 id="results">Results</h1>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GMT colours for topography, part 2
+title: GMT topography colours (II)
 tags: [oceanography, R]
 category: R
 year: 2014
