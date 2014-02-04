@@ -1,4 +1,4 @@
-if (!interactive()) png("splines2.png", width=7, height=7, unit="in", res=150, pointsize=8)
+if (!interactive()) png("splines2.png", width=7, height=7, unit="in", res=150, pointsize=12)
 
 ## Data from "MD=1" set of akima1972iasc
 x <- c(0, 1, 2, 3, 3, 4, 5,  6,  6,  7,   8,   9)
