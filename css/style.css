@@ -30,7 +30,16 @@ body {
     font-family: helvetica,arial,freesans,clean,sans-serif;
     font-size:14px;
     color: #444444;
+    background-color: #eee;
     line-height: 2.5ex;
+    margin:0;
+    margin-top:0;
+    padding-top:0;
+}
+
+p {
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 tt {
@@ -43,13 +52,23 @@ code {
 
 
 pre {
+    /*
     margin-top: 0.2em;
     margin-bottom: 0.2em;
     margin-left: 1em;
+    */
+    padding: 9px;
+    margin: 0 0 9px;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    background-color: #F2F2F2;
+    background-color: #F5F5F5;
     font-weight: 400;
     font-size: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+
     /* new: messes up with line numbered code */
     /*width: 620px; /* see span8 */
     /*display: block; */
@@ -140,34 +159,46 @@ post.count {
 .navbar {
     display:block;
     position:relative;
+    padding:0;
+    top:0px;
     bottom:0px;
     right:0px;
     width:100%;
+    line-height: 100%;
+    margin: 0;
 }
 .navbar ul {
-    margin: 0;
-    padding: 0.2em 0.2em;
+    padding: 0.6em 0.6em;
+    margin-top:0;
     list-style: none;
-    background-color: #036;
-    color: #FFF;
+    /*background-color: #036;*/
+    background-color: #333333;
     width: 100%;
+    font-weight: normal;
 }
 .navbar li {
     display:inline;
 }
 .navbar li a {
+    color: #999999;
     text-decoration:none;
-    font-weight: bold;
-    color: white;
     padding: 0.5em 0.5em;
-    border-right: 1px solid #fff;
+    font-weight: 100;
+    /*border-right: 1px solid #fff;*/
+}
+.navbar li a.brand {
+    color: white;
+    font-size: 120%;
 }
 .navbar li a:hover {
-    background-color: #06C;
+    color: #eeeeee;
 }
 
 #content {
     margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: #FFF;
 }
 
 p.footnote {
@@ -191,4 +222,10 @@ ul.posts span {
     font-family: Monaco, "Courier New", monospace;
     font-size: 80%;
     margin-left: 0;
+}
+
+div.page-header {
+    background-color: #f5f5f5;
+    padding: 20px 20px 10px;
+    margin: -20px -20px 20px;
 }
