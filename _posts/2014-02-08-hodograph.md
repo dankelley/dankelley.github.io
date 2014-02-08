@@ -40,7 +40,7 @@ hodograph <- function(x, y, t, rings, tcut = c("daily", "yearly"), ...) {
             xx <- x * cos(day/365 * 2 * pi)
             yy <- x * sin(day/365 * 2 * pi)
             ## axes
-            if (!missing(rings)) 
+            if (missing(rings)) 
                 rings <- pretty(sqrt(xx^2 + yy^2))
             rscale <- 1.04 * max(rings)
             theta <- seq(0, 2 * pi, length.out = 200)
@@ -79,8 +79,10 @@ hodograph(x = co2 - co2[1], t = t, tcut = "yearly", type = "l")
 
 
 {% highlight text %}
-## Error: 'rings' is missing
+## Error: object 'R' not found
 {% endhighlight %}
+
+![center]({{ site.url }}/assets/2014-02-08-hodograph.png) 
 
 
 # Results
