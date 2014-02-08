@@ -206,7 +206,7 @@ a.pagination { /* Previous Next */
     padding-left: 0.5em;
     padding-right: 0.5em;
     float:right;
-    font-size:90%;
+    font-size:80%;
     background-color:#AAA;
     color:#FFF;
 }
