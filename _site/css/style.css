@@ -196,9 +196,8 @@ post.count {
     color: #eeeeee;
 }
 
-a.navbutton {
+a.pagination { /* Previous Next */
     text-decoration:none;
-    background-color:white;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     margin-top: 1ex;
@@ -207,6 +206,13 @@ a.navbutton {
     padding-left: 0.5em;
     padding-right: 0.5em;
     float:right;
+    font-size:90%;
+    background-color:#AAA;
+    color:#FFF;
+}
+a.pagination:hover {
+    background-color:white;
+    color: #333;
 }
 
 #content {
