@@ -13,7 +13,7 @@ description: The GMT colour palette is illustrated with ocean topography.
 I enjoyed the [blog posting](http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html), which I ran across on R-bloggers, and so I decided to try that author's GMT colourscheme.  This revealed some intriguing patterns in the Oce dataset named ``topoWorld``.  The following code produces a graph
 
 
-{% highlight r %}
+{% highlight r linenos=table %}
 ## test GMT colours as suggested by
 ## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html
 

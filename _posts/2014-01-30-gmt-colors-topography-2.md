@@ -43,7 +43,7 @@ N	255	255	255
 {% endhighlight %}
 
 R code to read this file and construct 16-piece linear ramps between the levels is as follows.
-{% highlight r %}
+{% highlight r linenos=table %}
 breakPerLevel <- 16 # say
 d <- read.table("GMT_relief.cpt", comment="#", nrows=17,
                 col.names=c("l", "lr", "lg", "lb",
