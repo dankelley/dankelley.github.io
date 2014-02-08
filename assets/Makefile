@@ -43,3 +43,7 @@ splines2-thumbnail.png: force
 
 force:
 
+%.md: %.Rmd
+	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}/assets/")'
+	mv $@ ../_posts/
+
