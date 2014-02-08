@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Colourizing a trajectory
-tags: R
+tags: [R, graphics]
 category: R
 year: 2014
 month: 1

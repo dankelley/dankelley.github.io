@@ -1,7 +1,7 @@
 ---
 layout: post
-title: hodograph in R
-tags: [R, plotting]
+title: Hodograph drawing
+tags: [R, graphics]
 category: R
 year: 2014
 month: 2
