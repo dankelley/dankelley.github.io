@@ -96,7 +96,7 @@ plot(co2)
 
 # Conclusions
 
-The function is useful as it is, but some improvements are indicated.  Aesthetic weaknesses include: (a) the month separators are approximate, resulting presently from simply dividing the year into 12 equal parts; (b) the ring labels are often over-written by the axes (hence their omission in the example).
+The function is useful as it is, but some improvements are indicated.  For example, the ring labels are often over-written by the axes, and the only solution on offer presently is to skip the labels.
 
 # Resources
 
