@@ -1,6 +1,6 @@
 ---
 layout: post
-title: vote splitting in Canada
+title: Vote splitting in Canada
 tags: [politics, R]
 category: R
 year: 2013
