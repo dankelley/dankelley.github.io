@@ -48,11 +48,12 @@ hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly")
                  type='n', xlab="", ylab="", axes=FALSE)
             ## month lines
             month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+            rscale <- max(rings)
             for (m in 1:12) {
                 phi <- 2*pi*(m-1)/12
-                lines(Rscale*1.1*cos(phi)*c(-1,1), Rscale*1.1*sin(phi)*c(-1,1), col='gray')
+                lines(rscale*1.1*cos(phi)*c(-1,1), rscale*1.1*sin(phi)*c(-1,1), col='gray')
                 phi <- 2*pi*(0.5/12+(m-1)/12)
-                text(1.15*Rscale * cos(phi), 1.15*Rscale * sin(phi), month[m]) 
+                text(1.15*rscale * cos(phi), 1.15*rscale * sin(phi), month[m]) 
             }
             for (r in rings) {
                 if (r > 0) {
