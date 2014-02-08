@@ -86,7 +86,7 @@ hodograph(x=co2-co2[1], t=t, tcut="yearly", type="l", ringlabels=FALSE)
 
 # Results
 
-The plot is surprisingly informative.  I've looked at the ``co2`` data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, considere a conventional time-series plot.
+The plot is informative.  I've looked at the ``co2`` data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.
 
 ```{r timeseries, fig.path='2014-02-08-'}
 plot(co2)
@@ -94,7 +94,7 @@ plot(co2)
 
 # Conclusions
 
-Even in this draft form, the function may be useful.  Among the aesthetic weaknesses one might list: (a) the month separators are approximate, being a year divided into 12 parts; (b) the ring labels are over-written by the axes.
+The function is useful as it is, but some improvements are indicated.  Aesthetic weaknesses include: (a) the month separators are approximate, resulting presently from simply dividing the year into 12 equal parts; (b) the ring labels are often over-written by the axes (hence their omission in the example).
 
 # Resources
 
