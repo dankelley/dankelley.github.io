@@ -28,18 +28,19 @@ layout: default
 <!-- <div class="span8"> -->
 
 <div class=topnav>
-{% if page.previous.url %}
-<a class="navbutton" href="{{page.previous.url}}" title="{{page.previous.title}}">
-    <!-- &larr; --> Previous
-</a>
-{% endif %}
-<!-- | <a href='/blog'>Home</a> | -->
 {% if page.next.url %}
 <a class="navbutton" href="{{page.next.url}}" title="{{page.next.title}}">
     Next <!-- &rarr; -->
 </a>
 {% endif %}
+<!-- | <a href='/blog'>Home</a> | -->
+{% if page.previous.url %}
+<a class="navbutton" href="{{page.previous.url}}" title="{{page.previous.title}}">
+    <!-- &larr; --> Previous
+</a>
+{% endif %}
 </div> <!-- topnav -->
+
 
 <div class="page-header">
 
