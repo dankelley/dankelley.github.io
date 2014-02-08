@@ -12,7 +12,7 @@
     <!-- <div class="navbar-inner"> -->
         <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
         <!-- <div class="nav">Dan Kelley</div> -->
-        <ul class="nav">
+        <ul class="navbar">
             <li><a class="brand" href="/index.html">Dan Kelley</a></li>
             <li><a href="/publications.html">Publications</a></li>
             <li><a href="/software.html">Software</a></li>
@@ -29,19 +29,19 @@
 
 <!-- <div class="span8"> -->
 
-<span class=topnav>
+<div class=topnav>
 
-<a href="/r/2014/01/11/smoothing-hydrographic-profiles.html" title="Smoothing CTD profiles">
-&larr; Previous
+<a class="navbutton" href="/r/2014/01/11/smoothing-hydrographic-profiles.html" title="Smoothing CTD profiles">
+    <!-- &larr; --> Previous
 </a>
 
-| <a href='/blog'>Home</a> |
+<!-- | <a href='/blog'>Home</a> | -->
 
-<a href="/r/2014/01/15/cabelling.html" title="Cabelling calculations">
-Next &rarr;
+<a class="navbutton" href="/r/2014/01/15/cabelling.html" title="Cabelling calculations">
+    Next <!-- &rarr; -->
 </a>
 
-</span> <!-- topnav -->
+</div> <!-- topnav -->
 
 <div class="page-header">
 
@@ -51,11 +51,10 @@ Next &rarr;
 <!-- <div class="span4"> -->
 
 <div class=slug>
-    <div class=post_date>
-        Posted: Jan 15, 2014
-    </div> <!-- post_date -->
-    <div class=post_tags>
-        Tagged:
+    <span class=post_date>
+        Jan 15, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
         
         <a href="/tags/time-series/index.html" class="tag">
             time-series
@@ -67,9 +66,9 @@ Next &rarr;
         </a>
         
         
-    </div> <!-- post_date -->
+    </span> <!-- post_date -->
     <div class=post_summary>
-        Summary: A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.
+        A series of examples with a tophat function illustrate the problem of overshoot in Butterworth filters of order exceeding 1.
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 

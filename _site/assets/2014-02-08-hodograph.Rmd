@@ -4,7 +4,7 @@
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
 <meta charset="UTF-8">
-<title>hodograph</title>
+<title>hodograph in R</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
     <!-- <div class="navbar-inner"> -->
         <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
         <!-- <div class="nav">Dan Kelley</div> -->
-        <ul class="nav">
+        <ul class="navbar">
             <li><a class="brand" href="/index.html">Dan Kelley</a></li>
             <li><a href="/publications.html">Publications</a></li>
             <li><a href="/software.html">Software</a></li>
@@ -29,25 +29,24 @@
 
 <!-- <div class="span8"> -->
 
-<span class=topnav>
+<div class=topnav>
 
-| <a href='/blog'>Home</a> |
+<!-- | <a href='/blog'>Home</a> | -->
 
-</span> <!-- topnav -->
+</div> <!-- topnav -->
 
 <div class="page-header">
 
-<div class=post_title>hodograph</div>
+<div class=post_title>hodograph in R</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
 
 <div class=slug>
-    <div class=post_date>
-        Posted: 
-    </div> <!-- post_date -->
-    <div class=post_tags>
-        Tagged:
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
         
         <a href="/tags/R/index.html" class="tag">
             R
@@ -59,9 +58,9 @@
         </a>
         
         
-    </div> <!-- post_date -->
+    </span> <!-- post_date -->
     <div class=post_summary>
-        Summary: simple hodograph function
+        A draft function for hodograph drawing is provided, and illustrated with the co2 dataset.  A variant of this function is likely to appear soon in the Oce R package.
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 

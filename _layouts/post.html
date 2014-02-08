@@ -27,19 +27,19 @@ layout: default
 
 <!-- <div class="span8"> -->
 
-<span class=topnav>
+<div class=topnav>
 {% if page.previous.url %}
-<a href="{{page.previous.url}}" title="{{page.previous.title}}">
-&larr; Previous
+<a class="navbutton" href="{{page.previous.url}}" title="{{page.previous.title}}">
+    <!-- &larr; --> Previous
 </a>
 {% endif %}
-| <a href='/blog'>Home</a> |
+<!-- | <a href='/blog'>Home</a> | -->
 {% if page.next.url %}
-<a href="{{page.next.url}}" title="{{page.next.title}}">
-Next &rarr;
+<a class="navbutton" href="{{page.next.url}}" title="{{page.next.title}}">
+    Next <!-- &rarr; -->
 </a>
 {% endif %}
-</span> <!-- topnav -->
+</div> <!-- topnav -->
 
 <div class="page-header">
 
@@ -49,20 +49,19 @@ Next &rarr;
 <!-- <div class="span4"> -->
 
 <div class=slug>
-    <div class=post_date>
-        Posted: {{ page.date | date: "%b %e, %Y" }}
-    </div> <!-- post_date -->
-    <div class=post_tags>
-        Tagged:
+    <span class=post_date>
+        {{ page.date | date: "%b %e, %Y" }}
+    </span> <!-- post_date -->
+    <span class=post_tags>
         {% for tag in page.tags %}
         <a href="{{ site.url }}/tags/{{ tag }}/index.html" class="tag">
             {{ tag }}
         </a>
         {% if forloop.last != true %} &#183; {% endif %}
         {% endfor %}
-    </div> <!-- post_date -->
+    </span> <!-- post_date -->
     <div class=post_summary>
-        Summary: {{ page.summary }}
+        {{ page.summary }}
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 

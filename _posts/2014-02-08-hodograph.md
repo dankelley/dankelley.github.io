@@ -1,12 +1,12 @@
 ---
 layout: post
-title: hodograph
+title: hodograph in R
 tags: [R, plotting]
 category: R
 year: 2014
 month: 2
 day: 8
-summary: simple hodograph function
+summary: A draft function for hodograph drawing is provided, and illustrated with the co2 dataset.  A variant of this function is likely to appear soon in the Oce R package.
 description: Show the use of a simple hodograph function, perhaps destined for the Oce package.
 ---
 

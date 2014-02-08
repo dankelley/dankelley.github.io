@@ -21,9 +21,10 @@ a.tag:hover {
     color: red;
 }
 
-span.topnav {
+div.topnav {
     font-size:120%;
     margin-left: 0px;
+    /*margin-top: -13px; /* FIXME: why do we need this? */
 }
 
 body {
@@ -77,10 +78,10 @@ pre {
 }
 
 div.slug {
-    margin-left: 1em;
+    margin-left: 3em;
     color: black;
     font-size:90%;
-    margin-bottom:1.5ex;
+    margin-bottom:0ex;
 }
 div.post_title {
     font-size:160%;
@@ -88,11 +89,12 @@ div.post_title {
     font-weight:400;
     color:black;
     line-height:140%;
+    margin-left: 1em;
     margin-top: 1ex;
     margin-bottom: 0ex;
 }
 
-div.post_tags, div.post_date, div.post_summary {
+span.post_tags, span.post_date, span.post_summary {
     margin-left: 0ex;
     margin-bottom: 0ex;
 }
@@ -161,7 +163,7 @@ post.count {
     position:relative;
     padding:0;
     top:0px;
-    bottom:0px;
+    margin-bottom:0px;
     right:0px;
     width:100%;
     line-height: 100%;
@@ -192,6 +194,19 @@ post.count {
 }
 .navbar li a:hover {
     color: #eeeeee;
+}
+
+a.navbutton {
+    text-decoration:none;
+    background-color:white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 1ex;
+    margin-left:0.5em;
+    margin-right:0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    float:right;
 }
 
 #content {
@@ -225,7 +240,8 @@ ul.posts span {
 }
 
 div.page-header {
-    background-color: #f5f5f5;
-    padding: 20px 20px 10px;
-    margin: -20px -20px 20px;
+    background-color: #d0d0d0;
+    /*padding: 20px 20px 10px;*/
+    padding: 5px 20px 10px;
+    margin: -20px -20px 00px; /* last was 20px */
 }
