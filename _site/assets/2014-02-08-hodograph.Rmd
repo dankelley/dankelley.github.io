@@ -81,7 +81,7 @@ I will leave documentation of the function for a later time, conscious of the fa
 # Methods
 
 ```{r hodograph, fig.path='2014-02-08-'}
-hodograph <- function(x, y, t, Rings, tcut=c("daily", "yearly"), ...)
+hodograph <- function(x, y, t, rings, tcut=c("daily", "yearly"), ...)
 {
     tcut <- match.arg(tcut)
     if (missing(t)) {
@@ -99,22 +99,23 @@ hodograph <- function(x, y, t, Rings, tcut=c("daily", "yearly"), ...)
             xx <- x * cos(day / 365 * 2 * pi)
             yy <- x * sin(day / 365 * 2 * pi)
             ## axes
-            Rings <- if (missing(Rings)) pretty(sqrt(xx^2 + yy^2))
-            Rscale <- 1.04 * max(Rings)
+            if (missing(rings))
+                rings <- pretty(sqrt(xx^2 + yy^2))
+            rscale <- 1.04 * max(rings)
             theta <- seq(0, 2 * pi, length.out=200)
-            plot(xx, yy, asp=1, xlim=Rscale*c(-1.1,1.1), ylim=Rscale*c(-1.1, 1.1),
+            plot(xx, yy, asp=1, xlim=rscale*c(-1.1,1.1), ylim=rscale*c(-1.1, 1.1),
                  type='n', xlab="", ylab="", axes=FALSE)
             ## month lines
             month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
             for (m in 1:12) {
                 phi <- 2*pi*(m-1)/12
-                lines(Rscale*cos(phi)*c(-1.1,1.1), Rscale*sin(phi)*c(-1.1,1.1), col='gray')
+                lines(rscale*cos(phi)*c(-1.1,1.1), rscale*sin(phi)*c(-1.1,1.1), col='gray')
                 phi <- 2*pi*(0.5/12+(m-1)/12)
-                text(1.1*Rscale * cos(phi), 1.1*Rscale * sin(phi), month[m]) 
+                text(1.1*rscale * cos(phi), 1.1*rscale * sin(phi), month[m]) 
             }
-            for (R in Rings) {
-                gx <- R * cos(theta)
-                gy <- R * sin(theta)
+            for (r in rings) {
+                gx <- r * cos(theta)
+                gy <- r * sin(theta)
                 lines(gx, gy, col='gray')
                 text(gx[1], 0, format(R))
             }
