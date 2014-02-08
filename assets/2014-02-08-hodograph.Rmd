@@ -58,7 +58,7 @@ hodograph <- function(x, y, t, rings, tcut=c("daily", "yearly"), ...)
                 gx <- r * cos(theta)
                 gy <- r * sin(theta)
                 lines(gx, gy, col='gray')
-                text(gx[1], 0, format(R))
+                text(gx[1], 0, format(r))
             }
             points(xx, yy, ...)
         } else {

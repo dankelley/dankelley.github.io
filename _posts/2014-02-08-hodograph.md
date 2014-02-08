@@ -60,7 +60,7 @@ hodograph <- function(x, y, t, rings, tcut = c("daily", "yearly"), ...) {
                 gx <- r * cos(theta)
                 gy <- r * sin(theta)
                 lines(gx, gy, col = "gray")
-                text(gx[1], 0, format(R))
+                text(gx[1], 0, format(r))
             }
             points(xx, yy, ...)
         } else {
@@ -74,12 +74,6 @@ t0 <- as.POSIXlt("1959-01-01 00:00:00", tz = "UTC")
 t <- t0 + (year - year[1]) * 365 * 86400
 par(mar = rep(1, 4))
 hodograph(x = co2 - co2[1], t = t, tcut = "yearly", type = "l")
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error: object 'R' not found
 {% endhighlight %}
 
 ![center]({{ site.url }}/assets/2014-02-08-hodograph.png) 
