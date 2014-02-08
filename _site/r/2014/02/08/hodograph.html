@@ -77,9 +77,9 @@
 
 <p>The polar graph known as a hodograph can be useful for vector plots, and also for showing varition within nearly-cyclical time series data. The Oce R package should have a function to create hodographs, but as usual my first step is to start by writing isolated code, testing to find the right match between the function and real-world needs.</p>
 
-<p>The code chunk given below is such a test, with the build-in dataset named <code>co2</code>, which is a time-series starting in 1959. Since any function in a package is necessarily documented, I will not bother with explaining things here.</p>
+<p>The code chunk given below is such a test, with the build-in dataset named <code>co2</code>, which is a time-series starting in 1959. The hodograph is for the variation of CO2 from its value in 1959, so the data start at zero radius. Climatologists will why this makes sense, and climate-change deniars will think it’s part of a hoax.</p>
 
-<p>Note that the code has a few tests on arguments provided to it. Things are only known to work in the circumstance illustrated here, with <code>x</code> and <code>t</code> being provided.</p>
+<p>I will leave documentation of the function for a later time, conscious of the fact that the argument list and the aesthtics of the output are likely to change with use.</p>
 
 <h1 id="methods">Methods</h1>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
