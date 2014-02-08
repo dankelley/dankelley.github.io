@@ -82,6 +82,8 @@
 <p>I will leave documentation of the function for a later time, conscious of the fact that the argument list and the aesthtics of the output are likely to change with use.</p>
 
 <h1 id="methods">Methods</h1>
+
+<p>First, define <code>hodograph()</code>, with arguments that suffice for a simple problem of a periodic signal <em>x=x(t)</em> to be plotted in polar fashion with radius indicating <em>x</em> and angle indicating <em>t</em> modulo 1 year.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
  2
  3
@@ -131,13 +133,7 @@
 47
 48
 49
-50
-51
-52
-53
-54
-55
-56</code></pre></div></td><td class='code'><div class='highlight'><pre>hodograph <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> t<span class='p'>,</span> rings<span class='p'>,</span> ringlabels <span class='o'>=</span> <span class='kc'>TRUE</span><span class='p'>,</span> tcut <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;daily&quot;</span><span class='p'>,</span> <span class='s'>&quot;yearly&quot;</span><span class='p'>),</span> 
+50</code></pre></div></td><td class='code'><div class='highlight'><pre>hodograph <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> t<span class='p'>,</span> rings<span class='p'>,</span> ringlabels <span class='o'>=</span> <span class='kc'>TRUE</span><span class='p'>,</span> tcut <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;daily&quot;</span><span class='p'>,</span> <span class='s'>&quot;yearly&quot;</span><span class='p'>),</span> 
     <span class='kc'>...</span><span class='p'>)</span> <span class='p'>{</span>
     tcut <span class='o'>&lt;-</span> match.arg<span class='p'>(</span>tcut<span class='p'>)</span>
     <span class='kr'>if</span> <span class='p'>(</span>missing<span class='p'>(</span>t<span class='p'>))</span> <span class='p'>{</span>
@@ -187,7 +183,15 @@
         <span class='p'>}</span>
     <span class='p'>}</span>
 <span class='p'>}</span>
-data<span class='p'>(</span>co2<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>This may be tested as follows</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>co2<span class='p'>)</span>
 year <span class='o'>&lt;-</span> as.numeric<span class='p'>(</span>time<span class='p'>(</span>co2<span class='p'>))</span>
 t0 <span class='o'>&lt;-</span> as.POSIXlt<span class='p'>(</span><span class='s'>&quot;1959-01-01 00:00:00&quot;</span><span class='p'>,</span> tz <span class='o'>=</span> <span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
 t <span class='o'>&lt;-</span> t0 <span class='o'>+</span> <span class='p'>(</span>year <span class='o'>-</span> year<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span> <span class='o'>*</span> <span class='m'>365</span> <span class='o'>*</span> <span class='m'>86400</span>

@@ -83,7 +83,29 @@
 </div> <!-- page-header -->
 
 <p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a>, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named <code>topoWorld</code>. The following code produces a graph</p>
-<div class='highlight'><pre><code class='r'><span class='c1'>## test GMT colours as suggested by</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## test GMT colours as suggested by</span>
 <span class='c1'>## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html</span>
 
 <span class='c1'># 1. colours as suggested on &quot;menuggest&quot; blog</span>
@@ -106,7 +128,8 @@ imagep<span class='p'>(</span>topoWorld<span class='p'>,</span> asp<span class='
        breaks<span class='o'>=</span>c<span class='p'>(</span>waterBreaks<span class='p'>,</span> <span class='m'>0</span><span class='p'>,</span> landBreaks<span class='p'>),</span>
        col<span class='o'>=</span>c<span class='p'>(</span>ocean.pal<span class='p'>(</span>length<span class='p'>(</span>waterBreaks<span class='p'>)),</span> land.pal<span class='p'>(</span>length<span class='p'>(</span>landBreaks<span class='p'>))))</span>
 <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>I have attached below the results, with some hand-drawn arrows that show the fault-line features in the North Pacific that I had never noticed before. Somehow, this colourscheme made my eye notice them, and now even when I plot with other colour schemes, my eye cannot help but be drawn to these featurs. It is amazing how a simple change of a colorscale can sometimes reveal something to the eye.</p>
 
 <p><a href="/assets/gmt-topography.png"><img src="/assets/gmt-topography-thumbnail.png" alt="graph" /></a></p>

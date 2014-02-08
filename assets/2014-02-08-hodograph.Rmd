@@ -21,6 +21,8 @@ I will leave documentation of the function for a later time, conscious of the fa
 
 # Methods
 
+First, define ``hodograph()``, with arguments that suffice for a simple problem of a periodic signal *x=x(t)* to be plotted in polar fashion with radius indicating *x* and angle indicating *t* modulo 1 year.
+
 ```{r}
 hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly"), ...)
 {

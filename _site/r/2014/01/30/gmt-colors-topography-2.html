@@ -112,7 +112,29 @@ B	0	0	0
 N	255	255	255
 </code></pre></div>
 <p>R code to read this file and construct 16-piece linear ramps between the levels is as follows.</p>
-<div class='highlight'><pre><code class='r'>breakPerLevel <span class='o'>&lt;-</span> <span class='m'>16</span> <span class='c1'># say</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</code></pre></div></td><td class='code'><div class='highlight'><pre>breakPerLevel <span class='o'>&lt;-</span> <span class='m'>16</span> <span class='c1'># say</span>
 d <span class='o'>&lt;-</span> read.table<span class='p'>(</span><span class='s'>&quot;GMT_relief.cpt&quot;</span><span class='p'>,</span> comment<span class='o'>=</span><span class='s'>&quot;#&quot;</span><span class='p'>,</span> nrows<span class='o'>=</span><span class='m'>17</span><span class='p'>,</span>
                 col.names<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;l&quot;</span><span class='p'>,</span> <span class='s'>&quot;lr&quot;</span><span class='p'>,</span> <span class='s'>&quot;lg&quot;</span><span class='p'>,</span> <span class='s'>&quot;lb&quot;</span><span class='p'>,</span>
                             <span class='s'>&quot;u&quot;</span><span class='p'>,</span> <span class='s'>&quot;ur&quot;</span><span class='p'>,</span> <span class='s'>&quot;ug&quot;</span><span class='p'>,</span> <span class='s'>&quot;ub&quot;</span><span class='p'>))</span>
@@ -135,7 +157,8 @@ grid<span class='p'>()</span>
 library<span class='p'>(</span>oce<span class='p'>)</span>
 data<span class='p'>(</span>topoWorld<span class='p'>)</span>
 imagep<span class='p'>(</span>topoWorld<span class='p'>,</span> breaks<span class='o'>=</span>breaks<span class='p'>,</span> col<span class='o'>=</span>col<span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>A graph of the results is below.</p>
 
 <p><a href="/assets/gmt_relief_2.png"><img src="/assets/gmt_relief_2-thumbnail.png" alt="graph" /></a></p>
