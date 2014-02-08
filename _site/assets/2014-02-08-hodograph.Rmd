@@ -114,10 +114,13 @@ hodograph <- function(x, y, t, rings, tcut=c("daily", "yearly"), ...)
                 text(1.1*rscale * cos(phi), 1.1*rscale * sin(phi), month[m]) 
             }
             for (r in rings) {
-                gx <- r * cos(theta)
-                gy <- r * sin(theta)
-                lines(gx, gy, col='gray')
-                text(gx[1], 0, format(r))
+                ## do not mess up the origin with a ring and label
+                if (r > 0) {
+                    gx <- r * cos(theta)
+                    gy <- r * sin(theta)
+                    lines(gx, gy, col='gray')
+                    text(gx[1], 0, format(r))
+                }
             }
             points(xx, yy, ...)
         } else {

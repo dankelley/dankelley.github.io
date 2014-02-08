@@ -132,7 +132,10 @@
 48
 49
 50
-51</code></pre></div></td><td class='code'><div class='highlight'><pre>hodograph <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> t<span class='p'>,</span> rings<span class='p'>,</span> tcut <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;daily&quot;</span><span class='p'>,</span> <span class='s'>&quot;yearly&quot;</span><span class='p'>),</span> <span class='kc'>...</span><span class='p'>)</span> <span class='p'>{</span>
+51
+52
+53
+54</code></pre></div></td><td class='code'><div class='highlight'><pre>hodograph <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> t<span class='p'>,</span> rings<span class='p'>,</span> tcut <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;daily&quot;</span><span class='p'>,</span> <span class='s'>&quot;yearly&quot;</span><span class='p'>),</span> <span class='kc'>...</span><span class='p'>)</span> <span class='p'>{</span>
     tcut <span class='o'>&lt;-</span> match.arg<span class='p'>(</span>tcut<span class='p'>)</span>
     <span class='kr'>if</span> <span class='p'>(</span>missing<span class='p'>(</span>t<span class='p'>))</span> <span class='p'>{</span>
         stop<span class='p'>(</span><span class='s'>&quot;x-y method not coded yet\n&quot;</span><span class='p'>)</span>
@@ -166,10 +169,13 @@
                 text<span class='p'>(</span><span class='m'>1.1</span> <span class='o'>*</span> rscale <span class='o'>*</span> cos<span class='p'>(</span>phi<span class='p'>),</span> <span class='m'>1.1</span> <span class='o'>*</span> rscale <span class='o'>*</span> sin<span class='p'>(</span>phi<span class='p'>),</span> month<span class='p'>[</span>m<span class='p'>])</span>
             <span class='p'>}</span>
             <span class='kr'>for</span> <span class='p'>(</span>r <span class='kr'>in</span> rings<span class='p'>)</span> <span class='p'>{</span>
-                gx <span class='o'>&lt;-</span> r <span class='o'>*</span> cos<span class='p'>(</span>theta<span class='p'>)</span>
-                gy <span class='o'>&lt;-</span> r <span class='o'>*</span> sin<span class='p'>(</span>theta<span class='p'>)</span>
-                lines<span class='p'>(</span>gx<span class='p'>,</span> gy<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;gray&quot;</span><span class='p'>)</span>
-                text<span class='p'>(</span>gx<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='m'>0</span><span class='p'>,</span> format<span class='p'>(</span>r<span class='p'>))</span>
+                <span class='c1'>## do not mess up the origin with a ring and label</span>
+                <span class='kr'>if</span> <span class='p'>(</span>r <span class='o'>&gt;</span> <span class='m'>0</span><span class='p'>)</span> <span class='p'>{</span>
+                  gx <span class='o'>&lt;-</span> r <span class='o'>*</span> cos<span class='p'>(</span>theta<span class='p'>)</span>
+                  gy <span class='o'>&lt;-</span> r <span class='o'>*</span> sin<span class='p'>(</span>theta<span class='p'>)</span>
+                  lines<span class='p'>(</span>gx<span class='p'>,</span> gy<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;gray&quot;</span><span class='p'>)</span>
+                  text<span class='p'>(</span>gx<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='m'>0</span><span class='p'>,</span> format<span class='p'>(</span>r<span class='p'>))</span>
+                <span class='p'>}</span>
             <span class='p'>}</span>
             points<span class='p'>(</span>xx<span class='p'>,</span> yy<span class='p'>,</span> <span class='kc'>...</span><span class='p'>)</span>
         <span class='p'>}</span> <span class='kr'>else</span> <span class='p'>{</span>
