@@ -1,5 +1,5 @@
 
-## ----hodograph, fig.path='2014-02-08-'-----------------------------------
+## ------------------------------------------------------------------------
 hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly"), ...)
 {
     tcut <- match.arg(tcut)
@@ -48,6 +48,9 @@ hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly")
         }
     }
 }
+
+
+## ----hodograph, fig.path='2014-02-08-'-----------------------------------
 data(co2)
 year <- as.numeric(time(co2))
 t0 <- as.POSIXlt("1959-01-01 00:00:00", tz="UTC")

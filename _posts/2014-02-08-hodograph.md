@@ -73,6 +73,12 @@ hodograph <- function(x, y, t, rings, ringlabels = TRUE, tcut = c("daily", "year
         }
     }
 }
+{% endhighlight %}
+
+
+This may be tested as follows
+
+{% highlight r linenos=table %}
 data(co2)
 year <- as.numeric(time(co2))
 t0 <- as.POSIXlt("1959-01-01 00:00:00", tz = "UTC")
