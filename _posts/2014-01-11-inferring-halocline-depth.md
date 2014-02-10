@@ -18,7 +18,7 @@ There are no agreed-upon methods for inferring halocline depth, but a reasonable
 
 Pasted below is test code that does this with the ctd dataset in the oce package. The function returns the pressure at which the smoothing spline has highest salinity derivative, and it can also plot the results (which is recommended). The parameter named deltap is used to set the value of ``df`` (degrees of freedom) for the spline. One might think of deltap as the thickness (in dbar) of the smoothing interval for each of the sub-components of the spline.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 findHalocline <- function(ctd, deltap=5, plot=TRUE)
 {
     S <- ctd[['salinity']]
