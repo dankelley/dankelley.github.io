@@ -20,7 +20,7 @@ The day of the solstice is indicated with vertical lines. All times are in UTC, 
 
 The first step in making the graph shown above is to load the ``oce`` library and create a function that measures daylength by finding sunrise and sunset times.  Note that ``uniroot()``, which is used to find times of zero solar altitude, needs lower and upper limits on ``t``, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(oce)
 daylength <- function(t, lon=-63.60, lat=44.65)
 {
@@ -34,20 +34,20 @@ daylength <- function(t, lon=-63.60, lat=44.65)
 {% endhighlight %}
 
 Next, use ``lappy()`` to find the daylength for December, 2013.
-{% highlight r %}
+{% highlight r linenos=table %}
 t0 <- as.POSIXct("2013-12-01 12:00:00", tz="UTC")
 t <- seq.POSIXt(t0, by="1 day", length.out=1*31)
 dayLength <- unlist(lapply(t, daylength))
 {% endhighlight %}
 
 Set up to plot two panels, with narrowed margins.
-{% highlight r %}
+{% highlight r linenos=table %}
 par(mfrow=c(2,1), mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 {% endhighlight %}
 
 Plot daylength in the top panel, indicating the day of the solstice with vertical lines.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 plot(t, dayLength/3600, type='o', pch=20,
      xlab="", ylab="Day length (hours)")
 grid()
@@ -56,7 +56,7 @@ abline(v=solstice+c(0, 86400))
 {% endhighlight %}
 
 Plot daylength difference in the bottom panel, again indicating the solstice.
-{% highlight r %}
+{% highlight r linenos=table %}
 plot(t[-1], diff(dayLength), type='o', pch=20,
      xlab="Day in 2013", ylab="Seconds gained per day")
 grid()

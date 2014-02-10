@@ -91,7 +91,16 @@
 <p><img src="/assets/daylength.png" alt="daylength graph" /></p>
 
 <p>The first step in making the graph shown above is to load the <code>oce</code> library and create a function that measures daylength by finding sunrise and sunset times. Note that <code>uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code>t</code>, and these are calculated by looking back and then forward a half-day. This works well for application to Halifax, but in other timezones other offsets would be needed. Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
-<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 daylength <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>,</span> lon<span class='o'>=</span><span class='m'>-63.60</span><span class='p'>,</span> lat<span class='o'>=</span><span class='m'>44.65</span><span class='p'>)</span>
 <span class='p'>{</span>
     t <span class='o'>&lt;-</span> as.numeric<span class='p'>(</span>t<span class='p'>)</span>
@@ -101,28 +110,42 @@ daylength <span class='o'>&lt;-</span> <span class='kr'>function</span><span cla
     set <span class='o'>&lt;-</span> uniroot<span class='p'>(</span>alt<span class='p'>,</span> lower<span class='o'>=</span>t<span class='p'>,</span> upper<span class='o'>=</span>t<span class='m'>+86400</span><span class='o'>/</span><span class='m'>2</span><span class='p'>)</span><span class='o'>$</span>root
     set <span class='o'>-</span> rise
 <span class='p'>}</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Next, use <code>lappy()</code> to find the daylength for December, 2013.</p>
-<div class='highlight'><pre><code class='r'>t0 <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3</code></pre></div></td><td class='code'><div class='highlight'><pre>t0 <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
 t <span class='o'>&lt;-</span> seq.POSIXt<span class='p'>(</span>t0<span class='p'>,</span> by<span class='o'>=</span><span class='s'>&quot;1 day&quot;</span><span class='p'>,</span> length.out<span class='o'>=</span><span class='m'>1</span><span class='o'>*</span><span class='m'>31</span><span class='p'>)</span>
 dayLength <span class='o'>&lt;-</span> unlist<span class='p'>(</span>lapply<span class='p'>(</span>t<span class='p'>,</span> daylength<span class='p'>))</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Set up to plot two panels, with narrowed margins.</p>
-<div class='highlight'><pre><code class='r'>par<span class='p'>(</span>mfrow<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
-</code></pre></div>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mfrow<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
+</pre></div>
+</td></tr></table>
 <p>Plot daylength in the top panel, indicating the day of the solstice with vertical lines.</p>
-<div class='highlight'><pre><code class='r'>plot<span class='p'>(</span>t<span class='p'>,</span> dayLength<span class='o'>/</span><span class='m'>3600</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>plot<span class='p'>(</span>t<span class='p'>,</span> dayLength<span class='o'>/</span><span class='m'>3600</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
      xlab<span class='o'>=</span><span class='s'>&quot;&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Day length (hours)&quot;</span><span class='p'>)</span>
 grid<span class='p'>()</span>
 solstice <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Plot daylength difference in the bottom panel, again indicating the solstice.</p>
-<div class='highlight'><pre><code class='r'>plot<span class='p'>(</span>t<span class='p'>[</span><span class='m'>-1</span><span class='p'>],</span> diff<span class='p'>(</span>dayLength<span class='p'>),</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre>plot<span class='p'>(</span>t<span class='p'>[</span><span class='m'>-1</span><span class='p'>],</span> diff<span class='p'>(</span>dayLength<span class='p'>),</span> type<span class='o'>=</span><span class='s'>&#39;o&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
      xlab<span class='o'>=</span><span class='s'>&quot;Day in 2013&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Seconds gained per day&quot;</span><span class='p'>)</span>
 grid<span class='p'>()</span>
 abline<span class='p'>(</span>v<span class='o'>=</span>solstice<span class='o'>+</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>86400</span><span class='p'>))</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
