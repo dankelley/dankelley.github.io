@@ -22,7 +22,7 @@ The test task will be extraction of latitude (and then both latitude and longitu
 First, load the data
 
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(oce)
 data(section)
 {% endhighlight %}
@@ -30,14 +30,14 @@ data(section)
 
 Next, find latitudes using ``lapply``
 
-{% highlight r %}
+{% highlight r linenos=table %}
 lat <- unlist(lapply(section[["station"]], function(x) x[["latitude"]]))
 {% endhighlight %}
 
 
 Next, find latitudes with ``ldply``
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(plyr)
 lat <- ldply(section[["station"]], function(x) x[["latitude"]])
 {% endhighlight %}
@@ -47,7 +47,7 @@ lat <- ldply(section[["station"]], function(x) x[["latitude"]])
 
 The reader can check that the results match, although ``ldply()`` returns a data frame, not a vector as in the first method.  Tests of speed
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(microbenchmark)
 microbenchmark(ldply(section[["station"]], function(x) x[["latitude"]])$V1, 
     unlist(lapply(section[["station"]], function(x) x[["latitude"]])))
@@ -55,7 +55,7 @@ microbenchmark(ldply(section[["station"]], function(x) x[["latitude"]])$V1,
 
 yield the following
 
-{% highlight r %}
+{% highlight r linenos=table %}
 ## Unit: milliseconds
 ##                                                               expr   min
 ##        ldply(section[["station"]], function(x) x[["latitude"]])$V1 18.99
@@ -71,14 +71,14 @@ suggesting a difference too small to be of much practical interest.
 
 Since ``ldply()`` returns a data frame, it is more flexible than ``unlist()``, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:
 
-{% highlight r %}
+{% highlight r linenos=table %}
 latlon <- ldply(section[["station"]], function(x) c(x[["latitude"]], x[["longitude"]]))
 {% endhighlight %}
 
 
 A station plot is produced as follows.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 mapPlot(coastlineWorld, projection = "orthographic", orientation = c(20, -40, 
     0))
 mapPoints(latlon$V2, latlon$V1, pch = "+", cex = 1/2, col = "red")
