@@ -1,0 +1,52 @@
+---
+layout: post
+title: Hodograph drawing
+tags: [R, oceanography]
+category: R
+year: 2014
+month: 2
+day: 10
+summary: The Oce package presently handles map projections by using the ``mapproj`` package, but an alternative is the ``proj4`` package.  This post compares the two, focussing on the vexing problem of islands crossing the edge of the earth, which causes spurious lines on some Oce maps at present.
+description: The Oce package presently handles map projections by using the ``mapproj`` package, but an alternative is the ``proj4`` package.  This post compares the two, focussing on the vexing problem of islands crossing the edge of the earth, which causes spurious lines on some Oce maps at present.
+---
+
+# Introduction
+
+Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.
+
+I had thought this was a basic problem of all projection coding, until I happened to try using the ``projr`` package instead of ``mapproj`` to carry out the projections.  The result is that the annoying lines went away.
+
+I am still thinking about whether to make a transition in Oce.  The ``proj4`` syntax is too tricky for simple inclusion in Oce, and tricky, and users (including me) are accustomed to the existing syntax, so it would be necessary to convert the internal linkage in a somewhat nontrivial way.  Nevertheless, the point of the present post is simply to illustrate that the problem is solved, at least in one test case.
+
+
+# Test case
+
+First, load libraries and extract the coastline.
+
+```{r}
+library(oce)
+library(proj4)
+library(mapproj)
+data(coastlineWorld)
+lon <- coastlineWorld[['longitude']]
+lat <- coastlineWorld[['latitude']]
+```
+
+Next, plot with existing (mapproj) projection.
+
+```{r projection-existing, fig.path='2014-02-10-', fig.height=4, dpi=100}
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+xy <- project(cbind(lon,lat), "+proj=moll")
+plot(xy[,1], xy[,2], type='l', asp=1)
+```
+
+Finally, plot with proposed (proj4) projection.
+
+```{r projection-proposed, fig.path='2014-02-10-', fig.height=4, dpi=100}
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+xy <- mapproject(coastlineWorld[['longitude']], coastlineWorld[['latitude']], proj="mollweide")
+plot(xy$x, xy$y, type='l', asp=1)
+```
+
+# Resources
+* Source code: [2014-04-10-oce-map-projection.R]({{ site.url }}/assets/2014-02-10-oce-map-projection.R)
