@@ -21,7 +21,7 @@ The first step in making the graph shown above is to load the ``oce`` library an
 # Methods
 
 The first step is to load the data and extract dependent and independent variables, here *S* and *p*.
-{% highlight r %}
+{% highlight r linenos=table %}
 library(oce)
 library(signal)
 data(ctd)
@@ -30,26 +30,26 @@ p <- ctd[['pressure']]
 {% endhighlight %}
 
 Next, one must create equispaced data, for filtering to make any sense at all.
-{% highlight r %}
+{% highlight r linenos=table %}
 dp <- median(diff(p))
 pp <- seq(min(p), max(p), dp)
 S0 <- approx(p, S, pp)$y
 {% endhighlight %}
 
 Now comes something that must be established by the actual task at hand: setting the critical frequency for the filter (as a ratio to Nyquist).  In this case, a somewhat arbitrary frequency is selected, and then both first-order and second-order filters are created.
-{% highlight r %}
+{% highlight r linenos=table %}
 W <- dp / 2
 f1 <- butter(1, W)
 f2 <- butter(2, W)
 {% endhighlight %}
 
 Now, set up for a three-panel plot.
-{% highlight r %}
+{% highlight r linenos=table %}
 par(mfrow=c(1, 3))
 {% endhighlight %}
  
 For the left-hand panel, show the raw data in black, and the two filters in red and blue.
-{% highlight r %}
+{% highlight r linenos=table %}
 plotProfile(ctd, xtype="salinity", type='l')
 S0f1 <- filtfilt(f1, S0)
 S0f2 <- filtfilt(f2, S0)
@@ -59,7 +59,7 @@ mtext("(a) ", side=3, adj=1, line=-5/4, cex=3/4)
 {% endhighlight %}
 
 For the middle panel, detrended the profile, and then filter.
-{% highlight r %}
+{% highlight r linenos=table %}
 plotProfile(ctd, xtype="salinity", type='l')
 Sd <- detrend(pp, S0)
 S1f1 <- filtfilt(f1, Sd$Y) + Sd$a + Sd$b * pp
@@ -70,7 +70,7 @@ mtext("(b) ", side=3, adj=1, line=-5/4, cex=3/4)
 {% endhighlight %}
 
 For the right-hand panel, use a smoothing spline instead of a filter.
-{% highlight r %}
+{% highlight r linenos=table %}
 spline <- smooth.spline(pp, S0, df=3/W)
 S2 <- predict(spline)$y
 plotProfile(ctd, xtype="salinity", type='l')

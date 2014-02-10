@@ -13,7 +13,7 @@ description: Moon phase is calculated using percent illumination.
 
 The illuminated fraction of the moon can be calculated with ``moonAngle()`` in the oce package, as illustrated graphically and in R code below.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(oce)
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0)) # tighten margins
 t <- as.POSIXct("2013-12-1", tz="UTC") + seq(0, 28*24*3600, 3600)
@@ -24,7 +24,7 @@ grid()
 {% endhighlight %}
 
 For interest, add full-moon time as indicated in an almanac.
-{% highlight r %}
+{% highlight r linenos=table %}
 full <- as.POSIXct("2013-12-17 05:29:00", tz="AST")
 abline(v=full)
 mtext("full", at=full, side=3)
