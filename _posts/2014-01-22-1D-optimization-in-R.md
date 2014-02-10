@@ -23,7 +23,7 @@ As an example, consider the phase speed of deep gravity-capillary waves, which i
 
 
 
-{% highlight r %}
+{% highlight r linenos=table %}
 phaseSpeed <- function(k) {
     g <- 9.8
     sigma <- 0.074  # water-air
@@ -37,7 +37,7 @@ phaseSpeed <- function(k) {
 It makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.  Readers who are familiar with gravity-capillary waves may know that the speed is minimum at wavelengths of about 2 cm, or wavenumbers of approximately $2\pi/0.02=300$; this suggests an x range for the plot.  
 
 
-{% highlight r %}
+{% highlight r linenos=table %}
 k <- seq(100, 1000, length.out = 100)
 par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
 plot(k, phaseSpeed(k), type = "l", xlab = "Wavenumber", ylab = "Phase speed")
@@ -48,7 +48,7 @@ plot(k, phaseSpeed(k), type = "l", xlab = "Wavenumber", ylab = "Phase speed")
 The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to ``optimize()``.
 
 
-{% highlight r %}
+{% highlight r linenos=table %}
 o <- optimize(phaseSpeed, range(k))
 phaseSpeed(o$minimum)
 ## [1] 0.2321
