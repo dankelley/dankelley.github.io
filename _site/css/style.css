@@ -127,7 +127,7 @@ h3 {
 @media only screen and (max-width: 481px), only screen and (max-device-width: 480px) {
     body{
         padding:5px;
-        font: 3em Verdana, Tahoma, Arial, Helvetica, sans-serif;
+        font: 2em Verdana, Tahoma, Arial, Helvetica, sans-serif;
     }
     pre{
         font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
@@ -189,11 +189,14 @@ post.count {
     /*border-right: 1px solid #fff;*/
 }
 .navbar li a.brand {
-    color: white;
     font-size: 120%;
 }
 .navbar li a:hover {
     color: #eeeeee;
+}
+.navbar li a.highlight {
+    color: white;
+    background-color: #333333;
 }
 
 a.pagination { /* Previous Next */
@@ -206,7 +209,7 @@ a.pagination { /* Previous Next */
     padding-left: 0.5em;
     padding-right: 0.5em;
     float:right;
-    font-size:90%;
+    font-size:80%;
     background-color:#AAA;
     color:#FFF;
 }

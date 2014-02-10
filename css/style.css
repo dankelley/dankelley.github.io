@@ -189,11 +189,14 @@ post.count {
     /*border-right: 1px solid #fff;*/
 }
 .navbar li a.brand {
-    color: white;
     font-size: 120%;
 }
 .navbar li a:hover {
     color: #eeeeee;
+}
+.navbar li a.highlight {
+    color: white;
+    background-color: #333333;
 }
 
 a.pagination { /* Previous Next */

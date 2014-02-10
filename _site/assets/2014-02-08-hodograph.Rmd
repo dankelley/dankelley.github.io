@@ -13,10 +13,19 @@
         <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
         <!-- <div class="nav">Dan Kelley</div> -->
         <ul class="navbar">
-            <li><a class="brand" href="/index.html">Dan Kelley</a></li>
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+            
             <li><a href="/publications.html">Publications</a></li>
+            
+            
             <li><a href="/software.html">Software</a></li>
-            <li><a href="/blog">Blog</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
         </ul>
         <!-- </div> -->
 </div>
@@ -109,10 +118,12 @@ hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly")
                  type='n', xlab="", ylab="", axes=FALSE)
             ## month lines
             month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+            day <- c(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
             rscale <- max(rings)
             for (m in 1:12) {
-                phi <- 2*pi*(m-1)/12
-                lines(rscale*1.1*cos(phi)*c(-1,1), rscale*1.1*sin(phi)*c(-1,1), col='gray')
+                ## boundaries are for non leap years
+                phi <- 2 * pi * (sum(day[1:m]) - day[1]) / sum(day)
+                lines(rscale*1.1*cos(phi)*c(0,1), rscale*1.1*sin(phi)*c(0,1), col='gray')
                 phi <- 2*pi*(0.5/12+(m-1)/12)
                 text(1.15*rscale * cos(phi), 1.15*rscale * sin(phi), month[m]) 
             }
@@ -134,7 +145,7 @@ hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly")
 ```
 
 This may be tested as follows
-```{r hodograph, fig.path='2014-02-08-'}
+```{r hodograph, fig.path='2014-02-08-', dpi=100}
 data(co2)
 year <- as.numeric(time(co2))
 t0 <- as.POSIXlt("1959-01-01 00:00:00", tz="UTC")
@@ -145,15 +156,15 @@ hodograph(x=co2-co2[1], t=t, tcut="yearly", type="l", ringlabels=FALSE)
 
 # Results
 
-The plot is surprisingly informative.  I've looked at the ``co2`` data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, considere a conventional time-series plot.
+The plot is informative.  I've looked at the ``co2`` data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.
 
-```{r timeseries, fig.path='2014-02-08-'}
+```{r timeseries, fig.path='2014-02-08-', dpi=100}
 plot(co2)
 ```
 
 # Conclusions
 
-Even in this draft form, the function may be useful.  Among the aesthetic weaknesses one might list: (a) the month separators are approximate, being a year divided into 12 parts; (b) the ring labels are over-written by the axes.
+The function is useful as it is, but some improvements are indicated.  For example, the ring labels are often over-written by the axes, and the only solution on offer presently is to skip the labels.
 
 # Resources
 
