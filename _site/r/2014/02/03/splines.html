@@ -88,41 +88,67 @@
 <h1 id="methods">Methods</h1>
 
 <p>The first step is to load the data. (Ignore the extra digits, which simply result from naive copying of digitized values. I suppose the error is of order 2 percent or so, given the scanning of the diagram and my ability to position the pointer on my computer screen.)</p>
-<div class='highlight'><pre><code class='r'> 
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class='code'><div class='highlight'><pre> 
 distance <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>23.17400</span><span class='p'>,</span> <span class='m'>25.09559</span><span class='p'>,</span> <span class='m'>31.15092</span><span class='p'>,</span> <span class='m'>40.75568</span><span class='p'>,</span>
               <span class='m'>46.42938</span><span class='p'>,</span> <span class='m'>124.68628</span><span class='p'>,</span> <span class='m'>132.20556</span><span class='p'>,</span> <span class='m'>136.81277</span><span class='p'>,</span>
               <span class='m'>141.37564</span><span class='p'>,</span> <span class='m'>145.08263</span><span class='p'>,</span> <span class='m'>149.38977</span><span class='p'>)</span>
 topography <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>-98.99976</span><span class='p'>,</span> <span class='m'>-97.44730</span><span class='p'>,</span> <span class='m'>-100.15198</span><span class='p'>,</span> <span class='m'>-98.66016</span><span class='p'>,</span>
                 <span class='m'>-98.66016</span><span class='p'>,</span> <span class='m'>-193.94266</span><span class='p'>,</span> <span class='m'>-296.89045</span><span class='p'>,</span> <span class='m'>-392.63991</span><span class='p'>,</span>
                 <span class='m'>-493.85330</span><span class='p'>,</span> <span class='m'>-591.21586</span><span class='p'>,</span> <span class='m'>-692.82951</span><span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Next, plot the data.</p>
-<div class='highlight'><pre><code class='r'> 
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre> 
 <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> png<span class='p'>(</span><span class='s'>&quot;splines.png&quot;</span><span class='p'>,</span> width<span class='o'>=</span><span class='m'>7</span><span class='p'>,</span> height<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> unit<span class='o'>=</span><span class='s'>&quot;in&quot;</span><span class='p'>,</span> res<span class='o'>=</span><span class='m'>150</span><span class='p'>,</span> pointsize<span class='o'>=</span><span class='m'>8</span><span class='p'>)</span>
 par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 plot<span class='p'>(</span>distance<span class='p'>,</span> topography<span class='p'>,</span> ylim<span class='o'>=</span>c<span class='p'>(</span><span class='m'>-700</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>),</span> pch<span class='o'>=</span><span class='m'>16</span><span class='p'>)</span>
 grid<span class='p'>()</span>
-</code></pre></div>
-<p>Now, set up a gird, and show the results of <code>smooth.spline()</code>.</p>
-<div class='highlight'><pre><code class='r'> 
+</pre></div>
+</td></tr></table>
+<p>Now, set up a grid, and show the results of <code>smooth.spline()</code>.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre> 
 d <span class='o'>&lt;-</span> seq<span class='p'>(</span>min<span class='p'>(</span>distance<span class='p'>),</span> max<span class='p'>(</span>distance<span class='p'>),</span> length.out<span class='o'>=</span><span class='m'>100</span><span class='p'>)</span>
 s <span class='o'>&lt;-</span> smooth.spline<span class='p'>(</span>topography <span class='o'>~</span> distance<span class='p'>)</span>
 ps <span class='o'>&lt;-</span> predict<span class='p'>(</span>s<span class='p'>,</span> d<span class='p'>)</span>
 lines<span class='p'>(</span>ps<span class='o'>$</span>x<span class='p'>,</span> ps<span class='o'>$</span>y<span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Now, load the Akima package to get <code>aspline()</code>, which presumably stems from Akima (1970).</p>
-<div class='highlight'><pre><code class='r'> 
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre> 
 library<span class='p'>(</span>akima<span class='p'>)</span>
 akima <span class='o'>&lt;-</span> aspline<span class='p'>(</span>distance<span class='p'>,</span> topography<span class='p'>,</span> d<span class='p'>)</span>
 lines<span class='p'>(</span>akima<span class='o'>$</span>x<span class='p'>,</span> akima<span class='o'>$</span>y<span class='p'>,</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Finally, draw a legend and finish up.</p>
-<div class='highlight'><pre><code class='r'> 
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre> 
 legend<span class='p'>(</span><span class='s'>&quot;bottomleft&quot;</span><span class='p'>,</span> lwd<span class='o'>=</span>par<span class='p'>(</span><span class='s'>&#39;lwd&#39;</span><span class='p'>),</span> bg<span class='o'>=</span><span class='s'>&#39;white&#39;</span><span class='p'>,</span>
        col<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;black&quot;</span><span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>),</span>
        legend<span class='o'>=</span>c<span class='p'>(</span><span class='s'>&quot;smooth.spline&quot;</span><span class='p'>,</span> <span class='s'>&quot;aspline&quot;</span><span class='p'>))</span>
 <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <h1 id="results">Results</h1>
 
 <p><a href="/assets/splines.png"><img src="/assets/splines-thumbnail.png" alt="graph" /></a></p>
