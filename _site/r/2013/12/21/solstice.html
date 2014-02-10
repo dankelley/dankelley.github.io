@@ -93,43 +93,69 @@
 <h1 id="methods">Methods</h1>
 
 <p>First, set up the problem; these may be the only lines that need editing for other places or times.</p>
-<div class='highlight'><pre><code class='r'>t <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21 17:11:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span> <span class='c1'># winter solstice</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3</code></pre></div></td><td class='code'><div class='highlight'><pre>t <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-21 17:11:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span> <span class='c1'># winter solstice</span>
 xy <span class='o'>&lt;-</span> list<span class='p'>(</span>x<span class='o'>=</span><span class='m'>-63.60</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>44.65</span><span class='p'>)</span>          <span class='c1'># centre of map (Halifax)</span>
 D <span class='o'>&lt;-</span> <span class='m'>6</span>                                 <span class='c1'># map span in km</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Next, use <code>sunAngle()</code> from the <code>oce</code> package to find the time of the sunrise and the azimuth at that moment. Here, <code>uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we start searching a quarter-day before the time of the actual solstice.</p>
-<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 t0 <span class='o'>&lt;-</span> t <span class='o'>-</span> <span class='m'>86400</span> <span class='o'>/</span> <span class='m'>4</span>
 sunrise <span class='o'>&lt;-</span> uniroot<span class='p'>(</span><span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span>
                    sunAngle<span class='p'>(</span>t<span class='p'>,</span> lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='p'>)</span><span class='o'>$</span>altitude<span class='p'>,</span>
                    interval<span class='o'>=</span>as.numeric<span class='p'>(</span>c<span class='p'>(</span>t0<span class='p'>,</span> t<span class='p'>)))</span><span class='o'>$</span>root
 sunrise <span class='o'>&lt;-</span> numberAsPOSIXct<span class='p'>(</span>sunrise<span class='p'>)</span>
 azimuth <span class='o'>&lt;-</span> <span class='m'>90</span> <span class='o'>-</span> sunAngle<span class='p'>(</span>sunrise<span class='p'>,</span> lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='p'>)</span><span class='o'>$</span>azimuth
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>The span <code>D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
-<div class='highlight'><pre><code class='r'>D <span class='o'>&lt;-</span> D <span class='o'>/</span> <span class='m'>111</span>                           <span class='c1'># deg</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>D <span class='o'>&lt;-</span> D <span class='o'>/</span> <span class='m'>111</span>                           <span class='c1'># deg</span>
 Dlon <span class='o'>&lt;-</span> D <span class='o'>/</span> cos<span class='p'>(</span>xy<span class='o'>$</span>y <span class='o'>*</span> pi <span class='o'>/</span> <span class='m'>180</span><span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Now it is time to start with the mapping, which uses the <code>OpenStreetMap</code> package.</p>
-<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>OpenStreetMap<span class='p'>)</span>
 map <span class='o'>&lt;-</span> openmap<span class='p'>(</span>c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>+</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>-</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                c<span class='p'>(</span>lat<span class='o'>=</span>xy<span class='o'>$</span>y<span class='o'>-</span>D<span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> lon<span class='o'>=</span>xy<span class='o'>$</span>x<span class='o'>+</span>Dlon<span class='o'>/</span><span class='m'>2</span><span class='p'>),</span>
                minNumTiles<span class='o'>=</span><span class='m'>9</span><span class='p'>)</span>
 plot<span class='p'>(</span>map<span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Now, it remains to draw the sunrise/sunset lines. The variables <code>cx</code> and <code>cy</code> are the centre points of the map, in map units (not latitude and longitude).</p>
-<div class='highlight'><pre><code class='r'>cx <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>2</span><span class='p'>])</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class='code'><div class='highlight'><pre>cx <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>2</span><span class='p'>])</span>
 cy <span class='o'>&lt;-</span> mean<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span>
 d <span class='o'>&lt;-</span> diff<span class='p'>(</span>par<span class='p'>(</span><span class='s'>&#39;usr&#39;</span><span class='p'>)[</span><span class='m'>3</span><span class='o'>:</span><span class='m'>4</span><span class='p'>])</span> <span class='c1'># scales as the map</span>
 <span class='kr'>for</span> <span class='p'>(</span>o <span class='kr'>in</span> d<span class='o'>*</span>seq<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> length.out<span class='o'>=</span><span class='m'>30</span><span class='p'>))</span> <span class='p'>{</span>
     lines<span class='p'>(</span>cx<span class='o'>+</span>c<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>)</span><span class='o'>*</span>d<span class='o'>*</span>cos<span class='p'>(</span>azimuth<span class='o'>*</span>pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span>
           cy<span class='o'>+</span>o<span class='o'>+</span>c<span class='p'>(</span><span class='m'>-1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>)</span><span class='o'>*</span>d<span class='o'>*</span>sin<span class='p'>(</span>azimuth<span class='o'>*</span>pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span> col<span class='o'>=</span><span class='s'>&#39;red&#39;</span><span class='p'>)</span>
 <span class='p'>}</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>Finally, add a title so that plot is self-explanatory.</p>
-<div class='highlight'><pre><code class='r'>mtext<span class='p'>(</span>sprintf<span class='p'>(</span><span class='s'>&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class='p'>,</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>mtext<span class='p'>(</span>sprintf<span class='p'>(</span><span class='s'>&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class='p'>,</span>
               format<span class='p'>(</span>t<span class='p'>,</span> <span class='s'>&quot;%Y-%m-%d&quot;</span><span class='p'>)),</span> side<span class='o'>=</span><span class='m'>3</span><span class='p'>,</span> line<span class='o'>=</span><span class='m'>2</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>1.5</span><span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <h1 id="results">Results</h1>
 
 <p>The graph indicates the results; click it to zoom in.</p>
