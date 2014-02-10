@@ -19,7 +19,7 @@ In Oceanography it can be useful to use colour to display z values along an (x,y
 
 The R code given below demonstrates this with fake data.  The core idea is to use ``segments()``, here with ``head()`` and ``tail()`` to chop up the trajectory.
 
-{% highlight r %}
+{% highlight r linenos=table %}
 library(oce)
 x <- 1:50
 y <- x * 2/10 + x^2/10

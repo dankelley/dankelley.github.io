@@ -93,7 +93,22 @@
 <h1 id="methods">Methods</h1>
 
 <p>The R code given below demonstrates this with fake data. The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
-<div class='highlight'><pre><code class='r'>library<span class='p'>(</span>oce<span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>50</span>
 y <span class='o'>&lt;-</span> x <span class='o'>*</span> <span class='m'>2</span><span class='o'>/</span><span class='m'>10</span> <span class='o'>+</span> x<span class='o'>^</span><span class='m'>2</span><span class='o'>/</span><span class='m'>10</span>
 z <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> length.out <span class='o'>=</span> length<span class='p'>(</span>x<span class='p'>))</span>
@@ -109,7 +124,8 @@ segments<span class='p'>(</span>head<span class='p'>(</span>x<span class='p'>,</
     seq<span class='p'>(</span>zlim<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> zlim<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> length.out <span class='o'>=</span> npalette<span class='p'>))],</span>
   lwd <span class='o'>=</span> <span class='m'>10</span><span class='p'>)</span>
 points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> pch <span class='o'>=</span> <span class='m'>20</span><span class='p'>)</span>
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <h1 id="results">Results</h1>
 
 <p>The graph shows that this works reasonably well. The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
