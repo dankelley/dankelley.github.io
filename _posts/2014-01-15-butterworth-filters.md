@@ -18,7 +18,7 @@ Butterworth filters with order other than 1 have an overshoot phenomenon that ca
 
 First, create and plot some fake data, a top-hat function.  (Note the use of ``par`` to tighten the margins.)
 
-{% highlight R %}
+{% highlight R linenos=table %}
 library(signal)
 n <- 100
 x <- 1:n
@@ -30,13 +30,13 @@ plot(x, y, type='o', pch=20, ylim=c(-0.1, 1.1))
 Next, decide on the cutoff frequency for a low-pass filter.  Setting ``W`` to 0.1 means a cutoff at 1/10-th of the Nyquist frequency.
 
 
-{% highlight R %}
+{% highlight R linenos=table %}
 W <- 0.1
 {% endhighlight %}
 
 Finally, filter with orders 1, 2 and 3, and add coloured lines indicating the results
 
-{% highlight R %}
+{% highlight R linenos=table %}
 b1 <- butter(1, W)
 y1 <- filtfilt(b1, y)
 points(x, y1, type='o', pch=20, col='red')
