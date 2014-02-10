@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Hodograph drawing
-tags: [R, oceanography]
+title: oce map projection
+tags: [R, oceanography, mapping]
 category: R
 year: 2014
 month: 2

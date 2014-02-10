@@ -4,7 +4,7 @@
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
 <meta charset="UTF-8">
-<title>Hodograph drawing</title>
+<title>oce map projection</title>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
 
 <div class="page-header">
 
-<div class=post_title>Hodograph drawing</div>
+<div class=post_title>oce map projection</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
@@ -65,6 +65,11 @@
         
         <a href="/tags/oceanography/index.html" class="tag">
             oceanography
+        </a>
+         &#183; 
+        
+        <a href="/tags/mapping/index.html" class="tag">
+            mapping
         </a>
         
         
