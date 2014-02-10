@@ -11,15 +11,15 @@ description: Instructions are given for installing oce.
 ---
 
 Several of the blog items have used the oce package.  The official version of this can be installed from within R by
-{% highlight bash %}
+{% highlight r linenos=table %}
 install.packages("oce")
 {% endhighlight %}
 and more up-to-date versions can be installed using the ``devtools`` package written by Hadley Wickham, which is itself installed with
-{% highlight bash %}
+{% highlight r linenos=table %}
 install.packages("devtools")
 {% endhighlight %}
 after which installing the latest development version of oce is accomplished with
-{% highlight bash %}
+{% highlight r linenos=table %}
 library(devtools)
 install_github('ocedata', 'dankelley', 'master')
 install_github('oce', 'dankelley', 'develop')
