@@ -23,7 +23,7 @@ The [Guardian Newspaper](http://www.theguardian.com/news/datablog/2013/dec/03/pi
 # Code that makes the graph
 
 First, read the data and set up axes.
-{% highlight r %}
+{% highlight r linenos=table %}
 regionHighlight <- "Canada"
 d <- read.csv('PISA-summary-2012.csv', skip=16, header=FALSE,
               col.names=c("rank","region",
@@ -41,7 +41,7 @@ box()
 {% endhighlight %}
 
 Next, set parameters for label placement.
-{% highlight r %}
+{% highlight r linenos=table %}
 dy <- diff(par('usr')[3:4]) / 50
 x0 <- 0
 dx <- 1
@@ -49,7 +49,7 @@ cex <- 0.65
 {% endhighlight %}
  
 Show Mathematics scores.  The gist is in the line containing the call to ``approx()``, followed by the one calling ``segments()``; this scheme draws lines between a numerical scale and evenly-spaced labels.  Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements.  For example, there is a remarkable gap in each measure, between the top performer and the second-top one.
-{% highlight r %}
+{% highlight r linenos=table %}
 o <- order(d$math, decreasing=TRUE)
 y <- approx(1:n, seq(range[2],range[1],length.out=n), 1:n)$y
 segments(rep(x0, n), d$math[o], rep(x0+dx, n), y, 
@@ -61,7 +61,7 @@ text(x0+dx, range[2]+dy, "Maths", pos=4, cex=1.2)
 {% endhighlight %}
  
 Show Reading scores
-{% highlight r %}
+{% highlight r linenos=table %}
 x0 <- x0 + 2 * dx 
 o <- order(d$reading, decreasing=TRUE)
 segments(rep(x0, n), d$reading[o], rep(x0+dx, n), y, 
@@ -73,7 +73,7 @@ text(x0+dx, range[2]+dy, "Reading", pos=4, cex=1.2)
 {% endhighlight %}
  
 Finally, show Science scores.
-{% highlight r %}
+{% highlight r linenos=table %}
 x0 <- x0 + 2 * dx 
 o <- order(d$science, decreasing=TRUE)
 segments(rep(x0, n), d$science[o], rep(x0+dx, n), y, 
