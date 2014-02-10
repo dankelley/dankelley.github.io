@@ -51,6 +51,19 @@ code {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 }
 
+/* <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> */
+
+table.highlighttable tr td.linenos div.linenodiv pre code.r {
+    background-color: white;
+}
+table.highlighttable tr td.linenos div.linenodiv pre {
+    background-color: white;
+    border: none;
+}
+
+code.r {
+    color:brown;
+}
 
 pre {
     /*
@@ -58,8 +71,8 @@ pre {
     margin-bottom: 0.2em;
     margin-left: 1em;
     */
-    padding: 9px;
-    margin: 0 0 9px;
+    padding: 2px;
+    margin: 0 0 2px;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     background-color: #F5F5F5;
     font-weight: 400;
