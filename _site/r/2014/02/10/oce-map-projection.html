@@ -125,19 +125,21 @@ lat <span class='o'>&lt;-</span> coastlineWorld<span class='p'>[[</span><span cl
 4</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 xy <span class='o'>&lt;-</span> mapproject<span class='p'>(</span>coastlineWorld<span class='p'>[[</span><span class='s'>&quot;longitude&quot;</span><span class='p'>]],</span> coastlineWorld<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]],</span> 
     proj <span class='o'>=</span> <span class='s'>&quot;mollweide&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>xy<span class='p'>[,</span> <span class='m'>1</span><span class='p'>],</span> xy<span class='p'>[,</span> <span class='m'>2</span><span class='p'>],</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
+plot<span class='p'>(</span>xy<span class='o'>$</span>x<span class='p'>,</span> xy<span class='o'>$</span>y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error in xy[, 1] : incorrect number of dimensions
-</code></pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-10-projection-existing.png" alt="center" /></p>
+
 <p>Finally, plot with proposed (proj4) projection.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 xy <span class='o'>&lt;-</span> project<span class='p'>(</span>cbind<span class='p'>(</span>lon<span class='p'>,</span> lat<span class='p'>),</span> <span class='s'>&quot;+proj=moll&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>xy<span class='o'>$</span>x<span class='p'>,</span> xy<span class='o'>$</span>y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
+plot<span class='p'>(</span>xy<span class='p'>[,</span> <span class='m'>1</span><span class='p'>],</span> xy<span class='p'>[,</span> <span class='m'>2</span><span class='p'>],</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error in xy$x : $ operator is invalid for atomic vectors
-</code></pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-10-projection-proposed.png" alt="center" /></p>
+
 <h1 id="conclusions">Conclusions</h1>
 
 <p>At least in this example, the <code>proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
