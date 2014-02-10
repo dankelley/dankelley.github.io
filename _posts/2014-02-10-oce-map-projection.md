@@ -71,6 +71,12 @@ plot(xy$x, xy$y, type = "l", asp = 1)
 
 ![center]({{ site.url }}/assets/2014-02-10-projection-proposed.png) 
 
+# Conclusions
+
+At least in this example, the ``proj4`` package produces better coastlines, somehow being clever enough to cut the polygons that cross the "edge" of the earth.
+
+I will do some more tests to see if this is a fluke case, but if I think ``proj4`` is promising, I will see how to invent a scheme for handling the ``mapproj`` arguments called ``parameters`` and ``orientation`` with ``proj4``.  THis seems to be a bit tricky, at first glance, but let's keep the cart behind the horse for now.
+
 
 # Resources
 * Source code: [2014-04-10-oce-map-projection.R]({{ site.url }}/assets/2014-02-10-oce-map-projection.R)

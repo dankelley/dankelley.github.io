@@ -140,6 +140,12 @@ plot<span class='p'>(</span>xy<span class='o'>$</span>x<span class='p'>,</span> 
 </td></tr></table>
 <p><img src="/assets/2014-02-10-projection-proposed.png" alt="center" /></p>
 
+<h1 id="conclusions">Conclusions</h1>
+
+<p>At least in this example, the <code>proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
+
+<p>I will do some more tests to see if this is a fluke case, but if I think <code>proj4</code> is promising, I will see how to invent a scheme for handling the <code>mapproj</code> arguments called <code>parameters</code> and <code>orientation</code> with <code>proj4</code>. THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
+
 <h1 id="resources">Resources</h1>
 
 <ul>
