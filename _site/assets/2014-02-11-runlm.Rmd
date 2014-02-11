@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>oce runlm function</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+<div class=post_title>oce runlm function</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The week-old ``runderiv()`` function has been replaced with a more useful ``runlm()`` function.  This post shows how to use it.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+# Introduction
+
+As was expected, the ``runderiv()`` function has been both useful and deficient.  Useful because it offers a good replacement for ``smooth.spline()`` calculations of derivatives for things like N^2.  And deficient because it only calculated derivatives, not values!
+
+Both an extension and a renaming were called for.  The result is ``runlm()``.
+
+# Tests
+
+Below are the examples from its manpage, with the results.
+
+**Case 1**
+
+```{r runlm-case1, fig.path='2014-02-11-', dpi=100}
+library(oce)
+x <- 1:100
+y <- 1 + x/100 + sin(x/5)
+yn <- y + rnorm(100, sd=0.1)
+L <- 4
+calc <- runlm(x, y, L=L)
+plot(x, y, type='l', lwd=7, col='gray')
+points(x, yn, pch=20, col='blue')
+lines(x, calc, lwd=2, col='red')
+```
+**Case 2**
+```{r runlm-case2, fig.path='2014-02-11-', dpi=100}
+data(ctd)
+par(mfrow=c(1,1))
+plot(ctd, which="N2")
+rho <- swRho(ctd)
+z <- swZ(ctd)
+zz <- seq(min(z), max(z), 0.1)
+N2 <- -9.8 / mean(rho) * runlm(z, rho, zz, deriv=1)
+lines(N2, -zz, col='red')
+legend("bottomright", lwd=2, bg="white",
+       col=c("black", "red"),
+       legend=c("swN2()", "using runlm()"))
+```
+
+# Conclusions
+
+The fit in Case 1 is almost spookily good.
+
+# Resources
+* Source code: [2014-04-11-runlm.R](/assets/2014-02-11-runlm.R)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
