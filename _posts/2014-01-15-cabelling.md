@@ -6,7 +6,7 @@ category: R
 year: 2014
 month: 1
 day: 15
-summary: A TS diagram is used to show density changes during cabelling
+summary: A TS diagram illustrates the density changes during cabelling, for conditions typical of a classroom demonstration.
 description: A TS diagram is used to show density changes during cabelling
 ---
 
