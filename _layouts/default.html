@@ -18,11 +18,19 @@
             {% else %}
             <li><a href="/index.html">Dan Kelley</a></li>
             {% endif %}
+
             {% if page.submenu == "publications" %}
             <li><a class="highlight" href="/publications.html">Publications</a></li>
             {% else %}
             <li><a href="/publications.html">Publications</a></li>
             {% endif %}
+
+            {% if page.submenu == "textbook" %}
+            <li><a class="highlight" href="/textbook.html">Textbook</a></li>
+            {% else %}
+            <li><a href="/textbook.html">Textbook</a></li>
+            {% endif %}
+
             {% if page.submenu == "software" %}
             <li><a class="highlight" href="/software.html">Software</a></li>
             {% else %}
