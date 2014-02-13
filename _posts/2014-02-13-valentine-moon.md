@@ -18,7 +18,7 @@ A wise person told me that it will be a full moon on the upcoming Valentine's Da
 
 The Oce package has a function called ``moonAngle()`` that returns, among other things, the illuminated fraction of the moon visible at any given time.  This can be used to test for a full moon on Valentine's day.
 
-The first step is to construct the times of Valentine's days, starting with the one this year.
+The first step is to construct the times of Valentine's days, starting with the one this year.  Then the illuminated fraction can be calculated (here, for Halifax, the lover's capital of Canada), and that fraction can be plotted for each of the next fifty years, with red dots for the romantic times, and blue ones for the so-sad ones.
 
 
 {% highlight r linenos=table %}
@@ -40,7 +40,7 @@ library(oce)
 fraction <- moonAngle(times, lon = -63, lat = 43)$illuminatedFraction
 full <- fraction > 0.99
 plot(times, fraction, xlab = "Year", ylab = "Moon Illuminated Fraction", col = ifelse(full, 
-    "red", "blue"), pch = 16)
+    "red", "blue"), pch = 16, cex = 2)
 {% endhighlight %}
 
 ![center]({{ site.url }}/assets/2014-02-13-valentines.png) 
