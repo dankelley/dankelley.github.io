@@ -106,13 +106,16 @@
 2</code></pre></div></td><td class='code'><div class='highlight'><pre>times <span class='o'>&lt;-</span> seq<span class='p'>(</span>as.POSIXct<span class='p'>(</span><span class='s'>&quot;2014-02-14&quot;</span><span class='p'>),</span> length.out <span class='o'>=</span> <span class='m'>50</span><span class='p'>,</span> by <span class='o'>=</span> <span class='s'>&quot;year&quot;</span><span class='p'>)</span>
 library<span class='p'>(</span>oce<span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
 </code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>fraction <span class='o'>&lt;-</span> moonAngle<span class='p'>(</span>times<span class='p'>,</span> lon <span class='o'>=</span> <span class='m'>-63</span><span class='p'>,</span> lat <span class='o'>=</span> <span class='m'>43</span><span class='p'>)</span><span class='o'>$</span>illuminatedFraction
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre>fraction <span class='o'>&lt;-</span> moonAngle<span class='p'>(</span>times<span class='p'>,</span> lon <span class='o'>=</span> <span class='m'>-63</span><span class='p'>,</span> lat <span class='o'>=</span> <span class='m'>43</span><span class='p'>)</span><span class='o'>$</span>illuminatedFraction
 full <span class='o'>&lt;-</span> fraction <span class='o'>&gt;</span> <span class='m'>0.99</span>
-plot<span class='p'>(</span>times<span class='p'>,</span> fraction<span class='p'>,</span> col <span class='o'>=</span> ifelse<span class='p'>(</span>full<span class='p'>,</span> <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>),</span> pch <span class='o'>=</span> <span class='m'>16</span><span class='p'>)</span>
+plot<span class='p'>(</span>times<span class='p'>,</span> fraction<span class='p'>,</span> xlab <span class='o'>=</span> <span class='s'>&quot;Year&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Moon Illuminated Fraction&quot;</span><span class='p'>,</span> col <span class='o'>=</span> ifelse<span class='p'>(</span>full<span class='p'>,</span> 
+    <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>),</span> pch <span class='o'>=</span> <span class='m'>16</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
 <p><img src="/assets/2014-02-13-valentines.png" alt="center" /></p>

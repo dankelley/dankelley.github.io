@@ -29,7 +29,8 @@ library(oce)
 
 
 {% highlight text %}
-## Loading required package: methods Loading required package: mapproj
+## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
 {% endhighlight %}
 
@@ -38,7 +39,8 @@ library(oce)
 {% highlight r linenos=table %}
 fraction <- moonAngle(times, lon = -63, lat = 43)$illuminatedFraction
 full <- fraction > 0.99
-plot(times, fraction, col = ifelse(full, "red", "blue"), pch = 16)
+plot(times, fraction, xlab = "Year", ylab = "Moon Illuminated Fraction", col = ifelse(full, 
+    "red", "blue"), pch = 16)
 {% endhighlight %}
 
 ![center]({{ site.url }}/assets/2014-02-13-valentines.png) 
