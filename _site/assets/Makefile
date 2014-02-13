@@ -47,3 +47,9 @@ force:
 	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}/assets/")'
 	mv $@ ../_posts/
 
+
+oar-toc: force
+	-/usr/local/bin/convert -resize 45% oar-toc-1.png tmp.png
+	-mv tmp.png oar-toc-1.png
+	-/usr/local/bin/convert -resize 45% oar-toc-2.png tmp.png
+	-mv tmp.png oar-toc-2.png
