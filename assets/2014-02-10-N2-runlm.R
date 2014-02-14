@@ -1,5 +1,5 @@
 
-## ----profile1, fig.path='2014-02-10_', dpi=100---------------------------
+## ----N2-runlm-1, fig.path='2014-02-10_', dpi=100-------------------------
 library(oce)
 data(ctd)
 plot(ctd, which="N2")
@@ -28,7 +28,7 @@ print(best)
 N2best <- N2fromderiv(best$minimum)
 
 
-## ----profile2, fig.path='2014-02-10_', dpi=100---------------------------
+## ----N2-runlm-2, fig.path='2014-02-10_', dpi=100-------------------------
 plotProfile(ctd, "N2")
 lines(N2best, ctd[['pressure']], col="red")
 
