@@ -110,7 +110,6 @@ lines(x, calc, lwd=2, col='red')
 **Case 2**
 ```{r runlm-case2, fig.path='2014-02-11-', dpi=100}
 data(ctd)
-par(mfrow=c(1,1))
 plot(ctd, which="N2")
 rho <- swRho(ctd)
 z <- swZ(ctd)

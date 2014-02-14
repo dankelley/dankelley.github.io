@@ -105,7 +105,8 @@
 <p><strong>Case 1</strong></p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
 </code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
@@ -129,19 +130,15 @@ lines<span class='p'>(</span>x<span class='p'>,</span> calc<span class='p'>,</sp
 <p><strong>Case 2</strong></p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
-par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>))</span>
-plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/2014-02-11-runlm-case21.png" alt="center" /></p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2
 3
 4
 5
 6
-7</code></pre></div></td><td class='code'><div class='highlight'><pre>rho <span class='o'>&lt;-</span> swRho<span class='p'>(</span>ctd<span class='p'>)</span>
+7
+8
+9</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
+plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
+rho <span class='o'>&lt;-</span> swRho<span class='p'>(</span>ctd<span class='p'>)</span>
 z <span class='o'>&lt;-</span> swZ<span class='p'>(</span>ctd<span class='p'>)</span>
 zz <span class='o'>&lt;-</span> seq<span class='p'>(</span>min<span class='p'>(</span>z<span class='p'>),</span> max<span class='p'>(</span>z<span class='p'>),</span> <span class='m'>0.1</span><span class='p'>)</span>
 N2 <span class='o'>&lt;-</span> <span class='m'>-9.8</span><span class='o'>/</span>mean<span class='p'>(</span>rho<span class='p'>)</span> <span class='o'>*</span> runlm<span class='p'>(</span>z<span class='p'>,</span> rho<span class='p'>,</span> zz<span class='p'>,</span> deriv <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
@@ -150,7 +147,7 @@ legend<span class='p'>(</span><span class='s'>&quot;bottomright&quot;</span><spa
     <span class='s'>&quot;using runlm()&quot;</span><span class='p'>))</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-11-runlm-case22.png" alt="center" /></p>
+<p><img src="/assets/2014-02-11-runlm-case2.png" alt="center" /></p>
 
 <h1 id="comments">Comments</h1>
 
