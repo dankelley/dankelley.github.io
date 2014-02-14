@@ -46,15 +46,7 @@
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2014/02/10/oce-map-projection.html" title="oce map projection">
-    Next <!-- &rarr; -->
-</a>
-
 <!-- | <a href='/blog'>Home</a> | -->
-
-<a class="pagination" href="/r/2014/02/08/hodograph.html" title="Hodograph drawing">
-    <!-- &larr; --> Previous
-</a>
 
 </div> <!-- topnav -->
 
@@ -68,7 +60,7 @@
 
 <div class=slug>
     <span class=post_date>
-        Feb 10, 2014
+        
     </span> <!-- post_date -->
     <span class=post_tags>
         
@@ -97,42 +89,34 @@
 <p>The default <code>swN2()</code> calculation in Oce uses a smoothing spline. One disadvantage of this is that few readers will know how it works. A possible alternative is to compute d(rho)/dz using the slope inferred from a running-window linear regression. Such a slope is provided by the new Oce function <code>runlm()</code>, which is tested here. (Note that <code>runlm()</code> is new enough that its argument list may change as a result of tests like the present one.)</p>
 
 <h1 id="methods">Methods</h1>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
-</pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
-source<span class='p'>(</span><span class='s'>&quot;~/src/R-kelley/oce/R/ctd.R&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-11.png" alt="center" /></p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## Using runlm() to get d(rho)/dz</span>
+3
+4
+5
+6
+7
+8
+9</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
+data<span class='p'>(</span>ctd<span class='p'>)</span>
 rho <span class='o'>&lt;-</span> swRho<span class='p'>(</span>ctd<span class='p'>)</span>
 z <span class='o'>&lt;-</span> swZ<span class='p'>(</span>ctd<span class='p'>)</span>
-
 drhodz <span class='o'>&lt;-</span> runlm<span class='p'>(</span>z<span class='p'>,</span> rho<span class='p'>,</span> deriv <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
 g <span class='o'>&lt;-</span> <span class='m'>9.81</span>
 rho0 <span class='o'>&lt;-</span> mean<span class='p'>(</span>rho<span class='p'>,</span> na.rm <span class='o'>=</span> <span class='kc'>TRUE</span><span class='p'>)</span>
 N2 <span class='o'>&lt;-</span> <span class='o'>-</span>g <span class='o'>*</span> drhodz<span class='o'>/</span>rho0
-lines<span class='p'>(</span>N2<span class='p'>,</span> <span class='o'>-</span>z<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;blue&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-10_N2-runlm-a1.png" alt="center" /></p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3</code></pre></div></td><td class='code'><div class='highlight'><pre>lines<span class='p'>(</span>N2<span class='p'>,</span> <span class='o'>-</span>z<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;blue&quot;</span><span class='p'>)</span>
 legend<span class='p'>(</span><span class='s'>&quot;bottomright&quot;</span><span class='p'>,</span> lwd <span class='o'>=</span> <span class='m'>2</span><span class='p'>,</span> col <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;brown&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>),</span> legend <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;spline&quot;</span><span class='p'>,</span> 
     <span class='s'>&quot;runlm&quot;</span><span class='p'>),</span> bg <span class='o'>=</span> <span class='s'>&quot;white&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-12.png" alt="center" /></p>
+<p><img src="/assets/2014-02-10_N2-runlm-a2.png" alt="center" /></p>
 
 <h1 id="results">Results</h1>
 
@@ -173,11 +157,11 @@ print<span class='p'>(</span>best<span class='p'>)</span>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-21.png" alt="center" /></p>
+<p><img src="/assets/2014-02-10_N2-runlm-b1.png" alt="center" /></p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>lines<span class='p'>(</span>N2best<span class='p'>,</span> ctd<span class='p'>[[</span><span class='s'>&quot;pressure&quot;</span><span class='p'>]],</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-22.png" alt="center" /></p>
+<p><img src="/assets/2014-02-10_N2-runlm-b2.png" alt="center" /></p>
 
 <h1 id="questions">Questions</h1>
 

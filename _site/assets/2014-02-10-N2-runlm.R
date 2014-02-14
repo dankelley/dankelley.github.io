@@ -2,9 +2,9 @@
 ## ----N2-runlm-1, fig.path='2014-02-10_', dpi=100-------------------------
 library(oce)
 data(ctd)
+source('~/src/R-kelley/oce/R/ctd.R')
 plot(ctd, which="N2")
-
-## Using ``runlm()`` to get d(rho)/dz
+## Using runlm() to get d(rho)/dz
 rho <- swRho(ctd)
 z <- swZ(ctd)
 
