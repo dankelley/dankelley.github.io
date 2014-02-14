@@ -99,17 +99,10 @@
 <h1 id="methods">Methods</h1>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
-source<span class='p'>(</span><span class='s'>&quot;~/src/R-kelley/oce/R/ctd.R&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-11.png" alt="center" /></p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
  2
  3
  4
@@ -119,20 +112,20 @@ plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=<
  8
  9
 10
-11</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## Using runlm() to get d(rho)/dz</span>
+11</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
 rho <span class='o'>&lt;-</span> swRho<span class='p'>(</span>ctd<span class='p'>)</span>
 z <span class='o'>&lt;-</span> swZ<span class='p'>(</span>ctd<span class='p'>)</span>
-
 drhodz <span class='o'>&lt;-</span> runlm<span class='p'>(</span>z<span class='p'>,</span> rho<span class='p'>,</span> deriv <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
 g <span class='o'>&lt;-</span> <span class='m'>9.81</span>
 rho0 <span class='o'>&lt;-</span> mean<span class='p'>(</span>rho<span class='p'>,</span> na.rm <span class='o'>=</span> <span class='kc'>TRUE</span><span class='p'>)</span>
 N2 <span class='o'>&lt;-</span> <span class='o'>-</span>g <span class='o'>*</span> drhodz<span class='o'>/</span>rho0
+plot<span class='p'>(</span>ctd<span class='p'>,</span> which <span class='o'>=</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
 lines<span class='p'>(</span>N2<span class='p'>,</span> <span class='o'>-</span>z<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;blue&quot;</span><span class='p'>)</span>
 legend<span class='p'>(</span><span class='s'>&quot;bottomright&quot;</span><span class='p'>,</span> lwd <span class='o'>=</span> <span class='m'>2</span><span class='p'>,</span> col <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;brown&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>),</span> legend <span class='o'>=</span> c<span class='p'>(</span><span class='s'>&quot;spline&quot;</span><span class='p'>,</span> 
     <span class='s'>&quot;runlm&quot;</span><span class='p'>),</span> bg <span class='o'>=</span> <span class='s'>&quot;white&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-12.png" alt="center" /></p>
+<p><img src="/assets/2014-02-10_N2-runlm-a.png" alt="center" /></p>
 
 <h1 id="results">Results</h1>
 
@@ -170,14 +163,12 @@ print<span class='p'>(</span>best<span class='p'>)</span>
 </pre></div>
 </td></tr></table>
 <p>This best-matching estimate is the red line.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;N2&quot;</span><span class='p'>)</span>
+lines<span class='p'>(</span>N2best<span class='p'>,</span> ctd<span class='p'>[[</span><span class='s'>&quot;pressure&quot;</span><span class='p'>]],</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-21.png" alt="center" /></p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>lines<span class='p'>(</span>N2best<span class='p'>,</span> ctd<span class='p'>[[</span><span class='s'>&quot;pressure&quot;</span><span class='p'>]],</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/2014-02-10_N2-runlm-22.png" alt="center" /></p>
+<p><img src="/assets/2014-02-10_N2-runlm-b.png" alt="center" /></p>
 
 <h1 id="questions">Questions</h1>
 

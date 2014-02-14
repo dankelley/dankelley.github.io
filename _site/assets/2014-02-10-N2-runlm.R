@@ -1,17 +1,14 @@
 
-## ----N2-runlm-1, fig.path='2014-02-10_', dpi=100-------------------------
+## ----N2-runlm-a, fig.path='2014-02-10_', dpi=100-------------------------
 library(oce)
 data(ctd)
-source('~/src/R-kelley/oce/R/ctd.R')
-plot(ctd, which="N2")
-## Using runlm() to get d(rho)/dz
 rho <- swRho(ctd)
 z <- swZ(ctd)
-
 drhodz <- runlm(z, rho, deriv=1)
 g <- 9.81
 rho0 <- mean(rho, na.rm=TRUE)
 N2 <- -g * drhodz / rho0
+plot(ctd, which='N2')
 lines(N2, -z, col='blue')
 legend("bottomright", lwd=2, 
        col=c("brown", "blue"), legend=c("spline", "runlm"),
@@ -28,7 +25,7 @@ print(best)
 N2best <- N2fromderiv(best$minimum)
 
 
-## ----N2-runlm-2, fig.path='2014-02-10_', dpi=100-------------------------
+## ----N2-runlm-b, fig.path='2014-02-10_', dpi=100-------------------------
 plotProfile(ctd, "N2")
 lines(N2best, ctd[['pressure']], col="red")
 
