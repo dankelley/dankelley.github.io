@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>demodulating time series</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+
+            
+            <li><a href="/textbook.html">Textbook</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+<div class=post_title>demodulating time series</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/time-series/index.html" class="tag">
+            time-series
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        An example of demodulation is given, using fake data.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+This posting shows how one might perform demodulation in R.  It is assumed that readers are generally familiar tith the procedure.
+
+First, create some fake data, a carrier signal with period 10, modulated over a long timescale, and with phase drifting linearly over time.
+
+```{r}
+period <- 10
+fc <- 1 / period
+fs <- 1
+n <- 200
+t <- 1:n
+AMP <- 1 + sin(0.5 * fc * t)
+PH  <- 50 * t / max(t)
+noise <- rnorm(n, sd=0.5)
+signal <- AMP * sin(2 * pi * fc * t + PH*pi/180)
+x <- signal + noise
+```
+
+Next, create the base sine and cosine time-series, varying with the known frequency, and plot these.
+```{r demodulation-signal, fig.path='2014-02-17-', fig.height=4, dpi=100}
+xc <- x * cos(2 * pi * fc * t)
+xs <- x * sin(2 * pi * fc * t)
+par(mar=c(1.75,3,1/2,1), mgp=c(2, 0.7, 0), mfcol=c(3,1))
+plot(t, x, type='l')
+plot(t, cos(2 * pi * fc * t), type='l')
+plot(t, xc, type='l')
+```
+
+Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab ``demod()`` function (reference 1).
+
+```{r}
+w <- 2 * fc / fs
+## Here, we use more smoothing
+w <- w / 5
+filter <- signal::butter(5, w)    # FIXME: why extras on w?
+xcs <- signal::filtfilt(filter, xc)
+xss <- signal::filtfilt(filter, xs)
+amp <- 2 * sqrt(xcs^2 + xss^2)
+phase <- 180 / pi * atan2(xcs, xss)
+```
+
+Finally, show the amplitude and phase (black for supplied, red for inferred), as well as the original time series (again, black) and the reconstructed signal (red).
+
+
+```{r demodulation-results, fig.path='2014-02-17-', fig.height=4, dpi=100}
+par(mar=c(1.75,3,1/2,1), mgp=c(2, 0.7, 0), mfcol=c(3,1))
+plot(t, AMP, type='l')
+lines(t, amp, col='red')
+
+plot(t, phase, type='l')
+lines(t, PH, col='red')
+plot(t, x, type='l', pch=20)
+lines(t, amp * sin(2 * pi * fc * t + phase*pi/180), col='red')
+```
+
+
+# Resources
+
+1. Source code: [2014-04-17-demodulation.R](/assets/2014-02-17-demodulation.R)
+
+2. [Matlab demod() documentation](http://www.mathworks.com/help/signal/ref/demod.html)
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

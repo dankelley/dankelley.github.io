@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>demodulating time series</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+
+            
+            <li><a href="/textbook.html">Textbook</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/02/13/valentine-moon.html" title="Valentines-day full moon">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+<div class=post_title>demodulating time series</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Feb 17, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/time-series/index.html" class="tag">
+            time-series
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        An example of demodulation is given, using fake data.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+<p>This posting shows how one might perform demodulation in R. It is assumed that readers are generally familiar tith the procedure.</p>
+
+<p>First, create some fake data, a carrier signal with period 10, modulated over a long timescale, and with phase drifting linearly over time.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class='code'><div class='highlight'><pre>period <span class='o'>&lt;-</span> <span class='m'>10</span>
+fc <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>/</span>period
+fs <span class='o'>&lt;-</span> <span class='m'>1</span>
+n <span class='o'>&lt;-</span> <span class='m'>200</span>
+t <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span>n
+AMP <span class='o'>&lt;-</span> <span class='m'>1</span> <span class='o'>+</span> sin<span class='p'>(</span><span class='m'>0.5</span> <span class='o'>*</span> fc <span class='o'>*</span> t<span class='p'>)</span>
+PH <span class='o'>&lt;-</span> <span class='m'>50</span> <span class='o'>*</span> t<span class='o'>/</span>max<span class='p'>(</span>t<span class='p'>)</span>
+noise <span class='o'>&lt;-</span> rnorm<span class='p'>(</span>n<span class='p'>,</span> sd <span class='o'>=</span> <span class='m'>0.5</span><span class='p'>)</span>
+signal <span class='o'>&lt;-</span> AMP <span class='o'>*</span> sin<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> fc <span class='o'>*</span> t <span class='o'>+</span> PH <span class='o'>*</span> pi<span class='o'>/</span><span class='m'>180</span><span class='p'>)</span>
+x <span class='o'>&lt;-</span> signal <span class='o'>+</span> noise
+</pre></div>
+</td></tr></table>
+<p>Next, create the base sine and cosine time-series, varying with the known frequency, and plot these.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6</code></pre></div></td><td class='code'><div class='highlight'><pre>xc <span class='o'>&lt;-</span> x <span class='o'>*</span> cos<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> fc <span class='o'>*</span> t<span class='p'>)</span>
+xs <span class='o'>&lt;-</span> x <span class='o'>*</span> sin<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> fc <span class='o'>*</span> t<span class='p'>)</span>
+par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>1.75</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>),</span> mfcol <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>))</span>
+plot<span class='p'>(</span>t<span class='p'>,</span> x<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>t<span class='p'>,</span> cos<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> fc <span class='o'>*</span> t<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>t<span class='p'>,</span> xc<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-17-demodulation-signal.png" alt="center" /></p>
+
+<p>Smooth the results, and infer amplitude and phase. Here, the butterworth filter parameters are smoothing more than in the Matlab <code>demod()</code> function (reference 1).</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7
+8</code></pre></div></td><td class='code'><div class='highlight'><pre>w <span class='o'>&lt;-</span> <span class='m'>2</span> <span class='o'>*</span> fc<span class='o'>/</span>fs
+<span class='c1'>## Here, we use more smoothing</span>
+w <span class='o'>&lt;-</span> w<span class='o'>/</span><span class='m'>5</span>
+filter <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>5</span><span class='p'>,</span> w<span class='p'>)</span>  <span class='c1'># FIXME: why extras on w?</span>
+xcs <span class='o'>&lt;-</span> signal<span class='o'>::</span>filtfilt<span class='p'>(</span>filter<span class='p'>,</span> xc<span class='p'>)</span>
+xss <span class='o'>&lt;-</span> signal<span class='o'>::</span>filtfilt<span class='p'>(</span>filter<span class='p'>,</span> xs<span class='p'>)</span>
+amp <span class='o'>&lt;-</span> <span class='m'>2</span> <span class='o'>*</span> sqrt<span class='p'>(</span>xcs<span class='o'>^</span><span class='m'>2</span> <span class='o'>+</span> xss<span class='o'>^</span><span class='m'>2</span><span class='p'>)</span>
+phase <span class='o'>&lt;-</span> <span class='m'>180</span><span class='o'>/</span>pi <span class='o'>*</span> atan2<span class='p'>(</span>xcs<span class='p'>,</span> xss<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>Finally, show the amplitude and phase (black for supplied, red for inferred), as well as the original time series (again, black) and the reconstructed signal (red).</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7
+8</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>1.75</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='o'>/</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>),</span> mfcol <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>))</span>
+plot<span class='p'>(</span>t<span class='p'>,</span> AMP<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+lines<span class='p'>(</span>t<span class='p'>,</span> amp<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
+
+plot<span class='p'>(</span>t<span class='p'>,</span> phase<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
+lines<span class='p'>(</span>t<span class='p'>,</span> PH<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>t<span class='p'>,</span> x<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> pch <span class='o'>=</span> <span class='m'>20</span><span class='p'>)</span>
+lines<span class='p'>(</span>t<span class='p'>,</span> amp <span class='o'>*</span> sin<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> fc <span class='o'>*</span> t <span class='o'>+</span> phase <span class='o'>*</span> pi<span class='o'>/</span><span class='m'>180</span><span class='p'>),</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-17-demodulation-results.png" alt="center" /></p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+<li>
+<p>Source code: <a href="/assets/2014-02-17-demodulation.R">2014-04-17-demodulation.R</a></p>
+</li>
+
+<li>
+<p><a href="http://www.mathworks.com/help/signal/ref/demod.html">Matlab demod() documentation</a></p>
+</li>
+</ol>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
