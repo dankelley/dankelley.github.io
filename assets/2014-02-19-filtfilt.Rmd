@@ -165,7 +165,8 @@ lines(t, y, col='red')
 The two methods are not agreeing.  The test codes provided in the next section reveal that the problem is in the use of `filter`, which evidently gives different results in the two cases.  A problem is that the R version of ``stats::filter()`` is really not well documented, regarding ``init``, ``init.x`` and ``init.y``.  I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the ``signal`` package ... extreme, I know :-)
 
 # Resources
-* Matlab test code ![a.m]({{ site.url }}/assets/a.m)
-* R test code ![a.R]({{ site.url }}/assets/a.R)
+* Matlab test code [a.m]({{ site.url }}/assets/a.m)
+* R test code [a.R]({{ site.url }}/assets/a.R)
+* test data used by above two codes [x.dat]({{ site.url }}/assets/x.dat)
 
 
