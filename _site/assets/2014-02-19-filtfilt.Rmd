@@ -239,14 +239,14 @@ lines(t, y, col='red')
 
 # Comments
 
-The two methods are not agreeing.  The test codes provided in the next section reveal that the problem is in the use of `filter`, which evidently gives different results in the two cases.  A problem is that the R version of ``stats::filter()`` is really not well documented, regarding ``init``, ``init.x`` and ``init.y``.  I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the ``signal`` package ... extreme, I know :-)
+The two methods are disagree.  The test codes ``a.m`` and ``a.R`` provided in the next section reveal that the problem is in the use of ``filter()``.  I am having difficulties finding the problem.  The R version of ``stats::filter()`` is not well documented, regarding ``init``, ``init.x`` and ``init.y``.  And I've yet to find the source code for the Octave version of ``filter()`` (see an item in the next section).
 
 # Resources
 * Matlab test code [a.m](/assets/a.m)
 * R test code [a.R](/assets/a.R)
 * test data used by above two codes [x.dat](/assets/x.dat)
-
-
+* to set the octave code for ``filtfilt()``, type ``pkg install -forge signal`` within an Octave window, and then inspect the file named ``~/octave/signal-1.3.0/filtfilt.m`` (where the directory name may vary).
+* to see the octave code for ``filter()``, note that doing ``help filter`` yields "is a built-in function from the file libinterp/corefcn/filter.cc", so download from [http://www.gnu.org/software/octave/download.html](http://www.gnu.org/software/octave/download.html), unzip and untar, and there it is, in C++.  It's c. 700 lines long, so some study will be required...
 
 
 <div id="disqus_thread"></div>

@@ -258,7 +258,7 @@ lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span>
 
 <h1 id="comments">Comments</h1>
 
-<p>The two methods are not agreeing. The test codes provided in the next section reveal that the problem is in the use of <code>filter</code>, which evidently gives different results in the two cases. A problem is that the R version of <code>stats::filter()</code> is really not well documented, regarding <code>init</code>, <code>init.x</code> and <code>init.y</code>. I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the <code>signal</code> package … extreme, I know :-)</p>
+<p>The two methods are disagree. The test codes <code>a.m</code> and <code>a.R</code> provided in the next section reveal that the problem is in the use of <code>filter()</code>. I am having difficulties finding the problem. The R version of <code>stats::filter()</code> is not well documented, regarding <code>init</code>, <code>init.x</code> and <code>init.y</code>. And I’ve yet to find the source code for the Octave version of <code>filter()</code> (see an item in the next section).</p>
 
 <h1 id="resources">Resources</h1>
 
@@ -268,6 +268,10 @@ lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span>
 <li>R test code <a href="/assets/a.R">a.R</a></li>
 
 <li>test data used by above two codes <a href="/assets/x.dat">x.dat</a></li>
+
+<li>to set the octave code for <code>filtfilt()</code>, type <code>pkg install -forge signal</code> within an Octave window, and then inspect the file named <code>~/octave/signal-1.3.0/filtfilt.m</code> (where the directory name may vary).</li>
+
+<li>to see the octave code for <code>filter()</code>, note that doing <code>help filter</code> yields “is a built-in function from the file libinterp/corefcn/filter.cc”, so download from <a href="http://www.gnu.org/software/octave/download.html">http://www.gnu.org/software/octave/download.html</a>, unzip and untar, and there it is, in C++. It’s c. 700 lines long, so some study will be required</li>
 </ul>
 
 <div id="disqus_thread"></div>
