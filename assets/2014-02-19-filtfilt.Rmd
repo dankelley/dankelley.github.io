@@ -13,6 +13,19 @@ Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seem
 
 # Octave implementation
 
+## Test code
+
+{% highlight matlab %}
+pkg load signal
+[b, a]=butter(3, 0.1);                  # 10 Hz low-pass filter
+t = 0:0.01:1.0;                         # 1 second sample
+x=sin(2*pi*t*2.3)+0.25*randn(size(t));  # 2.3 Hz sinusoid+noise
+y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
+plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
+#{% endhighlight %}
+
+## Full code
+
 {% highlight matlab %}
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ## Copyright (C) 2007 Francesco Potortì <pot@gnu.org>
@@ -103,17 +116,25 @@ function y = filtfilt(b, a, x)
 endfunction
 {% endhighlight %}
 
-## R implementation
+
+## Result
+
+[filtfilt_octave.png](filtfilt_octave.png)
+
+
+# R implementation
 
 ```{r}
-x <- 0.2*sin((1:100)*2*pi/20) + seq(0, 1, length.out=100)
-x <- x + rnorm(100, sd=0.2)
-ab <- signal::butter(2, 0.05)
+
+ab <- signal::butter(3, 0.1)
+t <- seq(0, 1, 0.01)
+x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
+## below could be extracted to a function when working
 a <- ab$a
 b <- ab$b
 na <- length(a)
 nb <- length(b)
-kdc <- sum(b) / sum(a);
+kdc <- sum(b) / sum(a)
 if (!is.nan(kdc)) {
   si <- rev(cumsum(rev(b - kdc * a)))
 } else {
@@ -137,5 +158,7 @@ y <- v[seq.int(lrefl+1, lx+lrefl)]
 t <- seq_along(x)
 plot(t, x, type='l')
 lines(t, y, col='red')
+
 ```
+
 
