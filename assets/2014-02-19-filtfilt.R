@@ -21,16 +21,16 @@ nx <- length(x)
 n <- max(na, nb)
 lrefl <- 3 * (n - 1)
 if (na < n)
-    a <- c(a, rep(0, n-na))
+    a <- c(a, rep(0, length.out=n-na))
 if (nb < n)
-    b <- c(b, rep(0, n-nb))
-v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],
+    b <- c(b, rep(0, length.out=n-nb))
+v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
            x,
-           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])
+           2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
+warning("relying on filter to do as in matlab\n")
 v <- signal::filter(b,a,v,si*v[1])     # forward filter
 v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
 y <- v[seq.int(lrefl+1, lx+lrefl)]
-t <- seq_along(x)
 plot(t, x, type='l')
 lines(t, y, col='red')
 

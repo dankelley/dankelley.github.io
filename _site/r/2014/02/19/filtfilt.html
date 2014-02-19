@@ -222,12 +222,7 @@
 21
 22
 23
-24
-25
-26
-27
-28
-29</code></pre></div></td><td class='code'><div class='highlight'><pre>ab <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>0.1</span><span class='p'>)</span>
+24</code></pre></div></td><td class='code'><div class='highlight'><pre>ab <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>0.1</span><span class='p'>)</span>
 t <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0.01</span><span class='p'>)</span>
 x <span class='o'>&lt;-</span> sin<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> t <span class='o'>*</span> <span class='m'>2.3</span><span class='p'>)</span> <span class='o'>+</span> <span class='m'>0.25</span> <span class='o'>*</span> rnorm<span class='p'>(</span>length<span class='p'>(</span>t<span class='p'>))</span>
 <span class='c1'>## below could be extracted to a function when working</span>
@@ -246,14 +241,20 @@ si <span class='o'>&lt;-</span> si<span class='p'>[</span><span class='m'>-1</sp
 nx <span class='o'>&lt;-</span> length<span class='p'>(</span>x<span class='p'>)</span>
 n <span class='o'>&lt;-</span> max<span class='p'>(</span>na<span class='p'>,</span> nb<span class='p'>)</span>
 lrefl <span class='o'>&lt;-</span> <span class='m'>3</span> <span class='o'>*</span> <span class='p'>(</span>n <span class='o'>-</span> <span class='m'>1</span><span class='p'>)</span>
-<span class='kr'>if</span> <span class='p'>(</span>na <span class='o'>&lt;</span> n<span class='p'>)</span> a <span class='o'>&lt;-</span> c<span class='p'>(</span>a<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> n <span class='o'>-</span> na<span class='p'>))</span>
-<span class='kr'>if</span> <span class='p'>(</span>nb <span class='o'>&lt;</span> n<span class='p'>)</span> b <span class='o'>&lt;-</span> c<span class='p'>(</span>b<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> n <span class='o'>-</span> nb<span class='p'>))</span>
-v <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>-1</span><span class='p'>)],</span> x<span class='p'>,</span> <span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span>nx<span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq<span class='p'>(</span>nx <span class='o'>-</span> <span class='m'>1</span><span class='p'>,</span> nx <span class='o'>-</span> 
-    lrefl<span class='p'>,</span> <span class='m'>-1</span><span class='p'>)])</span>
-v <span class='o'>&lt;-</span> signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> v<span class='p'>,</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span>  <span class='c1'># forward filter</span>
+<span class='kr'>if</span> <span class='p'>(</span>na <span class='o'>&lt;</span> n<span class='p'>)</span> a <span class='o'>&lt;-</span> c<span class='p'>(</span>a<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length.out <span class='o'>=</span> n <span class='o'>-</span> na<span class='p'>))</span>
+<span class='kr'>if</span> <span class='p'>(</span>nb <span class='o'>&lt;</span> n<span class='p'>)</span> b <span class='o'>&lt;-</span> c<span class='p'>(</span>b<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length.out <span class='o'>=</span> n <span class='o'>-</span> nb<span class='p'>))</span>
+v <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>-1</span><span class='p'>)],</span> x<span class='p'>,</span> <span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span>nx<span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>nx <span class='o'>-</span> 
+    <span class='m'>1</span><span class='p'>,</span> nx <span class='o'>-</span> lrefl<span class='p'>,</span> <span class='m'>-1</span><span class='p'>)])</span>
+warning<span class='p'>(</span><span class='s'>&quot;relying on filter to do as in matlab\n&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table><div class='highlight'><pre><code class='text'>## Warning: relying on filter to do as in matlab
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>v <span class='o'>&lt;-</span> signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> v<span class='p'>,</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span>  <span class='c1'># forward filter</span>
 v <span class='o'>&lt;-</span> rev<span class='p'>(</span>signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> rev<span class='p'>(</span>v<span class='p'>),</span> si <span class='o'>*</span> v<span class='p'>[</span>nx<span class='p'>]))</span>  <span class='c1'># reverse filter</span>
 y <span class='o'>&lt;-</span> v<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> lx <span class='o'>+</span> lrefl<span class='p'>)]</span>
-t <span class='o'>&lt;-</span> seq_along<span class='p'>(</span>x<span class='p'>)</span>
 plot<span class='p'>(</span>t<span class='p'>,</span> x<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
 lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
 </pre></div>
