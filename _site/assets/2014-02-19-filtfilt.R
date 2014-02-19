@@ -3,7 +3,7 @@
 
 ab <- signal::butter(3, 0.1)
 t <- seq(0, 1, 0.01)
-x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
+x <- scan("x.dat")
 ## below could be extracted to a function when working
 a <- ab$a
 b <- ab$b
@@ -27,7 +27,6 @@ if (nb < n)
 v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
            x,
            2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-warning("relying on filter to do as in matlab\n")
 v <- signal::filter(b,a,v,si*v[1])     # forward filter
 v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
 y <- v[seq.int(lrefl+1, lx+lrefl)]

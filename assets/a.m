@@ -1,22 +1,4 @@
----
-layout: post
-title: Improved filtfilt() for R
-tags: [R, time-series]
-category: R
-year: 2014
-month: 2
-day: 18
-summary: A better filtfilt() for R.
-description: A better filtfilt() for R.
-status: draft
----
-Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seems perfectly reasonable to build R code based on this.
-
-# Octave implementation
-
-## Full code
-
-{% highlight matlab %}
+pkg load signal
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ## Copyright (C) 2007 Francesco Potortì <pot@gnu.org>
 ## Copyright (C) 2008 Luca Citi <lciti@essex.ac.uk>
@@ -88,13 +70,22 @@ function y = filtfilt(b, a, x)
     si = zeros(size(a)); # fall back to zero initialization
   endif
   si(1) = [];
+  si
+  lrefl
 
   for (c = 1:size(x,2)) # filter all columns, one by one
     v = [2*x(1,c)-x((lrefl+1):-1:2,c); x(:,c);
          2*x(end,c)-x((end-1):-1:end-lrefl,c)]; # a column vector
+    # v # same as R
+    "v(1:15) before first filter pass"
+    v(1:15)'
+    "si*v(1)"
+    si*v(1)'
 
     ## Do forward and reverse filtering
     v = filter(b,a,v,si*v(1));                   # forward filter
+    "v(1:15) after first filter pass"
+    v(1:15)'
     v = flipud(filter(b,a,flipud(v),si*v(end))); # reverse filter
     y(:,c) = v((lrefl+1):(lx+lrefl));
   endfor
@@ -104,68 +95,11 @@ function y = filtfilt(b, a, x)
   endif
 
 endfunction
-{% endhighlight %}
-
-
-## Test
-
-{% highlight matlab %}
-pkg load signal
 [b, a]=butter(3, 0.1);                  # 10 Hz low-pass filter
 t = 0:0.01:1.0;                         # 1 second sample
-load x.dat # created by the R code, to ensure both have same data
+#x=sin(2*pi*t*2.3)+0.25*randn(size(t));  # 2.3 Hz sinusoid+noise
+load x.dat
+x(1:3)
 y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
 plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
-#{% endhighlight %}
-
-
-
-[![graph]({{ site.url }}/assets/2014-02-19-filtfilt_octave-thumbnail.png)]({{ site.url }}/assets/2014-02-19-filtfilt_octave.png)
-
-# R implementation
-
-```{r}
-
-ab <- signal::butter(3, 0.1)
-t <- seq(0, 1, 0.01)
-x <- scan("x.dat")
-## below could be extracted to a function when working
-a <- ab$a
-b <- ab$b
-na <- length(a)
-nb <- length(b)
-kdc <- sum(b) / sum(a)
-if (!is.nan(kdc)) {
-  si <- rev(cumsum(rev(b - kdc * a)))
-} else {
-  si <- rep(0, length(a))
-}
-lx <- length(x)
-si <- si[-1]
-nx <- length(x)
-n <- max(na, nb)
-lrefl <- 3 * (n - 1)
-if (na < n)
-    a <- c(a, rep(0, length.out=n-na))
-if (nb < n)
-    b <- c(b, rep(0, length.out=n-nb))
-v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
-           x,
-           2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-v <- signal::filter(b,a,v,si*v[1])     # forward filter
-v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
-y <- v[seq.int(lrefl+1, lx+lrefl)]
-plot(t, x, type='l')
-lines(t, y, col='red')
-
-```
-
-# Comments
-
-The two methods are not agreeing.  The test codes provided in the next section reveal that the problem is in the use of `filter`, which evidently gives different results in the two cases.  A problem is that the R version of ``stats::filter()`` is really not well documented, regarding ``init``, ``init.x`` and ``init.y``.  I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the ``signal`` package ... extreme, I know :-)
-
-# Resources
-* Matlab test code ![a.m]({{ site.url }}/assets/a.m)
-* R test code ![a.R]({{ site.url }}/assets/a.R)
-
 

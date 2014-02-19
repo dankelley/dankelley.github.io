@@ -92,17 +92,6 @@ Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seem
 
 # Octave implementation
 
-## Test code
-
-<div class="highlight"><pre><code class="matlab"><span class="n">pkg</span> <span class="n">load</span> <span class="n">signal</span>
-<span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]=</span><span class="n">butter</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>                  # <span class="mi">10</span> <span class="n">Hz</span> <span class="n">low</span><span class="o">-</span><span class="n">pass</span> <span class="n">filter</span>
-<span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">;</span>                         # <span class="mi">1</span> <span class="n">second</span> <span class="n">sample</span>
-<span class="n">x</span><span class="p">=</span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="mf">2.3</span><span class="p">)</span><span class="o">+</span><span class="mf">0.25</span><span class="o">*</span><span class="nb">randn</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>  # <span class="mf">2.3</span> <span class="n">Hz</span> <span class="n">sinusoid</span><span class="o">+</span><span class="n">noise</span>
-<span class="n">y</span> <span class="p">=</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> <span class="n">z</span> <span class="p">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> # <span class="n">apply</span> <span class="n">filter</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;;data;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;;filtfilt;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s">&#39;;filter;&#39;</span><span class="p">)</span>
-#
-</code></pre></div>
-
 ## Full code
 
 <div class="highlight"><pre><code class="matlab">## <span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">1999</span> <span class="n">Paul</span> <span class="n">Kienzle</span> <span class="o">&lt;</span><span class="n">pkienzle</span><span class="p">@</span><span class="n">users</span><span class="p">.</span><span class="n">sf</span><span class="p">.</span><span class="n">net</span><span class="o">&gt;</span>
@@ -195,7 +184,18 @@ Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seem
 </code></pre></div>
 
 
-## Result
+## Test
+
+<div class="highlight"><pre><code class="matlab"><span class="n">pkg</span> <span class="n">load</span> <span class="n">signal</span>
+<span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]=</span><span class="n">butter</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>                  # <span class="mi">10</span> <span class="n">Hz</span> <span class="n">low</span><span class="o">-</span><span class="n">pass</span> <span class="n">filter</span>
+<span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">;</span>                         # <span class="mi">1</span> <span class="n">second</span> <span class="n">sample</span>
+<span class="n">load</span> <span class="n">x</span><span class="p">.</span><span class="n">dat</span> # <span class="n">created</span> <span class="n">by</span> <span class="n">the</span> <span class="n">R</span> <span class="n">code</span><span class="p">,</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">both</span> <span class="n">have</span> <span class="n">same</span> <span class="n">data</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> <span class="n">z</span> <span class="p">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> # <span class="n">apply</span> <span class="n">filter</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;;data;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;;filtfilt;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s">&#39;;filter;&#39;</span><span class="p">)</span>
+#
+</code></pre></div>
+
+
 
 [![graph](/assets/2014-02-19-filtfilt_octave-thumbnail.png)](/assets/2014-02-19-filtfilt_octave.png)
 
@@ -205,7 +205,7 @@ Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seem
 
 ab <- signal::butter(3, 0.1)
 t <- seq(0, 1, 0.01)
-x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
+x <- scan("x.dat")
 ## below could be extracted to a function when working
 a <- ab$a
 b <- ab$b
@@ -229,7 +229,6 @@ if (nb < n)
 v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
            x,
            2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-warning("relying on filter to do as in matlab\n")
 v <- signal::filter(b,a,v,si*v[1])     # forward filter
 v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
 y <- v[seq.int(lrefl+1, lx+lrefl)]
@@ -237,6 +236,14 @@ plot(t, x, type='l')
 lines(t, y, col='red')
 
 ```
+
+# Comments
+
+The two methods are not agreeing.  The test codes provided in the next section reveal that the problem is in the use of `filter`, which evidently gives different results in the two cases.  A problem is that the R version of ``stats::filter()`` is really not well documented, regarding ``init``, ``init.x`` and ``init.y``.  I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the ``signal`` package ... extreme, I know :-)
+
+# Resources
+* Matlab test code ![a.m](/assets/a.m)
+* R test code ![a.R](/assets/a.R)
 
 
 

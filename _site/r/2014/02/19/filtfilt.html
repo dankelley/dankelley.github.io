@@ -96,15 +96,6 @@
 
 <h1 id="octave_implementation">Octave implementation</h1>
 
-<h2 id="test_code">Test code</h2>
-<div class='highlight'><pre><code class='matlab'><span class='n'>pkg</span> <span class='n'>load</span> <span class='n'>signal</span>
-<span class='p'>[</span><span class='n'>b</span><span class='p'>,</span> <span class='n'>a</span><span class='p'>]=</span><span class='n'>butter</span><span class='p'>(</span><span class='mi'>3</span><span class='p'>,</span> <span class='mf'>0.1</span><span class='p'>);</span>                  # <span class='mi'>10</span> <span class='n'>Hz</span> <span class='n'>low</span><span class='o'>-</span><span class='n'>pass</span> <span class='n'>filter</span>
-<span class='n'>t</span> <span class='p'>=</span> <span class='mi'>0</span><span class='p'>:</span><span class='mf'>0.01</span><span class='p'>:</span><span class='mf'>1.0</span><span class='p'>;</span>                         # <span class='mi'>1</span> <span class='n'>second</span> <span class='n'>sample</span>
-<span class='n'>x</span><span class='p'>=</span><span class='nb'>sin</span><span class='p'>(</span><span class='mi'>2</span><span class='o'>*</span><span class='nb'>pi</span><span class='o'>*</span><span class='n'>t</span><span class='o'>*</span><span class='mf'>2.3</span><span class='p'>)</span><span class='o'>+</span><span class='mf'>0.25</span><span class='o'>*</span><span class='nb'>randn</span><span class='p'>(</span><span class='nb'>size</span><span class='p'>(</span><span class='n'>t</span><span class='p'>));</span>  # <span class='mf'>2.3</span> <span class='n'>Hz</span> <span class='n'>sinusoid</span><span class='o'>+</span><span class='n'>noise</span>
-<span class='n'>y</span> <span class='p'>=</span> <span class='n'>filtfilt</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> <span class='n'>z</span> <span class='p'>=</span> <span class='n'>filter</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> # <span class='n'>apply</span> <span class='n'>filter</span>
-<span class='n'>plot</span><span class='p'>(</span><span class='n'>t</span><span class='p'>,</span><span class='n'>x</span><span class='p'>,</span><span class='s'>&#39;;data;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>y</span><span class='p'>,</span><span class='s'>&#39;;filtfilt;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>z</span><span class='p'>,</span><span class='s'>&#39;;filter;&#39;</span><span class='p'>)</span>
-#
-</code></pre></div>
 <h2 id="full_code">Full code</h2>
 <div class='highlight'><pre><code class='matlab'>## <span class='n'>Copyright</span> <span class='p'>(</span><span class='n'>C</span><span class='p'>)</span> <span class='mi'>1999</span> <span class='n'>Paul</span> <span class='n'>Kienzle</span> <span class='o'>&lt;</span><span class='n'>pkienzle</span><span class='p'>@</span><span class='n'>users</span><span class='p'>.</span><span class='n'>sf</span><span class='p'>.</span><span class='n'>net</span><span class='o'>&gt;</span>
 ## <span class='n'>Copyright</span> <span class='p'>(</span><span class='n'>C</span><span class='p'>)</span> <span class='mi'>2007</span> <span class='n'>Francesco</span> <span class='n'>Potort</span>ì <span class='o'>&lt;</span><span class='n'>pot</span><span class='p'>@</span><span class='n'>gnu</span><span class='p'>.</span><span class='n'>org</span><span class='o'>&gt;</span>
@@ -194,8 +185,15 @@
 
 <span class='n'>endfunction</span>
 </code></pre></div>
-<h2 id="result">Result</h2>
-
+<h2 id="test">Test</h2>
+<div class='highlight'><pre><code class='matlab'><span class='n'>pkg</span> <span class='n'>load</span> <span class='n'>signal</span>
+<span class='p'>[</span><span class='n'>b</span><span class='p'>,</span> <span class='n'>a</span><span class='p'>]=</span><span class='n'>butter</span><span class='p'>(</span><span class='mi'>3</span><span class='p'>,</span> <span class='mf'>0.1</span><span class='p'>);</span>                  # <span class='mi'>10</span> <span class='n'>Hz</span> <span class='n'>low</span><span class='o'>-</span><span class='n'>pass</span> <span class='n'>filter</span>
+<span class='n'>t</span> <span class='p'>=</span> <span class='mi'>0</span><span class='p'>:</span><span class='mf'>0.01</span><span class='p'>:</span><span class='mf'>1.0</span><span class='p'>;</span>                         # <span class='mi'>1</span> <span class='n'>second</span> <span class='n'>sample</span>
+<span class='n'>load</span> <span class='n'>x</span><span class='p'>.</span><span class='n'>dat</span> # <span class='n'>created</span> <span class='n'>by</span> <span class='n'>the</span> <span class='n'>R</span> <span class='n'>code</span><span class='p'>,</span> <span class='n'>to</span> <span class='n'>ensure</span> <span class='n'>both</span> <span class='n'>have</span> <span class='n'>same</span> <span class='n'>data</span>
+<span class='n'>y</span> <span class='p'>=</span> <span class='n'>filtfilt</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> <span class='n'>z</span> <span class='p'>=</span> <span class='n'>filter</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> # <span class='n'>apply</span> <span class='n'>filter</span>
+<span class='n'>plot</span><span class='p'>(</span><span class='n'>t</span><span class='p'>,</span><span class='n'>x</span><span class='p'>,</span><span class='s'>&#39;;data;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>y</span><span class='p'>,</span><span class='s'>&#39;;filtfilt;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>z</span><span class='p'>,</span><span class='s'>&#39;;filter;&#39;</span><span class='p'>)</span>
+#
+</code></pre></div>
 <p><a href="/assets/2014-02-19-filtfilt_octave.png"><img src="/assets/2014-02-19-filtfilt_octave-thumbnail.png" alt="graph" /></a></p>
 
 <h1 id="r_implementation">R implementation</h1>
@@ -222,9 +220,13 @@
 21
 22
 23
-24</code></pre></div></td><td class='code'><div class='highlight'><pre>ab <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>0.1</span><span class='p'>)</span>
+24
+25
+26
+27
+28</code></pre></div></td><td class='code'><div class='highlight'><pre>ab <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>0.1</span><span class='p'>)</span>
 t <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0.01</span><span class='p'>)</span>
-x <span class='o'>&lt;-</span> sin<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> pi <span class='o'>*</span> t <span class='o'>*</span> <span class='m'>2.3</span><span class='p'>)</span> <span class='o'>+</span> <span class='m'>0.25</span> <span class='o'>*</span> rnorm<span class='p'>(</span>length<span class='p'>(</span>t<span class='p'>))</span>
+x <span class='o'>&lt;-</span> scan<span class='p'>(</span><span class='s'>&quot;x.dat&quot;</span><span class='p'>)</span>
 <span class='c1'>## below could be extracted to a function when working</span>
 a <span class='o'>&lt;-</span> ab<span class='o'>$</span>a
 b <span class='o'>&lt;-</span> ab<span class='o'>$</span>b
@@ -245,14 +247,7 @@ lrefl <span class='o'>&lt;-</span> <span class='m'>3</span> <span class='o'>*</s
 <span class='kr'>if</span> <span class='p'>(</span>nb <span class='o'>&lt;</span> n<span class='p'>)</span> b <span class='o'>&lt;-</span> c<span class='p'>(</span>b<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length.out <span class='o'>=</span> n <span class='o'>-</span> nb<span class='p'>))</span>
 v <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>-1</span><span class='p'>)],</span> x<span class='p'>,</span> <span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span>nx<span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>nx <span class='o'>-</span> 
     <span class='m'>1</span><span class='p'>,</span> nx <span class='o'>-</span> lrefl<span class='p'>,</span> <span class='m'>-1</span><span class='p'>)])</span>
-warning<span class='p'>(</span><span class='s'>&quot;relying on filter to do as in matlab\n&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Warning: relying on filter to do as in matlab
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2
-3
-4
-5</code></pre></div></td><td class='code'><div class='highlight'><pre>v <span class='o'>&lt;-</span> signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> v<span class='p'>,</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span>  <span class='c1'># forward filter</span>
+v <span class='o'>&lt;-</span> signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> v<span class='p'>,</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span>  <span class='c1'># forward filter</span>
 v <span class='o'>&lt;-</span> rev<span class='p'>(</span>signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> rev<span class='p'>(</span>v<span class='p'>),</span> si <span class='o'>*</span> v<span class='p'>[</span>nx<span class='p'>]))</span>  <span class='c1'># reverse filter</span>
 y <span class='o'>&lt;-</span> v<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> lx <span class='o'>+</span> lrefl<span class='p'>)]</span>
 plot<span class='p'>(</span>t<span class='p'>,</span> x<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
@@ -260,6 +255,18 @@ lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span>
 </pre></div>
 </td></tr></table>
 <p><img src="/assets/figs/2014-02-19-filtfilt/unnamed-chunk-1.png" alt="center" /></p>
+
+<h1 id="comments">Comments</h1>
+
+<p>The two methods are not agreeing. The test codes provided in the next section reveal that the problem is in the use of <code>filter</code>, which evidently gives different results in the two cases. A problem is that the R version of <code>stats::filter()</code> is really not well documented, regarding <code>init</code>, <code>init.x</code> and <code>init.y</code>. I am looking into this, but now that things are isolated to this level I have half a mind to just code the filter in C and hook it to oce, and thus to be independent of the <code>signal</code> package … extreme, I know :-)</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li>Matlab test code <img src="/assets/a.m" alt="a.m" /></li>
+
+<li>R test code <img src="/assets/a.R" alt="a.R" /></li>
+</ul>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
