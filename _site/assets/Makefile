@@ -4,7 +4,8 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     coastline-switch-1-thumbnail.png coastline-switch-2-thumbnail.png \
     vote-split-thumbnail.png smooth-profile-thumbnail.png \
     solstice_sunrise_sunset-thumbnail.png gmt-topography-thumbnail.png \
-    gmt_relief_2-thumbnail.png splines-thumbnail.png splines2-thumbnail.png
+    gmt_relief_2-thumbnail.png splines-thumbnail.png splines2-thumbnail.png \
+    2014-02-19-filtfilt_octave-thumbnail.png
 
 pisa-scores-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 pisa-scores.png pisa-scores-thumbnail.png;
@@ -40,6 +41,10 @@ splines-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 splines.png splines-thumbnail.png
 splines2-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 splines2.png splines2-thumbnail.png
+
+2014-02-19-filtfilt_octave-thumbnail.png: force
+	/usr/local/bin/convert -thumbnail 600x600 2014-02-19-filtfilt_octave.png 2014-02-19-filtfilt_octave-thumbnail.png
+
 
 force:
 

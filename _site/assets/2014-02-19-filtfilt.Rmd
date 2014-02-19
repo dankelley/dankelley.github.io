@@ -53,7 +53,7 @@
 
 <div class="page-header">
 
-<div class=post_title>Improved filtfilt() for R</div>
+    <div class=post_title>Improved filtfilt() for R</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
@@ -83,6 +83,10 @@
 <!-- </div> -->
 <!-- span4 -->
 </div> <!-- page-header -->
+
+
+<b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
+
 
 Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seems perfectly reasonable to build R code based on this.
 
@@ -193,8 +197,7 @@ Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seem
 
 ## Result
 
-[filtfilt_octave.png](filtfilt_octave.png)
-
+[![graph](/assets/2014-02-19-filtfilt_octave-thumbnail.png)](/assets/2014-02-19-filtfilt_octave.png)
 
 # R implementation
 

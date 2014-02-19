@@ -53,7 +53,7 @@
 
 <div class="page-header">
 
-<div class=post_title>Hodograph drawing</div>
+    <div class=post_title>Hodograph drawing</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
@@ -83,6 +83,8 @@
 <!-- </div> -->
 <!-- span4 -->
 </div> <!-- page-header -->
+
+
 
 # Introduction
 

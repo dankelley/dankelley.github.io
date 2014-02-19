@@ -8,6 +8,7 @@ month: 2
 day: 18
 summary: A better filtfilt() for R.
 description: A better filtfilt() for R.
+status: draft
 ---
 Octave does as follows, which looks pretty simple.  Since Octave is GPL, it seems perfectly reasonable to build R code based on this.
 
@@ -119,8 +120,7 @@ endfunction
 
 ## Result
 
-[filtfilt_octave.png](filtfilt_octave.png)
-
+[![graph]({{ site.url }}/assets/2014-02-19-filtfilt_octave-thumbnail.png)]({{ site.url }}/assets/2014-02-19-filtfilt_octave.png)
 
 # R implementation
 

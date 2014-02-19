@@ -45,7 +45,7 @@ submenu: blog
 
 <div class="page-header">
 
-<div class=post_title>{{page.title}}</div>
+    <div class=post_title>{{page.title}}</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
@@ -70,6 +70,10 @@ submenu: blog
 <!-- </div> -->
 <!-- span4 -->
 </div> <!-- page-header -->
+
+{% if page.status == "draft" %}
+<b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
+{% endif %}
 
 {{ content }}
 

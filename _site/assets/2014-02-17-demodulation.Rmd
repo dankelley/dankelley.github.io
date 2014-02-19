@@ -53,7 +53,7 @@
 
 <div class="page-header">
 
-<div class=post_title>demodulating time series</div>
+    <div class=post_title>demodulating time series</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
@@ -83,6 +83,8 @@
 <!-- </div> -->
 <!-- span4 -->
 </div> <!-- page-header -->
+
+
 
 This posting shows how one might perform demodulation in R.  It is assumed that readers are generally familiar tith the procedure.
 
