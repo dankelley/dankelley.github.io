@@ -32,14 +32,13 @@ cat("si*v[1]:15]:", si*v[1], "\n")
 cat("v[1:15] before first filter:", v[1:15], "\n")
 
 #v <- signal::filter(filt=b, a=a, x=v, init=si*v[1])    # forward filter (WRONG OUTPUT)
-v <- signal::filter(ab, x=v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
+v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
 #v <- signal::filter(b,a,v,init=si*v[1])     # forward filter (WRONG OUTPUT)
 #v <- signal::filter(b,a,v, init.x=si*v[1])     # forward filter (WRONG OUTPUT)
 #v <- signal::filter(b,a,v, init.y=si*v[1])     # forward filter (WRONG OUTPUT)
 cat("v[1:15] after first filter:", v[1:15], "\n")
 
-stop()
-v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
+v <- rev(signal::filter(b,a,rev(v),init.x=si*v[nx]))  # reverse filter
 y <- v[seq.int(lrefl+1, lx+lrefl)]
 plot(t, x, type='l')
 lines(t, y, col='red')
