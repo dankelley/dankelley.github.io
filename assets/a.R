@@ -28,17 +28,16 @@ if (nb < n)
 v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
            x,
            2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-cat("si*v[1]:15]:", si*v[1], "\n")
+cat("si*v[1]:", si*v[1], "\n")
 cat("v[1:15] before first filter:", v[1:15], "\n")
 
-#v <- signal::filter(filt=b, a=a, x=v, init=si*v[1])    # forward filter (WRONG OUTPUT)
+#v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
 v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
-#v <- signal::filter(b,a,v,init=si*v[1])     # forward filter (WRONG OUTPUT)
-#v <- signal::filter(b,a,v, init.x=si*v[1])     # forward filter (WRONG OUTPUT)
-#v <- signal::filter(b,a,v, init.y=si*v[1])     # forward filter (WRONG OUTPUT)
 cat("v[1:15] after first filter:", v[1:15], "\n")
 
-v <- rev(signal::filter(b,a,rev(v),init.x=si*v[nx]))  # reverse filter
+cat("si*v[length(v)]:", si*v[length(v)], "\n")
+v <- rev(signal::filter(b,a,rev(v),init.x=si*v[length(v)]))  # reverse filter
+cat("v[1:15] after second filter:", v[1:15], "\n")
 y <- v[seq.int(lrefl+1, lx+lrefl)]
 plot(t, x, type='l')
 lines(t, y, col='red')

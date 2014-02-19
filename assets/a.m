@@ -84,9 +84,13 @@ function y = filtfilt(b, a, x)
 
     ## Do forward and reverse filtering
     v = filter(b,a,v,si*v(1));                   # forward filter
-    "v(1:15) after first filter pass"
+    "v(1:15) after first filter"
     v(1:15)'
+    "si*v(end)"
+    si*v(end)'
     v = flipud(filter(b,a,flipud(v),si*v(end))); # reverse filter
+    "v(1:15) after second filter"
+    v(1:15)'
     y(:,c) = v((lrefl+1):(lx+lrefl));
   endfor
 
