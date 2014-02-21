@@ -83,7 +83,23 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 ## How to help with Oce translations
 
-If you would like Oce graphs to work in your language, please contact me via this blog.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful).  The words should be the ones that are wrong on graphs you use, and should include translations of some common additional words that will probably be needed by others who speak your language, e.g. ``Depth``, ``Pressure``, ``Temperature``, ``Potential Temperature``, ``Conservative Temperature``, ``Practical Salinity``, ``Absolute Salinity`` and so forth.
-
 At the moment, Oce works in English, with some support for Spanish and French.
+
+If you would like Oce graphs to work in your language, please contact me via this blog.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users greatly if you could translate everything on the list given below, line by line.  (Also, translate ``E``, ``W``, ``N``, and ``S``, as used in longitude and latitude.)
+{% highlight linenos=table %}
+Absolute Salinity
+Conservative Temperature
+Depth
+Distance
+Elevation
+Longitude
+Latitude
+Practical Salinity
+Potential Temperature
+Pressure
+Sea Level
+Speed
+Temperature
+Velocity
+{% highlight %}
 
