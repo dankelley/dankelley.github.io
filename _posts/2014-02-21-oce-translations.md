@@ -95,8 +95,9 @@ Distance
 Elevation
 Longitude
 Latitude
-Practical Salinity
 Potential Temperature
+Potential Density Anomaly
+Practical Salinity
 Pressure
 Sea Level
 Speed
