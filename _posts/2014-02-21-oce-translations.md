@@ -54,18 +54,6 @@ Then build your package and test.  The test could be e.g. as follows, for Spanis
 
 {% highlight r linenos=table %}
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-{% endhighlight %}
-
-
-{% highlight r linenos=table %}
 data(ctd)
 par(mfrow = c(1, 3))
 plotProfile(ctd, "T")
@@ -74,6 +62,8 @@ plotProfile(ctd, "T")
 Sys.setenv(LANGUAGE = "fr")
 plotProfile(ctd, "T")
 {% endhighlight %}
+
+This produces the graph shown below (click to enlarge).
 
 [![center]({{ site.url }}/assets/2014-02-21-oce-translations-thumbnail.png)]({{ site.url }}/assets/2014-02-21-oce-translations.png)
 

@@ -124,18 +124,15 @@ msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 <div class='highlight'><pre><code class='bash'>msgmerge --update R-fr.po R-oce.pot
 </code></pre></div>
 <p>Then build your package and test. The test could be e.g. as follows, for Spanish, French, and English.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
-</pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
+7
+8</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
+data<span class='p'>(</span>ctd<span class='p'>)</span>
 par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>))</span>
 plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
 Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class='s'>&quot;es&quot;</span><span class='p'>)</span>
@@ -144,6 +141,8 @@ Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class=
 plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
+<p>This produces the graph shown below (click to enlarge).</p>
+
 <p><a href="/assets/2014-02-21-oce-translations.png"><img src="/assets/2014-02-21-oce-translations-thumbnail.png" alt="center" /></a></p>
 
 <p>Instead of using <code>Sys.setenv()</code> one can define the language in the shell, as (temporarily) in the following invocation.</p>
