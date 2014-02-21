@@ -49,7 +49,7 @@ Edit your source code ... repeat step 3 ... run the following in the shell.
 msgmerge --update R-fr.po R-oce.pot
 {% endhighlight %}
 
-Then build your package and test.  The test could be e.g. as follows, for Spanish, French, and English.  BUG: pressure is not translated, and I'm not sure why!
+Then build your package and test.  The test could be e.g. as follows, for Spanish, French, and English.
 
 
 {% highlight r linenos=table %}
@@ -86,5 +86,5 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 ## Bugs
 
-As noted, I'm hazy on some steps because I got confused and redid things a fair bit.  Most likely this page will need revision.
+As noted, I am a bit hazy on some steps because I got confused and redid things a fair bit.  Most likely this page will need revision.
 
