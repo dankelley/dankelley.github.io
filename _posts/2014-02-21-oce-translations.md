@@ -85,7 +85,8 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 At the moment, Oce works in English, with some support for Spanish and French.
 
-If you would like Oce graphs to work in your language, please contact me via this blog.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users greatly if you could translate everything on the list given below, line by line.  (Also, translate ``E``, ``W``, ``N``, and ``S``, as used in longitude and latitude.)
+If you would like Oce graphs to work in your language, please contact me via this blog.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users greatly if you could translate everything on the list given below, line by line.  (Also, translate ``E``, ``W``, ``N``, and ``S``, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.)
+
 {% highlight linenos=table %}
 Absolute Salinity
 Conservative Temperature
