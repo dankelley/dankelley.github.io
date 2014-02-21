@@ -59,10 +59,10 @@ library(oce)
 
 
 {% highlight text %}
-## Loading required package: methods Loading required package: mapproj
+## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
 {% endhighlight %}
-
 
 
 {% highlight r linenos=table %}
@@ -75,7 +75,7 @@ Sys.setenv(LANGUAGE = "fr")
 plotProfile(ctd, "T")
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-21-oce-translations.png) 
+[![center]({{ site.url }}/assets/2014-02-21-oce-translations-thumbnail.png)]({{ site.url }}/assets/2014-02-21-oce-translations.png)
 
 
 Instead of using ``Sys.setenv()`` one can define the language in the shell, as (temporarily) in the following invocation.

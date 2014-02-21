@@ -126,7 +126,8 @@ msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 <p>Then build your package and test. The test could be e.g. as follows, for Spanish, French, and English. BUG: pressure is not translated, and I’m not sure why!</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+## Loading required package: mapproj
 ## Loading required package: maps
 </code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
@@ -143,7 +144,7 @@ Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class=
 plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-21-oce-translations.png" alt="center" /></p>
+<p><a href="/assets/2014-02-21-oce-translations.png"><img src="/assets/2014-02-21-oce-translations-thumbnail.png" alt="center" /></a></p>
 
 <p>Instead of using <code>Sys.setenv()</code> one can define the language in the shell, as (temporarily) in the following invocation.</p>
 <div class='highlight'><pre><code class='bash'><span class='nv'>LANG</span><span class='o'>=</span>es_ES.UTF-8 R --no-save &lt; spanish.R

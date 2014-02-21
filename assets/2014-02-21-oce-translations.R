@@ -1,5 +1,4 @@
-
-## ----oce-translations, fig.path='2014-02-21-', fig.height=4, dpi=100-----
+png("2014-02-21-oce-translations-figure.png", width=7, height=3.5, unit="in", res=150, pointsize=14)
 library(oce)
 data(ctd)
 par(mfrow=c(1,3))
@@ -8,5 +7,5 @@ Sys.setenv(LANGUAGE="es")
 plotProfile(ctd, "T")
 Sys.setenv(LANGUAGE="fr")
 plotProfile(ctd, "T")
-
+dev.off()
 
