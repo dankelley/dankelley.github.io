@@ -81,4 +81,8 @@ Instead of using ``Sys.setenv()`` one can define the language in the shell, as (
 LANG=es_ES.UTF-8 R --no-save < spanish.R
 {% endhighlight %}
 
+## How to help with Oce translations
+
+If you would like Oce graphs to work in your language, please contact me via this blog.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful).  The words should be the ones that are wrong on graphs you use, and should include translations of some common additional words that will probably be needed by others who speak your language, e.g. ``Depth``, ``Pressure``, ``Temperature``, ``Potential Temperature``, ``Conservative Temperature``, ``Practical Salinity``, ``Absolute Salinity`` and so forth.
+
 
