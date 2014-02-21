@@ -10,9 +10,9 @@ summary: The Oce scheme for adding translated axis labels is described.
 description: The Oce scheme for adding translated axis labels is described.
 ---
 
-A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help; this posting describes what I did, in hopes that it will smooth the path to doing this in another language
+A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help. This posting describes what I did, in hopes that it will smooth the path to doing this in another language.  I am not entirely clear that the steps I document here are the ones I took, or that anyone else should take, since I got somewhat mixed up in the process (and was grateful to get help from BR on R-help).  I may revise this posting later, if I add a new language and get clearer on the steps.  Readers are advised to exercise care if copying my procedure, and to consult the many other websites dealing with text translation (and how it is done in R).
 
-## Update work cycle
+## Initial work cycle
 
 ### Step 1
 
@@ -44,11 +44,11 @@ msginit --locale=R-fr --input R-oce.pot
 
 ### Step 5
 
-Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especally ``resizableLabel()`` in ``R/misc.R``.
+Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especally ``resizableLabel()`` in ``R/misc.R``.
 
 ## Update work cycle
 
-Here I'm a bit foggy.  I think the work cycle (say, for French) is:
+Here I am a bit foggy.  I think the work cycle (say, for French) is:
 
 Edit your source code ... repeat step 3 ... run the following in the shell.
 
@@ -81,7 +81,4 @@ Instead of using ``Sys.setenv()`` one can define the language in the shell, as (
 LANG=es_ES.UTF-8 R --no-save < spanish.R
 {% endhighlight %}
 
-## Bugs
-
-As noted, I am a bit hazy on some steps because I got confused and redid things a fair bit.  Most likely this page will need revision.
 

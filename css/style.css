@@ -72,7 +72,7 @@ pre {
     margin-left: 1em;
     */
     padding: 2px;
-    margin: 0 0 2px;
+    margin: 0 0 2px 2px;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     background-color: #F5F5F5;
     font-weight: 400;
@@ -129,10 +129,12 @@ h2 {
 
 h3 {
     font-size:100%;
+    font-weight:normal;
+    font-style: italic;
     line-height:100%;
-    margin-left: 0.2em;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0em;
 }
 
 
