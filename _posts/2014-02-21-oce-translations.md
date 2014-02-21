@@ -8,7 +8,6 @@ month: 2
 day: 12
 summary: The Oce scheme for adding translated axis labels is described.
 description: The Oce scheme for adding translated axis labels is described.
-status: draft
 ---
 
 A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help; this posting describes what I did, in hopes that it will smooth the path to doing this in another language
@@ -30,7 +29,7 @@ This will insert a file named ``R-oce.pot`` in the ``po`` directory.  (Actually,
 
 Step 4. To start work on, say, a French translation table, do
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 cd oce/po
 msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
@@ -45,7 +44,7 @@ Here I'm a bit foggy.  I think the work cycle (say, for French) is:
 
 Edit your source code ... repeat step 3 ... run the following in the shell.
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 msgmerge --update R-fr.po R-oce.pot
 {% endhighlight %}
 
@@ -70,7 +69,7 @@ This produces the graph shown below (click to enlarge).
 
 Instead of using ``Sys.setenv()`` one can define the language in the shell, as (temporarily) in the following invocation.
 
-{% highlight bash %}
+{% highlight bash linenos=table %}
 LANG=es_ES.UTF-8 R --no-save < spanish.R
 {% endhighlight %}
 
