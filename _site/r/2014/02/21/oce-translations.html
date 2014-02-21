@@ -94,26 +94,28 @@
 
 <h2 id="update_work_cycle">Update work cycle</h2>
 
-<p>Step 1. Set up a directory named <code>oce/po/</code>.</p>
+<h3 id="step_1">Step 1</h3>
 
-<p>Step 2. Add some text like <code>gettext(&quot;Pressure&quot;)</code> in the <code>resizableLabel()</code> function in <code>oce/R/misc.R</code>. This, and other text strings, will be scanned by the next step.</p>
+<p>Create a directory named <code>oce/po/</code>.</p>
 
-<p>Step 3. Go to the <code>oce</code> directory, launch R, and do as follows</p>
+<h3 id="step_2">Step 2</h3>
+
+<p>Add some text like <code>gettext(&quot;Pressure&quot;)</code> in the <code>resizableLabel()</code> function in <code>oce/R/misc.R</code>. This, and other text strings, will be scanned by the next step.</p>
+
+<h3 id="step_3">Step 3</h3>
+
+<p>Enter the <code>oce</code> directory, launch R, and type as follows, to will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I’m not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>tools<span class='p'>)</span>
 update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p>This will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I’m not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
-
-<p>Step 4. To start work on, say, a French translation table, do</p>
+<p>Step 4. To start work on, say, a French translation table, type the following in the shell.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1
 2</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='nb'>cd </span>oce/po
 msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 </pre></div>
 </td></tr></table>
-<p>in the shell.</p>
-
 <p>Step 5. Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especally <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
 
 <h2 id="update_work_cycle_2">Update work cycle</h2>

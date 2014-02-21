@@ -14,20 +14,27 @@ A new user wondered how to get Spanish labels on axes, so I did some reading and
 
 ## Update work cycle
 
-Step 1. Set up a directory named ``oce/po/``.
+### Step 1
 
-Step 2. Add some text like ``gettext("Pressure")`` in the ``resizableLabel()`` function in ``oce/R/misc.R``.  This, and other text strings, will be scanned by the next step.
+Create a directory named ``oce/po/``.
 
-Step 3. Go to the ``oce`` directory, launch R, and do as follows
+### Step 2
+
+Add some text like ``gettext("Pressure")`` in the ``resizableLabel()`` function in ``oce/R/misc.R``.  This, and other text strings, will be scanned by the next step.
+
+### Step 3
+
+Enter the ``oce`` directory, launch R, and type as follows, to will insert a file named ``R-oce.pot`` in the ``po`` directory.  (Actually, I am not sure if a step has to be done before this one... possibly one has to do ``msginit`` in the ``po`` directory.)
+
 
 {% highlight R linenos=table %}
 library(tools)
 update_pkg_po(".")
 {% endhighlight %}
 
-This will insert a file named ``R-oce.pot`` in the ``po`` directory.  (Actually, I'm not sure if a step has to be done before this one... possibly one has to do ``msginit`` in the ``po`` directory.)
+### Step 4
 
-Step 4. To start work on, say, a French translation table, type the following in the shell.
+To start work on, say, a French translation table, type the following in the shell.
 
 {% highlight bash linenos=table %}
 cd oce/po
@@ -35,7 +42,9 @@ msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
 
 
-Step 5. Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especally ``resizableLabel()`` in ``R/misc.R``.
+### Step 5
+
+Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especally ``resizableLabel()`` in ``R/misc.R``.
 
 ## Update work cycle
 
