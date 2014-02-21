@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Oce translations</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+
+            
+            <li><a href="/textbook.html">Textbook</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/02/19/filtfilt.html" title="Improved filtfilt() for R">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Oce translations</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Feb 21, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The Oce scheme for adding translated axis labels is described.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+<b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
+
+
+<p>A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help; this posting describes what I did, in hopes that it will smooth the path to doing this in another language</p>
+
+<h2 id="update_work_cycle">Update work cycle</h2>
+
+<p>Step 1. Set up a directory named <code>oce/po/</code>.</p>
+
+<p>Step 2. Add some text like <code>gettext(&quot;Pressure&quot;)</code> in the <code>resizableLabel()</code> function in <code>oce/R/misc.R</code>. This, and other text strings, will be scanned by the next step.</p>
+
+<p>Step 3. Go to the <code>oce</code> directory, launch R, and do as follows</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>tools<span class='p'>)</span>
+update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>This will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I’m not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
+
+<p>Step 4. To start work on, say, a French translation table, do</p>
+<div class='highlight'><pre><code class='bash'><span class='nb'>cd </span>oce/po
+msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
+</code></pre></div>
+<p>in the shell.</p>
+
+<p>Step 5. Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especally <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
+
+<h2 id="update_work_cycle_2">Update work cycle</h2>
+
+<p>Here I’m a bit foggy. I think the work cycle (say, for French) is:</p>
+
+<p>Edit your source code … repeat step 3 … run the following in the shell.</p>
+<div class='highlight'><pre><code class='bash'>msgmerge --update R-fr.po R-oce.pot
+</code></pre></div>
+<p>Then build your package and test. The test could be e.g. as follows, for Spanish, French, and English. BUG: pressure is not translated, and I’m not sure why!</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
+</pre></div>
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods Loading required package: mapproj
+## Loading required package: maps
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>ctd<span class='p'>)</span>
+par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>))</span>
+plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
+Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class='s'>&quot;es&quot;</span><span class='p'>)</span>
+plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
+Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class='s'>&quot;fr&quot;</span><span class='p'>)</span>
+plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-02-21-oce-translations.png" alt="center" /></p>
+
+<p>Instead of using <code>Sys.setenv()</code> one can define the language in the shell, as (temporarily) in the following invocation.</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>LANG</span><span class='o'>=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
+</code></pre></div>
+<h2 id="bugs">Bugs</h2>
+
+<p>As noted, I’m hazy on some steps because I got confused and redid things a fair bit. Most likely this page will need revision.</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
