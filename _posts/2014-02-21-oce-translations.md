@@ -27,14 +27,13 @@ update_pkg_po(".")
 
 This will insert a file named ``R-oce.pot`` in the ``po`` directory.  (Actually, I'm not sure if a step has to be done before this one... possibly one has to do ``msginit`` in the ``po`` directory.)
 
-Step 4. To start work on, say, a French translation table, do
+Step 4. To start work on, say, a French translation table, type the following in the shell.
 
 {% highlight bash linenos=table %}
 cd oce/po
 msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
 
-in the shell.
 
 Step 5. Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especally ``resizableLabel()`` in ``R/misc.R``.
 

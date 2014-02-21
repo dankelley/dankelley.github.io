@@ -89,8 +89,6 @@
 </div> <!-- page-header -->
 
 
-<b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
-
 
 <p>A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help; this posting describes what I did, in hopes that it will smooth the path to doing this in another language</p>
 
@@ -109,9 +107,11 @@ update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span c
 <p>This will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I’m not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
 
 <p>Step 4. To start work on, say, a French translation table, do</p>
-<div class='highlight'><pre><code class='bash'><span class='nb'>cd </span>oce/po
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='nb'>cd </span>oce/po
 msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
-</code></pre></div>
+</pre></div>
+</td></tr></table>
 <p>in the shell.</p>
 
 <p>Step 5. Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especally <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
@@ -121,8 +121,9 @@ msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 <p>Here I’m a bit foggy. I think the work cycle (say, for French) is:</p>
 
 <p>Edit your source code … repeat step 3 … run the following in the shell.</p>
-<div class='highlight'><pre><code class='bash'>msgmerge --update R-fr.po R-oce.pot
-</code></pre></div>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>msgmerge --update R-fr.po R-oce.pot
+</pre></div>
+</td></tr></table>
 <p>Then build your package and test. The test could be e.g. as follows, for Spanish, French, and English.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
@@ -146,8 +147,9 @@ plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&
 <p><a href="/assets/2014-02-21-oce-translations.png"><img src="/assets/2014-02-21-oce-translations-thumbnail.png" alt="center" /></a></p>
 
 <p>Instead of using <code>Sys.setenv()</code> one can define the language in the shell, as (temporarily) in the following invocation.</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>LANG</span><span class='o'>=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
-</code></pre></div>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='nv'>LANG</span><span class='o'>=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
+</pre></div>
+</td></tr></table>
 <h2 id="bugs">Bugs</h2>
 
 <p>As noted, I am a bit hazy on some steps because I got confused and redid things a fair bit. Most likely this page will need revision.</p>
