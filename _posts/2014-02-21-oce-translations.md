@@ -28,8 +28,7 @@ Enter the ``oce`` directory, launch R, and type as follows, to will insert a fil
 
 
 {% highlight R linenos=table %}
-library(tools)
-update_pkg_po(".")
+tools::update_pkg_po(".")
 {% endhighlight %}
 
 ### Step 4
@@ -53,9 +52,7 @@ Here I am a bit foggy.  I think the work cycle (say, for French) is:
 
 Edit your source code ... repeat step 3 ... build your package and test.
 
-(NOTE: once, I thought step 3 had to be accompanied with ``msgmerge --update R-fr.po R-oce.pot`` in the shell, but now I do not think this is needed.)
-
-As an example, the following tests some CTD plots in English, Spanish, and French.
+As an example, the following
 
 {% highlight r linenos=table %}
 library(oce)
@@ -68,16 +65,17 @@ Sys.setenv(LANGUAGE = "fr")
 plotProfile(ctd, "T")
 {% endhighlight %}
 
-This produces the graph shown below (click to enlarge).
+produces the graph shown below (click to enlarge).
 
 [![center]({{ site.url }}/assets/2014-02-21-oce-translations-thumbnail.png)]({{ site.url }}/assets/2014-02-21-oce-translations.png)
 
-
-Instead of using ``Sys.setenv()`` one can define the language in the shell, as (temporarily) in the following invocation.
+In most cases the system language will be set with system tools.  Still, ``Sys.setenv()`` can be handy for switching the language used in a plot (e.g. a French user may have the computer set up to work in French, but may prefer to graph data using English, for publication).  Commonly, ``Sys.setenv()`` will be done in the R startup file, or defined in the OS shell, e.g. below for a temporary use
 
 {% highlight bash linenos=table %}
 LANG=es_ES.UTF-8 R --no-save < spanish.R
 {% endhighlight %}
+
+
 
 ## How to help with Oce translations
 
