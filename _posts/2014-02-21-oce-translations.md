@@ -69,6 +69,8 @@ produces the graph shown below (click to enlarge).
 
 [![center]({{ site.url }}/assets/2014-02-21-oce-translations-thumbnail.png)]({{ site.url }}/assets/2014-02-21-oce-translations.png)
 
+## Using translations
+
 In most cases the system language will be set with system tools.  Still, ``Sys.setenv()`` can be handy for switching the language used in a plot (e.g. a French user may have the computer set up to work in French, but may prefer to graph data using English, for publication).  Commonly, ``Sys.setenv()`` will be done in the R startup file, or defined in the OS shell, e.g. below for a temporary use
 
 {% highlight bash linenos=table %}
@@ -77,7 +79,7 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 
 
-## How to help with Oce translations
+## Helping me with the translation effort
 
 At the moment, Oce works in English, with some support for Spanish and French, and just a few test words for Mandarin.  (For Mandarine, be sure to specify your PDF plot device as e.g. ``pdf(..., family="BG1")`` so that proper fonts will be loaded.)
 

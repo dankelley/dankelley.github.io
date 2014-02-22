@@ -105,9 +105,7 @@
 <h3 id="step_3">Step 3</h3>
 
 <p>Enter the <code>oce</code> directory, launch R, and type as follows, to will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I am not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>tools<span class='p'>)</span>
-update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>tools<span class='o'>::</span>update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
 <h3 id="step_4">Step 4</h3>
@@ -118,7 +116,7 @@ update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span c
 msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 </pre></div>
 </td></tr></table>
-<p>(This initialization must be done with every new language added, with <code>fr</code> replaced by the two-letter locale code for the language. It is also necessary to change the <code>charset</code> to <code>UTF-8</code>, for most languages.</p>
+<p>This initialization must be done with every new language added, with <code>fr</code> replaced by the two-letter locale code for the language. It is also necessary to change the <code>charset</code> to <code>UTF-8</code>, for most languages.</p>
 
 <h3 id="step_5">Step 5</h3>
 
@@ -130,9 +128,7 @@ msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 
 <p>Edit your source code … repeat step 3 … build your package and test.</p>
 
-<p>(NOTE: once, I thought step 3 had to be accompanied with <code>msgmerge --update R-fr.po R-oce.pot</code> in the shell, but now I do not think this is needed.)</p>
-
-<p>As an example, the following tests some CTD plots in English, Spanish, and French.</p>
+<p>As an example, the following</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3
@@ -150,15 +146,17 @@ Sys.setenv<span class='p'>(</span>LANGUAGE <span class='o'>=</span> <span class=
 plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&quot;T&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p>This produces the graph shown below (click to enlarge).</p>
+<p>produces the graph shown below (click to enlarge).</p>
 
 <p><a href="/assets/2014-02-21-oce-translations.png"><img src="/assets/2014-02-21-oce-translations-thumbnail.png" alt="center" /></a></p>
 
-<p>Instead of using <code>Sys.setenv()</code> one can define the language in the shell, as (temporarily) in the following invocation.</p>
+<h2 id="using_translations">Using translations</h2>
+
+<p>In most cases the system language will be set with system tools. Still, <code>Sys.setenv()</code> can be handy for switching the language used in a plot (e.g. a French user may have the computer set up to work in French, but may prefer to graph data using English, for publication). Commonly, <code>Sys.setenv()</code> will be done in the R startup file, or defined in the OS shell, e.g. below for a temporary use</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='nv'>LANG</span><span class='o'>=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
 </pre></div>
 </td></tr></table>
-<h2 id="how_to_help_with_oce_translations">How to help with Oce translations</h2>
+<h2 id="helping_me_with_the_translation_effort">Helping me with the translation effort</h2>
 
 <p>At the moment, Oce works in English, with some support for Spanish and French, and just a few test words for Mandarin. (For Mandarine, be sure to specify your PDF plot device as e.g. <code>pdf(..., family=&quot;BG1&quot;)</code> so that proper fonts will be loaded.)</p>
 
