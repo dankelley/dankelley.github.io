@@ -50,14 +50,11 @@ Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to i
 
 Here I am a bit foggy.  I think the work cycle (say, for French) is:
 
-Edit your source code ... repeat step 3 ... run the following in the shell.
+Edit your source code ... repeat step 3 ... build your package and test.
 
-{% highlight bash linenos=table %}
-msgmerge --update R-fr.po R-oce.pot
-{% endhighlight %}
+(NOTE: once, I thought step 3 had to be accompanied with ``msgmerge --update R-fr.po R-oce.pot`` in the shell, but now I do not think this is needed.)
 
-Then build your package and test.  The test could be e.g. as follows, for Spanish, French, and English.
-
+As an example, the following tests some CTD plots in English, Spanish, and French.
 
 {% highlight r linenos=table %}
 library(oce)

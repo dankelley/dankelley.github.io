@@ -120,17 +120,17 @@ msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 </td></tr></table>
 <h3 id="step_5">Step 5</h3>
 
-<p>Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especally <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
+<p>Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especially <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
 
 <h2 id="update_work_cycle">Update work cycle</h2>
 
 <p>Here I am a bit foggy. I think the work cycle (say, for French) is:</p>
 
-<p>Edit your source code … repeat step 3 … run the following in the shell.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>msgmerge --update R-fr.po R-oce.pot
-</pre></div>
-</td></tr></table>
-<p>Then build your package and test. The test could be e.g. as follows, for Spanish, French, and English.</p>
+<p>Edit your source code … repeat step 3 … build your package and test.</p>
+
+<p>(NOTE: once, I thought step 3 had to be accompanied with <code>msgmerge --update R-fr.po R-oce.pot</code> in the shell, but now I do not think this is needed.)</p>
+
+<p>As an example, the following tests some CTD plots in English, Spanish, and French.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3
@@ -160,7 +160,7 @@ plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&
 
 <p>At the moment, Oce works in English, with some support for Spanish and French.</p>
 
-<p>If you would like Oce graphs to work in your language, please contact me via this blog. I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword is not useful). Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users greatly if you could translate everything on the list given below, line by line. (Also, translate <code>E</code>, <code>W</code>, <code>N</code>, and <code>S</code>, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.)</p>
+<p>If you would like Oce graphs to work in your language, please contact me via this blog. I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword and OpenOffice formats cannot are not useful). Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users greatly if you could translate everything on the list given below, line by line. (Also, translate <code>E</code>, <code>W</code>, <code>N</code>, and <code>S</code>, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.)</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'> 1
  2
  3
@@ -174,15 +174,17 @@ plotProfile<span class='p'>(</span>ctd<span class='p'>,</span> <span class='s'>&
 11
 12
 13
-14</code></pre></div></td><td class='code'><div class='highlight'><pre>Absolute Salinity
+14
+15</code></pre></div></td><td class='code'><div class='highlight'><pre>Absolute Salinity
 Conservative Temperature
 Depth
 Distance
 Elevation
 Longitude
 Latitude
-Practical Salinity
 Potential Temperature
+Potential Density Anomaly
+Practical Salinity
 Pressure
 Sea Level
 Speed
