@@ -41,7 +41,7 @@ cd oce/po
 msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
 
-(This initialization must be done with every new language added, with ``fr`` replaced by the two-letter locale code for the language.  It is also necessary to change the ``charset`` to ``UTF-8``, for most languages.
+This initialization must be done with every new language added, with ``fr`` replaced by the two-letter locale code for the language.  It is also necessary to change the ``charset`` to ``UTF-8``, for most languages.
 
 ### Step 5
 
