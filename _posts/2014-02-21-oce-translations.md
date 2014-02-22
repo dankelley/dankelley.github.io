@@ -105,7 +105,7 @@ Velocity
 
 For some languages (especially Asian ones) it is best to send me a UTF-8 file with the translated phrases that I can copy and paste into the source files.  For example, below is a screenshot showing a rough guess at Mandarin, which I found by using an onine translation engine.
 
-![center]({{ site.url }}/assets/2012-02-21-translation-editor)
+![center]({{ site.url }}/assets/2012-02-21-translation-editor.png)
 
 ## Status of translation effort
 
