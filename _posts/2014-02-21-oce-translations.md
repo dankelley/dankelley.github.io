@@ -80,7 +80,7 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 ## How to help with Oce translations
 
-At the moment, Oce works in English, with some support for Spanish and French.
+At the moment, Oce works in English, with some support for Spanish and French, and just a few test words for Mandarin.
 
 If you would like Oce graphs to work in another language with which you have high familiarity, please contact me.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword and OpenOffice formats cannot are not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users if you could translate the phrases listed below.  Also, translate ``E``, ``W``, ``N``, and ``S``, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.
 
