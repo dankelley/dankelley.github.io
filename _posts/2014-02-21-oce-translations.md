@@ -41,6 +41,7 @@ cd oce/po
 msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
 
+(This initialization must be done with every new language added, with ``fr`` replaced by the two-letter locale code for the language.  It is also necessary to change the ``charset`` to ``UTF-8``, for most languages.
 
 ### Step 5
 
@@ -102,3 +103,10 @@ Temperature
 Velocity
 {% endhighlight %}
 
+For some languages (especially Asian ones) it is best to send me a UTF-8 file with the translated phrases that I can copy and paste into the source files.  For example, below is a screenshot showing a rough guess at Mandarin, which I found by using an onine translation engine.
+
+![center]({{ site.url }}/assets/2012-02-21-translation-editor)
+
+## Status of translation effort
+
+I am doing translations a bit at a time, starting with languages that are popular with Oce users.  Those who would like to follow the progress should consult my [Dropbox page](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq) in which I test languages as I add them.  The first step is usually to get CTD plots working, because these are so commonly done, and after that I move on to ADP and ADV plots.

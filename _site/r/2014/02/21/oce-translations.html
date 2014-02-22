@@ -118,6 +118,8 @@ update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span c
 msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 </pre></div>
 </td></tr></table>
+<p>(This initialization must be done with every new language added, with <code>fr</code> replaced by the two-letter locale code for the language. It is also necessary to change the <code>charset</code> to <code>UTF-8</code>, for most languages.</p>
+
 <h3 id="step_5">Step 5</h3>
 
 <p>Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especially <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
@@ -192,6 +194,13 @@ Temperature
 Velocity
 </pre></div>
 </td></tr></table>
+<p>For some languages (especially Asian ones) it is best to send me a UTF-8 file with the translated phrases that I can copy and paste into the source files. For example, below is a screenshot showing a rough guess at Mandarin, which I found by using an onine translation engine.</p>
+
+<p><img src="/assets/2012-02-21-translation-editor" alt="center" /></p>
+
+<h2 id="status_of_translation_effort">Status of translation effort</h2>
+
+<p>I am doing translations a bit at a time, starting with languages that are popular with Oce users. Those who would like to follow the progress should consult my <a href="https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq">Dropbox page</a> in which I test languages as I add them. The first step is usually to get CTD plots working, because these are so commonly done, and after that I move on to ADP and ADV plots.</p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
