@@ -52,7 +52,7 @@ Here I am a bit foggy.  I think the work cycle (say, for French) is:
 
 Edit your source code ... repeat step 3 ... build your package and test.
 
-As an example, the following
+## An example
 
 {% highlight r linenos=table %}
 library(oce)
