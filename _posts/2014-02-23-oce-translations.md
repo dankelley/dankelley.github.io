@@ -147,3 +147,11 @@ For some languages (especially Asian ones) it is best to send me a UTF-8 file wi
 
 ![center]({{ site.url }}/assets/2012-02-21-translation-editor.png)
 
+## Resources
+
+* [R documentation on translation methodology](http://developer.r-project.org/Translations30.html)
+
+* [GNU documentation on gettext](http://www.gnu.org/software/gettext/)
+
+* [Dropbox page about Oce translation progress](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq)
+
