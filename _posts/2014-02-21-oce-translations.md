@@ -5,12 +5,12 @@ tags: [R, oce]
 category: R
 year: 2014
 month: 2
-day: 12
-summary: The Oce scheme for adding translated axis labels is described.
-description: The Oce scheme for adding translated axis labels is described.
+day: 23
+summary: The method for adding additional languages to Oce graphics is described.
+description: The method for adding additional languages to Oce graphics is described.
 ---
 
-A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help. This posting describes what I did, in hopes that it will smooth the path to doing this in another language.  Some of the steps may be wrong since I am still learning.  Readers can check the progress by seeing plots at [a sample Dropbox page](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq).
+A new user wondered how to get Spanish labels on axes, and so I started on the process of localizing the code, using the [GNU gettext](http://www.gnu.org/software/gettext/) scheme.  Gettext being unfamiliar to me, I stumbled a bit at first, and decided to document the successful steps here.  Readers may wish to consult [a Dropbox page](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq) on my progress towards the goal of translating the main Oce plots into common languages.  For now, I am focussing on Spanish, French, and Mandarin.
 
 ## Initial work cycle
 
@@ -20,16 +20,32 @@ Create a directory named ``oce/po/``.
 
 ### Step 2
 
-Add some text like ``gettext("Pressure")`` in the ``resizableLabel()`` function in ``oce/R/misc.R``.  This, and other text strings, will be scanned by the next step.
+The basic procedure it to change a code fragment like
+{% highlight R linenos=table %}
+ylab="Depth"
+{% endhighlight %}
+which is clearly not appropriate in all langauges, into
+{% highlight R linenos=table %}
+gettext("Depth", domain="R-oce")
+{% endhighlight %}
+which yields an entry in a translation table that can then be tailored for any desired language.  (The ``gettext()`` call should not really need to set the ``domain``, but I found it necessary for some items, and decided to include it everywhere.)
 
 ### Step 3
 
-Enter the ``oce`` directory, launch R, and type as follows, to will insert a file named ``R-oce.pot`` in the ``po`` directory.  (Actually, I am not sure if a step has to be done before this one... possibly one has to do ``msginit`` in the ``po`` directory.)
+Enter the ``oce`` directory, launch R, and type as follows, to insert a file named ``R-oce.pot`` in the ``po`` directory.
 
 
 {% highlight R linenos=table %}
 tools::update_pkg_po(".")
 {% endhighlight %}
+
+This create entries like the following in the file ``po/R-oce.pot``:
+{% highlight bash linenos=table %}
+msgid "Depth"
+msgstr ""
+{% endhighlight %}
+The first of these is a key, and the second will be a replacement string (discussed presently).
+
 
 ### Step 4
 
@@ -40,17 +56,41 @@ cd oce/po
 msginit --locale=R-fr --input R-oce.pot
 {% endhighlight %}
 
-This initialization must be done with every new language added, with ``fr`` replaced by the two-letter locale code for the language.  It is also necessary to change the ``charset`` to ``UTF-8``, for most languages.
+This creates an English-French translation table in a file named ``po/R-fr.po``.  This must be done just once for each language to be translated.  The key is the ``fr`` part of the name, which is the [ISO-639](http://en.wikipedia.org/wiki/ISO_639) code for French.  
+
+Once the file is created, look at it with a text editor and, if necessary, change the ``charset`` to ``UTF-8``, which can handle most languages.
+
+Importantly, running ``msginit`` is only necessary at the first stage of translation.  As new entries are added, one must only follow the work cycle given below.
 
 ### Step 5
 
-Edit ``po/R-fr.po`` as desired, inserting translations.  The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read ``Content-Type: text/plain; charset=UTF-8``.  In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added ``gettext()`` calls to especially ``resizableLabel()`` in ``R/misc.R``.
+Edit ``po/R-fr.po`` as desired, inserting translations.  You will need a text editor that permits characters in a variety of languages; vim and emacs are ideal for this.
+
+Simply change the ``msgstr`` item to the translated value, e.g. for French the ``R-fr.po`` file should contain
+{% highlight bash linenos=table %}
+msgid "Depth"
+msgstr "Profondeur"
+{% endhighlight %}
+for this entry.
+
 
 ## Update work cycle
 
-Here I am a bit foggy.  I think the work cycle (say, for French) is:
+The work cycle is as follows.
 
-Edit your source code ... repeat step 3 ... build your package and test.
+1. Edit the R source code, replacing strings like ``FOO`` with ``gettext("FOO", "R-oce")``.
+
+2. Launch R in the ``oce`` directory and invoke ``tools::update_pkg_po(".")`` to add an entry to the ``po/R-oce.pot`` file, with corresponding entries in ``po/R-fr.po`` and any other existing translation files.
+
+3. Edit ``po/R-fr.po`` and any other translation files, changing the ``msgstr`` entry that corresponds to ``FOO``.
+
+4. Run ``tools::update_pkg_po(".")`` again, to update all relevant files in the ``inst`` directory.
+
+5. Build and test oce.
+
+6. Repeat from step 1 as required for other words.
+
+Since step 5 is slow, it helps to be watching your country win a gold medal in the Olympics hockey game, while you are doing such work.
 
 ## An example
 
@@ -107,6 +147,3 @@ For some languages (especially Asian ones) it is best to send me a UTF-8 file wi
 
 ![center]({{ site.url }}/assets/2012-02-21-translation-editor.png)
 
-## Status of translation effort
-
-I am doing translations a bit at a time, starting with languages that are popular with Oce users.  Those who would like to follow the progress should consult my [Dropbox page](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq) in which I test languages as I add them.  The first step is usually to get CTD plots working, because these are so commonly done, and after that I move on to ADP and ADV plots.

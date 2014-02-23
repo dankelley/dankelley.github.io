@@ -80,7 +80,7 @@
         
     </span> <!-- post_date -->
     <div class=post_summary>
-        The Oce scheme for adding translated axis labels is described.
+        The method for adding additional languages to Oce graphics is described.
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 
@@ -90,7 +90,7 @@
 
 
 
-<p>A new user wondered how to get Spanish labels on axes, so I did some reading and got some help from R-help. This posting describes what I did, in hopes that it will smooth the path to doing this in another language. Some of the steps may be wrong since I am still learning. Readers can check the progress by seeing plots at <a href="https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq">a sample Dropbox page</a>.</p>
+<p>A new user wondered how to get Spanish labels on axes, and so I started on the process of localizing the code, using the <a href="http://www.gnu.org/software/gettext/">GNU gettext</a> scheme. Gettext being unfamiliar to me, I stumbled a bit at first, and decided to document the successful steps here. Readers may wish to consult <a href="https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq">a Dropbox page</a> on my progress towards the goal of translating the main Oce plots into common languages. For now, I am focussing on Spanish, French, and Mandarin.</p>
 
 <h2 id="initial_work_cycle">Initial work cycle</h2>
 
@@ -100,14 +100,30 @@
 
 <h3 id="step_2">Step 2</h3>
 
-<p>Add some text like <code>gettext(&quot;Pressure&quot;)</code> in the <code>resizableLabel()</code> function in <code>oce/R/misc.R</code>. This, and other text strings, will be scanned by the next step.</p>
+<p>The basic procedure it to change a code fragment like</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>ylab<span class='o'>=</span><span class='s'>&quot;Depth&quot;</span>
+</pre></div>
+</td></tr></table>
+<p>which is clearly not appropriate in all langauges, into</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>gettext<span class='p'>(</span><span class='s'>&quot;Depth&quot;</span><span class='p'>,</span> domain<span class='o'>=</span><span class='s'>&quot;R-oce&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>which yields an entry in a translation table that can then be tailored for any desired language. (The <code>gettext()</code> call should not really need to set the <code>domain</code>, but I found it necessary for some items, and decided to include it everywhere.)</p>
 
 <h3 id="step_3">Step 3</h3>
 
-<p>Enter the <code>oce</code> directory, launch R, and type as follows, to will insert a file named <code>R-oce.pot</code> in the <code>po</code> directory. (Actually, I am not sure if a step has to be done before this one… possibly one has to do <code>msginit</code> in the <code>po</code> directory.)</p>
+<p>Enter the <code>oce</code> directory, launch R, and type as follows, to insert a file named <code>R-oce.pot</code> in the <code>po</code> directory.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>tools<span class='o'>::</span>update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
+<p>This create entries like the following in the file <code>po/R-oce.pot</code>:</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>msgid <span class='s2'>&quot;Depth&quot;</span>
+msgstr <span class='s2'>&quot;&quot;</span>
+</pre></div>
+</td></tr></table>
+<p>The first of these is a key, and the second will be a replacement string (discussed presently).</p>
+
 <h3 id="step_4">Step 4</h3>
 
 <p>To start work on, say, a French translation table, type the following in the shell.</p>
@@ -116,19 +132,57 @@
 msginit --locale<span class='o'>=</span>R-fr --input R-oce.pot
 </pre></div>
 </td></tr></table>
-<p>This initialization must be done with every new language added, with <code>fr</code> replaced by the two-letter locale code for the language. It is also necessary to change the <code>charset</code> to <code>UTF-8</code>, for most languages.</p>
+<p>This creates an English-French translation table in a file named <code>po/R-fr.po</code>. This must be done just once for each language to be translated. The key is the <code>fr</code> part of the name, which is the <a href="http://en.wikipedia.org/wiki/ISO_639">ISO-639</a> code for French.</p>
+
+<p>Once the file is created, look at it with a text editor and, if necessary, change the <code>charset</code> to <code>UTF-8</code>, which can handle most languages.</p>
+
+<p>Importantly, running <code>msginit</code> is only necessary at the first stage of translation. As new entries are added, one must only follow the work cycle given below.</p>
 
 <h3 id="step_5">Step 5</h3>
 
-<p>Edit <code>po/R-fr.po</code> as desired, inserting translations. The easiest way is to insert accents is with the text editor, and for this to work it will be necessary to edit one of the lines near the top of this file to read <code>Content-Type: text/plain; charset=UTF-8</code>. In doing the translation, I focussed on words used on axes, and worked on translations at the same time as I added <code>gettext()</code> calls to especially <code>resizableLabel()</code> in <code>R/misc.R</code>.</p>
+<p>Edit <code>po/R-fr.po</code> as desired, inserting translations. You will need a text editor that permits characters in a variety of languages; vim and emacs are ideal for this.</p>
+
+<p>Simply change the <code>msgstr</code> item to the translated value, e.g. for French the <code>R-fr.po</code> file should contain</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>msgid <span class='s2'>&quot;Depth&quot;</span>
+msgstr <span class='s2'>&quot;Profondeur&quot;</span>
+</pre></div>
+</td></tr></table>
+<p>for this entry.</p>
 
 <h2 id="update_work_cycle">Update work cycle</h2>
 
-<p>Here I am a bit foggy. I think the work cycle (say, for French) is:</p>
+<p>The work cycle is as follows.</p>
 
-<p>Edit your source code … repeat step 3 … build your package and test.</p>
+<ol>
+<li>
+<p>Edit the R source code, replacing strings like <code>FOO</code> with <code>gettext(&quot;FOO&quot;, &quot;R-oce&quot;)</code>.</p>
+</li>
 
-<p>As an example, the following</p>
+<li>
+<p>Launch R in the <code>oce</code> directory and invoke <code>tools::update_pkg_po(&quot;.&quot;)</code> to add an entry to the <code>po/R-oce.pot</code> file, with corresponding entries in <code>po/R-fr.po</code> and any other existing translation files.</p>
+</li>
+
+<li>
+<p>Edit <code>po/R-fr.po</code> and any other translation files, changing the <code>msgstr</code> entry that corresponds to <code>FOO</code>.</p>
+</li>
+
+<li>
+<p>Run <code>tools::update_pkg_po(&quot;.&quot;)</code> again, to update all relevant files in the <code>inst</code> directory.</p>
+</li>
+
+<li>
+<p>Build and test oce.</p>
+</li>
+
+<li>
+<p>Repeat from step 1 as required for other words.</p>
+</li>
+</ol>
+
+<p>Since step 5 is slow, it helps to be watching your country win a gold medal in the Olympics hockey game, while you are doing such work.</p>
+
+<h2 id="an_example">An example</h2>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3
@@ -195,10 +249,6 @@ Velocity
 <p>For some languages (especially Asian ones) it is best to send me a UTF-8 file with the translated phrases that I can copy and paste into the source files. For example, below is a screenshot showing a rough guess at Mandarin, which I found by using an onine translation engine.</p>
 
 <p><img src="/assets/2012-02-21-translation-editor.png" alt="center" /></p>
-
-<h2 id="status_of_translation_effort">Status of translation effort</h2>
-
-<p>I am doing translations a bit at a time, starting with languages that are popular with Oce users. Those who would like to follow the progress should consult my <a href="https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq">Dropbox page</a> in which I test languages as I add them. The first step is usually to get CTD plots working, because these are so commonly done, and after that I move on to ADP and ADV plots.</p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
