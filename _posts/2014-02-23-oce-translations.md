@@ -39,12 +39,12 @@ Enter the ``oce`` directory, launch R, and type as follows, to insert a file nam
 tools::update_pkg_po(".")
 {% endhighlight %}
 
-This create entries like the following in the file ``po/R-oce.pot``:
+This create a file that has entries for all errors, warnings, and messages, as well as for ``gettext()`` entries.  The file will be named ``po/R-oce.pot``, and will contain entry pairs such as the following.
 {% highlight bash linenos=table %}
 msgid "Depth"
 msgstr ""
 {% endhighlight %}
-The first of these is a key, and the second will be a replacement string (discussed presently).
+The first of these is a key, and the second is a replacement string (discussed presently).  The details of the file format, and much else relating to ``gettext`` are available at the [GNU site](http://www.gnu.org/software/gettext/manual/gettext.html).
 
 
 ### Step 4

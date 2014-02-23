@@ -116,13 +116,13 @@
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>tools<span class='o'>::</span>update_pkg_po<span class='p'>(</span><span class='s'>&quot;.&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p>This create entries like the following in the file <code>po/R-oce.pot</code>:</p>
+<p>This create a file that has entries for all errors, warnings, and messages, as well as for <code>gettext()</code> entries. The file will be named <code>po/R-oce.pot</code>, and will contain entry pairs such as the following.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='bash'>1
 2</code></pre></div></td><td class='code'><div class='highlight'><pre>msgid <span class='s2'>&quot;Depth&quot;</span>
 msgstr <span class='s2'>&quot;&quot;</span>
 </pre></div>
 </td></tr></table>
-<p>The first of these is a key, and the second will be a replacement string (discussed presently).</p>
+<p>The first of these is a key, and the second is a replacement string (discussed presently). The details of the file format, and much else relating to <code>gettext</code> are available at the <a href="http://www.gnu.org/software/gettext/manual/gettext.html">GNU site</a>.</p>
 
 <h3 id="step_4">Step 4</h3>
 
