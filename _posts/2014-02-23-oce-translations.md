@@ -121,7 +121,7 @@ LANG=es_ES.UTF-8 R --no-save < spanish.R
 
 ## Helping me with the translation effort
 
-At the moment, Oce works in English, with some support for Spanish and French, and just a few test words for Mandarin.  (For Mandarine, be sure to specify your PDF plot device as e.g. ``pdf(..., family="BG1")`` so that proper fonts will be loaded.)
+At the moment, Oce works in English, with some support for Spanish and French, and just a few test words for Mandarin.  (For Mandarin, be sure to specify your PDF plot device as e.g. ``pdf(..., family="BG1")`` so that proper fonts will be loaded.)
 
 If you would like Oce graphs to work in another language with which you have high familiarity, please contact me.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword and OpenOffice formats cannot are not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users if you could translate the phrases listed below.  Also, translate ``E``, ``W``, ``N``, and ``S``, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.
 
@@ -149,7 +149,7 @@ For some languages (especially Asian ones) it is best to send me a UTF-8 file wi
 
 ## Table of results
 
-Some tests with default data types are given in the PDF files linked to in the table below.  In each case, te filename combines the data type and the language code (en=English, de=German, fr=French, es=Spanish, zh=Mandarine).
+Some tests with default data types are given in the PDF files linked to in the table below.  In each case, te filename combines the data type and the language code (en=English, de=German, fr=French, es=Spanish, zh=Mandarin).  Again, please note that most of the translated items come from online translation engines, and are quite likely to be wrong ... help me, readers!
 
 
 ### English
