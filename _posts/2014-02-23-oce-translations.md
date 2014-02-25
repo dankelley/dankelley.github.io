@@ -147,6 +147,65 @@ For some languages (especially Asian ones) it is best to send me a UTF-8 file wi
 
 ![center]({{ site.url }}/assets/2012-02-21-translation-editor.png)
 
+## Table of results
+
+Some tests with default data types are given in the PDF files linked to in the table below.  In each case, te filename combines the data type and the language code (en=English, de=German, fr=French, es=Spanish, zh=Mandarine).
+
+
+### English
+
+[adp]({{ site.url }}/assets/adp-en.pdf)
+[adv]({{ site.url }}/assets/adv-en.pdf)
+[cm]({{ site.url }}/assets/cm-en.pdf)
+[ctd]({{ site.url }}/assets/ctd-en.pdf)
+[drifter]({{ site.url }}/assets/drifter-en.pdf)
+[lisst]({{ site.url }}/assets/lisst-en.pdf)
+[lobo]({{ site.url }}/assets/lobo-en.pdf)
+[sealevel]({{ site.url }}/assets/sealevel-en.pdf)
+[section]({{ site.url }}/assets/section-en.pdf)
+[tdr]({{ site.url }}/assets/tdr-en.pdf)
+
+### French
+
+[adp]({{ site.url }}/assets/adp-fr.pdf)
+[adv]({{ site.url }}/assets/adv-fr.pdf)
+[cm]({{ site.url }}/assets/cm-fr.pdf)
+[ctd]({{ site.url }}/assets/ctd-fr.pdf)
+[drifter]({{ site.url }}/assets/drifter-fr.pdf)
+[lisst]({{ site.url }}/assets/lisst-fr.pdf)
+[lobo]({{ site.url }}/assets/lobo-fr.pdf)
+[sealevel]({{ site.url }}/assets/sealevel-fr.pdf)
+[section]({{ site.url }}/assets/section-fr.pdf)
+[tdr]({{ site.url }}/assets/tdr-fr.pdf)
+
+### German
+
+[adp]({{ site.url }}/assets/adp-de.pdf)
+[adv]({{ site.url }}/assets/adv-de.pdf)
+[cm]({{ site.url }}/assets/cm-de.pdf)
+[ctd]({{ site.url }}/assets/ctd-de.pdf)
+[drifter]({{ site.url }}/assets/drifter-de.pdf)
+[lisst]({{ site.url }}/assets/lisst-de.pdf)
+[lobo]({{ site.url }}/assets/lobo-de.pdf)
+[sealevel]({{ site.url }}/assets/sealevel-de.pdf)
+[section]({{ site.url }}/assets/section-de.pdf)
+[tdr]({{ site.url }}/assets/tdr-de.pdf)
+
+### Mandarin
+
+[adp]({{ site.url }}/assets/adp-zh.pdf)
+[adv]({{ site.url }}/assets/adv-zh.pdf)
+[cm]({{ site.url }}/assets/cm-zh.pdf)
+[ctd]({{ site.url }}/assets/ctd-zh.pdf)
+[drifter]({{ site.url }}/assets/drifter-zh.pdf)
+[lisst]({{ site.url }}/assets/lisst-zh.pdf)
+[lobo]({{ site.url }}/assets/lobo-zh.pdf)
+[sealevel]({{ site.url }}/assets/sealevel-zh.pdf)
+[section]({{ site.url }}/assets/section-zh.pdf)
+[tdr]({{ site.url }}/assets/tdr-zh.pdf)
+
+
+
 ## Resources
 
 * [R documentation on translation methodology](http://developer.r-project.org/Translations30.html)
