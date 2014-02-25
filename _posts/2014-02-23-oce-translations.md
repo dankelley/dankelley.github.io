@@ -149,7 +149,7 @@ The easiest way to make things easy for me is to send a UTF-8 file with the tran
 
 ## Table of results
 
-Some tests with default data types are given in the PDF files linked to in the table below.  In each case, te filename combines the data type and the language code (en=English, de=German, fr=French, es=Spanish, zh=Mandarin).  Again, please note that most of the translated items come from online translation engines, and are quite likely to be wrong ... help me, readers!
+Some tests with default data types are given in the files linked to in the table below.  Again, please note that most of the translated items come from online translation engines, and are quite likely to be wrong ... help me, readers!
 
 
 ### English
