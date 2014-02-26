@@ -8,6 +8,13 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     2014-02-19-filtfilt_octave-thumbnail.png \
     2014-02-21-oce-translations-thumbnail.png
 
+translation: force
+	for tran in adp-de.pdf adp-en.pdf adp-es.pdf adp-fr.pdf adp-zh.pdf adv-de.pdf adv-en.pdf adv-es.pdf adv-fr.pdf adv-zh.pdf cm-de.pdf cm-en.pdf cm-es.pdf cm-fr.pdf cm-zh.pdf ctd-de.pdf ctd-en.pdf ctd-es.pdf ctd-fr.pdf ctd-zh.pdf drifter-de.pdf drifter-en.pdf drifter-es.pdf drifter-fr.pdf drifter-zh.pdf lisst-de.pdf lisst-en.pdf lisst-es.pdf lisst-fr.pdf lisst-zh.pdf lobo-de.pdf lobo-en.pdf lobo-es.pdf lobo-fr.pdf lobo-zh.pdf sealevel-de.pdf sealevel-en.pdf sealevel-es.pdf sealevel-fr.pdf sealevel-zh.pdf section-de.pdf section-en.pdf section-es.pdf section-fr.pdf section-zh.pdf tdr-de.pdf tdr-en.pdf tdr-es.pdf tdr-fr.pdf tdr-zh.pdf ; do \
+	    echo $$tran ; \
+	    /usr/local/bin/convert -density 150 $$tran `basename $$tran .pdf`.png ; \
+	    /usr/local/bin/convert -thumbnail 100x100 $$tran `basename $$tran .pdf`-thumbnail.png ; \
+	    done
+
 pisa-scores-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 pisa-scores.png pisa-scores-thumbnail.png;
 webtide1-thumbnail.png: force

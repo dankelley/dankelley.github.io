@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Oce translations
-tags: [R, oce]
+tags: [R, oce, translation]
 category: R
 year: 2014
 month: 2
-day: 23
+day: 26
 summary: The method for adding additional languages to Oce graphics is described.
 description: The method for adding additional languages to Oce graphics is described.
 ---
@@ -149,60 +149,60 @@ The easiest way to make things easy for me is to send a UTF-8 file with the tran
 
 ## Table of results
 
-Some tests with default data types are given in the files linked to in the table below.  Again, please note that most of the translated items come from online translation engines, and are quite likely to be wrong ... help me, readers!
+Some tests with default data types are given in images below (click to enlarge).  These are presented in the hope that experts in the relevant languages will suggest improved translations.
 
 
 ### English
 
-[adp]({{ site.url }}/assets/adp-en.pdf)
-[adv]({{ site.url }}/assets/adv-en.pdf)
-[cm]({{ site.url }}/assets/cm-en.pdf)
-[ctd]({{ site.url }}/assets/ctd-en.pdf)
-[drifter]({{ site.url }}/assets/drifter-en.pdf)
-[lisst]({{ site.url }}/assets/lisst-en.pdf)
-[lobo]({{ site.url }}/assets/lobo-en.pdf)
-[sealevel]({{ site.url }}/assets/sealevel-en.pdf)
-[section]({{ site.url }}/assets/section-en.pdf)
-[tdr]({{ site.url }}/assets/tdr-en.pdf)
+[![tg]({{ site.url }}/assets/adp-en-thumbnail.png)]({{ site.url }}/assets/adp-en.png)
+[![tg]({{ site.url }}/assets/adv-en-thumbnail.png)]({{ site.url }}/assets/adv-en.png)
+[![tg]({{ site.url }}/assets/cm-en-thumbnail.png)]({{ site.url }}/assets/cm-en.png)
+[![tg]({{ site.url }}/assets/ctd-en-thumbnail.png)]({{ site.url }}/assets/ctd-en.png)
+[![tg]({{ site.url }}/assets/drifter-en-thumbnail.png)]({{ site.url }}/assets/drifter-en.png)
+[![tg]({{ site.url }}/assets/lisst-en-thumbnail.png)]({{ site.url }}/assets/lisst-en.png)
+[![tg]({{ site.url }}/assets/lobo-en-thumbnail.png)]({{ site.url }}/assets/lobo-en.png)
+[![tg]({{ site.url }}/assets/sealevel-en-thumbnail.png)]({{ site.url }}/assets/sealevel-en.png)
+[![tg]({{ site.url }}/assets/section-en-thumbnail.png)]({{ site.url }}/assets/section-en.png)
+[![tg]({{ site.url }}/assets/tdr-en-thumbnail.png)]({{ site.url }}/assets/tdr-en.png)
 
 ### French
 
-[adp]({{ site.url }}/assets/adp-fr.pdf)
-[adv]({{ site.url }}/assets/adv-fr.pdf)
-[cm]({{ site.url }}/assets/cm-fr.pdf)
-[ctd]({{ site.url }}/assets/ctd-fr.pdf)
-[drifter]({{ site.url }}/assets/drifter-fr.pdf)
-[lisst]({{ site.url }}/assets/lisst-fr.pdf)
-[lobo]({{ site.url }}/assets/lobo-fr.pdf)
-[sealevel]({{ site.url }}/assets/sealevel-fr.pdf)
-[section]({{ site.url }}/assets/section-fr.pdf)
-[tdr]({{ site.url }}/assets/tdr-fr.pdf)
+[![tg]({{ site.url }}/assets/adp-fr-thumbnail.png)]({{ site.url }}/assets/adp-fr.png)
+[![tg]({{ site.url }}/assets/adv-fr-thumbnail.png)]({{ site.url }}/assets/adv-fr.png)
+[![tg]({{ site.url }}/assets/cm-fr-thumbnail.png)]({{ site.url }}/assets/cm-fr.png)
+[![tg]({{ site.url }}/assets/ctd-fr-thumbnail.png)]({{ site.url }}/assets/ctd-fr.png)
+[![tg]({{ site.url }}/assets/drifter-fr-thumbnail.png)]({{ site.url }}/assets/drifter-fr.png)
+[![tg]({{ site.url }}/assets/lisst-fr-thumbnail.png)]({{ site.url }}/assets/lisst-fr.png)
+[![tg]({{ site.url }}/assets/lobo-fr-thumbnail.png)]({{ site.url }}/assets/lobo-fr.png)
+[![tg]({{ site.url }}/assets/sealevel-fr-thumbnail.png)]({{ site.url }}/assets/sealevel-fr.png)
+[![tg]({{ site.url }}/assets/section-fr-thumbnail.png)]({{ site.url }}/assets/section-fr.png)
+[![tg]({{ site.url }}/assets/tdr-fr-thumbnail.png)]({{ site.url }}/assets/tdr-fr.png)
 
 ### German
 
-[adp]({{ site.url }}/assets/adp-de.pdf)
-[adv]({{ site.url }}/assets/adv-de.pdf)
-[cm]({{ site.url }}/assets/cm-de.pdf)
-[ctd]({{ site.url }}/assets/ctd-de.pdf)
-[drifter]({{ site.url }}/assets/drifter-de.pdf)
-[lisst]({{ site.url }}/assets/lisst-de.pdf)
-[lobo]({{ site.url }}/assets/lobo-de.pdf)
-[sealevel]({{ site.url }}/assets/sealevel-de.pdf)
-[section]({{ site.url }}/assets/section-de.pdf)
-[tdr]({{ site.url }}/assets/tdr-de.pdf)
+[![tg]({{ site.url }}/assets/adp-de-thumbnail.png)]({{ site.url }}/assets/adp-de.png)
+[![tg]({{ site.url }}/assets/adv-de-thumbnail.png)]({{ site.url }}/assets/adv-de.png)
+[![tg]({{ site.url }}/assets/cm-de-thumbnail.png)]({{ site.url }}/assets/cm-de.png)
+[![tg]({{ site.url }}/assets/ctd-de-thumbnail.png)]({{ site.url }}/assets/ctd-de.png)
+[![tg]({{ site.url }}/assets/drifter-de-thumbnail.png)]({{ site.url }}/assets/drifter-de.png)
+[![tg]({{ site.url }}/assets/lisst-de-thumbnail.png)]({{ site.url }}/assets/lisst-de.png)
+[![tg]({{ site.url }}/assets/lobo-de-thumbnail.png)]({{ site.url }}/assets/lobo-de.png)
+[![tg]({{ site.url }}/assets/sealevel-de-thumbnail.png)]({{ site.url }}/assets/sealevel-de.png)
+[![tg]({{ site.url }}/assets/section-de-thumbnail.png)]({{ site.url }}/assets/section-de.png)
+[![tg]({{ site.url }}/assets/tdr-de-thumbnail.png)]({{ site.url }}/assets/tdr-de.png)
 
 ### Mandarin
 
-[adp]({{ site.url }}/assets/adp-zh.pdf)
-[adv]({{ site.url }}/assets/adv-zh.pdf)
-[cm]({{ site.url }}/assets/cm-zh.pdf)
-[ctd]({{ site.url }}/assets/ctd-zh.pdf)
-[drifter]({{ site.url }}/assets/drifter-zh.pdf)
-[lisst]({{ site.url }}/assets/lisst-zh.pdf)
-[lobo]({{ site.url }}/assets/lobo-zh.pdf)
-[sealevel]({{ site.url }}/assets/sealevel-zh.pdf)
-[section]({{ site.url }}/assets/section-zh.pdf)
-[tdr]({{ site.url }}/assets/tdr-zh.pdf)
+[![tg]({{ site.url }}/assets/adp-zh-thumbnail.png)]({{ site.url }}/assets/adp-zh.png)
+[![tg]({{ site.url }}/assets/adv-zh-thumbnail.png)]({{ site.url }}/assets/adv-zh.png)
+[![tg]({{ site.url }}/assets/cm-zh-thumbnail.png)]({{ site.url }}/assets/cm-zh.png)
+[![tg]({{ site.url }}/assets/ctd-zh-thumbnail.png)]({{ site.url }}/assets/ctd-zh.png)
+[![tg]({{ site.url }}/assets/drifter-zh-thumbnail.png)]({{ site.url }}/assets/drifter-zh.png)
+[![tg]({{ site.url }}/assets/lisst-zh-thumbnail.png)]({{ site.url }}/assets/lisst-zh.png)
+[![tg]({{ site.url }}/assets/lobo-zh-thumbnail.png)]({{ site.url }}/assets/lobo-zh.png)
+[![tg]({{ site.url }}/assets/sealevel-zh-thumbnail.png)]({{ site.url }}/assets/sealevel-zh.png)
+[![tg]({{ site.url }}/assets/section-zh-thumbnail.png)]({{ site.url }}/assets/section-zh.png)
+[![tg]({{ site.url }}/assets/tdr-zh-thumbnail.png)]({{ site.url }}/assets/tdr-zh.png)
 
 
 

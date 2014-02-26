@@ -269,3 +269,6 @@ div.page-header {
     padding: 5px 20px 10px;
     margin: -20px -20px 00px; /* last was 20px */
 }
+
+img[alt=tg] { border-style: solid; border-color: red, border-width: 2px;}
+
