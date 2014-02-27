@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Installing oce in R
-tags: [oceanography, R]
+tags: [oceanography, oce, R]
 category: R
 year: 2013
 month: 12
