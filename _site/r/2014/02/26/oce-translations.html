@@ -267,7 +267,15 @@ languages <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='s'>
 <span class='p'>}</span>
 </pre></div>
 </td></tr></table>
-<p>The results are shown in the thumbnail images given below (click to enlarge).</p>
+<p>To make the above work, an up-to-date version of the <code>translation</code> branch must be installed, by executing the following in R:</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>devtools<span class='p'>)</span>
+install_github<span class='p'>(</span><span class='s'>&quot;ocedata&quot;</span><span class='p'>,</span> <span class='s'>&quot;dankelley&quot;</span><span class='p'>,</span> <span class='s'>&quot;master&quot;</span><span class='p'>)</span>
+install_github<span class='p'>(</span><span class='s'>&quot;oce&quot;</span><span class='p'>,</span> <span class='s'>&quot;dankelley&quot;</span><span class='p'>,</span> <span class='s'>&quot;languages&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>The results of the test code given above are shown below (click to enlarge).</p>
 
 <h3 id="english">English</h3>
 
@@ -294,10 +302,6 @@ languages <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='s'>
 
 <li>
 <p><a href="http://www.gnu.org/software/gettext/">GNU documentation on gettext</a></p>
-</li>
-
-<li>
-<p><a href="https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq">Dropbox page about Oce translation progress</a></p>
 </li>
 </ul>
 

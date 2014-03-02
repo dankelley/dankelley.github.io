@@ -154,7 +154,15 @@ for (d in datasets) {
 }
 {% endhighlight %}
 
-The results are shown in the thumbnail images given below (click to enlarge).
+
+To make the above work, an up-to-date version of the ``translation`` branch must be installed, by executing the following in R:
+{% highlight R linenos=table %}
+library(devtools)
+install_github("ocedata", "dankelley", "master")
+install_github("oce", "dankelley", "languages")
+{% endhighlight %}
+
+The results of the test code given above are shown below (click to enlarge).
 
 
 ### English
@@ -217,5 +225,4 @@ The results are shown in the thumbnail images given below (click to enlarge).
 
 * [GNU documentation on gettext](http://www.gnu.org/software/gettext/)
 
-* [Dropbox page about Oce translation progress](https://www.dropbox.com/sh/301wmxm4ddnv68v/7G85OTScZq)
 
