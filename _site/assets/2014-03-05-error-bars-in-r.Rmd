@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Error bars in R</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+
+            
+            <li><a href="/textbook.html">Textbook</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Error bars in R</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A Monte-Carlo method for computing errors bars is presented.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+Error propagation can be a fair bit of work with a calculator, but it's easy with R.  Just use R in repeated calculation with perturbed quantities, and inspect the range of results.  Two methods are shown below for inspecting the range: ``sd()`` and ``quantile()``, the latter using the fact that area under a normal distribution is 0.68 when calculated between -1 and 1 standard deviation.
+
+# Tests
+
+
+## Case 1: scale factor
+
+In this case, the answer is simple: the A uncertainty of 0.1 turns into an uncertainty of 10 for 10A.
+
+
+```{r}
+set.seed(123)
+
+n <- 500
+result <- vector("double", n)
+A <- 1
+Au <- 0.1 # uncertainty in A
+for (i in 1:n) {
+    Ap <- A + Au * rnorm(n=1)
+    result[i] = 10 * Ap
+}
+D <- 0.5 * (1 - 0.68)
+r <- quantile(result, probs=c(D, 1-D))
+cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
+
+```
+
+                                        
+## Case 2: squaring
+
+Here, we expect an uncertainty of 20 percent.
+
+
+```{r}
+set.seed(123)
+n <- 500
+result <- vector("double", n)
+A <- 1
+Au <- 0.1 # uncertainty in A
+for (i in 1:n) {
+    Ap <- A + Au * rnorm(n=1)
+    result[i] = Ap^2
+}
+D <- 0.5 * (1 - 0.68)
+r <- quantile(result, probs=c(D, 1-D))
+cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
+```
+
+## Case 3: a nonlinear function
+
+Here, we have a hyperbolic tangent, so the expected error bar will be trickier analytically, but of course the R method remains simple.  (Note that the uncertainty is increased to ensure a nonlinear range of hyperbolic tangent.)
+
+
+```{r}
+set.seed(123)
+n <- 500
+result <- vector("double", n)
+A <- 1
+Au <- 0.3 # uncertainty in A
+for (i in 1:n) {
+    Ap <- A + Au * rnorm(n=1)
+    result[i] = tanh(Ap)
+}
+D <- 0.5 * (1 - 0.68)
+r <- quantile(result, probs=c(D, 1-D))
+cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
+```
+
+In this case, the error bar is assymetric.
+
+# Conclusions
+
+The computation is a simple matter of looping over a perturbed calculation.  Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).  One should experiment with the value of ``n``, of course.
+
+# Resources
+
+* Source code: [2014-03-05-error-bars-in-r](/assets/2014-03-05-error-bars-in-r.R)
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
