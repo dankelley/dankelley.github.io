@@ -93,7 +93,7 @@
 
 <h2 id="case_1_scale_factor">Case 1: scale factor</h2>
 
-<p>In this case, the answer is simple: the A uncertainty of 0.1 turns into an uncertainty of 10 for 10A.</p>
+<p>In this case, the answer is simple. If <code>A</code> has uncertainty equal to 0.1, then <code>10A</code> has uncertainty 1.0.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
  2
  3
@@ -104,10 +104,7 @@
  8
  9
 10
-11
-12
-13
-14</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
+11</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
 
 n <span class='o'>&lt;-</span> <span class='m'>500</span>
 result <span class='o'>&lt;-</span> vector<span class='p'>(</span><span class='s'>&quot;double&quot;</span><span class='p'>,</span> n<span class='p'>)</span>
@@ -117,17 +114,20 @@ Au <span class='o'>&lt;-</span> <span class='m'>0.1</span>  <span class='c1'># u
     Ap <span class='o'>&lt;-</span> A <span class='o'>+</span> Au <span class='o'>*</span> rnorm<span class='p'>(</span>n <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
     result<span class='p'>[</span>i<span class='p'>]</span> <span class='o'>=</span> <span class='m'>10</span> <span class='o'>*</span> Ap
 <span class='p'>}</span>
-D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
+hist<span class='p'>(</span>result<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png" alt="center" /></p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre>D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
 r <span class='o'>&lt;-</span> quantile<span class='p'>(</span>result<span class='p'>,</span> probs <span class='o'>=</span> c<span class='p'>(</span>D<span class='p'>,</span> <span class='m'>1</span> <span class='o'>-</span> D<span class='p'>))</span>
 cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class='p'>,</span> mean<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot;uncertainty:&quot;</span><span class='p'>,</span> sd<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot; range:&quot;</span><span class='p'>,</span> r<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='s'>&quot;to&quot;</span><span class='p'>,</span> 
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png" alt="center" /></p>
-
+</code></pre></div>
 <p>The graph indicates that the values are symmetric, which makes sense for a linear operation.</p>
 
 <h2 id="case_2_squaring">Case 2: squaring</h2>
@@ -142,10 +142,7 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
  7
  8
  9
-10
-11
-12
-13</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
+10</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
 n <span class='o'>&lt;-</span> <span class='m'>500</span>
 result <span class='o'>&lt;-</span> vector<span class='p'>(</span><span class='s'>&quot;double&quot;</span><span class='p'>,</span> n<span class='p'>)</span>
 A <span class='o'>&lt;-</span> <span class='m'>1</span>
@@ -154,17 +151,20 @@ Au <span class='o'>&lt;-</span> <span class='m'>0.1</span>  <span class='c1'># u
     Ap <span class='o'>&lt;-</span> A <span class='o'>+</span> Au <span class='o'>*</span> rnorm<span class='p'>(</span>n <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
     result<span class='p'>[</span>i<span class='p'>]</span> <span class='o'>=</span> Ap<span class='o'>^</span><span class='m'>2</span>
 <span class='p'>}</span>
-D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
+hist<span class='p'>(</span>result<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png" alt="center" /></p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre>D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
 r <span class='o'>&lt;-</span> quantile<span class='p'>(</span>result<span class='p'>,</span> probs <span class='o'>=</span> c<span class='p'>(</span>D<span class='p'>,</span> <span class='m'>1</span> <span class='o'>-</span> D<span class='p'>))</span>
 cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class='p'>,</span> mean<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot;uncertainty:&quot;</span><span class='p'>,</span> sd<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot; range:&quot;</span><span class='p'>,</span> r<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='s'>&quot;to&quot;</span><span class='p'>,</span> 
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png" alt="center" /></p>
-
+</code></pre></div>
 <h2 id="case_3_a_nonlinear_function">Case 3: a nonlinear function</h2>
 
 <p>Here, we have a hyperbolic tangent, so the expected error bar will be trickier analytically, but of course the R method remains simple. (Note that the uncertainty is increased to ensure a nonlinear range of hyperbolic tangent.)</p>
@@ -177,10 +177,7 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
  7
  8
  9
-10
-11
-12
-13</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
+10</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
 n <span class='o'>&lt;-</span> <span class='m'>500</span>
 result <span class='o'>&lt;-</span> vector<span class='p'>(</span><span class='s'>&quot;double&quot;</span><span class='p'>,</span> n<span class='p'>)</span>
 A <span class='o'>&lt;-</span> <span class='m'>1</span>
@@ -189,20 +186,35 @@ Au <span class='o'>&lt;-</span> <span class='m'>0.5</span>  <span class='c1'># u
     Ap <span class='o'>&lt;-</span> A <span class='o'>+</span> Au <span class='o'>*</span> rnorm<span class='p'>(</span>n <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
     result<span class='p'>[</span>i<span class='p'>]</span> <span class='o'>=</span> tanh<span class='p'>(</span>Ap<span class='p'>)</span>
 <span class='p'>}</span>
-D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
+hist<span class='p'>(</span>result<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png" alt="center" /></p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4</code></pre></div></td><td class='code'><div class='highlight'><pre>D <span class='o'>&lt;-</span> <span class='m'>0.5</span> <span class='o'>*</span> <span class='p'>(</span><span class='m'>1</span> <span class='o'>-</span> <span class='m'>0.68</span><span class='p'>)</span>
 r <span class='o'>&lt;-</span> quantile<span class='p'>(</span>result<span class='p'>,</span> probs <span class='o'>=</span> c<span class='p'>(</span>D<span class='p'>,</span> <span class='m'>1</span> <span class='o'>-</span> D<span class='p'>))</span>
 cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class='p'>,</span> mean<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot;uncertainty:&quot;</span><span class='p'>,</span> sd<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot; range:&quot;</span><span class='p'>,</span> r<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='s'>&quot;to&quot;</span><span class='p'>,</span> 
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png" alt="center" /></p>
-
+</code></pre></div>
 <h1 id="conclusions">Conclusions</h1>
 
-<p>The computation is a simple matter of looping over a perturbed calculation. Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner). One should experiment with the value of <code>n</code>, of course.</p>
+<p>The computation is a simple matter of looping over a perturbed calculation. Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).</p>
+
+<h1 id="further_work">Further work</h1>
+
+<ol>
+<li>
+<p>How large should <code>n</code> be, to get results to some desired resolution?</p>
+</li>
+
+<li>
+<p>If the function is highly nonlinear, perhaps the <code>mean(result)</code> should be replaced by <code>median(result)</code>, or something.</p>
+</li>
+</ol>
 
 <h1 id="resources">Resources</h1>
 

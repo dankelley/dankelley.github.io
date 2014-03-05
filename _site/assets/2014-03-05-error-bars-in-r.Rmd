@@ -90,7 +90,7 @@ Error propagation can be a fair bit of work with a calculator, but it's easy wit
 
 ## Case 1: scale factor
 
-In this case, the answer is simple: the A uncertainty of 0.1 turns into an uncertainty of 10 for 10A.
+In this case, the answer is simple.  If ``A`` has uncertainty equal to 0.1, then ``10A`` has uncertainty 1.0.
 
 
 ```{r}
@@ -104,10 +104,10 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n=1)
     result[i] = 10 * Ap
 }
+hist(result)
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
-hist(result)
 ```
 
 The graph indicates that the values are symmetric, which makes sense for a linear operation.
@@ -128,10 +128,10 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n=1)
     result[i] = Ap^2
 }
+hist(result)
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
-hist(result)
 ```
 
 ## Case 3: a nonlinear function
@@ -149,15 +149,21 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n=1)
     result[i] = tanh(Ap)
 }
+hist(result)
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
-hist(result)
 ```
 
 # Conclusions
 
-The computation is a simple matter of looping over a perturbed calculation.  Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).  One should experiment with the value of ``n``, of course.
+The computation is a simple matter of looping over a perturbed calculation.  Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).  
+
+# Further work
+
+1. How large should ``n`` be, to get results to some desired resolution?
+
+2. If the function is highly nonlinear, perhaps the ``mean(result)`` should be replaced by ``median(result)``, or something. 
 
 # Resources
 

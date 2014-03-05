@@ -19,7 +19,7 @@ Error propagation can be a fair bit of work with a calculator, but it's easy wit
 
 ## Case 1: scale factor
 
-In this case, the answer is simple: the A uncertainty of 0.1 turns into an uncertainty of 10 for 10A.
+In this case, the answer is simple.  If ``A`` has uncertainty equal to 0.1, then ``10A`` has uncertainty 1.0.
 
 
 
@@ -34,6 +34,12 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = 10 * Ap
 }
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
+
+{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -45,14 +51,6 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% highlight text %}
 ## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
 {% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
 
 
 The graph indicates that the values are symmetric, which makes sense for a linear operation.
@@ -74,6 +72,12 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = Ap^2
 }
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
+
+{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -85,14 +89,6 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% highlight text %}
 ## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
 {% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
 
 
 ## Case 3: a nonlinear function
@@ -111,6 +107,12 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = tanh(Ap)
 }
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
+
+{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -124,17 +126,15 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% endhighlight %}
 
 
-
-{% highlight r linenos=table %}
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
-
-
 # Conclusions
 
-The computation is a simple matter of looping over a perturbed calculation.  Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).  One should experiment with the value of ``n``, of course.
+The computation is a simple matter of looping over a perturbed calculation.  Here, gaussian errors are assumed, but other distributions could be used (e.g. quantities like kinetic energy that cannot be distributed in a Gaussian manner).  
+
+# Further work
+
+1. How large should ``n`` be, to get results to some desired resolution?
+
+2. If the function is highly nonlinear, perhaps the ``mean(result)`` should be replaced by ``median(result)``, or something. 
 
 # Resources
 
