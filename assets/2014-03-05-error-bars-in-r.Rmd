@@ -79,8 +79,10 @@ D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
 ```
-
-In this case, the error bar is assymetric.
+It might be of interest to construct a histogram of the results.
+```{r}
+hist(result)
+```
 
 # Conclusions
 
@@ -88,5 +90,6 @@ The computation is a simple matter of looping over a perturbed calculation.  Her
 
 # Resources
 
-* Source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
+* R source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
+* Rmd source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.Rmd)
 

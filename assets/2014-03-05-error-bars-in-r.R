@@ -46,3 +46,7 @@ r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
 
 
+## ------------------------------------------------------------------------
+hist(result)
+
+

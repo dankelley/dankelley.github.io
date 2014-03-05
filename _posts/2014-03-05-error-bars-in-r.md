@@ -105,8 +105,14 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 ## value: 0.7398 uncertainty: 0.1299  range: 0.6132 to 0.8629
 {% endhighlight %}
 
+It might be of interest to construct a histogram of the results.
 
-In this case, the error bar is assymetric.
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-4.png) 
+
 
 # Conclusions
 
@@ -114,5 +120,6 @@ The computation is a simple matter of looping over a perturbed calculation.  Her
 
 # Resources
 
-* Source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
+* R source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
+* Rmd source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.Rmd)
 
