@@ -120,6 +120,6 @@ The computation is a simple matter of looping over a perturbed calculation.  Her
 
 # Resources
 
-* R source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
-* Rmd source code: [2014-03-05-error-bars-in-r]({{ site.url }}/assets/2014-03-05-error-bars-in-r.Rmd)
+* R source code: [2014-03-05-error-bars-in-r.R]({{ site.url }}/assets/2014-03-05-error-bars-in-r.R)
+* Rmd source code: [2014-03-05-error-bars-in-r.Rmd]({{ site.url }}/assets/2014-03-05-error-bars-in-r.Rmd)
 
