@@ -47,6 +47,16 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% endhighlight %}
 
 
+
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
+
+
+The graph indicates that the values are symmetric, which makes sense for a linear operation.
+
                                         
 ## Case 2: squaring
 
@@ -77,6 +87,14 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% endhighlight %}
 
 
+
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
+
+
 ## Case 3: a nonlinear function
 
 Here, we have a hyperbolic tangent, so the expected error bar will be trickier analytically, but of course the R method remains simple.  (Note that the uncertainty is increased to ensure a nonlinear range of hyperbolic tangent.)
@@ -105,13 +123,13 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 ## value: 0.7398 uncertainty: 0.1299  range: 0.6132 to 0.8629
 {% endhighlight %}
 
-It might be of interest to construct a histogram of the results.
+
 
 {% highlight r linenos=table %}
 hist(result)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-4.png) 
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
 
 
 # Conclusions

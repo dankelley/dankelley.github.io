@@ -13,7 +13,7 @@ for (i in 1:n) {
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
-
+hist(result)
 
 
 ## ------------------------------------------------------------------------
@@ -29,6 +29,7 @@ for (i in 1:n) {
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
+hist(result)
 
 
 ## ------------------------------------------------------------------------
@@ -44,9 +45,6 @@ for (i in 1:n) {
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs=c(D, 1-D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r[2], "\n")
-
-
-## ------------------------------------------------------------------------
 hist(result)
 
 

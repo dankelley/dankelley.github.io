@@ -123,7 +123,13 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
-</code></pre></div>
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png" alt="center" /></p>
+
+<p>The graph indicates that the values are symmetric, which makes sense for a linear operation.</p>
+
 <h2 id="case_2_squaring">Case 2: squaring</h2>
 
 <p>Here, we expect an uncertainty of 20 percent.</p>
@@ -154,7 +160,11 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
-</code></pre></div>
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png" alt="center" /></p>
+
 <h2 id="case_3_a_nonlinear_function">Case 3: a nonlinear function</h2>
 
 <p>Here, we have a hyperbolic tangent, so the expected error bar will be trickier analytically, but of course the R method remains simple. (Note that the uncertainty is increased to ensure a nonlinear range of hyperbolic tangent.)</p>
@@ -185,12 +195,10 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table><div class='highlight'><pre><code class='text'>## value: 0.7398 uncertainty: 0.1299  range: 0.6132 to 0.8629
-</code></pre></div>
-<p>It might be of interest to construct a histogram of the results.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-4.png" alt="center" /></p>
+<p><img src="/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png" alt="center" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 
