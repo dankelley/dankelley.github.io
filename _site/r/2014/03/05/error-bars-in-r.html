@@ -184,7 +184,7 @@ cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class=
 n <span class='o'>&lt;-</span> <span class='m'>500</span>
 result <span class='o'>&lt;-</span> vector<span class='p'>(</span><span class='s'>&quot;double&quot;</span><span class='p'>,</span> n<span class='p'>)</span>
 A <span class='o'>&lt;-</span> <span class='m'>1</span>
-Au <span class='o'>&lt;-</span> <span class='m'>0.3</span>  <span class='c1'># uncertainty in A</span>
+Au <span class='o'>&lt;-</span> <span class='m'>0.5</span>  <span class='c1'># uncertainty in A</span>
 <span class='kr'>for</span> <span class='p'>(</span>i <span class='kr'>in</span> <span class='m'>1</span><span class='o'>:</span>n<span class='p'>)</span> <span class='p'>{</span>
     Ap <span class='o'>&lt;-</span> A <span class='o'>+</span> Au <span class='o'>*</span> rnorm<span class='p'>(</span>n <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
     result<span class='p'>[</span>i<span class='p'>]</span> <span class='o'>=</span> tanh<span class='p'>(</span>Ap<span class='p'>)</span>
@@ -194,7 +194,7 @@ r <span class='o'>&lt;-</span> quantile<span class='p'>(</span>result<span class
 cat<span class='p'>(</span><span class='s'>&quot;value:&quot;</span><span class='p'>,</span> mean<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot;uncertainty:&quot;</span><span class='p'>,</span> sd<span class='p'>(</span>result<span class='p'>),</span> <span class='s'>&quot; range:&quot;</span><span class='p'>,</span> r<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> <span class='s'>&quot;to&quot;</span><span class='p'>,</span> 
     r<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> <span class='s'>&quot;\n&quot;</span><span class='p'>)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## value: 0.7398 uncertainty: 0.1299  range: 0.6132 to 0.8629
+</td></tr></table><div class='highlight'><pre><code class='text'>## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
 </code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>hist<span class='p'>(</span>result<span class='p'>)</span>
 </pre></div>
 </td></tr></table>

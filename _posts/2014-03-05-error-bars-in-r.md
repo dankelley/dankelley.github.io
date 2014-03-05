@@ -106,7 +106,7 @@ set.seed(123)
 n <- 500
 result <- vector("double", n)
 A <- 1
-Au <- 0.3  # uncertainty in A
+Au <- 0.5  # uncertainty in A
 for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = tanh(Ap)
@@ -120,7 +120,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 
 
 {% highlight text %}
-## value: 0.7398 uncertainty: 0.1299  range: 0.6132 to 0.8629
+## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
 {% endhighlight %}
 
 
