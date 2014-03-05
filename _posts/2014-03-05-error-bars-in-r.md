@@ -34,12 +34,6 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = 10 * Ap
 }
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
-
-{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -51,6 +45,14 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% highlight text %}
 ## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
 {% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
 
 
 The graph indicates that the values are symmetric, which makes sense for a linear operation.
@@ -72,12 +74,6 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = Ap^2
 }
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
-
-{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -89,6 +85,14 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% highlight text %}
 ## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
 {% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
 
 
 ## Case 3: a nonlinear function
@@ -107,12 +111,6 @@ for (i in 1:n) {
     Ap <- A + Au * rnorm(n = 1)
     result[i] = tanh(Ap)
 }
-hist(result)
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
-
-{% highlight r linenos=table %}
 D <- 0.5 * (1 - 0.68)
 r <- quantile(result, probs = c(D, 1 - D))
 cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", 
@@ -124,6 +122,14 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 {% highlight text %}
 ## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
 {% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
+hist(result)
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
 
 
 # Conclusions
