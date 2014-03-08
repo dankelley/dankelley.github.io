@@ -169,6 +169,7 @@ The docs on the matlab version are [here](http://www.mathworks.com/help/matlab/r
 
 # Resources
 * Matlab test code [a.m]({{ site.url }}/assets/a_m.html)
+* R [signal::filter.R]({{ site.url }}/assets/stats_filter_R.html)
 * R test code [a.R]({{ site.url }}/assets/a_R.html)
 * test data used by above two codes [x.dat]({{ site.url }}/assets/x.dat)
 * the octave script [filtfilt.m]({{ site.url }}/assets/filtfilt_m.html)  can be acquired by typing ``pkg install -forge signal`` in an Octave window, and extracting file named ``~/octave/signal-1.3.0/filtfilt.m``
