@@ -33,7 +33,8 @@ si_v1 <- si * v[1]
 #v <- signal::filter(b, a, v, init=si*v[1])    # forward filter (WRONG OUTPUT)
 #v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
 #v <- signal::filter(b, a, v, init.y=si*v[1])    # forward filter (WRONG OUTPUT)
-v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
+#v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
+v <- stats::filter(b, a, v, init=si*v[1])    # forward filter (WRONG OUTPUT)
 v_after_first_filter <- v[1:4]
 
 si_vend <- si*v[length(v)]
