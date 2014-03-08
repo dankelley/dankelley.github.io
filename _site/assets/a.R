@@ -1,7 +1,5 @@
-set.seed(123)
 ab <- signal::butter(3, 0.1)
 t <- seq(0, 1, 0.01)
-x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
 x <- scan("x.dat")
 ## below could be extracted to a function when working
 a <- ab$a

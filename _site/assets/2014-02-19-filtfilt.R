@@ -1,9 +1,7 @@
 
 ## ------------------------------------------------------------------------
-set.seed(123)
 ab <- signal::butter(3, 0.1)
 t <- seq(0, 1, 0.01)
-x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
 x <- scan("x.dat")
 ## below could be extracted to a function when working
 a <- ab$a
@@ -21,8 +19,6 @@ si <- si[-1]
 nx <- length(x)
 n <- max(na, nb)
 lrefl <- 3 * (n - 1)
-cat("si:", si, "\n")
-cat("lrefl:", lrefl, "\n")
 if (na < n)
     a <- c(a, rep(0, length.out=n-na))
 if (nb < n)
@@ -30,18 +26,19 @@ if (nb < n)
 v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
            x,
            2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-cat("si*v[1]:", si*v[1], "\n")
-cat("v[1:15] before first filter:", v[1:15], "\n")
-cat("Above should start:          -1.132546 -1.023766 -0.811650  -1.157909 ...\n")
+v_before_first_filter <- v[1:4]
 
 #v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
+si_v1 <- si * v[1]
+#v <- signal::filter(b, a, v, init=si*v[1])    # forward filter (WRONG OUTPUT)
+#v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
+#v <- signal::filter(b, a, v, init.y=si*v[1])    # forward filter (WRONG OUTPUT)
 v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
-cat("v[1:15] after first filter:", v[1:15], "\n")
-cat("Above should start:        -1.13255  -1.13223  -1.12992 ...\n")
+v_after_first_filter <- v[1:4]
 
-cat("si*v[length(v)]:", si*v[length(v)], "\n")
+si_vend <- si*v[length(v)]
 v <- rev(signal::filter(b,a,rev(v),init.x=si*v[length(v)]))  # reverse filter
-cat("v[1:15] after second filter:", v[1:15], "\n")
+v_after_first_filter <- v[1:4]
 y <- v[seq.int(lrefl+1, lx+lrefl)]
 plot(t, x, type='l')
 lines(t, y, col='red')
