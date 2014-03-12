@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Digitizing plots</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/publications.html">Publications</a></li>
+            
+
+            
+            <li><a href="/textbook.html">Textbook</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Digitizing plots</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/graphics/index.html" class="tag">
+            graphics
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A simple scheme for digitizing (linear-axis) plots in R is presented.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+It is not uncommon to want to digitize values from a graph in a paper, whether to do some initial analysis without bothering an author, or to get data from a paper published so long ago that the data are available only graphically.  Although there are several software applications that do this well, it is also possible to use the ``locator()`` function of R.  This posting shows how to do that.
+
+
+# Step 1: create some fake data.
+
+```{r make-data, fig.path='2014-03-12-', fig.height=4, dpi=100}
+set.seed(123)
+x <- 1:10
+y <- 1 + x + rnorm(10)
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+plot(x, y, type='o')
+print(data.frame(x=x, y=y))
+```
+
+# Step 2: general code for digitizing
+
+This will be presented without comment.
+```{r}
+xaxis <- function(values)
+{
+    n <- length(values)
+    message("click on the x axis at places where x=", paste(values, collapse=","), "\n")
+    xy <- locator(n)
+    m <- lm(values ~ xy$x)
+    C <- as.numeric(coef(m))
+    xa <<- C[1]
+    xb <<- C[2]
+}
+yaxis <- function(values)
+{
+    n <- length(values)
+    message("click on the y axis at places where x=", paste(values, collapse=","), "\n")
+    xy <- locator(n)
+    m <- lm(values ~ xy$y)
+    C <- as.numeric(coef(m))
+    ya <<- C[1]
+    yb <<- C[2]
+}
+topright <- function()
+{
+    message("click the top-right corner of plot box\n")
+    xy <- locator(1)
+    xout <<- xy$x
+    yout <<- xy$y
+}
+data <- function(n=100)
+{
+    message("escape by clicking to right of or above top-right corner of box\n")
+    x <- y <- NULL
+    i <- 1
+    while (TRUE) {
+        xy <- locator(1)
+        xx <- xa + xb * xy$x 
+        yy <- ya + yb * xy$y 
+        cat("i=", i, "xy:", xy$x, xy$y, "->", xx, yy, "\n")
+        if (xy$x > xout || xy$y > yout) {
+            return(list(x=x, y=y))
+        }
+        x <- c(x, xx)
+        y <- c(y, yy)
+        i <- i + 1
+        if (i > n)
+            return(list(x=x, y=y))
+    }
+}
+digitize <- function(image, xaxis, yaxis)
+{
+    library(png)
+    png <- readPNG(image)
+    par(mar=rep(0, 4))
+    plot(0:1, 0:1, type='n')
+    rasterImage(png[,,1], 0, 0, 1, 1)
+    xaxis(xaxis)
+    yaxis(yaxis)
+    topright()
+    data()
+}
+```
+
+# Step 3: use the code
+
+```{r, eval=FALSE}
+xy <- digitize("sample.png", c(2, 10), c(2, 10))
+```
+
+# Conclusions
+
+When I did this, clicking points without a great deal of care, I got an RMS error of a bit under 2 percent.  It seems likely that more careful work could get this closer to 1 percent.
+
+# Resources
+* Source code: [2014-03-12-digitizing-plots.R](/assets/2014-03-12-digitizing-plots.R)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
