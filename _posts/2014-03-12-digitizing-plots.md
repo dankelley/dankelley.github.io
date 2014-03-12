@@ -15,43 +15,10 @@ description: A simple scheme for digitizing (linear-axis) plots in R is presente
 It is not uncommon to want to digitize values from a graph in a paper, whether to do some initial analysis without bothering an author, or to get data from a paper published so long ago that the data are available only graphically.  Although there are several software applications that do this well, it is also possible to use the ``locator()`` function of R.  This posting shows how to do that.
 
 
-# Step 1: create some fake data.
+# Method
 
+Code for digitizing a plot on the screen is given below, without comment.  It can be saved to a file, for later use.  (I don't bother commenting because the work of doing that is about equal to the work of making a package, which I may do, if anyone expresses interest.)
 
-{% highlight r linenos=table %}
-set.seed(123)
-x <- 1:10
-y <- 1 + x + rnorm(10)
-par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
-plot(x, y, type = "o")
-{% endhighlight %}
-
-![center]({{ site.url }}/assets/2014-03-12-make-data.png) 
-
-{% highlight r linenos=table %}
-print(data.frame(x = x, y = y))
-{% endhighlight %}
-
-
-
-{% highlight text %}
-##     x      y
-## 1   1  1.440
-## 2   2  2.770
-## 3   3  5.559
-## 4   4  5.071
-## 5   5  6.129
-## 6   6  8.715
-## 7   7  8.461
-## 8   8  7.735
-## 9   9  9.313
-## 10 10 10.554
-{% endhighlight %}
-
-
-# Step 2: general code for digitizing
-
-This will be presented without comment.
 
 {% highlight r linenos=table %}
 xaxis <- function(values) {
@@ -113,7 +80,23 @@ digitize <- function(image, xaxis, yaxis) {
 {% endhighlight %}
 
 
-# Step 3: use the code
+# Application
+
+As a test of this, let's create some fake data
+
+
+{% highlight r linenos=table %}
+set.seed(123)
+x <- 1:10
+y <- 1 + x + rnorm(10)
+par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
+plot(x, y, type = "o")
+{% endhighlight %}
+
+![center]({{ site.url }}/assets/2014-03-12-make-data.png) 
+
+
+and digitize the resultant image (saved in a PNG file).
 
 
 {% highlight r linenos=table %}
@@ -121,9 +104,14 @@ xy <- digitize("sample.png", c(2, 10), c(2, 10))
 {% endhighlight %}
 
 
+# Results
+
+When I did as above, clicking points without a great deal of care, I got an RMS error of a bit under 2 percent.  It seems likely that more careful work could get this closer to 1 percent.
+
+
 # Conclusions
 
-When I did this, clicking points without a great deal of care, I got an RMS error of a bit under 2 percent.  It seems likely that more careful work could get this closer to 1 percent.
+This method is perhaps slightly easier than hand-rolling new code for each instance of this task.  It lacks some basic features, however. One nice addition would be the ability to remove data points.  For that, perhaps the lower-left corner of the graph box could be determined with a function named ``bottomleft()``, and the rule could be that clicking below that point or to its left would remove the most recent point.  That's an exercise for the reader.  Possibly the next step would be to take the hour it would take to create a little package ... although it seems likely that one already exists!
 
 # Resources
 * Source code: [2014-03-12-digitizing-plots.R]({{ site.url }}/assets/2014-03-12-digitizing-plots.R)

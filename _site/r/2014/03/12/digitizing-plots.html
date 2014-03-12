@@ -94,36 +94,9 @@
 
 <p>It is not uncommon to want to digitize values from a graph in a paper, whether to do some initial analysis without bothering an author, or to get data from a paper published so long ago that the data are available only graphically. Although there are several software applications that do this well, it is also possible to use the <code>locator()</code> function of R. This posting shows how to do that.</p>
 
-<h1 id="step_1_create_some_fake_data">Step 1: create some fake data.</h1>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2
-3
-4
-5</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
-x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>10</span>
-y <span class='o'>&lt;-</span> <span class='m'>1</span> <span class='o'>+</span> x <span class='o'>+</span> rnorm<span class='p'>(</span><span class='m'>10</span><span class='p'>)</span>
-par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
-plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;o&quot;</span><span class='p'>)</span>
-</pre></div>
-</td></tr></table>
-<p><img src="/assets/2014-03-12-make-data.png" alt="center" /></p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>print<span class='p'>(</span>data.frame<span class='p'>(</span>x <span class='o'>=</span> x<span class='p'>,</span> y <span class='o'>=</span> y<span class='p'>))</span>
-</pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>##     x      y
-## 1   1  1.440
-## 2   2  2.770
-## 3   3  5.559
-## 4   4  5.071
-## 5   5  6.129
-## 6   6  8.715
-## 7   7  8.461
-## 8   8  7.735
-## 9   9  9.313
-## 10 10 10.554
-</code></pre></div>
-<h1 id="step_2_general_code_for_digitizing">Step 2: general code for digitizing</h1>
+<h1 id="method">Method</h1>
 
-<p>This will be presented without comment.</p>
+<p>Code for digitizing a plot on the screen is given below, without comment. It can be saved to a file, for later use. (I don’t bother commenting because the work of doing that is about equal to the work of making a package, which I may do, if anyone expresses interest.)</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
  2
  3
@@ -237,13 +210,33 @@ digitize <span class='o'>&lt;-</span> <span class='kr'>function</span><span clas
 <span class='p'>}</span>
 </pre></div>
 </td></tr></table>
-<h1 id="step_3_use_the_code">Step 3: use the code</h1>
+<h1 id="application">Application</h1>
+
+<p>As a test of this, let’s create some fake data</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>set.seed<span class='p'>(</span><span class='m'>123</span><span class='p'>)</span>
+x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>10</span>
+y <span class='o'>&lt;-</span> <span class='m'>1</span> <span class='o'>+</span> x <span class='o'>+</span> rnorm<span class='p'>(</span><span class='m'>10</span><span class='p'>)</span>
+par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
+plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;o&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-03-12-make-data.png" alt="center" /></p>
+
+<p>and digitize the resultant image (saved in a PNG file).</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>xy <span class='o'>&lt;-</span> digitize<span class='p'>(</span><span class='s'>&quot;sample.png&quot;</span><span class='p'>,</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>10</span><span class='p'>),</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>10</span><span class='p'>))</span>
 </pre></div>
 </td></tr></table>
+<h1 id="results">Results</h1>
+
+<p>When I did as above, clicking points without a great deal of care, I got an RMS error of a bit under 2 percent. It seems likely that more careful work could get this closer to 1 percent.</p>
+
 <h1 id="conclusions">Conclusions</h1>
 
-<p>When I did this, clicking points without a great deal of care, I got an RMS error of a bit under 2 percent. It seems likely that more careful work could get this closer to 1 percent.</p>
+<p>This method is perhaps slightly easier than hand-rolling new code for each instance of this task. It lacks some basic features, however. One nice addition would be the ability to remove data points. For that, perhaps the lower-left corner of the graph box could be determined with a function named <code>bottomleft()</code>, and the rule could be that clicking below that point or to its left would remove the most recent point. That’s an exercise for the reader. Possibly the next step would be to take the hour it would take to create a little package … although it seems likely that one already exists!</p>
 
 <h1 id="resources">Resources</h1>
 

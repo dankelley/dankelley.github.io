@@ -1,13 +1,4 @@
 
-## ----make-data, fig.path='2014-03-12-', fig.height=4, dpi=100------------
-set.seed(123)
-x <- 1:10
-y <- 1 + x + rnorm(10)
-par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
-plot(x, y, type='o')
-print(data.frame(x=x, y=y))
-
-
 ## ------------------------------------------------------------------------
 xaxis <- function(values)
 {
@@ -68,6 +59,14 @@ digitize <- function(image, xaxis, yaxis)
     topright()
     data()
 }
+
+
+## ----make-data, fig.path='2014-03-12-', fig.height=4, dpi=100------------
+set.seed(123)
+x <- 1:10
+y <- 1 + x + rnorm(10)
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+plot(x, y, type='o')
 
 
 ## ----, eval=FALSE--------------------------------------------------------
