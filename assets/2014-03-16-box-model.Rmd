@@ -1,6 +1,6 @@
 ---
 layout: post
-title: box models in R
+title: Box models in R
 tags: [R, oceanography, box model]
 category: R
 year: 2014
