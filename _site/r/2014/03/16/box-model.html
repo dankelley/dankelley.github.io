@@ -103,8 +103,6 @@
 
 <p>The basic ideas can be explained in the context of riverine input into a lake that connects to the sea. Readers with mathematical expertise will see easily that the same method holds for a wide variety of problems. An oceanographer might think of salinity reduction. A meteorologist might think of the seasonal lag of ocean temperature. A pharmacologist might think of the concentration of a drug in the bloodstream. A contractor might think of water in a basement. But let’s stick to the lake, shall we?</p>
 
-<p>The</p>
-
 <h1 id="model_formulation">Model formulation</h1>
 
 <p>Let the lake surface area be <em>A</em>, and its water level be <em>h</em>, with the latter being expressed as height above (constant) sea level. Let the river input volume per unit time be <em>F</em>. Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form $$\gamma h$$ where the coefficient has units of area per time.</p>
@@ -177,7 +175,13 @@ plot<span class='p'>(</span>days<span class='p'>,</span> h<span class='p'>,</spa
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>Those interested in box models might like to alter the parameters and forcing function, to study the results. Adding more boxes is easy, and surprisingly useful models can be constructed in this way. Changing the forcing and the model formulation is also easy. For example, the outflow function could be made nonlinear to account for hydraulic-control effects, perhaps. It’s even easy to add time dependence to the parameterizations, perhaps to model a dam-break situation. Once the model is formulated numerically, all manner of numerical experiments are within easy grasp. One can go further, of course, using the model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model (e.g. here, <code>gamma</code> could be inferred from measurements of lake level).</p>
+<p>Those interested in box models might like to alter the parameters and forcing function, to study the results.</p>
+
+<p>Adding more boxes is easy, and surprisingly useful models can be constructed in this way.</p>
+
+<p>Changing the forcing and the model formulation is also easy. For example, the outflow function could be made nonlinear to account for hydraulic-control effects, perhaps. It’s even easy to add time dependence to the parameterizations, perhaps to model a dam-break situation. Once the model is formulated numerically, all manner of numerical experiments are within easy grasp.</p>
+
+<p>One can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model. For example, if $F$ were known for a given lake (and of course its area known also) then observations of lake level could yield a value of <code>gamma</code> as formulated here, or could suggest another formulation for lake outflow.</p>
 
 <h1 id="resources">Resources</h1>
 
