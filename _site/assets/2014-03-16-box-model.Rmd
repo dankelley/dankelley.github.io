@@ -97,10 +97,15 @@
 
 Box models are popular in some branches of oceanography and other geophysical disciplines, partly because they are simple to construct and to solve.  This posting shows how to solve a box model in R, using the ``lsoda()`` function in the ``deSolve`` package.
 
-The basic ideas can be explained in the context of riverine input into a lake that connects to the sea.  Let the lake surface area be *A*, and its water level be *h*, with the latter being expressed as height above (constant) sea level.  Let the river input volume per unit time be *F*.   Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form $$\gamma h$$ where the coefficient has units of area per time.
+The basic ideas can be explained in the context of riverine input into a lake that connects to the sea.  Readers with mathematical expertise will see easily that the same method holds for a wide variety of problems. An oceanographer might think of salinity reduction.  A meteorologist might think of the seasonal lag of ocean temperature.  A pharmacologist might think of the concentration of a drug in the bloodstream.  A contractor might think of water in a basement.  But let's stick to the lake, shall we?
 
+The 
 
 # Model formulation
+
+Let the lake surface area be *A*, and its water level be *h*, with the latter being expressed as height above (constant) sea level.  Let the river input volume per unit time be *F*.   Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form $$\gamma h$$ where the coefficient has units of area per time.
+
+
 
 The principle of volume conservation yields the differential equation
 $$A\frac{dh}{dt} = F - \gamma h$$
@@ -173,7 +178,7 @@ plot(days, h, type='l', ylab="Lake level [m]")
 
 # Conclusions
 
-Those interested in box models might like to alter the parameters and forcing function, to study the results.  Adding more boxes is easy, as is changing the model formulations.  For example, one might want to try a nonlinear outflow function to see e.g. the effect of hydraulic control of lake outflow.
+Those interested in box models might like to alter the parameters and forcing function, to study the results.  Adding more boxes is easy, and surprisingly useful models can be constructed in this way.  Changing the forcing and the model formulation is also easy.  For example, the outflow function could be made nonlinear to account for hydraulic-control effects, perhaps.  It's even easy to add time dependence to the parameterizations, perhaps to model a dam-break situation.  Once the model is formulated numerically, all manner of numerical experiments are within easy grasp.  One can go further, of course, using the model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model (e.g. here, ``gamma`` could be inferred from measurements of lake level).
 
 # Resources
 * Source code: [2014-03-16-box-model.R](/assets/2014-03-16-box-model.R)
