@@ -115,10 +115,6 @@ imagep(topoWorld, asp=1,
        col=c(ocean.pal(length(waterBreaks)), land.pal(length(landBreaks))))
 ```
 
-I have attached below the results, with some hand-drawn arrows that show the fault-line features in the North Pacific that I had never noticed before.  Somehow, this colourscheme made my eye notice them, and now even when I plot with other colour schemes, my eye cannot help but be drawn to these featurs.  It is amazing how a simple change of a colorscale can sometimes reveal something to the eye.
-
-[![graph](/assets/2014-01-30_gmt.png)](/assets/2014-01-30_gmt.png)
-
 
 # Resources
 
