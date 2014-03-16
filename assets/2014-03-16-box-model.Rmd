@@ -106,5 +106,5 @@ At a more advanced level, one can also use such a model in a data-assimilative w
 As mathematically-inclined readers might agree, and others might learn by a bit of exploration, numerical experimentation can be a useful tool for increasing understanding.
 
 # Resources
-* R code used here: [2014-03-16-box-model.R]({{ site.url }}/assets/2014-03-16-box-model.R)
-* Source code for this blog item: [https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd)
+* [R code used in this blog item]({{ site.url }}/assets/2014-03-16-box-model.R)
+* [Jekyll source code for this blog item](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd)
