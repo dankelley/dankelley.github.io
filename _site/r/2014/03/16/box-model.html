@@ -38,6 +38,8 @@
 
 <div id="content">
     
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
 
 
 
@@ -99,13 +101,13 @@
 
 <p>Box models are popular in some branches of oceanography and other geophysical disciplines, partly because they are simple to construct and to solve. This posting shows how to solve a box model in R, using the <code>lsoda()</code> function in the <code>deSolve</code> package.</p>
 
-<p>The basic ideas can be explained in the context of riverine input into a lake that connects to the sea. Let the lake surface area be <code>A</code>, and its water level be <code>h</code>, with the latter being expressed as height above (constant) sea level. Let the river input volume per unit time be <code>F</code>. Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form <code>gamma * h</code>, where <code>gamma</code> has units of area per time.</p>
+<p>The basic ideas can be explained in the context of riverine input into a lake that connects to the sea. Let the lake surface area be <em>A</em>, and its water level be <em>h</em>, with the latter being expressed as height above (constant) sea level. Let the river input volume per unit time be <em>F</em>. Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form $$\gamma h$$ where the coefficient has units of area per time.</p>
 
 <h1 id="model_formulation">Model formulation</h1>
 
-<p>The principle of volume conservation yields the differential equation <code>A * dh/dt = F - gamma * h</code>, where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <code>F</code> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
+<p>The principle of volume conservation yields the differential equation $$A\frac{dh}{dt} = \gamma h$$ where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <em>F</em> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
 
-<p>It is conventional to isolate the derivative, expressing this as <code>dh/dt = F/A - gamma * h / A</code>, and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
+<p>It is conventional to isolate the derivative, expressing this as $$\frac{dh}{dt} = \frac{\gamma h}{A}$$ and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
 
 <h1 id="solution_in_r">Solution in R</h1>
 
@@ -128,26 +130,26 @@ parms <span class='o'>&lt;-</span> list<span class='p'>(</span>A <span class='o'
 4
 5</code></pre></div></td><td class='code'><div class='highlight'><pre>day <span class='o'>&lt;-</span> <span class='m'>86400</span>
 times <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>10</span> <span class='o'>*</span> day<span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>200</span><span class='p'>)</span>
-F01 <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span> <span class='p'>{</span>
+<span class='k-Variable'>F</span> <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span> <span class='p'>{</span>
     ifelse<span class='p'>(</span>t <span class='o'>&gt;</span> day <span class='o'>&amp;</span> t <span class='o'>&lt;</span> <span class='m'>2</span> <span class='o'>*</span> day<span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
 <span class='p'>}</span>
 </pre></div>
 </td></tr></table>
 <p>(The length of <code>times</code> mainly matters to plotting; it has no effect on the accuray of the solution, i.e. we are not setting an integration time step here.)</p>
 
-<p>Next, set up the differential equation. This has to follow a certain format. The function must take time as first argument, current model state (a vector, generally) as second, and parameters, third.</p>
+<p>Next, set up the differential equation. This has to follow a certain format. The function must take time as first argument, current model state (a vector, generally) as second, and parameters, third. The function returns a list of derivatives.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
 2
 3
 4
 5</code></pre></div></td><td class='code'><div class='highlight'><pre>DE <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span> parms<span class='p'>)</span> <span class='p'>{</span>
     h <span class='o'>&lt;-</span> y<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span>
-    dhdt <span class='o'>&lt;-</span> F01<span class='p'>(</span>t<span class='p'>)</span><span class='o'>/</span>parms<span class='o'>$</span>A <span class='o'>-</span> parms<span class='o'>$</span>gamma <span class='o'>*</span> h<span class='o'>/</span>parms<span class='o'>$</span>A
+    dhdt <span class='o'>&lt;-</span> <span class='k-Variable'>F</span><span class='p'>(</span>t<span class='p'>)</span><span class='o'>/</span>parms<span class='o'>$</span>A <span class='o'>-</span> parms<span class='o'>$</span>gamma <span class='o'>*</span> h<span class='o'>/</span>parms<span class='o'>$</span>A
     list<span class='p'>(</span>dhdt<span class='p'>)</span>
 <span class='p'>}</span>
 </pre></div>
 </td></tr></table>
-<p>Note how the state is extracted into a variable named <code>h</code>; this is done merely for clarity. Note that the function must return a list of derivatives.</p>
+<p>Here, the state is extracted into a variable named <code>h</code>; this is done merely for clarity, because I like to have function definitions match documentation, so the second variable is named <code>y</code>, etc. Astute readers will see that the three lines in this function could be replaced by one, but there may be pedagogical merit in working in steps, and naming things simply.</p>
 
 <p>Now for model solution.</p>
 <table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>sol <span class='o'>&lt;-</span> lsoda<span class='p'>(</span>IC<span class='p'>,</span> times<span class='p'>,</span> DE<span class='p'>,</span> parms<span class='p'>)</span>
@@ -163,7 +165,7 @@ F01 <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'
 5</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 h <span class='o'>&lt;-</span> sol<span class='p'>[,</span> <span class='m'>2</span><span class='p'>]</span>
 days <span class='o'>&lt;-</span> times<span class='o'>/</span><span class='m'>86400</span>
-plot<span class='p'>(</span>days<span class='p'>,</span> F01<span class='p'>(</span>times<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Riverine input [m^3/s]&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>days<span class='p'>,</span> <span class='k-Variable'>F</span><span class='p'>(</span>times<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Riverine input [m^3/s]&quot;</span><span class='p'>)</span>
 plot<span class='p'>(</span>days<span class='p'>,</span> h<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Lake level [m]&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>

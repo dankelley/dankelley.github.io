@@ -11,7 +11,7 @@ parms <- list(A=1e6, gamma=10)
 ## ------------------------------------------------------------------------
 day <- 86400
 times <- seq(0, 10*day, length.out=200)
-F01 <- function(t)
+F <- function(t)
 {
     ifelse (t > day & t < 2*day, 1, 0)
 }
@@ -21,7 +21,7 @@ F01 <- function(t)
 DE <- function(t, y, parms)
 {
     h <- y[1]
-    dhdt <- F01(t) / parms$A - parms$gamma * h / parms$A
+    dhdt <- F(t) / parms$A - parms$gamma * h / parms$A
     list(dhdt)
 }
 
@@ -34,7 +34,7 @@ sol <- lsoda(IC, times, DE, parms)
 par(mfrow=c(2,1), mar=c(3,3,1,1), mgp=c(2,0.7,0))
 h <- sol[,2]
 days <- times / 86400
-plot(days, F01(times), type='l', ylab="Riverine input [m^3/s]")
+plot(days, F(times), type='l', ylab="Riverine input [m^3/s]")
 plot(days, h, type='l', ylab="Lake level [m]")
 
 
