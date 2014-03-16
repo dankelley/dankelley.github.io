@@ -21,11 +21,11 @@ The basic ideas can be explained in the context of riverine input into a lake th
 # Model formulation
 
 The principle of volume conservation yields the differential equation
-$$A\frac{dh}{dt} = \gamma h$$
+$$A\frac{dh}{dt} = F - \gamma h$$
 where the left-hand side is the changing volume of the lake (assuming vertical coastline).  In this equation, *F* may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.
 
 It is conventional to isolate the derivative, expressing this as
-$$\frac{dh}{dt} = \frac{\gamma h}{A}$$
+$$\frac{dh}{dt} = \frac{F}{A} - \frac{\gamma h}{A}$$
 and this is helpful since this is a form that works with ``lsoda()``, the R function to be used here.
 
 

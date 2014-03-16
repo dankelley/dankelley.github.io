@@ -105,9 +105,9 @@
 
 <h1 id="model_formulation">Model formulation</h1>
 
-<p>The principle of volume conservation yields the differential equation $$A\frac{dh}{dt} = \gamma h$$ where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <em>F</em> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
+<p>The principle of volume conservation yields the differential equation $$A\frac{dh}{dt} = F - \gamma h$$ where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <em>F</em> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
 
-<p>It is conventional to isolate the derivative, expressing this as $$\frac{dh}{dt} = \frac{\gamma h}{A}$$ and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
+<p>It is conventional to isolate the derivative, expressing this as $$\frac{dh}{dt} = \frac{F}{A} - \frac{\gamma h}{A}$$ and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
 
 <h1 id="solution_in_r">Solution in R</h1>
 
