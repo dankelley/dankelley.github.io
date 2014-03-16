@@ -183,7 +183,7 @@ Adding more boxes is easy, and surprisingly useful models can be constructed in 
 
 Changing the forcing and the model formulation is also easy.  For example, the outflow function could be made nonlinear to account for hydraulic-control effects, perhaps.  It's even easy to add time dependence to the parameterizations, perhaps to model a dam-break situation.  Once the model is formulated numerically, all manner of numerical experiments are within easy grasp.  
 
-One can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model.  For example, if $F$ were known for a given lake (and of course its area known also) then observations of lake level could yield a value of ``gamma`` as formulated here, or could suggest another formulation for lake outflow.
+One can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model.  For example, if *F* were known for a given lake (and of course its area known also) then observations of lake level could yield a value of ``gamma`` as formulated here, or could suggest another formulation for lake outflow.
 
 # Resources
 * Source code: [2014-03-16-box-model.R](/assets/2014-03-16-box-model.R)
