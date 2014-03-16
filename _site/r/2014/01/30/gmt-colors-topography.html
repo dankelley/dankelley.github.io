@@ -99,57 +99,50 @@
 
 
 
-<p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a> by “me nugget”, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named <code>topoWorld</code>. The following code produces a graph</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## test GMT colours as suggested by</span>
+<p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a> by “me nugget”, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named <code>topoWorld</code>. The following code produces a graph to illustrate.</p>
+
+<h1 id="1_set_up_colours_as_suggested_on_the_menuggest_blog">1. Set up colours as suggested on the “menuggest” blog</h1>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## test GMT colours as suggested by</span>
 <span class='c1'>## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html</span>
-
-<span class='c1'># 1. colours as suggested on &quot;menuggest&quot; blog</span>
-ocean.pal <span class='o'>&lt;-</span> colorRampPalette<span class='p'>(</span>c<span class='p'>(</span><span class='s'>&quot;#000000&quot;</span><span class='p'>,</span><span class='s'>&quot;#000209&quot;</span><span class='p'>,</span><span class='s'>&quot;#000413&quot;</span><span class='p'>,</span><span class='s'>&quot;#00061E&quot;</span><span class='p'>,</span>
-                                <span class='s'>&quot;#000728&quot;</span><span class='p'>,</span><span class='s'>&quot;#000932&quot;</span><span class='p'>,</span><span class='s'>&quot;#002650&quot;</span><span class='p'>,</span><span class='s'>&quot;#00426E&quot;</span><span class='p'>,</span>
-                                <span class='s'>&quot;#005E8C&quot;</span><span class='p'>,</span><span class='s'>&quot;#007AAA&quot;</span><span class='p'>,</span><span class='s'>&quot;#0096C8&quot;</span><span class='p'>,</span><span class='s'>&quot;#22A9C2&quot;</span><span class='p'>,</span>
-                                <span class='s'>&quot;#45BCBB&quot;</span><span class='p'>,</span><span class='s'>&quot;#67CFB5&quot;</span><span class='p'>,</span><span class='s'>&quot;#8AE2AE&quot;</span><span class='p'>,</span><span class='s'>&quot;#ACF6A8&quot;</span><span class='p'>,</span>
-                                <span class='s'>&quot;#BCF8B9&quot;</span><span class='p'>,</span><span class='s'>&quot;#CBF9CA&quot;</span><span class='p'>,</span><span class='s'>&quot;#DBFBDC&quot;</span><span class='p'>,</span><span class='s'>&quot;#EBFDED&quot;</span><span class='p'>))</span>
-land.pal <span class='o'>&lt;-</span> colorRampPalette<span class='p'>(</span>c<span class='p'>(</span><span class='s'>&quot;#336600&quot;</span><span class='p'>,</span><span class='s'>&quot;#F3CA89&quot;</span><span class='p'>,</span><span class='s'>&quot;#D9A627&quot;</span><span class='p'>,</span><span class='s'>&quot;#A49019&quot;</span><span class='p'>,</span>
-                               <span class='s'>&quot;#9F7B0D&quot;</span><span class='p'>,</span><span class='s'>&quot;#996600&quot;</span><span class='p'>,</span><span class='s'>&quot;#B27676&quot;</span><span class='p'>,</span><span class='s'>&quot;#C2B0B0&quot;</span><span class='p'>,</span>
-                               <span class='s'>&quot;#E5E5E5&quot;</span><span class='p'>,</span><span class='s'>&quot;#FFFFFF&quot;</span><span class='p'>))</span>
-
-<span class='c1'># 2. test in oce</span>
-<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> png<span class='p'>(</span><span class='s'>&quot;gmt.png&quot;</span><span class='p'>,</span> width<span class='o'>=</span><span class='m'>8</span><span class='p'>,</span> height<span class='o'>=</span><span class='m'>4</span><span class='p'>,</span> unit<span class='o'>=</span><span class='s'>&quot;in&quot;</span><span class='p'>,</span> res<span class='o'>=</span><span class='m'>150</span><span class='p'>,</span> pointsize<span class='o'>=</span><span class='m'>7</span><span class='p'>)</span>
+ocean.pal <span class='o'>&lt;-</span> colorRampPalette<span class='p'>(</span>c<span class='p'>(</span><span class='s'>&quot;#000000&quot;</span><span class='p'>,</span> <span class='s'>&quot;#000209&quot;</span><span class='p'>,</span> <span class='s'>&quot;#000413&quot;</span><span class='p'>,</span> <span class='s'>&quot;#00061E&quot;</span><span class='p'>,</span> 
+    <span class='s'>&quot;#000728&quot;</span><span class='p'>,</span> <span class='s'>&quot;#000932&quot;</span><span class='p'>,</span> <span class='s'>&quot;#002650&quot;</span><span class='p'>,</span> <span class='s'>&quot;#00426E&quot;</span><span class='p'>,</span> <span class='s'>&quot;#005E8C&quot;</span><span class='p'>,</span> <span class='s'>&quot;#007AAA&quot;</span><span class='p'>,</span> <span class='s'>&quot;#0096C8&quot;</span><span class='p'>,</span> 
+    <span class='s'>&quot;#22A9C2&quot;</span><span class='p'>,</span> <span class='s'>&quot;#45BCBB&quot;</span><span class='p'>,</span> <span class='s'>&quot;#67CFB5&quot;</span><span class='p'>,</span> <span class='s'>&quot;#8AE2AE&quot;</span><span class='p'>,</span> <span class='s'>&quot;#ACF6A8&quot;</span><span class='p'>,</span> <span class='s'>&quot;#BCF8B9&quot;</span><span class='p'>,</span> <span class='s'>&quot;#CBF9CA&quot;</span><span class='p'>,</span> 
+    <span class='s'>&quot;#DBFBDC&quot;</span><span class='p'>,</span> <span class='s'>&quot;#EBFDED&quot;</span><span class='p'>))</span>
+land.pal <span class='o'>&lt;-</span> colorRampPalette<span class='p'>(</span>c<span class='p'>(</span><span class='s'>&quot;#336600&quot;</span><span class='p'>,</span> <span class='s'>&quot;#F3CA89&quot;</span><span class='p'>,</span> <span class='s'>&quot;#D9A627&quot;</span><span class='p'>,</span> <span class='s'>&quot;#A49019&quot;</span><span class='p'>,</span> <span class='s'>&quot;#9F7B0D&quot;</span><span class='p'>,</span> 
+    <span class='s'>&quot;#996600&quot;</span><span class='p'>,</span> <span class='s'>&quot;#B27676&quot;</span><span class='p'>,</span> <span class='s'>&quot;#C2B0B0&quot;</span><span class='p'>,</span> <span class='s'>&quot;#E5E5E5&quot;</span><span class='p'>,</span> <span class='s'>&quot;#FFFFFF&quot;</span><span class='p'>))</span>
 library<span class='p'>(</span>oce<span class='p'>)</span>
-data<span class='p'>(</span>topoWorld<span class='p'>)</span>
-waterBreaks <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>-10000</span><span class='p'>,</span> <span class='m'>-100</span><span class='p'>,</span> by<span class='o'>=</span><span class='m'>50</span><span class='p'>)</span>
-landBreaks <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>100</span><span class='p'>,</span> <span class='m'>10000</span><span class='p'>,</span> by<span class='o'>=</span><span class='m'>50</span><span class='p'>)</span>
-imagep<span class='p'>(</span>topoWorld<span class='p'>,</span> asp<span class='o'>=</span><span class='m'>1</span><span class='p'>,</span>
-       breaks<span class='o'>=</span>c<span class='p'>(</span>waterBreaks<span class='p'>,</span> <span class='m'>0</span><span class='p'>,</span> landBreaks<span class='p'>),</span>
-       col<span class='o'>=</span>c<span class='p'>(</span>ocean.pal<span class='p'>(</span>length<span class='p'>(</span>waterBreaks<span class='p'>)),</span> land.pal<span class='p'>(</span>length<span class='p'>(</span>landBreaks<span class='p'>))))</span>
-<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
+</pre></div>
+</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>data<span class='p'>(</span>topoWorld<span class='p'>)</span>
+waterBreaks <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>-10000</span><span class='p'>,</span> <span class='m'>-100</span><span class='p'>,</span> by <span class='o'>=</span> <span class='m'>50</span><span class='p'>)</span>
+landBreaks <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>100</span><span class='p'>,</span> <span class='m'>10000</span><span class='p'>,</span> by <span class='o'>=</span> <span class='m'>50</span><span class='p'>)</span>
+imagep<span class='p'>(</span>topoWorld<span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>,</span> breaks <span class='o'>=</span> c<span class='p'>(</span>waterBreaks<span class='p'>,</span> <span class='m'>0</span><span class='p'>,</span> landBreaks<span class='p'>),</span> col <span class='o'>=</span> c<span class='p'>(</span>ocean.pal<span class='p'>(</span>length<span class='p'>(</span>waterBreaks<span class='p'>)),</span> 
+    land.pal<span class='p'>(</span>length<span class='p'>(</span>landBreaks<span class='p'>))))</span>
 </pre></div>
 </td></tr></table>
+<p><img src="/assets/2014-01-30_gmt.png" alt="center" /></p>
+
 <p>I have attached below the results, with some hand-drawn arrows that show the fault-line features in the North Pacific that I had never noticed before. Somehow, this colourscheme made my eye notice them, and now even when I plot with other colour schemes, my eye cannot help but be drawn to these featurs. It is amazing how a simple change of a colorscale can sometimes reveal something to the eye.</p>
 
-<p><a href="/assets/gmt-topography.png"><img src="/assets/gmt-topography-thumbnail.png" alt="graph" /></a></p>
+<p><a href="/assets/2014-01-30_gmt.png"><img src="/assets/2014-01-30_gmt.png" alt="graph" /></a></p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li>Source code: <a href="/assets/2014-01-30-gmt-colors-topography.R">2014-01-30-gmt-colors-topography.R</a></li>
+</ul>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

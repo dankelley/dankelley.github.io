@@ -35,7 +35,7 @@ legend("bottomright", lwd=2,
 
 # Results
 
-The reuults look similar *but* see the question below.
+The results look similar *but* see the question below.
 
 
 # Conclusions
