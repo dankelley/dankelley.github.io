@@ -130,10 +130,10 @@ parms <span class='o'>&lt;-</span> list<span class='p'>(</span>A <span class='o'
 2
 3
 4
-5</code></pre></div></td><td class='code'><div class='highlight'><pre>day <span class='o'>&lt;-</span> <span class='m'>86400</span>
-times <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>10</span> <span class='o'>*</span> day<span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>200</span><span class='p'>)</span>
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>sperday <span class='o'>&lt;-</span> <span class='m'>86400</span>  <span class='c1'># seconds per day</span>
+times <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>10</span> <span class='o'>*</span> sperday<span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>200</span><span class='p'>)</span>
 <span class='k-Variable'>F</span> <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span> <span class='p'>{</span>
-    ifelse<span class='p'>(</span>t <span class='o'>&gt;</span> day <span class='o'>&amp;</span> t <span class='o'>&lt;</span> <span class='m'>2</span> <span class='o'>*</span> day<span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
+    ifelse<span class='p'>(</span>t <span class='o'>&gt;</span> sperday <span class='o'>&amp;</span> t <span class='o'>&lt;</span> <span class='m'>2</span> <span class='o'>*</span> sperday<span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
 <span class='p'>}</span>
 </pre></div>
 </td></tr></table>
@@ -166,9 +166,9 @@ times <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0<
 4
 5</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
 h <span class='o'>&lt;-</span> sol<span class='p'>[,</span> <span class='m'>2</span><span class='p'>]</span>
-days <span class='o'>&lt;-</span> times<span class='o'>/</span><span class='m'>86400</span>
-plot<span class='p'>(</span>days<span class='p'>,</span> <span class='k-Variable'>F</span><span class='p'>(</span>times<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Riverine input [m^3/s]&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>days<span class='p'>,</span> h<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Lake level [m]&quot;</span><span class='p'>)</span>
+Day <span class='o'>&lt;-</span> times<span class='o'>/</span><span class='m'>86400</span>
+plot<span class='p'>(</span>Day<span class='p'>,</span> <span class='k-Variable'>F</span><span class='p'>(</span>times<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;River input [m^3/s]&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>Day<span class='p'>,</span> h<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Lake level [m]&quot;</span><span class='p'>)</span>
 </pre></div>
 </td></tr></table>
 <p><img src="/assets/2014-03-17-box-model.png" alt="center" /></p>
@@ -177,11 +177,13 @@ plot<span class='p'>(</span>days<span class='p'>,</span> h<span class='p'>,</spa
 
 <p>Those interested in box models might like to alter the parameters and forcing function, to study the results.</p>
 
-<p>Adding more boxes is easy, and surprisingly useful models can be constructed in this way.</p>
+<p>Adding more boxes is easy, and a good exercise for the reader. Careful adjustment of parameters in multi-box models can yield reasonably useful alternatives to high-resolution numerical models, especially for exploratory work.</p>
 
-<p>Changing the forcing and the model formulation is also easy. For example, the outflow function could be made nonlinear to account for hydraulic-control effects, perhaps. It’s even easy to add time dependence to the parameterizations, perhaps to model a dam-break situation. Once the model is formulated numerically, all manner of numerical experiments are within easy grasp.</p>
+<p>It is also a simple matter to change the forcing and the model formulation. For example, the outflow function could be made nonlinear, e.g. to account for hydraulic-control effects. Adding time dependence to parameterizations is not difficult either, and it opens the possibility of using such models in wide applications, e.g. modelling dam-break situations.</p>
 
-<p>One can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model. For example, if <em>F</em> were known for a given lake (and of course its area known also) then observations of lake level could yield a value of <code>gamma</code> as formulated here, or could suggest another formulation for lake outflow.</p>
+<p>At a more advanced level, one can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model. For example, if <em>F</em> were known for a given lake (and of course its area known also) then observations of lake level could yield a value of <code>gamma</code> as formulated here, or could suggest another formulation for lake outflow.</p>
+
+<p>As mathematically-inclined readers might agree, and others might learn by a bit of exploration, numerical experimentation can be a useful tool for increasing understanding.</p>
 
 <h1 id="resources">Resources</h1>
 
