@@ -4,7 +4,7 @@
 <link rel='stylesheet' type='text/css' href='/css/syntax.css' />
 <link rel='stylesheet' type='text/css' href='/css/style.css' />
 <meta charset="UTF-8">
-<title>oce runlm function</title>
+<title>box models in R</title>
 </head>
 
 <body>
@@ -53,7 +53,7 @@
 
 <div class="page-header">
 
-    <div class=post_title>oce runlm function</div>
+    <div class=post_title>box models in R</div>
 <!-- </div> --> <!-- span8 -->
 
 <!-- <div class="span4"> -->
