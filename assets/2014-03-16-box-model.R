@@ -30,7 +30,7 @@ DE <- function(t, y, parms)
 sol <- lsoda(IC, times, DE, parms)
 
 
-## ----box-model, fig.path='2014-03-17-', dpi=100--------------------------
+## ----box-model, fig.path='2014-03-16-', dpi=100--------------------------
 par(mfrow=c(2,1), mar=c(3,3,1,1), mgp=c(2,0.7,0))
 h <- sol[,2]
 Day <- times / 86400

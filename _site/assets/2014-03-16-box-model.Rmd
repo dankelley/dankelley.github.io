@@ -167,7 +167,7 @@ This defines ``sol``, which has time as its first column and the solution as its
 
 # Results
 
-```{r box-model, fig.path='2014-03-17-', dpi=100}
+```{r box-model, fig.path='2014-03-16-', dpi=100}
 par(mfrow=c(2,1), mar=c(3,3,1,1), mgp=c(2,0.7,0))
 h <- sol[,2]
 Day <- times / 86400
@@ -188,7 +188,8 @@ At a more advanced level, one can also use such a model in a data-assimilative w
 As mathematically-inclined readers might agree, and others might learn by a bit of exploration, numerical experimentation can be a useful tool for increasing understanding.
 
 # Resources
-* Source code: [2014-03-16-box-model.R](/assets/2014-03-16-box-model.R)
+* R code used here: [2014-03-16-box-model.R](/assets/2014-03-16-box-model.R)
+* Source code for this blog item: [https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd)
 
 
 <div id="disqus_thread"></div>
