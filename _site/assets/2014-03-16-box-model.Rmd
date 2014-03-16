@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>oce runlm function</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>oce runlm function</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+         &#183; 
+        
+        <a href="/tags/box model/index.html" class="tag">
+            box model
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A one-box model is constructed in R.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+Box models are popular in some branches of oceanography and other geophysical disciplines, partly because they are simple to construct and to solve.  This posting shows how to solve a box model in R, using the ``lsoda()`` function in the ``deSolve`` package.
+
+The basic ideas can be explained in the context of riverine input into a lake that connects to the sea.  Let the lake surface area be ``A``, and its water level be ``h``, with the latter being expressed as height above (constant) sea level.  Let the river input volume per unit time be ``F``.   Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form ``gamma * h``, where ``gamma`` has units of area per time.
+
+
+# Model formulation
+
+The principle of volume conservation yields the differential equation ``A * dh/dt = F - gamma * h``, where the left-hand side is the changing volume of the lake (assuming vertical coastline).  In this equation, ``F`` may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.
+
+It is conventional to isolate the derivative, expressing this as ``dh/dt = F/A - gamma * h / A``, and this is helpful since this is a form that works with ``lsoda()``, the R function to be used here.
+
+# Solution in R
+
+The first step is to load the package containing ``lsoda()``.
+
+```{r}
+library(deSolve)
+```
+
+Readers who are following along might want to type ``?lsoda`` in an R console at this point, to get an idea of the reasoning being followed here.  The summary is that ``lsoda()`` takes initial conditions as its first argument, a vector of times at which to report the solution as its second argument, a function defining the differential equation(s) as its third argument, and a list containing model parameters in its fourth argument.
+
+We start by defining initial conditions, in line 1.  In this case, suppose that ``h=0``, i.e. that the lake water level is equal to that of the sea.  Then, in line 2, we set parameters.  This is at the heart of the matter, and will be the most important part of any application of such a model.  Here, we take simple values: square lake of width 1 km (``A``=10^6 m^2), and outflow coefficient ``gamma=``10 m^2/s.
+
+
+```{r}
+IC <- 0
+parms <- list(A=1e6, gamma=10)
+```
+
+Suppose we would like to examine the result of riverine input ``F`` of 1m^3/s lasting for a day, so that it makes sense to set up a time vector of, say, a week.
+
+```{r}
+day <- 86400
+times <- seq(0, 10*day, length.out=200)
+F01 <- function(t)
+{
+    ifelse (t > day & t < 2*day, 1, 0)
+}
+```
+(The length of ``times`` mainly matters to plotting; it has no effect on the accuray of the solution, i.e. we are not setting an integration time step here.)
+
+Next, set up the differential equation.  This has to follow a certain format.  The function must take time as first argument, current model state (a vector, generally) as second, and parameters, third.
+
+```{r}
+DE <- function(t, y, parms)
+{
+    h <- y[1]
+    dhdt <- F01(t) / parms$A - parms$gamma * h / parms$A
+    list(dhdt)
+}
+```
+Note how the state is extracted into a variable named ``h``; this is done merely for clarity.  Note that the function must return a list of derivatives.
+
+Now for model solution.
+```{r}
+sol <- lsoda(IC, times, DE, parms)
+```
+
+This defines ``sol``, which has time as its first column and the solution as its second.  We may plot the results as follows (where time is indicated in days for simplicity).
+
+# Results
+
+```{r box-model, fig.path='2014-03-17-', dpi=100}
+par(mfrow=c(2,1), mar=c(3,3,1,1), mgp=c(2,0.7,0))
+h <- sol[,2]
+days <- times / 86400
+plot(days, F01(times), type='l', ylab="Riverine input [m^3/s]")
+plot(days, h, type='l', ylab="Lake level [m]")
+```
+
+# Conclusions
+
+Those interested in box models might like to alter the parameters and forcing function, to study the results.  Adding more boxes is easy, as is changing the model formulations.  For example, one might want to try a nonlinear outflow function to see e.g. the effect of hydraulic control of lake outflow.
+
+# Resources
+* Source code: [2014-03-16-box-model.R](/assets/2014-03-16-box-model.R)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>oce runlm function</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/03/12/digitizing-plots.html" title="Digitizing plots">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>oce runlm function</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Mar 16, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+         &#183; 
+        
+        <a href="/tags/box model/index.html" class="tag">
+            box model
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A one-box model is constructed in R.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Box models are popular in some branches of oceanography and other geophysical disciplines, partly because they are simple to construct and to solve. This posting shows how to solve a box model in R, using the <code>lsoda()</code> function in the <code>deSolve</code> package.</p>
+
+<p>The basic ideas can be explained in the context of riverine input into a lake that connects to the sea. Let the lake surface area be <code>A</code>, and its water level be <code>h</code>, with the latter being expressed as height above (constant) sea level. Let the river input volume per unit time be <code>F</code>. Suppose that the lake drains into the sea with volume output per unit time given by a linear law (as perhaps with pressure-driven viscous flow) of the form <code>gamma * h</code>, where <code>gamma</code> has units of area per time.</p>
+
+<h1 id="model_formulation">Model formulation</h1>
+
+<p>The principle of volume conservation yields the differential equation <code>A * dh/dt = F - gamma * h</code>, where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <code>F</code> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
+
+<p>It is conventional to isolate the derivative, expressing this as <code>dh/dt = F/A - gamma * h / A</code>, and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
+
+<h1 id="solution_in_r">Solution in R</h1>
+
+<p>The first step is to load the package containing <code>lsoda()</code>.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>deSolve<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>Readers who are following along might want to type <code>?lsoda</code> in an R console at this point, to get an idea of the reasoning being followed here. The summary is that <code>lsoda()</code> takes initial conditions as its first argument, a vector of times at which to report the solution as its second argument, a function defining the differential equation(s) as its third argument, and a list containing model parameters in its fourth argument.</p>
+
+<p>We start by defining initial conditions, in line 1. In this case, suppose that <code>h=0</code>, i.e. that the lake water level is equal to that of the sea. Then, in line 2, we set parameters. This is at the heart of the matter, and will be the most important part of any application of such a model. Here, we take simple values: square lake of width 1 km (<code>A</code>=10^6 m^2), and outflow coefficient <code>gamma=</code>10 m^2/s.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2</code></pre></div></td><td class='code'><div class='highlight'><pre>IC <span class='o'>&lt;-</span> <span class='m'>0</span>
+parms <span class='o'>&lt;-</span> list<span class='p'>(</span>A <span class='o'>=</span> <span class='m'>1e+06</span><span class='p'>,</span> gamma <span class='o'>=</span> <span class='m'>10</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>Suppose we would like to examine the result of riverine input <code>F</code> of 1m^3/s lasting for a day, so that it makes sense to set up a time vector of, say, a week.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>day <span class='o'>&lt;-</span> <span class='m'>86400</span>
+times <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>10</span> <span class='o'>*</span> day<span class='p'>,</span> length.out <span class='o'>=</span> <span class='m'>200</span><span class='p'>)</span>
+F01 <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>)</span> <span class='p'>{</span>
+    ifelse<span class='p'>(</span>t <span class='o'>&gt;</span> day <span class='o'>&amp;</span> t <span class='o'>&lt;</span> <span class='m'>2</span> <span class='o'>*</span> day<span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
+<span class='p'>}</span>
+</pre></div>
+</td></tr></table>
+<p>(The length of <code>times</code> mainly matters to plotting; it has no effect on the accuray of the solution, i.e. we are not setting an integration time step here.)</p>
+
+<p>Next, set up the differential equation. This has to follow a certain format. The function must take time as first argument, current model state (a vector, generally) as second, and parameters, third.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>DE <span class='o'>&lt;-</span> <span class='kr'>function</span><span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span> parms<span class='p'>)</span> <span class='p'>{</span>
+    h <span class='o'>&lt;-</span> y<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span>
+    dhdt <span class='o'>&lt;-</span> F01<span class='p'>(</span>t<span class='p'>)</span><span class='o'>/</span>parms<span class='o'>$</span>A <span class='o'>-</span> parms<span class='o'>$</span>gamma <span class='o'>*</span> h<span class='o'>/</span>parms<span class='o'>$</span>A
+    list<span class='p'>(</span>dhdt<span class='p'>)</span>
+<span class='p'>}</span>
+</pre></div>
+</td></tr></table>
+<p>Note how the state is extracted into a variable named <code>h</code>; this is done merely for clarity. Note that the function must return a list of derivatives.</p>
+
+<p>Now for model solution.</p>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>sol <span class='o'>&lt;-</span> lsoda<span class='p'>(</span>IC<span class='p'>,</span> times<span class='p'>,</span> DE<span class='p'>,</span> parms<span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p>This defines <code>sol</code>, which has time as its first column and the solution as its second. We may plot the results as follows (where time is indicated in days for simplicity).</p>
+
+<h1 id="results">Results</h1>
+<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+2
+3
+4
+5</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mfrow <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
+h <span class='o'>&lt;-</span> sol<span class='p'>[,</span> <span class='m'>2</span><span class='p'>]</span>
+days <span class='o'>&lt;-</span> times<span class='o'>/</span><span class='m'>86400</span>
+plot<span class='p'>(</span>days<span class='p'>,</span> F01<span class='p'>(</span>times<span class='p'>),</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Riverine input [m^3/s]&quot;</span><span class='p'>)</span>
+plot<span class='p'>(</span>days<span class='p'>,</span> h<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Lake level [m]&quot;</span><span class='p'>)</span>
+</pre></div>
+</td></tr></table>
+<p><img src="/assets/2014-03-17-box-model.png" alt="center" /></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>Those interested in box models might like to alter the parameters and forcing function, to study the results. Adding more boxes is easy, as is changing the model formulations. For example, one might want to try a nonlinear outflow function to see e.g. the effect of hydraulic control of lake outflow.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+<li>Source code: <a href="/assets/2014-03-16-box-model.R">2014-03-16-box-model.R</a></li>
+</ul>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
