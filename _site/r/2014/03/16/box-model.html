@@ -109,7 +109,9 @@
 
 <p>The principle of volume conservation yields the differential equation $$A\frac{dh}{dt} = F - \gamma h$$ where the left-hand side is the changing volume of the lake (assuming vertical coastline). In this equation, <em>F</em> may vary with time as rivers flow and ebb, driven by rainfall or perhaps spring snowmelt.</p>
 
-<p>It is conventional to isolate the derivative, expressing this as $$\frac{dh}{dt} = \frac{F}{A} - \frac{\gamma h}{A}$$ and this is helpful since this is a form that works with <code>lsoda()</code>, the R function to be used here.</p>
+<p>In many circumstances it would make sense to non-dimensionalize the equation at this point, but for practical purposes it can be convenient to retain physical units. (For example, the task could be to find the response to an observed time series <em>F=F(t)</em> of forcing.)</p>
+
+<p>Expressing the model as $$\frac{dh}{dt} = \frac{F}{A} - \frac{\gamma h}{A}$$ is helpful since this is a form that works well with <code>lsoda()</code>, the R function to be used here to carry out the numerical integration of the differential equation.</p>
 
 <h1 id="solution_in_r">Solution in R</h1>
 
