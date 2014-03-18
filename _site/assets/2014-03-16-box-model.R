@@ -21,7 +21,7 @@ F <- function(t)
 DE <- function(t, y, parms)
 {
     h <- y[1]
-    dhdt <- F(t) / parms$A - parms$gamma * h / parms$A
+    dhdt <- (F(t) - parms$gamma * h) / parms$A
     list(dhdt)
 }
 

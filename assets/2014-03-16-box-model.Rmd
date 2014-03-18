@@ -31,7 +31,7 @@ where the left-hand side is the changing volume of the lake (assuming vertical c
 In many circumstances it would make sense to non-dimensionalize the equation at this point, but for practical purposes it can be convenient to retain physical units.  (For example, the task could be to find the response to an observed time series *F=F(t)* of forcing.)
 
 Expressing the model as
-$$\frac{dh}{dt} = \frac{F}{A} - \frac{\gamma h}{A}$$
+$$\frac{dh}{dt} = \frac{F-\gamma h}{A}$$
 is helpful since this is a form that works well with ``lsoda()``, the R function to be used here to carry out the numerical integration of the differential equation.
 
 
@@ -73,18 +73,17 @@ Next, set up the differential equation.  This has to follow a certain format.  T
 DE <- function(t, y, parms)
 {
     h <- y[1]
-    dhdt <- F(t) / parms$A - parms$gamma * h / parms$A
+    dhdt <- (F(t) - parms$gamma * h) / parms$A
     list(dhdt)
 }
 ```
-Here, the state is extracted into a variable named ``h``; this is done merely for clarity, because I like to have function definitions match documentation, so the second variable is named ``y``, etc.  Astute readers will see that the three lines in this function could be replaced by one, but there may be pedagogical merit in working in steps, and naming things simply.
+Here, the state is extracted into a variable named ``h`` and the derivative is stored in a variable named ``dhdt``.  This is done merely for clarity of illustration here; experienced programmers are likely to write ``DE`` as a single-line function.
 
-Now for model solution.
+Computing the model solution is now easy:
 ```{r}
 sol <- lsoda(IC, times, DE, parms)
 ```
-
-This defines ``sol``, which has time as its first column and the solution as its second.  We may plot the results as follows (where time is indicated in days for simplicity).
+defines ``sol``, which has time as its first column and the solution as its second.  We may plot the results as follows (where time is indicated in days for simplicity).
 
 # Results
 
