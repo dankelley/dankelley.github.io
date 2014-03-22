@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Recursive</title>
- <link href="http://dankelley.github.io/blog/feed/" rel="self"/>
+ <link href="http://dankelley.github.io/atom.xml" rel="self"/>
  <link href="http://dankelley.github.io"/>
- <updated>2014-03-22T15:17:56-03:00</updated>
+ <updated>2014-03-22T15:29:40-03:00</updated>
  <id>http://dankelley.github.io/</id>
  <author>
    <name>DanKelley</name>
@@ -1387,6 +1387,24 @@ lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;N2best&lt;span class=&#39;p&#39
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-10-N2-runlm.R&quot;&gt;2014-04-07-N2-runlm.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>N2 Runlm</title>
+   <link href="http://dankelley.github.io/blog//2014/02/09/N2-runlm.html"/>
+   <updated>2014-02-09T00:00:00-04:00</updated>
+   <id>http://dankelley.github.io/blog/2014/02/09/N2-runlm</id>
+   <content type="html">&lt;h2 id=&quot;n2runlma_figpath20140210__dpi100&quot;&gt;—-N2-runlm-a, fig.path=’2014-02-10_’, dpi=100————————-&lt;/h2&gt;
+
+&lt;p&gt;library(oce) data(ctd) rho &amp;lt;- swRho(ctd) z &amp;lt;- swZ(ctd) drhodz &amp;lt;- runlm(z, rho, deriv=1) g &amp;lt;- 9.81 rho0 &amp;lt;- mean(rho, na.rm=TRUE) N2 &amp;lt;- -g * drhodz / rho0 plot(ctd, which=’N2’) lines(N2, -z, col=’blue’) legend(“bottomright”, lwd=2, col=c(“brown”, “blue”), legend=c(“spline”, “runlm”), bg=”white”)&lt;/p&gt;
+
+&lt;h2 id=&quot;&quot;&gt;{}&lt;/h2&gt;
+
+&lt;p&gt;N2 &amp;lt;- swN2(ctd) N2fromderiv &amp;lt;- function(L) { - g * runlm(z, rho, L=L, deriv=1) / rho0 } best &amp;lt;- optimize(function(L) sqrt(mean((N2 - N2fromderiv(L))^2)), interval=c(1, 100)) print(best) N2best &amp;lt;- N2fromderiv(best$minimum)&lt;/p&gt;
+
+&lt;h2 id=&quot;n2runlmb_figpath20140210__dpi100&quot;&gt;—-N2-runlm-b, fig.path=’2014-02-10_’, dpi=100————————-&lt;/h2&gt;
+
+&lt;p&gt;plotProfile(ctd, “N2”) lines(N2best, ctd[[‘pressure’]], col=”red”)&lt;/p&gt;</content>
  </entry>
  
  <entry>
