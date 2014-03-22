@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Sun and moon paths in daily sky</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Sun and moon paths in daily sky</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Sun and moon positions through the daily sky are plotted using R.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+This blog started because I was interested in the sunrise position on the winter solstice of 2013.  With the Spring equinox, I'm trying something different: plotting the paths of the sun and moon through the day.
+
+The code shown here produces a daily graph, and I have a cron job running on a machine so that this graph is visible to anyone at [my website](http://emit.phys.ocean.dal.ca/~kelley/sunmoon).
+
+# Procedure
+
+The Oce package has functions called ``moonAngle()`` and ``sunAngle()`` that do the calculations.  The rest of this code sets up and graphs the results.  The horizon is on the outer edge of the circle.  Hours (local time) are marked along the sun and moon paths.  East-west and North-south lines are shown, and they intersect at the zenith.
+
+```{r sunmoon, fig.path='2014-03-22-', dpi=100}
+library(oce)
+angles <- function(day=Sys.Date(), lon=-63.61, lat=44.67, tz="America/Halifax", sun=TRUE)
+{
+    tUTC <- t <- seq(as.POSIXct(paste(day, "00:00:00"), tz=tz), length.out=240, by="6 min")
+    attributes(tUTC)$tzone <- "UTC"
+    a <- if (sun) sunAngle(tUTC, lon=lon, lat=lat) else moonAngle(tUTC, lon=lon, lat=lat)
+    invisible <- a$altitude < 0
+    a$altitude[invisible] <- NA
+    a$azimuth[invisible] <- NA
+    list(t=t, altitude=a$altitude, azimuth=a$azimuth)
+}
+
+day <- Sys.Date()
+tz <- "America/Halifax"
+s <- angles()
+m <- angles(sun=FALSE)
+max <- 1.04 * max(c(s$altitude, m$altitude), na.rm=TRUE)
+
+par(mar=rep(0.5, 4))
+theta <- seq(0, 2*pi, length.out=24 * 10)
+radiusx <- cos(theta)
+radiusy <- sin(theta)
+
+# Horizon and labels+lines for EW and NS
+plot(radiusx, radiusy, type='l', col='gray', asp=1, axes=FALSE, xlab="", ylab="")
+lines(c(-1, 1), c(0, 0), col='gray')
+lines(c(0, 0), c(-1, 1), col='gray')
+D <- 1.06
+text( 0, -D, "S", xpd=TRUE) # xpd so can go in margin
+text(-D,  0, "W", xpd=TRUE)
+text( 0,  D, "N", xpd=TRUE)
+text( D,  0, "E", xpd=TRUE)
+
+## Moon
+mx <- (90 - m$altitude) / 90 * cos(pi / 180 * (90 - m$azimuth))
+my <- (90 - m$altitude) / 90 * sin(pi / 180 * (90 - m$azimuth))
+lines(mx, my, col='blue', lwd=3)
+t <- s$t
+mlt <- as.POSIXct(sprintf("%s %02d:00:00", day, 1:24), tz=tz)
+ti <- unlist(lapply(mlt, function(X) which.min(abs(X-t))))
+points(mx[ti], my[ti], pch=20, cex=3, col='white')
+text(mx[ti], my[ti], 1:24, cex=3/4)
+
+## Sun
+sx <- (90 - s$altitude) / 90 *  cos(pi / 180 * (90 - s$azimuth))
+sy <- (90 - s$altitude) / 90 *  sin(pi / 180 * (90 - s$azimuth))
+lines(sx, sy, col='red', lwd=3)
+slt <- as.POSIXct(sprintf("%s %02d:00:00", day, 1:24), tz=tz)
+si <- unlist(lapply(slt, function(X) which.min(abs(X-t))))
+points(sx[ti], sy[ti], pch=20, cex=3, col='white')
+text(sx[ti], sy[ti], 1:24, cex=3/4)
+
+mtext(paste("Halifax NS", day, sep='\n'), side=3, adj=0, line=-2)
+mtext("Red sun\nBlue moon", side=3, adj=1, line=-2)
+```
+Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
+
+# Resources
+
+* [Website](http://emit.phys.ocean.dal.ca/~kelley/sunmoon/) with daily graph for Halifax, Nova Scotia.
+
+* Source code: [2014-03-22-sun-moon.R](/assets/2014-03-22-sun-moon.R)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
