@@ -152,7 +152,6 @@ text(sx[ti], sy[ti], 1:24, cex=3/4)
 mtext(paste("Halifax NS", day, sep='\n'), side=3, adj=0, line=-2)
 mtext("Red sun\nBlue moon", side=3, adj=1, line=-2)
 ```
-Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
 
 # Resources
 
