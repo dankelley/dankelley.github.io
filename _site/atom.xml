@@ -4,7 +4,7 @@
  <title>Recursive</title>
  <link href="http://dankelley.github.io/atom.xml" rel="self"/>
  <link href="http://dankelley.github.io"/>
- <updated>2014-03-22T15:30:57-03:00</updated>
+ <updated>2014-03-22T18:38:35-03:00</updated>
  <id>http://dankelley.github.io/</id>
  <author>
    <name>DanKelley</name>
@@ -1166,6 +1166,85 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;times&lt;span class=&#39;p&#39;&
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;text&#39;&gt;## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&#39;code&#39;&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;x &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt;&lt;span class=&#39;m&#39;&gt;100&lt;/span&gt;
+y &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;1&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; x&lt;span class=&#39;o&#39;&gt;/&lt;/span&gt;&lt;span class=&#39;m&#39;&gt;100&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; sin&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;o&#39;&gt;/&lt;/span&gt;&lt;span class=&#39;m&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+yn &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; y &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; rnorm&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;m&#39;&gt;100&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; sd &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;0.1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+L &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;4&lt;/span&gt;
+calc &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; runlm&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; y&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; L &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; L&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; deriv &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; y&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; type &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; lwd &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;7&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; col &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+points&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; yn&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; pch &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;20&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; col &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; calc&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; lwd &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; col &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2014-02-11-runlm-case1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Case 2&lt;/strong&gt;&lt;/p&gt;
+&lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&#39;code&#39;&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;data&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;ctd&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;ctd&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; which &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;N2&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+rho &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; swRho&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;ctd&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+z &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; swZ&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;ctd&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+zz &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; seq&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;min&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;z&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt; max&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;z&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;0.1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+N2 &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;-9.8&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;/&lt;/span&gt;mean&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;rho&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;*&lt;/span&gt; runlm&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;z&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; rho&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; zz&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; deriv &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;N2&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;zz&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; col &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+legend&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;bottomright&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; lwd &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; bg &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; col &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; c&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt; legend &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; c&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;swN2()&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; 
+    &lt;span class=&#39;s&#39;&gt;&amp;quot;using runlm()&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2014-02-11-runlm-case2.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;comments&quot;&gt;Comments&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The fit in Case 1 is almost spookily good.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;The N^2 results suggest including this as a method for &lt;code&gt;swN2()&lt;/code&gt;, perhaps the default method, but that’s for another day.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-11-runlm.R&quot;&gt;2014-04-11-runlm.R&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>oce runlm function</title>
+   <link href="http://dankelley.github.io/blog//r/2014/02/11/oce_runlm.html"/>
+   <updated>2014-02-11T00:00:00-04:00</updated>
+   <id>http://dankelley.github.io/blog/r/2014/02/11/oce_runlm</id>
+   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;As was expected, the &lt;code&gt;runderiv()&lt;/code&gt; function has been both useful and deficient. Useful because it offers a good replacement for &lt;code&gt;smooth.spline()&lt;/code&gt; calculations of derivatives for things like N^2. And deficient because it only calculated derivatives, not values!&lt;/p&gt;
+
+&lt;p&gt;Both an extension and a renaming were called for. The result is &lt;code&gt;runlm()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;tests&quot;&gt;Tests&lt;/h1&gt;
+
+&lt;p&gt;Below are the examples from its manpage, with the results.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Case 1&lt;/strong&gt;&lt;/p&gt;
+&lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&#39;code&#39;&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;library&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;oce&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;text&#39;&gt;## Loading required package: methods
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
 2
 3
