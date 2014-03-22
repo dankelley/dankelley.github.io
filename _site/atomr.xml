@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Recursive</title>
- <link href="http://dankelley.github.io/atom.xml" rel="self"/>
- <link href="http://dankelley.github.io"/>
- <updated>2014-03-22T18:52:24-03:00</updated>
- <id>http://dankelley.github.io/</id>
- <author>
-   <name>DanKelley</name>
-   <email>dan.kelley@dal.ca</email>
- </author>
+    <title>Dan Kelley Blog/R</title>
+    <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
+    <link href="http://dankelley.github.io"/>
+    <updated>2014-03-22T19:01:09-03:00</updated>
+    <id>http://dankelley.github.io/</id>
+    <author>
+        <name>Dan Kelley Blog/R</name>
+        <email>dan.kelley@dal.ca</email>
+    </author>
 
- 
- <entry>
-   <title>Sun and moon paths in daily sky</title>
-   <link href="http://dankelley.github.io/blog//r/2014/03/22/sun-moon.html"/>
-   <updated>2014-03-22T00:00:00-03:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/03/22/sun-moon</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    
+    
+    <entry>
+        <title>Sun and moon paths in daily sky</title>
+        <link href="http://dankelley.github.io/blog//r/2014/03/22/sun-moon.html"/>
+        <updated>2014-03-22T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/03/22/sun-moon</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;This blog started because I was interested in the sunrise position on the winter solstice of 2013. With the Spring equinox, I’m trying something different: plotting the paths of the sun and moon through the day.&lt;/p&gt;
 
@@ -155,14 +156,16 @@ mtext&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&
 &lt;p&gt;Source code: &lt;a href=&quot;/assets/2014-03-22-sun-moon.R&quot;&gt;2014-03-22-sun-moon.R&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Box models in R</title>
-   <link href="http://dankelley.github.io/blog//r/2014/03/16/box-model.html"/>
-   <updated>2014-03-16T00:00:00-03:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/03/16/box-model</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Box models in R</title>
+        <link href="http://dankelley.github.io/blog//r/2014/03/16/box-model.html"/>
+        <updated>2014-03-16T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/03/16/box-model</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Box models are popular in some branches of oceanography and other geophysical disciplines, partly because they are simple to construct and to solve. This posting shows how to solve a box model in R, using the &lt;code&gt;lsoda()&lt;/code&gt; function in the &lt;code&gt;deSolve&lt;/code&gt; package.&lt;/p&gt;
 
@@ -259,14 +262,16 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;Day&lt;span class=&#39;p&#39;&gt
 
 &lt;li&gt;&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-03-16-box-model.Rmd&quot;&gt;Jekyll source code for this blog item&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Digitizing plots</title>
-   <link href="http://dankelley.github.io/blog//r/2014/03/12/digitizing-plots.html"/>
-   <updated>2014-03-12T00:00:00-03:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/03/12/digitizing-plots</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Digitizing plots</title>
+        <link href="http://dankelley.github.io/blog//r/2014/03/12/digitizing-plots.html"/>
+        <updated>2014-03-12T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/03/12/digitizing-plots</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;It is not uncommon to want to digitize values from a graph in a paper, whether to do some initial analysis without bothering an author, or to get data from a paper published so long ago that the data are available only graphically. Although there are several software applications that do this well, it is also possible to use the &lt;code&gt;locator()&lt;/code&gt; function of R. This posting shows how to do that.&lt;/p&gt;
 
@@ -419,14 +424,16 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-03-12-digitizing-plots.R&quot;&gt;2014-03-12-digitizing-plots.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Error bars in R</title>
-   <link href="http://dankelley.github.io/blog//r/2014/03/05/error-bars-in-r.html"/>
-   <updated>2014-03-05T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/03/05/error-bars-in-r</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Error bars in R</title>
+        <link href="http://dankelley.github.io/blog//r/2014/03/05/error-bars-in-r.html"/>
+        <updated>2014-03-05T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/03/05/error-bars-in-r</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Error propagation can be a fair bit of work with a calculator, but it’s easy with R. Just use R in repeated calculation with perturbed quantities, and inspect the range of results. Two methods are shown below for inspecting the range: &lt;code&gt;sd()&lt;/code&gt; and &lt;code&gt;quantile()&lt;/code&gt;, the latter using the fact that area under a normal distribution is 0.68 when calculated between -1 and 1 standard deviation.&lt;/p&gt;
 
@@ -562,14 +569,16 @@ cat&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&am
 &lt;ul&gt;
 &lt;li&gt;R source code: &lt;a href=&quot;/assets/2014-03-05-error-bars-in-r.R&quot;&gt;2014-03-05-error-bars-in-r.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Oce translations</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/26/oce-translations.html"/>
-   <updated>2014-02-26T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/26/oce-translations</id>
-   <content type="html">&lt;p&gt;A new Oce user wondered how to get Spanish labels on axes. This is easy for some plot types because &lt;code&gt;xlab&lt;/code&gt; and &lt;code&gt;ylab&lt;/code&gt; arguments are obeyed, but in many cases the labels are generated by the code. That meant that it was finally time for me to start localizing Oce, using the &lt;a href=&quot;http://www.gnu.org/software/gettext/&quot;&gt;GNU gettext&lt;/a&gt; scheme. Gettext being unfamiliar to me, I stumbled a bit at first, and decided to document the procedure here.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Oce translations</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/26/oce-translations.html"/>
+        <updated>2014-02-26T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/26/oce-translations</id>
+        <content type="html">&lt;p&gt;A new Oce user wondered how to get Spanish labels on axes. This is easy for some plot types because &lt;code&gt;xlab&lt;/code&gt; and &lt;code&gt;ylab&lt;/code&gt; arguments are obeyed, but in many cases the labels are generated by the code. That meant that it was finally time for me to start localizing Oce, using the &lt;a href=&quot;http://www.gnu.org/software/gettext/&quot;&gt;GNU gettext&lt;/a&gt; scheme. Gettext being unfamiliar to me, I stumbled a bit at first, and decided to document the procedure here.&lt;/p&gt;
 
 &lt;p&gt;The start of this blog post is mostly for me, while the end is mostly for users who would like to help in the translation effort.&lt;/p&gt;
 
@@ -778,14 +787,16 @@ install_github&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&
 &lt;p&gt;&lt;a href=&quot;http://www.gnu.org/software/gettext/&quot;&gt;GNU documentation on gettext&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Improved filtfilt() for R</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/19/filtfilt.html"/>
-   <updated>2014-02-19T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/19/filtfilt</id>
-   <content type="html">&lt;p&gt;The &lt;code&gt;filtfilt&lt;/code&gt; function in R is supposedly based on the Matlab one, but it does quite badly on endpoints. My goal here is to explore alternatives, with a focus on the Octave method.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Improved filtfilt() for R</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/19/filtfilt.html"/>
+        <updated>2014-02-19T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/19/filtfilt</id>
+        <content type="html">&lt;p&gt;The &lt;code&gt;filtfilt&lt;/code&gt; function in R is supposedly based on the Matlab one, but it does quite badly on endpoints. My goal here is to explore alternatives, with a focus on the Octave method.&lt;/p&gt;
 
 &lt;p&gt;NOTE: I may also try &lt;a href=&quot;http://wiki.scipy.org/Cookbook/FiltFilt&quot;&gt;scipy&lt;/a&gt; for hints.)&lt;/p&gt;
 
@@ -995,14 +1006,16 @@ lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;t&lt;span class=&#39;p&#39;&gt;
 
 &lt;li&gt;the octave C filtering code &lt;a href=&quot;/assets/filter_cc.html&quot;&gt;filter.cc&lt;/a&gt; is the file &lt;code&gt;libinterp/corefcn/filter.cc&lt;/code&gt; in &lt;a href=&quot;http://www.gnu.org/software/octave/download.html&quot;&gt;the Octave source&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>demodulating time series</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/17/demodulation.html"/>
-   <updated>2014-02-17T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/17/demodulation</id>
-   <content type="html">&lt;p&gt;This posting shows how one might perform demodulation in R. It is assumed that readers are generally familiar tith the procedure.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>demodulating time series</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/17/demodulation.html"/>
+        <updated>2014-02-17T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/17/demodulation</id>
+        <content type="html">&lt;p&gt;This posting shows how one might perform demodulation in R. It is assumed that readers are generally familiar tith the procedure.&lt;/p&gt;
 
 &lt;p&gt;First, create some fake data, a carrier signal with period 10, modulated over a long timescale, and with phase drifting linearly over time.&lt;/p&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt; 1
@@ -1093,14 +1106,16 @@ lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;t&lt;span class=&#39;p&#39;&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.mathworks.com/help/signal/ref/demod.html&quot;&gt;Matlab demod() documentation&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;</content>
- </entry>
- 
- <entry>
-   <title>Valentines-day full moon</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/13/valentine-moon.html"/>
-   <updated>2014-02-13T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/13/valentine-moon</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Valentines-day full moon</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/13/valentine-moon.html"/>
+        <updated>2014-02-13T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/13/valentine-moon</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;A wise person told me that it will be a full moon on the upcoming Valentine’s Day, but that it will be a long time until another one. I decided to check this with astronomical calculation.&lt;/p&gt;
 
@@ -1143,14 +1158,16 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;times&lt;span class=&#39;p&#39;&
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-13-valentine-moon.R&quot;&gt;2014-04-13-valentine-moon.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>oce map projection</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/10/oce-map-projection.html"/>
-   <updated>2014-02-10T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/10/oce-map-projection</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>oce map projection</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/10/oce-map-projection.html"/>
+        <updated>2014-02-10T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/10/oce-map-projection</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot. A ad-hoc scheme was code to try to prevent this, but it does not always work. Problems are compounded for filled coastlines.&lt;/p&gt;
 
@@ -1210,14 +1227,16 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;xy&lt;span class=&#39;p&#39;&gt;
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-10-oce-map-projection.R&quot;&gt;2014-04-10-oce-map-projection.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>N2 with runlm()</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/09/N2-runlm.html"/>
-   <updated>2014-02-09T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/09/N2-runlm</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>N2 with runlm()</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/09/N2-runlm.html"/>
+        <updated>2014-02-09T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/09/N2-runlm</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;The default &lt;code&gt;swN2()&lt;/code&gt; calculation in Oce uses a smoothing spline. One disadvantage of this is that few readers will know how it works. A possible alternative is to compute d(rho)/dz using the slope inferred from a running-window linear regression. Such a slope is provided by the new Oce function &lt;code&gt;runlm()&lt;/code&gt;, which is tested here. (Note that &lt;code&gt;runlm()&lt;/code&gt; is new enough that its argument list may change as a result of tests like the present one.)&lt;/p&gt;
 
@@ -1306,14 +1325,16 @@ lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;N2best&lt;span class=&#39;p&#39
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-10-N2-runlm.R&quot;&gt;2014-04-07-N2-runlm.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Hodograph drawing</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/08/hodograph.html"/>
-   <updated>2014-02-08T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/08/hodograph</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Hodograph drawing</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/08/hodograph.html"/>
+        <updated>2014-02-08T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/08/hodograph</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;The polar graph known as a hodograph can be useful for vector plots, and also for showing varition within nearly-cyclical time series data. The Oce R package should have a function to create hodographs, but as usual my first step is to start by writing isolated code, testing to find the right match between the function and real-world needs.&lt;/p&gt;
 
@@ -1462,14 +1483,16 @@ hodograph&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x &lt;span class=&#39;o&#39
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-02-08-hodograph.R&quot;&gt;2014-04-08-hodograph.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Spline wiggles (II)</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/04/splines-2.html"/>
-   <updated>2014-02-04T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/04/splines-2</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Spline wiggles (II)</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/04/splines-2.html"/>
+        <updated>2014-02-04T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/04/splines-2</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;This follows up on the previous posting, using data provided by Akima (1972). The four panels of the plot produced by the following code compare the original Akima spline formula with an improved version, and three styles of &lt;code&gt;spline()&lt;/code&gt; fits.&lt;/p&gt;
 
@@ -1596,14 +1619,16 @@ legend&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;
 &lt;h1 id=&quot;citations&quot;&gt;Citations&lt;/h1&gt;
 
 &lt;p&gt;Hiroshi Akima, 1972. &lt;a href=&quot;http://dl.acm.org/citation.cfm?doid=355604.355605&quot;&gt;Algorithm 433 Interpolation and smooth curve fitting based on local procedures (E2)&lt;/a&gt;. Communications of the Association for Computing Machinery, 15(10): 914-918.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Spline wiggles (I)</title>
-   <link href="http://dankelley.github.io/blog//r/2014/02/03/splines.html"/>
-   <updated>2014-02-03T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/02/03/splines</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Spline wiggles (I)</title>
+        <link href="http://dankelley.github.io/blog//r/2014/02/03/splines.html"/>
+        <updated>2014-02-03T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/02/03/splines</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;An interesting paper (Smith and Wessel, 1990) points out a weakness in using splines in cases with data gaps. Their illustration of the problem with isobaths was particularly compelling. I cannot reproduce their Fig 1b here, owing to copyright problems, but I digitized the data so I could test two R functions for splines. Readers can follow along with the code given in this post.&lt;/p&gt;
 
@@ -1672,14 +1697,16 @@ lines&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;akima&lt;span class=&#39;o&#39;
 &lt;p&gt;W. H. F. Smith and P. Wessel, 1990. Gridding with continuous curvature splines in tension. Geophysics, 55(3): 293-305.&lt;/p&gt;
 
 &lt;p&gt;Hiroshi Akima, 1970. A new method of interpolation and smooth curve fitting based on local procedures. Journal of the Association for Computing Machinery, 17(4): 589-602.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>GMT topography colours (II)</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/30/gmt-colors-topography-2.html"/>
-   <updated>2014-01-30T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/30/gmt-colors-topography-2</id>
-   <content type="html">&lt;p&gt;This follows an item about GMT colours. In the meantime I have found a &lt;a href=&quot;http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html&quot;&gt;website&lt;/a&gt; illustrating the colours, and also the &lt;a href=&quot;http://www.beamreach.org/maps/gmt/share/cpt&quot;&gt;definition files&lt;/a&gt; for those palettes.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>GMT topography colours (II)</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/30/gmt-colors-topography-2.html"/>
+        <updated>2014-01-30T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/30/gmt-colors-topography-2</id>
+        <content type="html">&lt;p&gt;This follows an item about GMT colours. In the meantime I have found a &lt;a href=&quot;http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html&quot;&gt;website&lt;/a&gt; illustrating the colours, and also the &lt;a href=&quot;http://www.beamreach.org/maps/gmt/share/cpt&quot;&gt;definition files&lt;/a&gt; for those palettes.&lt;/p&gt;
 
 &lt;p&gt;The palette in question is named &lt;code&gt;GMT_relief&lt;/code&gt;, and it is defined in a file that is as follows.&lt;/p&gt;
 &lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;&lt;span class=&#39;c&#39;&gt;#	$Id: GMT_relief.cpt,v 1.1 2001/09/23 23:11:20 pwessel Exp $&lt;/span&gt;
@@ -1759,14 +1786,16 @@ imagep&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;topoWorld&lt;span class=&#39;p
 &lt;p&gt;A graph of the results is below.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/gmt_relief_2.png&quot;&gt;&lt;img src=&quot;/assets/gmt_relief_2-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>GMT topography colours (I)</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/30/gmt-colors-topography.html"/>
-   <updated>2014-01-30T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/30/gmt-colors-topography</id>
-   <content type="html">&lt;p&gt;I enjoyed the &lt;a href=&quot;http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html&quot;&gt;blog posting&lt;/a&gt; by “me nugget”, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named &lt;code&gt;topoWorld&lt;/code&gt;. The following code produces a graph to illustrate.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>GMT topography colours (I)</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/30/gmt-colors-topography.html"/>
+        <updated>2014-01-30T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/30/gmt-colors-topography</id>
+        <content type="html">&lt;p&gt;I enjoyed the &lt;a href=&quot;http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html&quot;&gt;blog posting&lt;/a&gt; by “me nugget”, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme. This revealed some intriguing patterns in the Oce dataset named &lt;code&gt;topoWorld&lt;/code&gt;. The following code produces a graph to illustrate.&lt;/p&gt;
 
 &lt;h1 id=&quot;1_set_up_colours_as_suggested_on_the_menuggest_blog&quot;&gt;1. Set up colours as suggested on the “menuggest” blog&lt;/h1&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
@@ -1806,14 +1835,16 @@ imagep&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;topoWorld&lt;span class=&#39;p
 &lt;ul&gt;
 &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-01-30-gmt-colors-topography.R&quot;&gt;2014-01-30-gmt-colors-topography.R&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
- </entry>
- 
- <entry>
-   <title>Vote splitting in Canada</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/25/canada-election-split.html"/>
-   <updated>2014-01-25T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/25/canada-election-split</id>
-   <content type="html">&lt;h1 id=&quot;analysis&quot;&gt;Analysis&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Vote splitting in Canada</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/25/canada-election-split.html"/>
+        <updated>2014-01-25T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/25/canada-election-split</id>
+        <content type="html">&lt;h1 id=&quot;analysis&quot;&gt;Analysis&lt;/h1&gt;
 
 &lt;p&gt;District-by-district data reveal that if the Bloc Quebecois, Green, Liberal, and NDP parties were to have been united, the Conservative party would have lost the 41st Canadian election by a dramatic measure, instead of winning a majority.&lt;/p&gt;
 
@@ -2011,69 +2042,20 @@ text&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;o&#39;&gt;=
 dev.off&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
- </entry>
- 
- <entry>
-   <title>How entries are added</title>
-   <link href="http://dankelley.github.io/blog//development/2014/01/24/how-this-blog-is-used.html"/>
-   <updated>2014-01-24T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/development/2014/01/24/how-this-blog-is-used</id>
-   <content type="html">&lt;p&gt;Entries are added to this blog simpy by creating files in the &lt;code&gt;_posts/&lt;/code&gt; directory. There is an important convention on the file names: they must start with the year, followed by a dash, followed by the decimal number (with leading zero if appropriate), followed by the day, followed by a dash and then followed by some title words, and with &lt;code&gt;.md&lt;/code&gt; at the end.&lt;/p&gt;
-
-&lt;p&gt;The format of the blog entries is markdown for the main body, but the first part must be a preface in so-called YAML format. See any existing blog entry for the format, which should be simple to understand.&lt;/p&gt;
-
-&lt;p&gt;Since Markdown errors will cause non-display of the item when it is eventually uploaded to github, it is important to test things locally first. This is very easy. In the commandline, type&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;jekyll serve --watch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;to start a server. It will state a local URL that holds the blog. Cut and past that URL in a browser, and you will see a local copy of the blog. Every time you edit a file, &lt;code&gt;jekyll&lt;/code&gt; will update the blog, but you will need to do a browser refresh to see the results.&lt;/p&gt;
-
-&lt;p&gt;Once things work well locally, type the following in a terminal to upload the blog to github.&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;make
-git add .
-git commit -m MSG
-git push
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;PS. the &lt;code&gt;make&lt;/code&gt; part of the above is important, because it moves a tags file from a location where github will not find it, to another where it will be found. Simply using &lt;code&gt;git&lt;/code&gt; to upload files will give a blog that works in all respects except for tagging, but what would be the point of that?&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>How this blog was made</title>
-   <link href="http://dankelley.github.io/blog//development/2014/01/23/how-this-blog-was-made.html"/>
-   <updated>2014-01-23T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/development/2014/01/23/how-this-blog-was-made</id>
-   <content type="html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
-
-&lt;p&gt;After using WordPress (WP, henceforth) for a month or so, I got tired of the divergence that always seemed to happen between my local (R-markdown) source and the normal-markdown on wordpress. My pattern was to write something rough locally in Rmd and then use knitr to create local markdown, and then upload it. That would be fine but WP has some special tricks for figure inclusion, so the markdown file on WP will not be the same as locally. And then I always edit everything when I see it on the screen, so that also makes the WP markdown file differ from the local one. And, finally, WP changes some of the markdown from characters I like (less-than, for example) into silly html characters. The consequence of all this is that my local source copy is not the same as the source on WP, and I do not like that since it means I have no archive in case WP decides to charge me, or goes out of business, or puts larger ads on their site. I wanted to try other blogging methods, and github/jekyll came to mind because I use github a lot.&lt;/p&gt;
-
-&lt;h2 id=&quot;methods&quot;&gt;Methods&lt;/h2&gt;
-
-&lt;p&gt;I read through the jekyll docs to get a general idea, and made a blog. Of course it did not work, so I started searching for hints. I do not even recall the original problem, but in any case I solved it, and along the way I ran across &lt;a href=&quot;http://ocramius.github.io&quot;&gt;http://ocramius.github.io&lt;/a&gt;, a site that had what I wanted (especially tags, which the jekyll docs do not discuss), so I started using that as a resource. Then I noticed that it was in turn based on &lt;a href=&quot;http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/&quot;&gt;http://erjjones.github.io/blog/Part-two-how-I-built-my-blog/&lt;/a&gt;, so that became my go-to source for practical hints.&lt;/p&gt;
-
-&lt;h2 id=&quot;some_snags_and_how_to_deal_with_them&quot;&gt;Some snags and how to deal with them:&lt;/h2&gt;
-
-&lt;p&gt;Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading. The solution is simple: run a local jekyll server with the unix command&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;jekyll serve --watch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If there are errors, try stopping the server and running&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;jekyll build --trace
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Once things work well locally, do&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;make
-git add .
-git commit -m MSG
-git push
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;to upload to github.&lt;/p&gt;
-
-&lt;p&gt;The method of generating tags (which I got from ocramius, who got it from erjjones) puts the tag-list files into &lt;code&gt;_site/tags&lt;/code&gt; but jekyll will not serve the files from there. They must go into &lt;code&gt;tags&lt;/code&gt; at the top level. The solution I am using is to continue using the ruby script that I found for creating tags, but to use a Makefile to shift the file locations.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>1D optimization in R</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/22/1D-optimization-in-R.html"/>
-   <updated>2014-01-22T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/22/1D-optimization-in-R</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    
+    
+    
+    
+    <entry>
+        <title>1D optimization in R</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/22/1D-optimization-in-R.html"/>
+        <updated>2014-01-22T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/22/1D-optimization-in-R</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;R provides functions for both one-dimensional and multi-dimensional optimization. The second topic is much more complicated than the former (see e.g. Nocedal 1999) and will be left for another day.&lt;/p&gt;
 
@@ -2140,14 +2122,16 @@ phaseSpeed&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;o&lt;span class=&#39;o&#39
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;p&gt;Jorge Nocedal and Stephen J. Wright, 1999. &lt;em&gt;Numerical optimization.&lt;/em&gt; Springer series in operations research. Springer-Verlag, New York, NY, USA.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Using the plyr package</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/18/using-the-plyr-package.html"/>
-   <updated>2014-01-18T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/18/using-the-plyr-package</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Using the plyr package</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/18/using-the-plyr-package.html"/>
+        <updated>2014-01-18T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/18/using-the-plyr-package</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;The base R system provides &lt;code&gt;lapply()&lt;/code&gt; and related functions, and the package &lt;code&gt;plyr&lt;/code&gt; provides alternatives that are worth considering. It will be assumed that readers are familiar with &lt;code&gt;lapply()&lt;/code&gt; and are willing to spend a few moments reading the &lt;code&gt;plyr&lt;/code&gt; documentation, to see why the illustration here will use the &lt;code&gt;ldply()&lt;/code&gt; function.&lt;/p&gt;
 
@@ -2218,14 +2202,16 @@ mapPoints&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;latlon&lt;span class=&#39;o
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
 &lt;p&gt;The effort of learning how to use the &lt;code&gt;plyr&lt;/code&gt; package is likely to pay off in more flexible code, particularly because of the use of data frames in that package. On this theme, note that the author of &lt;code&gt;plyr&lt;/code&gt; is developing a similar package called &lt;code&gt;dplry&lt;/code&gt;, which centres more closely on data frames and offers many new features; see &lt;a href=&quot;http://blog.rstudio.org/2014/01/17/introducing-dplyr/&quot;&gt;http://blog.rstudio.org/2014/01/17/introducing-dplyr/&lt;/a&gt; for a blog item introducing &lt;code&gt;dplyr&lt;/code&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Colourizing a trajectory</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/15/colourizing-along-a-trajectory.html"/>
-   <updated>2014-01-15T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/15/colourizing-along-a-trajectory</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Colourizing a trajectory</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/15/colourizing-along-a-trajectory.html"/>
+        <updated>2014-01-15T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/15/colourizing-along-a-trajectory</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.&lt;/p&gt;
 
@@ -2276,14 +2262,16 @@ points&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt
 &lt;h1 id=&quot;exercises&quot;&gt;Exercises&lt;/h1&gt;
 
 &lt;p&gt;Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using &lt;code&gt;approx()&lt;/code&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Cabelling calculations</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/15/cabelling.html"/>
-   <updated>2014-01-15T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/15/cabelling</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt; R code is provided in aide of laboratory demonstration of cabelling.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Cabelling calculations</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/15/cabelling.html"/>
+        <updated>2014-01-15T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/15/cabelling</id>
+        <content type="html">&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt; R code is provided in aide of laboratory demonstration of cabelling.&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
@@ -2364,14 +2352,16 @@ legend&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;
 
 &lt;li&gt;Consider (calculate or measure) the convection associated with sidewall heat conduction.&lt;/li&gt;
 &lt;/ol&gt;</content>
- </entry>
- 
- <entry>
-   <title>Butterworth filter overshoot</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/15/butterworth-filters.html"/>
-   <updated>2014-01-15T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/15/butterworth-filters</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Butterworth filter overshoot</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/15/butterworth-filters.html"/>
+        <updated>2014-01-15T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/15/butterworth-filters</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases. For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical. This post simply illustrates this with made-up data that the reader can experiment with.&lt;/p&gt;
 
@@ -2434,14 +2424,16 @@ legend&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
 &lt;p&gt;Be careful in using butterworth filters of order 2 and higher, at least in applications that are sensitive to overshoot (e.g. kinetic-energy timeseries).&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Smoothing CTD profiles</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/11/smoothing-hydrographic-profiles.html"/>
-   <updated>2014-01-11T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/11/smoothing-hydrographic-profiles</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Smoothing CTD profiles</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/11/smoothing-hydrographic-profiles.html"/>
+        <updated>2014-01-11T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/11/smoothing-hydrographic-profiles</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Smoothing hydrographic profiles with conventional time-series methods is problematic for two reasons: (a) the data are commonly not equi-spaced in depth and (b) the data seldom lack trends in depth. The issues and their solutions are illustrated without much discussion here.&lt;/p&gt;
 
@@ -2530,14 +2522,16 @@ mtext&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&
 &lt;p&gt;Filtering a non-detrended profile is a generally a bad idea. There is almost always a zero-offset problem, and also most properties vary dramatically with depth, so detrending is required as well as zero offsetting. The advantage of detrending is illustrated in the left-hand and middle panels.&lt;/p&gt;
 
 &lt;p&gt;Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required. However, a disadvantage of splines is that there is no simple way to describe the method to those who are not familiar with them. In some branches of the literature, splines will be understood by readers, and in others, they will be a mystery that will waste a review cycle for the education of referees. There is also a problem in describing the spline simply in terms that have physical meaning. For example, spline smoothness is here controlled by setting the &lt;code&gt;df&lt;/code&gt; argument, but this has no simple analogy to physics, as perhaps the half-power frequency of a filter might (in terms of spectral models of finestructure, say).&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Inferring halocline depth</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/11/inferring-halocline-depth.html"/>
-   <updated>2014-01-11T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/11/inferring-halocline-depth</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Inferring halocline depth</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/11/inferring-halocline-depth.html"/>
+        <updated>2014-01-11T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/11/inferring-halocline-depth</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which &lt;em&gt;dS/dp&lt;/em&gt; is largest, where &lt;em&gt;S&lt;/em&gt; is salinity and &lt;em&gt;p&lt;/em&gt; is pressure (Kelley 2014 chapter 5). Calculating the derivative using e.g. &lt;code&gt;diff(S)/diff(p)&lt;/code&gt; can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.&lt;/p&gt;
 
@@ -2612,14 +2606,16 @@ findHalocline&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;ctd&lt;span class=&#39;
 &lt;h1 id=&quot;discussion&quot;&gt;Discussion&lt;/h1&gt;
 
 &lt;p&gt;Lacking further information about the data or a statistical model of the variation, the choice of deltap is somewhat open, and one interpretation of the results would be to state that the halocline depth is likely to be between 4 and 5 m.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>PISA scores</title>
-   <link href="http://dankelley.github.io/blog//r/2014/01/06/pisa-scores.html"/>
-   <updated>2014-01-06T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2014/01/06/pisa-scores</id>
-   <content type="html">&lt;p&gt;The &lt;a href=&quot;http://www.theguardian.com/news/datablog/2013/dec/03/pisa-results-country-best-reading-maths-science&quot;&gt;Guardian Newspaper&lt;/a&gt; has an interesting article about the &lt;a href=&quot;http://www.oecd.org/pisa/&quot;&gt;Pisa&lt;/a&gt; (Program for International Student Assessment) scores for 2012, and it includes &lt;a href=&quot;https://docs.google.com/spreadsheet/ccc?key=0AoBYy67QwoevdHIyc2Rha2VYamZ0LUl0Xy1TdUszRkE&amp;usp=sharing#gid=0&quot;&gt;data&lt;/a&gt;. Since I was interested to see how my own region scored, I downloaded the data into a file called PISA-summary-2012.csv and created a plot summarizing scores in all the sampled regions, with Canada highlighted.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>PISA scores</title>
+        <link href="http://dankelley.github.io/blog//r/2014/01/06/pisa-scores.html"/>
+        <updated>2014-01-06T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/01/06/pisa-scores</id>
+        <content type="html">&lt;p&gt;The &lt;a href=&quot;http://www.theguardian.com/news/datablog/2013/dec/03/pisa-results-country-best-reading-maths-science&quot;&gt;Guardian Newspaper&lt;/a&gt; has an interesting article about the &lt;a href=&quot;http://www.oecd.org/pisa/&quot;&gt;Pisa&lt;/a&gt; (Program for International Student Assessment) scores for 2012, and it includes &lt;a href=&quot;https://docs.google.com/spreadsheet/ccc?key=0AoBYy67QwoevdHIyc2Rha2VYamZ0LUl0Xy1TdUszRkE&amp;usp=sharing#gid=0&quot;&gt;data&lt;/a&gt;. Since I was interested to see how my own region scored, I downloaded the data into a file called PISA-summary-2012.csv and created a plot summarizing scores in all the sampled regions, with Canada highlighted.&lt;/p&gt;
 
 &lt;h1 id=&quot;graphical_summary&quot;&gt;Graphical summary&lt;/h1&gt;
 
@@ -2809,14 +2805,16 @@ text&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x0&lt;span class=&#39;o&#39;&gt;
 64,Indonesia,375,75.7,0.3,0.7,396,2.3,382,-1.9
 65,Peru,368,74.6,0.6,1,384,5.2,373,1.3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
- </entry>
- 
- <entry>
-   <title>Installing oce in R</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/30/installing-oce.html"/>
-   <updated>2013-12-30T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/30/installing-oce</id>
-   <content type="html">&lt;p&gt;Several of the blog items have used the oce package. The official version of this can be installed from within R by&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Installing oce in R</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/30/installing-oce.html"/>
+        <updated>2013-12-30T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/30/installing-oce</id>
+        <content type="html">&lt;p&gt;Several of the blog items have used the oce package. The official version of this can be installed from within R by&lt;/p&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&#39;code&#39;&gt;&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;install.packages&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;oce&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
@@ -2835,14 +2833,16 @@ install_github&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&
 &lt;p&gt;Note that the &lt;code&gt;ocedata&lt;/code&gt; package does not need to be updated frequently, as it only updated when new datasets are added to oce. The official version of oce is only updated every few months, but the branch named &lt;code&gt;develop&lt;/code&gt; (used above) may be updated several times a day, if the author is adding new features or fixing bugs.&lt;/p&gt;
 
 &lt;p&gt;For more on oce, see the &lt;a href=&quot;http://dankelley.github.io/oce/&quot;&gt;oce website on github&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>R interface to WebTide</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/29/r-interface-to-webtide.html"/>
-   <updated>2013-12-29T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/29/r-interface-to-webtide</id>
-   <content type="html">&lt;p&gt;A previous posting explained how to install WebTide on an OSX machine. This one shows how to hook up to an installed WebTide database, so that R code can get tidal predictions.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>R interface to WebTide</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/29/r-interface-to-webtide.html"/>
+        <updated>2013-12-29T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/29/r-interface-to-webtide</id>
+        <content type="html">&lt;p&gt;A previous posting explained how to install WebTide on an OSX machine. This one shows how to hook up to an installed WebTide database, so that R code can get tidal predictions.&lt;/p&gt;
 
 &lt;p&gt;The following code in the R language will produce a graph in which the top panel mimics the tidal-elevation graph produced by WebTide itself (see previous blog posting for comparison).&lt;/p&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
@@ -2875,63 +2875,18 @@ plot&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;x&lt;span class=&#39;p&#39;&gt;,
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p&gt;&lt;a href=&quot;/assets/webtide2.png&quot;&gt;&lt;img src=&quot;/assets/webtide-thumbnail2.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Installing WebTide in OSX</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/29/installing-webtide-in-osx.html"/>
-   <updated>2013-12-29T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/29/installing-webtide-in-osx</id>
-   <content type="html">&lt;p&gt;This blog item explains how to install WebTide, a tidal prediction application, on an OSX machine. The work requires moderate expertise, being carried out in the console, and requiring that a C compiler be found on the host machine.&lt;/p&gt;
-
-&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;WebTide comes with a friendly graphical user interface that makes it easy to get tidal predictions at various locations around the world. Anyone with an interest in oceanography is likely to find it a useful application. Although the interface is slightly quirky (particularly for map navigation), it only takes a few minutes to learn. (An upcoming blog entry will explain how to avoid the WebTide interface, using the &lt;code&gt;oce&lt;/code&gt; R package to access the data that underly WebTide.)&lt;/p&gt;
-
-&lt;h1 id=&quot;installation&quot;&gt;Installation&lt;/h1&gt;
-
-&lt;p&gt;Step 1. Download the linux-without-Java-VM version from the &lt;a href=&quot;http://www.bio.gc.ca/science/research-recherche/ocean/webtide/index-eng.php&quot;&gt;Bedford Institute of Oceanography&lt;/a&gt; website, and store the results in the &lt;code&gt;~/Downloads&lt;/code&gt; directory.&lt;/p&gt;
-
-&lt;p&gt;Step 2. Open a terminal or console window, and type the following to enter the WebTide directory and start the process of installing WebTide.&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;&lt;span class=&#39;nb&#39;&gt;cd&lt;/span&gt; ~/Downloads
-sh WebTide_unix_0_7.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;After a moment, a dialog box will pop up, asking where WebTide is to be installed. To install a version just for you, supply &lt;code&gt;/Users/USERNAME/WebTide&lt;/code&gt;, where &lt;code&gt;USERNAME&lt;/code&gt; is your username. To install a version for all accounts on the computer, use the default, which is &lt;code&gt;/usr/local/WebTide&lt;/code&gt;. A second dialog box addresses the issue of symlinks. Click the box indicating that these are not to be used. After a few moments, a final dialog box will appear, stating that the work has been completed. Click the button named &lt;code&gt;Finish&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Step 3. Now for the OSX-specific part of the work. You will need the gcc compiler to do this. It is available for free on the Apple website, as the Xcode development tools. (If you have been using the computer for science, it is quite likely you have already installed a compiler, so just try the steps below, before bothering with a re-install of Xcode.) In a console, type the following to enter the source directory (here assumed to be configured for a single user) and to compile two programs.&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;&lt;span class=&#39;nb&#39;&gt;cd&lt;/span&gt; ~/WebTide/Tidecor_src
-gcc -O2 -o tidecor webtidecor2.5.1.c -lm
-gcc -O2 -o constituentinterpolator constituentinterpolator1.1.c -lm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the two &lt;code&gt;gcc&lt;/code&gt; lines shown above, it may be necessary to change the names of the &lt;code&gt;&amp;quot;.c&amp;quot;&lt;/code&gt; files, to match whatever you find in this &lt;code&gt;tidecor_src&lt;/code&gt; directory. You may ignore the warning messages that are likely to appear, but if errors appear, you will need to interrupt this tutorial to find out what is wrong. Possibly leaving a comment on this site would encourage another reader to offer a solution; possibly the scientists at the Bedford Institute of Oceanography (named on the website) could help.&lt;/p&gt;
-
-&lt;p&gt;Step 4. Move these newly-compiled programs from the source directory into the bin directory, by typing&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;mv tidecor ../bin
-mv constituentinterpolator ../bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;using_webtide&quot;&gt;Using WebTide&lt;/h1&gt;
-
-&lt;p&gt;If you installed WebTide to your home directory, launch WebTide by typing the following in a console window&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;~/WebTide/WebTide
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;and use the GUI from that point on. If you installed it to &lt;code&gt;/usr/local/WebTide&lt;/code&gt;, type the following instead&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;bash&#39;&gt;/usr/local/WebTide/WebTide
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The main WebTide window looks like the following.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/webtideosx1.png&quot;&gt;&lt;img src=&quot;/assets/webtideosx1-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;There is little point in explaining the details of the menu and mouse actions here, since WebTide provides its own documentation. In most cases, the action will be to click the mouse on spot on the map, to set a so-called “marker” for a location at which calculations are to be done. The diagram shown here has a marker in the Bay of Fundy. Once a marker has been set, the user may wish to click a menu item (see at the right-hand side) to get a tidal prediction, as shown in the screenshot below.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/webtideosx2.png&quot;&gt;&lt;img src=&quot;/assets/webtideosx2-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Sundial calculations</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/28/sundial.html"/>
-   <updated>2013-12-28T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/28/sundial</id>
-   <content type="html">&lt;p&gt;After experimenting with calculations for what I eventually came to realize were analemma-based sundials (with shadow cast by a vertical pole), I remembered that the common sundial has a wedge as the shadow-maker. A bit of research told me that the wedge is called a gnomon. It is a right triangle with one vertex (the centre vertex, shall we say) having angle equal to the local latitude. If this wedge is placed upright on a horizontal plane with the centre vertex aligned south and the 90deg vertex aligned north, then the shadow will produce a line that indicates the hour of the day. This works throughout the year, with approximately quarter-hour adjustments being required through the seasons.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    
+    
+    <entry>
+        <title>Sundial calculations</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/28/sundial.html"/>
+        <updated>2013-12-28T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/28/sundial</id>
+        <content type="html">&lt;p&gt;After experimenting with calculations for what I eventually came to realize were analemma-based sundials (with shadow cast by a vertical pole), I remembered that the common sundial has a wedge as the shadow-maker. A bit of research told me that the wedge is called a gnomon. It is a right triangle with one vertex (the centre vertex, shall we say) having angle equal to the local latitude. If this wedge is placed upright on a horizontal plane with the centre vertex aligned south and the 90deg vertex aligned north, then the shadow will produce a line that indicates the hour of the day. This works throughout the year, with approximately quarter-hour adjustments being required through the seasons.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&quot;http://www.r-project.org&quot;&gt;R&lt;/a&gt; code given below the diagram creates an outline of the expected edge of the shadow of the gnomon. To illustrate the variation in angle through the year (which relates to the so-called equation of time), colours are used to indicate four significant times during the year.&lt;/p&gt;
 
@@ -3105,14 +3060,16 @@ sundial &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#39
     dev.off&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
- </entry>
- 
- <entry>
-   <title>Analemma graphs</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/27/analemma.html"/>
-   <updated>2013-12-27T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/27/analemma</id>
-   <content type="html">&lt;p&gt;Continuing on the theme of solar angles, the code given below produces an analemma diagram similar to that of Lynch (2012, figure 2).&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Analemma graphs</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/27/analemma.html"/>
+        <updated>2013-12-27T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/27/analemma</id>
+        <content type="html">&lt;p&gt;Continuing on the theme of solar angles, the code given below produces an analemma diagram similar to that of Lynch (2012, figure 2).&lt;/p&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt; 1
  2
  3
@@ -3139,14 +3096,16 @@ grid&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;p&gt;Peter Lynch, 2012. The equation of time and the analemma. Irish Math. Soc. Bulletin, 69:47-56. &lt;a href=&quot;http://www.maths.tcd.ie/pub/ims/bull69/Lynch.pdf&quot;&gt;PDF&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>A new Oce coastline</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/22/coastline.html"/>
-   <updated>2013-12-22T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/22/coastline</id>
-   <content type="html">&lt;h1 id=&quot;part_1_coastal_applications&quot;&gt;Part 1: coastal applications&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>A new Oce coastline</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/22/coastline.html"/>
+        <updated>2013-12-22T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/22/coastline</id>
+        <content type="html">&lt;h1 id=&quot;part_1_coastal_applications&quot;&gt;Part 1: coastal applications&lt;/h1&gt;
 
 &lt;p&gt;The oce package has a world coastline file that is visibly crude on a scale suitable for continental-shelf work.  At the cost of about 1 Mbyte of storage, a candidate for a replacement is a 1:10million scale version downloaded from naturalearthdata.com (full link below).&lt;/p&gt;
 
@@ -3262,14 +3221,16 @@ system.time&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;mapPlot&lt;span class=&#3
     dev.off&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
- </entry>
- 
- <entry>
-   <title>Solstice sunrise-sunset</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/21/solstice.html"/>
-   <updated>2013-12-21T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/21/solstice</id>
-   <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Solstice sunrise-sunset</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/21/solstice.html"/>
+        <updated>2013-12-21T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/21/solstice</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;The &lt;code&gt;sunAngle()&lt;/code&gt; function in the &lt;code&gt;oce&lt;/code&gt; package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.&lt;/p&gt;
 
@@ -3344,14 +3305,16 @@ d &lt;span class=&#39;o&#39;&gt;&amp;lt;-&lt;/span&gt; diff&lt;span class=&#39;p
 &lt;p&gt;The graph indicates the results; click it to zoom in.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/solstice_sunrise_sunset.png&quot;&gt;&lt;img src=&quot;/assets/solstice_sunrise_sunset-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Moon phase calculation</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/21/moon-phases.html"/>
-   <updated>2013-12-21T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/21/moon-phases</id>
-   <content type="html">&lt;p&gt;The illuminated fraction of the moon can be calculated with &lt;code&gt;moonAngle()&lt;/code&gt; in the oce package, as illustrated graphically and in R code below.&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Moon phase calculation</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/21/moon-phases.html"/>
+        <updated>2013-12-21T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/21/moon-phases</id>
+        <content type="html">&lt;p&gt;The illuminated fraction of the moon can be calculated with &lt;code&gt;moonAngle()&lt;/code&gt; in the oce package, as illustrated graphically and in R code below.&lt;/p&gt;
 &lt;table class=&#39;highlighttable&#39;&gt;&lt;tr&gt;&lt;td class=&#39;linenos&#39;&gt;&lt;div class=&#39;linenodiv&#39;&gt;&lt;pre&gt;&lt;code class=&#39;r&#39;&gt;1
 2
 3
@@ -3378,14 +3341,16 @@ mtext&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&
 &lt;p&gt;&lt;img src=&quot;/assets/moon.png&quot; alt=&quot;moon phase diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Exercises&lt;/em&gt; (a) Try this for other locations. (b) Detect full moon by using uniroot() on the rate of change of illumination.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Day length calculation</title>
-   <link href="http://dankelley.github.io/blog//r/2013/12/21/day-length.html"/>
-   <updated>2013-12-21T00:00:00-04:00</updated>
-   <id>http://dankelley.github.io/blog/r/2013/12/21/day-length</id>
-   <content type="html">&lt;p&gt;The winter solstice has been on many minds lately. The days are about to start getting longer … but just how fast will they do that?&lt;/p&gt;
+    </entry>
+    
+    
+    
+    <entry>
+        <title>Day length calculation</title>
+        <link href="http://dankelley.github.io/blog//r/2013/12/21/day-length.html"/>
+        <updated>2013-12-21T00:00:00-04:00</updated>
+        <id>http://dankelley.github.io/blog/r/2013/12/21/day-length</id>
+        <content type="html">&lt;p&gt;The winter solstice has been on many minds lately. The days are about to start getting longer … but just how fast will they do that?&lt;/p&gt;
 
 &lt;p&gt;This post provides R that calculates and graphs day length and its variation, using &lt;code&gt;uniroot()&lt;/code&gt; to find sunrises and sunsets as indicated by solar altitude that is calculated with &lt;code&gt;sunAngle()&lt;/code&gt; in the oce package.&lt;/p&gt;
 
@@ -3449,7 +3414,8 @@ grid&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
 abline&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;v&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;solstice&lt;span class=&#39;o&#39;&gt;+&lt;/span&gt;c&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;m&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;m&#39;&gt;86400&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
- </entry>
- 
+    </entry>
+    
+    
 
 </feed>
