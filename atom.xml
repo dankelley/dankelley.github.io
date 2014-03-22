@@ -10,8 +10,8 @@ layout: nil
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>http://dankelley.github.io/</id>
  <author>
-   <name>Recursive</name>
-   <email>mail@dan.kelley@dal.ca</email>
+   <name>DanKelley</name>
+   <email>dan.kelley@dal.ca</email>
  </author>
 
  {% for post in site.posts %}
