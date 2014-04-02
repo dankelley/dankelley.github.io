@@ -95,32 +95,38 @@
 
 
 <p>The illuminated fraction of the moon can be calculated with <code>moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
-par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span> <span class='c1'># tighten margins</span>
-t <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-1&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>)</span> <span class='o'>+</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>28</span><span class='o'>*</span><span class='m'>24</span><span class='o'>*</span><span class='m'>3600</span><span class='p'>,</span> <span class='m'>3600</span><span class='p'>)</span>
-f <span class='o'>&lt;-</span> moonAngle<span class='p'>(</span>t<span class='o'>=</span>t<span class='p'>,</span> longitude<span class='o'>=</span><span class='m'>-63.6</span><span class='p'>,</span> 
-                    latitude<span class='o'>=</span><span class='m'>44.65</span><span class='p'>)</span><span class='o'>$</span>illuminatedFraction
-plot<span class='p'>(</span>t<span class='p'>,</span> f<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&quot;l&quot;</span><span class='p'>,</span> xlab<span class='o'>=</span><span class='s'>&quot;Day of 2013&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Moon fraction&quot;</span><span class='p'>)</span>
-grid<span class='p'>()</span>
+7</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="c1"># tighten margins</span>
+t <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2013-12-1&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span> <span class="o">+</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">28</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">3600</span><span class="p">,</span> <span class="m">3600</span><span class="p">)</span>
+f <span class="o">&lt;-</span> moonAngle<span class="p">(</span>t<span class="o">=</span>t<span class="p">,</span> longitude<span class="o">=</span><span class="m">-63.6</span><span class="p">,</span> 
+                    latitude<span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="o">$</span>illuminatedFraction
+plot<span class="p">(</span>t<span class="p">,</span> f<span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;Day of 2013&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Moon fraction&quot;</span><span class="p">)</span>
+grid<span class="p">()</span>
 </pre></div>
 </td></tr></table>
+
 <p>For interest, add full-moon time as indicated in an almanac.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>full <span class='o'>&lt;-</span> as.POSIXct<span class='p'>(</span><span class='s'>&quot;2013-12-17 05:29:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;AST&quot;</span><span class='p'>)</span>
-abline<span class='p'>(</span>v<span class='o'>=</span>full<span class='p'>)</span>
-mtext<span class='p'>(</span><span class='s'>&quot;full&quot;</span><span class='p'>,</span> at<span class='o'>=</span>full<span class='p'>,</span> side<span class='o'>=</span><span class='m'>3</span><span class='p'>)</span>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>full <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2013-12-17 05:29:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;AST&quot;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>full<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;full&quot;</span><span class="p">,</span> at<span class="o">=</span>full<span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
+
 <p><img src="/assets/moon.png" alt="moon phase diagram" /></p>
 
 <p><em>Exercises</em> (a) Try this for other locations. (b) Detect full moon by using uniroot() on the rate of change of illumination.</p>
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

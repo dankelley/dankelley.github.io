@@ -96,12 +96,13 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory. For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.</p>
+<p>In Oceanography it can be useful to use colour to display z values along an (x,y) trajectory.  For example, CTD data might be displayed in this way, with x being distance along track, y being depth, and z being temperature. This post shows how one might do this.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The R code given below demonstrates this with fake data. The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+<p>The R code given below demonstrates this with fake data.  The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
  4
@@ -116,27 +117,28 @@
 13
 14
 15
-16</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
-x <span class='o'>&lt;-</span> <span class='m'>1</span><span class='o'>:</span><span class='m'>50</span>
-y <span class='o'>&lt;-</span> x <span class='o'>*</span> <span class='m'>2</span><span class='o'>/</span><span class='m'>10</span> <span class='o'>+</span> x<span class='o'>^</span><span class='m'>2</span><span class='o'>/</span><span class='m'>10</span>
-z <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> length.out <span class='o'>=</span> length<span class='p'>(</span>x<span class='p'>))</span>
-zlim <span class='o'>&lt;-</span> range<span class='p'>(</span>z<span class='p'>)</span>
-npalette <span class='o'>&lt;-</span> <span class='m'>10</span>
+16</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">50</span>
+y <span class="o">&lt;-</span> x <span class="o">*</span> <span class="m">2</span><span class="o">/</span><span class="m">10</span> <span class="o">+</span> x<span class="o">^</span><span class="m">2</span><span class="o">/</span><span class="m">10</span>
+z <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> length.out <span class="o">=</span> length<span class="p">(</span>x<span class="p">))</span>
+zlim <span class="o">&lt;-</span> range<span class="p">(</span>z<span class="p">)</span>
+npalette <span class="o">&lt;-</span> <span class="m">10</span>
 
-palette <span class='o'>&lt;-</span> oceColorsJet<span class='p'>(</span>npalette<span class='p'>)</span>
-drawPalette<span class='p'>(</span>zlim <span class='o'>=</span> zlim<span class='p'>,</span> col <span class='o'>=</span> palette<span class='p'>)</span>
-plot<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
-segments<span class='p'>(</span>head<span class='p'>(</span>x<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span> head<span class='p'>(</span>y<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span>
-  tail<span class='p'>(</span>x<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span> tail<span class='p'>(</span>y<span class='p'>,</span> <span class='m'>-1</span><span class='p'>),</span>
-  col <span class='o'>=</span> palette<span class='p'>[</span>findInterval<span class='p'>(</span>z<span class='p'>,</span> 
-    seq<span class='p'>(</span>zlim<span class='p'>[</span><span class='m'>1</span><span class='p'>],</span> zlim<span class='p'>[</span><span class='m'>2</span><span class='p'>],</span> length.out <span class='o'>=</span> npalette<span class='p'>))],</span>
-  lwd <span class='o'>=</span> <span class='m'>10</span><span class='p'>)</span>
-points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span> pch <span class='o'>=</span> <span class='m'>20</span><span class='p'>)</span>
+palette <span class="o">&lt;-</span> oceColorsJet<span class="p">(</span>npalette<span class="p">)</span>
+drawPalette<span class="p">(</span>zlim <span class="o">=</span> zlim<span class="p">,</span> col <span class="o">=</span> palette<span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+segments<span class="p">(</span>head<span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> head<span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  tail<span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> tail<span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  col <span class="o">=</span> palette<span class="p">[</span>findInterval<span class="p">(</span>z<span class="p">,</span> 
+    seq<span class="p">(</span>zlim<span class="p">[</span><span class="m">1</span><span class="p">],</span> zlim<span class="p">[</span><span class="m">2</span><span class="p">],</span> length.out <span class="o">=</span> npalette<span class="p">))],</span>
+  lwd <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+points<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">20</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
+
 <h1 id="results">Results</h1>
 
-<p>The graph shows that this works reasonably well. The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
+<p>The graph shows that this works reasonably well.  The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
 
 <p><a href="/assets/colorline.png"><img src="/assets/colorline-thumbnail.png" alt="graph" /></a></p>
 
@@ -145,6 +147,7 @@ points<span class='p'>(</span>x<span class='p'>,</span> y<span class='p'>,</span
 <h1 id="exercises">Exercises</h1>
 
 <p>Find a way to blend colour between the points, perhaps by defining a euclidian distance in (x,y) space (which will of course require scaling if x and y have different units or ranges) and then using <code>approx()</code>.</p>
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

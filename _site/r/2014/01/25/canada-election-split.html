@@ -98,14 +98,15 @@
 
 <p>District-by-district data reveal that if the Bloc Quebecois, Green, Liberal, and NDP parties were to have been united, the Conservative party would have lost the 41st Canadian election by a dramatic measure, instead of winning a majority.</p>
 
-<p>The graph given below shows the results by naming the ridings. Clicking on the graph will let you see results riding by riding, but the overview is also useful. The first two columns show the actual election results, with those that went Conservative (in the first-past-the-post system) to the left, and those that went to another party to the right. A clear majority is seen at a glance. The two columns on the right are analogous, but under the scenario that the non-Conservative parties were to form a new party.</p>
+<p>The graph given below shows the results by naming the ridings.  Clicking on the graph will let you see results riding by riding, but the overview is also useful.  The first two columns show the actual election results, with those that went Conservative (in the first-past-the-post system) to the left, and those that went to another party to the right.  A clear majority is seen at a glance.  The two columns on the right are analogous, but under the scenario that the non-Conservative parties were to form a new party.</p>
 
 <p><a href="/assets/vote-split.png"><img src="/assets/vote-split-thumbnail.png" alt="graph" /></a></p>
 
 <p>(Note that a few fringe parties were removed from the analysis.)</p>
 
-<h1 id="r_code_that_made_the_graph">R code that made the graph</h1>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+<h1 id="r-code-that-made-the-graph">R code that made the graph</h1>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
  4
@@ -197,101 +198,103 @@
 90
 91
 92
-93</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'>## DATA SOURCE: the file named e41m.txt was downloaded </span>
-<span class='c1'>## 2011-05-04 from http://enr.elections.ca/DownloadResults.aspx </span>
-<span class='c1'>## (after clicking the &#39;latest results&#39; link near the bottom of</span>
-<span class='c1'>## the left-hand column).  Some trailing blank lines were removed.</span>
-e <span class='o'>&lt;-</span> read.csv<span class='p'>(</span><span class='s'>&quot;e41m.txt&quot;</span><span class='p'>,</span> sep<span class='o'>=</span><span class='s'>&quot;\t&quot;</span><span class='p'>,</span> encoding<span class='o'>=</span><span class='s'>&quot;latin1&quot;</span><span class='p'>)</span>
-<span class='c1'>## shorten column names</span>
-colNames <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='s'>&quot;distNum&quot;</span><span class='p'>,</span> <span class='s'>&quot;distName&quot;</span><span class='p'>,</span> <span class='s'>&quot;distNameFR&quot;</span><span class='p'>,</span><span class='s'>&quot;type&quot;</span><span class='p'>,</span><span class='s'>&quot;typeFR&quot;</span><span class='p'>,</span><span class='s'>&quot;lname&quot;</span><span class='p'>,</span><span class='s'>&quot;mname&quot;</span><span class='p'>,</span><span class='s'>&quot;fname&quot;</span><span class='p'>,</span>
-              <span class='s'>&quot;affil&quot;</span><span class='p'>,</span> <span class='s'>&quot;affilFR&quot;</span><span class='p'>,</span><span class='s'>&quot;votes&quot;</span><span class='p'>,</span><span class='s'>&quot;percentVotes&quot;</span><span class='p'>,</span><span class='s'>&quot;rejected&quot;</span><span class='p'>,</span><span class='s'>&quot;total&quot;</span><span class='p'>)</span>
-names<span class='p'>(</span>e<span class='p'>)</span> <span class='o'>&lt;-</span> colNames
-<span class='c1'>## remove columns that we won&#39;t use</span>
-e <span class='o'>&lt;-</span> e<span class='p'>[,</span> names<span class='p'>(</span>e<span class='p'>)</span> <span class='o'>!=</span> <span class='s'>&quot;distNameFR&quot;</span><span class='p'>]</span>
-e <span class='o'>&lt;-</span> e<span class='p'>[,</span> names<span class='p'>(</span>e<span class='p'>)</span> <span class='o'>!=</span> <span class='s'>&quot;typeFR&quot;</span><span class='p'>]</span>
-e <span class='o'>&lt;-</span> e<span class='p'>[,</span> names<span class='p'>(</span>e<span class='p'>)</span> <span class='o'>!=</span> <span class='s'>&quot;affilFR&quot;</span><span class='p'>]</span>
-e <span class='o'>&lt;-</span> e<span class='p'>[,</span> names<span class='p'>(</span>e<span class='p'>)</span> <span class='o'>!=</span> <span class='s'>&quot;mname&quot;</span><span class='p'>]</span>
+93</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## DATA SOURCE: the file named e41m.txt was downloaded </span>
+<span class="c1">## 2011-05-04 from http://enr.elections.ca/DownloadResults.aspx </span>
+<span class="c1">## (after clicking the &#39;latest results&#39; link near the bottom of</span>
+<span class="c1">## the left-hand column).  Some trailing blank lines were removed.</span>
+e <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;e41m.txt&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> encoding<span class="o">=</span><span class="s">&quot;latin1&quot;</span><span class="p">)</span>
+<span class="c1">## shorten column names</span>
+colNames <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;distNum&quot;</span><span class="p">,</span> <span class="s">&quot;distName&quot;</span><span class="p">,</span> <span class="s">&quot;distNameFR&quot;</span><span class="p">,</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="s">&quot;typeFR&quot;</span><span class="p">,</span><span class="s">&quot;lname&quot;</span><span class="p">,</span><span class="s">&quot;mname&quot;</span><span class="p">,</span><span class="s">&quot;fname&quot;</span><span class="p">,</span>
+              <span class="s">&quot;affil&quot;</span><span class="p">,</span> <span class="s">&quot;affilFR&quot;</span><span class="p">,</span><span class="s">&quot;votes&quot;</span><span class="p">,</span><span class="s">&quot;percentVotes&quot;</span><span class="p">,</span><span class="s">&quot;rejected&quot;</span><span class="p">,</span><span class="s">&quot;total&quot;</span><span class="p">)</span>
+names<span class="p">(</span>e<span class="p">)</span> <span class="o">&lt;-</span> colNames
+<span class="c1">## remove columns that we won&#39;t use</span>
+e <span class="o">&lt;-</span> e<span class="p">[,</span> names<span class="p">(</span>e<span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;distNameFR&quot;</span><span class="p">]</span>
+e <span class="o">&lt;-</span> e<span class="p">[,</span> names<span class="p">(</span>e<span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;typeFR&quot;</span><span class="p">]</span>
+e <span class="o">&lt;-</span> e<span class="p">[,</span> names<span class="p">(</span>e<span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;affilFR&quot;</span><span class="p">]</span>
+e <span class="o">&lt;-</span> e<span class="p">[,</span> names<span class="p">(</span>e<span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;mname&quot;</span><span class="p">]</span>
 
-<span class='c1'>## shorten relevant party names</span>
-levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)[</span>levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)</span> <span class='o'>==</span> <span class='s'>&quot;Bloc Québécois&quot;</span><span class='p'>]</span> <span class='o'>&lt;-</span> <span class='s'>&quot;Bloc&quot;</span>
-levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)[</span>levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)</span> <span class='o'>==</span> <span class='s'>&quot;Conservative&quot;</span><span class='p'>]</span> <span class='o'>&lt;-</span> <span class='s'>&quot;Con&quot;</span>
-levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)[</span>levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)</span> <span class='o'>==</span> <span class='s'>&quot;Green Party&quot;</span><span class='p'>]</span> <span class='o'>&lt;-</span> <span class='s'>&quot;Green&quot;</span>
-levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)[</span>levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)</span> <span class='o'>==</span> <span class='s'>&quot;Liberal&quot;</span><span class='p'>]</span> <span class='o'>&lt;-</span> <span class='s'>&quot;Lib&quot;</span>
-levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)[</span>levels<span class='p'>(</span>e<span class='o'>$</span>affil<span class='p'>)</span> <span class='o'>==</span> <span class='s'>&quot;NDP-New Democratic Party&quot;</span><span class='p'>]</span> <span class='o'>&lt;-</span> <span class='s'>&quot;NDP&quot;</span>
+<span class="c1">## shorten relevant party names</span>
+levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)[</span>levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;Bloc Québécois&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;Bloc&quot;</span>
+levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)[</span>levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;Conservative&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;Con&quot;</span>
+levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)[</span>levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;Green Party&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;Green&quot;</span>
+levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)[</span>levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;Liberal&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;Lib&quot;</span>
+levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)[</span>levels<span class="p">(</span>e<span class="o">$</span>affil<span class="p">)</span> <span class="o">==</span> <span class="s">&quot;NDP-New Democratic Party&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;NDP&quot;</span>
 
-<span class='c1'>## categorize by district</span>
-f <span class='o'>&lt;-</span> factor<span class='p'>(</span>e<span class='o'>$</span>distNum<span class='p'>)</span>
-ee <span class='o'>&lt;-</span> split<span class='p'>(</span>e<span class='p'>,</span> f<span class='p'>)</span>
-district <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-bloc <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-green <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-con <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-lib <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-ndp <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-conWon <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-conWouldWin <span class='o'>&lt;-</span> <span class='kc'>NULL</span>
-nd <span class='o'>&lt;-</span> length<span class='p'>(</span>ee<span class='p'>)</span>
-<span class='kr'>for</span> <span class='p'>(</span>i <span class='kr'>in</span> <span class='m'>1</span><span class='o'>:</span>nd<span class='p'>)</span> <span class='p'>{</span>
-    d <span class='o'>&lt;-</span> ee<span class='p'>[</span>i<span class='p'>][[</span><span class='m'>1</span><span class='p'>]]</span>
-    <span class='c1'>## restrict to validated data, if we have them</span>
-    <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>d<span class='o'>$</span>type <span class='o'>==</span> <span class='s'>&quot;validated&quot;</span><span class='p'>))</span>
-        d <span class='o'>&lt;-</span> d<span class='p'>[</span>d<span class='o'>$</span>type <span class='o'>==</span> <span class='s'>&quot;validated&quot;</span><span class='p'>,]</span>
-    affil <span class='o'>&lt;-</span> as.character<span class='p'>(</span>d<span class='o'>$</span>affil<span class='p'>)</span>
-    percentVotes <span class='o'>&lt;-</span> d<span class='o'>$</span>percentVotes
-    district <span class='o'>&lt;-</span> c<span class='p'>(</span>district<span class='p'>,</span> as.character<span class='p'>(</span>d<span class='o'>$</span>distName<span class='p'>[</span><span class='m'>1</span><span class='p'>]))</span>
-    thisbloc <span class='o'>&lt;-</span> <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>affil<span class='o'>==</span><span class='s'>&quot;Bloc&quot;</span><span class='p'>))</span> percentVotes<span class='p'>[</span>affil<span class='o'>==</span><span class='s'>&quot;Bloc&quot;</span><span class='p'>]</span> <span class='kr'>else</span> <span class='m'>0</span>
-    thiscon <span class='o'>&lt;-</span> <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>affil<span class='o'>==</span><span class='s'>&quot;Con&quot;</span><span class='p'>))</span> percentVotes<span class='p'>[</span>affil<span class='o'>==</span><span class='s'>&quot;Con&quot;</span><span class='p'>]</span> <span class='kr'>else</span> <span class='m'>0</span>
-    thisgreen <span class='o'>&lt;-</span> <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>affil<span class='o'>==</span><span class='s'>&quot;Green&quot;</span><span class='p'>))</span> percentVotes<span class='p'>[</span>affil<span class='o'>==</span><span class='s'>&quot;Green&quot;</span><span class='p'>]</span> <span class='kr'>else</span> <span class='m'>0</span>
-    thislib <span class='o'>&lt;-</span> <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>affil<span class='o'>==</span><span class='s'>&quot;Lib&quot;</span><span class='p'>))</span> percentVotes<span class='p'>[</span>affil<span class='o'>==</span><span class='s'>&quot;Lib&quot;</span><span class='p'>]</span> <span class='kr'>else</span> <span class='m'>0</span>
-    thisndp <span class='o'>&lt;-</span> <span class='kr'>if</span> <span class='p'>(</span>any<span class='p'>(</span>affil<span class='o'>==</span><span class='s'>&quot;NDP&quot;</span><span class='p'>))</span> percentVotes<span class='p'>[</span>affil<span class='o'>==</span><span class='s'>&quot;NDP&quot;</span><span class='p'>]</span> <span class='kr'>else</span> <span class='m'>0</span>
-    con <span class='o'>&lt;-</span> c<span class='p'>(</span>con<span class='p'>,</span> thiscon<span class='p'>)</span>
-    ndp <span class='o'>&lt;-</span> c<span class='p'>(</span>ndp<span class='p'>,</span> thisndp<span class='p'>)</span>
-    lib <span class='o'>&lt;-</span> c<span class='p'>(</span>lib<span class='p'>,</span> thislib<span class='p'>)</span>
-    bloc <span class='o'>&lt;-</span> c<span class='p'>(</span>bloc<span class='p'>,</span> thisbloc<span class='p'>)</span>
-    green <span class='o'>&lt;-</span> c<span class='p'>(</span>green<span class='p'>,</span> thisgreen<span class='p'>)</span>
-    conWon <span class='o'>&lt;-</span> c<span class='p'>(</span>conWon<span class='p'>,</span> thiscon <span class='o'>&gt;</span> max<span class='p'>(</span>thisndp<span class='p'>,</span> thislib<span class='p'>,</span> thisbloc<span class='p'>,</span> thisgreen<span class='p'>))</span>
-    conWouldWin <span class='o'>&lt;-</span> c<span class='p'>(</span>conWouldWin<span class='p'>,</span> thiscon <span class='o'>&gt;</span> sum<span class='p'>(</span>thisndp<span class='p'>,</span> thislib<span class='p'>,</span> thisbloc<span class='p'>,</span> thisgreen<span class='p'>))</span>
-<span class='p'>}</span>
-results <span class='o'>&lt;-</span> data.frame<span class='p'>(</span>district<span class='p'>,</span> con<span class='p'>,</span> ndp<span class='p'>,</span> lib<span class='p'>,</span> bloc<span class='p'>,</span> green<span class='p'>,</span> conWon<span class='p'>,</span> conWouldWin<span class='p'>)</span>
-results <span class='o'>&lt;-</span> results<span class='p'>[</span>order<span class='p'>(</span>results<span class='o'>$</span>district<span class='p'>),</span> <span class='p'>]</span>
+<span class="c1">## categorize by district</span>
+f <span class="o">&lt;-</span> factor<span class="p">(</span>e<span class="o">$</span>distNum<span class="p">)</span>
+ee <span class="o">&lt;-</span> split<span class="p">(</span>e<span class="p">,</span> f<span class="p">)</span>
+district <span class="o">&lt;-</span> <span class="kc">NULL</span>
+bloc <span class="o">&lt;-</span> <span class="kc">NULL</span>
+green <span class="o">&lt;-</span> <span class="kc">NULL</span>
+con <span class="o">&lt;-</span> <span class="kc">NULL</span>
+lib <span class="o">&lt;-</span> <span class="kc">NULL</span>
+ndp <span class="o">&lt;-</span> <span class="kc">NULL</span>
+conWon <span class="o">&lt;-</span> <span class="kc">NULL</span>
+conWouldWin <span class="o">&lt;-</span> <span class="kc">NULL</span>
+nd <span class="o">&lt;-</span> length<span class="p">(</span>ee<span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nd<span class="p">)</span> <span class="p">{</span>
+    d <span class="o">&lt;-</span> ee<span class="p">[</span>i<span class="p">][[</span><span class="m">1</span><span class="p">]]</span>
+    <span class="c1">## restrict to validated data, if we have them</span>
+    <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>d<span class="o">$</span>type <span class="o">==</span> <span class="s">&quot;validated&quot;</span><span class="p">))</span>
+        d <span class="o">&lt;-</span> d<span class="p">[</span>d<span class="o">$</span>type <span class="o">==</span> <span class="s">&quot;validated&quot;</span><span class="p">,]</span>
+    affil <span class="o">&lt;-</span> as.character<span class="p">(</span>d<span class="o">$</span>affil<span class="p">)</span>
+    percentVotes <span class="o">&lt;-</span> d<span class="o">$</span>percentVotes
+    district <span class="o">&lt;-</span> c<span class="p">(</span>district<span class="p">,</span> as.character<span class="p">(</span>d<span class="o">$</span>distName<span class="p">[</span><span class="m">1</span><span class="p">]))</span>
+    thisbloc <span class="o">&lt;-</span> <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>affil<span class="o">==</span><span class="s">&quot;Bloc&quot;</span><span class="p">))</span> percentVotes<span class="p">[</span>affil<span class="o">==</span><span class="s">&quot;Bloc&quot;</span><span class="p">]</span> <span class="kr">else</span> <span class="m">0</span>
+    thiscon <span class="o">&lt;-</span> <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>affil<span class="o">==</span><span class="s">&quot;Con&quot;</span><span class="p">))</span> percentVotes<span class="p">[</span>affil<span class="o">==</span><span class="s">&quot;Con&quot;</span><span class="p">]</span> <span class="kr">else</span> <span class="m">0</span>
+    thisgreen <span class="o">&lt;-</span> <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>affil<span class="o">==</span><span class="s">&quot;Green&quot;</span><span class="p">))</span> percentVotes<span class="p">[</span>affil<span class="o">==</span><span class="s">&quot;Green&quot;</span><span class="p">]</span> <span class="kr">else</span> <span class="m">0</span>
+    thislib <span class="o">&lt;-</span> <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>affil<span class="o">==</span><span class="s">&quot;Lib&quot;</span><span class="p">))</span> percentVotes<span class="p">[</span>affil<span class="o">==</span><span class="s">&quot;Lib&quot;</span><span class="p">]</span> <span class="kr">else</span> <span class="m">0</span>
+    thisndp <span class="o">&lt;-</span> <span class="kr">if</span> <span class="p">(</span>any<span class="p">(</span>affil<span class="o">==</span><span class="s">&quot;NDP&quot;</span><span class="p">))</span> percentVotes<span class="p">[</span>affil<span class="o">==</span><span class="s">&quot;NDP&quot;</span><span class="p">]</span> <span class="kr">else</span> <span class="m">0</span>
+    con <span class="o">&lt;-</span> c<span class="p">(</span>con<span class="p">,</span> thiscon<span class="p">)</span>
+    ndp <span class="o">&lt;-</span> c<span class="p">(</span>ndp<span class="p">,</span> thisndp<span class="p">)</span>
+    lib <span class="o">&lt;-</span> c<span class="p">(</span>lib<span class="p">,</span> thislib<span class="p">)</span>
+    bloc <span class="o">&lt;-</span> c<span class="p">(</span>bloc<span class="p">,</span> thisbloc<span class="p">)</span>
+    green <span class="o">&lt;-</span> c<span class="p">(</span>green<span class="p">,</span> thisgreen<span class="p">)</span>
+    conWon <span class="o">&lt;-</span> c<span class="p">(</span>conWon<span class="p">,</span> thiscon <span class="o">&gt;</span> max<span class="p">(</span>thisndp<span class="p">,</span> thislib<span class="p">,</span> thisbloc<span class="p">,</span> thisgreen<span class="p">))</span>
+    conWouldWin <span class="o">&lt;-</span> c<span class="p">(</span>conWouldWin<span class="p">,</span> thiscon <span class="o">&gt;</span> sum<span class="p">(</span>thisndp<span class="p">,</span> thislib<span class="p">,</span> thisbloc<span class="p">,</span> thisgreen<span class="p">))</span>
+<span class="p">}</span>
+results <span class="o">&lt;-</span> data.frame<span class="p">(</span>district<span class="p">,</span> con<span class="p">,</span> ndp<span class="p">,</span> lib<span class="p">,</span> bloc<span class="p">,</span> green<span class="p">,</span> conWon<span class="p">,</span> conWouldWin<span class="p">)</span>
+results <span class="o">&lt;-</span> results<span class="p">[</span>order<span class="p">(</span>results<span class="o">$</span>district<span class="p">),</span> <span class="p">]</span>
 
-png<span class='p'>(</span><span class='s'>&quot;split.png&quot;</span><span class='p'>,</span> width<span class='o'>=</span><span class='m'>8.5</span><span class='p'>,</span> height<span class='o'>=</span><span class='m'>11</span><span class='p'>,</span> unit<span class='o'>=</span><span class='s'>&quot;in&quot;</span><span class='p'>,</span> res<span class='o'>=</span><span class='m'>200</span><span class='p'>,</span> pointsize<span class='o'>=</span><span class='m'>7</span><span class='p'>)</span>
-par<span class='p'>(</span>mfrow<span class='o'>=</span>c<span class='p'>(</span><span class='m'>1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>),</span>mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>))</span>
-plot<span class='p'>(</span>c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> c<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>1</span><span class='p'>),</span> xlab<span class='o'>=</span><span class='s'>&quot;&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;&quot;</span><span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;n&#39;</span><span class='p'>)</span>
-jconwon <span class='o'>&lt;-</span> <span class='m'>1</span>
-jconwonnot <span class='o'>&lt;-</span> <span class='m'>1</span>
-jconwouldwin <span class='o'>&lt;-</span> <span class='m'>1</span>
-jconwouldwinnot <span class='o'>&lt;-</span> <span class='m'>1</span>
-yy <span class='o'>&lt;-</span> <span class='m'>0.0051</span>
-cex <span class='o'>&lt;-</span> <span class='m'>0.45</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.1</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.01</span><span class='p'>,</span> <span class='s'>&quot;Actual results&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.7</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.01</span><span class='p'>,</span> <span class='s'>&quot;If &#39;left&#39; not split&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.005</span><span class='p'>,</span> <span class='s'>&quot;Conservatives won&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>2</span><span class='o'>/</span><span class='m'>3</span><span class='p'>)</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.2</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.005</span><span class='p'>,</span> <span class='s'>&quot;Conservatives lost&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>2</span><span class='o'>/</span><span class='m'>3</span><span class='p'>)</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.6</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.005</span><span class='p'>,</span> <span class='s'>&quot;Conservatives would win&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>2</span><span class='o'>/</span><span class='m'>3</span><span class='p'>)</span>
-text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.8</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1.005</span><span class='p'>,</span> <span class='s'>&quot;Conservatives would lose&quot;</span><span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>2</span><span class='o'>/</span><span class='m'>3</span><span class='p'>)</span>
-<span class='kr'>for</span> <span class='p'>(</span>i <span class='kr'>in</span> <span class='m'>1</span><span class='o'>:</span>nd<span class='p'>)</span> <span class='p'>{</span>
-    district <span class='o'>&lt;-</span> iconv<span class='p'>(</span>as.character<span class='p'>(</span>results<span class='o'>$</span>district<span class='p'>[</span>i<span class='p'>]),</span> to<span class='o'>=</span><span class='s'>&quot;UTF8&quot;</span><span class='p'>)</span>
-    <span class='kr'>if</span> <span class='p'>(</span>results<span class='o'>$</span>conWon<span class='p'>[</span>i<span class='p'>])</span> <span class='p'>{</span>
-        text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1</span><span class='o'>-</span>yy<span class='o'>*</span>jconwon<span class='p'>,</span> district<span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-        jconwon <span class='o'>&lt;-</span> jconwon <span class='o'>+</span> <span class='m'>1</span>
-    <span class='p'>}</span>
-    <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>results<span class='o'>$</span>conWon<span class='p'>[</span>i<span class='p'>])</span> <span class='p'>{</span>
-        text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.2</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1</span><span class='o'>-</span>yy<span class='o'>*</span>jconwonnot<span class='p'>,</span> district<span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-        jconwonnot <span class='o'>&lt;-</span> jconwonnot <span class='o'>+</span> <span class='m'>1</span>
-    <span class='p'>}</span>
-    <span class='kr'>if</span> <span class='p'>(</span>results<span class='o'>$</span>conWouldWin<span class='p'>[</span>i<span class='p'>])</span> <span class='p'>{</span>
-        text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.6</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1</span><span class='o'>-</span>yy<span class='o'>*</span>jconwouldwin<span class='p'>,</span> district<span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-        jconwouldwin <span class='o'>&lt;-</span> jconwouldwin <span class='o'>+</span> <span class='m'>1</span>
-    <span class='p'>}</span>
-    <span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>results<span class='o'>$</span>conWouldWin<span class='p'>[</span>i<span class='p'>])</span> <span class='p'>{</span>
-        text<span class='p'>(</span>x<span class='o'>=</span><span class='m'>0.8</span><span class='p'>,</span> y<span class='o'>=</span><span class='m'>1</span><span class='o'>-</span>yy<span class='o'>*</span>jconwouldwinnot<span class='p'>,</span> district<span class='p'>,</span> cex<span class='o'>=</span>cex<span class='p'>,</span> adj<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-        jconwouldwinnot <span class='o'>&lt;-</span> jconwouldwinnot <span class='o'>+</span> <span class='m'>1</span>
-    <span class='p'>}</span>
-<span class='p'>}</span>
-dev.off<span class='p'>()</span>
+png<span class="p">(</span><span class="s">&quot;split.png&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">8.5</span><span class="p">,</span> height<span class="o">=</span><span class="m">11</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> res<span class="o">=</span><span class="m">200</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">7</span><span class="p">)</span>
+par<span class="p">(</span>mfrow<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span>mgp<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+plot<span class="p">(</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">)</span>
+jconwon <span class="o">&lt;-</span> <span class="m">1</span>
+jconwonnot <span class="o">&lt;-</span> <span class="m">1</span>
+jconwouldwin <span class="o">&lt;-</span> <span class="m">1</span>
+jconwouldwinnot <span class="o">&lt;-</span> <span class="m">1</span>
+yy <span class="o">&lt;-</span> <span class="m">0.0051</span>
+cex <span class="o">&lt;-</span> <span class="m">0.45</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0.1</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.01</span><span class="p">,</span> <span class="s">&quot;Actual results&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0.7</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.01</span><span class="p">,</span> <span class="s">&quot;If &#39;left&#39; not split&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.005</span><span class="p">,</span> <span class="s">&quot;Conservatives won&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0.2</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.005</span><span class="p">,</span> <span class="s">&quot;Conservatives lost&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0.6</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.005</span><span class="p">,</span> <span class="s">&quot;Conservatives would win&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+text<span class="p">(</span>x<span class="o">=</span><span class="m">0.8</span><span class="p">,</span> y<span class="o">=</span><span class="m">1.005</span><span class="p">,</span> <span class="s">&quot;Conservatives would lose&quot;</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nd<span class="p">)</span> <span class="p">{</span>
+    district <span class="o">&lt;-</span> iconv<span class="p">(</span>as.character<span class="p">(</span>results<span class="o">$</span>district<span class="p">[</span>i<span class="p">]),</span> to<span class="o">=</span><span class="s">&quot;UTF8&quot;</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span>results<span class="o">$</span>conWon<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+        text<span class="p">(</span>x<span class="o">=</span><span class="m">0</span><span class="p">,</span> y<span class="o">=</span><span class="m">1</span><span class="o">-</span>yy<span class="o">*</span>jconwon<span class="p">,</span> district<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+        jconwon <span class="o">&lt;-</span> jconwon <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span>results<span class="o">$</span>conWon<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+        text<span class="p">(</span>x<span class="o">=</span><span class="m">0.2</span><span class="p">,</span> y<span class="o">=</span><span class="m">1</span><span class="o">-</span>yy<span class="o">*</span>jconwonnot<span class="p">,</span> district<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+        jconwonnot <span class="o">&lt;-</span> jconwonnot <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+    <span class="kr">if</span> <span class="p">(</span>results<span class="o">$</span>conWouldWin<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+        text<span class="p">(</span>x<span class="o">=</span><span class="m">0.6</span><span class="p">,</span> y<span class="o">=</span><span class="m">1</span><span class="o">-</span>yy<span class="o">*</span>jconwouldwin<span class="p">,</span> district<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+        jconwouldwin <span class="o">&lt;-</span> jconwouldwin <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span>results<span class="o">$</span>conWouldWin<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+        text<span class="p">(</span>x<span class="o">=</span><span class="m">0.8</span><span class="p">,</span> y<span class="o">=</span><span class="m">1</span><span class="o">-</span>yy<span class="o">*</span>jconwouldwinnot<span class="p">,</span> district<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+        jconwouldwinnot <span class="o">&lt;-</span> jconwouldwinnot <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+dev.off<span class="p">()</span>
 </pre></div>
 </td></tr></table>
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

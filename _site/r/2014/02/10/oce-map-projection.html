@@ -106,64 +106,74 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot. A ad-hoc scheme was code to try to prevent this, but it does not always work. Problems are compounded for filled coastlines.</p>
+<p>Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.</p>
 
-<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code>projr</code> package instead of <code>mapproj</code> to carry out the projections. The result is that the annoying lines went away.</p>
+<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code>projr</code> package instead of <code>mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
 
-<p>I am still thinking about whether to make a transition in Oce. The <code>proj4</code> syntax is too tricky for simple inclusion in Oce, and tricky, and users (including me) are accustomed to the existing syntax, so it would be necessary to convert the internal linkage in a somewhat nontrivial way. Nevertheless, the point of the present post is simply to illustrate that the problem is solved, at least in one test case.</p>
+<p>I am still thinking about whether to make a transition in Oce.  The <code>proj4</code> syntax is too tricky for simple inclusion in Oce, and tricky, and users (including me) are accustomed to the existing syntax, so it would be necessary to convert the internal linkage in a somewhat nontrivial way.  Nevertheless, the point of the present post is simply to illustrate that the problem is solved, at least in one test case.</p>
 
-<h1 id="test_case">Test case</h1>
+<h1 id="test-case">Test case</h1>
 
 <p>First, load libraries and extract the coastline.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
 4
-5</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>proj4<span class='p'>)</span>
-library<span class='p'>(</span>mapproj<span class='p'>)</span>
-data<span class='p'>(</span>coastlineWorld<span class='p'>)</span>
-lon <span class='o'>&lt;-</span> coastlineWorld<span class='p'>[[</span><span class='s'>&quot;longitude&quot;</span><span class='p'>]]</span>
-lat <span class='o'>&lt;-</span> coastlineWorld<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]]</span>
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>proj4<span class="p">)</span>
+library<span class="p">(</span>mapproj<span class="p">)</span>
+data<span class="p">(</span>coastlineWorld<span class="p">)</span>
+lon <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]]</span>
+lat <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]]</span>
 </pre></div>
 </td></tr></table>
+
 <p>Next, plot with existing (mapproj) projection.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
-4</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
-xy <span class='o'>&lt;-</span> mapproject<span class='p'>(</span>coastlineWorld<span class='p'>[[</span><span class='s'>&quot;longitude&quot;</span><span class='p'>]],</span> coastlineWorld<span class='p'>[[</span><span class='s'>&quot;latitude&quot;</span><span class='p'>]],</span> 
-    proj <span class='o'>=</span> <span class='s'>&quot;mollweide&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>xy<span class='o'>$</span>x<span class='p'>,</span> xy<span class='o'>$</span>y<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+xy <span class="o">&lt;-</span> mapproject<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span> 
+    proj <span class="o">=</span> <span class="s">&quot;mollweide&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>xy<span class="o">$</span>x<span class="p">,</span> xy<span class="o">$</span>y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> asp <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10-projection-existing.png" alt="center" /></p>
+
+<p><img src="/assets/2014-02-10-projection-existing.png" alt="center" /> </p>
 
 <p>Finally, plot with proposed (proj4) projection.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
-3</code></pre></div></td><td class='code'><div class='highlight'><pre>par<span class='p'>(</span>mar <span class='o'>=</span> c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp <span class='o'>=</span> c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span>
-xy <span class='o'>&lt;-</span> project<span class='p'>(</span>cbind<span class='p'>(</span>lon<span class='p'>,</span> lat<span class='p'>),</span> <span class='s'>&quot;+proj=moll&quot;</span><span class='p'>)</span>
-plot<span class='p'>(</span>xy<span class='p'>[,</span> <span class='m'>1</span><span class='p'>],</span> xy<span class='p'>[,</span> <span class='m'>2</span><span class='p'>],</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>,</span> asp <span class='o'>=</span> <span class='m'>1</span><span class='p'>)</span>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+xy <span class="o">&lt;-</span> project<span class="p">(</span>cbind<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">),</span> <span class="s">&quot;+proj=moll&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>xy<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> xy<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> asp <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-10-projection-proposed.png" alt="center" /></p>
+
+<p><img src="/assets/2014-02-10-projection-proposed.png" alt="center" /> </p>
 
 <h1 id="conclusions">Conclusions</h1>
 
 <p>At least in this example, the <code>proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
 
-<p>I will do some more tests to see if this is a fluke case, but if I think <code>proj4</code> is promising, I will see how to invent a scheme for handling the <code>mapproj</code> arguments called <code>parameters</code> and <code>orientation</code> with <code>proj4</code>. THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
+<p>I will do some more tests to see if this is a fluke case, but if I think <code>proj4</code> is promising, I will see how to invent a scheme for handling the <code>mapproj</code> arguments called <code>parameters</code> and <code>orientation</code> with <code>proj4</code>.  THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
 
 <h1 id="resources">Resources</h1>
-
 <ul>
-<li>Source code: <a href="/assets/2014-02-10-oce-map-projection.R">2014-04-10-oce-map-projection.R</a></li>
+  <li>Source code: <a href="/assets/2014-02-10-oce-map-projection.R">2014-04-10-oce-map-projection.R</a></li>
 </ul>
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

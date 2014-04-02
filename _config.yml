@@ -1,4 +1,5 @@
 pygments: true
 baseurl: /
 comments: true
+markdown: kramdown
 

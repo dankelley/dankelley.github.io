@@ -95,7 +95,8 @@
 
 
 <p>Continuing on the theme of solar angles, the code given below produces an analemma diagram similar to that of Lynch (2012, figure 2).</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
  4
@@ -104,23 +105,26 @@
  7
  8
  9
-10</code></pre></div></td><td class='code'><div class='highlight'><pre>library<span class='p'>(</span>oce<span class='p'>)</span>
-loc <span class='o'>&lt;-</span> list<span class='p'>(</span>lon<span class='o'>=</span><span class='m'>-0.0015</span><span class='p'>,</span> lat<span class='o'>=</span><span class='m'>51.4778</span><span class='p'>)</span>  <span class='c1'># Greenwich Observatory</span>
-t <span class='o'>&lt;-</span> seq.POSIXt<span class='p'>(</span>as.POSIXct<span class='p'>(</span><span class='s'>&quot;2014-01-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>),</span>
-                as.POSIXct<span class='p'>(</span><span class='s'>&quot;2015-01-01 12:00:00&quot;</span><span class='p'>,</span> tz<span class='o'>=</span><span class='s'>&quot;UTC&quot;</span><span class='p'>),</span>
-                by<span class='o'>=</span><span class='s'>&quot;1 d&quot;</span><span class='p'>)</span>
-sa <span class='o'>&lt;-</span> sunAngle<span class='p'>(</span>t<span class='p'>,</span> lon<span class='o'>=</span>loc<span class='o'>$</span>lon<span class='p'>,</span> lat<span class='o'>=</span>loc<span class='o'>$</span>lat<span class='p'>)</span>
-par<span class='p'>(</span>mar<span class='o'>=</span>c<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>),</span> mgp<span class='o'>=</span>c<span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>0.7</span><span class='p'>,</span> <span class='m'>0</span><span class='p'>))</span> <span class='c1'># tighten margins</span>
-plot<span class='p'>(</span>sa<span class='o'>$</span>azimuth<span class='p'>,</span> sa<span class='o'>$</span>altitude<span class='p'>,</span> type<span class='o'>=</span><span class='s'>&#39;p&#39;</span><span class='p'>,</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span>
-     xlab<span class='o'>=</span><span class='s'>&quot;Azimuth&quot;</span><span class='p'>,</span> ylab<span class='o'>=</span><span class='s'>&quot;Altitude&quot;</span><span class='p'>)</span>
-grid<span class='p'>()</span>
+10</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+loc <span class="o">&lt;-</span> list<span class="p">(</span>lon<span class="o">=</span><span class="m">-0.0015</span><span class="p">,</span> lat<span class="o">=</span><span class="m">51.4778</span><span class="p">)</span>  <span class="c1"># Greenwich Observatory</span>
+t <span class="o">&lt;-</span> seq.POSIXt<span class="p">(</span>as.POSIXct<span class="p">(</span><span class="s">&quot;2014-01-01 12:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">),</span>
+                as.POSIXct<span class="p">(</span><span class="s">&quot;2015-01-01 12:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">),</span>
+                by<span class="o">=</span><span class="s">&quot;1 d&quot;</span><span class="p">)</span>
+sa <span class="o">&lt;-</span> sunAngle<span class="p">(</span>t<span class="p">,</span> lon<span class="o">=</span>loc<span class="o">$</span>lon<span class="p">,</span> lat<span class="o">=</span>loc<span class="o">$</span>lat<span class="p">)</span>
+par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="c1"># tighten margins</span>
+plot<span class="p">(</span>sa<span class="o">$</span>azimuth<span class="p">,</span> sa<span class="o">$</span>altitude<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span>
+     xlab<span class="o">=</span><span class="s">&quot;Azimuth&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Altitude&quot;</span><span class="p">)</span>
+grid<span class="p">()</span>
 </pre></div>
 </td></tr></table>
+
 <p><a href="/assets/analemma.png"><img src="/assets/analemma-thumbnail.png" alt="graph" /></a></p>
 
 <h1 id="references">References</h1>
 
 <p>Peter Lynch, 2012. The equation of time and the analemma. Irish Math. Soc. Bulletin, 69:47-56. <a href="http://www.maths.tcd.ie/pub/ims/bull69/Lynch.pdf">PDF</a></p>
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

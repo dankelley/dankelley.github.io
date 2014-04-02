@@ -96,78 +96,83 @@
 <b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
 
 
-<p>The <code>filtfilt</code> function in R is supposedly based on the Matlab one, but it does quite badly on endpoints. My goal here is to explore alternatives, with a focus on the Octave method.</p>
+<p>The <code>filtfilt</code> function in R is supposedly based on the Matlab one, but it does quite badly on endpoints.  My goal here is to explore alternatives, with a focus on the Octave method.</p>
 
 <p>NOTE: I may also try <a href="http://wiki.scipy.org/Cookbook/FiltFilt">scipy</a> for hints.)</p>
 
-<p>The best method of dealing with endpoints is still an open question. Matlab does one thing, Octave does another. Both seem to work reasonably well, and the Octave license is more appropriate to the present task, so I am focussing on that.</p>
+<p>The best method of dealing with endpoints is still an open question.  Matlab does one thing, Octave does another.  Both seem to work reasonably well, and the Octave license is more appropriate to the present task, so I am focussing on that.</p>
 
-<p>This is a page in progress. I am trying to make some of my R code work exactly as Octave does, since then I’ll know that I’ve successfully mimicked their method. This is proving to be difficult! I started this page weeks ago and have returned to it several times. If/when I figure it out, I will update the date of the blog posting and remove the “draft” designation.</p>
+<p>This is a page in progress.  I am trying to make some of my R code work exactly as Octave does, since then I’ll know that I’ve successfully mimicked their method.  This is proving to be difficult!  I started this page weeks ago and have returned to it several times.  If/when I figure it out, I will update the date of the blog posting and remove the “draft” designation.</p>
 
 <p>If any readers have ideas, please let me know!</p>
 
-<h1 id="octave_implementation">Octave implementation</h1>
+<h1 id="octave-implementation">Octave implementation</h1>
 
-<h2 id="full_code_with_initial_comments_removed_for_brevity">Full code (with initial comments removed for brevity)</h2>
-<div class='highlight'><pre><code class='matlab'><span class='k'>function</span><span class='w'> </span>y <span class='p'>=</span><span class='w'> </span><span class='nf'>filtfilt</span><span class='p'>(</span>b, a, x<span class='p'>)</span><span class='w' />
+<h2 id="full-code-with-initial-comments-removed-for-brevity">Full code (with initial comments removed for brevity)</h2>
 
-<span class='w'>  </span><span class='k'>if</span> <span class='p'>(</span><span class='n'>nargin</span> !<span class='p'>=</span> <span class='mi'>3</span><span class='p'>)</span>
-    <span class='n'>print_usage</span><span class='p'>;</span>
-  <span class='n'>endif</span>
-  <span class='n'>rotate</span> <span class='p'>=</span> <span class='p'>(</span><span class='nb'>size</span><span class='p'>(</span><span class='n'>x</span><span class='p'>,</span><span class='mi'>1</span><span class='p'>)</span><span class='o'>==</span><span class='mi'>1</span><span class='p'>);</span>
-  <span class='k'>if</span> <span class='n'>rotate</span><span class='p'>,</span>                    # <span class='n'>a</span> <span class='n'>row</span> <span class='n'>vector</span>
-    <span class='n'>x</span> <span class='p'>=</span> <span class='n'>x</span><span class='p'>(:);</span>                   # <span class='n'>make</span> <span class='n'>it</span> <span class='n'>a</span> <span class='n'>column</span> <span class='n'>vector</span>
-  <span class='n'>endif</span>
+<div class="highlight"><pre><code class="matlab"><span class="k">function</span><span class="w"> </span>y <span class="p">=</span><span class="w"> </span><span class="nf">filtfilt</span><span class="p">(</span>b, a, x<span class="p">)</span><span class="w"></span>
 
-  <span class='n'>lx</span> <span class='p'>=</span> <span class='nb'>size</span><span class='p'>(</span><span class='n'>x</span><span class='p'>,</span><span class='mi'>1</span><span class='p'>);</span>
-  <span class='n'>a</span> <span class='p'>=</span> <span class='n'>a</span><span class='p'>(:).</span><span class='s'>&#39;;</span>
-<span class='s'>  b = b(:).&#39;</span><span class='p'>;</span>
-  <span class='n'>lb</span> <span class='p'>=</span> <span class='nb'>length</span><span class='p'>(</span><span class='n'>b</span><span class='p'>);</span>
-  <span class='n'>la</span> <span class='p'>=</span> <span class='nb'>length</span><span class='p'>(</span><span class='n'>a</span><span class='p'>);</span>
-  <span class='n'>n</span> <span class='p'>=</span> <span class='n'>max</span><span class='p'>(</span><span class='n'>lb</span><span class='p'>,</span> <span class='n'>la</span><span class='p'>);</span>
-  <span class='n'>lrefl</span> <span class='p'>=</span> <span class='mi'>3</span> <span class='o'>*</span> <span class='p'>(</span><span class='n'>n</span> <span class='o'>-</span> <span class='mi'>1</span><span class='p'>);</span>
-  <span class='k'>if</span> <span class='n'>la</span> <span class='o'>&lt;</span> <span class='n'>n</span><span class='p'>,</span> <span class='n'>a</span><span class='p'>(</span><span class='n'>n</span><span class='p'>)</span> <span class='p'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='n'>endif</span>
-  <span class='k'>if</span> <span class='n'>lb</span> <span class='o'>&lt;</span> <span class='n'>n</span><span class='p'>,</span> <span class='n'>b</span><span class='p'>(</span><span class='n'>n</span><span class='p'>)</span> <span class='p'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='n'>endif</span>
+<span class="w">  </span><span class="k">if</span> <span class="p">(</span><span class="n">nargin</span> !<span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">print_usage</span><span class="p">;</span>
+  <span class="n">endif</span>
+  <span class="n">rotate</span> <span class="p">=</span> <span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">);</span>
+  <span class="k">if</span> <span class="n">rotate</span><span class="p">,</span>                    # <span class="n">a</span> <span class="n">row</span> <span class="n">vector</span>
+    <span class="n">x</span> <span class="p">=</span> <span class="n">x</span><span class="p">(:);</span>                   # <span class="n">make</span> <span class="n">it</span> <span class="n">a</span> <span class="n">column</span> <span class="n">vector</span>
+  <span class="n">endif</span>
 
-  ## <span class='n'>Compute</span> <span class='n'>a</span> <span class='n'>the</span> <span class='n'>initial</span> <span class='n'>state</span> <span class='n'>taking</span> <span class='n'>inspiration</span> <span class='n'>from</span>
-  ## <span class='n'>Likhterov</span> <span class='o'>&amp;</span> <span class='n'>Kopeika</span><span class='p'>,</span> <span class='mf'>2003.</span> &quot;<span class='n'>Hardware</span><span class='o'>-</span><span class='n'>efficient</span> <span class='n'>technique</span> <span class='k'>for</span>
-  ##     <span class='n'>minimizing</span> <span class='n'>startup</span> <span class='n'>transients</span> <span class='n'>in</span> <span class='n'>Direct</span> <span class='n'>Form</span> <span class='n'>II</span> <span class='n'>digital</span> <span class='n'>filters</span>&quot;
-  <span class='n'>kdc</span> <span class='p'>=</span> <span class='n'>sum</span><span class='p'>(</span><span class='n'>b</span><span class='p'>)</span> <span class='o'>/</span> <span class='n'>sum</span><span class='p'>(</span><span class='n'>a</span><span class='p'>);</span>
-  <span class='k'>if</span> <span class='p'>(</span><span class='nb'>abs</span><span class='p'>(</span><span class='n'>kdc</span><span class='p'>)</span> <span class='o'>&lt;</span> <span class='nb'>inf</span><span class='p'>)</span> # <span class='n'>neither</span> <span class='n'>NaN</span> <span class='n'>nor</span> <span class='o'>+/-</span> <span class='n'>Inf</span>
-    <span class='n'>si</span> <span class='p'>=</span> <span class='nb'>fliplr</span><span class='p'>(</span><span class='n'>cumsum</span><span class='p'>(</span><span class='nb'>fliplr</span><span class='p'>(</span><span class='n'>b</span> <span class='o'>-</span> <span class='n'>kdc</span> <span class='o'>*</span> <span class='n'>a</span><span class='p'>)));</span>
-  <span class='k'>else</span>
-    <span class='n'>si</span> <span class='p'>=</span> <span class='nb'>zeros</span><span class='p'>(</span><span class='nb'>size</span><span class='p'>(</span><span class='n'>a</span><span class='p'>));</span> # <span class='n'>fall</span> <span class='n'>back</span> <span class='n'>to</span> <span class='n'>zero</span> <span class='n'>initialization</span>
-  <span class='n'>endif</span>
-  <span class='n'>si</span><span class='p'>(</span><span class='mi'>1</span><span class='p'>)</span> <span class='p'>=</span> <span class='p'>[];</span>
+  <span class="n">lx</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">a</span> <span class="p">=</span> <span class="n">a</span><span class="p">(:).</span><span class="s">&#39;;</span>
+<span class="s">  b = b(:).&#39;</span><span class="p">;</span>
+  <span class="n">lb</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="n">la</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">n</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">la</span><span class="p">);</span>
+  <span class="n">lrefl</span> <span class="p">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="k">if</span> <span class="n">la</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">endif</span>
+  <span class="k">if</span> <span class="n">lb</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">endif</span>
 
-  <span class='k'>for</span> <span class='p'>(</span><span class='n'>c</span> <span class='p'>=</span> <span class='mi'>1</span><span class='p'>:</span><span class='nb'>size</span><span class='p'>(</span><span class='n'>x</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>))</span> # <span class='n'>filter</span> <span class='n'>all</span> <span class='n'>columns</span><span class='p'>,</span> <span class='n'>one</span> <span class='n'>by</span> <span class='n'>one</span>
-    <span class='n'>v</span> <span class='p'>=</span> <span class='p'>[</span><span class='mi'>2</span><span class='o'>*</span><span class='n'>x</span><span class='p'>(</span><span class='mi'>1</span><span class='p'>,</span><span class='n'>c</span><span class='p'>)</span><span class='o'>-</span><span class='n'>x</span><span class='p'>((</span><span class='n'>lrefl</span><span class='o'>+</span><span class='mi'>1</span><span class='p'>):</span><span class='o'>-</span><span class='mi'>1</span><span class='p'>:</span><span class='mi'>2</span><span class='p'>,</span><span class='n'>c</span><span class='p'>);</span> <span class='n'>x</span><span class='p'>(:,</span><span class='n'>c</span><span class='p'>);</span>
-         <span class='mi'>2</span><span class='o'>*</span><span class='n'>x</span><span class='p'>(</span><span class='k'>end</span><span class='p'>,</span><span class='n'>c</span><span class='p'>)</span><span class='o'>-</span><span class='n'>x</span><span class='p'>((</span><span class='k'>end</span><span class='o'>-</span><span class='mi'>1</span><span class='p'>):</span><span class='o'>-</span><span class='mi'>1</span><span class='p'>:</span><span class='k'>end</span><span class='o'>-</span><span class='n'>lrefl</span><span class='p'>,</span><span class='n'>c</span><span class='p'>)];</span> # <span class='n'>a</span> <span class='n'>column</span> <span class='n'>vector</span>
+  ## <span class="n">Compute</span> <span class="n">a</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">state</span> <span class="n">taking</span> <span class="n">inspiration</span> <span class="n">from</span>
+  ## <span class="n">Likhterov</span> <span class="o">&amp;</span> <span class="n">Kopeika</span><span class="p">,</span> <span class="mf">2003.</span> &quot;<span class="n">Hardware</span><span class="o">-</span><span class="n">efficient</span> <span class="n">technique</span> <span class="k">for</span>
+  ##     <span class="n">minimizing</span> <span class="n">startup</span> <span class="n">transients</span> <span class="n">in</span> <span class="n">Direct</span> <span class="n">Form</span> <span class="n">II</span> <span class="n">digital</span> <span class="n">filters</span>&quot;
+  <span class="n">kdc</span> <span class="p">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">kdc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">inf</span><span class="p">)</span> # <span class="n">neither</span> <span class="n">NaN</span> <span class="n">nor</span> <span class="o">+/-</span> <span class="n">Inf</span>
+    <span class="n">si</span> <span class="p">=</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">cumsum</span><span class="p">(</span><span class="nb">fliplr</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">kdc</span> <span class="o">*</span> <span class="n">a</span><span class="p">)));</span>
+  <span class="k">else</span>
+    <span class="n">si</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span> # <span class="n">fall</span> <span class="n">back</span> <span class="n">to</span> <span class="n">zero</span> <span class="n">initialization</span>
+  <span class="n">endif</span>
+  <span class="n">si</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="p">[];</span>
 
-    ## <span class='n'>Do</span> <span class='n'>forward</span> <span class='n'>and</span> <span class='n'>reverse</span> <span class='n'>filtering</span>
-    <span class='n'>v</span> <span class='p'>=</span> <span class='n'>filter</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>v</span><span class='p'>,</span><span class='n'>si</span><span class='o'>*</span><span class='n'>v</span><span class='p'>(</span><span class='mi'>1</span><span class='p'>));</span>                   # <span class='n'>forward</span> <span class='n'>filter</span>
-    <span class='n'>v</span> <span class='p'>=</span> <span class='nb'>flipud</span><span class='p'>(</span><span class='n'>filter</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='nb'>flipud</span><span class='p'>(</span><span class='n'>v</span><span class='p'>),</span><span class='n'>si</span><span class='o'>*</span><span class='n'>v</span><span class='p'>(</span><span class='k'>end</span><span class='p'>)));</span> # <span class='n'>reverse</span> <span class='n'>filter</span>
-    <span class='n'>y</span><span class='p'>(:,</span><span class='n'>c</span><span class='p'>)</span> <span class='p'>=</span> <span class='n'>v</span><span class='p'>((</span><span class='n'>lrefl</span><span class='o'>+</span><span class='mi'>1</span><span class='p'>):(</span><span class='n'>lx</span><span class='o'>+</span><span class='n'>lrefl</span><span class='p'>));</span>
-  <span class='n'>endfor</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> # <span class="n">filter</span> <span class="n">all</span> <span class="n">columns</span><span class="p">,</span> <span class="n">one</span> <span class="n">by</span> <span class="n">one</span>
+    <span class="n">v</span> <span class="p">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">((</span><span class="n">lrefl</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="p">);</span> <span class="n">x</span><span class="p">(:,</span><span class="n">c</span><span class="p">);</span>
+         <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="k">end</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">((</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="o">-</span><span class="n">lrefl</span><span class="p">,</span><span class="n">c</span><span class="p">)];</span> # <span class="n">a</span> <span class="n">column</span> <span class="n">vector</span>
 
-  <span class='k'>if</span> <span class='p'>(</span><span class='n'>rotate</span><span class='p'>)</span>                   # <span class='n'>x</span> <span class='n'>was</span> <span class='n'>a</span> <span class='n'>row</span> <span class='n'>vector</span>
-    <span class='n'>y</span> <span class='p'>=</span> <span class='nb'>rot90</span><span class='p'>(</span><span class='n'>y</span><span class='p'>);</span>               # <span class='n'>rotate</span> <span class='n'>it</span> <span class='n'>back</span>
-  <span class='n'>endif</span>
+    ## <span class="n">Do</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">reverse</span> <span class="n">filtering</span>
+    <span class="n">v</span> <span class="p">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">si</span><span class="o">*</span><span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>                   # <span class="n">forward</span> <span class="n">filter</span>
+    <span class="n">v</span> <span class="p">=</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="nb">flipud</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="n">si</span><span class="o">*</span><span class="n">v</span><span class="p">(</span><span class="k">end</span><span class="p">)));</span> # <span class="n">reverse</span> <span class="n">filter</span>
+    <span class="n">y</span><span class="p">(:,</span><span class="n">c</span><span class="p">)</span> <span class="p">=</span> <span class="n">v</span><span class="p">((</span><span class="n">lrefl</span><span class="o">+</span><span class="mi">1</span><span class="p">):(</span><span class="n">lx</span><span class="o">+</span><span class="n">lrefl</span><span class="p">));</span>
+  <span class="n">endfor</span>
 
-<span class='n'>endfunction</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">rotate</span><span class="p">)</span>                   # <span class="n">x</span> <span class="n">was</span> <span class="n">a</span> <span class="n">row</span> <span class="n">vector</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="nb">rot90</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>               # <span class="n">rotate</span> <span class="n">it</span> <span class="n">back</span>
+  <span class="n">endif</span>
+
+<span class="n">endfunction</span>
 </code></pre></div>
+
 <h2 id="test">Test</h2>
-<div class='highlight'><pre><code class='matlab'><span class='n'>pkg</span> <span class='n'>load</span> <span class='n'>signal</span>
-<span class='p'>[</span><span class='n'>b</span><span class='p'>,</span> <span class='n'>a</span><span class='p'>]=</span><span class='n'>butter</span><span class='p'>(</span><span class='mi'>3</span><span class='p'>,</span> <span class='mf'>0.1</span><span class='p'>);</span>                  # <span class='mi'>10</span> <span class='n'>Hz</span> <span class='n'>low</span><span class='o'>-</span><span class='n'>pass</span> <span class='n'>filter</span>
-<span class='n'>t</span> <span class='p'>=</span> <span class='mi'>0</span><span class='p'>:</span><span class='mf'>0.01</span><span class='p'>:</span><span class='mf'>1.0</span><span class='p'>;</span>                         # <span class='mi'>1</span> <span class='n'>second</span> <span class='n'>sample</span>
-<span class='n'>load</span> <span class='n'>x</span><span class='p'>.</span><span class='n'>dat</span> # <span class='n'>created</span> <span class='n'>by</span> <span class='n'>the</span> <span class='n'>R</span> <span class='n'>code</span><span class='p'>,</span> <span class='n'>to</span> <span class='n'>ensure</span> <span class='n'>both</span> <span class='n'>have</span> <span class='n'>same</span> <span class='n'>data</span>
-<span class='n'>y</span> <span class='p'>=</span> <span class='n'>filtfilt</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> <span class='n'>z</span> <span class='p'>=</span> <span class='n'>filter</span><span class='p'>(</span><span class='n'>b</span><span class='p'>,</span><span class='n'>a</span><span class='p'>,</span><span class='n'>x</span><span class='p'>);</span> # <span class='n'>apply</span> <span class='n'>filter</span>
-<span class='n'>plot</span><span class='p'>(</span><span class='n'>t</span><span class='p'>,</span><span class='n'>x</span><span class='p'>,</span><span class='s'>&#39;;data;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>y</span><span class='p'>,</span><span class='s'>&#39;;filtfilt;&#39;</span><span class='p'>,</span><span class='n'>t</span><span class='p'>,</span><span class='n'>z</span><span class='p'>,</span><span class='s'>&#39;;filter;&#39;</span><span class='p'>)</span>
+
+<div class="highlight"><pre><code class="matlab"><span class="n">pkg</span> <span class="n">load</span> <span class="n">signal</span>
+<span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]=</span><span class="n">butter</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>                  # <span class="mi">10</span> <span class="n">Hz</span> <span class="n">low</span><span class="o">-</span><span class="n">pass</span> <span class="n">filter</span>
+<span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">;</span>                         # <span class="mi">1</span> <span class="n">second</span> <span class="n">sample</span>
+<span class="n">load</span> <span class="n">x</span><span class="p">.</span><span class="n">dat</span> # <span class="n">created</span> <span class="n">by</span> <span class="n">the</span> <span class="n">R</span> <span class="n">code</span><span class="p">,</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">both</span> <span class="n">have</span> <span class="n">same</span> <span class="n">data</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> <span class="n">z</span> <span class="p">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> # <span class="n">apply</span> <span class="n">filter</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;;data;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;;filtfilt;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s">&#39;;filter;&#39;</span><span class="p">)</span>
 </code></pre></div>
+
 <p><a href="/assets/2014-02-19-filtfilt_octave.png"><img src="/assets/2014-02-19-filtfilt_octave-thumbnail.png" alt="graph" /></a></p>
 
-<h1 id="r_implementation">R implementation</h1>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+<h1 id="r-implementation">R implementation</h1>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
  4
@@ -200,79 +205,79 @@
 31
 32
 33
-34</code></pre></div></td><td class='code'><div class='highlight'><pre>ab <span class='o'>&lt;-</span> signal<span class='o'>::</span>butter<span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>0.1</span><span class='p'>)</span>
-t <span class='o'>&lt;-</span> seq<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>0.01</span><span class='p'>)</span>
-x <span class='o'>&lt;-</span> scan<span class='p'>(</span><span class='s'>&quot;x.dat&quot;</span><span class='p'>)</span>
-<span class='c1'>## below could be extracted to a function when working</span>
-a <span class='o'>&lt;-</span> ab<span class='o'>$</span>a
-b <span class='o'>&lt;-</span> ab<span class='o'>$</span>b
-na <span class='o'>&lt;-</span> length<span class='p'>(</span>a<span class='p'>)</span>
-nb <span class='o'>&lt;-</span> length<span class='p'>(</span>b<span class='p'>)</span>
-kdc <span class='o'>&lt;-</span> sum<span class='p'>(</span>b<span class='p'>)</span><span class='o'>/</span>sum<span class='p'>(</span>a<span class='p'>)</span>
-<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>is.nan<span class='p'>(</span>kdc<span class='p'>))</span> <span class='p'>{</span>
-    si <span class='o'>&lt;-</span> rev<span class='p'>(</span>cumsum<span class='p'>(</span>rev<span class='p'>(</span>b <span class='o'>-</span> kdc <span class='o'>*</span> a<span class='p'>)))</span>
-<span class='p'>}</span> <span class='kr'>else</span> <span class='p'>{</span>
-    si <span class='o'>&lt;-</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length<span class='p'>(</span>a<span class='p'>))</span>
-<span class='p'>}</span>
-lx <span class='o'>&lt;-</span> length<span class='p'>(</span>x<span class='p'>)</span>
-si <span class='o'>&lt;-</span> si<span class='p'>[</span><span class='m'>-1</span><span class='p'>]</span>
-nx <span class='o'>&lt;-</span> length<span class='p'>(</span>x<span class='p'>)</span>
-n <span class='o'>&lt;-</span> max<span class='p'>(</span>na<span class='p'>,</span> nb<span class='p'>)</span>
-lrefl <span class='o'>&lt;-</span> <span class='m'>3</span> <span class='o'>*</span> <span class='p'>(</span>n <span class='o'>-</span> <span class='m'>1</span><span class='p'>)</span>
-<span class='kr'>if</span> <span class='p'>(</span>na <span class='o'>&lt;</span> n<span class='p'>)</span> a <span class='o'>&lt;-</span> c<span class='p'>(</span>a<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length.out <span class='o'>=</span> n <span class='o'>-</span> na<span class='p'>))</span>
-<span class='kr'>if</span> <span class='p'>(</span>nb <span class='o'>&lt;</span> n<span class='p'>)</span> b <span class='o'>&lt;-</span> c<span class='p'>(</span>b<span class='p'>,</span> rep<span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> length.out <span class='o'>=</span> n <span class='o'>-</span> nb<span class='p'>))</span>
-v <span class='o'>&lt;-</span> c<span class='p'>(</span><span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>-1</span><span class='p'>)],</span> x<span class='p'>,</span> <span class='m'>2</span> <span class='o'>*</span> x<span class='p'>[</span>nx<span class='p'>]</span> <span class='o'>-</span> x<span class='p'>[</span>seq.int<span class='p'>(</span>nx <span class='o'>-</span> 
-    <span class='m'>1</span><span class='p'>,</span> nx <span class='o'>-</span> lrefl<span class='p'>,</span> <span class='m'>-1</span><span class='p'>)])</span>
-v_before_first_filter <span class='o'>&lt;-</span> v<span class='p'>[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>4</span><span class='p'>]</span>
+34</code></pre></div></td><td class="code"><div class="highlight"><pre>ab <span class="o">&lt;-</span> signal<span class="o">::</span>butter<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">0.1</span><span class="p">)</span>
+t <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">)</span>
+x <span class="o">&lt;-</span> scan<span class="p">(</span><span class="s">&quot;x.dat&quot;</span><span class="p">)</span>
+<span class="c1">## below could be extracted to a function when working</span>
+a <span class="o">&lt;-</span> ab<span class="o">$</span>a
+b <span class="o">&lt;-</span> ab<span class="o">$</span>b
+na <span class="o">&lt;-</span> length<span class="p">(</span>a<span class="p">)</span>
+nb <span class="o">&lt;-</span> length<span class="p">(</span>b<span class="p">)</span>
+kdc <span class="o">&lt;-</span> sum<span class="p">(</span>b<span class="p">)</span><span class="o">/</span>sum<span class="p">(</span>a<span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span><span class="o">!</span>is.nan<span class="p">(</span>kdc<span class="p">))</span> <span class="p">{</span>
+    si <span class="o">&lt;-</span> rev<span class="p">(</span>cumsum<span class="p">(</span>rev<span class="p">(</span>b <span class="o">-</span> kdc <span class="o">*</span> a<span class="p">)))</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    si <span class="o">&lt;-</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span> length<span class="p">(</span>a<span class="p">))</span>
+<span class="p">}</span>
+lx <span class="o">&lt;-</span> length<span class="p">(</span>x<span class="p">)</span>
+si <span class="o">&lt;-</span> si<span class="p">[</span><span class="m">-1</span><span class="p">]</span>
+nx <span class="o">&lt;-</span> length<span class="p">(</span>x<span class="p">)</span>
+n <span class="o">&lt;-</span> max<span class="p">(</span>na<span class="p">,</span> nb<span class="p">)</span>
+lrefl <span class="o">&lt;-</span> <span class="m">3</span> <span class="o">*</span> <span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span>na <span class="o">&lt;</span> n<span class="p">)</span> a <span class="o">&lt;-</span> c<span class="p">(</span>a<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span> length.out <span class="o">=</span> n <span class="o">-</span> na<span class="p">))</span>
+<span class="kr">if</span> <span class="p">(</span>nb <span class="o">&lt;</span> n<span class="p">)</span> b <span class="o">&lt;-</span> c<span class="p">(</span>b<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span> length.out <span class="o">=</span> n <span class="o">-</span> nb<span class="p">))</span>
+v <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">2</span> <span class="o">*</span> x<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">-</span> x<span class="p">[</span>seq.int<span class="p">(</span>lrefl <span class="o">+</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">-1</span><span class="p">)],</span> x<span class="p">,</span> <span class="m">2</span> <span class="o">*</span> x<span class="p">[</span>nx<span class="p">]</span> <span class="o">-</span> x<span class="p">[</span>seq.int<span class="p">(</span>nx <span class="o">-</span> 
+    <span class="m">1</span><span class="p">,</span> nx <span class="o">-</span> lrefl<span class="p">,</span> <span class="m">-1</span><span class="p">)])</span>
+v_before_first_filter <span class="o">&lt;-</span> v<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>
 
-<span class='c1'># v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward filter (WRONG</span>
-<span class='c1'># OUTPUT)</span>
-si_v1 <span class='o'>&lt;-</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>]</span>
-<span class='c1'># v &lt;- signal::filter(b, a, v, init=si*v[1]) # forward filter (WRONG OUTPUT)</span>
-<span class='c1'># v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward filter (WRONG</span>
-<span class='c1'># OUTPUT) v &lt;- signal::filter(b, a, v, init.y=si*v[1]) # forward filter</span>
-<span class='c1'># (WRONG OUTPUT) v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward</span>
-<span class='c1'># filter (WRONG OUTPUT)</span>
-v <span class='o'>&lt;-</span> stats<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> v<span class='p'>,</span> init <span class='o'>=</span> si <span class='o'>*</span> v<span class='p'>[</span><span class='m'>1</span><span class='p'>])</span>  <span class='c1'># forward filter (WRONG OUTPUT)</span>
+<span class="c1"># v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward filter (WRONG</span>
+<span class="c1"># OUTPUT)</span>
+si_v1 <span class="o">&lt;-</span> si <span class="o">*</span> v<span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="c1"># v &lt;- signal::filter(b, a, v, init=si*v[1]) # forward filter (WRONG OUTPUT)</span>
+<span class="c1"># v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward filter (WRONG</span>
+<span class="c1"># OUTPUT) v &lt;- signal::filter(b, a, v, init.y=si*v[1]) # forward filter</span>
+<span class="c1"># (WRONG OUTPUT) v &lt;- signal::filter(b, a, v, init.x=si*v[1]) # forward</span>
+<span class="c1"># filter (WRONG OUTPUT)</span>
+v <span class="o">&lt;-</span> stats<span class="o">::</span>filter<span class="p">(</span>b<span class="p">,</span> a<span class="p">,</span> v<span class="p">,</span> init <span class="o">=</span> si <span class="o">*</span> v<span class="p">[</span><span class="m">1</span><span class="p">])</span>  <span class="c1"># forward filter (WRONG OUTPUT)</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Error: &#39;arg&#39; must be NULL or a character vector
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error: &#39;arg&#39; must be NULL or a character vector
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
 4
 5
 6
 7
-8</code></pre></div></td><td class='code'><div class='highlight'><pre>v_after_first_filter <span class='o'>&lt;-</span> v<span class='p'>[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>4</span><span class='p'>]</span>
+8</code></pre></div></td><td class="code"><div class="highlight"><pre>v_after_first_filter <span class="o">&lt;-</span> v<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>
 
-si_vend <span class='o'>&lt;-</span> si <span class='o'>*</span> v<span class='p'>[</span>length<span class='p'>(</span>v<span class='p'>)]</span>
-v <span class='o'>&lt;-</span> rev<span class='p'>(</span>signal<span class='o'>::</span>filter<span class='p'>(</span>b<span class='p'>,</span> a<span class='p'>,</span> rev<span class='p'>(</span>v<span class='p'>),</span> init.x <span class='o'>=</span> si <span class='o'>*</span> v<span class='p'>[</span>length<span class='p'>(</span>v<span class='p'>)]))</span>  <span class='c1'># reverse filter</span>
-v_after_first_filter <span class='o'>&lt;-</span> v<span class='p'>[</span><span class='m'>1</span><span class='o'>:</span><span class='m'>4</span><span class='p'>]</span>
-y <span class='o'>&lt;-</span> v<span class='p'>[</span>seq.int<span class='p'>(</span>lrefl <span class='o'>+</span> <span class='m'>1</span><span class='p'>,</span> lx <span class='o'>+</span> lrefl<span class='p'>)]</span>
-plot<span class='p'>(</span>t<span class='p'>,</span> x<span class='p'>,</span> type <span class='o'>=</span> <span class='s'>&quot;l&quot;</span><span class='p'>)</span>
-lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span> col <span class='o'>=</span> <span class='s'>&quot;red&quot;</span><span class='p'>)</span>
+si_vend <span class="o">&lt;-</span> si <span class="o">*</span> v<span class="p">[</span>length<span class="p">(</span>v<span class="p">)]</span>
+v <span class="o">&lt;-</span> rev<span class="p">(</span>signal<span class="o">::</span>filter<span class="p">(</span>b<span class="p">,</span> a<span class="p">,</span> rev<span class="p">(</span>v<span class="p">),</span> init.x <span class="o">=</span> si <span class="o">*</span> v<span class="p">[</span>length<span class="p">(</span>v<span class="p">)]))</span>  <span class="c1"># reverse filter</span>
+v_after_first_filter <span class="o">&lt;-</span> v<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>
+y <span class="o">&lt;-</span> v<span class="p">[</span>seq.int<span class="p">(</span>lrefl <span class="o">+</span> <span class="m">1</span><span class="p">,</span> lx <span class="o">+</span> lrefl<span class="p">)]</span>
+plot<span class="p">(</span>t<span class="p">,</span> x<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+lines<span class="p">(</span>t<span class="p">,</span> y<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/figs/2014-02-19-filtfilt/unnamed-chunk-1.png" alt="center" /></p>
 
-<h1 id="comparison_between_r_and_octave_output">Comparison between R and octave output</h1>
+<p><img src="/assets/figs/2014-02-19-filtfilt/unnamed-chunk-1.png" alt="center" /> </p>
+
+<h1 id="comparison-between-r-and-octave-output">Comparison between R and octave output</h1>
 
 <p>The test codes <a href="/assets/a_m.html">a.m</a> and <a href="/assets/a_R.html">a.R</a> are the basis for the above.</p>
 
 <p>Some R values (and comparisons with octave output) are given below.</p>
 
 <ul>
-<li><code>si</code>: 0.9971, -1.3857, 0.535 (expect 0.99710 -1.38569 0.53497)</li>
-
-<li><code>lrefl</code>: 9 (expect 9)</li>
-
-<li><code>si_v1</code>: -1.1293, 1.5694, -0.6059<code> (expect -1.12926   1.56935  -0.60588)</code></li>
-
-<li><code>si_vend</code>: 0.8557, -1.1891, 0.4591<code> (expect 0.65164  -0.90559   0.34962)</code></li>
-
-<li><code>v_before_first_filter</code>: -1.1325, -1.0238, -0.8117, -1.1579 (expect -1.132546 -1.023766 -0.811650 -1.157909 -1.370316 -0.858954 -0.717951 …)</li>
-
-<li><code>v_after_first_filter</code>: -0.6099, -0.4232, -0.219, -0.0097 (expect -1.157285 -1.123425 -1.072315 -1.001433 -0.909024 -0.794494 -0.658707 …)</li>
+  <li><code>si</code>: 0.9971, -1.3857, 0.535 (expect 0.99710  -1.38569   0.53497)</li>
+  <li><code>lrefl</code>: 9 (expect 9)</li>
+  <li><code>si_v1</code>: -1.1293, 1.5694, -0.6059<code> (expect -1.12926   1.56935  -0.60588)</code></li>
+  <li><code>si_vend</code>: 0.8557, -1.1891, 0.4591<code> (expect 0.65164  -0.90559   0.34962)</code></li>
+  <li><code>v_before_first_filter</code>: -1.1325, -1.0238, -0.8117, -1.1579 (expect -1.132546  -1.023766  -0.811650  -1.157909  -1.370316  -0.858954  -0.717951  …)</li>
+  <li><code>v_after_first_filter</code>: -0.6099, -0.4232, -0.219, -0.0097 (expect -1.157285  -1.123425  -1.072315  -1.001433  -0.909024  -0.794494  -0.658707 …)</li>
 </ul>
 
 <p><strong>Since v was ok before the filter, and wrong after, the problem seems to be in filter().</strong></p>
@@ -283,29 +288,25 @@ lines<span class='p'>(</span>t<span class='p'>,</span> y<span class='p'>,</span>
 
 <p>I’ll start by assuming that this is trying to mimic the Matlab function of the same name, although the 4th arg is called <code>si</code> in Octave and <code>zi</code> in Matlab, so some caution is warranted.</p>
 
-<p>The docs on the matlab version are <a href="http://www.mathworks.com/help/matlab/ref/filter.html">here</a> 1. it takes 4 args, the last of which (<code>si</code>) is perhaps worth investigating, since it’s different from the initialization in the R filter (which has 3 items).</p>
+<p>The docs on the matlab version are <a href="http://www.mathworks.com/help/matlab/ref/filter.html">here</a>
+1. it takes 4 args, the last of which (<code>si</code>) is perhaps worth investigating, since it’s different from the initialization in the R filter (which has 3 items).</p>
 
 <ol>
-<li><code>si</code> gets renamed as <code>psi</code> in line 166</li>
+  <li><code>si</code> gets renamed as <code>psi</code> in line 166</li>
 </ol>
 
 <h1 id="resources">Resources</h1>
-
 <ul>
-<li>Matlab test code <a href="/assets/a_m.html">a.m</a></li>
-
-<li>R <a href="/assets/stats_filter_R.html">signal::filter.R</a></li>
-
-<li>R test code <a href="/assets/a_R.html">a.R</a></li>
-
-<li>test data used by above two codes <a href="/assets/x.dat">x.dat</a></li>
-
-<li>matlab <a href="/assets/filtfilt_m_matlab.html">filtfilt.m</a></li>
-
-<li>the octave script <a href="/assets/filtfilt_m.html">filtfilt.m</a> can be acquired by typing <code>pkg install -forge signal</code> in an Octave window, and extracting file named <code>~/octave/signal-1.3.0/filtfilt.m</code></li>
-
-<li>the octave C filtering code <a href="/assets/filter_cc.html">filter.cc</a> is the file <code>libinterp/corefcn/filter.cc</code> in <a href="http://www.gnu.org/software/octave/download.html">the Octave source</a>.</li>
+  <li>Matlab test code <a href="/assets/a_m.html">a.m</a></li>
+  <li>R <a href="/assets/stats_filter_R.html">signal::filter.R</a></li>
+  <li>R test code <a href="/assets/a_R.html">a.R</a></li>
+  <li>test data used by above two codes <a href="/assets/x.dat">x.dat</a></li>
+  <li>matlab <a href="/assets/filtfilt_m_matlab.html">filtfilt.m</a> </li>
+  <li>the octave script <a href="/assets/filtfilt_m.html">filtfilt.m</a>  can be acquired by typing <code>pkg install -forge signal</code> in an Octave window, and extracting file named <code>~/octave/signal-1.3.0/filtfilt.m</code></li>
+  <li>the octave C filtering code <a href="/assets/filter_cc.html">filter.cc</a> is the file <code>libinterp/corefcn/filter.cc</code> in <a href="http://www.gnu.org/software/octave/download.html">the Octave source</a>.</li>
 </ul>
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

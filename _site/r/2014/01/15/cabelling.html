@@ -94,16 +94,18 @@
 
 
 
-<p><em>Abstract</em> R code is provided in aide of laboratory demonstration of cabelling.</p>
+<p><em>Abstract</em> R code is provided in aide of laboratory demonstration of
+cabelling.</p>
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Setting up a cabelling experiment requires creating two watermasses of equal density, and if only S and T can be measured, that means calculating densities. Using a TS diagram and graphical interpolation is one approach to that task, but another is to use R to do the calculation.</p>
+<p>Setting up a cabelling experiment requires creating two watermasses of equal density, and if only S and T can be measured, that means calculating densities.  Using a TS diagram and graphical interpolation is one approach to that task, but another is to use R to do the calculation.  </p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The code given below will do the calculation for specified <code>Sa</code>, <code>Ta</code> and <code>Sb</code>, where the second letter indicates the watermass. The code uses <code>uniroot()</code> to find the temperature <code>Tb</code> that yields equal densities for watermasses <em>a</em> and <em>b</em>.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'> 1
+<p>The code given below will do the calculation for specified <code>Sa</code>, <code>Ta</code> and <code>Sb</code>, where the second letter indicates the watermass.  The code uses <code>uniroot()</code> to find the temperature <code>Tb</code> that yields equal densities for watermasses <em>a</em> and <em>b</em>.  </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
  4
@@ -128,34 +130,35 @@
 23
 24
 25
-26</code></pre></div></td><td class='code'><div class='highlight'><pre><span class='c1'># Alter next three lines as desired; a and b are watermasses.</span>
-Sa <span class='o'>&lt;-</span> <span class='m'>30</span>
-Ta <span class='o'>&lt;-</span> <span class='m'>10</span>
-Sb <span class='o'>&lt;-</span> <span class='m'>40</span>
-library<span class='p'>(</span>oce<span class='p'>)</span>
-<span class='c1'># Should not need to edit below this line</span>
-rho0 <span class='o'>&lt;-</span> swRho<span class='p'>(</span>Sa<span class='p'>,</span> Ta<span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
-Tb <span class='o'>&lt;-</span> uniroot<span class='p'>(</span><span class='kr'>function</span><span class='p'>(</span><span class='k-Variable'>T</span><span class='p'>)</span> rho0<span class='o'>-</span>swRho<span class='p'>(</span>Sb<span class='p'>,</span><span class='k-Variable'>T</span><span class='p'>,</span><span class='m'>0</span><span class='p'>),</span> lower<span class='o'>=</span><span class='m'>0</span><span class='p'>,</span> upper<span class='o'>=</span><span class='m'>100</span><span class='p'>)</span><span class='o'>$</span>root
-Sc <span class='o'>&lt;-</span> <span class='p'>(</span>Sa <span class='o'>+</span> Sb<span class='p'>)</span> <span class='o'>/</span><span class='m'>2</span>
-Tc <span class='o'>&lt;-</span> <span class='p'>(</span>Ta <span class='o'>+</span> Tb<span class='p'>)</span> <span class='o'>/</span><span class='m'>2</span>
-<span class='c1'>## density change, and equiv temp change</span>
-drho <span class='o'>&lt;-</span> swRho<span class='p'>(</span>Sc<span class='p'>,</span> Tc<span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span> <span class='o'>-</span> rho0
-dT <span class='o'>&lt;-</span> drho <span class='o'>/</span> rho0 <span class='o'>/</span> swAlpha<span class='p'>(</span>Sc<span class='p'>,</span> Tc<span class='p'>,</span> <span class='m'>0</span><span class='p'>)</span>
-<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> png<span class='p'>(</span><span class='s'>&quot;cabelling.png&quot;</span><span class='p'>,</span> width<span class='o'>=</span><span class='m'>7</span><span class='p'>,</span> height<span class='o'>=</span><span class='m'>7</span><span class='p'>,</span>
-                        unit<span class='o'>=</span><span class='s'>&quot;in&quot;</span><span class='p'>,</span> res<span class='o'>=</span><span class='m'>200</span><span class='p'>,</span> pointsize<span class='o'>=</span><span class='m'>12</span><span class='p'>)</span>
-plotTS<span class='p'>(</span>as.ctd<span class='p'>(</span>c<span class='p'>(</span>Sa<span class='p'>,</span> Sb<span class='p'>,</span> Sc<span class='p'>),</span> c<span class='p'>(</span>Ta<span class='p'>,</span> Tb<span class='p'>,</span> Tc<span class='p'>),</span> <span class='m'>0</span><span class='p'>),</span> pch<span class='o'>=</span><span class='m'>20</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>2</span><span class='p'>)</span>
-drawIsopycnals<span class='p'>(</span>levels<span class='o'>=</span>rho0<span class='p'>,</span> col<span class='o'>=</span><span class='s'>&quot;red&quot;</span><span class='p'>,</span> cex<span class='o'>=</span><span class='m'>0</span><span class='p'>)</span>
-segments<span class='p'>(</span>Sa<span class='p'>,</span> Ta<span class='p'>,</span> Sb<span class='p'>,</span> Tb<span class='p'>,</span> col<span class='o'>=</span><span class='s'>&quot;blue&quot;</span><span class='p'>)</span>
-text<span class='p'>(</span>Sb<span class='p'>,</span> Tb<span class='p'>,</span> <span class='s'>&quot;b&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>)</span>
-text<span class='p'>(</span>Sa<span class='p'>,</span> Ta<span class='p'>,</span> <span class='s'>&quot;a&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>)</span>
-text<span class='p'>(</span>Sc<span class='p'>,</span> Tc<span class='p'>,</span> <span class='s'>&quot;c&quot;</span><span class='p'>,</span> pos<span class='o'>=</span><span class='m'>4</span><span class='p'>)</span>
-legend<span class='p'>(</span><span class='s'>&quot;topleft&quot;</span><span class='p'>,</span>
-       legend<span class='o'>=</span>sprintf<span class='p'>(</span><span class='s'>&quot;Sa=%.1f, Ta=%.1f, Sb=%.1f  -&gt;  Tb=%.1f, drho=%.2f, dT=%.2f&quot;</span><span class='p'>,</span>
-                      Sa<span class='p'>,</span> Ta<span class='p'>,</span> Sb<span class='p'>,</span> Tb<span class='p'>,</span> drho<span class='p'>,</span> dT<span class='p'>),</span>
-       bg<span class='o'>=</span><span class='s'>&quot;white&quot;</span><span class='p'>)</span>
-<span class='kr'>if</span> <span class='p'>(</span><span class='o'>!</span>interactive<span class='p'>())</span> dev.off<span class='p'>()</span>
+26</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1"># Alter next three lines as desired; a and b are watermasses.</span>
+Sa <span class="o">&lt;-</span> <span class="m">30</span>
+Ta <span class="o">&lt;-</span> <span class="m">10</span>
+Sb <span class="o">&lt;-</span> <span class="m">40</span>
+library<span class="p">(</span>oce<span class="p">)</span>
+<span class="c1"># Should not need to edit below this line</span>
+rho0 <span class="o">&lt;-</span> swRho<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+Tb <span class="o">&lt;-</span> uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="k-Variable">T</span><span class="p">)</span> rho0<span class="o">-</span>swRho<span class="p">(</span>Sb<span class="p">,</span><span class="k-Variable">T</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> lower<span class="o">=</span><span class="m">0</span><span class="p">,</span> upper<span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="o">$</span>root
+Sc <span class="o">&lt;-</span> <span class="p">(</span>Sa <span class="o">+</span> Sb<span class="p">)</span> <span class="o">/</span><span class="m">2</span>
+Tc <span class="o">&lt;-</span> <span class="p">(</span>Ta <span class="o">+</span> Tb<span class="p">)</span> <span class="o">/</span><span class="m">2</span>
+<span class="c1">## density change, and equiv temp change</span>
+drho <span class="o">&lt;-</span> swRho<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">-</span> rho0
+dT <span class="o">&lt;-</span> drho <span class="o">/</span> rho0 <span class="o">/</span> swAlpha<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span><span class="o">!</span>interactive<span class="p">())</span> png<span class="p">(</span><span class="s">&quot;cabelling.png&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">7</span><span class="p">,</span> height<span class="o">=</span><span class="m">7</span><span class="p">,</span>
+                        unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> res<span class="o">=</span><span class="m">200</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">12</span><span class="p">)</span>
+plotTS<span class="p">(</span>as.ctd<span class="p">(</span>c<span class="p">(</span>Sa<span class="p">,</span> Sb<span class="p">,</span> Sc<span class="p">),</span> c<span class="p">(</span>Ta<span class="p">,</span> Tb<span class="p">,</span> Tc<span class="p">),</span> <span class="m">0</span><span class="p">),</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+drawIsopycnals<span class="p">(</span>levels<span class="o">=</span>rho0<span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+segments<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> Sb<span class="p">,</span> Tb<span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+text<span class="p">(</span>Sb<span class="p">,</span> Tb<span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
+text<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
+text<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="s">&quot;c&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
+legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span>
+       legend<span class="o">=</span>sprintf<span class="p">(</span><span class="s">&quot;Sa=%.1f, Ta=%.1f, Sb=%.1f  -&gt;  Tb=%.1f, drho=%.2f, dT=%.2f&quot;</span><span class="p">,</span>
+                      Sa<span class="p">,</span> Ta<span class="p">,</span> Sb<span class="p">,</span> Tb<span class="p">,</span> drho<span class="p">,</span> dT<span class="p">),</span>
+       bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span><span class="o">!</span>interactive<span class="p">())</span> dev.off<span class="p">()</span>
 </pre></div>
 </td></tr></table>
+
 <p>If run non-interactively, the code will produce a PNG file like that given below.</p>
 
 <h1 id="results">Results</h1>
@@ -171,10 +174,11 @@ legend<span class='p'>(</span><span class='s'>&quot;topleft&quot;</span><span cl
 <h1 id="exercises">Exercises</h1>
 
 <ol>
-<li>Alter the R code to calculate <code>Sb</code> in terms of <code>Tb</code>.</li>
-
-<li>Consider (calculate or measure) the convection associated with sidewall heat conduction.</li>
+  <li>Alter the R code to calculate <code>Sb</code> in terms of <code>Tb</code>.</li>
+  <li>Consider (calculate or measure) the convection associated with sidewall heat conduction.</li>
 </ol>
+
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">

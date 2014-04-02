@@ -101,47 +101,58 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>A wise person told me that it will be a full moon on the upcoming Valentine’s Day, but that it will be a long time until another one. I decided to check this with astronomical calculation.</p>
+<p>A wise person told me that it will be a full moon on the upcoming Valentine’s Day, but that it will be a long time until another one.  I decided to check this with astronomical calculation.</p>
 
 <h1 id="procedure">Procedure</h1>
 
-<p>The Oce package has a function called <code>moonAngle()</code> that returns, among other things, the illuminated fraction of the moon visible at any given time. This can be used to test for a full moon on Valentine’s day.</p>
+<p>The Oce package has a function called <code>moonAngle()</code> that returns, among other things, the illuminated fraction of the moon visible at any given time.  This can be used to test for a full moon on Valentine’s day.</p>
 
-<p>The first step is to construct the times of Valentine’s days, starting with the one this year. Then the illuminated fraction can be calculated (here, for Halifax, the lover’s capital of Canada), and that fraction can be plotted for each of the next fifty years, with red dots for the romantic times, and blue ones for the so-sad ones.</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2</code></pre></div></td><td class='code'><div class='highlight'><pre>times <span class='o'>&lt;-</span> seq<span class='p'>(</span>as.POSIXct<span class='p'>(</span><span class='s'>&quot;2014-02-14&quot;</span><span class='p'>),</span> length.out <span class='o'>=</span> <span class='m'>50</span><span class='p'>,</span> by <span class='o'>=</span> <span class='s'>&quot;year&quot;</span><span class='p'>)</span>
-library<span class='p'>(</span>oce<span class='p'>)</span>
-</pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div><table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1
-2
-3
-4</code></pre></div></td><td class='code'><div class='highlight'><pre>fraction <span class='o'>&lt;-</span> moonAngle<span class='p'>(</span>times<span class='p'>,</span> lon <span class='o'>=</span> <span class='m'>-63</span><span class='p'>,</span> lat <span class='o'>=</span> <span class='m'>43</span><span class='p'>)</span><span class='o'>$</span>illuminatedFraction
-full <span class='o'>&lt;-</span> fraction <span class='o'>&gt;</span> <span class='m'>0.99</span>
-plot<span class='p'>(</span>times<span class='p'>,</span> fraction<span class='p'>,</span> xlab <span class='o'>=</span> <span class='s'>&quot;Year&quot;</span><span class='p'>,</span> ylab <span class='o'>=</span> <span class='s'>&quot;Moon Illuminated Fraction&quot;</span><span class='p'>,</span> col <span class='o'>=</span> ifelse<span class='p'>(</span>full<span class='p'>,</span> 
-    <span class='s'>&quot;red&quot;</span><span class='p'>,</span> <span class='s'>&quot;blue&quot;</span><span class='p'>),</span> pch <span class='o'>=</span> <span class='m'>16</span><span class='p'>,</span> cex <span class='o'>=</span> <span class='m'>2</span><span class='p'>)</span>
+<p>The first step is to construct the times of Valentine’s days, starting with the one this year.  Then the illuminated fraction can be calculated (here, for Halifax, the lover’s capital of Canada), and that fraction can be plotted for each of the next fifty years, with red dots for the romantic times, and blue ones for the so-sad ones.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>times <span class="o">&lt;-</span> seq<span class="p">(</span>as.POSIXct<span class="p">(</span><span class="s">&quot;2014-02-14&quot;</span><span class="p">),</span> length.out <span class="o">=</span> <span class="m">50</span><span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;year&quot;</span><span class="p">)</span>
+library<span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
 </td></tr></table>
-<p><img src="/assets/2014-02-13-valentines.png" alt="center" /></p>
+
+<div class="highlight"><pre><code class="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>fraction <span class="o">&lt;-</span> moonAngle<span class="p">(</span>times<span class="p">,</span> lon <span class="o">=</span> <span class="m">-63</span><span class="p">,</span> lat <span class="o">=</span> <span class="m">43</span><span class="p">)</span><span class="o">$</span>illuminatedFraction
+full <span class="o">&lt;-</span> fraction <span class="o">&gt;</span> <span class="m">0.99</span>
+plot<span class="p">(</span>times<span class="p">,</span> fraction<span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Moon Illuminated Fraction&quot;</span><span class="p">,</span> col <span class="o">=</span> ifelse<span class="p">(</span>full<span class="p">,</span> 
+    <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> pch <span class="o">=</span> <span class="m">16</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-02-13-valentines.png" alt="center" /> </p>
 
 <p>Here, red has been used to indicate years with full moon on Valentine’s Day, and sad blue otherwise.</p>
 
 <h1 id="results">Results</h1>
 
 <p>Yes, it will be a long time until the next full moon on Valentine’s Day:</p>
-<table class='highlighttable'><tr><td class='linenos'><div class='linenodiv'><pre><code class='r'>1</code></pre></div></td><td class='code'><div class='highlight'><pre>times<span class='p'>[</span>full<span class='p'>]</span>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>times<span class="p">[</span>full<span class="p">]</span>
 </pre></div>
-</td></tr></table><div class='highlight'><pre><code class='text'>## [1] &quot;2014-02-14 AST&quot; &quot;2033-02-14 AST&quot; &quot;2052-02-14 AST&quot;
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## [1] &quot;2014-02-14 AST&quot; &quot;2033-02-14 AST&quot; &quot;2052-02-14 AST&quot;
 </code></pre></div>
+
 <h1 id="conclusions">Conclusions</h1>
 
 <p>Buy candy now.</p>
 
 <ul>
-<li>Source code: <a href="/assets/2014-02-13-valentine-moon.R">2014-04-13-valentine-moon.R</a></li>
+  <li>Source code: <a href="/assets/2014-02-13-valentine-moon.R">2014-04-13-valentine-moon.R</a></li>
 </ul>
+
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
