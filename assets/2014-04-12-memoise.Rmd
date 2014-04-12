@@ -1,0 +1,61 @@
+---
+layout: post
+title: Using memoise to cache R values
+tags: [R]
+category: R
+year: 2014
+month: 4
+day: 12
+summary: Dramatic speed improvements can result from caching values with memoise().
+description: Dramatic speed improvements can result from caching values with memoise().
+---
+
+# Introduction
+
+library(memoise)
+
+The ``memoise`` package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The ``microbenchmark`` package shows timing results.
+
+# Methods and results
+
+## Setup
+
+First, load the package being tested, and also a benchmarking package.
+
+```{r}
+library(memoise)
+library(microbenchmark)
+```
+
+## Test conventional function
+
+The demonstration will be for reading a CTD file.
+
+```{r}
+library(oce)
+microbenchmark(d<-read.oce("/data/arctic/beaufort/2012/d201211_0002.cnv"))
+```
+
+## Memoise the function
+
+Memoising ``read.oce()`` is simple
+```{r}
+r <- memoise(read.oce)
+```
+
+## Measure the speed of memoised code
+
+```{r}
+microbenchmark(d <- r("/data/arctic/beaufort/2012/d201211_0002.cnv"))
+```
+
+
+# Conclusions
+
+In this example, the speedup was by a factor of about 3000.
+
+The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using ``memoise()`` would reduce that half minute to a hundredth of a second -- easily converting an annoyingly slow operation to what feels like zero time in an interactive session.
+
+# Resources
+* [R code used in this blog item]({{ site.url }}/assets/2014-04-12-memoise.R)
+* [Jekyll source code for this blog item](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-12-memoise.Rmd)

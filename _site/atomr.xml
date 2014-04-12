@@ -4,13 +4,99 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-04-02T14:32:48-03:00</updated>
+    <updated>2014-04-12T12:57:22-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>Using memoise to cache R values</title>
+        <link href="http://dankelley.github.io//r/2014/04/12/memoise.html"/>
+        <updated>2014-04-12T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/04/12/memoise</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;library(memoise)&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;memoise&lt;/code&gt; package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The &lt;code&gt;microbenchmark&lt;/code&gt; package shows timing results.&lt;/p&gt;
+
+&lt;h1 id=&quot;methods-and-results&quot;&gt;Methods and results&lt;/h1&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;First, load the package being tested, and also a benchmarking package.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;memoise&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h2 id=&quot;test-conventional-function&quot;&gt;Test conventional function&lt;/h2&gt;
+
+&lt;p&gt;The demonstration will be for reading a CTD file.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: ncdf4
+## Loading required package: tiff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.oce&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: milliseconds
+##                                                          expr   min    lq
+##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 161.5 167.3
+##  median    uq   max neval
+##     187 227.3 371.6   100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
+
+&lt;p&gt;Memoising &lt;code&gt;read.oce()&lt;/code&gt; is simple&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;r &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; memoise&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;read.oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h2 id=&quot;measure-the-speed-of-memoised-code&quot;&gt;Measure the speed of memoised code&lt;/h2&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; r&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
+##                                                   expr   min    lq median
+##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 54.61 56.98  59.98
+##     uq    max neval
+##  64.26 190419   100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;In this example, the speedup was by a factor of about 3000.&lt;/p&gt;
+
+&lt;p&gt;The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using &lt;code&gt;memoise()&lt;/code&gt; would reduce that half minute to a hundredth of a second – easily converting an annoyingly slow operation to what feels like zero time in an interactive session.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/assets/2014-04-12-memoise.R&quot;&gt;R code used in this blog item&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-12-memoise.Rmd&quot;&gt;Jekyll source code for this blog item&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </entry>
+    
     
     
     <entry>

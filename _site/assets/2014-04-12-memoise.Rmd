@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Using memoise to cache R values</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Using memoise to cache R values</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Dramatic speed improvements can result from caching values with memoise().
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+library(memoise)
+
+The ``memoise`` package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The ``microbenchmark`` package shows timing results.
+
+# Methods and results
+
+## Setup
+
+First, load the package being tested, and also a benchmarking package.
+
+```{r}
+library(memoise)
+library(microbenchmark)
+```
+
+## Test conventional function
+
+The demonstration will be for reading a CTD file.
+
+```{r}
+library(oce)
+microbenchmark(d<-read.oce("/data/arctic/beaufort/2012/d201211_0002.cnv"))
+```
+
+## Memoise the function
+
+Memoising ``read.oce()`` is simple
+```{r}
+r <- memoise(read.oce)
+```
+
+## Measure the speed of memoised code
+
+```{r}
+microbenchmark(d <- r("/data/arctic/beaufort/2012/d201211_0002.cnv"))
+```
+
+
+# Conclusions
+
+In this example, the speedup was by a factor of about 3000.
+
+The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using ``memoise()`` would reduce that half minute to a hundredth of a second -- easily converting an annoyingly slow operation to what feels like zero time in an interactive session.
+
+# Resources
+* [R code used in this blog item](/assets/2014-04-12-memoise.R)
+* [Jekyll source code for this blog item](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-12-memoise.Rmd)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
