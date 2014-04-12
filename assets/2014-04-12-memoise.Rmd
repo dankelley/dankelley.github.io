@@ -12,8 +12,6 @@ description: Dramatic speed improvements can result from caching values with mem
 
 # Introduction
 
-library(memoise)
-
 The ``memoise`` package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The ``microbenchmark`` package shows timing results.
 
 # Methods and results
