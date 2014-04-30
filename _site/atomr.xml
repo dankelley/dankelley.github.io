@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-04-12T12:57:22-03:00</updated>
+    <updated>2014-04-30T08:56:50-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -14,13 +14,149 @@
     
     
     <entry>
+        <title>colormap</title>
+        <link href="http://dankelley.github.io//r/2014/04/30/colormap.html"/>
+        <updated>2014-04-30T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/04/30/colormap</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;Over the past month or so I have been trying different ways of handling GMT-style colormaps in Oce.  I think my present solution is on the right track, but I am posting here to get more eyes on the problem.&lt;/p&gt;
+
+&lt;p&gt;Note that the function called &lt;code&gt;Colormap()&lt;/code&gt; here will be called &lt;code&gt;colormap()&lt;/code&gt; if I decided to incorporate it into Oce.  That will mean that it &lt;em&gt;replaces&lt;/em&gt; an old function of the same name.  Also, as part of the change, the old function &lt;code&gt;colorize()&lt;/code&gt; will disappear.  (To call them “old” is a stretch.  They are about a month old and were marked as “Alpha” code from the start.)&lt;/p&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+
+&lt;p&gt;The following code is direct from the help for &lt;code&gt;Colormap()&lt;/code&gt;; all I’ve done is to put the example code into Rmarkdown to make for easier comparision with the resultant graphs.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: ncdf4
+## Loading required package: tiff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;## Example 1. color scheme for points on xy plot&lt;/span&gt;
+x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; length.out &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+y &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; pi &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mar &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;mar&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# prevent margin creep by drawPalette()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## First, default breaks&lt;/span&gt;
+c &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+drawPalette&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;zlim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;breaks&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; bg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;zcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pch &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2014-04-30-colormap1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mar&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## Second, 100 breaks, yielding a smoother palette&lt;/span&gt;
+c &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+drawPalette&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;zlim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;breaks&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; bg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;zcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pch &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2014-04-30-colormap2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mar&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;## Example 2. topographic image with a standard color scheme&lt;/span&gt;
+par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mfrow &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gmt_globe&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;breaks&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2014-04-30-colormap3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;## Example 3. topographic image with modified colors&lt;/span&gt;
+cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gmt_globe&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+deep &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4000&lt;/span&gt;
+cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col0&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;deep&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
+cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col1&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;deep&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
+cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col1&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;breaks&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2014-04-30-colormap4.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;## Example 4. image of world topography with water colorized smoothly from&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## violet at 8km depth to blue at 4km depth, then blending in 0.5km&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## increments to white at the coast, with tan for land.&lt;/span&gt;
+cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-8000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; x1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-8000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;violet&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;tan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;violet&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;tan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; n &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+lon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; topoWorld&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;longitude&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+lat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; topoWorld&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;latitude&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+z &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; topoWorld&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lon&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; z&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;breaks&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+contour&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lon&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; z&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; levels &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; add &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2014-04-30-colormap5.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-04-30-colormap.R&quot;&gt;2014-04-30-colormap.R&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </entry>
+    
+    
+    
+    <entry>
         <title>Using memoise to cache R values</title>
         <link href="http://dankelley.github.io//r/2014/04/12/memoise.html"/>
         <updated>2014-04-12T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2014/04/12/memoise</id>
         <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;library(memoise)&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;memoise&lt;/code&gt; package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The &lt;code&gt;microbenchmark&lt;/code&gt; package shows timing results.&lt;/p&gt;
 
@@ -57,9 +193,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: milliseconds
 ##                                                          expr   min    lq
-##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 161.5 167.3
+##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 160.4 162.5
 ##  median    uq   max neval
-##     187 227.3 371.6   100
+##   162.9 167.6 258.6   100
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
@@ -78,9 +214,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 54.61 56.98  59.98
+##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 47.47 48.61   49.5
 ##     uq    max neval
-##  64.26 190419   100
+##  52.57 165199   100
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;

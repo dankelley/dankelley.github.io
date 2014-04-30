@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>colormap</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/04/12/memoise.html" title="Using memoise to cache R values">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>colormap</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Apr 30, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A proposed colormap() function for oce is illustrated.
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Over the past month or so I have been trying different ways of handling GMT-style colormaps in Oce.  I think my present solution is on the right track, but I am posting here to get more eyes on the problem.</p>
+
+<p>Note that the function called <code>Colormap()</code> here will be called <code>colormap()</code> if I decided to incorporate it into Oce.  That will mean that it <em>replaces</em> an old function of the same name.  Also, as part of the change, the old function <code>colorize()</code> will disappear.  (To call them “old” is a stretch.  They are about a month old and were marked as “Alpha” code from the start.)</p>
+
+<h1 id="procedure">Procedure</h1>
+
+<p>The following code is direct from the help for <code>Colormap()</code>; all I’ve done is to put the example code into Rmarkdown to make for easier comparision with the resultant graphs.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: ncdf4
+## Loading required package: tiff
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 1. color scheme for points on xy plot</span>
+x <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
+y <span class="o">&lt;-</span> sin<span class="p">(</span><span class="m">2</span> <span class="o">*</span> pi <span class="o">*</span> x<span class="p">)</span>
+par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+mar <span class="o">&lt;-</span> par<span class="p">(</span><span class="s">&quot;mar&quot;</span><span class="p">)</span>  <span class="c1"># prevent margin creep by drawPalette()</span>
+<span class="c1">## First, default breaks</span>
+c <span class="o">&lt;-</span> Colormap<span class="p">(</span>y<span class="p">)</span>
+drawPalette<span class="p">(</span>c<span class="o">$</span>zlim<span class="p">,</span> col <span class="o">=</span> c<span class="o">$</span>col<span class="p">,</span> breaks <span class="o">=</span> c<span class="o">$</span>breaks<span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> bg <span class="o">=</span> c<span class="o">$</span>zcol<span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+grid<span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-04-30-colormap1.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> mar<span class="p">)</span>
+<span class="c1">## Second, 100 breaks, yielding a smoother palette</span>
+c <span class="o">&lt;-</span> Colormap<span class="p">(</span>y<span class="p">,</span> breaks <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+drawPalette<span class="p">(</span>c<span class="o">$</span>zlim<span class="p">,</span> col <span class="o">=</span> c<span class="o">$</span>col<span class="p">,</span> breaks <span class="o">=</span> c<span class="o">$</span>breaks<span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> bg <span class="o">=</span> c<span class="o">$</span>zcol<span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+grid<span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-04-30-colormap2.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> mar<span class="p">)</span>
+
+<span class="c1">## Example 2. topographic image with a standard color scheme</span>
+par<span class="p">(</span>mfrow <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+data<span class="p">(</span>topoWorld<span class="p">)</span>
+cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>name <span class="o">=</span> <span class="s">&quot;gmt_globe&quot;</span><span class="p">)</span>
+imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks <span class="o">=</span> cm<span class="o">$</span>breaks<span class="p">,</span> col <span class="o">=</span> cm<span class="o">$</span>col<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-04-30-colormap3.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 3. topographic image with modified colors</span>
+cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>name <span class="o">=</span> <span class="s">&quot;gmt_globe&quot;</span><span class="p">)</span>
+deep <span class="o">&lt;-</span> cm<span class="o">$</span>x0 <span class="o">&lt;=</span> <span class="m">-4000</span>
+cm<span class="o">$</span>col0<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
+cm<span class="o">$</span>col1<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
+cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>x0 <span class="o">=</span> cm<span class="o">$</span>x0<span class="p">,</span> x1 <span class="o">=</span> cm<span class="o">$</span>x1<span class="p">,</span> col0 <span class="o">=</span> cm<span class="o">$</span>col0<span class="p">,</span> col1 <span class="o">=</span> cm<span class="o">$</span>col1<span class="p">)</span>
+imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks <span class="o">=</span> cm<span class="o">$</span>breaks<span class="p">,</span> col <span class="o">=</span> cm<span class="o">$</span>col<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-04-30-colormap4.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 4. image of world topography with water colorized smoothly from</span>
+<span class="c1">## violet at 8km depth to blue at 4km depth, then blending in 0.5km</span>
+<span class="c1">## increments to white at the coast, with tan for land.</span>
+cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>x0 <span class="o">=</span> c<span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> x1 <span class="o">=</span> c<span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> col0 <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;violet&quot;</span><span class="p">,</span> 
+    <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;white&quot;</span><span class="p">,</span> <span class="s">&quot;tan&quot;</span><span class="p">),</span> col1 <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;violet&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;white&quot;</span><span class="p">,</span> <span class="s">&quot;tan&quot;</span><span class="p">),</span> n <span class="o">=</span> c<span class="p">(</span><span class="m">100</span><span class="p">,</span> 
+    <span class="m">8</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+lon <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]]</span>
+lat <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]]</span>
+z <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&quot;z&quot;</span><span class="p">]]</span>
+imagep<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> z<span class="p">,</span> breaks <span class="o">=</span> cm<span class="o">$</span>breaks<span class="p">,</span> col <span class="o">=</span> cm<span class="o">$</span>col<span class="p">)</span>
+contour<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> z<span class="p">,</span> levels <span class="o">=</span> <span class="m">0</span><span class="p">,</span> add <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="/assets/2014-04-30-colormap5.png" alt="center" /> </p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-04-30-colormap.R">2014-04-30-colormap.R</a></li>
+</ul>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
