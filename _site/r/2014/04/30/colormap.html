@@ -177,7 +177,7 @@ imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks <span cla
 6
 7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 3. topographic image with modified colors</span>
 cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>name <span class="o">=</span> <span class="s">&quot;gmt_globe&quot;</span><span class="p">)</span>
-deep <span class="o">&lt;-</span> cm<span class="o">$</span>x0 <span class="o">&lt;=</span> <span class="m">-4000</span>
+deep <span class="o">&lt;-</span> cm<span class="o">$</span>x0 <span class="o">&lt;</span> <span class="m">-4000</span>
 cm<span class="o">$</span>col0<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
 cm<span class="o">$</span>col1<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
 cm <span class="o">&lt;-</span> Colormap<span class="p">(</span>x0 <span class="o">=</span> cm<span class="o">$</span>x0<span class="p">,</span> x1 <span class="o">=</span> cm<span class="o">$</span>x1<span class="p">,</span> col0 <span class="o">=</span> cm<span class="o">$</span>col0<span class="p">,</span> col1 <span class="o">=</span> cm<span class="o">$</span>col1<span class="p">)</span>

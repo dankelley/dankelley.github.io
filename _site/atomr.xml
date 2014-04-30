@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-04-30T09:03:06-03:00</updated>
+    <updated>2014-04-30T09:04:27-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -105,7 +105,7 @@ imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quo
 6
 7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;## Example 3. topographic image with modified colors&lt;/span&gt;
 cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gmt_globe&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-deep &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4000&lt;/span&gt;
+deep &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4000&lt;/span&gt;
 cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col0&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;deep&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
 cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col1&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;deep&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;
 cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Colormap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; cm&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;col1&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
