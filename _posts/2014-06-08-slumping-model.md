@@ -6,8 +6,8 @@ category: R
 year: 2014
 month: 6
 day: 08
-summary: A test of using C++ to speed up R
-description: Using which(...)[1] seems wasteful because work is done even after the desired result is found. A C++ approach is demonstrated here, and tested for speed.
+summary: A simple model of sedimentation with slumping.
+description: A simple model of sedimentation with slumping.
 ---
 
 # Introduction
@@ -23,24 +23,24 @@ inverse ages.
 
 
 {% highlight r linenos=table %}
-m <- 51  # number of particles
+m <- 50  # number of particles
 n <- 10  # grid width
-debug <- FALSE  # put TRUE for debugging
+debug <- FALSE  # set TRUE to trace steps
 info <- function(...) if (debug) cat(...)
 pch <- 20
 cex <- 4/log2(n)
 type <- "t"
 set.seed(1)
-rollDownhill <- function(X, Z) {
-    info("rollDownhill(", X, ",", Z, ")\n", sep = "")
+slump <- function(X, Z) {
+    info("slump(", X, ",", Z, ")\n", sep = "")
     if (Z == 1) 
         return(list(x = X, z = Z))
-    ## Particles roll down-slope until they hit the bottom...  ... or a ledge
-    ## comprising two particles.
+    ## Particles roll down-slope until they hit the bottom or a ledge with at
+    ## least one particle to the right.
     XX <- X
     ZZ <- Z
+    ## Small particles stop rolling if 2 points below move down and to right
     while (0 == S[XX + 1, ZZ - 1]) {
-        # move down and to right
         info("  XX:", XX, " ZZ:", ZZ, "\n")
         XX <- XX + 1
         ZZ <- which(0 == S[XX, ])[1]
@@ -53,26 +53,29 @@ rollDownhill <- function(X, Z) {
 }
 
 S <- matrix(0, nrow = n, ncol = n)  # 'S' means 'space'
-par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
+par(mar = c(2, 2, 1/2, 1/2), mgp = c(2, 0.7, 0))
 plot(1:n, 1:n, type = "n", xlab = "", ylab = "")
 xDrop <- 1  # location of drop; everything goes here or to right
 for (i in 1:m) {
     # 'p' means partcle
-    while (0 == length(zDrop <- which(0 == S[xDrop, ])[1])) {
-        info("in while line 72\n")
+    while (is.na(zDrop <- which(0 == S[xDrop, ])[1])) {
         xDrop <- xDrop + 1
-        if (xDrop == n) {
-            message("RHS")
+        if (xDrop == n) 
             break
-        }
     }
+    if (is.na(zDrop)) 
+        break
     info("particle:", i, " ")
-    p <- rollDownhill(xDrop, zDrop)
-    S[p$x, p$z] <- 1
-    if (type == "p") {
-        points(p$x, p$z, col = "gray", pch = pch, cex = cex)
+    p <- slump(xDrop, zDrop)
+    if (p$x < (n + 1)) {
+        S[p$x, p$z] <- 1
+        if (type == "p") {
+            points(p$x, p$z, col = "gray", pch = pch, cex = cex)
+        } else {
+            text(p$x, p$z, i, col = "gray")
+        }
     } else {
-        text(p$x, p$z, i, col = "gray")
+        str(p)
     }
 }
 {% endhighlight %}
@@ -80,21 +83,22 @@ for (i in 1:m) {
 ![center]({{ site.url }}/assets/figs/2014-06-08-slumping-model/unnamed-chunk-1.png) 
 
 
+
 # Discussion and conclusions
 
 Reading the numbers on the graph as inverse age, one can see an interesting age
-structure.  
+structure through the sediments.  
 
-Viewed along diagonals, ages increase by 1 time unit with every lateral step
-away from the source.  
+1. Viewed along diagonals (i.e. along a given depth below the sediment
+   surface), age increase by 1 time unit with every lateral step away from the
+   source.  
 
-Viewed along Z levels, though, the time step is more interesting.  You can see
-this at a glance, by first-differencing the values along z=1, and then at z=2,
-etc.
+2. Viewed as a vertical slice (i.e. a core), the time step per unit depth
+   depends on distance from sediment source.
 
-I suppose that if something came along and sliced the sediment mound along z
-levels, we'd see this more interesting pattern of time variation in the
-lateral.
+3. Viewed along Z levels (i.e. what might be a surface trace if something
+   sliced the sediment pile horizontally), the time step per unit X distance
+   depends on Z.
 
 I wonder if these patterns (or the code) are of interest to geologists?
 
