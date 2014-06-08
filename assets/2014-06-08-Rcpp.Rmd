@@ -44,9 +44,15 @@ times for the two methods.
 
 # Conclusions
 
-Pending more tests (especially those tailored to data properties in actual
-applications) would be helpful in making decisions about whether the added code
-complexity of the Rcpp approach is a cost that should be paid.
+In light of variations in test results, and the added complexity of including
+C++ code in an R program, I advise carrying out data-tailored benchmarks before
+deciding to use Rcpp.  
+
+Note that the test does not account for the time to compile the C++ program,
+which can outweigh time savings in small problems.  However, this is irrelevant
+because one shouldn't be worrying about optimization in small problems anyway,
+and large problems will likely involve package generation, which means that the
+C++ compilation will be done as the package is being built.
 
 
 # Resources
