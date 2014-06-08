@@ -1,0 +1,54 @@
+---
+layout: post
+title: using C++ within R
+tags: [R, C++, oce]
+category: R
+year: 2014
+month: 6
+day: 08
+summary: A test of using C++ to speed up R
+description: Using which(...)[1] seems wasteful because work is done even after the desired result is found. A C++ approach is demonstrated here, and tested for speed.
+---
+
+# Introduction
+
+Quite often I write ``which(...)[1]`` to find the first element of a vector matching some condition.  One has to wonder whether that's wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.
+
+# Procedure
+
+```{r}
+library(Rcpp)
+library(microbenchmark)
+cppFunction('
+            int firstZero(IntegerVector x) {
+                int nx = x.size();
+                for (int i = 0; i < nx; ++i) {
+                    if (0 == x[i]) {
+                        return i+1;
+                    }
+                }
+                return 0; // means none found
+            }'
+            )
+x <- rep(1, 10000)
+x[seq.int(500, 10000)] <- 0
+microbenchmark(firstZero(x), times=1000L)
+microbenchmark(which(0==x)[1], times=1000L)
+```
+
+# Results
+
+The C++ method was nearly twice as fast.  However, other tests (with different
+vector lengths, different fractions zeroed-out, etc) showed nearly identical
+times for the two methods.
+
+# Conclusions
+
+Pending more tests (especially those tailored to data properties in actual
+applications) would be helpful in making decisions about whether the added code
+complexity of the Rcpp approach is a cost that should be paid.
+
+
+# Resources
+
+* Source code: [2014-06-08-Rcpp.R]({{ site.url }}/assets/2014-06-08-Rcpp.R)

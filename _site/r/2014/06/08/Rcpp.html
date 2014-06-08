@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>using C++ within R</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/04/30/colormap.html" title="colormap">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>using C++ within R</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Jun  8, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/C++/index.html" class="tag">
+            C++
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A test of using C++ to speed up R
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Quite often I write <code>which(...)[1]</code> to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.</p>
+
+<h1 id="procedure">Procedure</h1>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>Rcpp<span class="p">)</span>
+library<span class="p">(</span>microbenchmark<span class="p">)</span>
+cppFunction<span class="p">(</span><span class="s">&quot;\n            int firstZero(IntegerVector x) {\n                int nx = x.size();\n                for (int i = 0; i &lt; nx; ++i) {\n                    if (0 == x[i]) {\n                        return i+1;\n                    }\n                }\n                return 0; // means none found\n            }&quot;</span><span class="p">)</span>
+x <span class="o">&lt;-</span> rep<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">)</span>
+x<span class="p">[</span>seq.int<span class="p">(</span><span class="m">500</span><span class="p">,</span> <span class="m">10000</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
+microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span class="p">),</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Unit: microseconds
+##          expr   min   lq median    uq   max neval
+##  firstZero(x) 17.16 18.2   19.1 20.06 820.1  1000
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Unit: microseconds
+##              expr   min    lq median    uq   max neval
+##  which(0 == x)[1] 31.31 32.94  33.84 35.48 777.3  1000
+</code></pre></div>
+
+<h1 id="results">Results</h1>
+
+<p>The C++ method was nearly twice as fast.  However, other tests (with different
+vector lengths, different fractions zeroed-out, etc) showed nearly identical
+times for the two methods.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>Pending more tests (especially those tailored to data properties in actual
+applications) would be helpful in making decisions about whether the added code
+complexity of the Rcpp approach is a cost that should be paid.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-06-08-Rcpp.R">2014-06-08-Rcpp.R</a></li>
+</ul>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

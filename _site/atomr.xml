@@ -4,13 +4,74 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-04-30T09:04:27-03:00</updated>
+    <updated>2014-06-08T09:28:49-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>using C++ within R</title>
+        <link href="http://dankelley.github.io//r/2014/06/08/Rcpp.html"/>
+        <updated>2014-06-08T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/06/08/Rcpp</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;Quite often I write &lt;code&gt;which(...)[1]&lt;/code&gt; to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.&lt;/p&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Rcpp&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+cppFunction&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\n            int firstZero(IntegerVector x) {\n                int nx = x.size();\n                for (int i = 0; i &amp;lt; nx; ++i) {\n                    if (0 == x[i]) {\n                        return i+1;\n                    }\n                }\n                return 0; // means none found\n            }&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+x&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;seq.int&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
+##          expr   min   lq median    uq   max neval
+##  firstZero(x) 17.16 18.2   19.1 20.06 820.1  1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;which&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
+##              expr   min    lq median    uq   max neval
+##  which(0 == x)[1] 31.31 32.94  33.84 35.48 777.3  1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
+
+&lt;p&gt;The C++ method was nearly twice as fast.  However, other tests (with different
+vector lengths, different fractions zeroed-out, etc) showed nearly identical
+times for the two methods.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;Pending more tests (especially those tailored to data properties in actual
+applications) would be helpful in making decisions about whether the added code
+complexity of the Rcpp approach is a cost that should be paid.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-06-08-Rcpp.R&quot;&gt;2014-06-08-Rcpp.R&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </entry>
+    
     
     
     <entry>
