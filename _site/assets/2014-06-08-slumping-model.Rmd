@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>slumping model</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>slumping model</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/sedimentation/index.html" class="tag">
+            sedimentation
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A test of using C++ to speed up R
+    </div> <!-- post_summary -->
+</div> <!-- slug ->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+I got interested in layered sedimentation from viewing [a video](http://www.simonsfoundation.org/multimedia/mathematical-impressions-multimedia/mathematical-impressions-spontaneous-stratification/) and decided it would be interesting to code this into R.  More on that in due course, but my first step was to code a syatem with one sediment "type".
+
+# Procedure
+
+The following code draws numbers at the sedimented particles' final positions.  Since the numbers start at 1, the values are like inverse ages.
+
+```{r}
+m <- 51                                # number of particles
+n <- 10                                # grid width
+debug <- FALSE                         # put TRUE for debugging
+info <- function(...) if (debug) cat(...)
+pch <- 20
+cex <- 4 / log2(n)
+type <- 't'
+set.seed(1)
+rollDownhill <- function(X, Z)
+{
+    info("rollDownhill(", X, ",", Z, ")\n", sep="")
+    if (Z == 1)
+        return(list(x=X, z=Z))
+    ## Particles roll down-slope until they hit the bottom...
+    ## ... or a ledge comprising two particles.
+    XX <- X
+    ZZ <- Z
+    while (0 == S[XX+1, ZZ-1]) { # move down and to right
+        info("  XX:", XX, " ZZ:", ZZ, "\n")
+        XX <- XX + 1
+        ZZ <- which(0 == S[XX,])[1]
+        if (ZZ == 1)
+            break
+        if (XX == n)
+            break
+    }
+    return(list(x=XX, z=ZZ))
+}
+
+S <- matrix(0, nrow=n, ncol=n)         # "S" means "space"
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+plot(1:n, 1:n, type='n', xlab="", ylab="")
+xDrop <- 1 # location of drop; everything goes here or to right
+for (i in 1:m) {                       # "p" means partcle
+    while (0 == length(zDrop <- which(0 == S[xDrop,])[1])) {
+        info("in while line 72\n")
+        xDrop <- xDrop + 1
+        if (xDrop == n) {
+            message("RHS")
+            break
+        }
+    }
+    info("particle:", i, " ")
+    p <- rollDownhill(xDrop, zDrop)
+    S[p$x, p$z] <- 1
+    if (type == 'p') {
+        points(p$x, p$z, col='gray', pch=pch, cex=cex) 
+    } else {
+        text(p$x, p$z, i, col='gray') 
+    }
+}
+```
+
+# Discussion and conclusions
+
+Reading the numbers on the graph as inverse age, one can see an interesting age
+structure in isochrones.  I wonder if this pattern (or the code) is of interest
+to geologists?
+
+# Resources
+
+* Source code: [2014-06-08-slumping-model.R](/assets/2014-06-08-slumping-model.R)
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
