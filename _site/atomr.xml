@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-08T10:59:07-03:00</updated>
+    <updated>2014-06-08T11:08:29-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -24,7 +24,10 @@
 
 &lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
 
-&lt;p&gt;The following code draws numbers at the sedimented particles’ final positions.  Since the numbers start at 1, the values are like inverse ages.&lt;/p&gt;
+&lt;p&gt;The following code drops sediment particles at x=1, and lets them roll downhill
+until they reach the bottom or a ledge.  It draws numbers at the sedimented
+particles’ final positions.  Since the numbers start at 1, the values are like
+inverse ages.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -142,12 +145,13 @@ structure.  &lt;/p&gt;
 &lt;p&gt;Viewed along diagonals, ages increase by 1 time unit with every lateral step
 away from the source.  &lt;/p&gt;
 
-&lt;p&gt;Viewed along Z levels, though, the time step for a lateral step depends on Z,
-e.g. a step of 1 time unit at z=1, then 2 time units at z=2, etc.  If something
-sliced the sediment horizontally, we would get horizontal variation in “time”
-that would depend on the initial Z value.  In other words, tracing time
-horizontally along such a sliced sediment stack could tell us something about
-the whole history.&lt;/p&gt;
+&lt;p&gt;Viewed along Z levels, though, the time step is more interesting.  You can see
+this at a glance, by first-differencing the values along z=1, and then at z=2,
+etc.&lt;/p&gt;
+
+&lt;p&gt;I suppose that if something came along and sliced the sediment mound along z
+levels, we’d see this more interesting pattern of time variation in the
+lateral.&lt;/p&gt;
 
 &lt;p&gt;I wonder if these patterns (or the code) are of interest to geologists?&lt;/p&gt;
 

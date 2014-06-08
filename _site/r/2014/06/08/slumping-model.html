@@ -96,7 +96,10 @@
 
 <h1 id="procedure">Procedure</h1>
 
-<p>The following code draws numbers at the sedimented particles’ final positions.  Since the numbers start at 1, the values are like inverse ages.</p>
+<p>The following code drops sediment particles at x=1, and lets them roll downhill
+until they reach the bottom or a ledge.  It draws numbers at the sedimented
+particles’ final positions.  Since the numbers start at 1, the values are like
+inverse ages.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
@@ -214,12 +217,13 @@ structure.  </p>
 <p>Viewed along diagonals, ages increase by 1 time unit with every lateral step
 away from the source.  </p>
 
-<p>Viewed along Z levels, though, the time step for a lateral step depends on Z,
-e.g. a step of 1 time unit at z=1, then 2 time units at z=2, etc.  If something
-sliced the sediment horizontally, we would get horizontal variation in “time”
-that would depend on the initial Z value.  In other words, tracing time
-horizontally along such a sliced sediment stack could tell us something about
-the whole history.</p>
+<p>Viewed along Z levels, though, the time step is more interesting.  You can see
+this at a glance, by first-differencing the values along z=1, and then at z=2,
+etc.</p>
+
+<p>I suppose that if something came along and sliced the sediment mound along z
+levels, we’d see this more interesting pattern of time variation in the
+lateral.</p>
 
 <p>I wonder if these patterns (or the code) are of interest to geologists?</p>
 
