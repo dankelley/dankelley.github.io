@@ -42,7 +42,6 @@
 
 
 
-<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -54,9 +53,6 @@
 <div class="page-header">
 
     <div class=post_title>oce runlm function</div>
-<!-- </div> --> <!-- span8 -->
-
-<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -85,9 +81,7 @@
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 
-<!-- </div> -->
-<!-- span4 -->
-</div> <!-- page-header -->
+</div>
 
 
 
