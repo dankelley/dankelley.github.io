@@ -26,6 +26,7 @@ submenu: blog
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 {% endif %}
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 {% if page.next.url %}
@@ -45,6 +46,9 @@ submenu: blog
 <div class="page-header">
 
     <div class=post_title>{{page.title}}</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -63,7 +67,9 @@ submenu: blog
     </div> <!-- post_summary -->
 </div> <!-- slug ->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 {% if page.status == "draft" %}
 <b style="background-color:#FFF68F;">This page is a draft, and may change at any time.</b>
