@@ -21,7 +21,7 @@ until they reach the bottom or a ledge.  It draws numbers at the sedimented
 particles' final positions.  Since the numbers start at 1, the values are like
 inverse ages.
 
-```{r fig.caption="Simulation", dpi=100}
+```{r slumping-model, fig.caption="Simulation", dpi=100}
 m <- 50                                # number of particles
 n <- 10                                # grid width
 debug <- FALSE                         # set TRUE to trace steps

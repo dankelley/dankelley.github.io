@@ -1,5 +1,5 @@
 
-## ------------------------------------------------------------------------
+## ----error-bars-1, fig.caption="Error bars", dpi=100---------------------
 set.seed(123)
 
 n <- 500
@@ -16,7 +16,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r
 hist(result)
 
 
-## ------------------------------------------------------------------------
+## ----error-bars-2, fig.caption="Error bars", dpi=100---------------------
 set.seed(123)
 n <- 500
 result <- vector("double", n)
@@ -32,7 +32,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to", r
 hist(result)
 
 
-## ------------------------------------------------------------------------
+## ----error-bars-3, fig.caption="Error bars", dpi=100---------------------
 set.seed(123)
 n <- 500
 result <- vector("double", n)

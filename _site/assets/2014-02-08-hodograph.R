@@ -52,7 +52,7 @@ hodograph <- function(x, y, t, rings, ringlabels=TRUE, tcut=c("daily", "yearly")
 }
 
 
-## ----hodograph, fig.path='2014-02-08-', dpi=100--------------------------
+## ----hodograph, fig.caption='Hodograph', dpi=100-------------------------
 data(co2)
 year <- as.numeric(time(co2))
 t0 <- as.POSIXlt("1959-01-01 00:00:00", tz="UTC")
@@ -61,7 +61,7 @@ par(mar=rep(1, 4))
 hodograph(x=co2-co2[1], t=t, tcut="yearly", type="l", ringlabels=FALSE)
 
 
-## ----timeseries, fig.path='2014-02-08-', dpi=100-------------------------
+## ----timeseries, fig.caption='Time series', dpi=100----------------------
 plot(co2)
 
 

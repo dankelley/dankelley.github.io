@@ -91,7 +91,7 @@ par(mar = rep(1, 4))
 hodograph(x = co2 - co2[1], t = t, tcut = "yearly", type = "l", ringlabels = FALSE)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/2014-02-08-hodograph.png) 
+![center](http://dankelley.github.io/figs/2014-02-08-hodograph/hodograph.png) 
 
 
 # Results
@@ -103,7 +103,7 @@ The plot is informative.  I've looked at the ``co2`` data before, without really
 plot(co2)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/2014-02-08-timeseries.png) 
+![center](http://dankelley.github.io/figs/2014-02-08-hodograph/timeseries.png) 
 
 
 # Conclusions

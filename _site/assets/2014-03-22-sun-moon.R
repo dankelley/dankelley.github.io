@@ -1,5 +1,5 @@
 
-## ----sunmoon, fig.path='2014-03-22-', dpi=100----------------------------
+## ----sunmoon, fig.caption='Sun moon', dpi=100----------------------------
 library(oce)
 angles <- function(day=Sys.Date(), lon=-63.61, lat=44.67, tz="America/Halifax", sun=TRUE)
 {

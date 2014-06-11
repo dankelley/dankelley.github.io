@@ -122,10 +122,10 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: milliseconds
-##                                                          expr min    lq
-##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 262 273.6
+##                                                          expr   min    lq
+##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 260.8 264.6
 ##  median    uq   max neval
-##   277.3 282.2 348.2   100</code></pre></div>
+##   270.5 280.7 349.9   100</code></pre></div>
 
 <h2 id="memoise-the-function">Memoise the function</h2>
 
@@ -143,9 +143,9 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 101.4 104.1  105.9
+##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 101.9 104.6  105.8
 ##     uq    max neval
-##  110.6 272294   100</code></pre></div>
+##  110.3 272400   100</code></pre></div>
 
 <h1 id="conclusions">Conclusions</h1>
 

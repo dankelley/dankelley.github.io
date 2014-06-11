@@ -22,7 +22,7 @@ Error propagation can be a fair bit of work with a calculator, but it's easy wit
 In this case, the answer is simple.  If ``A`` has uncertainty equal to 0.1, then ``10A`` has uncertainty 1.0.
 
 
-```{r}
+```{r error-bars-1, fig.caption="Error bars", dpi=100}
 set.seed(123)
 
 n <- 500
@@ -47,7 +47,7 @@ The graph indicates that the values are symmetric, which makes sense for a linea
 Here, we expect an uncertainty of 20 percent.
 
 
-```{r}
+```{r error-bars-2, fig.caption="Error bars", dpi=100}
 set.seed(123)
 n <- 500
 result <- vector("double", n)
@@ -68,7 +68,7 @@ hist(result)
 Here, we have a hyperbolic tangent, so the expected error bar will be trickier analytically, but of course the R method remains simple.  (Note that the uncertainty is increased to ensure a nonlinear range of hyperbolic tangent.)
 
 
-```{r}
+```{r error-bars-3, fig.caption="Error bars", dpi=100}
 set.seed(123)
 n <- 500
 result <- vector("double", n)

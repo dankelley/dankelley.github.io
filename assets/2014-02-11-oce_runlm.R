@@ -1,5 +1,5 @@
 
-## ----runlm-case1, fig.path='2014-02-11-', dpi=100------------------------
+## ----runlm-case1, fig.caption='runlm case 1', dpi=100--------------------
 library(oce)
 x <- 1:100
 y <- 1 + x/100 + sin(x/5)
@@ -11,7 +11,7 @@ points(x, yn, pch=20, col='blue')
 lines(x, calc, lwd=2, col='red')
 
 
-## ----runlm-case2, fig.path='2014-02-11-', dpi=100------------------------
+## ----runlm-case2, fig.caption='runlm case 2', dpi=100--------------------
 data(ctd)
 plot(ctd, which="N2")
 rho <- swRho(ctd)

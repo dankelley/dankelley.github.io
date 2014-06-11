@@ -96,7 +96,7 @@ The code shown here produces a daily graph, and I have a cron job running on a m
 
 The Oce package has functions called ``moonAngle()`` and ``sunAngle()`` that do the calculations.  The rest of this code sets up and graphs the results.  The horizon is on the outer edge of the circle.  Hours (local time) are marked along the sun and moon paths.  East-west and North-south lines are shown, and they intersect at the zenith.
 
-```{r sunmoon, fig.path='2014-03-22-', dpi=100}
+```{r sunmoon, fig.caption='Sun moon', dpi=100}
 library(oce)
 angles <- function(day=Sys.Date(), lon=-63.61, lat=44.67, tz="America/Halifax", sun=TRUE)
 {

@@ -1,5 +1,5 @@
 
-## ----gmt, fig.path='2014-01-30_', dpi=100, fig.height=3.8, linenos=table----
+## ----gmt, fig.caption='GMT colors', dpi=100, fig.height=3.8, linenos=table----
 ## test GMT colours as suggested by
 ## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html
 ocean.pal <- colorRampPalette(c("#000000","#000209","#000413","#00061E",
