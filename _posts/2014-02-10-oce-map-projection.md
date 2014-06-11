@@ -68,7 +68,7 @@ xy <- mapproject(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
 plot(xy$x, xy$y, type = "l", asp = 1)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/2014-02-10-projection-existing.png) 
+![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png) 
 
 
 Finally, plot with proposed (proj4) projection.

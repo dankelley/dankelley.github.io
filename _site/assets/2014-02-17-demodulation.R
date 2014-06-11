@@ -12,7 +12,7 @@ signal <- AMP * sin(2 * pi * fc * t + PH*pi/180)
 x <- signal + noise
 
 
-## ----demodulation-signal, fig.path='2014-02-17-', fig.height=4, dpi=100----
+## ----demodulation-signal, fig.height=4, dpi=100--------------------------
 xc <- x * cos(2 * pi * fc * t)
 xs <- x * sin(2 * pi * fc * t)
 par(mar=c(1.75,3,1/2,1), mgp=c(2, 0.7, 0), mfcol=c(3,1))
@@ -32,7 +32,7 @@ amp <- 2 * sqrt(xcs^2 + xss^2)
 phase <- 180 / pi * atan2(xcs, xss)
 
 
-## ----demodulation-results, fig.path='2014-02-17-', fig.height=4, dpi=100----
+## ----demodulation-results, fig.height=4, dpi=100-------------------------
 par(mar=c(1.75,3,1/2,1), mgp=c(2, 0.7, 0), mfcol=c(3,1))
 plot(t, AMP, type='l')
 lines(t, amp, col='red')

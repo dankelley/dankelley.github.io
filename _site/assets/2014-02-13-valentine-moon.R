@@ -1,5 +1,5 @@
 
-## ----valentines, fig.path='2014-02-13-', dpi=100-------------------------
+## ----valentines, dpi=100-------------------------------------------------
 times <- seq(as.POSIXct("2014-02-14"), length.out=50, by="year")
 library(oce)
 fraction <- moonAngle(times, lon=-63, lat=43)$illuminatedFraction

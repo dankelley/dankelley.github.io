@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-11T11:48:39-03:00</updated>
+    <updated>2014-06-11T12:02:26-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -203,16 +203,16 @@ microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span cl
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
-##          expr   min   lq median    uq  max neval
-##  firstZero(x) 25.24 25.7  25.89 28.44 1119  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##          expr   min    lq median    uq   max neval
+##  firstZero(x) 23.73 24.24  24.32 24.45 984.1  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;which&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
-##              expr   min    lq median   uq  max neval
-##  which(0 == x)[1] 52.33 56.28  56.99 58.2 1119  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##              expr   min    lq median    uq   max neval
+##  which(0 == x)[1] 51.95 52.69  52.89 53.18 927.4  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
@@ -423,9 +423,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: milliseconds
 ##                                                          expr   min    lq
-##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 260.8 264.6
+##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 262.6 266.1
 ##  median    uq   max neval
-##   270.5 280.7 349.9   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##   268.6 271.4 325.5   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
 
@@ -443,9 +443,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.9 104.6  105.8
+##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.1 103.8  105.2
 ##     uq    max neval
-##  110.3 272400   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  111.9 267511   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -881,7 +881,7 @@ plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/2014-03-12-make-data.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-03-12-digitizing-plots/make-data.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;and digitize the resultant image (saved in a PNG file).&lt;/p&gt;
 
@@ -1601,7 +1601,7 @@ plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/2014-02-17-demodulation-signal.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-signal.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab &lt;code&gt;demod()&lt;/code&gt; function (reference 1).&lt;/p&gt;
 
@@ -1643,7 +1643,7 @@ lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/2014-02-17-demodulation-results.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-results.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in &lt;a href=&quot;http://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html&quot;&gt;a previous blog item&lt;/a&gt;.&lt;/p&gt;
 
@@ -1874,7 +1874,7 @@ plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;xy&lt;span class=&quot;o&quot;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/2014-02-10-projection-existing.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Finally, plot with proposed (proj4) projection.&lt;/p&gt;
 

@@ -61,7 +61,7 @@ digitize <- function(image, xaxis, yaxis)
 }
 
 
-## ----make-data, fig.path='2014-03-12-', fig.height=4, dpi=100------------
+## ----make-data, fig.height=4, dpi=100------------------------------------
 set.seed(123)
 x <- 1:10
 y <- 1 + x + rnorm(10)
