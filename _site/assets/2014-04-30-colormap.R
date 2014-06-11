@@ -1,5 +1,5 @@
 
-## ----colormap, fig.height=5, fig.path='2014-04-30-', dpi=100-------------
+## ----colormap, fig.height=5, dpi=100-------------------------------------
 library(oce)
 ## Example 1. color scheme for points on xy plot
 x <- seq(0, 1, length.out=40)

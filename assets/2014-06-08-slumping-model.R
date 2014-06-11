@@ -1,5 +1,5 @@
 
-## ----fig.caption="Simulation", dpi=90------------------------------------
+## ----fig.caption="Simulation", dpi=100-----------------------------------
 m <- 50                                # number of particles
 n <- 10                                # grid width
 debug <- FALSE                         # set TRUE to trace steps
