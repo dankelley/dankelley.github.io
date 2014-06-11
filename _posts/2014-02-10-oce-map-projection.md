@@ -40,6 +40,17 @@ library(oce)
 
 {% highlight r linenos=table %}
 library(proj4)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: there is no package called 'proj4'
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 library(mapproj)
 data(coastlineWorld)
 lon <- coastlineWorld[["longitude"]]
@@ -57,7 +68,7 @@ xy <- mapproject(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
 plot(xy$x, xy$y, type = "l", asp = 1)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-10-projection-existing.png) 
+![center]({{ site.url }}2014-02-10-projection-existing.png) 
 
 
 Finally, plot with proposed (proj4) projection.
@@ -66,10 +77,25 @@ Finally, plot with proposed (proj4) projection.
 {% highlight r linenos=table %}
 par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
 xy <- project(cbind(lon, lat), "+proj=moll")
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: could not find function "project"
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 plot(xy[, 1], xy[, 2], type = "l", asp = 1)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-10-projection-proposed.png) 
+
+
+{% highlight text %}
+## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error in xy[, 1] : incorrect number of dimensions
+{% endhighlight %}
 
 # Conclusions
 

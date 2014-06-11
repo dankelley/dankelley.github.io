@@ -40,7 +40,7 @@ plot(t, cos(2 * pi * fc * t), type = "l")
 plot(t, xc, type = "l")
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-17-demodulation-signal.png) 
+![center]({{ site.url }}2014-02-17-demodulation-signal.png) 
 
 
 Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab ``demod()`` function (reference 1).
@@ -73,7 +73,7 @@ plot(t, x, type = "l", pch = 20)
 lines(t, amp * sin(2 * pi * fc * t + phase * pi/180), col = "red")
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-17-demodulation-results.png) 
+![center]({{ site.url }}2014-02-17-demodulation-results.png) 
 
 
 Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in [a previous blog item](http://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html).

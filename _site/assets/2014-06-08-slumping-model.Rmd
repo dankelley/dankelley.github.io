@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -53,6 +54,9 @@
 <div class="page-header">
 
     <div class=post_title>slumping model</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -74,9 +78,11 @@
     <div class=post_summary>
         A simple model of sedimentation with slumping.
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 

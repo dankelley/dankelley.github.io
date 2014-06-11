@@ -52,7 +52,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 hist(result)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
+![center]({{ site.url }}http://dankelley_github_io/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png) 
 
 
 The graph indicates that the values are symmetric, which makes sense for a linear operation.
@@ -92,7 +92,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 hist(result)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
+![center]({{ site.url }}http://dankelley_github_io/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png) 
 
 
 ## Case 3: a nonlinear function
@@ -129,7 +129,7 @@ cat("value:", mean(result), "uncertainty:", sd(result), " range:", r[1], "to",
 hist(result)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
+![center]({{ site.url }}http://dankelley_github_io/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png) 
 
 
 # Conclusions

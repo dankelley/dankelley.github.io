@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -61,6 +62,9 @@
 <div class="page-header">
 
     <div class=post_title>Using memoise to cache R values</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -77,9 +81,11 @@
     <div class=post_summary>
         Dramatic speed improvements can result from caching values with memoise().
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 
@@ -110,8 +116,6 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 <div class="highlight"><pre><code class="text">## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps
-## Loading required package: ncdf4
-## Loading required package: tiff
 </code></pre></div>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>d <span class="o">&lt;-</span> read.oce<span class="p">(</span><span class="s">&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;</span><span class="p">))</span>
@@ -120,9 +124,9 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Unit: milliseconds
 ##                                                          expr   min    lq
-##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 160.4 162.5
+##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 163.3 165.8
 ##  median    uq   max neval
-##   162.9 167.6 258.6   100
+##   167.7 169.7 244.1   100
 </code></pre></div>
 
 <h2 id="memoise-the-function">Memoise the function</h2>
@@ -141,9 +145,9 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 47.47 48.61   49.5
+##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 51.09 52.75  53.87
 ##     uq    max neval
-##  52.57 165199   100
+##  56.67 174893   100
 </code></pre></div>
 
 <h1 id="conclusions">Conclusions</h1>

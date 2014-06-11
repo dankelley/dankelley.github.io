@@ -42,10 +42,11 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2014/02/13/valentine-moon.html" title="Valentines-day full moon">
+<a class="pagination" href="/r/2014/02/11/oce_runlm.html" title="oce runlm function">
     Next <!-- &rarr; -->
 </a>
 
@@ -61,6 +62,9 @@
 <div class="page-header">
 
     <div class=post_title>oce map projection</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -92,9 +96,11 @@
     <div class=post_summary>
         The Oce package presently handles map projections by using the ``mapproj`` package, but an alternative is the ``proj4`` package.  This post compares the two, focussing on the vexing problem of islands crossing the edge of the earth, which causes spurious lines on some Oce maps at present.
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 
@@ -119,12 +125,17 @@
 ## Loading required package: maps
 </code></pre></div>
 
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>proj4<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error: there is no package called &#39;proj4&#39;
+</code></pre></div>
+
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
-4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>proj4<span class="p">)</span>
-library<span class="p">(</span>mapproj<span class="p">)</span>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>mapproj<span class="p">)</span>
 data<span class="p">(</span>coastlineWorld<span class="p">)</span>
 lon <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]]</span>
 lat <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]]</span>
@@ -143,19 +154,25 @@ plot<span class="p">(</span>xy<span class="o">$</span>x<span class="p">,</span> 
 </pre></div>
 </td></tr></table>
 
-<p><img src="/assets/2014-02-10-projection-existing.png" alt="center" /> </p>
+<p><img src="2014-02-10-projection-existing.png" alt="center" /> </p>
 
 <p>Finally, plot with proposed (proj4) projection.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
 xy <span class="o">&lt;-</span> project<span class="p">(</span>cbind<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">),</span> <span class="s">&quot;+proj=moll&quot;</span><span class="p">)</span>
-plot<span class="p">(</span>xy<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> xy<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> asp <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="/assets/2014-02-10-projection-proposed.png" alt="center" /> </p>
+<div class="highlight"><pre><code class="text">## Error: could not find function &quot;project&quot;
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>xy<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> xy<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> asp <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error in xy[, 1] : incorrect number of dimensions
+</code></pre></div>
 
 <h1 id="conclusions">Conclusions</h1>
 

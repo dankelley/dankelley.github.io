@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -61,6 +62,9 @@
 <div class="page-header">
 
     <div class=post_title>using C++ within R</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -87,9 +91,11 @@
     <div class=post_summary>
         A test of using C++ to speed up R
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 
@@ -114,8 +120,8 @@ microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span cl
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
-##          expr   min    lq median    uq   max neval
-##  firstZero(x) 17.17 18.16  19.05 19.29 738.6  1000
+##          expr   min    lq median    uq  max neval
+##  firstZero(x) 17.45 19.18  19.44 20.43 1218  1000
 </code></pre></div>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
@@ -123,8 +129,8 @@ microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span cl
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
-##              expr   min    lq median    uq   max neval
-##  which(0 == x)[1] 31.74 33.26  33.95 35.99 740.1  1000
+##              expr   min    lq median    uq max neval
+##  which(0 == x)[1] 31.18 32.65  33.41 35.83 790  1000
 </code></pre></div>
 
 <h1 id="results">Results</h1>

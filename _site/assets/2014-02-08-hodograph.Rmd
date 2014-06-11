@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -53,6 +54,9 @@
 <div class="page-header">
 
     <div class=post_title>Hodograph drawing</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -74,9 +78,11 @@
     <div class=post_summary>
         A draft function for hodograph drawing is provided, and illustrated with the co2 dataset.  A variant of this function is likely to appear soon in the Oce R package.
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 

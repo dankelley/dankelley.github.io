@@ -38,12 +38,38 @@ library(oce)
 
 {% highlight r linenos=table %}
 fraction <- moonAngle(times, lon = -63, lat = 43)$illuminatedFraction
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: t must be in UTC
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 full <- fraction > 0.99
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: object 'fraction' not found
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 plot(times, fraction, xlab = "Year", ylab = "Moon Illuminated Fraction", col = ifelse(full, 
     "red", "blue"), pch = 16, cex = 2)
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-02-13-valentines.png) 
+
+
+{% highlight text %}
+## Error: object 'fraction' not found
+{% endhighlight %}
 
 Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
 
@@ -58,7 +84,7 @@ times[full]
 
 
 {% highlight text %}
-## [1] "2014-02-14 AST" "2033-02-14 AST" "2052-02-14 AST"
+## Error: object 'full' not found
 {% endhighlight %}
 
 

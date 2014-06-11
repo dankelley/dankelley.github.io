@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -53,6 +54,9 @@
 <div class="page-header">
 
     <div class=post_title>oce runlm function</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -79,9 +83,11 @@
     <div class=post_summary>
         The week-old ``runderiv()`` function has been replaced with a more useful ``runlm()`` function.  This post shows how to use it.
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 

@@ -80,7 +80,7 @@ for (i in 1:m) {
 }
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/figs/2014-06-08-slumping-model/unnamed-chunk-1.png) 
+![center]({{ site.url }}http://dankelley_github_io/figs/2014-06-08-slumping-model/unnamed-chunk-1.png) 
 
 
 

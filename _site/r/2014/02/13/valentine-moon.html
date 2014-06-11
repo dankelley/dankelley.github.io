@@ -42,6 +42,7 @@
 
 
 
+<!-- <div class="span8"> -->
 
 <div class=topnav>
 
@@ -51,7 +52,7 @@
 
 <!-- | <a href='/blog'>Home</a> | -->
 
-<a class="pagination" href="/r/2014/02/10/oce-map-projection.html" title="oce map projection">
+<a class="pagination" href="/r/2014/02/11/oce_runlm.html" title="oce runlm function">
     <!-- &larr; --> Previous
 </a>
 
@@ -61,6 +62,9 @@
 <div class="page-header">
 
     <div class=post_title>Valentines-day full moon</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
 
 <div class=slug>
     <span class=post_date>
@@ -87,9 +91,11 @@
     <div class=post_summary>
         There will be a full moon on Valentine's Day this year.  How common is that?
     </div> <!-- post_summary -->
-</div> <!-- slug ->
+</div> <!-- slug -->
 
-</div>
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
 
 
 
@@ -114,17 +120,28 @@ library<span class="p">(</span>oce<span class="p">)</span>
 ## Loading required package: maps
 </code></pre></div>
 
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>fraction <span class="o">&lt;-</span> moonAngle<span class="p">(</span>times<span class="p">,</span> lon <span class="o">=</span> <span class="m">-63</span><span class="p">,</span> lat <span class="o">=</span> <span class="m">43</span><span class="p">)</span><span class="o">$</span>illuminatedFraction
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error: t must be in UTC
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>full <span class="o">&lt;-</span> fraction <span class="o">&gt;</span> <span class="m">0.99</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error: object &#39;fraction&#39; not found
+</code></pre></div>
+
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>fraction <span class="o">&lt;-</span> moonAngle<span class="p">(</span>times<span class="p">,</span> lon <span class="o">=</span> <span class="m">-63</span><span class="p">,</span> lat <span class="o">=</span> <span class="m">43</span><span class="p">)</span><span class="o">$</span>illuminatedFraction
-full <span class="o">&lt;-</span> fraction <span class="o">&gt;</span> <span class="m">0.99</span>
-plot<span class="p">(</span>times<span class="p">,</span> fraction<span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Moon Illuminated Fraction&quot;</span><span class="p">,</span> col <span class="o">=</span> ifelse<span class="p">(</span>full<span class="p">,</span> 
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>times<span class="p">,</span> fraction<span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;Moon Illuminated Fraction&quot;</span><span class="p">,</span> col <span class="o">=</span> ifelse<span class="p">(</span>full<span class="p">,</span> 
     <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> pch <span class="o">=</span> <span class="m">16</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="/assets/2014-02-13-valentines.png" alt="center" /> </p>
+<div class="highlight"><pre><code class="text">## Error: object &#39;fraction&#39; not found
+</code></pre></div>
 
 <p>Here, red has been used to indicate years with full moon on Valentine’s Day, and sad blue otherwise.</p>
 
@@ -136,7 +153,7 @@ plot<span class="p">(</span>times<span class="p">,</span> fraction<span class="p
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## [1] &quot;2014-02-14 AST&quot; &quot;2033-02-14 AST&quot; &quot;2052-02-14 AST&quot;
+<div class="highlight"><pre><code class="text">## Error: object &#39;full&#39; not found
 </code></pre></div>
 
 <h1 id="conclusions">Conclusions</h1>

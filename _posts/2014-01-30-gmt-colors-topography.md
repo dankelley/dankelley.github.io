@@ -31,6 +31,8 @@ library(oce)
 
 {% highlight text %}
 ## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
 {% endhighlight %}
 
 
@@ -43,7 +45,7 @@ imagep(topoWorld, asp = 1, breaks = c(waterBreaks, 0, landBreaks), col = c(ocean
     land.pal(length(landBreaks))))
 {% endhighlight %}
 
-![center]({{ site.url }}/assets/2014-01-30_gmt.png) 
+![center]({{ site.url }}2014-01-30_gmt.png) 
 
 
 
