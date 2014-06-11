@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-11T07:22:34-03:00</updated>
+    <updated>2014-06-11T11:07:34-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -141,7 +141,7 @@ xDrop &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quo
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-06-08-slumping-model/unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-06-08-slumping-model_unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;discussion-and-conclusions&quot;&gt;Discussion and conclusions&lt;/h1&gt;
 
@@ -203,18 +203,16 @@ microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span cl
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
-##          expr   min    lq median    uq   max neval
-##  firstZero(x) 17.21 17.69  19.02 19.43 794.7  1000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##          expr   min    lq median    uq  max neval
+##  firstZero(x) 25.46 25.68  25.77 25.92 1074  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;which&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
-##              expr   min    lq median   uq   max neval
-##  which(0 == x)[1] 31.34 33.09  34.39 39.1 955.3  1000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##              expr  min    lq median    uq  max neval
+##  which(0 == x)[1] 54.4 56.27  56.84 57.75 1086  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
@@ -265,8 +263,7 @@ C++ compilation will be done as the package is being built.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -290,7 +287,7 @@ grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-04-30-colormap/colormap1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-04-30-colormap_colormap1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -306,7 +303,7 @@ grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-04-30-colormap/colormap2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-04-30-colormap_colormap2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -324,7 +321,7 @@ imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quo
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-04-30-colormap/colormap3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-04-30-colormap_colormap3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -342,7 +339,7 @@ imagep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;topoWorld&lt;span class=&quo
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-04-30-colormap/colormap4.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-04-30-colormap_colormap4.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -359,11 +356,9 @@ cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; colormap&lt;span class
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Warning: the condition has length &amp;gt; 1 and only the first element will be
-## used
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## used&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;con&amp;#39; is not a connection
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;con&amp;#39; is not a connection&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -377,7 +372,7 @@ contour&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lon&lt;span class=&quot;p&q
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-04-30-colormap/colormap5.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-04-30-colormap_colormap5.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
 
@@ -420,8 +415,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.oce&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -429,10 +423,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: milliseconds
 ##                                                          expr   min    lq
-##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 163.4 165.6
-##  median    uq max neval
-##   166.1 167.5 203   100
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 265.1 273.5
+##  median    uq   max neval
+##   276.1 281.9 347.5   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
 
@@ -450,10 +443,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 51.46 53.98  55.47
+##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.9 104.5  105.9
 ##     uq    max neval
-##  58.88 177067   100
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  112.7 278345   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -492,8 +484,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -960,14 +951,13 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-03-05-error-bars-in-r_unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;The graph indicates that the values are symmetric, which makes sense for a linear operation.&lt;/p&gt;
 
@@ -1003,14 +993,13 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-03-05-error-bars-in-r_unnamed-chunk-2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;case-3-a-nonlinear-function&quot;&gt;Case 3: a nonlinear function&lt;/h2&gt;
 
@@ -1044,14 +1033,13 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-03-05-error-bars-in-r/unnamed-chunk-3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-03-05-error-bars-in-r_unnamed-chunk-3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -1413,8 +1401,7 @@ install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot
     &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rot90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;               # &lt;span class=&quot;n&quot;&gt;rotate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;back&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;endif&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;endfunction&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;endfunction&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;test&quot;&gt;Test&lt;/h2&gt;
 
@@ -1423,10 +1410,9 @@ install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot
 &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                         # &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; # &lt;span class=&quot;n&quot;&gt;created&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ensure&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;both&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;same&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filtfilt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; # &lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;data;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filtfilt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filter;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;data;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filtfilt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filter;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/2014-02-19-filtfilt_octave.png&quot;&gt;&lt;img src=&quot;/assets/2014-02-19-filtfilt_octave-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/assets/figs/2014-02-19-filtfilt_octave.png&quot;&gt;&lt;img src=&quot;/assets/figs/2014-02-19-filtfilt_octave-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;r-implementation&quot;&gt;R implementation&lt;/h1&gt;
 
@@ -1500,8 +1486,7 @@ v &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; stats&lt;span class=&qu
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;arg&amp;#39; must be NULL or a character vector
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;arg&amp;#39; must be NULL or a character vector&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1521,7 +1506,7 @@ lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/assets/figs/2014-02-19-filtfilt/unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-02-19-filtfilt_unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;comparison-between-r-and-octave-output&quot;&gt;Comparison between R and octave output&lt;/h1&gt;
 
@@ -1701,22 +1686,19 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;fraction &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; moonAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;times&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-63&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lat &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;43&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;illuminatedFraction
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: t must be in UTC
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: t must be in UTC&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;full &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; fraction &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.99&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;fraction&amp;#39; not found
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;fraction&amp;#39; not found&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;times&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fraction&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; xlab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Year&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Moon Illuminated Fraction&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ifelse&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;full&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
@@ -1724,8 +1706,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;fraction&amp;#39; not found
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;fraction&amp;#39; not found&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Here, red has been used to indicate years with full moon on Valentine’s Day, and sad blue otherwise.&lt;/p&gt;
 
@@ -1737,8 +1718,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;full&amp;#39; not found
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: object &amp;#39;full&amp;#39; not found&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -1775,8 +1755,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1865,15 +1844,13 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;proj4&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: there is no package called &amp;#39;proj4&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: there is no package called &amp;#39;proj4&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1907,15 +1884,13 @@ xy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; project&lt;span class=
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: could not find function &amp;quot;project&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: could not find function &amp;quot;project&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;xy&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; xy&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; asp &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: error in evaluating the argument &amp;#39;x&amp;#39; in selecting a method for function &amp;#39;plot&amp;#39;: Error in xy[, 1] : incorrect number of dimensions
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: error in evaluating the argument &amp;#39;x&amp;#39; in selecting a method for function &amp;#39;plot&amp;#39;: Error in xy[, 1] : incorrect number of dimensions&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -1949,8 +1924,7 @@ xy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; project&lt;span class=
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -2012,8 +1986,7 @@ print&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;best&lt;span class=&quot;p&qu
 ## [1] 6.161
 ## 
 ## $objective
-## [1] 7.854e-05
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## [1] 7.854e-05&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;N2best &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; N2fromderiv&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;best&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;minimum&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2470,8 +2443,7 @@ lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;akima&lt;span class=&quot;o&q
 7000	253	249	216	8000	255	255	255
 F	255	255	255				
 B	0	0	0
-N	255	255	255
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+N	255	255	255&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;R code to read this file and construct 16-piece linear ramps between the levels is as follows.&lt;/p&gt;
 
@@ -2562,8 +2534,7 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -3620,8 +3591,7 @@ text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x0&lt;span class=&quot;o&quot;
 57,Albania,394,60.7,0.8,5.6,394,4.1,397,2.2
 63,Qatar,376,69.6,2,9.2,388,12,384,5.4
 64,Indonesia,375,75.7,0.3,0.7,396,2.3,382,-1.9
-65,Peru,368,74.6,0.6,1,384,5.2,373,1.3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+65,Peru,368,74.6,0.6,1,384,5.2,373,1.3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </content>
     </entry>

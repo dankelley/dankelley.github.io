@@ -1,4 +1,4 @@
-pygments: true
+highlighter: pygments
 baseurl: /
 comments: true
 markdown: kramdown

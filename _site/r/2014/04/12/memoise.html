@@ -115,8 +115,7 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div>
+## Loading required package: maps</code></pre></div>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>d <span class="o">&lt;-</span> read.oce<span class="p">(</span><span class="s">&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;</span><span class="p">))</span>
 </pre></div>
@@ -124,10 +123,9 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Unit: milliseconds
 ##                                                          expr   min    lq
-##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 163.4 165.6
-##  median    uq max neval
-##   166.1 167.5 203   100
-</code></pre></div>
+##  d &lt;- read.oce(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 265.1 273.5
+##  median    uq   max neval
+##   276.1 281.9 347.5   100</code></pre></div>
 
 <h2 id="memoise-the-function">Memoise the function</h2>
 
@@ -145,10 +143,9 @@ library<span class="p">(</span>microbenchmark<span class="p">)</span>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 51.46 53.98  55.47
+##  d &lt;- r(&quot;/data/arctic/beaufort/2012/d201211_0002.cnv&quot;) 101.9 104.5  105.9
 ##     uq    max neval
-##  58.88 177067   100
-</code></pre></div>
+##  112.7 278345   100</code></pre></div>
 
 <h1 id="conclusions">Conclusions</h1>
 
