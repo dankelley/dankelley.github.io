@@ -21,7 +21,7 @@ Note that, prior to 2014-04, there were different versions for ``colormap()``.
 
 The following code is direct from the help for ``Colormap()``; all I've done is to put the example code into Rmarkdown to make for easier comparision with the resultant graphs.
 
-```{r colormap, fig.height=5, dpi=100}
+```{r fig.caption="colormap", fig.height=5, dpi=100}
 library(oce)
 ## Example 1. color scheme for points on xy plot
 x <- seq(0, 1, length.out=40)
