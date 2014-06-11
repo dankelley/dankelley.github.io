@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-11T11:07:34-03:00</updated>
+    <updated>2014-06-11T11:11:58-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -204,15 +204,15 @@ microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span cl
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##          expr   min    lq median    uq  max neval
-##  firstZero(x) 25.46 25.68  25.77 25.92 1074  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  firstZero(x) 25.55 25.84  25.99 27.27 1592  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;which&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
-##              expr  min    lq median    uq  max neval
-##  which(0 == x)[1] 54.4 56.27  56.84 57.75 1086  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##              expr   min    lq median    uq  max neval
+##  which(0 == x)[1] 52.18 56.27  57.07 58.05 1117  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
@@ -422,10 +422,10 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: milliseconds
-##                                                          expr   min    lq
-##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 265.1 273.5
+##                                                          expr min    lq
+##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 262 273.6
 ##  median    uq   max neval
-##   276.1 281.9 347.5   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##   277.3 282.2 348.2   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
 
@@ -443,9 +443,9 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##                                                   expr   min    lq median
-##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.9 104.5  105.9
+##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.4 104.1  105.9
 ##     uq    max neval
-##  112.7 278345   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  110.6 272294   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 

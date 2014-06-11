@@ -121,15 +121,15 @@ microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span cl
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
 ##          expr   min    lq median    uq  max neval
-##  firstZero(x) 25.46 25.68  25.77 25.92 1074  1000</code></pre></div>
+##  firstZero(x) 25.55 25.84  25.99 27.27 1592  1000</code></pre></div>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
-##              expr  min    lq median    uq  max neval
-##  which(0 == x)[1] 54.4 56.27  56.84 57.75 1086  1000</code></pre></div>
+##              expr   min    lq median    uq  max neval
+##  which(0 == x)[1] 52.18 56.27  57.07 58.05 1117  1000</code></pre></div>
 
 <h1 id="results">Results</h1>
 
