@@ -93,7 +93,7 @@ par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
 plot(x, y, type = "o")
 {% endhighlight %}
 
-![center]({{ site.url }}2014-03-12-make-data.png) 
+![center](http://dankelley.github.io/2014-03-12-make-data.png) 
 
 
 and digitize the resultant image (saved in a PNG file).

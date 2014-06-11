@@ -60,7 +60,7 @@ force:
 
 %.md: %.Rmd
 	#Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}/assets/")'
-	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}")'
+	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<")'
 	mv $@ ../_posts/
 
 
