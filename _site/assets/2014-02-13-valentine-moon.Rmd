@@ -102,7 +102,7 @@ The Oce package has a function called ``moonAngle()`` that returns, among other 
 The first step is to construct the times of Valentine's days, starting with the one this year.  Then the illuminated fraction can be calculated (here, for Halifax, the lover's capital of Canada), and that fraction can be plotted for each of the next fifty years, with red dots for the romantic times, and blue ones for the so-sad ones.
 
 ```{r valentines, dpi=100}
-times <- seq(as.POSIXct("2014-02-14"), length.out=50, by="year")
+times <- seq(as.POSIXct("2014-02-14", tz="UTC"), length.out=50, by="year")
 library(oce)
 fraction <- moonAngle(times, lon=-63, lat=43)$illuminatedFraction
 full <- fraction > 0.99

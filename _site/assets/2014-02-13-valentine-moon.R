@@ -1,6 +1,6 @@
 
 ## ----valentines, dpi=100-------------------------------------------------
-times <- seq(as.POSIXct("2014-02-14"), length.out=50, by="year")
+times <- seq(as.POSIXct("2014-02-14", tz="UTC"), length.out=50, by="year")
 library(oce)
 fraction <- moonAngle(times, lon=-63, lat=43)$illuminatedFraction
 full <- fraction > 0.99

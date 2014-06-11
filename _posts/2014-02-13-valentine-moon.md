@@ -22,7 +22,7 @@ The first step is to construct the times of Valentine's days, starting with the 
 
 
 {% highlight r linenos=table %}
-times <- seq(as.POSIXct("2014-02-14"), length.out = 50, by = "year")
+times <- seq(as.POSIXct("2014-02-14", tz = "UTC"), length.out = 50, by = "year")
 library(oce)
 {% endhighlight %}
 
@@ -38,38 +38,12 @@ library(oce)
 
 {% highlight r linenos=table %}
 fraction <- moonAngle(times, lon = -63, lat = 43)$illuminatedFraction
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error: t must be in UTC
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 full <- fraction > 0.99
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error: object 'fraction' not found
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 plot(times, fraction, xlab = "Year", ylab = "Moon Illuminated Fraction", col = ifelse(full, 
     "red", "blue"), pch = 16, cex = 2)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Error: object 'fraction' not found
-{% endhighlight %}
+![center](http://dankelley.github.io/figs/2014-02-13-valentine-moon/valentines.png) 
 
 Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
 
@@ -84,7 +58,8 @@ times[full]
 
 
 {% highlight text %}
-## Error: object 'full' not found
+## [1] "2014-02-14 UTC" "2033-02-14 UTC" "2044-02-14 UTC" "2052-02-14 UTC"
+## [5] "2063-02-14 UTC"
 {% endhighlight %}
 
 
