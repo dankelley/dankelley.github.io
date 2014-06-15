@@ -24,7 +24,7 @@ oscillator equation $$d\theta/dt + \sin\theta = 0$$ can be simplified to
 $$d\theta/dt + \theta = 0$$ provided that $$\theta \ll 1$$, i.e. in the "small
 angle" limit.  
 
-The linear form has a solution $$\theta = a \sin(t)$$ for initial conditions
+The linear form has solution $$\theta = a \sin(t)$$ for initial conditions
 $$\theta=0$$ and $$d\theta/dt=a$$ at $$t=0$$.
 
 The nonlinear form is harder to solve analytically, but numerical integration

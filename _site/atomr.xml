@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-15T12:20:38-03:00</updated>
+    <updated>2014-06-15T12:22:30-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -31,7 +31,7 @@ oscillator equation &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \sin\th
 &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \theta = 0&lt;/script&gt; provided that &lt;script type=&quot;math/tex&quot;&gt;\theta \ll 1&lt;/script&gt;, i.e. in the “small
 angle” limit.  &lt;/p&gt;
 
-&lt;p&gt;The linear form has a solution &lt;script type=&quot;math/tex&quot;&gt;\theta = a \sin(t)&lt;/script&gt; for initial conditions
+&lt;p&gt;The linear form has solution &lt;script type=&quot;math/tex&quot;&gt;\theta = a \sin(t)&lt;/script&gt; for initial conditions
 &lt;script type=&quot;math/tex&quot;&gt;\theta=0&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt=a&lt;/script&gt; at &lt;script type=&quot;math/tex&quot;&gt;t=0&lt;/script&gt;.&lt;/p&gt;
 
 &lt;p&gt;The nonlinear form is harder to solve analytically, but numerical integration
