@@ -120,15 +120,14 @@ present exercise.
 As an exercise, ``lsoda()`` from the ``deSolve`` package can be used to
 integrate the nonlinear DE without the small angle assumption.
 
-The first step is to break the second-order DE down into two first-order DEs.
-$$\phi = d\theta/dt$$ and $$d\phi/dt = -\sin\theta$$.
-
-These are to be supplied as a function named ``func`` to the DE solver named
-``lsoda``.  We also need initial conditions and a set of times at which to
-report the solution.  These are all set in the R code given below, which plots
-the solution for $$a=0.1$$ as the red dashed line, on top of the theoretical
-solution as the blue line.  Readers might wish to try this with slightly larger
-and smaller values of $$a$$, to get a feel for the solution.
+The first step is to break the second-order DE down into two first-order DEs,
+$$\phi = d\theta/dt$$ and $$d\phi/dt = -\sin\theta$$, which are to be defined
+with a function named ``func`` that is used by the DE solver named ``lsoda``.
+Of course, we also need initial conditions and a set of times at which to
+report the solution.  All of these things are set out in the R code given
+below, which plots the solution for $$a=0.1$$ as the red dashed line, on top of
+the theoretical solution as the blue line.  Readers might wish to try this with
+slightly larger and smaller values of $$a$$, to get a feel for the solution.
 
 
 ```{r}

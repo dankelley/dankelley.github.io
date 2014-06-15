@@ -124,15 +124,14 @@ present exercise.</p>
 <p>As an exercise, <code>lsoda()</code> from the <code>deSolve</code> package can be used to
 integrate the nonlinear DE without the small angle assumption.</p>
 
-<p>The first step is to break the second-order DE down into two first-order DEs.
-<script type="math/tex">\phi = d\theta/dt</script> and <script type="math/tex">d\phi/dt = -\sin\theta</script>.</p>
-
-<p>These are to be supplied as a function named <code>func</code> to the DE solver named
-<code>lsoda</code>.  We also need initial conditions and a set of times at which to
-report the solution.  These are all set in the R code given below, which plots
-the solution for <script type="math/tex">a=0.1</script> as the red dashed line, on top of the theoretical
-solution as the blue line.  Readers might wish to try this with slightly larger
-and smaller values of <script type="math/tex">a</script>, to get a feel for the solution.</p>
+<p>The first step is to break the second-order DE down into two first-order DEs,
+<script type="math/tex">\phi = d\theta/dt</script> and <script type="math/tex">d\phi/dt = -\sin\theta</script>, which are to be defined
+with a function named <code>func</code> that is used by the DE solver named <code>lsoda</code>.
+Of course, we also need initial conditions and a set of times at which to
+report the solution.  All of these things are set out in the R code given
+below, which plots the solution for <script type="math/tex">a=0.1</script> as the red dashed line, on top of
+the theoretical solution as the blue line.  Readers might wish to try this with
+slightly larger and smaller values of <script type="math/tex">a</script>, to get a feel for the solution.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2

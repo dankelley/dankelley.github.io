@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-15T12:16:51-03:00</updated>
+    <updated>2014-06-15T12:20:38-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -55,15 +55,14 @@ present exercise.&lt;/p&gt;
 &lt;p&gt;As an exercise, &lt;code&gt;lsoda()&lt;/code&gt; from the &lt;code&gt;deSolve&lt;/code&gt; package can be used to
 integrate the nonlinear DE without the small angle assumption.&lt;/p&gt;
 
-&lt;p&gt;The first step is to break the second-order DE down into two first-order DEs.
-&lt;script type=&quot;math/tex&quot;&gt;\phi = d\theta/dt&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\phi/dt = -\sin\theta&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;These are to be supplied as a function named &lt;code&gt;func&lt;/code&gt; to the DE solver named
-&lt;code&gt;lsoda&lt;/code&gt;.  We also need initial conditions and a set of times at which to
-report the solution.  These are all set in the R code given below, which plots
-the solution for &lt;script type=&quot;math/tex&quot;&gt;a=0.1&lt;/script&gt; as the red dashed line, on top of the theoretical
-solution as the blue line.  Readers might wish to try this with slightly larger
-and smaller values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, to get a feel for the solution.&lt;/p&gt;
+&lt;p&gt;The first step is to break the second-order DE down into two first-order DEs,
+&lt;script type=&quot;math/tex&quot;&gt;\phi = d\theta/dt&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\phi/dt = -\sin\theta&lt;/script&gt;, which are to be defined
+with a function named &lt;code&gt;func&lt;/code&gt; that is used by the DE solver named &lt;code&gt;lsoda&lt;/code&gt;.
+Of course, we also need initial conditions and a set of times at which to
+report the solution.  All of these things are set out in the R code given
+below, which plots the solution for &lt;script type=&quot;math/tex&quot;&gt;a=0.1&lt;/script&gt; as the red dashed line, on top of
+the theoretical solution as the blue line.  Readers might wish to try this with
+slightly larger and smaller values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, to get a feel for the solution.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
