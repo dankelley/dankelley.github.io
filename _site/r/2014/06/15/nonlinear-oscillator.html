@@ -97,21 +97,27 @@ example: the nonlinear oscillator.</p>
 
 <p>As explained in any introductory Physics textbook, the nondimensionalized
 oscillator equation <script type="math/tex">d\theta/dt + \sin\theta = 0</script> can be simplified to
-<script type="math/tex">d\theta/dt + \theta = 0</script> provided that <script type="math/tex">\theta \ll 1</script>, i.e. in the ``small
-angle’’ limit.  </p>
+<script type="math/tex">d\theta/dt + \theta = 0</script> provided that <script type="math/tex">\theta \ll 1</script>, i.e. in the “small
+angle” limit.  </p>
 
-<p>The linear has a solution <script type="math/tex">\theta = a \sin(t)</script> for initial conditions
+<p>The linear form has a solution <script type="math/tex">\theta = a \sin(t)</script> for initial conditions
 <script type="math/tex">\theta=0</script> and <script type="math/tex">d\theta/dt=a</script> at <script type="math/tex">t=0</script>.</p>
 
 <p>The nonlinear form is harder to solve analytically, but numerical integration
-can be applied to any situation of interest.  </p>
+can be applied to any situation of interest.  This is made simpler in the
+present statement of the problem in nondimensional form, since there is but a
+single parameter, <script type="math/tex">a</script>, that describes the system.</p>
 
-<p>Note that in the present statement of the problem, there is a single parameter,
-<script type="math/tex">a</script>, that describes the whole system.  If <script type="math/tex">a</script> is small compared with <script type="math/tex">1</script>,
-the numerical solution should match the solution to the linear equation.  But
-how small must it be?  And what form does the numerical solution take for
-various <script type="math/tex">a</script> values?  Showing that such questions are easily answered with R
-is the of the present exercise.</p>
+<p>A few questions may come to mind before proceeding further.  For example, it is
+clear that if <script type="math/tex">a\ll 1</script>, the numerical solution should match the solution to
+the linear equation.  But just how small must <script type="math/tex">a</script> be, for a given precision?
+A second question is about the qualitative form of the numerical solution, e.g
+is it still a sinusoid but a different frequency, or something of a different
+character?  Might there different classes of solutions in various ranges of
+<script type="math/tex">a</script>?</p>
+
+<p>Showing that such questions are easily answered with R is the point of the
+present exercise.</p>
 
 <h1 id="framing-the-de-for-solution-in-r">Framing the DE for solution in R</h1>
 

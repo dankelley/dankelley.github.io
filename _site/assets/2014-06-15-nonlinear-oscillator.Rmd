@@ -93,21 +93,27 @@ example: the nonlinear oscillator.
 
 As explained in any introductory Physics textbook, the nondimensionalized
 oscillator equation $$d\theta/dt + \sin\theta = 0$$ can be simplified to
-$$d\theta/dt + \theta = 0$$ provided that $$\theta \ll 1$$, i.e. in the ``small
-angle'' limit.  
+$$d\theta/dt + \theta = 0$$ provided that $$\theta \ll 1$$, i.e. in the "small
+angle" limit.  
 
-The linear has a solution $$\theta = a \sin(t)$$ for initial conditions
+The linear form has a solution $$\theta = a \sin(t)$$ for initial conditions
 $$\theta=0$$ and $$d\theta/dt=a$$ at $$t=0$$.
 
 The nonlinear form is harder to solve analytically, but numerical integration
-can be applied to any situation of interest.  
+can be applied to any situation of interest.  This is made simpler in the
+present statement of the problem in nondimensional form, since there is but a
+single parameter, $$a$$, that describes the system.
 
-Note that in the present statement of the problem, there is a single parameter,
-$$a$$, that describes the whole system.  If $$a$$ is small compared with $$1$$,
-the numerical solution should match the solution to the linear equation.  But
-how small must it be?  And what form does the numerical solution take for
-various $$a$$ values?  Showing that such questions are easily answered with R
-is the of the present exercise.
+A few questions may come to mind before proceeding further.  For example, it is
+clear that if $$a\ll 1$$, the numerical solution should match the solution to
+the linear equation.  But just how small must $$a$$ be, for a given precision?
+A second question is about the qualitative form of the numerical solution, e.g
+is it still a sinusoid but a different frequency, or something of a different
+character?  Might there different classes of solutions in various ranges of
+$$a$$?
+
+Showing that such questions are easily answered with R is the point of the
+present exercise.
 
 # Framing the DE for solution in R
 

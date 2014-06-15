@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-15T12:10:04-03:00</updated>
+    <updated>2014-06-15T12:16:51-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -28,21 +28,27 @@ example: the nonlinear oscillator.&lt;/p&gt;
 
 &lt;p&gt;As explained in any introductory Physics textbook, the nondimensionalized
 oscillator equation &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \sin\theta = 0&lt;/script&gt; can be simplified to
-&lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \theta = 0&lt;/script&gt; provided that &lt;script type=&quot;math/tex&quot;&gt;\theta \ll 1&lt;/script&gt;, i.e. in the ``small
-angle’’ limit.  &lt;/p&gt;
+&lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \theta = 0&lt;/script&gt; provided that &lt;script type=&quot;math/tex&quot;&gt;\theta \ll 1&lt;/script&gt;, i.e. in the “small
+angle” limit.  &lt;/p&gt;
 
-&lt;p&gt;The linear has a solution &lt;script type=&quot;math/tex&quot;&gt;\theta = a \sin(t)&lt;/script&gt; for initial conditions
+&lt;p&gt;The linear form has a solution &lt;script type=&quot;math/tex&quot;&gt;\theta = a \sin(t)&lt;/script&gt; for initial conditions
 &lt;script type=&quot;math/tex&quot;&gt;\theta=0&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt=a&lt;/script&gt; at &lt;script type=&quot;math/tex&quot;&gt;t=0&lt;/script&gt;.&lt;/p&gt;
 
 &lt;p&gt;The nonlinear form is harder to solve analytically, but numerical integration
-can be applied to any situation of interest.  &lt;/p&gt;
+can be applied to any situation of interest.  This is made simpler in the
+present statement of the problem in nondimensional form, since there is but a
+single parameter, &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, that describes the system.&lt;/p&gt;
 
-&lt;p&gt;Note that in the present statement of the problem, there is a single parameter,
-&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, that describes the whole system.  If &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; is small compared with &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;,
-the numerical solution should match the solution to the linear equation.  But
-how small must it be?  And what form does the numerical solution take for
-various &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; values?  Showing that such questions are easily answered with R
-is the of the present exercise.&lt;/p&gt;
+&lt;p&gt;A few questions may come to mind before proceeding further.  For example, it is
+clear that if &lt;script type=&quot;math/tex&quot;&gt;a\ll 1&lt;/script&gt;, the numerical solution should match the solution to
+the linear equation.  But just how small must &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; be, for a given precision?
+A second question is about the qualitative form of the numerical solution, e.g
+is it still a sinusoid but a different frequency, or something of a different
+character?  Might there different classes of solutions in various ranges of
+&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;?&lt;/p&gt;
+
+&lt;p&gt;Showing that such questions are easily answered with R is the point of the
+present exercise.&lt;/p&gt;
 
 &lt;h1 id=&quot;framing-the-de-for-solution-in-r&quot;&gt;Framing the DE for solution in R&lt;/h1&gt;
 
