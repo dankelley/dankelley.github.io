@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>DE solution in R (nonlinear oscillator)</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>DE solution in R (nonlinear oscillator)</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The nonlinear oscillator is solved numerically in R.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+The function ``lsoda()`` from the ``deSolve`` package is a handy function for
+solving differential equations in R.  This is illustrated here with a classic
+example: the nonlinear oscillator.
+
+# Theory
+
+As explained in any introductory Physics textbook, the nondimensionalized
+oscillator equation $$d\theta/dt + \sin\theta = 0$$ can be simplified to
+$$d\theta/dt + \theta = 0$$ provided that $$\theta \ll 1$$, i.e. in the ``small
+angle'' limit.  
+
+The linear has a solution $$\theta = a \sin(t)$$ for initial conditions
+$$\theta=0$$ and $$d\theta/dt=a$$ at $$t=0$$.
+
+The nonlinear form is harder to solve analytically, but numerical integration
+can be applied to any situation of interest.  
+
+Note that in the present statement of the problem, there is a single parameter,
+$$a$$, that describes the whole system.  If $$a$$ is small compared with $$1$$,
+the numerical solution should match the solution to the linear equation.  But
+how small must it be?  And what form does the numerical solution take for
+various $$a$$ values?  Showing that such questions are easily answered with R
+is the of the present exercise.
+
+# Framing the DE for solution in R
+
+As an exercise, ``lsoda()`` from the ``deSolve`` package can be used to
+integrate the nonlinear DE without the small angle assumption.
+
+The first step is to break the second-order DE down into two first-order DEs.
+$$\phi = d\theta/dt$$ and $$d\phi/dt = -\sin\theta$$.
+
+These are to be supplied as a function named ``func`` to the DE solver named
+``lsoda``.  We also need initial conditions and a set of times at which to
+report the solution.  These are all set in the R code given below, which plots
+the solution for $$a=0.1$$ as the red dashed line, on top of the theoretical
+solution as the blue line.  Readers might wish to try this with slightly larger
+and smaller values of $$a$$, to get a feel for the solution.
+
+
+```{r}
+library(deSolve)
+de <- function(t, y, parms, ...)
+{
+    theta <- y[1]
+    phi <- y[2]
+    list(c(dthetadt=phi, dphidt=-sin(theta)))
+}
+
+a <- 0.1
+y0 <- c(0, a)
+t <- seq(0, 4*pi, pi/100)
+sol <- lsoda(y=y0, times=t, func=de)
+ylim <- max(range(sol[,2])) * c(-1, 1)
+par(mar=c(3.5, 3.5, 1, 1), mgp=c(2, 0.7, 0))
+plot(sol[,1], sol[,2], type='l', ylim=ylim, col='blue',
+     xlab=expression(t), ylab=expression(theta(t)))
+grid()
+lines(t, a*sin(t), col='red', lty='dashed')
+```
+
+# Some test cases
+
+For more exploration, it is convenient to define the above as a stand-alone
+function that takes ``a`` as a parameter.
+
+```{r}
+library(deSolve)
+oscillator <- function(a=0.1)
+{
+    de <- function(t, y, parms, ...)
+    {
+        theta <- y[1]
+        phi <- y[2]
+        list(c(dthetadt=phi, dphidt=-sin(theta)))
+    }
+    y0 <- c(0, a)
+    t <- seq(0, 8*pi, pi/100)
+    sol <- lsoda(y=y0, times=t, func=de)
+    ylim <- max(range(sol[,2])) * c(-1, 1)
+    par(mar=c(3.5, 3.5, 1, 1), mgp=c(2, 0.7, 0))
+    plot(sol[,1], sol[,2], type='l', ylim=ylim, col='blue',
+         xlab=expression(t), ylab=expression(theta(t)))
+    grid()
+    lines(t, a*sin(t), col='red')
+    legend("bottomleft", col=c("blue", "red"), lwd=1,
+           legend=c("linear", "nonlinear"),
+           bg="white")
+}
+```
+
+Now, a few examples are easy to construct.
+
+Start with a somewhat nonlinear problem
+```{r}
+oscillator(1)
+```
+
+Readers should try increasing $$a$$ a bit at a time, e.g. the example below has
+a distinctly non-sinusoidal character.
+```{r}
+oscillator(1.999)
+```
+
+
+# Exercises
+
+Further explore the behaviour in the neighborhood of $$a=2$$.  Are changes
+subtle or dramatic in that region?  Are there other regions of interest?
+Consult the literature if this problem interests you.
+
+# Resources
+
+
+* Source code: [2014-06-15-nonlinear-oscillator.R](/assets/2014-06-15-nonlinear-oscillator.R)
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

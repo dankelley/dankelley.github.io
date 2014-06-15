@@ -4,13 +4,178 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-11T12:04:20-03:00</updated>
+    <updated>2014-06-15T12:10:04-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>DE solution in R (nonlinear oscillator)</title>
+        <link href="http://dankelley.github.io/r/2014/06/15/nonlinear-oscillator.html"/>
+        <updated>2014-06-15T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2014/06/15/nonlinear-oscillator</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;The function &lt;code&gt;lsoda()&lt;/code&gt; from the &lt;code&gt;deSolve&lt;/code&gt; package is a handy function for
+solving differential equations in R.  This is illustrated here with a classic
+example: the nonlinear oscillator.&lt;/p&gt;
+
+&lt;h1 id=&quot;theory&quot;&gt;Theory&lt;/h1&gt;
+
+&lt;p&gt;As explained in any introductory Physics textbook, the nondimensionalized
+oscillator equation &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \sin\theta = 0&lt;/script&gt; can be simplified to
+&lt;script type=&quot;math/tex&quot;&gt;d\theta/dt + \theta = 0&lt;/script&gt; provided that &lt;script type=&quot;math/tex&quot;&gt;\theta \ll 1&lt;/script&gt;, i.e. in the ``small
+angle’’ limit.  &lt;/p&gt;
+
+&lt;p&gt;The linear has a solution &lt;script type=&quot;math/tex&quot;&gt;\theta = a \sin(t)&lt;/script&gt; for initial conditions
+&lt;script type=&quot;math/tex&quot;&gt;\theta=0&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\theta/dt=a&lt;/script&gt; at &lt;script type=&quot;math/tex&quot;&gt;t=0&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;The nonlinear form is harder to solve analytically, but numerical integration
+can be applied to any situation of interest.  &lt;/p&gt;
+
+&lt;p&gt;Note that in the present statement of the problem, there is a single parameter,
+&lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, that describes the whole system.  If &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; is small compared with &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;,
+the numerical solution should match the solution to the linear equation.  But
+how small must it be?  And what form does the numerical solution take for
+various &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; values?  Showing that such questions are easily answered with R
+is the of the present exercise.&lt;/p&gt;
+
+&lt;h1 id=&quot;framing-the-de-for-solution-in-r&quot;&gt;Framing the DE for solution in R&lt;/h1&gt;
+
+&lt;p&gt;As an exercise, &lt;code&gt;lsoda()&lt;/code&gt; from the &lt;code&gt;deSolve&lt;/code&gt; package can be used to
+integrate the nonlinear DE without the small angle assumption.&lt;/p&gt;
+
+&lt;p&gt;The first step is to break the second-order DE down into two first-order DEs.
+&lt;script type=&quot;math/tex&quot;&gt;\phi = d\theta/dt&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;d\phi/dt = -\sin\theta&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;These are to be supplied as a function named &lt;code&gt;func&lt;/code&gt; to the DE solver named
+&lt;code&gt;lsoda&lt;/code&gt;.  We also need initial conditions and a set of times at which to
+report the solution.  These are all set in the R code given below, which plots
+the solution for &lt;script type=&quot;math/tex&quot;&gt;a=0.1&lt;/script&gt; as the red dashed line, on top of the theoretical
+solution as the blue line.  Readers might wish to try this with slightly larger
+and smaller values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, to get a feel for the solution.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;deSolve&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+de &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; parms&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    theta &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    phi &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dthetadt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; phi&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; dphidt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;theta&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+a &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.1&lt;/span&gt;
+y0 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; a&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+t &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; pi&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+sol &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; lsoda&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; y0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; func &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; de&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ylim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;range&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mgp &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ylim &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ylim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; xlab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; expression&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+    ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; expression&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;theta&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; a &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lty &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;some-test-cases&quot;&gt;Some test cases&lt;/h1&gt;
+
+&lt;p&gt;For more exploration, it is convenient to define the above as a stand-alone
+function that takes &lt;code&gt;a&lt;/code&gt; as a parameter.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;deSolve&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+oscillator &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    de &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; parms&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        theta &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        phi &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dthetadt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; phi&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; dphidt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;theta&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    y0 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; a&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    t &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; pi&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    sol &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; lsoda&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; y0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; func &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; de&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    ylim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;range&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mgp &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; sol&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ylim &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ylim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; xlab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; expression&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+        ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; expression&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;theta&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+    grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; a &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;bottomleft&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; lwd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; legend &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;linear&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;s&quot;&gt;&amp;quot;nonlinear&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; bg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now, a few examples are easy to construct.&lt;/p&gt;
+
+&lt;p&gt;Start with a somewhat nonlinear problem&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;oscillator&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;p&gt;Readers should try increasing &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; a bit at a time, e.g. the example below has
+a distinctly non-sinusoidal character.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;oscillator&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-4.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;exercises&quot;&gt;Exercises&lt;/h1&gt;
+
+&lt;p&gt;Further explore the behaviour in the neighborhood of &lt;script type=&quot;math/tex&quot;&gt;a=2&lt;/script&gt;.  Are changes
+subtle or dramatic in that region?  Are there other regions of interest?
+Consult the literature if this problem interests you.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Source code: &lt;a href=&quot;/assets/2014-06-15-nonlinear-oscillator.R&quot;&gt;2014-06-15-nonlinear-oscillator.R&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+    </entry>
+    
     
     
     <entry>
@@ -204,7 +369,8 @@ microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span cl
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##          expr   min    lq median    uq   max neval
-##  firstZero(x) 23.73 24.24  24.32 24.45 984.1  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  firstZero(x) 23.73 24.24  24.32 24.45 984.1  1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;which&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -212,7 +378,8 @@ microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;firstZero&lt;span cl
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Unit: microseconds
 ##              expr   min    lq median    uq   max neval
-##  which(0 == x)[1] 51.95 52.69  52.89 53.18 927.4  1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  which(0 == x)[1] 51.95 52.69  52.89 53.18 927.4  1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
@@ -263,7 +430,8 @@ C++ compilation will be done as the package is being built.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -356,9 +524,11 @@ cm &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; colormap&lt;span class
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Warning: the condition has length &amp;gt; 1 and only the first element will be
-## used&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## used
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;con&amp;#39; is not a connection&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;con&amp;#39; is not a connection
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -415,7 +585,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;microbenchmark&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.oce&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -425,7 +596,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 ##                                                          expr   min    lq
 ##  d &amp;lt;- read.oce(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 262.6 266.1
 ##  median    uq   max neval
-##   268.6 271.4 325.5   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##   268.6 271.4 325.5   100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;memoise-the-function&quot;&gt;Memoise the function&lt;/h2&gt;
 
@@ -445,7 +617,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 ##                                                   expr   min    lq median
 ##  d &amp;lt;- r(&amp;quot;/data/arctic/beaufort/2012/d201211_0002.cnv&amp;quot;) 101.1 103.8  105.2
 ##     uq    max neval
-##  111.9 267511   100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+##  111.9 267511   100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -484,7 +657,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;microbenchmark&lt;span clas
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -951,7 +1125,8 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 10.03 uncertainty: 0.9728  range: 9.047 to 11.02
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -993,7 +1168,8 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 1.016 uncertainty: 0.1965  range: 0.8184 to 1.213
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1033,7 +1209,8 @@ cat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## value: 0.7009 uncertainty: 0.233  range: 0.4803 to 0.9065
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;result&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1401,7 +1578,8 @@ install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot
     &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rot90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;               # &lt;span class=&quot;n&quot;&gt;rotate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;back&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;endif&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;endfunction&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;endfunction&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;test&quot;&gt;Test&lt;/h2&gt;
 
@@ -1410,7 +1588,8 @@ install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot
 &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                         # &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; # &lt;span class=&quot;n&quot;&gt;created&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ensure&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;both&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;same&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filtfilt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; # &lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;data;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filtfilt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filter;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;data;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filtfilt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;;filter;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/figs/2014-02-19-filtfilt_octave.png&quot;&gt;&lt;img src=&quot;/assets/figs/2014-02-19-filtfilt_octave-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -1486,7 +1665,8 @@ v &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; stats&lt;span class=&qu
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;arg&amp;#39; must be NULL or a character vector&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: &amp;#39;arg&amp;#39; must be NULL or a character vector
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1686,7 +1866,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1711,7 +1892,8 @@ plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;times&lt;span class=&quot;p&qu
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## [1] &amp;quot;2014-02-14 UTC&amp;quot; &amp;quot;2033-02-14 UTC&amp;quot; &amp;quot;2044-02-14 UTC&amp;quot; &amp;quot;2052-02-14 UTC&amp;quot;
-## [5] &amp;quot;2063-02-14 UTC&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## [5] &amp;quot;2063-02-14 UTC&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -1748,7 +1930,8 @@ plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;times&lt;span class=&quot;p&qu
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1837,13 +2020,15 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;proj4&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: there is no package called &amp;#39;proj4&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: there is no package called &amp;#39;proj4&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -1877,13 +2062,15 @@ xy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; project&lt;span class=
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: could not find function &amp;quot;project&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: could not find function &amp;quot;project&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;xy&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; xy&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; asp &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: error in evaluating the argument &amp;#39;x&amp;#39; in selecting a method for function &amp;#39;plot&amp;#39;: Error in xy[, 1] : incorrect number of dimensions&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Error: error in evaluating the argument &amp;#39;x&amp;#39; in selecting a method for function &amp;#39;plot&amp;#39;: Error in xy[, 1] : incorrect number of dimensions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
@@ -1917,7 +2104,8 @@ xy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; project&lt;span class=
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -1979,7 +2167,8 @@ print&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;best&lt;span class=&quot;p&qu
 ## [1] 6.161
 ## 
 ## $objective
-## [1] 7.854e-05&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## [1] 7.854e-05
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;N2best &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; N2fromderiv&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;best&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;minimum&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2436,7 +2625,8 @@ lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;akima&lt;span class=&quot;o&q
 7000	253	249	216	8000	255	255	255
 F	255	255	255				
 B	0	0	0
-N	255	255	255&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+N	255	255	255
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;R code to read this file and construct 16-piece linear ramps between the levels is as follows.&lt;/p&gt;
 
@@ -2527,7 +2717,8 @@ library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&q
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## Loading required package: maps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -3584,7 +3775,8 @@ text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x0&lt;span class=&quot;o&quot;
 57,Albania,394,60.7,0.8,5.6,394,4.1,397,2.2
 63,Qatar,376,69.6,2,9.2,388,12,384,5.4
 64,Indonesia,375,75.7,0.3,0.7,396,2.3,382,-1.9
-65,Peru,368,74.6,0.6,1,384,5.2,373,1.3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+65,Peru,368,74.6,0.6,1,384,5.2,373,1.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </content>
     </entry>

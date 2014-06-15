@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>DE solution in R (nonlinear oscillator)</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/06/08/slumping-model.html" title="slumping model">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>DE solution in R (nonlinear oscillator)</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Jun 15, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The nonlinear oscillator is solved numerically in R.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The function <code>lsoda()</code> from the <code>deSolve</code> package is a handy function for
+solving differential equations in R.  This is illustrated here with a classic
+example: the nonlinear oscillator.</p>
+
+<h1 id="theory">Theory</h1>
+
+<p>As explained in any introductory Physics textbook, the nondimensionalized
+oscillator equation <script type="math/tex">d\theta/dt + \sin\theta = 0</script> can be simplified to
+<script type="math/tex">d\theta/dt + \theta = 0</script> provided that <script type="math/tex">\theta \ll 1</script>, i.e. in the ``small
+angle’’ limit.  </p>
+
+<p>The linear has a solution <script type="math/tex">\theta = a \sin(t)</script> for initial conditions
+<script type="math/tex">\theta=0</script> and <script type="math/tex">d\theta/dt=a</script> at <script type="math/tex">t=0</script>.</p>
+
+<p>The nonlinear form is harder to solve analytically, but numerical integration
+can be applied to any situation of interest.  </p>
+
+<p>Note that in the present statement of the problem, there is a single parameter,
+<script type="math/tex">a</script>, that describes the whole system.  If <script type="math/tex">a</script> is small compared with <script type="math/tex">1</script>,
+the numerical solution should match the solution to the linear equation.  But
+how small must it be?  And what form does the numerical solution take for
+various <script type="math/tex">a</script> values?  Showing that such questions are easily answered with R
+is the of the present exercise.</p>
+
+<h1 id="framing-the-de-for-solution-in-r">Framing the DE for solution in R</h1>
+
+<p>As an exercise, <code>lsoda()</code> from the <code>deSolve</code> package can be used to
+integrate the nonlinear DE without the small angle assumption.</p>
+
+<p>The first step is to break the second-order DE down into two first-order DEs.
+<script type="math/tex">\phi = d\theta/dt</script> and <script type="math/tex">d\phi/dt = -\sin\theta</script>.</p>
+
+<p>These are to be supplied as a function named <code>func</code> to the DE solver named
+<code>lsoda</code>.  We also need initial conditions and a set of times at which to
+report the solution.  These are all set in the R code given below, which plots
+the solution for <script type="math/tex">a=0.1</script> as the red dashed line, on top of the theoretical
+solution as the blue line.  Readers might wish to try this with slightly larger
+and smaller values of <script type="math/tex">a</script>, to get a feel for the solution.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>deSolve<span class="p">)</span>
+de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+    theta <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">1</span><span class="p">]</span>
+    phi <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">2</span><span class="p">]</span>
+    list<span class="p">(</span>c<span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span>sin<span class="p">(</span>theta<span class="p">)))</span>
+<span class="p">}</span>
+
+a <span class="o">&lt;-</span> <span class="m">0.1</span>
+y0 <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
+t <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span> <span class="o">*</span> pi<span class="p">,</span> pi<span class="o">/</span><span class="m">100</span><span class="p">)</span>
+sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> t<span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
+ylim <span class="o">&lt;-</span> max<span class="p">(</span>range<span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> c<span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span>t<span class="p">),</span> 
+    ylab <span class="o">=</span> expression<span class="p">(</span>theta<span class="p">(</span>t<span class="p">)))</span>
+grid<span class="p">()</span>
+lines<span class="p">(</span>t<span class="p">,</span> a <span class="o">*</span> sin<span class="p">(</span>t<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lty <span class="o">=</span> <span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-1.png" alt="center" /> </p>
+
+<h1 id="some-test-cases">Some test cases</h1>
+
+<p>For more exploration, it is convenient to define the above as a stand-alone
+function that takes <code>a</code> as a parameter.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>deSolve<span class="p">)</span>
+oscillator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>a <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> <span class="p">{</span>
+    de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+        theta <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">1</span><span class="p">]</span>
+        phi <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">2</span><span class="p">]</span>
+        list<span class="p">(</span>c<span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span>sin<span class="p">(</span>theta<span class="p">)))</span>
+    <span class="p">}</span>
+    y0 <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
+    t <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">8</span> <span class="o">*</span> pi<span class="p">,</span> pi<span class="o">/</span><span class="m">100</span><span class="p">)</span>
+    sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> t<span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
+    ylim <span class="o">&lt;-</span> max<span class="p">(</span>range<span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> c<span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+    par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+    plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span>t<span class="p">),</span> 
+        ylab <span class="o">=</span> expression<span class="p">(</span>theta<span class="p">(</span>t<span class="p">)))</span>
+    grid<span class="p">()</span>
+    lines<span class="p">(</span>t<span class="p">,</span> a <span class="o">*</span> sin<span class="p">(</span>t<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+    legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> col <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> lwd <span class="o">=</span> <span class="m">1</span><span class="p">,</span> legend <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;linear&quot;</span><span class="p">,</span> 
+        <span class="s">&quot;nonlinear&quot;</span><span class="p">),</span> bg <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now, a few examples are easy to construct.</p>
+
+<p>Start with a somewhat nonlinear problem</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-3.png" alt="center" /> </p>
+
+<p>Readers should try increasing <script type="math/tex">a</script> a bit at a time, e.g. the example below has
+a distinctly non-sinusoidal character.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1.999</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-4.png" alt="center" /> </p>
+
+<h1 id="exercises">Exercises</h1>
+
+<p>Further explore the behaviour in the neighborhood of <script type="math/tex">a=2</script>.  Are changes
+subtle or dramatic in that region?  Are there other regions of interest?
+Consult the literature if this problem interests you.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-06-15-nonlinear-oscillator.R">2014-06-15-nonlinear-oscillator.R</a></li>
+</ul>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
