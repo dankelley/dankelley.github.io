@@ -105,7 +105,7 @@ oscillator <- function(a = 0.1) {
         ylab = expression(theta(t)))
     grid()
     lines(t, a * sin(t), col = "red")
-    legend("bottomleft", col = c("blue", "red"), lwd = 1, legend = c("linear", 
+    legend("bottomleft", col = c("red", "blue"), lwd = 1, legend = c("linear", 
         "nonlinear"), bg = "white")
 }
 {% endhighlight %}
