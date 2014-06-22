@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Gulf Stream centre detection</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/06/15/nonlinear-oscillator.html" title="DE solution in R (nonlinear oscillator)">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Gulf Stream centre detection</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Jun 22, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The Gulf Stream centre is located with a curve fit, and the results compared with climatology.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height $\eta$ instead.  This is illustreated here, using a $\tanh$ model for $\eta=\eta(x)$, with $x$ the distance along the transect.  The idea is to select the halfway point in the $\tanh$ function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.</p>
+
+<h1 id="methods-and-results">Methods and results</h1>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>section<span class="p">)</span>
+<span class="c1">## Extract Gulf Stream (and reverse station order)</span>
+GS <span class="o">&lt;-</span> subset<span class="p">(</span>section<span class="p">,</span> <span class="m">109</span><span class="o">&lt;=</span>stationId <span class="o">&amp;</span> stationId<span class="o">&lt;=</span><span class="m">129</span><span class="p">)</span>
+GS <span class="o">&lt;-</span> sectionSort<span class="p">(</span>GS<span class="p">,</span> by<span class="o">=</span><span class="s">&quot;longitude&quot;</span><span class="p">)</span>
+GS <span class="o">&lt;-</span> sectionGrid<span class="p">(</span>GS<span class="p">)</span>
+<span class="c1">## Compute and plot normalized dynamic height</span>
+dh <span class="o">&lt;-</span> swDynamicHeight<span class="p">(</span>GS<span class="p">)</span>
+h <span class="o">&lt;-</span> dh<span class="o">$</span>height
+x <span class="o">&lt;-</span> dh<span class="o">$</span>distance
+
+par<span class="p">(</span>mfrow<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+plot<span class="p">(</span>x<span class="p">,</span> h<span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;Distance [km]&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Dynamic Height [m]&quot;</span><span class="p">)</span>
+
+<span class="c1">## tanh fit</span>
+m <span class="o">&lt;-</span> nls<span class="p">(</span>h<span class="o">~</span>a<span class="o">+</span>b<span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">+</span>tanh<span class="p">((</span>x<span class="o">-</span>x0<span class="p">)</span><span class="o">/</span>L<span class="p">)),</span> start<span class="o">=</span>list<span class="p">(</span>a<span class="o">=</span><span class="m">0</span><span class="p">,</span>b<span class="o">=</span><span class="m">1</span><span class="p">,</span>x0<span class="o">=</span><span class="m">100</span><span class="p">,</span>L<span class="o">=</span><span class="m">100</span><span class="p">))</span>
+hp <span class="o">&lt;-</span> predict<span class="p">(</span>m<span class="p">)</span>
+lines<span class="p">(</span>x<span class="p">,</span> hp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+x0 <span class="o">&lt;-</span> coef<span class="p">(</span>m<span class="p">)[[</span><span class="s">&quot;x0&quot;</span><span class="p">]]</span>
+
+plot<span class="p">(</span>GS<span class="p">,</span> which<span class="o">=</span><span class="s">&quot;temperature&quot;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>x0<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="c1">## Determine and plot lon and lat of midpoints</span>
+lon <span class="o">&lt;-</span> GS<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">,</span> <span class="s">&quot;byStation&quot;</span><span class="p">]]</span>
+lat <span class="o">&lt;-</span> GS<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">,</span> <span class="s">&quot;byStation&quot;</span><span class="p">]]</span>
+distance <span class="o">&lt;-</span> geodDist<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> alongPath<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+lat0 <span class="o">&lt;-</span> approxfun<span class="p">(</span>lat<span class="o">~</span>distance<span class="p">)(</span>x0<span class="p">)</span>
+lon0 <span class="o">&lt;-</span> approxfun<span class="p">(</span>lon<span class="o">~</span>distance<span class="p">)(</span>x0<span class="p">)</span>
+plot<span class="p">(</span>GS<span class="p">,</span> which<span class="o">=</span><span class="s">&quot;map&quot;</span><span class="p">,</span>
+     map.xlim<span class="o">=</span>lon0<span class="o">+</span>c<span class="p">(</span><span class="m">-6</span><span class="p">,</span><span class="m">6</span><span class="p">),</span> map.ylim<span class="o">=</span>lat0<span class="o">+</span>c<span class="p">(</span><span class="m">-6</span><span class="p">,</span> <span class="m">6</span><span class="p">))</span>
+points<span class="p">(</span>lon0<span class="p">,</span> lat0<span class="p">,</span> pch<span class="o">=</span><span class="m">1</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+data<span class="p">(</span>topoWorld<span class="p">)</span>
+<span class="c1">## Show isobaths</span>
+depth <span class="o">&lt;-</span> <span class="o">-</span>topoWorld<span class="p">[[</span><span class="s">&quot;z&quot;</span><span class="p">]]</span>
+contour<span class="p">(</span>topoWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]]</span><span class="m">-360</span><span class="p">,</span> topoWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span> depth<span class="p">,</span>
+        level<span class="o">=</span><span class="m">1000</span><span class="o">*</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> add<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> col<span class="o">=</span>gray<span class="p">(</span><span class="m">0.4</span><span class="p">))</span>
+<span class="c1">## Show Drinkwater September climatological North Wall of Gulf Stream.</span>
+data<span class="p">(</span><span class="s">&quot;gs&quot;</span><span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
+lines<span class="p">(</span>gs<span class="o">$</span>longitude<span class="p">,</span> gs<span class="o">$</span>latitude<span class="p">[,</span><span class="m">9</span><span class="p">],</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> lty<span class="o">=</span><span class="s">&#39;dotted&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-22-gulf-stream-center/unnamed-chunk-1.png" alt="center" /> </p>
+
+<h1 id="exercises">Exercises</h1>
+
+<p>From the map, work out a scale factor for correcting geostrophic velocity from cross-section to along-stream, assuming the Drinkwater climatology to be relevant.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-06-22-gulf-stream-center.R">2014-06-22-gulf-stream-center.R</a></li>
+</ul>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
