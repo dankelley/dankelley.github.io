@@ -94,7 +94,7 @@ Definitions of Gulf Stream location sometimes centre on thermal signature, but i
 
 # Methods and results
 
-```{r fig.height=4, fig.width=8, dpi=120}
+```{r fig.height=3, fig.width=8, dpi=120}
 library(oce)
 data(section)
 ## Extract Gulf Stream (and reverse station order)
