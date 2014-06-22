@@ -1,5 +1,5 @@
 
-## ----fig.height=4, fig.width=7, dpi=100----------------------------------
+## ----fig.height=4, fig.width=8, dpi=120----------------------------------
 library(oce)
 data(section)
 ## Extract Gulf Stream (and reverse station order)
