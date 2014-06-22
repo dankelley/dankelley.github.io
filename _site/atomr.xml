@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-22T20:02:27-03:00</updated>
+    <updated>2014-06-22T20:04:29-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -126,13 +126,11 @@ lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gs&lt;span class=&quot;o&quot
     &lt;p&gt;Source code: &lt;a href=&quot;/assets/2014-06-22-gulf-stream-center.R&quot;&gt;2014-06-22-gulf-stream-center.R&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;K. F. Drinkwater, R. A Myers, R. G. Pettipas and T. L. Wright,&lt;/p&gt;
-    &lt;ol&gt;
-      &lt;li&gt;Climatic data for the northwest Atlantic: the position of the
-     shelf/slope front and the northern boundary of the Gulf Stream between
-     50W and 75W, 1973-1992.  Canadian Data Report of Fisheries and Ocean
-     Sciences 125.  Department of Fisheries and Oceans, Canada. &lt;/li&gt;
-    &lt;/ol&gt;
+    &lt;p&gt;K. F. Drinkwater, R. A Myers, R. G. Pettipas and T. L. Wright, 1994.
+ Climatic data for the northwest Atlantic: the position of the shelf/slope
+ front and the northern boundary of the Gulf Stream between 50W and 75W,
+ 1973-1992.  Canadian Data Report of Fisheries and Ocean Sciences 125.
+ Department of Fisheries and Oceans, Canada. &lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
