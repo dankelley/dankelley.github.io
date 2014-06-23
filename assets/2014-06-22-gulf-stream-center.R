@@ -14,16 +14,18 @@ x <- dh$distance
 par(mfrow=c(1, 3), mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 plot(x, h, xlab="Distance [km]", ylab="Dynamic Height [m]")
 
-## tanh fit
+## Fit to tanh, with x0 line
 m <- nls(h~a+b*(1+tanh((x-x0)/L)), start=list(a=0,b=1,x0=100,L=100))
 hp <- predict(m)
 lines(x, hp, col='blue')
 x0 <- coef(m)[["x0"]]
+abline(v=x0, col='blue')
 
+# Temperature section, again with x0 line
 plot(GS, which="temperature")
 abline(v=x0, col='blue')
 
-## Determine and plot lon and lat of midpoints
+## Show lon and lat of x0, on a map
 lon <- GS[["longitude", "byStation"]]
 lat <- GS[["latitude", "byStation"]]
 distance <- geodDist(lon, lat, alongPath=TRUE)

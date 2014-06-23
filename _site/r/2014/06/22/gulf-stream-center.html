@@ -94,7 +94,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height <script type="math/tex">\eta</script> instead.  This is illustrated here, using a <script type="math/tex">\tanh</script> model for <script type="math/tex">\eta=\eta(x)</script>, with <script type="math/tex">x</script> the distance along the transect.  The idea is to select the halfway point in the <script type="math/tex">\tanh</script> function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.</p>
+<p>Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height <script type="math/tex">\eta</script> instead.  This is illustrated here, using a <script type="math/tex">\tanh</script> model for <script type="math/tex">\eta=\eta(x)</script>, with <script type="math/tex">x</script> the distance along the transect.  The idea is to select <script type="math/tex">x_ 0</script>, the halfway point in the <script type="math/tex">\tanh()</script> function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.</p>
 
 <h1 id="methods-and-results">Methods and results</h1>
 
@@ -144,7 +144,9 @@
 36
 37
 38
-39</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>section<span class="p">)</span>
+39
+40
+41</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>section<span class="p">)</span>
 <span class="c1">## Extract Gulf Stream (and reverse station order)</span>
 GS <span class="o">&lt;-</span> subset<span class="p">(</span>section<span class="p">,</span> <span class="m">109</span><span class="o">&lt;=</span>stationId <span class="o">&amp;</span> stationId<span class="o">&lt;=</span><span class="m">129</span><span class="p">)</span>
 GS <span class="o">&lt;-</span> sectionSort<span class="p">(</span>GS<span class="p">,</span> by<span class="o">=</span><span class="s">&quot;longitude&quot;</span><span class="p">)</span>
@@ -157,16 +159,18 @@ x <span class="o">&lt;-</span> dh<span class="o">$</span>distance
 par<span class="p">(</span>mfrow<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
 plot<span class="p">(</span>x<span class="p">,</span> h<span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;Distance [km]&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Dynamic Height [m]&quot;</span><span class="p">)</span>
 
-<span class="c1">## tanh fit</span>
+<span class="c1">## Fit to tanh, with x0 line</span>
 m <span class="o">&lt;-</span> nls<span class="p">(</span>h<span class="o">~</span>a<span class="o">+</span>b<span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">+</span>tanh<span class="p">((</span>x<span class="o">-</span>x0<span class="p">)</span><span class="o">/</span>L<span class="p">)),</span> start<span class="o">=</span>list<span class="p">(</span>a<span class="o">=</span><span class="m">0</span><span class="p">,</span>b<span class="o">=</span><span class="m">1</span><span class="p">,</span>x0<span class="o">=</span><span class="m">100</span><span class="p">,</span>L<span class="o">=</span><span class="m">100</span><span class="p">))</span>
 hp <span class="o">&lt;-</span> predict<span class="p">(</span>m<span class="p">)</span>
 lines<span class="p">(</span>x<span class="p">,</span> hp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
 x0 <span class="o">&lt;-</span> coef<span class="p">(</span>m<span class="p">)[[</span><span class="s">&quot;x0&quot;</span><span class="p">]]</span>
+abline<span class="p">(</span>v<span class="o">=</span>x0<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
 
+<span class="c1"># Temperature section, again with x0 line</span>
 plot<span class="p">(</span>GS<span class="p">,</span> which<span class="o">=</span><span class="s">&quot;temperature&quot;</span><span class="p">)</span>
 abline<span class="p">(</span>v<span class="o">=</span>x0<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
 
-<span class="c1">## Determine and plot lon and lat of midpoints</span>
+<span class="c1">## Show lon and lat of x0, on a map</span>
 lon <span class="o">&lt;-</span> GS<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">,</span> <span class="s">&quot;byStation&quot;</span><span class="p">]]</span>
 lat <span class="o">&lt;-</span> GS<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">,</span> <span class="s">&quot;byStation&quot;</span><span class="p">]]</span>
 distance <span class="o">&lt;-</span> geodDist<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> alongPath<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>

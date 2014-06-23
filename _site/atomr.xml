@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-06-23T08:05:29-03:00</updated>
+    <updated>2014-06-23T08:10:07-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -20,7 +20,7 @@
         <id>http://dankelley.github.io/blog/r/2014/06/22/gulf-stream-center</id>
         <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height &lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt; instead.  This is illustrated here, using a &lt;script type=&quot;math/tex&quot;&gt;\tanh&lt;/script&gt; model for &lt;script type=&quot;math/tex&quot;&gt;\eta=\eta(x)&lt;/script&gt;, with &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; the distance along the transect.  The idea is to select the halfway point in the &lt;script type=&quot;math/tex&quot;&gt;\tanh&lt;/script&gt; function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.&lt;/p&gt;
+&lt;p&gt;Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height &lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt; instead.  This is illustrated here, using a &lt;script type=&quot;math/tex&quot;&gt;\tanh&lt;/script&gt; model for &lt;script type=&quot;math/tex&quot;&gt;\eta=\eta(x)&lt;/script&gt;, with &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; the distance along the transect.  The idea is to select &lt;script type=&quot;math/tex&quot;&gt;x_ 0&lt;/script&gt;, the halfway point in the &lt;script type=&quot;math/tex&quot;&gt;\tanh()&lt;/script&gt; function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.&lt;/p&gt;
 
 &lt;h1 id=&quot;methods-and-results&quot;&gt;Methods and results&lt;/h1&gt;
 
@@ -70,7 +70,9 @@
 36
 37
 38
-39&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+39
+40
+41&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;## Extract Gulf Stream (and reverse station order)&lt;/span&gt;
 GS &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; subset&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;109&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;stationId &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; stationId&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;129&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 GS &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sectionSort&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;GS&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;longitude&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -83,16 +85,18 @@ x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; dh&lt;span class=&quot;
 par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mfrow&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mar&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mgp&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; h&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; xlab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Distance [km]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ylab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Dynamic Height [m]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;## tanh fit&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## Fit to tanh, with x0 line&lt;/span&gt;
 m &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; nls&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;h&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;a&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;b&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;tanh&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;x0&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;L&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; start&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;a&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;b&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;x0&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;L&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 hp &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; predict&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;m&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; hp&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 x0 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; coef&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;m&lt;span class=&quot;p&quot;&gt;)[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;x0&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+abline&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;v&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;x0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
+&lt;span class=&quot;c1&quot;&gt;# Temperature section, again with x0 line&lt;/span&gt;
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;GS&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; which&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;temperature&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 abline&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;v&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;x0&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;## Determine and plot lon and lat of midpoints&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## Show lon and lat of x0, on a map&lt;/span&gt;
 lon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; GS&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;longitude&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;byStation&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
 lat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; GS&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;latitude&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;byStation&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
 distance &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; geodDist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lon&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alongPath&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
