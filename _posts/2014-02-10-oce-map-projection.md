@@ -53,30 +53,27 @@ library(proj4)
 {% highlight r linenos=table %}
 library(mapproj)
 data(coastlineWorld)
-lon <- coastlineWorld[["longitude"]]
-lat <- coastlineWorld[["latitude"]]
+lon <- coastlineWorld[['longitude']]
+lat <- coastlineWorld[['latitude']]
 {% endhighlight %}
-
 
 Next, plot with existing (mapproj) projection.
 
 
 {% highlight r linenos=table %}
-par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
-xy <- mapproject(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], 
-    proj = "mollweide")
-plot(xy$x, xy$y, type = "l", asp = 1)
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+xy <- mapproject(coastlineWorld[['longitude']], coastlineWorld[['latitude']], proj="mollweide")
+plot(xy$x, xy$y, type='l', asp=1)
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png) 
-
 
 Finally, plot with proposed (proj4) projection.
 
 
 {% highlight r linenos=table %}
-par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
-xy <- project(cbind(lon, lat), "+proj=moll")
+par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+xy <- project(cbind(lon,lat), "+proj=moll")
 {% endhighlight %}
 
 
@@ -88,7 +85,7 @@ xy <- project(cbind(lon, lat), "+proj=moll")
 
 
 {% highlight r linenos=table %}
-plot(xy[, 1], xy[, 2], type = "l", asp = 1)
+plot(xy[,1], xy[,2], type='l', asp=1)
 {% endhighlight %}
 
 
@@ -96,7 +93,6 @@ plot(xy[, 1], xy[, 2], type = "l", asp = 1)
 {% highlight text %}
 ## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error in xy[, 1] : incorrect number of dimensions
 {% endhighlight %}
-
 # Conclusions
 
 At least in this example, the ``proj4`` package produces better coastlines, somehow being clever enough to cut the polygons that cross the "edge" of the earth.

@@ -105,33 +105,51 @@
 
 <h1 id="procedure">Procedure</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3
-4
-5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>Rcpp<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>Rcpp<span class="p">)</span>
 library<span class="p">(</span>microbenchmark<span class="p">)</span>
-cppFunction<span class="p">(</span><span class="s">&quot;\n            int firstZero(IntegerVector x) {\n                int nx = x.size();\n                for (int i = 0; i &lt; nx; ++i) {\n                    if (0 == x[i]) {\n                        return i+1;\n                    }\n                }\n                return 0; // means none found\n            }&quot;</span><span class="p">)</span>
+cppFunction<span class="p">(</span><span class="s">&#39;</span>
+<span class="s">            int firstZero(IntegerVector x) {</span>
+<span class="s">                int nx = x.size();</span>
+<span class="s">                for (int i = 0; i &lt; nx; ++i) {</span>
+<span class="s">                    if (0 == x[i]) {</span>
+<span class="s">                        return i+1;</span>
+<span class="s">                    }</span>
+<span class="s">                }</span>
+<span class="s">                return 0; // means none found</span>
+<span class="s">            }&#39;</span>
+            <span class="p">)</span>
 x <span class="o">&lt;-</span> rep<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">)</span>
 x<span class="p">[</span>seq.int<span class="p">(</span><span class="m">500</span><span class="p">,</span> <span class="m">10000</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
-microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span class="p">),</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
+microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span class="p">),</span> times<span class="o">=</span><span class="m">1000L</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
-##          expr   min    lq median    uq   max neval
-##  firstZero(x) 23.73 24.24  24.32 24.45 984.1  1000
-</code></pre></div>
+##          expr   min    lq median    uq  max neval
+##  firstZero(x) 23.46 23.75  23.87 24.14 1065  1000</code></pre></div>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times <span class="o">=</span> <span class="m">1000L</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span>which<span class="p">(</span><span class="m">0</span><span class="o">==</span>x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times<span class="o">=</span><span class="m">1000L</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <div class="highlight"><pre><code class="text">## Unit: microseconds
-##              expr   min    lq median    uq   max neval
-##  which(0 == x)[1] 51.95 52.69  52.89 53.18 927.4  1000
-</code></pre></div>
+##              expr  min    lq median    uq  max neval
+##  which(0 == x)[1] 52.4 53.59  54.14 54.84 1124  1000</code></pre></div>
 
 <h1 id="results">Results</h1>
 

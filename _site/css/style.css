@@ -80,7 +80,7 @@ pre {
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     white-space: pre-wrap;
-    word-break: break-all;
+    /*word-break: break-all;*/ /* this split multi-digit line numbers */
     word-wrap: break-word;
 
     /* new: messes up with line numbered code */

@@ -159,56 +159,56 @@ inverse ages.</p>
 52
 53
 54
-55</code></pre></div></td><td class="code"><div class="highlight"><pre>m <span class="o">&lt;-</span> <span class="m">50</span>  <span class="c1"># number of particles</span>
-n <span class="o">&lt;-</span> <span class="m">10</span>  <span class="c1"># grid width</span>
-debug <span class="o">&lt;-</span> <span class="kc">FALSE</span>  <span class="c1"># set TRUE to trace steps</span>
+55</code></pre></div></td><td class="code"><div class="highlight"><pre>m <span class="o">&lt;-</span> <span class="m">50</span>                                <span class="c1"># number of particles</span>
+n <span class="o">&lt;-</span> <span class="m">10</span>                                <span class="c1"># grid width</span>
+debug <span class="o">&lt;-</span> <span class="kc">FALSE</span>                         <span class="c1"># set TRUE to trace steps</span>
 info <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="kr">if</span> <span class="p">(</span>debug<span class="p">)</span> cat<span class="p">(</span><span class="kc">...</span><span class="p">)</span>
 pch <span class="o">&lt;-</span> <span class="m">20</span>
-cex <span class="o">&lt;-</span> <span class="m">4</span><span class="o">/</span>log2<span class="p">(</span>n<span class="p">)</span>
-type <span class="o">&lt;-</span> <span class="s">&quot;t&quot;</span>
+cex <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">/</span> log2<span class="p">(</span>n<span class="p">)</span>
+type <span class="o">&lt;-</span> <span class="s">&#39;t&#39;</span>
 set.seed<span class="p">(</span><span class="m">1</span><span class="p">)</span>
-slump <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> Z<span class="p">)</span> <span class="p">{</span>
-    info<span class="p">(</span><span class="s">&quot;slump(&quot;</span><span class="p">,</span> X<span class="p">,</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> Z<span class="p">,</span> <span class="s">&quot;)\n&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span>Z <span class="o">==</span> <span class="m">1</span><span class="p">)</span> 
-        <span class="kr">return</span><span class="p">(</span>list<span class="p">(</span>x <span class="o">=</span> X<span class="p">,</span> z <span class="o">=</span> Z<span class="p">))</span>
-    <span class="c1">## Particles roll down-slope until they hit the bottom or a ledge with at</span>
-    <span class="c1">## least one particle to the right.</span>
+slump <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> Z<span class="p">)</span>
+<span class="p">{</span>
+    info<span class="p">(</span><span class="s">&quot;slump(&quot;</span><span class="p">,</span> X<span class="p">,</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> Z<span class="p">,</span> <span class="s">&quot;)\n&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span>Z <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+        <span class="kr">return</span><span class="p">(</span>list<span class="p">(</span>x<span class="o">=</span>X<span class="p">,</span> z<span class="o">=</span>Z<span class="p">))</span>
+    <span class="c1">## Particles roll down-slope until they hit the bottom</span>
+    <span class="c1">## or a ledge with at least one particle to the right.</span>
     XX <span class="o">&lt;-</span> X
     ZZ <span class="o">&lt;-</span> Z
-    <span class="c1">## Small particles stop rolling if 2 points below move down and to right</span>
-    <span class="kr">while</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>XX <span class="o">+</span> <span class="m">1</span><span class="p">,</span> ZZ <span class="o">-</span> <span class="m">1</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">## Small particles stop rolling if 2 points below</span>
+    <span class="kr">while</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>XX<span class="m">+1</span><span class="p">,</span> ZZ<span class="m">-1</span><span class="p">])</span> <span class="p">{</span> <span class="c1"># move down and to right</span>
         info<span class="p">(</span><span class="s">&quot;  XX:&quot;</span><span class="p">,</span> XX<span class="p">,</span> <span class="s">&quot; ZZ:&quot;</span><span class="p">,</span> ZZ<span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
         XX <span class="o">&lt;-</span> XX <span class="o">+</span> <span class="m">1</span>
-        ZZ <span class="o">&lt;-</span> which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>XX<span class="p">,</span> <span class="p">])[</span><span class="m">1</span><span class="p">]</span>
-        <span class="kr">if</span> <span class="p">(</span>ZZ <span class="o">==</span> <span class="m">1</span><span class="p">)</span> 
+        ZZ <span class="o">&lt;-</span> which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>XX<span class="p">,])[</span><span class="m">1</span><span class="p">]</span>
+        <span class="kr">if</span> <span class="p">(</span>ZZ <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
             <span class="kr">break</span>
-        <span class="kr">if</span> <span class="p">(</span>XX <span class="o">==</span> n<span class="p">)</span> 
+        <span class="kr">if</span> <span class="p">(</span>XX <span class="o">==</span> n<span class="p">)</span>
             <span class="kr">break</span>
     <span class="p">}</span>
-    <span class="kr">return</span><span class="p">(</span>list<span class="p">(</span>x <span class="o">=</span> XX<span class="p">,</span> z <span class="o">=</span> ZZ<span class="p">))</span>
+    <span class="kr">return</span><span class="p">(</span>list<span class="p">(</span>x<span class="o">=</span>XX<span class="p">,</span> z<span class="o">=</span>ZZ<span class="p">))</span>
 <span class="p">}</span>
 
-S <span class="o">&lt;-</span> matrix<span class="p">(</span><span class="m">0</span><span class="p">,</span> nrow <span class="o">=</span> n<span class="p">,</span> ncol <span class="o">=</span> n<span class="p">)</span>  <span class="c1"># &#39;S&#39; means &#39;space&#39;</span>
-par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-plot<span class="p">(</span><span class="m">1</span><span class="o">:</span>n<span class="p">,</span> <span class="m">1</span><span class="o">:</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-xDrop <span class="o">&lt;-</span> <span class="m">1</span>  <span class="c1"># location of drop; everything goes here or to right</span>
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>m<span class="p">)</span> <span class="p">{</span>
-    <span class="c1"># &#39;p&#39; means partcle</span>
-    <span class="kr">while</span> <span class="p">(</span>is.na<span class="p">(</span>zDrop <span class="o">&lt;-</span> which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>xDrop<span class="p">,</span> <span class="p">])[</span><span class="m">1</span><span class="p">]))</span> <span class="p">{</span>
+S <span class="o">&lt;-</span> matrix<span class="p">(</span><span class="m">0</span><span class="p">,</span> nrow<span class="o">=</span>n<span class="p">,</span> ncol<span class="o">=</span>n<span class="p">)</span>         <span class="c1"># &quot;S&quot; means &quot;space&quot;</span>
+par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+plot<span class="p">(</span><span class="m">1</span><span class="o">:</span>n<span class="p">,</span> <span class="m">1</span><span class="o">:</span>n<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+xDrop <span class="o">&lt;-</span> <span class="m">1</span> <span class="c1"># location of drop; everything goes here or to right</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>m<span class="p">)</span> <span class="p">{</span>                       <span class="c1"># &quot;p&quot; means partcle</span>
+    <span class="kr">while</span> <span class="p">(</span>is.na<span class="p">(</span>zDrop <span class="o">&lt;-</span> which<span class="p">(</span><span class="m">0</span> <span class="o">==</span> S<span class="p">[</span>xDrop<span class="p">,])[</span><span class="m">1</span><span class="p">]))</span> <span class="p">{</span>
         xDrop <span class="o">&lt;-</span> xDrop <span class="o">+</span> <span class="m">1</span>
-        <span class="kr">if</span> <span class="p">(</span>xDrop <span class="o">==</span> n<span class="p">)</span> 
+        <span class="kr">if</span> <span class="p">(</span>xDrop <span class="o">==</span> n<span class="p">)</span>
             <span class="kr">break</span>
     <span class="p">}</span>
-    <span class="kr">if</span> <span class="p">(</span>is.na<span class="p">(</span>zDrop<span class="p">))</span> 
+    <span class="kr">if</span> <span class="p">(</span>is.na<span class="p">(</span>zDrop<span class="p">))</span>
         <span class="kr">break</span>
     info<span class="p">(</span><span class="s">&quot;particle:&quot;</span><span class="p">,</span> i<span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
     p <span class="o">&lt;-</span> slump<span class="p">(</span>xDrop<span class="p">,</span> zDrop<span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span>p<span class="o">$</span>x <span class="o">&lt;</span> <span class="p">(</span>n <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>p<span class="o">$</span>x <span class="o">&lt;</span> <span class="p">(</span>n<span class="m">+1</span><span class="p">))</span> <span class="p">{</span>
         S<span class="p">[</span>p<span class="o">$</span>x<span class="p">,</span> p<span class="o">$</span>z<span class="p">]</span> <span class="o">&lt;-</span> <span class="m">1</span>
-        <span class="kr">if</span> <span class="p">(</span>type <span class="o">==</span> <span class="s">&quot;p&quot;</span><span class="p">)</span> <span class="p">{</span>
-            points<span class="p">(</span>p<span class="o">$</span>x<span class="p">,</span> p<span class="o">$</span>z<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">,</span> pch <span class="o">=</span> pch<span class="p">,</span> cex <span class="o">=</span> cex<span class="p">)</span>
+        <span class="kr">if</span> <span class="p">(</span>type <span class="o">==</span> <span class="s">&#39;p&#39;</span><span class="p">)</span> <span class="p">{</span>
+            points<span class="p">(</span>p<span class="o">$</span>x<span class="p">,</span> p<span class="o">$</span>z<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span> pch<span class="o">=</span>pch<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span> 
         <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-            text<span class="p">(</span>p<span class="o">$</span>x<span class="p">,</span> p<span class="o">$</span>z<span class="p">,</span> i<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
+            text<span class="p">(</span>p<span class="o">$</span>x<span class="p">,</span> p<span class="o">$</span>z<span class="p">,</span> i<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span> 
         <span class="p">}</span>
     <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
         str<span class="p">(</span>p<span class="p">)</span>
