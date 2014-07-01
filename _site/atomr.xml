@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-07-01T11:15:09-03:00</updated>
+    <updated>2014-07-01T13:59:18-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -62,11 +62,9 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;p&quot;
 
 &lt;p&gt;The figure below shows the results.  This image is from winter, so the land (Nova Scotia) is colder than the ocean.  &lt;/p&gt;
 
-&lt;p&gt;The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  Generally, the water temperature hovers around freezing (i.e. -2C).  &lt;/p&gt;
+&lt;p&gt;The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  &lt;/p&gt;
 
-&lt;p&gt;The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  &lt;/p&gt;
-
-&lt;p&gt;Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.&lt;/p&gt;
+&lt;p&gt;Generally, the ocean temperature hovers around freezing (i.e. -2C).  The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.&lt;/p&gt;
 
 &lt;p&gt;The beautiful swirls south of Nova Scotia are typical of these coastal waters.&lt;/p&gt;
 

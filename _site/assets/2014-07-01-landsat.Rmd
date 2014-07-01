@@ -124,11 +124,9 @@ mtext(l[["time"]])
 
 The figure below shows the results.  This image is from winter, so the land (Nova Scotia) is colder than the ocean.  
 
-The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  Generally, the water temperature hovers around freezing (i.e. -2C).  
+The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  
 
-The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  
-
-Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.
+Generally, the ocean temperature hovers around freezing (i.e. -2C).  The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.
 
 The beautiful swirls south of Nova Scotia are typical of these coastal waters.
 
