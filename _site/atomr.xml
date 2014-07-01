@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-07-01T10:42:34-03:00</updated>
+    <updated>2014-07-01T10:52:21-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -23,6 +23,10 @@
 &lt;p&gt;The &lt;code&gt;tirs1&lt;/code&gt; band of landsat-8 imagery (see [1]) is a near-thermal band.  Here, algorithm (see [2]) is applied to estimate surface ``brightness temperature’’.&lt;/p&gt;
 
 &lt;h1 id=&quot;methods&quot;&gt;Methods&lt;/h1&gt;
+
+&lt;p&gt;The brightness temperature in Kelvin is computed with &lt;script type=&quot;math/tex&quot;&gt;T=K_2 / (ln(K_1/\lambda_L + 1)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;K_1$ and &lt;/script&gt;K_2&lt;script type=&quot;math/tex&quot;&gt; are stored in the image metadata, and &lt;/script&gt;\lambda_L=M_L*d+A_L&lt;script type=&quot;math/tex&quot;&gt;, where again &lt;/script&gt;M_L&lt;script type=&quot;math/tex&quot;&gt; and &lt;/script&gt;A_L&lt;script type=&quot;math/tex&quot;&gt; are stored in the metadata.  In this last expression, &lt;/script&gt;d&lt;script type=&quot;math/tex&quot;&gt; is the image value, which when read with the ``oce`` package must be multiplied by &lt;/script&gt;2^15-1)$$.&lt;/p&gt;
+
+&lt;p&gt;Note in the code that the SST is computed in Celcius, and inserted into the data object before plotting.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -56,13 +60,15 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;p&quot;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
+&lt;p&gt;The figure below shows the results.  This image is from winter, so the land (Nova Scotia) is colder than the ocean.  The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  Generally, the water temperature hovers around freezing (i.e. -2C).  Colder patches in the Bay of Fundy are likely a signature of ice.  Some of the orange colour suggests temperatures below freezing (perhaps 1C below), which suggests a difficulty in the algorithm or the interpretation.  Note the beautiful swirls in the ocean, particularly south of Nova Scotia, indicative of interesting flows.&lt;/p&gt;
+
 &lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-07-01-landsat.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Landsat bands are explained at &lt;a href=&quot;http://landsat.gsfc.nasa.gov/?page_id=5377&quot;&gt;http://landsat.gsfc.nasa.gov/?page_id=5377)&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;Landsat bands are explained at &lt;a href=&quot;http://landsat.gsfc.nasa.gov/?page_id=5377&quot;&gt;http://landsat.gsfc.nasa.gov/?page_id=5377&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;The conversion to brightness temperature is described at &lt;a href=&quot;http://landsat.usgs.gov/Landsat8_Using_Product.php&quot;&gt;http://landsat.usgs.gov/Landsat8_Using_Product.php&lt;/a&gt;&lt;/p&gt;

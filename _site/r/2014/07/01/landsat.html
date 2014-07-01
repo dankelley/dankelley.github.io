@@ -103,6 +103,10 @@
 
 <h1 id="methods">Methods</h1>
 
+<p>The brightness temperature in Kelvin is computed with <script type="math/tex">T=K_2 / (ln(K_1/\lambda_L + 1)</script> where <script type="math/tex">K_1$ and </script>K_2<script type="math/tex"> are stored in the image metadata, and </script>\lambda_L=M_L*d+A_L<script type="math/tex">, where again </script>M_L<script type="math/tex"> and </script>A_L<script type="math/tex"> are stored in the metadata.  In this last expression, </script>d<script type="math/tex"> is the image value, which when read with the ``oce`` package must be multiplied by </script>2^15-1)$$.</p>
+
+<p>Note in the code that the SST is computed in Celcius, and inserted into the data object before plotting.</p>
+
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
@@ -135,13 +139,15 @@ mtext<span class="p">(</span>l<span class="p">[[</span><span class="s">&quot;tim
 
 <h1 id="results">Results</h1>
 
+<p>The figure below shows the results.  This image is from winter, so the land (Nova Scotia) is colder than the ocean.  The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.  Generally, the water temperature hovers around freezing (i.e. -2C).  Colder patches in the Bay of Fundy are likely a signature of ice.  Some of the orange colour suggests temperatures below freezing (perhaps 1C below), which suggests a difficulty in the algorithm or the interpretation.  Note the beautiful swirls in the ocean, particularly south of Nova Scotia, indicative of interesting flows.</p>
+
 <p><img src="http://dankelley.github.io/figs/2014-07-01-landsat.png" alt="center" /> </p>
 
 <h1 id="resources">Resources</h1>
 
 <ol>
   <li>
-    <p>Landsat bands are explained at <a href="http://landsat.gsfc.nasa.gov/?page_id=5377">http://landsat.gsfc.nasa.gov/?page_id=5377)</a>.</p>
+    <p>Landsat bands are explained at <a href="http://landsat.gsfc.nasa.gov/?page_id=5377">http://landsat.gsfc.nasa.gov/?page_id=5377</a>.</p>
   </li>
   <li>
     <p>The conversion to brightness temperature is described at <a href="http://landsat.usgs.gov/Landsat8_Using_Product.php">http://landsat.usgs.gov/Landsat8_Using_Product.php</a></p>
