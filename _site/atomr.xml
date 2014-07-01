@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-07-01T10:54:39-03:00</updated>
+    <updated>2014-07-01T10:55:23-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -24,7 +24,7 @@
 
 &lt;h1 id=&quot;methods&quot;&gt;Methods&lt;/h1&gt;
 
-&lt;p&gt;As explained in [2], the brightness temperature in Kelvin is computed with &lt;script type=&quot;math/tex&quot;&gt;T=K_2 / (ln(K_1/\lambda_L + 1)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;K_1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;K_2&lt;/script&gt; are stored in the image metadata, and &lt;script type=&quot;math/tex&quot;&gt;\lambda_L=M_L*d+A_L&lt;/script&gt;, where again &lt;script type=&quot;math/tex&quot;&gt;M_L&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;A_L&lt;/script&gt; are stored in the metadata.  In this last expression, &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; is the image value, which when read with the &lt;code&gt;oce&lt;/code&gt; package must be multiplied by &lt;script type=&quot;math/tex&quot;&gt;2^15-1)&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;As explained in [2], the brightness temperature in Kelvin is computed with &lt;script type=&quot;math/tex&quot;&gt;T=K_2 / (ln(K_1/\lambda_L + 1)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;K_1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;K_2&lt;/script&gt; are stored in the image metadata, and &lt;script type=&quot;math/tex&quot;&gt;\lambda_L=M_L*d+A_L&lt;/script&gt;, where again &lt;script type=&quot;math/tex&quot;&gt;M_L&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;A_L&lt;/script&gt; are stored in the metadata.  In this last expression, &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; is the image value, which when read with the &lt;code&gt;oce&lt;/code&gt; package must be multiplied by &lt;script type=&quot;math/tex&quot;&gt;2^{15]-1)&lt;/script&gt;.&lt;/p&gt;
 
 &lt;p&gt;Note in the code that the SST is computed in Celcius, and inserted into the data object before plotting.&lt;/p&gt;
 
