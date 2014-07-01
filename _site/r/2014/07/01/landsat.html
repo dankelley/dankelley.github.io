@@ -101,7 +101,7 @@
 
 <p>The <code>tirs1</code> band of landsat-8 imagery (see [1]) is a near-thermal band, from which a quantity called ``brightness temperature’’ may be inferred.</p>
 
-<p>As explained in [2], the brightness temperature in Kelvin is computed with <script type="math/tex">T=K_2 / ln(K_1/\lambda_L + 1)</script> where <script type="math/tex">K_1</script> and <script type="math/tex">K_2</script> are stored in the image metadata, and <script type="math/tex">\lambda_L=M_L*d+A_L</script>, where again <script type="math/tex">M_L</script> and <script type="math/tex">A_L</script> are stored in the metadata.  In this last expression, <script type="math/tex">d</script> is the image value, which when read with the <code>oce</code> package must be multiplied by <script type="math/tex">2^{15]-1)</script>.</p>
+<p>As explained in [2], the brightness temperature in Kelvin is computed with <script type="math/tex">T=K_2 / ln(K_1/\lambda_L + 1)</script> where <script type="math/tex">K_1</script> and <script type="math/tex">K_2</script> are stored in the image metadata, and <script type="math/tex">\lambda_L=M_L*d+A_L</script>, where again <script type="math/tex">M_L</script> and <script type="math/tex">A_L</script> are stored in the metadata.  In this last expression, <script type="math/tex">d</script> is the image value, which when read with the <code>oce</code> package must be multiplied by a scale factor for the formulae to work.</p>
 
 <h1 id="methods">Methods</h1>
 
