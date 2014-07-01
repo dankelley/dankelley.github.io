@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-07-01T11:06:17-03:00</updated>
+    <updated>2014-07-01T11:15:09-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -66,7 +66,7 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;p&quot;
 
 &lt;p&gt;The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  &lt;/p&gt;
 
-&lt;p&gt;Some of the orange colour suggests temperatures a much as 1C below freezing (i.e. as low as -3C).  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.&lt;/p&gt;
+&lt;p&gt;Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.&lt;/p&gt;
 
 &lt;p&gt;The beautiful swirls south of Nova Scotia are typical of these coastal waters.&lt;/p&gt;
 

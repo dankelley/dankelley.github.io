@@ -45,7 +45,7 @@ The high land is especially cold, as those familiar with the topography can tell
 
 The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  
 
-Some of the orange colour suggests temperatures a much as 1C below freezing (i.e. as low as -3C).  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.
+Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.
 
 The beautiful swirls south of Nova Scotia are typical of these coastal waters.
 
