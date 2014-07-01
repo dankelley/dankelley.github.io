@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>landsat thermal imaging</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/06/22/gulf-stream-center.html" title="Gulf Stream centre detection">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>landsat thermal imaging</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Jul  1, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A landsat thermal image is constructed.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The <code>tirs1</code> band of landsat-8 imagery (see [1]) is a near-thermal band.  Here, algorithm (see [2]) is applied to estimate surface ``brightness temperature’’.</p>
+
+<h1 id="methods">Methods</h1>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+l <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;LC80080292014065LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span><span class="s">&quot;tirs1&quot;</span><span class="p">)</span>
+tirs1 <span class="o">&lt;-</span> l<span class="p">[[</span><span class="s">&quot;tirs1&quot;</span><span class="p">]]</span>
+ML <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>radiance_mult_band_10
+AL <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>radiance_add_band_10
+K1 <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>k1_constant_band_10
+K2 <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>k2_constant_band_10
+d <span class="o">&lt;-</span> tirs1 <span class="o">*</span> <span class="p">(</span><span class="m">2</span><span class="o">^</span><span class="m">16</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>            <span class="c1"># convert from range 0 to 1</span>
+Llambda <span class="o">&lt;-</span> ML <span class="o">*</span> d <span class="o">+</span> AL
+dd <span class="o">&lt;-</span> K2 <span class="o">/</span> <span class="p">(</span>log<span class="p">(</span>K1 <span class="o">/</span> Llambda <span class="o">+</span> <span class="m">1</span><span class="p">))</span>
+SST <span class="o">&lt;-</span> dd <span class="o">-</span> <span class="m">273.15</span>                 <span class="c1"># convert Kelvin to Celcius</span>
+l<span class="o">@</span>data<span class="o">$</span>SST <span class="o">&lt;-</span> SST
+plot<span class="p">(</span>l<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;SST&quot;</span><span class="p">,</span> col<span class="o">=</span>oceColorsJet<span class="p">)</span>
+mtext<span class="p">(</span>l<span class="p">[[</span><span class="s">&quot;time&quot;</span><span class="p">]])</span>
+</pre></div>
+</td></tr></table>
+
+<h1 id="results">Results</h1>
+
+<p><img src="http://dankelley.github.io/figs/2014-07-01-landsat.png" alt="center" /> </p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+  <li>
+    <p>Landsat bands are explained at <a href="http://landsat.gsfc.nasa.gov/?page_id=5377">http://landsat.gsfc.nasa.gov/?page_id=5377)</a>.</p>
+  </li>
+  <li>
+    <p>The conversion to brightness temperature is described at <a href="http://landsat.usgs.gov/Landsat8_Using_Product.php">http://landsat.usgs.gov/Landsat8_Using_Product.php</a></p>
+  </li>
+  <li>
+    <p>Source code: <a href="/assets/2014-07-01-landsat.R">2014-07-01-landsat.R</a>.</p>
+  </li>
+</ol>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
