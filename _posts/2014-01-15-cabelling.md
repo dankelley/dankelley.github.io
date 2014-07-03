@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cabelling calculations
-tags: [oceanography, R]
+tags: [oce, oceanography, R]
 category: R
 year: 2014
 month: 1

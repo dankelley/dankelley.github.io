@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 1D optimization in R
-tags: [R, oceanography]
+tags: [oce, oceanography, R]
 category: R
 year: 2014
 month: 1

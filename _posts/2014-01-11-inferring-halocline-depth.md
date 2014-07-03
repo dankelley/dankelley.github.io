@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Inferring halocline depth
-tags: [oceanography, R]
+tags: [oce, oceanography, R]
 category: R
 year: 2014
 month: 1

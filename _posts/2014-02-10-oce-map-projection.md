@@ -1,7 +1,7 @@
 ---
 layout: post
 title: oce map projection
-tags: [R, oceanography, mapping, oce]
+tags: [mapping, oce, oceanography, mapping, R]
 category: R
 year: 2014
 month: 2

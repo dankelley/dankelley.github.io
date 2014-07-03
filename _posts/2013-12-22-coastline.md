@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A new Oce coastline
-tags: [oceanography, R]
+tags: [oce, oceanography, R]
 category: R
 year: 2013
 month: 22

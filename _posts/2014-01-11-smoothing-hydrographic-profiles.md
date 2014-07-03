@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Smoothing CTD profiles
-tags: [oceanography, time-series, R]
+tags: [oce, oceanography, R, time-series]
 category: R
 year: 2014
 month: 01

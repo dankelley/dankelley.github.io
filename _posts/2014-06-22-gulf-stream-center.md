@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Gulf Stream centre detection
-tags: [R, oceanography]
+tags: [oce, oceanography, R]
 category: R
 year: 2014
 month: 6

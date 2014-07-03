@@ -1,7 +1,7 @@
 ---
 layout: post
 title: R interface to WebTide
-tags: [oceanography, R, tides]
+tags: [oce, oceanography, R, tides]
 category: R
 year: 2013
 month: 12
