@@ -14,9 +14,8 @@ description: The Oce package presently handles map projections by using the ``ma
 
 Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.
 
-I had thought this was a basic problem of all projection coding, until I happened to try using the ``projr`` package instead of ``mapproj`` to carry out the projections.  The result is that the annoying lines went away.
+I had thought this was a basic problem of all projection coding, until I happened to try using the ``proj4`` package instead of ``mapproj`` to carry out the projections.  The result is that the annoying lines went away.
 
-I am still thinking about whether to make a transition in Oce.  The ``proj4`` syntax is too tricky for simple inclusion in Oce, and tricky, and users (including me) are accustomed to the existing syntax, so it would be necessary to convert the internal linkage in a somewhat nontrivial way.  Nevertheless, the point of the present post is simply to illustrate that the problem is solved, at least in one test case.
 
 
 # Test case
