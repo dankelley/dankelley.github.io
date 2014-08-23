@@ -47,6 +47,7 @@ par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 xy <- project(cbind(lon,lat), "+proj=moll")
 plot(xy[,1], xy[,2], type='l', asp=1)
 ```
+
 # Conclusions
 
 At least in this example, the ``proj4`` package produces better coastlines, somehow being clever enough to cut the polygons that cross the "edge" of the earth.

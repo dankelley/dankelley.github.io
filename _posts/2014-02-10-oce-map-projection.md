@@ -68,6 +68,7 @@ plot(xy[,1], xy[,2], type='l', asp=1)
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png) 
+
 # Conclusions
 
 At least in this example, the ``proj4`` package produces better coastlines, somehow being clever enough to cut the polygons that cross the "edge" of the earth.
