@@ -72,13 +72,8 @@
     </span> <!-- post_date -->
     <span class=post_tags>
         
-        <a href="/tags/mapping/index.html" class="tag">
-            mapping
-        </a>
-         &#183; 
-        
-        <a href="/tags/oce/index.html" class="tag">
-            oce
+        <a href="/tags/R/index.html" class="tag">
+            R
         </a>
          &#183; 
         
@@ -92,8 +87,8 @@
         </a>
          &#183; 
         
-        <a href="/tags/R/index.html" class="tag">
-            R
+        <a href="/tags/oce/index.html" class="tag">
+            oce
         </a>
         
         
@@ -128,19 +123,15 @@
 <div class="highlight"><pre><code class="text">## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>proj4<span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error: there is no package called &#39;proj4&#39;
+## Loading required package: proj4
 </code></pre></div>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>mapproj<span class="p">)</span>
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>proj4<span class="p">)</span>
+library<span class="p">(</span>mapproj<span class="p">)</span>
 data<span class="p">(</span>coastlineWorld<span class="p">)</span>
 lon <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&#39;longitude&#39;</span><span class="p">]]</span>
 lat <span class="o">&lt;-</span> coastlineWorld<span class="p">[[</span><span class="s">&#39;latitude&#39;</span><span class="p">]]</span>
@@ -162,22 +153,15 @@ plot<span class="p">(</span>xy<span class="o">$</span>x<span class="p">,</span> 
 <p>Finally, plot with proposed (proj4) projection.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+2
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
 xy <span class="o">&lt;-</span> project<span class="p">(</span>cbind<span class="p">(</span>lon<span class="p">,</span>lat<span class="p">),</span> <span class="s">&quot;+proj=moll&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>xy<span class="p">[,</span><span class="m">1</span><span class="p">],</span> xy<span class="p">[,</span><span class="m">2</span><span class="p">],</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## Error: could not find function &quot;project&quot;
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>xy<span class="p">[,</span><span class="m">1</span><span class="p">],</span> xy<span class="p">[,</span><span class="m">2</span><span class="p">],</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error: error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;plot&#39;: Error in xy[, 1] : incorrect number of dimensions
-</code></pre></div>
-
-<h1 id="conclusions">Conclusions</h1>
+<p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png" alt="center" /> 
+# Conclusions</p>
 
 <p>At least in this example, the <code>proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
 

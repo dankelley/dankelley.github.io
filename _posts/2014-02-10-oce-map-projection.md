@@ -1,7 +1,7 @@
 ---
 layout: post
 title: oce map projection
-tags: [mapping, oce, oceanography, mapping, R]
+tags: [R, oceanography, mapping, oce]
 category: R
 year: 2014
 month: 2
@@ -34,23 +34,13 @@ library(oce)
 ## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps
+## Loading required package: proj4
 {% endhighlight %}
 
 
 
 {% highlight r linenos=table %}
 library(proj4)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error: there is no package called 'proj4'
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 library(mapproj)
 data(coastlineWorld)
 lon <- coastlineWorld[['longitude']]
@@ -74,25 +64,10 @@ Finally, plot with proposed (proj4) projection.
 {% highlight r linenos=table %}
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 xy <- project(cbind(lon,lat), "+proj=moll")
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error: could not find function "project"
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 plot(xy[,1], xy[,2], type='l', asp=1)
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Error: error in evaluating the argument 'x' in selecting a method for function 'plot': Error in xy[, 1] : incorrect number of dimensions
-{% endhighlight %}
+![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png) 
 # Conclusions
 
 At least in this example, the ``proj4`` package produces better coastlines, somehow being clever enough to cut the polygons that cross the "edge" of the earth.
