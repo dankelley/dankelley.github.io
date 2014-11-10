@@ -89,8 +89,8 @@ points(bestfit$par[1], bestfit$par[2], pch=21, cex=2, bg="red")
 points(-63.571, 44.649, pch=22, cex=2, bg='yellow')
 # A legend summarizes all this work
 legend("bottomright", bg="white", 
-       pch=c(21, 21, 22), pt.bg=c("pink", "red", "yellow"),
-       legend=c("Best", "Cloud", "True"))
+       pch=c(21, 21, 22), pt.bg=c("red", "pink", "yellow"),
+       legend=c("Best", "Range", "True"))
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation.png) 
