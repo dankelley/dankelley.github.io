@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-10T19:06:05-04:00</updated>
+    <updated>2014-11-10T19:14:09-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -132,6 +132,20 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
 
 &lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
+&lt;h1 id=&quot;results-and-conclusions&quot;&gt;Results and conclusions&lt;/h1&gt;
+
+&lt;p&gt;The diagram above indicates that varying times by half a minute (corresponding
+to the rounding interval in public forecasts of sunrise and sunset times)
+yields approximately 25km of uncertainty in geographical position, at this
+particular time of year.  (Note that a degree of latitude is about 111km.)&lt;/p&gt;
+
+&lt;p&gt;Readers interested in exploring the uncertainty through the year should find
+the R code simple to modify.  It is also easy to express the uncertainty
+statistically.&lt;/p&gt;
+
+&lt;p&gt;Further discusion of matters relating to solar angles can be found in my
+upcoming book [3].&lt;/p&gt;
+
 &lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
 
 &lt;ol&gt;
@@ -142,6 +156,9 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
   &lt;li&gt;
     &lt;p&gt;A website providing the requisite sunrise and sunset times is
 &lt;a href=&quot;http://www.timeanddate.com/astronomy/canada/halifax&quot;&gt;http://www.timeanddate.com/astronomy/canada/halifax&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dan Kelley, in preparation.  Oceanographic Analysis with R. Spring-Verlag.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Source code: &lt;a href=&quot;/assets/2014-11-10-solar-navigation.R&quot;&gt;2014-11-10-solar-navigation.R&lt;/a&gt;.&lt;/p&gt;

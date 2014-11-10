@@ -78,6 +78,21 @@ legend("bottomright", bg="white",
        legend=c("Best", "Cloud", "True"))
 ```
 
+# Results and conclusions
+
+The diagram above indicates that varying times by half a minute (corresponding
+to the rounding interval in public forecasts of sunrise and sunset times)
+yields approximately 25km of uncertainty in geographical position, at this
+particular time of year.  (Note that a degree of latitude is about 111km.)
+
+Readers interested in exploring the uncertainty through the year should find
+the R code simple to modify.  It is also easy to express the uncertainty
+statistically.
+
+Further discusion of matters relating to solar angles can be found in my
+upcoming book [3].
+
+
 # Resources
 
 1. A website for the SkyView project is
@@ -86,5 +101,7 @@ legend("bottomright", bg="white",
 2. A website providing the requisite sunrise and sunset times is
 [http://www.timeanddate.com/astronomy/canada/halifax](http://www.timeanddate.com/astronomy/canada/halifax).
 
-3. Source code: [2014-11-10-solar-navigation.R]({{ site.url }}/assets/2014-11-10-solar-navigation.R).
+3. Dan Kelley, in preparation.  Oceanographic Analysis with R. Spring-Verlag.
+
+4. Source code: [2014-11-10-solar-navigation.R]({{ site.url }}/assets/2014-11-10-solar-navigation.R).
 
