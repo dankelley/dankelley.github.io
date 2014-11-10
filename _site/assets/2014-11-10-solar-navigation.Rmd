@@ -184,7 +184,7 @@ upcoming book [3].
 2. A website providing the requisite sunrise and sunset times is
 [http://www.timeanddate.com/astronomy/canada/halifax](http://www.timeanddate.com/astronomy/canada/halifax).
 
-3. Dan Kelley, in preparation.  Oceanographic Analysis with R. Spring-Verlag.
+3. Dan Kelley, in preparation.  Oceanographic Analysis with R. Springer-Verlag.
 
 4. Source code: [2014-11-10-solar-navigation.R](/assets/2014-11-10-solar-navigation.R).
 
