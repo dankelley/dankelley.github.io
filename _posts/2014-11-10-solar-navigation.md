@@ -1,0 +1,108 @@
+---
+layout: post
+title: solar navigation
+tags: [R, oce, oceanography]
+category: R
+year: 2014
+month: 11
+day: 10
+summary: Geographical location is inferred from sunrise and sunset times.
+latex: true
+---
+
+# Introduction
+
+Solar altitude $a$ is a function of time $t$, longitude $\phi$ and latitude
+$\lambda$, that is $a=a(t, \phi, \theta)$, and so it can be possible to infer
+location based on measuring altitude as a function of time.  This form of solar
+navigation can be based on sunrise and sunset times, at least on non-equinox
+days.
+
+I have explored this for a school-based project I call "SkyView" [1] involving
+light sensors and Arduino microcontrollers, and I suspect that readers could
+imagine other applications as well.
+
+I will illustrate the ideas and the accuracy of the method based on the example
+of sunrise and sunset on Remembrance Day in Halifax, Nova Scotia, a city where
+respect for the fallen is very strong.
+
+# Methods
+
+According to various websites [e.g. 2], sunrise on the Halifax Remembrance Day
+sunrise is at 7:06AM (11:06 UTC), with sunset at 4:51PM (20:51 UTC).
+
+Rather than devising an inverse formula to infer location from time and solar
+altitude, the R function ``optim`` may be used to find the longitude and
+latitude that minimize angle the sun makes to the horizon.  That angle is given
+by the ``altitude`` component of the list returned by ``oce::solarAngle()``.
+
+Thus, a method for inferring the location of Halifax is as follows.  The code
+should be self-explanatory to anyone who can read R.
+
+
+{% highlight r linenos=table %}
+library(oce)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: proj4
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
+misfit <- function(lonlat)
+{
+    riseAlt <- sunAngle(rise, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+    setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+    0.5 * (abs(riseAlt) + abs(setAlt))
+}
+start <- c(-50, 50) # set this vaguely near the expected location
+rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
+set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
+bestfit <- optim(start, misfit)
+
+# Plot coastline
+data(coastlineWorldFine, package="ocedata")
+plot(coastlineWorldFine, clon=-64, clat=45, span=500)
+grid()
+
+# Plot a series of points calculated by perturbing the 
+# suggested times by about the rounding interval of 1 minute.
+n <- 25
+rises <- rise + rnorm(n, sd=30)
+sets <- set + rnorm(n, sd=30)
+set.seed(20141111) # this lets readers reproduce this exactly
+for (i in 1:n) {
+    rise <- rises[i]
+    set <- sets[i]
+    fit <- optim(start, misfit)
+    points(fit$par[1], fit$par[2], pch=21, bg="pink", cex=1.4)
+}
+# Show the unperturbed fit
+points(bestfit$par[1], bestfit$par[2], pch=21, cex=2, bg="red")
+# Show the actual location of Halifax
+points(-63.571, 44.649, pch=22, cex=2, bg='yellow')
+# A legend summarizes all this work
+legend("bottomright", bg="white", 
+       pch=c(21, 21, 22), pt.bg=c("pink", "red", "yellow"),
+       legend=c("Best", "Cloud", "True"))
+{% endhighlight %}
+
+![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/unnamed-chunk-1.png) 
+
+# Resources
+
+1. A website for the SkyView project is
+[http://emit.phys.ocean.dal.ca/~kelley/skyview](http://emit.phys.ocean.dal.ca/~kelley/skyview/).
+   
+2. A website providing the requisite sunrise and sunset times is
+[http://www.timeanddate.com/astronomy/canada/halifax](http://www.timeanddate.com/astronomy/canada/halifax).
+
+3. Source code: [2014-11-10-solar-navigation.R]({{ site.url }}/assets/2014-11-10-solar-navigation.R).
+

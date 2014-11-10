@@ -28,6 +28,7 @@ full <- fraction > 0.99
 plot(times, fraction, xlab="Year", ylab="Moon Illuminated Fraction",
      col=ifelse(full, "red", "blue"), pch=16, cex=2)
 ```
+
 Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
 
 # Results
