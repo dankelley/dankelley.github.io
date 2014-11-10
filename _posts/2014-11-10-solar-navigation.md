@@ -93,7 +93,7 @@ legend("bottomright", bg="white",
        legend=c("Best", "Cloud", "True"))
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/unnamed-chunk-1.png) 
+![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation.png) 
 
 # Resources
 
