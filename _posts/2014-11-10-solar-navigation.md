@@ -12,11 +12,10 @@ latex: true
 
 # Introduction
 
-Solar altitude $a$ is a function of time $t$, longitude $\phi$ and latitude
-$\lambda$, that is $a=a(t, \phi, \theta)$, and so it can be possible to infer
-location based on measuring altitude as a function of time.  This form of solar
-navigation can be based on sunrise and sunset times, at least on non-equinox
-days.
+Solar altitude is a function of time, longitude and latitude, and so it can be
+possible to infer location based on measuring altitude as a function of time.
+This form of solar navigation can be based on sunrise and sunset times, at
+least on non-equinox days.
 
 I have explored this for a school-based project I call "SkyView" [1] involving
 light sensors and Arduino microcontrollers, and I suspect that readers could
