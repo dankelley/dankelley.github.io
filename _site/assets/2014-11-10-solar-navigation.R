@@ -1,5 +1,5 @@
 
-## ----solar-navigation, fig.height=6, fig.width=8, dpi=120----------------
+## ----solar-navigation, fig.height=4, fig.width=6, dpi=100----------------
 library(oce)
 misfit <- function(lonlat)
 {

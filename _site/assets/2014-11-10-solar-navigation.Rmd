@@ -121,7 +121,7 @@ by the ``altitude`` component of the list returned by ``oce::solarAngle()``.
 Thus, a method for inferring the location of Halifax is as follows.  The code
 should be self-explanatory to anyone who can read R.
 
-```{r solar-navigation, fig.height=6, fig.width=8, dpi=120}
+```{r solar-navigation, fig.height=4, fig.width=6, dpi=100}
 library(oce)
 misfit <- function(lonlat)
 {
