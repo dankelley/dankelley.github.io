@@ -108,9 +108,7 @@
 
 <p>Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.</p>
 
-<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code>projr</code> package instead of <code>mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
-
-<p>I am still thinking about whether to make a transition in Oce.  The <code>proj4</code> syntax is too tricky for simple inclusion in Oce, and tricky, and users (including me) are accustomed to the existing syntax, so it would be necessary to convert the internal linkage in a somewhat nontrivial way.  Nevertheless, the point of the present post is simply to illustrate that the problem is solved, at least in one test case.</p>
+<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code>proj4</code> package instead of <code>mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
 
 <h1 id="test-case">Test case</h1>
 
@@ -160,8 +158,9 @@ plot<span class="p">(</span>xy<span class="p">[,</span><span class="m">1</span><
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png" alt="center" /> 
-# Conclusions</p>
+<p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png" alt="center" /> </p>
+
+<h1 id="conclusions">Conclusions</h1>
 
 <p>At least in this example, the <code>proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
 

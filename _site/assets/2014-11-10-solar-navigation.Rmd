@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>solar navigation</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>solar navigation</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Geographical location is inferred from sunrise and sunset times.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+Solar altitude is a function of time, longitude and latitude, and so it can be
+possible to infer location based on measuring altitude as a function of time.
+This form of solar navigation can be based on sunrise and sunset times, at
+least on non-equinox days.
+
+I have explored this for a school-based project I call "SkyView" [1] involving
+light sensors and Arduino microcontrollers, and I suspect that readers could
+imagine other applications as well.
+
+I will illustrate the ideas and the accuracy of the method based on the example
+of sunrise and sunset on Remembrance Day in Halifax, Nova Scotia, a city where
+respect for the fallen is very strong.
+
+# Methods
+
+According to various websites [e.g. 2], sunrise on the Halifax Remembrance Day
+sunrise is at 7:06AM (11:06 UTC), with sunset at 4:51PM (20:51 UTC).
+
+Rather than devising an inverse formula to infer location from time and solar
+altitude, the R function ``optim`` may be used to find the longitude and
+latitude that minimize angle the sun makes to the horizon.  That angle is given
+by the ``altitude`` component of the list returned by ``oce::solarAngle()``.
+
+Thus, a method for inferring the location of Halifax is as follows.  The code
+should be self-explanatory to anyone who can read R.
+
+```{r solar-navigation, fig.height=6, fig.width=8, dpi=120}
+library(oce)
+misfit <- function(lonlat)
+{
+    riseAlt <- sunAngle(rise, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+    setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+    0.5 * (abs(riseAlt) + abs(setAlt))
+}
+start <- c(-50, 50) # set this vaguely near the expected location
+rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
+set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
+bestfit <- optim(start, misfit)
+
+# Plot coastline
+data(coastlineWorldFine, package="ocedata")
+plot(coastlineWorldFine, clon=-64, clat=45, span=500)
+grid()
+
+# Plot a series of points calculated by perturbing the 
+# suggested times by about the rounding interval of 1 minute.
+n <- 25
+rises <- rise + rnorm(n, sd=30)
+sets <- set + rnorm(n, sd=30)
+set.seed(20141111) # this lets readers reproduce this exactly
+for (i in 1:n) {
+    rise <- rises[i]
+    set <- sets[i]
+    fit <- optim(start, misfit)
+    points(fit$par[1], fit$par[2], pch=21, bg="pink", cex=1.4)
+}
+# Show the unperturbed fit
+points(bestfit$par[1], bestfit$par[2], pch=21, cex=2, bg="red")
+# Show the actual location of Halifax
+points(-63.571, 44.649, pch=22, cex=2, bg='yellow')
+# A legend summarizes all this work
+legend("bottomright", bg="white", 
+       pch=c(21, 21, 22), pt.bg=c("pink", "red", "yellow"),
+       legend=c("Best", "Cloud", "True"))
+```
+
+# Resources
+
+1. A website for the SkyView project is
+[http://emit.phys.ocean.dal.ca/~kelley/skyview](http://emit.phys.ocean.dal.ca/~kelley/skyview/).
+   
+2. A website providing the requisite sunrise and sunset times is
+[http://www.timeanddate.com/astronomy/canada/halifax](http://www.timeanddate.com/astronomy/canada/halifax).
+
+3. Source code: [2014-11-10-solar-navigation.R](/assets/2014-11-10-solar-navigation.R).
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
