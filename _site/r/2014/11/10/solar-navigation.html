@@ -128,22 +128,14 @@ angle, which of course is zero at the horizon.  We will try using paired
 sunrise and sunset, although of course other alternatives come to mind in
 various applications.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: proj4
-</code></pre></div>
-
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
+6
+7</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
 <span class="p">{</span>
     riseAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>rise<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
     setAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>set<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
@@ -152,7 +144,12 @@ various applications.</p>
 </pre></div>
 </td></tr></table>
 
-<p>We will be using <code>optim</code> to find the optimal values of longitude and
+<p>Here, <code>useRefraction</code> has been used, to account for the bending of the
+sunlight near the horizon, which perturbs the observed sunrise and sunset
+times.  See <code>help(sunAngle)</code> for more about how this function works,
+including details on the return values, of which only altitude is used here.</p>
+
+<p>The goal here is to use <code>optim</code> to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
 50W and 50N, as a very rough estimate.</p>
 

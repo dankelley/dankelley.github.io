@@ -44,20 +44,6 @@ various applications.
 
 {% highlight r linenos=table %}
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: proj4
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 misfit <- function(lonlat)
 {
     riseAlt <- sunAngle(rise, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
@@ -65,8 +51,12 @@ misfit <- function(lonlat)
     0.5 * (abs(riseAlt) + abs(setAlt))
 }
 {% endhighlight %}
+Here, ``useRefraction`` has been used, to account for the bending of the
+sunlight near the horizon, which perturbs the observed sunrise and sunset
+times.  See ``help(sunAngle)`` for more about how this function works,
+including details on the return values, of which only altitude is used here.
 
-We will be using ``optim`` to find the optimal values of longitude and
+The goal here is to use ``optim`` to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
 50W and 50N, as a very rough estimate.
 

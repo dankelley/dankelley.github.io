@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-11T07:59:46-04:00</updated>
+    <updated>2014-11-11T08:14:53-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -49,22 +49,14 @@ angle, which of course is zero at the horizon.  We will try using paired
 sunrise and sunset, although of course other alternatives come to mind in
 various applications.&lt;/p&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: proj4
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
 3
 4
 5
-6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+6
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     riseAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rise&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
     setAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
@@ -73,7 +65,12 @@ various applications.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;We will be using &lt;code&gt;optim&lt;/code&gt; to find the optimal values of longitude and
+&lt;p&gt;Here, &lt;code&gt;useRefraction&lt;/code&gt; has been used, to account for the bending of the
+sunlight near the horizon, which perturbs the observed sunrise and sunset
+times.  See &lt;code&gt;help(sunAngle)&lt;/code&gt; for more about how this function works,
+including details on the return values, of which only altitude is used here.&lt;/p&gt;
+
+&lt;p&gt;The goal here is to use &lt;code&gt;optim&lt;/code&gt; to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
 50W and 50N, as a very rough estimate.&lt;/p&gt;
 

@@ -41,7 +41,7 @@ angle, which of course is zero at the horizon.  We will try using paired
 sunrise and sunset, although of course other alternatives come to mind in
 various applications.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 library(oce)
 misfit <- function(lonlat)
 {
@@ -50,8 +50,12 @@ misfit <- function(lonlat)
     0.5 * (abs(riseAlt) + abs(setAlt))
 }
 ```
+Here, ``useRefraction`` has been used, to account for the bending of the
+sunlight near the horizon, which perturbs the observed sunrise and sunset
+times.  See ``help(sunAngle)`` for more about how this function works,
+including details on the return values, of which only altitude is used here.
 
-We will be using ``optim`` to find the optimal values of longitude and
+The goal here is to use ``optim`` to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
 50W and 50N, as a very rough estimate.
 ```{r}
