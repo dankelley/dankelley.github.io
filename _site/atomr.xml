@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-11T10:13:24-04:00</updated>
+    <updated>2014-11-11T10:37:07-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -217,8 +217,10 @@ sunrise and sunset.&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Source code: &lt;a href=&quot;/assets/2014-11-10-solar-navigation.R&quot;&gt;2014-11-10-solar-navigation.R&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-11-11-solar-navigation.Rmd&quot;&gt;Jekyll source code for this blog item&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
 </content>
     </entry>
     
