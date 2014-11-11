@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-11T15:12:25-04:00</updated>
+    <updated>2014-11-11T18:46:25-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -219,6 +219,14 @@ sunrise and sunset.&lt;/p&gt;
     &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-11-10-solar-navigation.Rmd&quot;&gt;2014-11-10-solar-navigation.Rmd&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h1 id=&quot;postscript&quot;&gt;Postscript&lt;/h1&gt;
+
+&lt;p&gt;The sunrise on this Remembrance day looked as shown below, with the solar disk
+halfway up the treeline in the Eastern Passage of Halifax Harbour. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/sunrise.png&quot; alt=&quot;sunrise.png&quot; /&gt;&lt;/p&gt;
+
 </content>
     </entry>
     

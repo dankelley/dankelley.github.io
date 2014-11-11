@@ -169,3 +169,11 @@ an eclipse in a famous Carly Simon song.
 4. R source code used here: [2014-11-10-solar-navigation.R]({{ site.url }}/assets/2014-11-10-solar-navigation.R).
 
 5. Jekyll source code for this blog entry: [2014-11-10-solar-navigation.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-11-10-solar-navigation.Rmd)
+
+# Postscript
+
+The sunrise on this Remembrance day looked as shown below, with the solar disk
+halfway up the treeline in the Eastern Passage of Halifax Harbour. 
+
+![sunrise.png]({{ site.url }}/assets/sunrise.png)
+
