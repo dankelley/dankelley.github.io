@@ -23,7 +23,7 @@ I will illustrate the method and its accuracy based on sunrise and sunset times
 on Remembrance Day in Halifax, Nova Scotia, a city where respect for the fallen
 is very strong.
 
-# Methods and results
+# Methods
 
 According to various websites [e.g. 2], the Halifax on Remembrance Day of 2014
 is at 7:06AM (11:06 UTC), and sunset at 4:51PM (20:51 UTC).
@@ -48,14 +48,14 @@ misfit <- function(lonlat)
 {% endhighlight %}
 Here, ``useRefraction`` is set to account for the bending of the sunlight near
 the horizon, which perturbs the observed sunrise and sunset times.  Note that
-tie sunrise and sunset times (``rise`` and ``set``) must be defined in order
+the sunrise and sunset times (``rise`` and ``set``) must be defined in order
 for ``misfit`` to work.  Use ``help(sunAngle)`` for more about how this
-function works, including details on the return value, a list of which only
-altitude is used here.
+function works.
 
-The goal is to use ``optim`` to find the optimal values of longitude and
-latitude.  This function needs an initial value, or guess, and for that we pick
-50W and 50N, as a very rough estimate.
+The goal is to use ``optim`` to find values of longitude and latitude that
+yield an optimal match to specified sunrise and sunset times.  This function
+needs an initial value, or guess, and for that we pick 50W and 50N.
+
 
 {% highlight r linenos=table %}
 start <- c(-50, 50) # set this vaguely near the expected location
@@ -63,7 +63,7 @@ rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
 set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
 bestfit <- optim(start, misfit)
 {% endhighlight %}
-Before moving on, it makes sense to look at this fit.
+An examination of the fit
 
 {% highlight r linenos=table %}
 str(bestfit)
@@ -80,10 +80,9 @@ str(bestfit)
 ##  $ convergence: int 0
 ##  $ message    : NULL
 {% endhighlight %}
-The function value is very low, indicating a sun just on the horizon, as
-expected for a converged solution.  The optimal values for longitude and
-latitude are stored in ``par``. See ``help("optim")`` to learn more about the
-return value.
+reveals the function value to be very low, indicating a sun just on the
+horizon.  The optimal values for longitude and latitude are stored in ``par``.
+See ``help("optim")`` to learn more about the return value.
 
 It can be helpful to show the results on a map.  To explore the dependence on
 sunrise and sunset times, random values can be added to those times and

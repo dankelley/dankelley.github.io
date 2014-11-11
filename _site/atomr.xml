@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-11T10:39:18-04:00</updated>
+    <updated>2014-11-11T15:12:25-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -31,7 +31,7 @@ imagine a range of other applications.&lt;/p&gt;
 on Remembrance Day in Halifax, Nova Scotia, a city where respect for the fallen
 is very strong.&lt;/p&gt;
 
-&lt;h1 id=&quot;methods-and-results&quot;&gt;Methods and results&lt;/h1&gt;
+&lt;h1 id=&quot;methods&quot;&gt;Methods&lt;/h1&gt;
 
 &lt;p&gt;According to various websites [e.g. 2], the Halifax on Remembrance Day of 2014
 is at 7:06AM (11:06 UTC), and sunset at 4:51PM (20:51 UTC).&lt;/p&gt;
@@ -62,14 +62,13 @@ misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&qu
 
 &lt;p&gt;Here, &lt;code&gt;useRefraction&lt;/code&gt; is set to account for the bending of the sunlight near
 the horizon, which perturbs the observed sunrise and sunset times.  Note that
-tie sunrise and sunset times (&lt;code&gt;rise&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;) must be defined in order
+the sunrise and sunset times (&lt;code&gt;rise&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;) must be defined in order
 for &lt;code&gt;misfit&lt;/code&gt; to work.  Use &lt;code&gt;help(sunAngle)&lt;/code&gt; for more about how this
-function works, including details on the return value, a list of which only
-altitude is used here.&lt;/p&gt;
+function works.&lt;/p&gt;
 
-&lt;p&gt;The goal is to use &lt;code&gt;optim&lt;/code&gt; to find the optimal values of longitude and
-latitude.  This function needs an initial value, or guess, and for that we pick
-50W and 50N, as a very rough estimate.&lt;/p&gt;
+&lt;p&gt;The goal is to use &lt;code&gt;optim&lt;/code&gt; to find values of longitude and latitude that
+yield an optimal match to specified sunrise and sunset times.  This function
+needs an initial value, or guess, and for that we pick 50W and 50N.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
@@ -81,7 +80,7 @@ bestfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; optim&lt;span cla
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;Before moving on, it makes sense to look at this fit.&lt;/p&gt;
+&lt;p&gt;An examination of the fit&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;str&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;bestfit&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -96,10 +95,9 @@ bestfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; optim&lt;span cla
 ##  $ message    : NULL
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The function value is very low, indicating a sun just on the horizon, as
-expected for a converged solution.  The optimal values for longitude and
-latitude are stored in &lt;code&gt;par&lt;/code&gt;. See &lt;code&gt;help(&quot;optim&quot;)&lt;/code&gt; to learn more about the
-return value.&lt;/p&gt;
+&lt;p&gt;reveals the function value to be very low, indicating a sun just on the
+horizon.  The optimal values for longitude and latitude are stored in &lt;code&gt;par&lt;/code&gt;.
+See &lt;code&gt;help(&quot;optim&quot;)&lt;/code&gt; to learn more about the return value.&lt;/p&gt;
 
 &lt;p&gt;It can be helpful to show the results on a map.  To explore the dependence on
 sunrise and sunset times, random values can be added to those times and
@@ -227,7 +225,7 @@ sunrise and sunset.&lt;/p&gt;
     
     
     <entry>
-        <title>landsat thermal imaging</title>
+        <title>Landsat thermal imaging</title>
         <link href="http://dankelley.github.io/r/2014/07/01/landsat.html"/>
         <updated>2014-07-01T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2014/07/01/landsat</id>

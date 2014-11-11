@@ -50,7 +50,7 @@
 
 <!-- | <a href='/blog'>Home</a> | -->
 
-<a class="pagination" href="/r/2014/07/01/landsat.html" title="landsat thermal imaging">
+<a class="pagination" href="/r/2014/07/01/landsat.html" title="Landsat thermal imaging">
     <!-- &larr; --> Previous
 </a>
 
@@ -110,7 +110,7 @@ imagine a range of other applications.</p>
 on Remembrance Day in Halifax, Nova Scotia, a city where respect for the fallen
 is very strong.</p>
 
-<h1 id="methods-and-results">Methods and results</h1>
+<h1 id="methods">Methods</h1>
 
 <p>According to various websites [e.g. 2], the Halifax on Remembrance Day of 2014
 is at 7:06AM (11:06 UTC), and sunset at 4:51PM (20:51 UTC).</p>
@@ -141,14 +141,13 @@ misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class=
 
 <p>Here, <code>useRefraction</code> is set to account for the bending of the sunlight near
 the horizon, which perturbs the observed sunrise and sunset times.  Note that
-tie sunrise and sunset times (<code>rise</code> and <code>set</code>) must be defined in order
+the sunrise and sunset times (<code>rise</code> and <code>set</code>) must be defined in order
 for <code>misfit</code> to work.  Use <code>help(sunAngle)</code> for more about how this
-function works, including details on the return value, a list of which only
-altitude is used here.</p>
+function works.</p>
 
-<p>The goal is to use <code>optim</code> to find the optimal values of longitude and
-latitude.  This function needs an initial value, or guess, and for that we pick
-50W and 50N, as a very rough estimate.</p>
+<p>The goal is to use <code>optim</code> to find values of longitude and latitude that
+yield an optimal match to specified sunrise and sunset times.  This function
+needs an initial value, or guess, and for that we pick 50W and 50N.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -160,7 +159,7 @@ bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span cla
 </pre></div>
 </td></tr></table>
 
-<p>Before moving on, it makes sense to look at this fit.</p>
+<p>An examination of the fit</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>str<span class="p">(</span>bestfit<span class="p">)</span>
 </pre></div>
@@ -175,10 +174,9 @@ bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span cla
 ##  $ message    : NULL
 </code></pre></div>
 
-<p>The function value is very low, indicating a sun just on the horizon, as
-expected for a converged solution.  The optimal values for longitude and
-latitude are stored in <code>par</code>. See <code>help("optim")</code> to learn more about the
-return value.</p>
+<p>reveals the function value to be very low, indicating a sun just on the
+horizon.  The optimal values for longitude and latitude are stored in <code>par</code>.
+See <code>help("optim")</code> to learn more about the return value.</p>
 
 <p>It can be helpful to show the results on a map.  To explore the dependence on
 sunrise and sunset times, random values can be added to those times and
