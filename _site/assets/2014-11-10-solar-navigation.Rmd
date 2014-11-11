@@ -232,9 +232,9 @@ an eclipse in a famous Carly Simon song.
 
 3. Dan Kelley, in preparation.  Oceanographic Analysis with R. Springer-Verlag.
 
-4. Source code: [2014-11-10-solar-navigation.R](/assets/2014-11-10-solar-navigation.R).
+4. R source code used here: [2014-11-10-solar-navigation.R](/assets/2014-11-10-solar-navigation.R).
 
-5. [Jekyll source code for this blog item](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-11-11-solar-navigation.Rmd)
+5. Jekyll source code for this blog entry: [2014-11-10-solar-navigation.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-11-10-solar-navigation.Rmd)
 
 
 <div id="disqus_thread"></div>
