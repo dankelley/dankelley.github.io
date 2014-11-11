@@ -156,10 +156,11 @@ expected for a converged solution.  The optimal values for longitude and
 latitude are stored in ``par``. See ``help("optim")`` to learn more about the
 return value.
 
-It can be helpful to show the results on a map.  To add some uncertainty with
-respect to sunrise and sunset times, random values can be added to those times.
-Here, the times are reported just to the nearest minute, so as a test the
-random values have standard deviation of 30 seconds.
+It can be helpful to show the results on a map.  To explore the effect of
+dependence on precise sunrise and sunset times, random values can be added to
+those times and resultant positions plotted.  In the present example, the times
+are reported just to the nearest minute, so random values with standard
+deviation of 30 seconds will be used.
 
 ```{r solar-navigation, fig.height=4, fig.width=7, dpi=100}
 data(coastlineWorldFine, package="ocedata")
