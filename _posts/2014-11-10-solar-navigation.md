@@ -79,32 +79,24 @@ bestfit <- optim(start, misfit)
 Before moving on, it makes sense to look at this fit.
 
 {% highlight r linenos=table %}
-bestfit
+str(bestfit)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## $par
-## [1] -63.68  44.49
-## 
-## $value
-## [1] 0.0005414
-## 
-## $counts
-## function gradient 
-##      203       NA 
-## 
-## $convergence
-## [1] 0
-## 
-## $message
-## NULL
+## List of 5
+##  $ par        : num [1:2] -63.7 44.5
+##  $ value      : num 0.000541
+##  $ counts     : Named int [1:2] 203 NA
+##   ..- attr(*, "names")= chr [1:2] "function" "gradient"
+##  $ convergence: int 0
+##  $ message    : NULL
 {% endhighlight %}
-Notice that the function value is very low, indicating that the sun angle above
-or below the horizon is very small, indeed.  The optimal values for longitude
-and latitude are stored in the two-element vector named ``par``. See
-``help("optim")`` to learn more about the return value.
+The function value is very low, indicating a sun just on the horizon, as
+expected for a converged solution.  The optimal values for longitude and
+latitude are stored in ``par``. See ``help("optim")`` to learn more about the
+return value.
 
 It can be helpful to show the results on a map.  To add some uncertainty with
 respect to sunrise and sunset times, random values can be added to those times.

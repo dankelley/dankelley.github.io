@@ -62,12 +62,12 @@ bestfit <- optim(start, misfit)
 ```
 Before moving on, it makes sense to look at this fit.
 ```{r}
-bestfit
+str(bestfit)
 ```
-Notice that the function value is very low, indicating that the sun angle above
-or below the horizon is very small, indeed.  The optimal values for longitude
-and latitude are stored in the two-element vector named ``par``. See
-``help("optim")`` to learn more about the return value.
+The function value is very low, indicating a sun just on the horizon, as
+expected for a converged solution.  The optimal values for longitude and
+latitude are stored in ``par``. See ``help("optim")`` to learn more about the
+return value.
 
 It can be helpful to show the results on a map.  To add some uncertainty with
 respect to sunrise and sunset times, random values can be added to those times.

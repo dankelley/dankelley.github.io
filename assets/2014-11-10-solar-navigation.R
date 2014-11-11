@@ -17,7 +17,7 @@ bestfit <- optim(start, misfit)
 
 
 ## ------------------------------------------------------------------------
-bestfit
+str(bestfit)
 
 
 ## ----solar-navigation, fig.height=4, fig.width=6, dpi=100----------------
