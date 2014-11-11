@@ -108,7 +108,7 @@ I will illustrate the ideas and the accuracy of the method based on the example
 of sunrise and sunset on Remembrance Day in Halifax, Nova Scotia, a city where
 respect for the fallen is very strong.
 
-# Methods
+# Methods and results
 
 According to various websites [e.g. 2], sunrise on the Halifax Remembrance Day
 sunrise is at 7:06AM (11:06 UTC), with sunset at 4:51PM (20:51 UTC).
@@ -157,7 +157,7 @@ respect to sunrise and sunset times, random values can be added to those times.
 Here, the times are reported just to the nearest minute, so as a test the
 random values have standard deviation of 30 seconds.
 
-```{r solar-navigation, fig.height=4, fig.width=6, dpi=100}
+```{r solar-navigation, fig.height=4, fig.width=7, dpi=100}
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()
@@ -182,19 +182,30 @@ legend("bottomright", bg="white",
        legend=c("Best", "Range", "True"))
 ```
 
-# Results and conclusions
+# Results
 
-The diagram above indicates that varying times by half a minute (corresponding
-to the rounding interval in public forecasts of sunrise and sunset times)
-yields approximately 25km of uncertainty in geographical position, at this
-particular time of year.  (Note that a degree of latitude is about 111km.)
+The diagram indicates that reported sunrise and sunset times are sufficient to
+locate Halifax to within about 10km.  (Note that 1 degree of latitude is
+111km.)
+
+Adjusting sunrise and sunset times by half a minute (corresponding to the
+rounding interval in public forecasts of sunrise and sunset times) yields
+approximately 25km of uncertainty in geographical position.  Extending the code
+to develop a statistical statement is trivial.
+
+# Discussion and conclusions
+
+Sunrise-sunset navigation to one-minute temporal resolution can yield
+accuracies in the range of 10km.  This is encouraging enough to make for a fun
+school project, with necessary provisos about not looking directly at the sun.
 
 Readers interested in exploring the uncertainty through the year should find
 the R code simple to modify.  It is also easy to express the uncertainty
 statistically.
 
-Further discusion of matters relating to solar angles can be found in my
-upcoming book [3].
+Further discussion of matters relating to solar angles can be found in my
+upcoming book [3].  For example, the method can be used to test a famous line
+in a Carly Simon song.
 
 
 # Resources
