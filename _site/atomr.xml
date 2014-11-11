@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-10T19:22:03-04:00</updated>
+    <updated>2014-11-11T07:44:20-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -43,8 +43,11 @@ altitude, the R function &lt;code&gt;optim&lt;/code&gt; may be used to find the 
 latitude that minimize angle the sun makes to the horizon.  That angle is given
 by the &lt;code&gt;altitude&lt;/code&gt; component of the list returned by &lt;code&gt;oce::solarAngle()&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Thus, a method for inferring the location of Halifax is as follows.  The code
-should be self-explanatory to anyone who can read R.&lt;/p&gt;
+&lt;p&gt;Thus, a method for inferring the location of Halifax is as follows.  The first
+step is to define a function that returns the absolute value of the solar
+angle, which of course is zero at the horizon.  We will try using paired
+sunrise and sunset, although of course other alternatives come to mind in
+various applications.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -55,6 +58,67 @@ should be self-explanatory to anyone who can read R.&lt;/p&gt;
 ## Loading required package: maps
 ## Loading required package: proj4
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    riseAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rise&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
+    setAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
+    &lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;abs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;riseAlt&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; abs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;setAlt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;We will be using &lt;code&gt;optim&lt;/code&gt; to find the optimal values of longitude and
+latitude.  This function needs an initial value, or guess, and for that we pick
+50W and 50N, as a very rough estimate.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;start &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# set this vaguely near the expected location&lt;/span&gt;
+rise &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-11-11 11:06:00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+set &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-11-11 20:51:00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+bestfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; optim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; misfit&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Before moving on, it makes sense to look at this fit.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;bestfit
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;## $par
+## [1] -63.68  44.49
+## 
+## $value
+## [1] 0.0005414
+## 
+## $counts
+## function gradient 
+##      203       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice that the function value is very low, indicating that the sun angle above
+or below the horizon is very small, indeed.  The optimal values for longitude
+and latitude are stored in the two-element vector named &lt;code&gt;par&lt;/code&gt;. See
+&lt;code&gt;help(&quot;optim&quot;)&lt;/code&gt; to learn more about the return value.&lt;/p&gt;
+
+&lt;p&gt;It can be helpful to show the results on a map.  To add some uncertainty with
+respect to sunrise and sunset times, random values can be added to those times.
+Here, the times are reported just to the nearest minute, so as a test the
+random values have standard deviation of 30 seconds.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
@@ -77,39 +141,11 @@ should be self-explanatory to anyone who can read R.&lt;/p&gt;
 19
 20
 21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    riseAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rise&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
-    setAlt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;set&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; latitude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lonlat&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; useRefraction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
-    &lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;abs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;riseAlt&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; abs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;setAlt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-start &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# set this vaguely near the expected location&lt;/span&gt;
-rise &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-11-11 11:06:00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-set &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-11-11 20:51:00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-bestfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; optim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; misfit&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Plot coastline&lt;/span&gt;
-data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ocedata&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+22&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ocedata&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; span&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;# Plot a series of points calculated by perturbing the &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# suggested times by about the rounding interval of 1 minute.&lt;/span&gt;
-n &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;25&lt;/span&gt;
+n &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;25&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;# use 25 perturbations&lt;/span&gt;
 rises &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; rise &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 sets &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; set &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20141111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# this lets readers reproduce this exactly&lt;/span&gt;

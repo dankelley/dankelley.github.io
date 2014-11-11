@@ -35,8 +35,11 @@ altitude, the R function ``optim`` may be used to find the longitude and
 latitude that minimize angle the sun makes to the horizon.  That angle is given
 by the ``altitude`` component of the list returned by ``oce::solarAngle()``.
 
-Thus, a method for inferring the location of Halifax is as follows.  The code
-should be self-explanatory to anyone who can read R.
+Thus, a method for inferring the location of Halifax is as follows.  The first
+step is to define a function that returns the absolute value of the solar
+angle, which of course is zero at the horizon.  We will try using paired
+sunrise and sunset, although of course other alternatives come to mind in
+various applications.
 
 
 {% highlight r linenos=table %}
@@ -61,19 +64,60 @@ misfit <- function(lonlat)
     setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
     0.5 * (abs(riseAlt) + abs(setAlt))
 }
+{% endhighlight %}
+
+We will be using ``optim`` to find the optimal values of longitude and
+latitude.  This function needs an initial value, or guess, and for that we pick
+50W and 50N, as a very rough estimate.
+
+{% highlight r linenos=table %}
 start <- c(-50, 50) # set this vaguely near the expected location
 rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
 set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
 bestfit <- optim(start, misfit)
+{% endhighlight %}
+Before moving on, it makes sense to look at this fit.
 
-# Plot coastline
+{% highlight r linenos=table %}
+bestfit
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## $par
+## [1] -63.68  44.49
+## 
+## $value
+## [1] 0.0005414
+## 
+## $counts
+## function gradient 
+##      203       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL
+{% endhighlight %}
+Notice that the function value is very low, indicating that the sun angle above
+or below the horizon is very small, indeed.  The optimal values for longitude
+and latitude are stored in the two-element vector named ``par``. See
+``help("optim")`` to learn more about the return value.
+
+It can be helpful to show the results on a map.  To add some uncertainty with
+respect to sunrise and sunset times, random values can be added to those times.
+Here, the times are reported just to the nearest minute, so as a test the
+random values have standard deviation of 30 seconds.
+
+
+{% highlight r linenos=table %}
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()
 
-# Plot a series of points calculated by perturbing the 
-# suggested times by about the rounding interval of 1 minute.
-n <- 25
+n <- 25                                # use 25 perturbations
 rises <- rise + rnorm(n, sd=30)
 sets <- set + rnorm(n, sd=30)
 set.seed(20141111) # this lets readers reproduce this exactly

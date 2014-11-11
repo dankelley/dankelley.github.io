@@ -1,5 +1,5 @@
 
-## ----solar-navigation, fig.height=4, fig.width=6, dpi=100----------------
+## ------------------------------------------------------------------------
 library(oce)
 misfit <- function(lonlat)
 {
@@ -7,19 +7,25 @@ misfit <- function(lonlat)
     setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
     0.5 * (abs(riseAlt) + abs(setAlt))
 }
+
+
+## ------------------------------------------------------------------------
 start <- c(-50, 50) # set this vaguely near the expected location
 rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
 set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
 bestfit <- optim(start, misfit)
 
-# Plot coastline
+
+## ------------------------------------------------------------------------
+bestfit
+
+
+## ----solar-navigation, fig.height=4, fig.width=6, dpi=100----------------
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()
 
-# Plot a series of points calculated by perturbing the 
-# suggested times by about the rounding interval of 1 minute.
-n <- 25
+n <- 25                                # use 25 perturbations
 rises <- rise + rnorm(n, sd=30)
 sets <- set + rnorm(n, sd=30)
 set.seed(20141111) # this lets readers reproduce this exactly

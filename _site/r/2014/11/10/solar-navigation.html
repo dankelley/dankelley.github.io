@@ -122,8 +122,11 @@ altitude, the R function <code>optim</code> may be used to find the longitude an
 latitude that minimize angle the sun makes to the horizon.  That angle is given
 by the <code>altitude</code> component of the list returned by <code>oce::solarAngle()</code>.</p>
 
-<p>Thus, a method for inferring the location of Halifax is as follows.  The code
-should be self-explanatory to anyone who can read R.</p>
+<p>Thus, a method for inferring the location of Halifax is as follows.  The first
+step is to define a function that returns the absolute value of the solar
+angle, which of course is zero at the horizon.  We will try using paired
+sunrise and sunset, although of course other alternatives come to mind in
+various applications.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
@@ -134,6 +137,67 @@ should be self-explanatory to anyone who can read R.</p>
 ## Loading required package: maps
 ## Loading required package: proj4
 </code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre>misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
+<span class="p">{</span>
+    riseAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>rise<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
+    setAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>set<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
+    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span>abs<span class="p">(</span>riseAlt<span class="p">)</span> <span class="o">+</span> abs<span class="p">(</span>setAlt<span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>We will be using <code>optim</code> to find the optimal values of longitude and
+latitude.  This function needs an initial value, or guess, and for that we pick
+50W and 50N, as a very rough estimate.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>start <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location</span>
+rise <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 11:06:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+set <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 20:51:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span class="p">,</span> misfit<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Before moving on, it makes sense to look at this fit.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>bestfit
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## $par
+## [1] -63.68  44.49
+## 
+## $value
+## [1] 0.0005414
+## 
+## $counts
+## function gradient 
+##      203       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL
+</code></pre></div>
+
+<p>Notice that the function value is very low, indicating that the sun angle above
+or below the horizon is very small, indeed.  The optimal values for longitude
+and latitude are stored in the two-element vector named <code>par</code>. See
+<code>help("optim")</code> to learn more about the return value.</p>
+
+<p>It can be helpful to show the results on a map.  To add some uncertainty with
+respect to sunrise and sunset times, random values can be added to those times.
+Here, the times are reported just to the nearest minute, so as a test the
+random values have standard deviation of 30 seconds.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
@@ -156,39 +220,11 @@ should be self-explanatory to anyone who can read R.</p>
 19
 20
 21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36</code></pre></div></td><td class="code"><div class="highlight"><pre>misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
-<span class="p">{</span>
-    riseAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>rise<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
-    setAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>set<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
-    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span>abs<span class="p">(</span>riseAlt<span class="p">)</span> <span class="o">+</span> abs<span class="p">(</span>setAlt<span class="p">))</span>
-<span class="p">}</span>
-start <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location</span>
-rise <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 11:06:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-set <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 20:51:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span class="p">,</span> misfit<span class="p">)</span>
-
-<span class="c1"># Plot coastline</span>
-data<span class="p">(</span>coastlineWorldFine<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
+22</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>coastlineWorldFine<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
 plot<span class="p">(</span>coastlineWorldFine<span class="p">,</span> clon<span class="o">=</span><span class="m">-64</span><span class="p">,</span> clat<span class="o">=</span><span class="m">45</span><span class="p">,</span> span<span class="o">=</span><span class="m">500</span><span class="p">)</span>
 grid<span class="p">()</span>
 
-<span class="c1"># Plot a series of points calculated by perturbing the </span>
-<span class="c1"># suggested times by about the rounding interval of 1 minute.</span>
-n <span class="o">&lt;-</span> <span class="m">25</span>
+n <span class="o">&lt;-</span> <span class="m">25</span>                                <span class="c1"># use 25 perturbations</span>
 rises <span class="o">&lt;-</span> rise <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span> sd<span class="o">=</span><span class="m">30</span><span class="p">)</span>
 sets <span class="o">&lt;-</span> set <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span> sd<span class="o">=</span><span class="m">30</span><span class="p">)</span>
 set.seed<span class="p">(</span><span class="m">20141111</span><span class="p">)</span> <span class="c1"># this lets readers reproduce this exactly</span>
