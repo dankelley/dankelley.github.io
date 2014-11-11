@@ -140,9 +140,11 @@ misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class=
 </td></tr></table>
 
 <p>Here, <code>useRefraction</code> is set to account for the bending of the sunlight near
-the horizon, which perturbs the observed sunrise and sunset times.  See
-<code>help(sunAngle)</code> for more about how this function works, including details on
-the return value, a list of which only altitude is used here.</p>
+the horizon, which perturbs the observed sunrise and sunset times.  Note that
+tie sunrise and sunset times (<code>rise</code> and <code>set</code>) must be defined in order
+for <code>misfit</code> to work.  Use <code>help(sunAngle)</code> for more about how this
+function works, including details on the return value, a list of which only
+altitude is used here.</p>
 
 <p>The goal is to use <code>optim</code> to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
@@ -261,6 +263,9 @@ an eclipse in a famous Carly Simon song.</p>
 
 <ol>
   <li>
+    <p>Alter the initial guess to see what effect it has.</p>
+  </li>
+  <li>
     <p>Evaluate the relationship between positional uncertainty and temporal
 uncertainty.</p>
   </li>
@@ -274,7 +279,7 @@ sunrise and sunset.</p>
   </li>
 </ol>
 
-<h1 id="resources">Resources</h1>
+<h1 id="references-and-resources">References and resources</h1>
 
 <ol>
   <li>

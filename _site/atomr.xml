@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-11T09:43:22-04:00</updated>
+    <updated>2014-11-11T10:13:24-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -61,9 +61,11 @@ misfit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&qu
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
 &lt;p&gt;Here, &lt;code&gt;useRefraction&lt;/code&gt; is set to account for the bending of the sunlight near
-the horizon, which perturbs the observed sunrise and sunset times.  See
-&lt;code&gt;help(sunAngle)&lt;/code&gt; for more about how this function works, including details on
-the return value, a list of which only altitude is used here.&lt;/p&gt;
+the horizon, which perturbs the observed sunrise and sunset times.  Note that
+tie sunrise and sunset times (&lt;code&gt;rise&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;) must be defined in order
+for &lt;code&gt;misfit&lt;/code&gt; to work.  Use &lt;code&gt;help(sunAngle)&lt;/code&gt; for more about how this
+function works, including details on the return value, a list of which only
+altitude is used here.&lt;/p&gt;
 
 &lt;p&gt;The goal is to use &lt;code&gt;optim&lt;/code&gt; to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
@@ -182,6 +184,9 @@ an eclipse in a famous Carly Simon song.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
+    &lt;p&gt;Alter the initial guess to see what effect it has.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
     &lt;p&gt;Evaluate the relationship between positional uncertainty and temporal
 uncertainty.&lt;/p&gt;
   &lt;/li&gt;
@@ -195,7 +200,7 @@ sunrise and sunset.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+&lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 
 &lt;ol&gt;
   &lt;li&gt;

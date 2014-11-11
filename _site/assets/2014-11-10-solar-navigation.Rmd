@@ -129,9 +129,11 @@ misfit <- function(lonlat)
 }
 ```
 Here, ``useRefraction`` is set to account for the bending of the sunlight near
-the horizon, which perturbs the observed sunrise and sunset times.  See
-``help(sunAngle)`` for more about how this function works, including details on
-the return value, a list of which only altitude is used here.
+the horizon, which perturbs the observed sunrise and sunset times.  Note that
+tie sunrise and sunset times (``rise`` and ``set``) must be defined in order
+for ``misfit`` to work.  Use ``help(sunAngle)`` for more about how this
+function works, including details on the return value, a list of which only
+altitude is used here.
 
 The goal is to use ``optim`` to find the optimal values of longitude and
 latitude.  This function needs an initial value, or guess, and for that we pick
@@ -209,16 +211,18 @@ an eclipse in a famous Carly Simon song.
 
 # Exercises
 
-1. Evaluate the relationship between positional uncertainty and temporal
+1. Alter the initial guess to see what effect it has.
+
+2. Evaluate the relationship between positional uncertainty and temporal
    uncertainty.
 
-2. Try similar exercises at various times of the year, and map the uncertainty
+3. Try similar exercises at various times of the year, and map the uncertainty
    as a function of season.
 
-3. Buy a cheap sextant, and try extending the analysis to times other than
+4. Buy a cheap sextant, and try extending the analysis to times other than
    sunrise and sunset.
 
-# Resources
+# References and resources
 
 1. A website for the SkyView project is
 [http://emit.phys.ocean.dal.ca/~kelley/skyview](http://emit.phys.ocean.dal.ca/~kelley/skyview/).
