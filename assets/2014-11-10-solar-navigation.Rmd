@@ -155,7 +155,7 @@ an eclipse in a famous Carly Simon song.
 # Postscript
 
 The sunrise on this Remembrance day looked as shown below, with the solar disk
-halfway up the treeline in the Eastern Passage of Halifax Harbour. 
+halfway past the treeline in the Eastern Passage of Halifax Harbour.
 
 ![sunrise.png]({{ site.url }}/assets/sunrise.png)
 
