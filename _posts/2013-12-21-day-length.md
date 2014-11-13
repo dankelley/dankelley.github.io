@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Day length calculation
-tags: [astronomy, R]
+tags: [astronomy, R, oce]
 category: R
 year: 2013
 month: 12
