@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-27T18:42:09-04:00</updated>
+    <updated>2014-11-27T18:47:35-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -126,7 +126,7 @@ be used.&lt;/p&gt;
 19
 20
 21&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ocedata&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; span&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorldFine&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; clat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;44.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; span&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 grid&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
 n &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;25&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;# use 25 perturbations&lt;/span&gt;

@@ -92,7 +92,7 @@ be used.
 
 {% highlight r linenos=table %}
 data(coastlineWorldFine, package="ocedata")
-plot(coastlineWorldFine, clon=-64, clat=45, span=500)
+plot(coastlineWorldFine, clon=-64, clat=44.5, span=800)
 grid()
 
 n <- 25                                # use 25 perturbations
