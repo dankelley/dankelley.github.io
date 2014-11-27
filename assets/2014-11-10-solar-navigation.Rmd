@@ -102,7 +102,7 @@ legend("bottomright", bg="white",
 
 # Results
 
-The diagram indicates that reported sunrise and sunset times on Rembrance Day,
+The diagram indicates that reported sunrise and sunset times on Remembrance Day,
 2014, are sufficient to locate Halifax to within about 10km.  (Note that 1
 degree of latitude is 111km.)
 
