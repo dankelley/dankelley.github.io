@@ -7,7 +7,6 @@ year: 2014
 month: 11
 day: 10
 summary: Geographical location is inferred from sunrise and sunset times.
-latex: true
 ---
 
 # Introduction
@@ -116,7 +115,7 @@ legend("bottomright", bg="white",
        legend=c("Best", "Range", "True"))
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation-1.png) 
+![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/find-halifax-1.png) 
 
 # Results
 

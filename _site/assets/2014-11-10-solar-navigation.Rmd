@@ -38,8 +38,6 @@
 
 <div id="content">
     
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-
 
 
 
@@ -158,7 +156,7 @@ resultant positions plotted.  In the present example, the times are reported to
 the nearest minute, so random values with standard deviation of 30 seconds will
 be used.
 
-```{r solar-navigation, fig.height=4, fig.width=7, dpi=100}
+```{r find-halifax, fig.height=4, fig.width=7, dpi=100}
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()
@@ -185,7 +183,7 @@ legend("bottomright", bg="white",
 
 # Results
 
-The diagram indicates that reported sunrise and sunset times on Rembrance Day,
+The diagram indicates that reported sunrise and sunset times on Remembrance Day,
 2014, are sufficient to locate Halifax to within about 10km.  (Note that 1
 degree of latitude is 111km.)
 

@@ -20,7 +20,7 @@ bestfit <- optim(start, misfit)
 str(bestfit)
 
 
-## ----solar-navigation, fig.height=4, fig.width=7, dpi=100----------------
+## ----find-halifax, fig.height=4, fig.width=7, dpi=100--------------------
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()

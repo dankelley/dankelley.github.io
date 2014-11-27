@@ -49,10 +49,8 @@ splines-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 splines.png splines-thumbnail.png
 splines2-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 splines2.png splines2-thumbnail.png
-
 2014-02-19-filtfilt_octave-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 2014-02-19-filtfilt_octave.png 2014-02-19-filtfilt_octave-thumbnail.png
-
 2014-02-21-oce-translations-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 2014-02-21-oce-translations.png 2014-02-21-oce-translations-thumbnail.png
 

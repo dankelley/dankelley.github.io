@@ -7,7 +7,6 @@ year: 2014
 month: 11
 day: 10
 summary: Geographical location is inferred from sunrise and sunset times.
-latex: true
 ---
 
 # Introduction
@@ -75,7 +74,7 @@ resultant positions plotted.  In the present example, the times are reported to
 the nearest minute, so random values with standard deviation of 30 seconds will
 be used.
 
-```{r solar-navigation, fig.height=4, fig.width=7, dpi=100}
+```{r find-halifax, fig.height=4, fig.width=7, dpi=100}
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, clon=-64, clat=45, span=500)
 grid()
