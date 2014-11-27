@@ -82,7 +82,6 @@ grid()
 n <- 25                                # use 25 perturbations
 rises <- rise + rnorm(n, sd=30)
 sets <- set + rnorm(n, sd=30)
-set.seed(20141111) # this lets readers reproduce this exactly
 for (i in 1:n) {
     rise <- rises[i]
     set <- sets[i]
