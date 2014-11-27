@@ -116,11 +116,11 @@ legend("bottomright", bg="white",
        legend=c("Best", "Range", "True"))
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation.png) 
+![center](http://dankelley.github.io/figs/2014-11-10-solar-navigation/solar-navigation-1.png) 
 
 # Results
 
-The diagram indicates that reported sunrise and sunset times on Rembrance Day,
+The diagram indicates that reported sunrise and sunset times on Remembrance Day,
 2014, are sufficient to locate Halifax to within about 10km.  (Note that 1
 degree of latitude is 111km.)
 
