@@ -22,7 +22,7 @@ Dlon <- D / cos(xy$y * pi / 180)
 ## ----message=FALSE, warning=FALSE----------------------------------------
 library(OpenStreetMap)
 
-## ----solstice-map,fig.height=7,fig.width=7,dpi=120-----------------------
+## ----solstice-map,fig.height=6,fig.width=6,dpi=120-----------------------
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),
                minNumTiles=9)
