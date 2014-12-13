@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-12-13T09:20:53-04:00</updated>
+    <updated>2014-12-13T09:42:45-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -4618,7 +4618,7 @@ system.time&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mapPlot&lt;span class=&
 2
 3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;t &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2013-12-21 17:11:00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# winter solstice&lt;/span&gt;
 xy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-63.60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;44.65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# centre of map (Halifax)&lt;/span&gt;
-D &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;                                 &lt;span class=&quot;c1&quot;&gt;# map span in km&lt;/span&gt;
+D &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;                                 &lt;span class=&quot;c1&quot;&gt;# map span in km&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -4650,6 +4650,10 @@ Dlon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; D &lt;span class=&qu
 
 &lt;p&gt;Now it is time to show the results. The map is done with the &lt;code&gt;OpenStreetMap&lt;/code&gt; package.  &lt;/p&gt;
 
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
  2
  3
@@ -4661,12 +4665,7 @@ Dlon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; D &lt;span class=&qu
  9
 10
 11
-12
-13
-14
-15
-16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-map &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; openmap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+12&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;map &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; openmap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                minNumTiles&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;map&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -4678,9 +4677,6 @@ d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; diff&lt;span class=&quo
     lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cx&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;cos&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;azimuth&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
           cy&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;o&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;azimuth&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## a title doesn&amp;#39;t hurt&lt;/span&gt;
-mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sprintf&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sunrise angles on day of winter solstice (%s)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              format&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%Y-%m-%d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; side&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 

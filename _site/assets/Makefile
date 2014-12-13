@@ -3,7 +3,7 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     sundial_with_gnomon-thumbnail.png analemma-thumbnail.png \
     coastline-switch-1-thumbnail.png coastline-switch-2-thumbnail.png \
     vote-split-thumbnail.png smooth-profile-thumbnail.png \
-    solstice_sunrise_sunset-thumbnail.png gmt-topography-thumbnail.png \
+    gmt-topography-thumbnail.png \
     gmt_relief_2-thumbnail.png splines-thumbnail.png splines2-thumbnail.png \
     2014-02-19-filtfilt_octave-thumbnail.png \
     2014-02-21-oce-translations-thumbnail.png
@@ -39,8 +39,6 @@ vote-split-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 vote-split.png vote-split-thumbnail.png;
 smooth-profile-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 smooth-profile.png smooth-profile-thumbnail.png;
-solstice_sunrise_sunset-thumbnail.png: force
-	/usr/local/bin/convert -thumbnail 400x400 solstice_sunrise_sunset.png solstice_sunrise_sunset-thumbnail.png;
 gmt-topography-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 400x400 gmt-topography.png gmt-topography-thumbnail.png
 gmt_relief_2-thumbnail.png: force
@@ -60,6 +58,7 @@ force:
 	#Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}/assets/")'
 	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<")'
 	mv $@ ../_posts/
+	mv figs/`basename $@ .md` ../_site/figs
 
 
 oar-toc: force

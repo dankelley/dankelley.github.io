@@ -111,7 +111,7 @@
 2
 3</code></pre></div></td><td class="code"><div class="highlight"><pre>t <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2013-12-21 17:11:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span> <span class="c1"># winter solstice</span>
 xy <span class="o">&lt;-</span> list<span class="p">(</span>x<span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> y<span class="o">=</span><span class="m">44.65</span><span class="p">)</span>          <span class="c1"># centre of map (Halifax)</span>
-D <span class="o">&lt;-</span> <span class="m">9</span>                                 <span class="c1"># map span in km</span>
+D <span class="o">&lt;-</span> <span class="m">7</span>                                 <span class="c1"># map span in km</span>
 </pre></div>
 </td></tr></table>
 
@@ -143,6 +143,10 @@ Dlon <span class="o">&lt;-</span> D <span class="o">/</span> cos<span class="p">
 
 <p>Now it is time to show the results. The map is done with the <code>OpenStreetMap</code> package.  </p>
 
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>OpenStreetMap<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
  3
@@ -154,12 +158,7 @@ Dlon <span class="o">&lt;-</span> D <span class="o">/</span> cos<span class="p">
  9
 10
 11
-12
-13
-14
-15
-16</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>OpenStreetMap<span class="p">)</span>
-map <span class="o">&lt;-</span> openmap<span class="p">(</span>c<span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">+</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">-</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
+12</code></pre></div></td><td class="code"><div class="highlight"><pre>map <span class="o">&lt;-</span> openmap<span class="p">(</span>c<span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">+</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">-</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
                c<span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">-</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">+</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
                minNumTiles<span class="o">=</span><span class="m">9</span><span class="p">)</span>
 plot<span class="p">(</span>map<span class="p">)</span>
@@ -171,9 +170,6 @@ d <span class="o">&lt;-</span> diff<span class="p">(</span>par<span class="p">(<
     lines<span class="p">(</span>cx<span class="o">+</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span>cos<span class="p">(</span>azimuth<span class="o">*</span>pi<span class="o">/</span><span class="m">180</span><span class="p">),</span>
           cy<span class="o">+</span>o<span class="o">+</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span>sin<span class="p">(</span>azimuth<span class="o">*</span>pi<span class="o">/</span><span class="m">180</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="c1">## a title doesn&#39;t hurt</span>
-mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class="p">,</span>
-              format<span class="p">(</span>t<span class="p">,</span> <span class="s">&quot;%Y-%m-%d&quot;</span><span class="p">)),</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">2</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
