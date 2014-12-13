@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-12-13T09:19:00-04:00</updated>
+    <updated>2014-12-13T09:20:53-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -4665,7 +4665,7 @@ Dlon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; D &lt;span class=&qu
 13
 14
 15
-16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;suppressPackageStartupMessages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 map &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; openmap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                minNumTiles&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
