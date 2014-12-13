@@ -2,7 +2,7 @@
 ## ------------------------------------------------------------------------
 t <- as.POSIXct("2013-12-21 17:11:00", tz="UTC") # winter solstice
 xy <- list(x=-63.60, y=44.65)          # centre of map (Halifax)
-D <- 7                                 # map span in km
+D <- 8                                 # map span in km
 
 
 ## ----,message=FALSE,warning=FALSE----------------------------------------
@@ -23,7 +23,7 @@ Dlon <- D / cos(xy$y * pi / 180)
 ## ----message=FALSE, warning=FALSE----------------------------------------
 library(OpenStreetMap)
 
-## ----solstice-map,fig.height=4,fig.width=7,dpi=100-----------------------
+## ----solstice-map,fig.height=7,fig.width=7,dpi=120-----------------------
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),
                minNumTiles=9)

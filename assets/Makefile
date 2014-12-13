@@ -59,7 +59,10 @@ force:
 	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<")'
 	mv $@ ../_posts/
 	#mv figs/`basename $@ .md` ../_site/figs
+	#Next line added 2014-12-13 to get figure inclusion in the 2013*solstice entry
+	rm -rf ../figs/`basename $@ .md`
 	mv figs/`basename $@ .md` ../figs
+	echo "Now cd .. ; jekyll build ; git add . ; git commit -m . ; git push"
 
 
 oar-toc: force
