@@ -58,7 +58,8 @@ force:
 	#Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<", "{{ site.url }}/assets/")'
 	Rscript -e 'source(paste(getwd(),"/knitPost.R",sep="")); knitPost("$<")'
 	mv $@ ../_posts/
-	mv figs/`basename $@ .md` ../_site/figs
+	#mv figs/`basename $@ .md` ../_site/figs
+	mv figs/`basename $@ .md` ../figs
 
 
 oar-toc: force
