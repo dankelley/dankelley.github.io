@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Solstice sunrise-sunset</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Solstice sunrise-sunset</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Sunrise-sunset lines are calculated for the winter solstice in Halifax
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+The ``sunAngle()`` function in the ``oce`` package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.
+
+# Methods
+
+First, set up the problem; these may be the only lines that need editing for other places or times.
+
+```{r}
+t <- as.POSIXct("2013-12-21 17:11:00", tz="UTC") # winter solstice
+xy <- list(x=-63.60, y=44.65)          # centre of map (Halifax)
+D <- 6                                 # map span in km
+```
+
+Next, use ``sunAngle()`` from the ``oce`` package to find the time of the sunrise and the azimuth at that moment.  Here, ``uniroot()`` is used to find the time when the altitude is zero (the sun is on the horizon), and we start searching a quarter-day before the time of the actual solstice.
+
+```{r}
+suppressPackageStartupMessages(library(oce))
+t0 <- t - 86400 / 4
+sunrise <- uniroot(function(t)
+                   sunAngle(t, lat=xy$y, lon=xy$x)$altitude,
+                   interval=as.numeric(c(t0, t)))$root
+sunrise <- numberAsPOSIXct(sunrise)
+azimuth <- 90 - sunAngle(sunrise, lat=xy$y, lon=xy$x)$azimuth
+```
+
+The span ``D`` is given in kilometres, which we convert to degrees of latitude and longitude.
+
+```{r}
+D <- D / 111                           # deg
+Dlon <- D / cos(xy$y * pi / 180)
+```
+
+
+Now it is time to show the results. The map is done with the ``OpenStreetMap`` package.  
+```{r solstice, fig.height=4, fig.width=7, dpi=100}
+suppressPackageStartupMessages(library(OpenStreetMap))
+map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
+               c(lat=xy$y-D/2, lon=xy$x+Dlon/2),
+               minNumTiles=9)
+plot(map)
+## Draw lines along which sunrise or sunset can be sighted.
+cx <- mean(par('usr')[1:2])
+cy <- mean(par('usr')[3:4])
+d <- diff(par('usr')[3:4]) # scales as the map
+for (o in d*seq(-1, 1, length.out=30)) {
+    lines(cx+c(-1,1)*d*cos(azimuth*pi/180),
+          cy+o+c(-1,1)*d*sin(azimuth*pi/180), col='red')
+}
+## a title doesn't hurt
+mtext(sprintf("sunrise angles on day of winter solstice (%s)",
+              format(t, "%Y-%m-%d")), side=3, line=2, cex=1.5)
+```
+
+# Resources
+
+* R source code used here: [2013-12-21-solstice.R](/assets/2013-12-21-solstice.R).
+
+5. Jekyll source code for this blog entry: [2013-12-21-solstice.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2013-12-21-solstice.Rmd)
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

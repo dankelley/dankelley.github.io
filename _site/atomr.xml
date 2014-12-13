@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2014-11-27T18:47:35-04:00</updated>
+    <updated>2014-12-13T09:09:52-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -4630,7 +4630,7 @@ D &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&
 4
 5
 6
-7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;suppressPackageStartupMessages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 t0 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; t &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
 sunrise &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; uniroot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
                    sunAngle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -4648,51 +4648,53 @@ Dlon &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; D &lt;span class=&qu
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;Now it is time to start with the mapping, which uses the &lt;code&gt;OpenStreetMap&lt;/code&gt; package.  &lt;/p&gt;
+&lt;p&gt;Now it is time to show the results. The map is done with the &lt;code&gt;OpenStreetMap&lt;/code&gt; package.  &lt;/p&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
-2
-3
-4
-5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;suppressPackageStartupMessages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;OpenStreetMap&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 map &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; openmap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;D&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; lon&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xy&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;Dlon&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
                minNumTiles&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;map&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-
-&lt;p&gt;Now, it remains to draw the sunrise/sunset lines.  The variables &lt;code&gt;cx&lt;/code&gt; and &lt;code&gt;cy&lt;/code&gt; are the centre points of the map, in map units (not latitude and longitude).&lt;/p&gt;
-
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
-2
-3
-4
-5
-6
-7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;cx &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;usr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## Draw lines along which sunrise or sunset can be sighted.&lt;/span&gt;
+cx &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;usr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 cy &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;usr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; diff&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;usr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# scales as the map&lt;/span&gt;
 &lt;span class=&quot;kr&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;o &lt;span class=&quot;kr&quot;&gt;in&lt;/span&gt; d&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; length.out&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cx&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;cos&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;azimuth&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
           cy&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;o&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;sin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;azimuth&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;pi&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-
-&lt;p&gt;Finally, add a title so that plot is self-explanatory.&lt;/p&gt;
-
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
-2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sprintf&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sunrise angles on day of winter solstice (%s)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## a title doesn&amp;#39;t hurt&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sprintf&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;sunrise angles on day of winter solstice (%s)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
               format&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%Y-%m-%d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; side&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2013-12-21-solstice/solstice-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
-&lt;p&gt;The graph indicates the results; click it to zoom in.&lt;/p&gt;
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/solstice_sunrise_sunset.png&quot;&gt;&lt;img src=&quot;/assets/solstice_sunrise_sunset-thumbnail.png&quot; alt=&quot;graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;R source code used here: &lt;a href=&quot;/assets/2013-12-21-solstice.R&quot;&gt;2013-12-21-solstice.R&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2013-12-21-solstice.Rmd&quot;&gt;2013-12-21-solstice.Rmd&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 </content>
     </entry>

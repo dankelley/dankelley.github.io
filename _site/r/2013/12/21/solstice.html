@@ -118,7 +118,7 @@ D <span class="o">&lt;-</span> <span class="m">6</span>                         
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+7</code></pre></div></td><td class="code"><div class="highlight"><pre>suppressPackageStartupMessages<span class="p">(</span>library<span class="p">(</span>oce<span class="p">))</span>
 t0 <span class="o">&lt;-</span> t <span class="o">-</span> <span class="m">86400</span> <span class="o">/</span> <span class="m">4</span>
 sunrise <span class="o">&lt;-</span> uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span>t<span class="p">)</span>
                    sunAngle<span class="p">(</span>t<span class="p">,</span> lat<span class="o">=</span>xy<span class="o">$</span>y<span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="p">)</span><span class="o">$</span>altitude<span class="p">,</span>
@@ -136,51 +136,53 @@ Dlon <span class="o">&lt;-</span> D <span class="o">/</span> cos<span class="p">
 </pre></div>
 </td></tr></table>
 
-<p>Now it is time to start with the mapping, which uses the <code>OpenStreetMap</code> package.  </p>
+<p>Now it is time to show the results. The map is done with the <code>OpenStreetMap</code> package.  </p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3
-4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>OpenStreetMap<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</code></pre></div></td><td class="code"><div class="highlight"><pre>suppressPackageStartupMessages<span class="p">(</span>library<span class="p">(</span>OpenStreetMap<span class="p">))</span>
 map <span class="o">&lt;-</span> openmap<span class="p">(</span>c<span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">+</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">-</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
                c<span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">-</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">+</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
                minNumTiles<span class="o">=</span><span class="m">9</span><span class="p">)</span>
 plot<span class="p">(</span>map<span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>Now, it remains to draw the sunrise/sunset lines.  The variables <code>cx</code> and <code>cy</code> are the centre points of the map, in map units (not latitude and longitude).</p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3
-4
-5
-6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>cx <span class="o">&lt;-</span> mean<span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span>
+<span class="c1">## Draw lines along which sunrise or sunset can be sighted.</span>
+cx <span class="o">&lt;-</span> mean<span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span>
 cy <span class="o">&lt;-</span> mean<span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span>
 d <span class="o">&lt;-</span> diff<span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span> <span class="c1"># scales as the map</span>
 <span class="kr">for</span> <span class="p">(</span>o <span class="kr">in</span> d<span class="o">*</span>seq<span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">30</span><span class="p">))</span> <span class="p">{</span>
     lines<span class="p">(</span>cx<span class="o">+</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span>cos<span class="p">(</span>azimuth<span class="o">*</span>pi<span class="o">/</span><span class="m">180</span><span class="p">),</span>
           cy<span class="o">+</span>o<span class="o">+</span>c<span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span>sin<span class="p">(</span>azimuth<span class="o">*</span>pi<span class="o">/</span><span class="m">180</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
-</td></tr></table>
-
-<p>Finally, add a title so that plot is self-explanatory.</p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class="p">,</span>
+<span class="c1">## a title doesn&#39;t hurt</span>
+mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;sunrise angles on day of winter solstice (%s)&quot;</span><span class="p">,</span>
               format<span class="p">(</span>t<span class="p">,</span> <span class="s">&quot;%Y-%m-%d&quot;</span><span class="p">)),</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">2</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<h1 id="results">Results</h1>
+<p><img src="http://dankelley.github.io/figs/2013-12-21-solstice/solstice-1.png" alt="center" /> </p>
 
-<p>The graph indicates the results; click it to zoom in.</p>
+<h1 id="resources">Resources</h1>
 
-<p><a href="/assets/solstice_sunrise_sunset.png"><img src="/assets/solstice_sunrise_sunset-thumbnail.png" alt="graph" /></a></p>
+<ul>
+  <li>R source code used here: <a href="/assets/2013-12-21-solstice.R">2013-12-21-solstice.R</a>.</li>
+</ul>
+
+<ol>
+  <li>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2013-12-21-solstice.Rmd">2013-12-21-solstice.Rmd</a></li>
+</ol>
 
 
 
