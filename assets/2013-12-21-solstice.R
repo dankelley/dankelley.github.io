@@ -2,7 +2,7 @@
 ## ------------------------------------------------------------------------
 t <- as.POSIXct("2013-12-21 17:11:00", tz="UTC") # winter solstice
 xy <- list(x=-63.60, y=44.65)          # centre of map (Halifax)
-D <- 8                                 # map span in km
+D <- 9                                 # map span in km
 
 
 ## ----,message=FALSE,warning=FALSE----------------------------------------
