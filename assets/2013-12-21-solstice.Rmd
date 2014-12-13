@@ -65,6 +65,14 @@ for (o in d*seq(-1, 1, length.out=60)) {
 mtext(paste("Solstice at ", format(sunrise)), font=2)
 ```
 
+# Exercises
+
+* Try altering ``t0`` to see how closely this alignment holds over time.
+* As above, but setting ``t0`` to an equinox.
+* Invent some sighting schemes for other times of the day, perhaps based on using
+  local building (viewed at a distance computed from geometry) to check on
+  noontime sun elevation.
+
 # Resources
 
 * R source code used here: [2013-12-21-solstice.R]({{ site.url }}/assets/2013-12-21-solstice.R).
