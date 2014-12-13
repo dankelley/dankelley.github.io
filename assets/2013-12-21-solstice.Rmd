@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Solstice sunrise-sunset
-tags: [astronomy, R]
+tags: [astronomy, sun, R]
 category: R
 year: 2013
 month: 12
@@ -28,8 +28,8 @@ D <- 9                                 # map span in km
 
 Next, use ``sunAngle()`` from the ``oce`` package to find the time of the sunrise and the azimuth at that moment.  Here, ``uniroot()`` is used to find the time when the altitude is zero (the sun is on the horizon), and we start searching a quarter-day before the time of the actual solstice.
 
-```{r}
-suppressPackageStartupMessages(library(oce))
+```{r,message=FALSE,warning=FALSE}
+library(oce)
 t0 <- t - 86400 / 4
 sunrise <- uniroot(function(t)
                    sunAngle(t, lat=xy$y, lon=xy$x)$altitude,
@@ -47,7 +47,7 @@ Dlon <- D / cos(xy$y * pi / 180)
 
 
 Now it is time to show the results. The map is done with the ``OpenStreetMap`` package.  
-```{r solstice, fig.height=4, fig.width=7, dpi=100}
+```{r solstice-map, fig.height=4, fig.width=7, dpi=100, message=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(OpenStreetMap))
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),

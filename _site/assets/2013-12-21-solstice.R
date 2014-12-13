@@ -5,8 +5,8 @@ xy <- list(x=-63.60, y=44.65)          # centre of map (Halifax)
 D <- 9                                 # map span in km
 
 
-## ------------------------------------------------------------------------
-suppressPackageStartupMessages(library(oce))
+## ----,message=FALSE,warning=FALSE----------------------------------------
+library(oce)
 t0 <- t - 86400 / 4
 sunrise <- uniroot(function(t)
                    sunAngle(t, lat=xy$y, lon=xy$x)$altitude,
@@ -20,7 +20,7 @@ D <- D / 111                           # deg
 Dlon <- D / cos(xy$y * pi / 180)
 
 
-## ----solstice, fig.height=4, fig.width=7, dpi=100------------------------
+## ----solstice-map, fig.height=4, fig.width=7, dpi=100, message=FALSE, warning=FALSE----
 suppressPackageStartupMessages(library(OpenStreetMap))
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),

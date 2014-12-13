@@ -64,8 +64,8 @@
     </span> <!-- post_date -->
     <span class=post_tags>
         
-        <a href="/tags/R/index.html" class="tag">
-            R
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
         </a>
          &#183; 
         
@@ -74,8 +74,8 @@
         </a>
          &#183; 
         
-        <a href="/tags/astronomy/index.html" class="tag">
-            astronomy
+        <a href="/tags/R/index.html" class="tag">
+            R
         </a>
         
         

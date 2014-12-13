@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Solar navigation
-tags: [R, oce, astronomy]
+tags: [astronomy, oce, R]
 category: R
 year: 2014
 month: 11
