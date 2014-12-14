@@ -44,5 +44,5 @@ times[full]
 
 # Resources
 
-* R source code used here: [2014-04-13-valentine-moon.R]({{ site.url }}/assets/2014-02-13-valentine-moon.R)
-* Jekyll source code for this blog entry: [2014-04-13-valentine-moon.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-13-valentine-moon.Rmd)
+* R source code used here: [2014-02-13-valentine-moon.R]({{ site.url }}/assets/2014-02-13-valentine-moon.R)
+* Jekyll source code for this blog entry: [2014-02-13-valentine-moon.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-02-13-valentine-moon.Rmd)
