@@ -22,7 +22,7 @@ Dlon <- D / cos(xy$y * pi / 180)
 ## ----message=FALSE, warning=FALSE----------------------------------------
 library(OpenStreetMap)
 
-## ----solstice-map,fig.height=6,fig.width=6,dpi=120-----------------------
+## ----solstice-map,fig.height=5,fig.width=5,dpi=150-----------------------
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),
                minNumTiles=9)
@@ -35,6 +35,6 @@ for (o in d*seq(-1, 1, length.out=60)) {
     lines(cx+c(-1,1)*d*cos(azimuth*pi/180),
           cy+o+c(-1,1)*d*sin(azimuth*pi/180), col='red')
 }
-mtext(paste("Solstice at ", format(sunrise)), font=2)
+mtext(paste("Solstice sunrise at ", format(sunrise-4*3600, "%Y-%m-%d %H:%M")), font=2)
 
 
