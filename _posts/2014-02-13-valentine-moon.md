@@ -24,31 +24,19 @@ The first step is to construct the times of Valentine's days, starting with the 
 {% highlight r linenos=table %}
 times <- seq(as.POSIXct("2014-02-14", tz="UTC"), length.out=50, by="year")
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 fraction <- moonAngle(times, lon=-63, lat=43)$illuminatedFraction
 full <- fraction > 0.99
 plot(times, fraction, xlab="Year", ylab="Moon Illuminated Fraction",
      col=ifelse(full, "red", "blue"), pch=16, cex=2)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-02-13-valentine-moon/valentines.png) 
+![center](http://dankelley.github.io/figs/2014-02-13-valentine-moon/valentines-1.png) 
+
 Here, red has been used to indicate years with full moon on Valentine's Day, and sad blue otherwise.
 
 # Results
 
-Yes, it will be a long time until the next full moon on Valentine's Day:
+It will be a long time until the next full moon on Valentine's Day:
 
 {% highlight r linenos=table %}
 times[full]
@@ -63,6 +51,9 @@ times[full]
 
 # Conclusions
 
-Buy candy now.
+* Buy candy now.
 
-* Source code: [2014-04-13-valentine-moon.R]({{ site.url }}/assets/2014-02-13-valentine-moon.R)
+# Resources
+
+* Rource code used here: [2014-04-13-valentine-moon.R]({{ site.url }}/assets/2014-02-13-valentine-moon.R)
+* Jekyll source code for this blog entry: [2014-04-13-valentine-moon.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-13-valentine-moon.Rmd)
