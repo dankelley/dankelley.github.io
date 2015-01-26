@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-01-26T15:05:26-04:00</updated>
+    <updated>2015-01-26T15:08:20-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -116,10 +116,9 @@ hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;levitus&lt;span class=&quot;o&
 
 &lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Source code: &lt;a href=&quot;/assets/2015-01-26-woa2013.R&quot;&gt;2015-01-26-woa2013.R&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
+&lt;ul&gt;
+  &lt;li&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-01-26-woa2013.Rmd&quot;&gt;2015-01-26-woa2013.Rmd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     </entry>
     
