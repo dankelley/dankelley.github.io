@@ -100,19 +100,18 @@ The ``sunAngle()`` function in the ``oce`` package provides a handy way to deter
 First, set up the problem; these may be the only lines that need editing for other places or times.
 
 ```{r}
-t <- as.POSIXct("2013-12-21 17:11:00", tz="UTC") # winter solstice
+t0 <- as.POSIXct("2014-12-21 10:00:00", tz="UTC") # morning of 
 xy <- list(x=-63.60, y=44.65)          # centre of map (Halifax)
-D <- 8                                 # map span in km
+D <- 9                                 # map span in km
 ```
 
-Next, use ``sunAngle()`` from the ``oce`` package to find the time of the sunrise and the azimuth at that moment.  Here, ``uniroot()`` is used to find the time when the altitude is zero (the sun is on the horizon), and we start searching a quarter-day before the time of the actual solstice.
+Next, use ``sunAngle()`` from the ``oce`` package to find the time of the sunrise and the azimuth at that moment.  Here, ``uniroot()`` is used to find the time when the altitude is zero (the sun is on the horizon), and we use a search interval that should encompass sunrise at this longitude.
 
 ```{r,message=FALSE,warning=FALSE}
 library(oce)
-t0 <- t - 86400 / 4
 sunrise <- uniroot(function(t)
-                   sunAngle(t, lat=xy$y, lon=xy$x)$altitude,
-                   interval=as.numeric(c(t0, t)))$root
+                   sunAngle(t, lat=xy$y, lon=xy$x, useRefraction=TRUE)$altitude,
+                   interval=as.numeric(t0 + 3600*c(-5,5)))$root
 sunrise <- numberAsPOSIXct(sunrise)
 azimuth <- 90 - sunAngle(sunrise, lat=xy$y, lon=xy$x)$azimuth
 ```
@@ -126,10 +125,8 @@ Dlon <- D / cos(xy$y * pi / 180)
 
 
 Now it is time to show the results. The map is done with the ``OpenStreetMap`` package.  
-```{r message=FALSE, warning=FALSE}
+```{r solstice-map,fig.height=5,fig.width=5,dpi=150,message=FALSE, warning=FALSE}
 library(OpenStreetMap)
-```
-```{r solstice-map,fig.height=7,fig.width=7,dpi=120}
 map <- openmap(c(lat=xy$y+D/2, lon=xy$x-Dlon/2),
                c(lat=xy$y-D/2, lon=xy$x+Dlon/2),
                minNumTiles=9)
@@ -138,17 +135,25 @@ plot(map)
 cx <- mean(par('usr')[1:2])
 cy <- mean(par('usr')[3:4])
 d <- diff(par('usr')[3:4]) # scales as the map
-for (o in d*seq(-1, 1, length.out=30)) {
+for (o in d*seq(-1, 1, length.out=60)) {
     lines(cx+c(-1,1)*d*cos(azimuth*pi/180),
           cy+o+c(-1,1)*d*sin(azimuth*pi/180), col='red')
 }
+mtext(paste("Solstice sunrise at ", format(sunrise-4*3600, "%Y-%m-%d %H:%M")), font=2)
 ```
+
+# Exercises
+
+* Try altering ``t0`` to see how closely this alignment holds over time.
+* As above, but setting ``t0`` to an equinox.
+* Invent some sighting schemes for other times of the day, perhaps based on using
+  local building (viewed at a distance computed from geometry) to check on
+  noontime sun elevation.
 
 # Resources
 
 * R source code used here: [2013-12-21-solstice.R](/assets/2013-12-21-solstice.R).
-
-5. Jekyll source code for this blog entry: [2013-12-21-solstice.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2013-12-21-solstice.Rmd)
+* Jekyll source code for this blog entry: [2013-12-21-solstice.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2013-12-21-solstice.Rmd)
 
 
 
