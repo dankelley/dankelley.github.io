@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Assessing mapdata world coastline</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2015/01/26/woa2013.html" title="World Ocean Atlas changes">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Assessing mapdata world coastline</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Jan 28, 2015
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/coastline/index.html" class="tag">
+            coastline
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Test of potential new coastline for ocedata package
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The <code>mapdata</code> R package contains a coastline called <code>worldHires</code> which is contained within a text file with a bit over 2 million lines.  Since the <code>coastlineWorldFine</code> dataset in the <code>ocedata</code> package contains about 0.5 million points, I thought I would explore how much better the <code>mapdata</code> coastline might be.</p>
+
+<h1 id="methods">Methods</h1>
+
+<p>First, I wrote the following C file to translate the data to something that R can read.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">#include &lt;stdio.h&gt;</span>
+char <span class="o">*</span>file <span class="o">=</span> <span class="s">&quot;/Users/kelley/mapdata/src/worldHires.line&quot;</span><span class="p">;</span>
+int main<span class="p">()</span>
+<span class="p">{</span>
+    char tok1<span class="p">[</span><span class="m">100</span><span class="p">],</span> tok2<span class="p">[</span><span class="m">100</span><span class="p">];</span> <span class="o">//</span> needn<span class="s">&#39;t be anywhere near that long</span>
+<span class="s">    FILE *in = fopen(file, &quot;r&quot;);</span>
+<span class="s">    int ok;</span>
+<span class="s">    int count = 0;</span>
+<span class="s">    int skip = 1;</span>
+<span class="s">    while (1) { //count++ &lt; n) {</span>
+<span class="s">        if (skip) {</span>
+<span class="s">            fscanf(in, &quot;%s&quot;, tok1);</span>
+<span class="s">            if (feof(in))</span>
+<span class="s">                return(0);</span>
+<span class="s">            fscanf(in, &quot;%s&quot;, tok2);</span>
+<span class="s">            printf(&quot;NA NA\n&quot;);</span>
+<span class="s">            skip = 0;</span>
+<span class="s">        } else {</span>
+<span class="s">            fscanf(in, &quot;%s&quot;, tok1);</span>
+<span class="s">            if (tok1[0] == &#39;</span>E<span class="s">&#39;</span><span class="err">) {</span>
+                skip <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+                fscanf<span class="p">(</span><span class="kr">in</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> tok2<span class="p">);</span>
+                printf<span class="p">(</span><span class="s">&quot;  %s %s\n&quot;</span><span class="p">,</span> tok1<span class="p">,</span> tok2<span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Then, I created a datafile for plotting. It turns out that <code>mapdata</code> numbers are in radians, so a conversion was required.</p>
+
+<p>I plotted this “new” dataset and the “old” one (containined in <code>ocedata</code>) and the results are shown below. </p>
+
+<h1 id="results">Results</h1>
+
+<p><img src="http://dankelley.github.io/figs/2015-01-28-coastline/coastline.png" alt="center" /> </p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>There are some differences between the two, but nothing dramatic (e.g. no Northwest Arm of Halifax Harbour). Certainly it would be difficult to argue for exapanding the memory footprint of <code>ocedata</code> by a factor of 4.</p>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
