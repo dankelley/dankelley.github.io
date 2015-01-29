@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Landsat thermal imaging
-tags: [R, oce, oceanography]
+tags: [R, oce, oceanography, landsat]
 category: R
 year: 2014
 month: 7
