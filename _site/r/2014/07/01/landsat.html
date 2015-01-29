@@ -123,18 +123,16 @@
 10
 11
 12
-13
-14</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+13</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 l <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;LC80080292014065LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span><span class="s">&quot;tirs1&quot;</span><span class="p">)</span>
 tirs1 <span class="o">&lt;-</span> l<span class="p">[[</span><span class="s">&quot;tirs1&quot;</span><span class="p">]]</span>
 ML <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>radiance_mult_band_10
 AL <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>radiance_add_band_10
 K1 <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>k1_constant_band_10
 K2 <span class="o">&lt;-</span> l<span class="o">@</span>metadata<span class="o">$</span>header<span class="o">$</span>k2_constant_band_10
-d <span class="o">&lt;-</span> tirs1 <span class="o">*</span> <span class="p">(</span><span class="m">2</span><span class="o">^</span><span class="m">16</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>            <span class="c1"># convert from range 0 to 1</span>
-Llambda <span class="o">&lt;-</span> ML <span class="o">*</span> d <span class="o">+</span> AL
-dd <span class="o">&lt;-</span> K2 <span class="o">/</span> log<span class="p">(</span>K1 <span class="o">/</span> Llambda <span class="o">+</span> <span class="m">1</span><span class="p">)</span>
-SST <span class="o">&lt;-</span> dd <span class="o">-</span> <span class="m">273.15</span>                 <span class="c1"># convert Kelvin to Celcius</span>
+Llambda <span class="o">&lt;-</span> ML <span class="o">*</span> tirs1 <span class="o">+</span> AL
+SSTkelvin <span class="o">&lt;-</span> K2 <span class="o">/</span> log<span class="p">(</span>K1 <span class="o">/</span> Llambda <span class="o">+</span> <span class="m">1</span><span class="p">)</span>
+SST <span class="o">&lt;-</span> SSTkelvin <span class="o">-</span> <span class="m">273.15</span>                 <span class="c1"># convert Kelvin to Celcius</span>
 l<span class="o">@</span>data<span class="o">$</span>SST <span class="o">&lt;-</span> SST
 plot<span class="p">(</span>l<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;SST&quot;</span><span class="p">,</span> col<span class="o">=</span>oceColorsJet<span class="p">)</span>
 mtext<span class="p">(</span>l<span class="p">[[</span><span class="s">&quot;time&quot;</span><span class="p">]])</span>

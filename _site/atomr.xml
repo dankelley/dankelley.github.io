@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-01-29T10:26:12-04:00</updated>
+    <updated>2015-01-29T10:29:12-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -450,18 +450,16 @@ halfway past the treeline in the Eastern Passage of Halifax Harbour.&lt;/p&gt;
 10
 11
 12
-13
-14&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+13&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 l &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.landsat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;LC80080292014065LGN00&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; band&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tirs1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 tirs1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; l&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tirs1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
 ML &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; l&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;metadata&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;header&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;radiance_mult_band_10
 AL &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; l&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;metadata&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;header&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;radiance_add_band_10
 K1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; l&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;metadata&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;header&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;k1_constant_band_10
 K2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; l&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;metadata&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;header&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;k2_constant_band_10
-d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; tirs1 &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;# convert from range 0 to 1&lt;/span&gt;
-Llambda &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ML &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; d &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; AL
-dd &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; K2 &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; log&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;K1 &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; Llambda &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-SST &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; dd &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;273.15&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# convert Kelvin to Celcius&lt;/span&gt;
+Llambda &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ML &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; tirs1 &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; AL
+SSTkelvin &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; K2 &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; log&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;K1 &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; Llambda &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+SST &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; SSTkelvin &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;273.15&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# convert Kelvin to Celcius&lt;/span&gt;
 l&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;SST &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; SST
 plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; band&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SST&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;oceColorsJet&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
