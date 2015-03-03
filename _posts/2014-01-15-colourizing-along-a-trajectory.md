@@ -45,7 +45,6 @@ mar <- par('mar')
 
 palette <- oceColorsJet(npalette)
 drawPalette(zlim = zlim, col = palette)
-par(mar=mar)
 plot(x, y, type = "l")
 grid()
 segments(head(x, -1), head(y, -1),
@@ -62,10 +61,6 @@ points(x, y, pch = 20, cex=1/3)
 # Results
 
 The graph shows that this works reasonably well.  The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.
-
-[![graph]({{ site.url }}/assets/colorline-thumbnail.png)]({{ site.url }}/assets/colorline.png)
-
-The method works well, and is flexible in terms of colour schemes.
 
 # Exercises
 

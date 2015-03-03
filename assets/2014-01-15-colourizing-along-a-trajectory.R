@@ -10,7 +10,6 @@ mar <- par('mar')
 
 palette <- oceColorsJet(npalette)
 drawPalette(zlim = zlim, col = palette)
-par(mar=mar)
 plot(x, y, type = "l")
 grid()
 segments(head(x, -1), head(y, -1),
