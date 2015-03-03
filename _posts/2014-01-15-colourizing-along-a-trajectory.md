@@ -22,20 +22,6 @@ The R code given below demonstrates this with fake data.  The core idea is to us
 
 {% highlight r linenos=table %}
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: gsw
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 x <- seq(0, 1, length.out=50)
 y <- x
 z <- seq(0, 1, length.out = length(x))
