@@ -19,23 +19,8 @@ In Oceanography it can be useful to use colour to display z values along an (x,y
 
 The R code given below demonstrates this with fake data.  The core idea is to use ``segments()``, here with ``head()`` and ``tail()`` to chop up the trajectory.
 
-
-{% highlight r linenos=table %}
+```{r}
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: gsw
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 x <- seq(0, 1, length.out=50)
 y <- x
 z <- seq(0, 1, length.out = length(x))
@@ -54,9 +39,7 @@ segments(head(x, -1), head(y, -1),
     seq(zlim[1], zlim[2], length.out = npalette + 1))],
   lwd = 8)
 points(x, y, pch = 20, cex=1/3)
-{% endhighlight %}
-
-![center](http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1.png) 
+```
 
 
 # Results
