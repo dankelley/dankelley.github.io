@@ -69,7 +69,7 @@ eclipse <- nasa + o$minimum
 abline(v=eclipse, col='black')
 abline(v=nasa, col='red')
 mtext(sprintf("Here: %s ", format(eclipse)), line=-1, adj=1, col="black")
-mtext(sprintf("NASA: %s ", format(max)), line=-2, adj=1, col="red")
+mtext(sprintf("NASA: %s ", format(nasa)), line=-2, adj=1, col="red")
 ```
 
 # Results and discussion
