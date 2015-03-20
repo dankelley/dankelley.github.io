@@ -119,8 +119,7 @@
 15
 16
 17
-18
-19</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+18</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 x <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">50</span><span class="p">)</span>
 y <span class="o">&lt;-</span> x
 z <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out <span class="o">=</span> length<span class="p">(</span>x<span class="p">))</span>
@@ -130,7 +129,6 @@ mar <span class="o">&lt;-</span> par<span class="p">(</span><span class="s">&#39
 
 palette <span class="o">&lt;-</span> oceColorsJet<span class="p">(</span>npalette<span class="p">)</span>
 drawPalette<span class="p">(</span>zlim <span class="o">=</span> zlim<span class="p">,</span> col <span class="o">=</span> palette<span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span>mar<span class="p">)</span>
 plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
 grid<span class="p">()</span>
 segments<span class="p">(</span>head<span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> head<span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
@@ -142,13 +140,11 @@ points<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span
 </pre></div>
 </td></tr></table>
 
+<p><img src="http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1.png" alt="center" /> </p>
+
 <h1 id="results">Results</h1>
 
 <p>The graph shows that this works reasonably well.  The dots will probably not be useful in an actual application, and are used here just to indicate colourization in groups.</p>
-
-<p><a href="/assets/colorline.png"><img src="/assets/colorline-thumbnail.png" alt="graph" /></a></p>
-
-<p>The method works well, and is flexible in terms of colour schemes.</p>
 
 <h1 id="exercises">Exercises</h1>
 

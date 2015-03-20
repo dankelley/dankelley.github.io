@@ -1,0 +1,105 @@
+---
+layout: post
+title: Solar eclipse
+tags: [astronomy, oce, R]
+category: R
+year: 2015
+month: 3
+day: 20
+summary: Eclipse timing is inferred from sun and moon positions
+---
+
+# Introduction
+
+Today there was a solar eclipse that was not visible on my side of the
+Atlantic, but was seen on the European side, either as a partial eclipse,
+towards the south, or a total one, towards the north [1]. Eclipses being rare
+and solar power being a new thing, this event caused unprecedented reduction of
+solar power [2].
+
+A good spot for viewing the total eclipse was Longyearbyen, on Svalbard, and
+readers seeking good images might want to include that name in web searches. (I
+could not find open-source images at the time of writing, but of course that
+was not really my goal in this blog posting...)
+
+I thought it might be interesting to see whether the sun and moon functions in
+the oce package could reproduce the eclipse timing, so I constructed a function
+to measure the mismatch between sun and moon position in the sky, and set up an
+optimization problem to find the time of least mismatch.
+
+The oce functions ``sunAngle()`` and ``moonAngle()`` are at the heart of the
+work. Each returns a list that contains, among other things, ``altitude`` and
+``azimuth``. I set up a mismatch function to calculate a combination of these,
+with a scale factor (line 11 of the code) to account for a sort of
+converging-meridian effect of azimuth. This function is unity at the horizon,
+where a degree change in azimuth is the same angular distance as a degree
+change of altitude, and it falls to 0 at the zenith.
+
+Below is the code, and the graph it makes. The black line is the estimated time
+when sun and moon centres are nearest each other in the sky, and the time is
+written in black near the top of the graph. The red line is the estimate of
+eclipse maximum from e.g. [3] The red line is the estimate of eclipse maximum
+from [3].
+
+
+```{r}
+library(oce)
+angle <- function(t, lon=15+40/60, lat=78+12/60)
+{
+    ## Default location is Longyearbyen, Svalbard
+    sa <- sunAngle(t, lon, lat)
+    ma <- moonAngle(t, lon, lat)
+    saz <- sa$azimuth
+    sal <- sa$altitude
+    maz <- ma$azimuth
+    mal <- ma$altitude
+    C <- cos(0.5*(ma$altitude+sa$altitude) * pi / 180)
+    sqrt((C*(saz-maz))^2 + (sal-mal)^2)
+}
+t0 <- as.POSIXct("2015-03-20 9:45:00", tz="UTC")
+times <- t0 + seq(-3600, 3600, 60)
+misfit <- NULL
+for (i in seq_along(times)) {
+    misfit <- c(misfit, angle(times[i]))
+}
+oce.plot.ts(times, misfit, ylab="Angular misfit [deg]")
+o <- optimize(function(t) angle(t0+t), lower=-3600, upper=3600)
+eclipse <- t0 + o$minimum
+# reference 3
+max <- as.POSIXct("2015-03-20 9:45:39", tz="UTC")
+abline(v=eclipse, col='black')
+abline(v=max, col='red')
+mtext(sprintf("Here: %s ", format(eclipse)), line=-1, adj=1, col="black")
+mtext(sprintf("NASA: %s ", format(max)), line=-2, adj=1, col="red")
+```
+
+# Results and discussion
+
+The present method suggests the maximum eclipse occured 3 minutes after the NASA estimate (see [3]).
+
+I'm not too sure why this is, so I've put some thoughts in the exercises.
+
+# Exercises
+
+1. Verify or correct the "C" factor in line 11 of the code.
+
+2. Determine why the times disagree by a few minutes.
+
+3. Check on other aspects of the prediction, e.g. the NASA site [3] gives solar
+   altitude and azimuth ... does my code recover these?
+
+# References and resources
+
+1. Overview of eclipse ([wikipedia](http://en.wikipedia.org/wiki/Solar_eclipse_of_March_20,_2015#cite_note-6)).
+
+2. Effect of eclipse on power grids ([reuters](http://www.reuters.com/article/2015/03/20/us-solar-eclipse-germany-idUSKBN0MG0S620150320)).
+
+3. Image from
+   [NASA](http://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF)
+   showing eclipse details, including timing.
+
+4. R source code used here: [2015-03-20-eclipse.R]({{ site.url }}/assets/2015-03-20-eclipse.R).
+
+5. Jekyll source code for this blog entry: [2015-03-20-eclipse.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-03-20-eclipse.Rmd)
+
+

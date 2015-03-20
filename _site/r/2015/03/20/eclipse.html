@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Solar eclipse</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2015/01/28/coastline.html" title="Assessing mapdata world coastline">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Solar eclipse</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Mar 20, 2015
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/astronomy/index.html" class="tag">
+            astronomy
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Eclipse timing is inferred from sun and moon positions
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Today there was a solar eclipse that was not visible on my side of the
+Atlantic, but was seen on the European side, either as a partial eclipse,
+towards the south, or a total one, towards the north [1]. Eclipses being rare
+and solar power being a new thing, this event caused unprecedented reduction of
+solar power [2].</p>
+
+<p>A good spot for viewing the total eclipse was Longyearbyen, on Svalbard, and
+readers seeking good images might want to include that name in web searches. (I
+could not find open-source images at the time of writing, but of course that
+was not really my goal in this blog posting…)</p>
+
+<p>I thought it might be interesting to see whether the sun and moon functions in
+the oce package could reproduce the eclipse timing, so I constructed a function
+to measure the mismatch between sun and moon position in the sky, and set up an
+optimization problem to find the time of least mismatch.</p>
+
+<p>The oce functions <code>sunAngle()</code> and <code>moonAngle()</code> are at the heart of the
+work. Each returns a list that contains, among other things, <code>altitude</code> and
+<code>azimuth</code>. I set up a mismatch function to calculate a combination of these,
+with a scale factor (line 11 of the code) to account for a sort of
+converging-meridian effect of azimuth. This function is unity at the horizon,
+where a degree change in azimuth is the same angular distance as a degree
+change of altitude, and it falls to 0 at the zenith.</p>
+
+<p>Below is the code, and the graph it makes. The black line is the estimated time
+when sun and moon centres are nearest each other in the sky, and the time is
+written in black near the top of the graph. The red line is the estimate of
+eclipse maximum from e.g. [3] The red line is the estimate of eclipse maximum
+from [3].</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: gsw
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</code></pre></div></td><td class="code"><div class="highlight"><pre>angle <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> lon<span class="o">=</span><span class="m">15+40</span><span class="o">/</span><span class="m">60</span><span class="p">,</span> lat<span class="o">=</span><span class="m">78+12</span><span class="o">/</span><span class="m">60</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">## Default location is Longyearbyen, Svalbard</span>
+    sa <span class="o">&lt;-</span> sunAngle<span class="p">(</span>t<span class="p">,</span> lon<span class="p">,</span> lat<span class="p">)</span>
+    ma <span class="o">&lt;-</span> moonAngle<span class="p">(</span>t<span class="p">,</span> lon<span class="p">,</span> lat<span class="p">)</span>
+    saz <span class="o">&lt;-</span> sa<span class="o">$</span>azimuth
+    sal <span class="o">&lt;-</span> sa<span class="o">$</span>altitude
+    maz <span class="o">&lt;-</span> ma<span class="o">$</span>azimuth
+    mal <span class="o">&lt;-</span> ma<span class="o">$</span>altitude
+    C <span class="o">&lt;-</span> cos<span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span>ma<span class="o">$</span>altitude<span class="o">+</span>sa<span class="o">$</span>altitude<span class="p">)</span> <span class="o">*</span> pi <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
+    sqrt<span class="p">((</span>C<span class="o">*</span><span class="p">(</span>saz<span class="o">-</span>maz<span class="p">))</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="p">(</span>sal<span class="o">-</span>mal<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="p">}</span>
+t0 <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2015-03-20 9:45:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+times <span class="o">&lt;-</span> t0 <span class="o">+</span> seq<span class="p">(</span><span class="m">-3600</span><span class="p">,</span> <span class="m">3600</span><span class="p">,</span> <span class="m">60</span><span class="p">)</span>
+misfit <span class="o">&lt;-</span> <span class="kc">NULL</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> seq_along<span class="p">(</span>times<span class="p">))</span> <span class="p">{</span>
+    misfit <span class="o">&lt;-</span> c<span class="p">(</span>misfit<span class="p">,</span> angle<span class="p">(</span>times<span class="p">[</span>i<span class="p">]))</span>
+<span class="p">}</span>
+oce.plot.ts<span class="p">(</span>times<span class="p">,</span> misfit<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Angular misfit [deg]&quot;</span><span class="p">)</span>
+o <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>t<span class="p">)</span> angle<span class="p">(</span>t0<span class="o">+</span>t<span class="p">),</span> lower<span class="o">=</span><span class="m">-3600</span><span class="p">,</span> upper<span class="o">=</span><span class="m">3600</span><span class="p">)</span>
+eclipse <span class="o">&lt;-</span> t0 <span class="o">+</span> o<span class="o">$</span>minimum
+<span class="c1"># reference 3</span>
+max <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2015-03-20 9:45:39&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>eclipse<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>max<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;Here: %s &quot;</span><span class="p">,</span> format<span class="p">(</span>eclipse<span class="p">)),</span> line<span class="o">=</span><span class="m">-1</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
+mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;NASA: %s &quot;</span><span class="p">,</span> format<span class="p">(</span>max<span class="p">)),</span> line<span class="o">=</span><span class="m">-2</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-03-20-eclipse/unnamed-chunk-1-1.png" alt="center" /> </p>
+
+<h1 id="results-and-discussion">Results and discussion</h1>
+
+<p>The present method suggests the maximum eclipse occured 3 minutes after the NASA estimate (see [3]).</p>
+
+<p>I’m not too sure why this is, so I’ve put some thoughts in the exercises.</p>
+
+<h1 id="exercises">Exercises</h1>
+
+<ol>
+  <li>
+    <p>Verify or correct the “C” factor in line 11 of the code.</p>
+  </li>
+  <li>
+    <p>Determine why the times disagree by a few minutes.</p>
+  </li>
+  <li>
+    <p>Check on other aspects of the prediction, e.g. the NASA site [3] gives solar
+altitude and azimuth … does my code recover these?</p>
+  </li>
+</ol>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p>Overview of eclipse (<a href="http://en.wikipedia.org/wiki/Solar_eclipse_of_March_20,_2015#cite_note-6">wikipedia</a>).</p>
+  </li>
+  <li>
+    <p>Effect of eclipse on power grids (<a href="http://www.reuters.com/article/2015/03/20/us-solar-eclipse-germany-idUSKBN0MG0S620150320">reuters</a>).</p>
+  </li>
+  <li>
+    <p>Image from
+<a href="http://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF">NASA</a>
+showing eclipse details, including timing.</p>
+  </li>
+  <li>
+    <p>R source code used here: <a href="/assets/2015-03-20-eclipse.R">2015-03-20-eclipse.R</a>.</p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-03-20-eclipse.Rmd">2015-03-20-eclipse.Rmd</a></p>
+  </li>
+</ol>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
