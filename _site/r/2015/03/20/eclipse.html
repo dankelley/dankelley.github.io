@@ -201,8 +201,10 @@ mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quo
     <p>Determine why the times disagree by a few minutes.</p>
   </li>
   <li>
-    <p>Check on other aspects of the prediction, e.g. the NASA site [3] gives solar
-altitude and azimuth … does my code recover these?</p>
+    <p>Determine whether oce code is now out of synch with UTC. I notice on the
+NASA site [3] they show TD (terrestrial dynamical time) being about a minute
+after UTC [4].  I wonder whether TD may be a replacement for the time I used
+in the oce code, which was based on algorithms from the 1970s?</p>
   </li>
 </ol>
 
@@ -219,6 +221,9 @@ altitude and azimuth … does my code recover these?</p>
     <p>Image from
 <a href="http://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF">NASA</a>
 showing eclipse details, including timing.</p>
+  </li>
+  <li>
+    <p>Time types at <a href="http://eclipse.gsfc.nasa.gov/LEcat5/time.html">NASA</a></p>
   </li>
   <li>
     <p>R source code used here: <a href="/assets/2015-03-20-eclipse.R">2015-03-20-eclipse.R</a>.</p>

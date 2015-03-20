@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-20T14:26:48-03:00</updated>
+    <updated>2015-03-20T14:33:41-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -124,8 +124,10 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sprintf&lt;span class=&quot;p
     &lt;p&gt;Determine why the times disagree by a few minutes.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Check on other aspects of the prediction, e.g. the NASA site [3] gives solar
-altitude and azimuth … does my code recover these?&lt;/p&gt;
+    &lt;p&gt;Determine whether oce code is now out of synch with UTC. I notice on the
+NASA site [3] they show TD (terrestrial dynamical time) being about a minute
+after UTC [4].  I wonder whether TD may be a replacement for the time I used
+in the oce code, which was based on algorithms from the 1970s?&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -142,6 +144,9 @@ altitude and azimuth … does my code recover these?&lt;/p&gt;
     &lt;p&gt;Image from
 &lt;a href=&quot;http://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF&quot;&gt;NASA&lt;/a&gt;
 showing eclipse details, including timing.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Time types at &lt;a href=&quot;http://eclipse.gsfc.nasa.gov/LEcat5/time.html&quot;&gt;NASA&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;R source code used here: &lt;a href=&quot;/assets/2015-03-20-eclipse.R&quot;&gt;2015-03-20-eclipse.R&lt;/a&gt;.&lt;/p&gt;
