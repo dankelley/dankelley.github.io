@@ -64,8 +64,8 @@ for (i in seq_along(times)) {
     misfit <- c(misfit, angle(times[i]))
 }
 oce.plot.ts(times, misfit, ylab="Angular misfit [deg]")
-o <- optimize(function(t) angle(t0+t), lower=-3600, upper=3600)
-eclipse <- t0 + o$minimum
+o <- optimize(function(t) angle(nasa+t), lower=-3600, upper=3600)
+eclipse <- nasa + o$minimum
 abline(v=eclipse, col='black')
 abline(v=nasa, col='red')
 mtext(sprintf("Here: %s ", format(eclipse)), line=-1, adj=1, col="black")

@@ -148,7 +148,12 @@ from [3].</p>
 19
 20
 21
-22</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+22
+23
+24
+25
+26
+27</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 angle <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> lon<span class="o">=</span><span class="m">15+40</span><span class="o">/</span><span class="m">60</span><span class="p">,</span> lat<span class="o">=</span><span class="m">78+12</span><span class="o">/</span><span class="m">60</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">## Default location is Longyearbyen, Svalbard</span>
@@ -169,37 +174,12 @@ misfit <span class="o">&lt;-</span> <span class="kc">NULL</span>
     misfit <span class="o">&lt;-</span> c<span class="p">(</span>misfit<span class="p">,</span> angle<span class="p">(</span>times<span class="p">[</span>i<span class="p">]))</span>
 <span class="p">}</span>
 oce.plot.ts<span class="p">(</span>times<span class="p">,</span> misfit<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Angular misfit [deg]&quot;</span><span class="p">)</span>
-o <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>t<span class="p">)</span> angle<span class="p">(</span>t0<span class="o">+</span>t<span class="p">),</span> lower<span class="o">=</span><span class="m">-3600</span><span class="p">,</span> upper<span class="o">=</span><span class="m">3600</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error in inherits(t, &quot;POSIXt&quot;): object &#39;t0&#39; not found
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>eclipse <span class="o">&lt;-</span> t0 <span class="o">+</span> o<span class="o">$</span>minimum
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error in eval(expr, envir, enclos): object &#39;t0&#39; not found
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>abline<span class="p">(</span>v<span class="o">=</span>eclipse<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): object &#39;eclipse&#39; not found
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>abline<span class="p">(</span>v<span class="o">=</span>nasa<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+o <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>t<span class="p">)</span> angle<span class="p">(</span>nasa<span class="o">+</span>t<span class="p">),</span> lower<span class="o">=</span><span class="m">-3600</span><span class="p">,</span> upper<span class="o">=</span><span class="m">3600</span><span class="p">)</span>
+eclipse <span class="o">&lt;-</span> nasa <span class="o">+</span> o<span class="o">$</span>minimum
+abline<span class="p">(</span>v<span class="o">=</span>eclipse<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>nasa<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;Here: %s &quot;</span><span class="p">,</span> format<span class="p">(</span>eclipse<span class="p">)),</span> line<span class="o">=</span><span class="m">-1</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="text">## Error in format(eclipse): object &#39;eclipse&#39; not found
-</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;NASA: %s &quot;</span><span class="p">,</span> format<span class="p">(</span>max<span class="p">)),</span> line<span class="o">=</span><span class="m">-2</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quot;NASA: %s &quot;</span><span class="p">,</span> format<span class="p">(</span>max<span class="p">)),</span> line<span class="o">=</span><span class="m">-2</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
