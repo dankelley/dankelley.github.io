@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-22T15:28:20-03:00</updated>
+    <updated>2015-03-22T15:35:51-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -111,7 +111,7 @@ woa &amp;lt;- function(x, a=1)
 i &amp;lt;- integrate(woa, -Inf, Inf)&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;value&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;err &amp;lt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; abs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; pi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; pi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;@&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;differs from the true value &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;4&lt;span class=&quot;k&quot;&gt;\pi&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; by &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\Sexpr&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;scinot(err, 0)&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;the results differ from the true value &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;4&lt;span class=&quot;k&quot;&gt;\pi&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; by &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\Sexpr&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;scinot(err, 0)&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which yields as shown in the screenshot below.&lt;/p&gt;
