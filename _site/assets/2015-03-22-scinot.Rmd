@@ -159,9 +159,9 @@ which yields as shown in the screenshot below.
 
 # References and resources
 
-1. R source code used here: [2215-03-22-scinot.R](/assets/2215-03-22-scinot.R).
+1. R source code used here: [2015-03-22-scinot.R](/assets/2015-03-22-scinot.R).
 
-2. Jekyll source code for this blog entry: [2215-03-22-scinot.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2215-03-22-scinot.Rmd)
+2. Jekyll source code for this blog entry: [2015-03-22-scinot.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-03-22-scinot.Rmd)
 
 
 

@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-22T15:24:55-03:00</updated>
+    <updated>2015-03-22T15:25:48-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -122,10 +122,10 @@ i &amp;lt;- integrate(woa, -Inf, Inf)&lt;span class=&quot;s&quot;&gt;$&lt;/span&
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;R source code used here: &lt;a href=&quot;/assets/2215-03-22-scinot.R&quot;&gt;2215-03-22-scinot.R&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;R source code used here: &lt;a href=&quot;/assets/2015-03-22-scinot.R&quot;&gt;2015-03-22-scinot.R&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2215-03-22-scinot.Rmd&quot;&gt;2215-03-22-scinot.Rmd&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-03-22-scinot.Rmd&quot;&gt;2015-03-22-scinot.Rmd&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
