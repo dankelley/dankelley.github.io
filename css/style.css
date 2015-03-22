@@ -271,5 +271,5 @@ div.page-header {
 }
 
 /* img[alt=tg] { border-style: solid; border-color: red, border-width: 2px;}*/
-img { border: 1px solid #d0d0d0;}
+img { margin: 0; border: 2px solid #d0d0d0;}
 
