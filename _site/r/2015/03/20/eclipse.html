@@ -163,8 +163,8 @@ angle <span class="o">&lt;-</span> <span class="kr">function</span><span class="
     sal <span class="o">&lt;-</span> sa<span class="o">$</span>altitude
     maz <span class="o">&lt;-</span> ma<span class="o">$</span>azimuth
     mal <span class="o">&lt;-</span> ma<span class="o">$</span>altitude
-    C <span class="o">&lt;-</span> cos<span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span>ma<span class="o">$</span>altitude<span class="o">+</span>sa<span class="o">$</span>altitude<span class="p">)</span> <span class="o">*</span> pi <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
-    sqrt<span class="p">((</span>C<span class="o">*</span><span class="p">(</span>saz<span class="o">-</span>maz<span class="p">))</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="p">(</span>sal<span class="o">-</span>mal<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+    scale <span class="o">&lt;-</span> cos<span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span>ma<span class="o">$</span>altitude<span class="o">+</span>sa<span class="o">$</span>altitude<span class="p">)</span> <span class="o">*</span> pi <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
+    sqrt<span class="p">((</span>scale<span class="o">*</span><span class="p">(</span>saz<span class="o">-</span>maz<span class="p">))</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="p">(</span>sal<span class="o">-</span>mal<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="c1"># time is from reference 3</span>
 nasa <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2015-03-20 9:45:39&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
@@ -195,7 +195,7 @@ mtext<span class="p">(</span>sprintf<span class="p">(</span><span class="s">&quo
 
 <ol>
   <li>
-    <p>Verify or correct the “C” factor in line 11 of the code.</p>
+    <p>Verify or correct the <code>scale</code> factor in line 11 of the code.</p>
   </li>
   <li>
     <p>Determine why the times disagree by a few minutes.</p>

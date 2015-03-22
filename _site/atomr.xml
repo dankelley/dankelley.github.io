@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-20T14:33:41-03:00</updated>
+    <updated>2015-03-22T08:26:42-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -86,8 +86,8 @@ angle &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quo
     sal &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; sa&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
     maz &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ma&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;azimuth
     mal &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ma&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude
-    C &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; cos&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ma&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;sa&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; pi &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    sqrt&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;C&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;saz&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;maz&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sal&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;mal&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    scale &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; cos&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ma&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;sa&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;altitude&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; pi &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    sqrt&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;scale&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;saz&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;maz&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sal&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;mal&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;# time is from reference 3&lt;/span&gt;
 nasa &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2015-03-20 9:45:39&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tz&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -118,7 +118,7 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sprintf&lt;span class=&quot;p
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Verify or correct the “C” factor in line 11 of the code.&lt;/p&gt;
+    &lt;p&gt;Verify or correct the &lt;code&gt;scale&lt;/code&gt; factor in line 11 of the code.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Determine why the times disagree by a few minutes.&lt;/p&gt;

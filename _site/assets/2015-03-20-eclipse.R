@@ -10,8 +10,8 @@ angle <- function(t, lon=15+40/60, lat=78+12/60)
     sal <- sa$altitude
     maz <- ma$azimuth
     mal <- ma$altitude
-    C <- cos(0.5*(ma$altitude+sa$altitude) * pi / 180)
-    sqrt((C*(saz-maz))^2 + (sal-mal)^2)
+    scale <- cos(0.5*(ma$altitude+sa$altitude) * pi / 180)
+    sqrt((scale*(saz-maz))^2 + (sal-mal)^2)
 }
 # time is from reference 3
 nasa <- as.POSIXct("2015-03-20 9:45:39", tz="UTC")
