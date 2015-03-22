@@ -1,0 +1,90 @@
+---
+layout: post
+title: scientific notation for R/latex
+tags: [R, latex]
+category: R
+year: 2015
+month: 3
+day: 22
+summary: A function is given to simplify display of R results in latex, using scientific notation.
+---
+
+# Motivation
+
+Using R within a latex document can be a component of reproducible research,
+offering (a) some assurance against typographical errors in transcribing
+results to the latex file and (b) the ability for others to reproduce the
+results.
+
+For example, one might like to explain how close the computed
+integral of the Witch of Agnesi function
+```{r}
+woa <- function(x, a=1) 8 * a^3 / (x^2 + 4*a^2)
+integrate(woa, -Inf, Inf)
+```
+is to the true value of $4\pi$. One way to do that is to compute the mismatch
+```{r}
+estimate <- integrate(woa, -Inf, Inf)$value
+theory <- 4 * pi
+```
+and to write something like
+```
+\dots the misfit is \Sexpr{abs(estimate-theory)}
+```
+in latex. However, the slew of digits is not especially useful, and the
+computer-type exponential notation is not conventional in written work.
+
+It would be good to have a function that writes such results in latex format.
+
+# Methods
+
+A trial function is below.
+```{r}
+scinot <- function(x, digits=2, showDollar=FALSE)
+{
+    sign <- ""
+    if (x < 0) {
+        sign <- "-"
+        x <- -x
+    }
+    exponent <- floor(log10(x))
+    if (exponent) {
+        xx <- round(x / 10^exponent, digits=digits)
+        e <- paste("\\\\times 10^{", as.integer(exponent), "}", sep="")
+    } else {
+        xx <- round(x, digits=digits)
+        e <- ""
+    }
+    if (showDollar) paste("$", sign, xx, e, "$", sep="")
+    else paste(sign, xx, e, sep="")
+}
+```
+
+and a latex test use is
+```
+Limits may be infinite if set to \code{Inf}, \eg for the \di{witch of Agnesi}
+function
+<<>>=
+woa <- function(x, a=1)
+    8 * a^3 / (x^2 + 4*a^2)
+integrate(woa, -Inf, Inf)
+@
+<<results=hide, echo=false>>=
+woa <- function(x, a=1)
+    8 * a^3 / (x^2 + 4*a^2)
+i <- integrate(woa, -Inf, Inf)$value
+err <- abs((i - 4 * pi) / (4 * pi))
+@
+differs from the true value $4\pi$ by $\Sexpr{scinot(err, 0)}$.
+```
+which yields as shown in the screenshot below.
+
+![scinot.png]({{ site.url }}/assets/scinot.png)
+
+# References and resources
+
+1. R source code used here: [2215-03-22-scinot.R]({{ site.url }}/assets/2215-03-22-scinot.R).
+
+2. Jekyll source code for this blog entry: [2215-03-22-scinot.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2215-03-22-scinot.Rmd)
+
+

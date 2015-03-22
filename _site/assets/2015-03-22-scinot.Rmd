@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>scientific notation for R/latex</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>scientific notation for R/latex</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/latex/index.html" class="tag">
+            latex
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        A function is given to simplify display of R results in latex, using scientific notation.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Motivation
+
+Using R within a latex document can be a component of reproducible research,
+offering (a) some assurance against typographical errors in transcribing
+results to the latex file and (b) the ability for others to reproduce the
+results.
+
+For example, one might like to explain how close the computed
+integral of the Witch of Agnesi function
+```{r}
+woa <- function(x, a=1) 8 * a^3 / (x^2 + 4*a^2)
+integrate(woa, -Inf, Inf)
+```
+is to the true value of $4\pi$. One way to do that is to compute the mismatch
+```{r}
+estimate <- integrate(woa, -Inf, Inf)$value
+theory <- 4 * pi
+```
+and to write something like
+```
+\dots the misfit is \Sexpr{abs(estimate-theory)}
+```
+in latex. However, the slew of digits is not especially useful, and the
+computer-type exponential notation is not conventional in written work.
+
+It would be good to have a function that writes such results in latex format.
+
+# Methods
+
+A trial function is below.
+```{r}
+scinot <- function(x, digits=2, showDollar=FALSE)
+{
+    sign <- ""
+    if (x < 0) {
+        sign <- "-"
+        x <- -x
+    }
+    exponent <- floor(log10(x))
+    if (exponent) {
+        xx <- round(x / 10^exponent, digits=digits)
+        e <- paste("\\\\times 10^{", as.integer(exponent), "}", sep="")
+    } else {
+        xx <- round(x, digits=digits)
+        e <- ""
+    }
+    if (showDollar) paste("$", sign, xx, e, "$", sep="")
+    else paste(sign, xx, e, sep="")
+}
+```
+
+and a latex test use is
+```
+Limits may be infinite if set to \code{Inf}, \eg for the \di{witch of Agnesi}
+function
+<<>>=
+woa <- function(x, a=1)
+    8 * a^3 / (x^2 + 4*a^2)
+integrate(woa, -Inf, Inf)
+@
+<<results=hide, echo=false>>=
+woa <- function(x, a=1)
+    8 * a^3 / (x^2 + 4*a^2)
+i <- integrate(woa, -Inf, Inf)$value
+err <- abs((i - 4 * pi) / (4 * pi))
+@
+differs from the true value $4\pi$ by $\Sexpr{scinot(err, 0)}$.
+```
+which yields as shown in the screenshot below.
+
+![scinot.png](/assets/scinot.png)
+
+# References and resources
+
+1. R source code used here: [2215-03-22-scinot.R](/assets/2215-03-22-scinot.R).
+
+2. Jekyll source code for this blog entry: [2215-03-22-scinot.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2215-03-22-scinot.Rmd)
+
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
