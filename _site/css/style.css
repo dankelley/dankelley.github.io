@@ -270,5 +270,6 @@ div.page-header {
     margin: -20px -20px 00px; /* last was 20px */
 }
 
-img[alt=tg] { border-style: solid; border-color: red, border-width: 2px;}
+/* img[alt=tg] { border-style: solid; border-color: red, border-width: 2px;}*/
+img { border-style: solid; border-color: red, border-width: 2px;}
 
