@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-22T15:36:55-03:00</updated>
+    <updated>2015-03-22T15:46:02-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -98,7 +98,7 @@ computer-type exponential notation is not conventional in written work.&lt;/p&gt
 
 &lt;p&gt;and a latex/sweave test use is&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;latex&quot;&gt;Limits may be infinite if set to &lt;span class=&quot;k&quot;&gt;\code&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;Inf&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;, &lt;span class=&quot;k&quot;&gt;\eg&lt;/span&gt; for the &lt;span class=&quot;k&quot;&gt;\di&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;witch of Agnesi&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;latex&quot;&gt;Limits may be infinite if set to &lt;span class=&quot;k&quot;&gt;\texttt&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;Inf&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;, e.g. for the witch of Agnesi
 function
 &amp;lt;&amp;lt;&amp;gt;&amp;gt;=
 woa &amp;lt;- function(x, a=1)

@@ -137,7 +137,7 @@ scinot <- function(x, digits=2, showDollar=FALSE)
 }
 ```
 and a latex/sweave test use is
-<div class="highlight"><pre><code class="latex">Limits may be infinite if set to <span class="k">\code</span><span class="nb">{</span>Inf<span class="nb">}</span>, <span class="k">\eg</span> for the <span class="k">\di</span><span class="nb">{</span>witch of Agnesi<span class="nb">}</span>
+<div class="highlight"><pre><code class="latex">Limits may be infinite if set to <span class="k">\texttt</span><span class="nb">{</span>Inf<span class="nb">}</span>, e.g. for the witch of Agnesi
 function
 &lt;&lt;&gt;&gt;=
 woa &lt;- function(x, a=1)
