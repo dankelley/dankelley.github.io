@@ -61,7 +61,7 @@ scinot <- function(x, digits=2, showDollar=FALSE)
 ```
 
 and a latex test use is
-```
+{% highlight latex%}
 Limits may be infinite if set to \code{Inf}, \eg for the \di{witch of Agnesi}
 function
 <<>>=
@@ -76,6 +76,7 @@ i <- integrate(woa, -Inf, Inf)$value
 err <- abs((i - 4 * pi) / (4 * pi))
 @
 differs from the true value $4\pi$ by $\Sexpr{scinot(err, 0)}$.
+{% endhighlight %}
 ```
 which yields as shown in the screenshot below.
 

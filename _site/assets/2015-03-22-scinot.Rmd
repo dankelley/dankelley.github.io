@@ -138,21 +138,21 @@ scinot <- function(x, digits=2, showDollar=FALSE)
 ```
 
 and a latex test use is
-```
-Limits may be infinite if set to \code{Inf}, \eg for the \di{witch of Agnesi}
+<div class="highlight"><pre><code class="latex">Limits may be infinite if set to <span class="k">\code</span><span class="nb">{</span>Inf<span class="nb">}</span>, <span class="k">\eg</span> for the <span class="k">\di</span><span class="nb">{</span>witch of Agnesi<span class="nb">}</span>
 function
-<<>>=
-woa <- function(x, a=1)
-    8 * a^3 / (x^2 + 4*a^2)
+&lt;&lt;&gt;&gt;=
+woa &lt;- function(x, a=1)
+    8 * a<span class="nb">^</span>3 / (x<span class="nb">^</span>2 + 4*a<span class="nb">^</span>2)
 integrate(woa, -Inf, Inf)
 @
-<<results=hide, echo=false>>=
-woa <- function(x, a=1)
-    8 * a^3 / (x^2 + 4*a^2)
-i <- integrate(woa, -Inf, Inf)$value
-err <- abs((i - 4 * pi) / (4 * pi))
-@
-differs from the true value $4\pi$ by $\Sexpr{scinot(err, 0)}$.
+&lt;&lt;results=hide, echo=false&gt;&gt;=
+woa &lt;- function(x, a=1)
+    8 * a<span class="nb">^</span>3 / (x<span class="nb">^</span>2 + 4*a<span class="nb">^</span>2)
+i &lt;- integrate(woa, -Inf, Inf)<span class="s">$</span><span class="nb">value</span>
+<span class="nb">err &lt;</span><span class="o">-</span><span class="nb"> abs</span><span class="o">((</span><span class="nb">i </span><span class="o">-</span><span class="nb"> </span><span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> pi</span><span class="o">)</span><span class="nb"> </span><span class="o">/</span><span class="nb"> </span><span class="o">(</span><span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> pi</span><span class="o">))</span><span class="nb"></span>
+<span class="nb">@</span>
+<span class="nb">differs from the true value </span><span class="s">$</span>4<span class="k">\pi</span><span class="s">$</span><span class="nb"> by </span><span class="s">$</span><span class="k">\Sexpr</span><span class="nb">{</span>scinot(err, 0)<span class="nb">}</span><span class="s">$</span><span class="nb">.</span>
+</code></pre></div>
 ```
 which yields as shown in the screenshot below.
 
