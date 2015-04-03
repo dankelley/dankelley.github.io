@@ -4,13 +4,1161 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-03-22T18:58:34-03:00</updated>
+    <updated>2015-04-03T20:10:04-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>map projections in oce</title>
+        <link href="http://dankelley.github.io/r/2015/04/03/oce-proj.html"/>
+        <updated>2015-04-03T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2015/04/03/oce-proj</id>
+        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;The latest version (4.9.0) of the PROJ.4 library is being incorporated into the
+development version of the oce R package. The work is not finalized yet, but I
+thought it might be useful to share an early version of the test suite, so
+people could get an idea of the upcoming capabilities.&lt;/p&gt;
+
+&lt;p&gt;Note that some projections work quite poorly in oce at the moment. The main
+problems are spurious overplotting of coastlines (from the opposite side of the
+planet), problems filling land areas that cross longitude cut lines, and
+problems filling Antarctica in some projections.&lt;/p&gt;
+
+&lt;p&gt;There are many projections to choose from, but in serious work probably only a
+few are relevant.  Development effort will be focussed on those projections,
+and this includes documenting them in oce, so there’s little need to say much
+more here.&lt;/p&gt;
+
+&lt;p&gt;Note that only PROJ.4 projections that have inverses are incorporated in oce.
+This is because oce needs to do inverse projections for some of its plotting
+operations. Also note that a handful of projections have not been incorporated,
+because they cause errors of various sorts (e.g. the “wintri” projection causes
+R to segfault when trying to draw a world coastline).&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+par&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mar&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+line &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.25&lt;/span&gt;
+pcol &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;
+ecol &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+font &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+
+p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=aea +lat_1=10 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=aeqd +lon_0=-45&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-2.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=aitoff +lon_0=-45&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-3.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=alsk +lon_0=-150&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Bad coastlines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-4.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=bipc&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-5.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=bonne +lat_1=45&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-6.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=cass +lon_0=-45&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Bad merdians&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-7.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=cc&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-8.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=cea&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-9.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=collg&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-10.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=crast&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-11.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck1&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-12.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck2&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-13.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck3&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-14.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck4&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-15.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck5&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-16.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eck6&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-17.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=eqc&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-18.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-19.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=etmerc +ellps=WGS84 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-20.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=fahey&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=fahey&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-21.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=fouc&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-22.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=fouc_s&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-23.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gall&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-24.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=geos +h=1e8&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-25.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gn_sinu +n=6 +m=3&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-26.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gnom +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-27.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=goode&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-28.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gs48&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-130&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-29.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gs50&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-130&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-30.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=hatano&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-31.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=healpix&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-32.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=rhealpix&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# +north_square=1 +south_square=2&amp;quot;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Unsure on usage&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-33.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=igh&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-34.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-35.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=kav5&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-36.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=kav7&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-37.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=krovak +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-38.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=laea +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=laea +lon_0=-40&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-39.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lonlat&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lonlat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-40.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=latlon&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lonlat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-41.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lcc +lat_1=30 +lat_2=70 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-42.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lcca +lat_0=20 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-43.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=leac +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-44.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lee_os&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-45.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=loxim&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-46.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lsat +lsat=1 +path=200&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-47.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mbt_s&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-48.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mbt_fps&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-49.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mbtfpp&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-50.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mbtfpq&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-51.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mbtfps&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-52.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=merc&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-53.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mil_os&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-54.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=mill&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-55.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=moll&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-56.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=murd1 +lat_1=30 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-57.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=murd2 +lat_1=30 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-58.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=murd3 +lat_1=30 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-59.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=natearth&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-60.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=nell&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-61.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=nell_h&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-62.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=nsper +h=90000000&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-63.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=nzmg&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-64.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=ob_tran&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20))&lt;/span&gt;
+plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; axes&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; type&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;n&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; xlab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ylab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+box&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Usage?&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-65.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=ocea&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-66.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=omerc +lat_1=30 +lon_1=-40 +lat_2=60&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-67.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=ortho&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-68.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=pconic +lat_1=20 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-69.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=poly +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-70.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp1&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-71.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp2&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-72.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp3&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-73.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp5&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-74.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp6&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-75.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp3p&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-76.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp5p&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-77.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=putp6p&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-78.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=qua_aut&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-79.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=qsc +lon_0=-100&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;lightgray&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-80.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=robin&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-81.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=rouss +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-82.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=sinu&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-83.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=stere +lat_0=90&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-84.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=sterea +lat_0=90&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-85.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=gstmerc +lon_0=-40 +lat_0=40 +k_0=1&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Overdrawn coastline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-86.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tcea +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-87.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-88.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tmerc +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-89.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tpeqd +lat_1=30 +lon_1=-80&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-90.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tpers +h=1e8&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-91.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=ups +ellps=WGS84&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-92.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=urmfps +n=0.9&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-93.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=utm +ellps=WGS84 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-94.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=vandg&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-95.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=vitk1 +lat_1=20 +lat_2=60 +lon_0=-40&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-96.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag1&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-97.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag2&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-98.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag3&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-99.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag4&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-100.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag5&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-101.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wag6&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-102.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=weren&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-103.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=wink1&amp;quot;&lt;/span&gt;
+mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; grid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-104.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://dankelley.github.io/oce/&quot;&gt;Oce website&lt;/a&gt;   &lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-04-03-oce-proj.Rmd&quot;&gt;2015-04-03-oce-proj.Rmd&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+    </entry>
+    
     
     
     <entry>

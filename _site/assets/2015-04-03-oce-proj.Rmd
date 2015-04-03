@@ -1,0 +1,602 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>map projections in oce</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>map projections in oce</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Available map projections are illustrated
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+The latest version (4.9.0) of the PROJ.4 library is being incorporated into the
+development version of the oce R package. The work is not finalized yet, but I
+thought it might be useful to share an early version of the test suite, so
+people could get an idea of the upcoming capabilities.
+
+Note that some projections work quite poorly in oce at the moment. The main
+problems are spurious overplotting of coastlines (from the opposite side of the
+planet), problems filling land areas that cross longitude cut lines, and
+problems filling Antarctica in some projections.
+
+There are many projections to choose from, but in serious work probably only a
+few are relevant.  Development effort will be focussed on those projections,
+and this includes documenting them in oce, so there's little need to say much
+more here.
+
+Note that only PROJ.4 projections that have inverses are incorporated in oce.
+This is because oce needs to do inverse projections for some of its plotting
+operations. Also note that a handful of projections have not been incorporated,
+because they cause errors of various sorts (e.g. the "wintri" projection causes
+R to segfault when trying to draw a world coastline).
+
+```{r,message=FALSE,warning=FALSE}
+library(oce)
+data(coastlineWorld)
+
+par(mar=rep(2, 4))
+line <- 0.25
+pcol <- "blue"
+ecol <- "red"
+font <- 2
+
+p <- "+proj=aea +lat_1=10 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=aeqd +lon_0=-45"
+mapPlot(coastlineWorld, projection=p,
+        longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=aitoff +lon_0=-45"
+mapPlot(coastlineWorld, projection=p,
+        longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=alsk +lon_0=-150"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(50,80))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Bad coastlines", line=line, adj=0, col='red')
+
+p <- "+proj=bipc"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=bonne +lat_1=45"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=cass +lon_0=-45"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Bad merdians", line=line, adj=0, col='red')
+
+p <- "+proj=cc"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(-40,40))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=cea"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=collg"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=crast"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck1"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck2"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck3"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck4"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck5"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eck6"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=eqc"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=fahey"
+mapPlot(coastlineWorld, projection=p)
+mtext("+proj=fahey", line=line, adj=1, col=pcol, font=font)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=fouc"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=fouc_s"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=gall"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=geos +h=1e8"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=gn_sinu +n=6 +m=3"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=gnom +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(-30,30))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=goode"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=gs48"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-130,-60), latitudelim=c(30,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=gs50"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-130,-60), latitudelim=c(30,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=hatano"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=healpix"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=rhealpix"
+mapPlot(coastlineWorld, projection=p)# +north_square=1 +south_square=2")
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Unsure on usage", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=igh"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=kav5"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=kav7"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=krovak +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=laea +lon_0=-40"
+mapPlot(coastlineWorld, projection=p)
+mtext("+proj=laea +lon_0=-40", line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=lonlat"
+mapPlot(coastlineWorld, projection=p)
+mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=latlon"
+mapPlot(coastlineWorld, projection=p)
+mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=lcc +lat_1=30 +lat_2=70 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=lcca +lat_0=20 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=leac +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=lee_os"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(70,110))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=loxim"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=lsat +lsat=1 +path=200"
+mapPlot(coastlineWorld, projection=p,
+            longitudelim=c(-180,-120), latitudelim=c(70,120))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mbt_s"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mbt_fps"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mbtfpp"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mbtfpq"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mbtfps"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=merc"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mil_os"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 120))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=mill"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=moll"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=murd1 +lat_1=30 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+
+p <- "+proj=murd2 +lat_1=30 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=murd3 +lat_1=30 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=natearth"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=nell"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=nell_h"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=nsper +h=90000000"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=nzmg"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=ob_tran"
+## mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20))
+plot(0:1, 0:1, axes=FALSE, type='n', xlab="", ylab="")
+box()
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Usage?", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=ocea"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=omerc +lat_1=30 +lon_1=-40 +lat_2=60"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=ortho"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=pconic +lat_1=20 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=poly +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp1"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp2"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp3"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp5"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp6"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp3p"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp5p"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=putp6p"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=qua_aut"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=qsc +lon_0=-100"
+mapPlot(coastlineWorld, projection=p, grid=15, fill='lightgray')
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=robin"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=rouss +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=sinu"
+mapPlot(coastlineWorld, projection=p)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=stere +lat_0=90"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=sterea +lat_0=90"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=gstmerc +lon_0=-40 +lat_0=40 +k_0=1"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=tcea +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=tmerc +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=tpeqd +lat_1=30 +lon_1=-80"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=tpers +h=1e8"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=ups +ellps=WGS84"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=urmfps +n=0.9"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=utm +ellps=WGS84 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=vandg"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=vitk1 +lat_1=20 +lat_2=60 +lon_0=-40"
+mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag1"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag2"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag3"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag4"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag5"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wag6"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=weren"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
+p <- "+proj=wink1"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+```
+
+
+# References and resources
+
+1. [Oce website](http://dankelley.github.io/oce/)   
+
+2. Jekyll source code for this blog entry: [2015-04-03-oce-proj.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-04-03-oce-proj.Rmd)
+
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'dankelleydalhousie'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
