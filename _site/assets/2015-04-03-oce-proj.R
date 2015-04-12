@@ -394,7 +394,7 @@ mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=tpers +h=1e8"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=ups +ellps=WGS84"
@@ -402,7 +402,7 @@ mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 1
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=urmfps +n=0.9"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=utm +ellps=WGS84 +lon_0=-40"
@@ -410,7 +410,7 @@ mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=vandg"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=vitk1 +lat_1=20 +lat_2=60 +lon_0=-40"
@@ -418,39 +418,39 @@ mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag1"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag2"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag3"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag4"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag5"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wag6"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=weren"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wink1"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=wintri"
-mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 
