@@ -449,4 +449,8 @@ p <- "+proj=wink1"
 mapPlot(coastlineWorld, projection=p, grid=FALSE)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
+p <- "+proj=wintri"
+mapPlot(coastlineWorld, projection=p, grid=FALSE)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
 
