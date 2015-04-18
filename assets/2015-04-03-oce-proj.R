@@ -133,7 +133,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=rhealpix"
 mapPlot(coastlineWorld, projection=p)# +north_square=1 +south_square=2")
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Unsure on usage", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=igh"
 mapPlot(coastlineWorld, projection=p)

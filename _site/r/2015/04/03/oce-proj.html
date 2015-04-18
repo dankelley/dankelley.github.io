@@ -97,26 +97,25 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The latest version (4.9.0) of the PROJ.4 library is being incorporated into the
-development version of the oce R package. The work is not finalized yet, but I
-thought it might be useful to share an early version of the test suite, so
-people could get an idea of the upcoming capabilities.</p>
+<p>Version 4.9.1 of the PROJ.4 library is being incorporated into the development
+version of the oce R package. The work is not finalized yet, but I thought it
+might be useful to share an early version of the test suite, so people could
+get an idea of the upcoming capabilities.</p>
 
-<p>Note that some projections work quite poorly in oce at the moment. The main
-problems are spurious overplotting of coastlines (from the opposite side of the
-planet), problems filling land areas that cross longitude cut lines, and
-problems filling Antarctica in some projections.</p>
-
-<p>There are many projections to choose from, but in serious work probably only a
-few are relevant.  Development effort will be focussed on those projections,
-and this includes documenting them in oce, so there’s little need to say much
-more here.</p>
+<p>This blog posting will be updated from time to time, as I settle on which
+projections to incorporate in <code>oce</code>.</p>
 
 <p>Note that only PROJ.4 projections that have inverses are incorporated in oce.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
-because they cause errors of various sorts (e.g. the “wintri” projection causes
-R to segfault when trying to draw a world coastline).</p>
+because they cause errors of various sorts; see <a href="https://github.com/dankelley/oce/issues/635">oce issue
+635</a> for more on this.</p>
+
+<p>I will not explain the methodology of projection here, nor the details of any
+given projection. Readers should consult the help for the <code>oce</code> function
+<code>mapPlot()</code> and the many websites detailing software that serives from
+PROJ.4.  In due course, they will be able to consult <a href="http://dankelley.github.io/book.html">my
+book</a>.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
  2
@@ -438,11 +437,9 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
-3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">)</span><span class="c1"># +north_square=1 +south_square=2&quot;)</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
-mtext<span class="p">(</span><span class="s">&quot;Unsure on usage&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 

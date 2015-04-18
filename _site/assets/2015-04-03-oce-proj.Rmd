@@ -93,26 +93,25 @@
 
 # Introduction
 
-The latest version (4.9.0) of the PROJ.4 library is being incorporated into the
-development version of the oce R package. The work is not finalized yet, but I
-thought it might be useful to share an early version of the test suite, so
-people could get an idea of the upcoming capabilities.
+Version 4.9.1 of the PROJ.4 library is being incorporated into the development
+version of the oce R package. The work is not finalized yet, but I thought it
+might be useful to share an early version of the test suite, so people could
+get an idea of the upcoming capabilities.
 
-Note that some projections work quite poorly in oce at the moment. The main
-problems are spurious overplotting of coastlines (from the opposite side of the
-planet), problems filling land areas that cross longitude cut lines, and
-problems filling Antarctica in some projections.
-
-There are many projections to choose from, but in serious work probably only a
-few are relevant.  Development effort will be focussed on those projections,
-and this includes documenting them in oce, so there's little need to say much
-more here.
+This blog posting will be updated from time to time, as I settle on which
+projections to incorporate in ``oce``.
 
 Note that only PROJ.4 projections that have inverses are incorporated in oce.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
-because they cause errors of various sorts (e.g. the "wintri" projection causes
-R to segfault when trying to draw a world coastline).
+because they cause errors of various sorts; see [oce issue
+635](https://github.com/dankelley/oce/issues/635) for more on this.
+
+I will not explain the methodology of projection here, nor the details of any
+given projection. Readers should consult the help for the ``oce`` function
+``mapPlot()`` and the many websites detailing software that serives from
+PROJ.4.  In due course, they will be able to consult [my
+book](http://dankelley.github.io/book.html).
 
 ```{r,message=FALSE,warning=FALSE}
 library(oce)
@@ -248,7 +247,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=rhealpix"
 mapPlot(coastlineWorld, projection=p)# +north_square=1 +south_square=2")
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Unsure on usage", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=igh"
 mapPlot(coastlineWorld, projection=p)
