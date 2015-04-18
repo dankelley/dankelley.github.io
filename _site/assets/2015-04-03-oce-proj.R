@@ -23,11 +23,6 @@ mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=alsk +lon_0=-150"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(50,80))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Bad coastlines", line=line, adj=0, col='red')
-
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
 mtext(p, line=line, adj=1, col=pcol, font=font)
@@ -127,16 +122,6 @@ p <- "+proj=goode"
 mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=gs48"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-130,-60), latitudelim=c(30,60))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
-
-p <- "+proj=gs50"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-130,-60), latitudelim=c(30,60))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
-
 p <- "+proj=hatano"
 mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
@@ -167,11 +152,6 @@ p <- "+proj=kav7"
 mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=krovak +lon_0=-40"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
-
 p <- "+proj=laea +lon_0=-40"
 mapPlot(coastlineWorld, projection=p)
 mtext("+proj=laea +lon_0=-40", line=line, adj=1, col=pcol, font=font)
@@ -196,11 +176,6 @@ mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 p <- "+proj=leac +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=lee_os"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(70,110))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=loxim"
 mapPlot(coastlineWorld, projection=p)
@@ -276,11 +251,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=nsper +h=90000000"
 mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=nzmg"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=ob_tran"
 ## mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20))
@@ -371,11 +341,6 @@ p <- "+proj=sterea +lat_0=90"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=gstmerc +lon_0=-40 +lat_0=40 +k_0=1"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Overdrawn coastline", line=line, adj=0, col=ecol, font=font)
-
 p <- "+proj=tcea +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
@@ -392,7 +357,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=tpeqd +lat_1=30 +lon_1=-80"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=tpers +h=1e8"
 mapPlot(coastlineWorld, projection=p)
