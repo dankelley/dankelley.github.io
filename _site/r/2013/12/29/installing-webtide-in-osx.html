@@ -107,8 +107,7 @@
 <p>Step 2. Open a terminal or console window, and type the following to enter the WebTide directory and start the process of installing WebTide.</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nb">cd</span> ~/Downloads
-sh WebTide_unix_0_7.sh
-</code></pre></div>
+sh WebTide_unix_0_7.sh</code></pre></div>
 
 <p>After a moment, a dialog box will pop up, asking where WebTide is to be installed. To install a version just for you, supply <code>/Users/USERNAME/WebTide</code>, where <code>USERNAME</code> is your username. To install a version for all accounts on the computer, use the default, which is <code>/usr/local/WebTide</code>. A second dialog box addresses the issue of symlinks. Click the box indicating that these are not to be used. After a few moments, a final dialog box will appear, stating that the work has been completed. Click the button named <code>Finish</code>.</p>
 
@@ -116,28 +115,24 @@ sh WebTide_unix_0_7.sh
 
 <div class="highlight"><pre><code class="bash"><span class="nb">cd</span> ~/WebTide/Tidecor_src
 gcc -O2 -o tidecor webtidecor2.5.1.c -lm
-gcc -O2 -o constituentinterpolator constituentinterpolator1.1.c -lm
-</code></pre></div>
+gcc -O2 -o constituentinterpolator constituentinterpolator1.1.c -lm</code></pre></div>
 
 <p>In the two <code>gcc</code> lines shown above, it may be necessary to change the names of the <code>".c"</code> files, to match whatever you find in this <code>tidecor_src</code> directory. You may ignore the warning messages that are likely to appear, but if errors appear, you will need to interrupt this tutorial to find out what is wrong.  Possibly leaving a comment on this site would encourage another reader to offer a solution; possibly the scientists at the Bedford Institute of Oceanography (named on the website) could help.</p>
 
 <p>Step 4. Move these newly-compiled programs from the source directory into the bin directory, by typing</p>
 
 <div class="highlight"><pre><code class="bash">mv tidecor ../bin
-mv constituentinterpolator ../bin
-</code></pre></div>
+mv constituentinterpolator ../bin</code></pre></div>
 
 <h1 id="using-webtide">Using WebTide</h1>
 
 <p>If you installed WebTide to your home directory, launch WebTide by typing the following in a console window</p>
 
-<div class="highlight"><pre><code class="bash">~/WebTide/WebTide
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">~/WebTide/WebTide</code></pre></div>
 
 <p>and use the GUI from that point on. If you installed it to <code>/usr/local/WebTide</code>, type the following instead</p>
 
-<div class="highlight"><pre><code class="bash">/usr/local/WebTide/WebTide
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/usr/local/WebTide/WebTide</code></pre></div>
 
 <p>The main WebTide window looks like the following.</p>
 
