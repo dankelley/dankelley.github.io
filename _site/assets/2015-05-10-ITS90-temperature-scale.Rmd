@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>ITS-90 temperature scale</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>ITS-90 temperature scale</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Oce will soon be getting functions to convert between the IPTS-68 and ITS-90 temperature scales. This posting investigates how much difference this might make in practical work.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+Recently, oce has been gaining flexibility in terms of conductivities stored in
+data files. This is necessitated by the fact that RBR files store conductivity
+in mS/cm, whereas calculations for seawater properties use the unitless
+conductivity ratio.  With the CTD code under examination for this work, it
+might make sense to also handle temperatures stored in files. The two choices
+for that seem to be the IPTS-68 and ITS-90 conventions [1], and a natural
+question is whether using ITS-90 temperatures in formula designed for IPTS-68
+will yield errors of practical significance.
+
+# Functions
+The following are functions for the conversion, as suggested in [1].
+```{r}
+T90toT68 <- function(T90) 1.00024 * T90
+T68toT90 <- function(T68) T68 / 1.00024
+```
+
+# Test of inferred density
+
+First, define some base quantities
+```{r,results="hide",message=FALSE}
+library(oce)
+S <- 35
+T90 <- 20
+p <- 100
+```
+and then do some calculations, e.g.
+```{r}
+T90toT68(T90)
+```
+This temperature difference, `r abs(T90-T90toT68(T90))`, is several
+times larger than the 
+SBE911plus initial accuracy of 0.001 C as stated at [2]. (It is about double the stated
+stability over a year of drift.)
+
+Another test is of density:
+
+```{r}
+swRho(S, T90, p) # incorrect
+swRho(S, T90toT68(T90), p)
+```
+
+Finally, the following tests the amount that salinity would need to be adjusted to 
+compensate (in density terms) for a temperature misapplication.
+```{r}
+rho0 <- swRho(S, T90toT68(T90), p)
+uniroot(function(S) swRho(S, T90, p) - rho0, lower=34, upper=36)$root
+```
+In a practical application, one might compare this salinity difference,
+`r S-uniroot(function(S) swRho(S, T90, p) - rho0, lower=34, upper=36)$root`,
+with expected inaccuracies in measurement, or perhaps with the inter-sample "noise".
+
+
+# References and resources
+
+1. [Seabird Electronics application note on temperature conversion](http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf)
+
+2. [Seabird Electronics application note on temperature conversion](http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf)
+
+3. [Oce website](http://dankelley.github.io/oce/)   
+
+4. Jekyll source code for this blog entry: [2015-05-10-ITS90-temperature-scale.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd)
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

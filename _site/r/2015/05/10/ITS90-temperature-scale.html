@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>ITS-90 temperature scale</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2015/04/03/oce-proj.html" title="map projections in oce">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>ITS-90 temperature scale</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        May 10, 2015
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Oce will soon be getting functions to convert between the IPTS-68 and ITS-90 temperature scales. This posting investigates how much difference this might make in practical work.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Recently, oce has been gaining flexibility in terms of conductivities stored in
+data files. This is necessitated by the fact that RBR files store conductivity
+in mS/cm, whereas calculations for seawater properties use the unitless
+conductivity ratio.  With the CTD code under examination for this work, it
+might make sense to also handle temperatures stored in files. The two choices
+for that seem to be the IPTS-68 and ITS-90 conventions [1], and a natural
+question is whether using ITS-90 temperatures in formula designed for IPTS-68
+will yield errors of practical significance.</p>
+
+<h1 id="functions">Functions</h1>
+<p>The following are functions for the conversion, as suggested in [1].</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>T90toT68 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>T90<span class="p">)</span> <span class="m">1.00024</span> <span class="o">*</span> T90
+T68toT90 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>T68<span class="p">)</span> T68 <span class="o">/</span> <span class="m">1.00024</span>
+</pre></div>
+</td></tr></table>
+
+<h1 id="test-of-inferred-density">Test of inferred density</h1>
+
+<p>First, define some base quantities</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+S <span class="o">&lt;-</span> <span class="m">35</span>
+T90 <span class="o">&lt;-</span> <span class="m">20</span>
+p <span class="o">&lt;-</span> <span class="m">100</span>
+</pre></div>
+</td></tr></table>
+
+<p>and then do some calculations, e.g.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>T90toT68<span class="p">(</span>T90<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## [1] 20.0048
+</code></pre></div>
+
+<p>This temperature difference, 0.0048, is several
+times larger than the 
+SBE911plus initial accuracy of 0.001 C as stated at [2]. (It is about double the stated
+stability over a year of drift.)</p>
+
+<p>Another test is of density:</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>swRho<span class="p">(</span>S<span class="p">,</span> T90<span class="p">,</span> p<span class="p">)</span> <span class="c1"># incorrect</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## [1] 1025.199
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>swRho<span class="p">(</span>S<span class="p">,</span> T90toT68<span class="p">(</span>T90<span class="p">),</span> p<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## [1] 1025.198
+</code></pre></div>
+
+<p>Finally, the following tests the amount that salinity would need to be adjusted to 
+compensate (in density terms) for a temperature misapplication.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>rho0 <span class="o">&lt;-</span> swRho<span class="p">(</span>S<span class="p">,</span> T90toT68<span class="p">(</span>T90<span class="p">),</span> p<span class="p">)</span>
+uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span>S<span class="p">)</span> swRho<span class="p">(</span>S<span class="p">,</span> T90<span class="p">,</span> p<span class="p">)</span> <span class="o">-</span> rho0<span class="p">,</span> lower<span class="o">=</span><span class="m">34</span><span class="p">,</span> upper<span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span>root
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## [1] 34.99833
+</code></pre></div>
+
+<p>In a practical application, one might compare this salinity difference,
+0.0016675,
+with expected inaccuracies in measurement, or perhaps with the inter-sample “noise”.</p>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p><a href="http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf">Seabird Electronics application note on temperature conversion</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf">Seabird Electronics application note on temperature conversion</a></p>
+  </li>
+  <li>
+    <p><a href="http://dankelley.github.io/oce/">Oce website</a>   </p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd">2015-05-10-ITS90-temperature-scale.Rmd</a></p>
+  </li>
+</ol>
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
