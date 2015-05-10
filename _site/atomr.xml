@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-05-10T10:40:45-03:00</updated>
+    <updated>2015-05-10T14:51:25-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -25,7 +25,7 @@ data files. This is necessitated by the fact that RBR files store conductivity
 in mS/cm, whereas calculations for seawater properties use the unitless
 conductivity ratio.  With the CTD code under examination for this work, it
 might make sense to also handle temperatures stored in files. The two choices
-for that seem to be the IPTS-68 and ITS-90 conventions [1], and a natural
+for that seem to be the IPTS-68 and ITS-90 conventions [1,2], and a natural
 question is whether using ITS-90 temperatures in formula designed for IPTS-68
 will yield errors of practical significance.&lt;/p&gt;
 
@@ -63,7 +63,7 @@ p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&
 
 &lt;p&gt;This temperature difference, 0.0048, is several
 times larger than the 
-SBE911plus initial accuracy of 0.001 C as stated at [2]. (It is about double the stated
+SBE911plus initial accuracy of 0.001 C as stated at [3]. (It is about double the stated
 stability over a year of drift.)&lt;/p&gt;
 
 &lt;p&gt;Another test is of density:&lt;/p&gt;
@@ -103,6 +103,10 @@ with expected inaccuracies in measurement, or perhaps with the inter-sample “n
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf&quot;&gt;Seabird Electronics application note on temperature conversion&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.nodc.noaa.gov/woce/wdiu/wocedocs/newsltr/news10/news10.pdf&quot;&gt;Saunders 1990&lt;/a&gt;
+article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10, page 10.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://www.seabird.com//sbe911plus-ctd&quot;&gt;Seabird Electronics SBE911plus specifications&lt;/a&gt;&lt;/p&gt;
