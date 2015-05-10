@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ITS-90 temperature scale
-tags: [oce, map, R]
+tags: [oce,R]
 category: R
 year: 2015
 month: 5
