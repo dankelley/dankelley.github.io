@@ -149,7 +149,7 @@ with expected inaccuracies in measurement, or perhaps with the inter-sample "noi
 
 1. [Seabird Electronics application note on temperature conversion](http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf)
 
-2. [Seabird Electronics application note on temperature conversion](http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf)
+2. [Seabird Electronics SBE911plus specifications](http://www.seabird.com//sbe911plus-ctd)
 
 3. [Oce website](http://dankelley.github.io/oce/)   
 
