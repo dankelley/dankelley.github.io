@@ -1,5 +1,4 @@
-
-## ----,message=FALSE,warning=FALSE----------------------------------------
+## ----message=FALSE,warning=FALSE-----------------------------------------
 library(oce)
 data(coastlineWorld)
 
@@ -141,7 +140,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=kav5"
 mapPlot(coastlineWorld, projection=p)
@@ -416,5 +414,4 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=wintri"
 mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-
 
