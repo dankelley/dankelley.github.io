@@ -33,7 +33,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=cass +lon_0=-45"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Bad merdians", line=line, adj=0, col='red')
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=cc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(-40,40))
@@ -354,6 +354,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=tpeqd +lat_1=30 +lon_1=-80"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=tpers +h=1e8"
 mapPlot(coastlineWorld, projection=p)

@@ -89,7 +89,7 @@
         
     </span> <!-- post_date -->
     <div class=post_summary>
-        Available map projections are illustrated
+        Available map projections are illustrated. This blog posting is updated occasionally without changing the date, since it is a development note.
     </div> <!-- post_summary -->
 </div> <!-- slug -->
 
@@ -101,15 +101,20 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Version 4.9.1 of the PROJ.4 library is being incorporated into the development
-version of the oce R package. The work is not finalized yet, but I thought it
-might be useful to share an early version of the test suite, so people could
-get an idea of the upcoming capabilities.</p>
+<p>Through the early months of 2015, efforts were made to incorporate PROJ.4
+projections into the oce R package. An earlier attempt had relied on the proj4
+package, but this package has the disadvantage of reporting an error if any
+point in a polygon cannot be projected, so it had to be called pointwise on
+coastline vectors, at significant time cost (minutes for many practical cases).
+The next step was to incorporate PROJ.4 code into oce itself.  This was used in
+oce version 0.9-17, available on the CRAN archive. However, a CRAN member
+suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
+so I started exploring the use of the rgdal package. At the moment, this work
+is only on the git branch named <code>project_with_rgdal</code>. The results with this
+version of oce seem to be very close to those with the previous system, with
+differences only in the cases where extraneous lines are seen.</p>
 
-<p>This blog posting will be updated from time to time, as I settle on which
-projections to incorporate in <code>oce</code>.</p>
-
-<p>Note that only PROJ.4 projections that have inverses are incorporated in oce.
+<p>Note that only PROJ.4 projections that have inverses are available in oce.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
 because they cause errors of various sorts; see <a href="https://github.com/dankelley/oce/issues/635">oce issue
@@ -199,7 +204,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=cass +lon_0=-45&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">))</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
-mtext<span class="p">(</span><span class="s">&quot;Bad merdians&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -989,9 +994,11 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=tpeqd +lat_1=30 +lon_1=-80&quot;</span>
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=tpeqd +lat_1=30 +lon_1=-80&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">))</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 

@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-05-15T14:54:04-03:00</updated>
+    <updated>2015-05-24T08:59:01-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -131,15 +131,20 @@ article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10,
         <id>http://dankelley.github.io/blog/r/2015/04/03/oce-proj</id>
         <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;Version 4.9.1 of the PROJ.4 library is being incorporated into the development
-version of the oce R package. The work is not finalized yet, but I thought it
-might be useful to share an early version of the test suite, so people could
-get an idea of the upcoming capabilities.&lt;/p&gt;
+&lt;p&gt;Through the early months of 2015, efforts were made to incorporate PROJ.4
+projections into the oce R package. An earlier attempt had relied on the proj4
+package, but this package has the disadvantage of reporting an error if any
+point in a polygon cannot be projected, so it had to be called pointwise on
+coastline vectors, at significant time cost (minutes for many practical cases).
+The next step was to incorporate PROJ.4 code into oce itself.  This was used in
+oce version 0.9-17, available on the CRAN archive. However, a CRAN member
+suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
+so I started exploring the use of the rgdal package. At the moment, this work
+is only on the git branch named &lt;code&gt;project_with_rgdal&lt;/code&gt;. The results with this
+version of oce seem to be very close to those with the previous system, with
+differences only in the cases where extraneous lines are seen.&lt;/p&gt;
 
-&lt;p&gt;This blog posting will be updated from time to time, as I settle on which
-projections to incorporate in &lt;code&gt;oce&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Note that only PROJ.4 projections that have inverses are incorporated in oce.
+&lt;p&gt;Note that only PROJ.4 projections that have inverses are available in oce.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
 because they cause errors of various sorts; see &lt;a href=&quot;https://github.com/dankelley/oce/issues/635&quot;&gt;oce issue
@@ -229,7 +234,7 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;
 4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=cass +lon_0=-45&amp;quot;&lt;/span&gt;
 mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Bad merdians&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -1019,9 +1024,11 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
-3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tpeqd +lat_1=30 +lon_1=-80&amp;quot;&lt;/span&gt;
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=tpeqd +lat_1=30 +lon_1=-80&amp;quot;&lt;/span&gt;
 mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
