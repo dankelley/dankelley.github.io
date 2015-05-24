@@ -169,10 +169,12 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=aitoff +lon_0=-45&quot;</span>
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=aitoff +lon_0=-45&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span>
         longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">))</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -446,9 +448,11 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">)</span><span class="c1"># +north_square=1 +south_square=2&quot;)</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -569,10 +573,12 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=lsat +lsat=1 +path=200&quot;</span>
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=lsat +lsat=1 +path=200&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span>
             longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="m">-120</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="m">120</span><span class="p">))</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 

@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-05-24T08:59:01-03:00</updated>
+    <updated>2015-05-24T09:05:09-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -199,10 +199,12 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
 3
-4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=aitoff +lon_0=-45&amp;quot;&lt;/span&gt;
+4
+5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=aitoff +lon_0=-45&amp;quot;&lt;/span&gt;
 mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -476,9 +478,11 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
-3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=rhealpix&amp;quot;&lt;/span&gt;
+3
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=rhealpix&amp;quot;&lt;/span&gt;
 mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# +north_square=1 +south_square=2&amp;quot;)&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -599,10 +603,12 @@ mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;1
 2
 3
-4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lsat +lsat=1 +path=200&amp;quot;&lt;/span&gt;
+4
+5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+proj=lsat +lsat=1 +path=200&amp;quot;&lt;/span&gt;
 mapPlot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;coastlineWorld&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; projection&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
             longitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; latitudelim&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+mtext&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Extraneous lines&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; line&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ecol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; font&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;font&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 

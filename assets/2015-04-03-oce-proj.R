@@ -21,6 +21,7 @@ p <- "+proj=aitoff +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
@@ -132,6 +133,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=rhealpix"
 mapPlot(coastlineWorld, projection=p)# +north_square=1 +south_square=2")
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=igh"
 mapPlot(coastlineWorld, projection=p)
@@ -182,6 +184,7 @@ p <- "+proj=lsat +lsat=1 +path=200"
 mapPlot(coastlineWorld, projection=p,
             longitudelim=c(-180,-120), latitudelim=c(70,120))
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=mbt_s"
 mapPlot(coastlineWorld, projection=p)
