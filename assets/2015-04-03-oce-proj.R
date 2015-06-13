@@ -1,6 +1,7 @@
 ## ----message=FALSE,warning=FALSE-----------------------------------------
 library(oce)
 data(coastlineWorld)
+cl45 <- coastlineCut(coastlineWorld, lon_0=-45)
 
 par(mar=rep(2, 4))
 line <- 0.25
@@ -23,6 +24,12 @@ mapPlot(coastlineWorld, projection=p,
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
+p <- "+proj=aitoff +lon_0=-45"
+mapPlot(cl45, projection=p,
+        longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
+
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110))
 mtext(p, line=line, adj=1, col=pcol, font=font)
@@ -34,6 +41,12 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=cass +lon_0=-45"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=cass +lon_0=-45"
+mapPlot(cl45, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
 mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=cc"
@@ -87,6 +100,12 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
+mapPlot(cl45, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
 mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=fahey"
@@ -171,6 +190,13 @@ p <- "+proj=lcca +lat_0=20 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=lcca +lat_0=20 +lon_0=-40"
+mapPlot(cl45, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
+mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+
 
 p <- "+proj=leac +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60))

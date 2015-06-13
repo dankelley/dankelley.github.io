@@ -137,8 +137,10 @@ book</a>.</p>
  9
 10
 11
-12</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+12
+13</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
 data<span class="p">(</span>coastlineWorld<span class="p">)</span>
+cl45 <span class="o">&lt;-</span> coastlineCut<span class="p">(</span>coastlineWorld<span class="p">,</span> lon_0<span class="o">=</span><span class="m">-45</span><span class="p">)</span>
 
 par<span class="p">(</span>mar<span class="o">=</span>rep<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
 line <span class="o">&lt;-</span> <span class="m">0.25</span>
@@ -182,13 +184,27 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=aitoff +lon_0=-45&quot;</span>
+mapPlot<span class="p">(</span>cl45<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span>
+        longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">))</span>
+mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Using coastlineCut()&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="m">+0.9</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-4.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
 3</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=bipc&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">70</span><span class="p">,</span> <span class="m">110</span><span class="p">))</span>
 mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-4.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-5.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -198,7 +214,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-5.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-6.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -210,7 +226,21 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-6.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-7.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=cass +lon_0=-45&quot;</span>
+mapPlot<span class="p">(</span>cl45<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">))</span>
+mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Using coastlineCut()&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="m">+0.9</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-8.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -220,7 +250,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-7.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-9.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -230,7 +260,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-8.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-10.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -240,7 +270,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-9.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-11.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -250,7 +280,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-10.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-12.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -260,7 +290,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-11.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-13.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -270,7 +300,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-12.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-14.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -280,7 +310,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-13.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-15.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -290,7 +320,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-14.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-16.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -300,7 +330,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-15.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-17.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -310,7 +340,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-16.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-18.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -320,7 +350,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-17.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-19.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -330,7 +360,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-18.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-20.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -342,7 +372,21 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-19.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-21.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=etmerc +ellps=WGS84 +lon_0=-40&quot;</span>
+mapPlot<span class="p">(</span>cl45<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">60</span><span class="p">))</span>
+mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Using coastlineCut()&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="m">+0.9</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-22.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -354,7 +398,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-20.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-23.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -364,7 +408,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-21.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-24.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -374,7 +418,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-22.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-25.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -384,7 +428,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-23.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-26.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -394,7 +438,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-24.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-27.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -404,7 +448,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-25.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-28.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -414,7 +458,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-26.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-29.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -424,7 +468,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-27.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-30.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -434,7 +478,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-28.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-31.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -444,19 +488,24 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-29.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-32.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
-2
-3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=rhealpix&quot;</span>
 mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection<span class="o">=</span>p<span class="p">)</span><span class="c1"># +north_square=1 +south_square=2&quot;)</span>
-mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<div class="highlight"><pre><code class="text">## Error in seq.default(-90 + small, 90 - small, dlatitude): invalid (to - from)/by in seq(.)
+</code></pre></div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2</code></pre></div></td><td class="code"><div class="highlight"><pre>mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-30.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-33.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -466,7 +515,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-31.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-34.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -476,7 +525,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-32.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-35.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -486,7 +535,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-33.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-36.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -496,7 +545,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-34.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-37.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -506,7 +555,7 @@ mtext<span class="p">(</span><span class="s">&quot;+proj=laea +lon_0=-40&quot;</
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-35.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-38.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -516,7 +565,7 @@ mtext<span class="p">(</span><span class="s">&quot;+proj=lonlat&quot;</span><spa
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-36.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-39.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -526,7 +575,7 @@ mtext<span class="p">(</span><span class="s">&quot;+proj=lonlat&quot;</span><spa
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-37.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-40.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -536,7 +585,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-38.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-41.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -548,7 +597,21 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-39.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-42.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> <span class="s">&quot;+proj=lcca +lat_0=20 +lon_0=-40&quot;</span>
+mapPlot<span class="p">(</span>cl45<span class="p">,</span> projection<span class="o">=</span>p<span class="p">,</span> longitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">-80</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> latitudelim<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">60</span><span class="p">))</span>
+mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Using coastlineCut()&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="m">+0.9</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span>pcol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span><span class="p">,</span> line<span class="o">=</span>line<span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> col<span class="o">=</span>ecol<span class="p">,</span> font<span class="o">=</span>font<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-43.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -558,7 +621,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-40.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-44.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -568,7 +631,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-41.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-45.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -582,7 +645,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-42.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-46.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -592,7 +655,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-43.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-47.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -602,7 +665,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-44.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-48.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -612,7 +675,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-45.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-49.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -622,7 +685,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-46.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-50.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -632,7 +695,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-47.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-51.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -642,7 +705,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-48.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-52.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -652,7 +715,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-49.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-53.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -662,7 +725,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-50.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-54.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -672,7 +735,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-51.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-55.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -682,7 +745,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-52.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-56.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -694,7 +757,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-53.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-57.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -704,7 +767,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-54.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-58.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -714,7 +777,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-55.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-59.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -724,7 +787,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-56.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-60.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -734,7 +797,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-57.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-61.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -744,7 +807,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-58.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-62.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -760,7 +823,7 @@ mtext<span class="p">(</span><span class="s">&quot;Usage?&quot;</span><span clas
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-59.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-63.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -770,7 +833,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-60.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-64.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -782,7 +845,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-61.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-65.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -792,7 +855,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-62.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-66.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -804,7 +867,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-63.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-67.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -814,7 +877,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-64.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-68.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -824,7 +887,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-65.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-69.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -834,7 +897,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-66.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-70.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -844,7 +907,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-67.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-71.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -854,7 +917,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-68.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-72.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -864,7 +927,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-69.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-73.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -874,7 +937,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-70.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-74.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -884,7 +947,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-71.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-75.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -894,7 +957,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-72.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-76.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -904,7 +967,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-73.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-77.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -914,7 +977,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-74.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-78.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -924,7 +987,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-75.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-79.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -934,7 +997,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-76.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-80.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -944,7 +1007,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-77.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-81.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -954,7 +1017,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-78.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-82.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -964,7 +1027,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-79.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-83.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -976,7 +1039,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-80.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-84.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -986,7 +1049,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-81.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-85.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -996,7 +1059,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-82.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-86.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1008,7 +1071,7 @@ mtext<span class="p">(</span><span class="s">&quot;Extraneous lines&quot;</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-83.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-87.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1018,7 +1081,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-84.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-88.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1028,7 +1091,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-85.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-89.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1038,7 +1101,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-86.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-90.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1048,7 +1111,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-87.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-91.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1058,7 +1121,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-88.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-92.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1068,7 +1131,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-89.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-93.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1078,7 +1141,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-90.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-94.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1088,7 +1151,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-91.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-95.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1098,7 +1161,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-92.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-96.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1108,7 +1171,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-93.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-97.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1118,7 +1181,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-94.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-98.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1128,7 +1191,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-95.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-99.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1138,7 +1201,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-96.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-100.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1148,7 +1211,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-97.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-101.png" alt="center" /> </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
 2
@@ -1158,7 +1221,7 @@ mtext<span class="p">(</span>p<span class="p">,</span> line<span class="o">=</sp
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-98.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-102.png" alt="center" /> </p>
 
 <h1 id="references-and-resources">References and resources</h1>
 
