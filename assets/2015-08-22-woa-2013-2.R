@@ -10,7 +10,7 @@ con <- nc_open("woa13_decav_s00_01v2.nc")
 SSS <- ncvar_get(con, "s_an")[,,1]
 nc_close(con)
 
-## ------------------------------------------------------------------------
+## ----message=FALSE,warning=FALSE-----------------------------------------
 library(oce)
 data("levitus", package="ocedata")
 library(MASS) # for truehist
