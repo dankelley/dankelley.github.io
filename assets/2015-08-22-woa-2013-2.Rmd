@@ -40,7 +40,7 @@ nc_close(con)
 
 Next, load the levitus dataset from the existing ``ocedata`` package
 and compute the differences
-```{r}
+```{r,message=FALSE,warning=FALSE}
 library(oce)
 data("levitus", package="ocedata")
 library(MASS) # for truehist
