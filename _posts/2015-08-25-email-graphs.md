@@ -79,3 +79,7 @@ range, taking into account the maximum length of the text items.  No pretence
 at elegance is being made here; the point is just to present a rough framework
 that readers could modify to suite their needs.  I suppose I could clean this
 up and put it in my [plan package](https://github.com/dankelley/plan).
+
+# Resources
+
+* Source code: [2014-08-25-email-graphs.R]({{ site.url }}/assets/2014-08-25-email-graphs.R)
