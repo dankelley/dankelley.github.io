@@ -23,7 +23,7 @@ person names. In this case, I have put the data into the format (time, sender,
 recipient); obviously, it is also simple to put instead a subject line, lines
 of text, etc; it all depends on the purpose.
 
-```{r}
+```{r fig.height=4, fig.width=8, dpi=120}
 data <- "
 2015-08-24 16:14:17,red,blue
 2015-08-19 09:18:00,blue,red
