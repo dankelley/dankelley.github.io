@@ -73,7 +73,9 @@ depends on the purpose, of course.
 The code has some hard-wired constants for spacing, and this will likely need
 adjustment for other time spans also for other string sizes.  No pretence at
 elegance is being made in the code; the idea is just to present a rough
-framework that readers can modify to suite their needs.
+framework that readers can modify to suite their needs.  (I imagine some
+readers will prefer the list to have most recent items at the top ... that can
+be arranged by plotting the labels below the time axies...)
 
 Readers will almost certainly want to display other things in the text lines;
 the method should be completely obvious to anyone with introductory R skills.
