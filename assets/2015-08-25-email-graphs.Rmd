@@ -75,4 +75,4 @@ and this would probably be better expressed as a fraction of the total time
 range, taking into account the maximum length of the text items.  No pretence
 at elegance is being made here; the point is just to present a rough framework
 that readers could modify to suite their needs.  I suppose I could put this in
-my ``plan`` package...
+my [``plan`` R package](https://github.com/dankelley/plan).
