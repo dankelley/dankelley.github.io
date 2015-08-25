@@ -22,13 +22,11 @@ data <- "
 "
 d <- read.csv(text=data, header=FALSE)
 t <- as.POSIXct(d$V1, tz="UTC")
-o <- order(t, decreasing=TRUE)
+o <- order(t, decreasing=TRUE) # just in case
 t <- t[o]
 from <- d$V2[o]
 to <- d$V3[o]
 n <- length(from)
-data.frame(t, from)
-## oce.plot.ts(t, 1:n, type='s', xlab="", ylab="Emails",
 day <- 86400
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 plot(t, 1:n, type='n', xlab="", ylab="Email",
@@ -36,7 +34,6 @@ plot(t, 1:n, type='n', xlab="", ylab="Email",
             ylim=c(0, n+1))
 tl <- max(t) + 20*day
 for (i in 1:n) {
-#for (i in 1:1) {
     text(tl+20*day, i, paste(from[i], "-", to[i], sep=""))
     lines(c(tl, t[i]), rep(i, 2))
     lines(c(t[i], t[i]), c(i, 0))

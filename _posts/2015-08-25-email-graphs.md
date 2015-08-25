@@ -48,43 +48,11 @@ data <- "
 "
 d <- read.csv(text=data, header=FALSE)
 t <- as.POSIXct(d$V1, tz="UTC")
-o <- order(t, decreasing=TRUE)
+o <- order(t, decreasing=TRUE) # just in case
 t <- t[o]
 from <- d$V2[o]
 to <- d$V3[o]
 n <- length(from)
-data.frame(t, from)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-##                      t   from
-## 1  2015-08-24 16:14:17    red
-## 2  2015-08-19 09:18:00   blue
-## 3  2015-07-31 14:23:31   blue
-## 4  2015-07-31 13:48:56  beige
-## 5  2015-07-31 12:17:00  brown
-## 6  2015-07-31 11:15:00 purple
-## 7  2015-07-30 19:59:00  green
-## 8  2015-07-30 08:09:00 orange
-## 9  2015-07-30 08:09:00   blue
-## 10 2015-07-30 07:59:00 orange
-## 11 2015-07-30 07:59:00  green
-## 12 2015-07-30 07:56:00 orange
-## 13 2015-07-29 21:04:00 yellow
-## 14 2015-07-29 11:07:00  green
-## 15 2015-07-28 15:22:00 yellow
-## 16 2015-04-11 10:19:00   blue
-## 17 2015-04-11 10:13:00   pink
-## 18 2015-04-11 09:43:00   blue
-## 19 2015-04-01 08:40:00   blue
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
-## oce.plot.ts(t, 1:n, type='s', xlab="", ylab="Emails",
 day <- 86400
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 plot(t, 1:n, type='n', xlab="", ylab="Email",
@@ -92,7 +60,6 @@ plot(t, 1:n, type='n', xlab="", ylab="Email",
             ylim=c(0, n+1))
 tl <- max(t) + 20*day
 for (i in 1:n) {
-#for (i in 1:1) {
     text(tl+20*day, i, paste(from[i], "-", to[i], sep=""))
     lines(c(tl, t[i]), rep(i, 2))
     lines(c(t[i], t[i]), c(i, 0))
@@ -100,3 +67,15 @@ for (i in 1:n) {
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2015-08-25-email-graphs/unnamed-chunk-1-1.png) 
+
+This shows that there was a fair bit of activity in the Spring, and then much
+more intense work near the end of July.  The labels show sender and recipient;
+in some cases it would make sense to put in keywords or subjectlines. It all
+depends on the purpose, of course.
+
+The code has some hard-wired constants (20 days here, another 20 days there)
+and this would probably be better expressed as a fraction of the total time
+range, taking into account the maximum length of the text items.  No pretence
+at elegance is being made here; the point is just to present a rough framework
+that readers could modify to suite their needs.  I suppose I could put this in
+my ``plan`` package...
