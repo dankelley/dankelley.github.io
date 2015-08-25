@@ -74,5 +74,5 @@ The code has some hard-wired constants (20 days here, another 20 days there)
 and this would probably be better expressed as a fraction of the total time
 range, taking into account the maximum length of the text items.  No pretence
 at elegance is being made here; the point is just to present a rough framework
-that readers could modify to suite their needs.  I suppose I could put this in
-my [``plan`` R package](https://github.com/dankelley/plan).
+that readers could modify to suite their needs.  I suppose I could clean this
+up and put it in my [plan package](https://github.com/dankelley/plan).
