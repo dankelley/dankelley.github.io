@@ -80,4 +80,5 @@ up and put it in my [plan package](https://github.com/dankelley/plan).
 
 # Resources
 
-* Source code: [2014-08-25-email-graphs.R]({{ site.url }}/assets/2014-08-25-email-graphs.R)
+1. Source code: [2015-08-25-email-graphs.R]({{ site.url }}/assets/2015-08-25-email-graphs.R)
+2. Jekyll source code for this blog entry: [2015-08-25-email-graphs.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-08-25-email-graphs.Rmd)
