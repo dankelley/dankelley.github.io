@@ -55,12 +55,12 @@ to <- d$V3[o]
 n <- length(from)
 day <- 86400
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
-plot(t, 1:n, type='n', xlab="", ylab="Email",
-            xlim=c(min(t), max(t)+50*day),
-            ylim=c(0, n+1))
-tl <- max(t) + 20*day
+timeSpan <- as.numeric(max(t)) - as.numeric(min(t))
+space <- 0.2 # adjust as necessary
+plot(t, 1:n, type='n', xlab="", ylab="Email", xlim=c(min(t), max(t)+space*timeSpan), ylim=c(0, n+1))
+tl <- max(t) + 0.5 * space * timeSpan
 for (i in 1:n) {
-    text(tl+20*day, i, paste(from[i], "-", to[i], sep=""))
+    text(tl + 0.05 * space * timeSpan, i, paste(from[i], "-", to[i], sep=""), pos=4)
     lines(c(tl, t[i]), rep(i, 2))
     lines(c(t[i], t[i]), c(i, 0))
 }
@@ -77,5 +77,5 @@ The code has some hard-wired constants (20 days here, another 20 days there)
 and this would probably be better expressed as a fraction of the total time
 range, taking into account the maximum length of the text items.  No pretence
 at elegance is being made here; the point is just to present a rough framework
-that readers could modify to suite their needs.  I suppose I could put this in
-my ``plan`` package...
+that readers could modify to suite their needs.  I suppose I could clean this
+up and put it in my [plan package](https://github.com/dankelley/plan).
