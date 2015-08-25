@@ -73,12 +73,16 @@ more intense work near the end of July.  The labels show sender and recipient;
 in some cases it would make sense to put in keywords or subjectlines. It all
 depends on the purpose, of course.
 
-The code has some hard-wired constants (20 days here, another 20 days there)
-and this would probably be better expressed as a fraction of the total time
-range, taking into account the maximum length of the text items.  No pretence
-at elegance is being made here; the point is just to present a rough framework
-that readers could modify to suite their needs.  I suppose I could clean this
-up and put it in my [plan package](https://github.com/dankelley/plan).
+The code has some hard-wired constants for spacing, and this will likely need
+adjustment for other time spans also for other string sizes.  No pretence at
+elegance is being made in the code; the idea is just to present a rough
+framework that readers can modify to suite their needs.
+
+Readers will almost certainly want to display other things in the text lines;
+the method should be completely obvious to anyone with introductory R skills.
+
+I suppose I could clean this up and put it in my [plan
+package](https://github.com/dankelley/plan).
 
 # Resources
 
