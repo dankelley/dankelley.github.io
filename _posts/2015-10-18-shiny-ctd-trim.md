@@ -129,14 +129,24 @@ the scan-pressure plot show the trimming that ``ctdTrim()`` would do, and the
 solid lines are the values as set at the moment (which are 0 and 100 percent,
 at the start). Slide the sliders to narrow in on the profile.
 
-Note that the code saves the trimmed data as an rda file in the local
+Note that the code saves the trimmed data as an ``rda`` file in the local
 directory. A more sophisticated application would use a tailored file name.
-Probably it would also use mouse drags on the scan-pressure plot, instead of a
-slider. But these things are for another day.
+Another useful addition might be to use mouse drags on the scan-pressure plot,
+instead of a slider. But these things are for another day.  For now, the goal
+has been met: the reader can see that shiny permits user interaction in a way
+that is practical, if not elegant. Those who try this in action will find that
+it is a bit slow, but this is not so much an issue with shiny as it is with
+plotting. Also, bear in mind the calculation of the cost of acquiring the data
+... is a 1/4 second lag in an interface an issue for a dataset that cost an
+hour to acquire that that might yield great benefits to science?
 
-Below are screenshots of the application in action.
+Below is a screenshot of the initial view of the application.
 
 ![ctd_trim_fig_1.png]({{ site.url }}/assets/ctd_trim_fig_1.png)
+
+Below is a screenshot of a view after the sliders have been used to narrow in
+on the downcast. Notice that I selected a different range than was selected
+automatically by ``ctdTrim()``.
 
 ![ctd_trim_fig_2.png]({{ site.url }}/assets/ctd_trim_fig_2.png)
 
