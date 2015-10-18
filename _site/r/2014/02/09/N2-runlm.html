@@ -105,16 +105,15 @@
 
 <h1 id="methods">Methods</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## Loading required package: methods
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div>
+## Loading required package: maps</code></pre></div>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -129,11 +128,11 @@ rho <span class="o">&lt;-</span> swRho<span class="p">(</span>ctd<span class="p"
 z <span class="o">&lt;-</span> swZ<span class="p">(</span>ctd<span class="p">)</span>
 drhodz <span class="o">&lt;-</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> deriv <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 g <span class="o">&lt;-</span> <span class="m">9.81</span>
-rho0 <span class="o">&lt;-</span> mean<span class="p">(</span>rho<span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+rho0 <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>rho<span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 N2 <span class="o">&lt;-</span> <span class="o">-</span>g <span class="o">*</span> drhodz<span class="o">/</span>rho0
 plot<span class="p">(</span>ctd<span class="p">,</span> which <span class="o">=</span> <span class="s">&quot;N2&quot;</span><span class="p">)</span>
 lines<span class="p">(</span>N2<span class="p">,</span> <span class="o">-</span>z<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">2</span><span class="p">,</span> col <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;brown&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> legend <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;spline&quot;</span><span class="p">,</span> 
+legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">2</span><span class="p">,</span> col <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;brown&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> legend <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;spline&quot;</span><span class="p">,</span> 
     <span class="s">&quot;runlm&quot;</span><span class="p">),</span> bg <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
@@ -154,7 +153,7 @@ legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><spa
 
 <p>It may be helpful to determine just how well the two methods can match.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -164,26 +163,25 @@ legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><spa
 N2fromderiv <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>L<span class="p">)</span> <span class="p">{</span>
     <span class="o">-</span>g <span class="o">*</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> L <span class="o">=</span> L<span class="p">,</span> deriv <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span>rho0
 <span class="p">}</span>
-best <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>L<span class="p">)</span> sqrt<span class="p">(</span>mean<span class="p">((</span>N2 <span class="o">-</span> N2fromderiv<span class="p">(</span>L<span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span> interval <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> 
+best <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>L<span class="p">)</span> <span class="kp">sqrt</span><span class="p">(</span><span class="kp">mean</span><span class="p">((</span>N2 <span class="o">-</span> N2fromderiv<span class="p">(</span>L<span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span> interval <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> 
     <span class="m">100</span><span class="p">))</span>
-print<span class="p">(</span>best<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>best<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## $minimum
+<div class="highlight"><pre><code class="language-text" data-lang="text">## $minimum
 ## [1] 6.161
 ## 
 ## $objective
-## [1] 7.854e-05
-</code></pre></div>
+## [1] 7.854e-05</code></pre></div>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>N2best <span class="o">&lt;-</span> N2fromderiv<span class="p">(</span>best<span class="o">$</span>minimum<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>N2best <span class="o">&lt;-</span> N2fromderiv<span class="p">(</span>best<span class="o">$</span>minimum<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>This best-matching estimate is the red line.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>plotProfile<span class="p">(</span>ctd<span class="p">,</span> <span class="s">&quot;N2&quot;</span><span class="p">)</span>
 lines<span class="p">(</span>N2best<span class="p">,</span> ctd<span class="p">[[</span><span class="s">&quot;pressure&quot;</span><span class="p">]],</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>

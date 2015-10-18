@@ -104,20 +104,19 @@ results.</p>
 <p>For example, one might like to explain how close the computed
 integral of the Witch of Agnesi function</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>woa <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> a<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="m">8</span> <span class="o">*</span> a<span class="o">^</span><span class="m">3</span> <span class="o">/</span> <span class="p">(</span>x<span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="m">4</span><span class="o">*</span>a<span class="o">^</span><span class="m">2</span><span class="p">)</span>
 integrate<span class="p">(</span>woa<span class="p">,</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="kc">Inf</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## 12.56637 with absolute error &lt; 1.3e-09
-</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## 12.56637 with absolute error &lt; 1.3e-09</code></pre></div>
 
 <p>is to the true value of $4\pi$. One way to do that is to compute the mismatch</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>estimate <span class="o">&lt;-</span> integrate<span class="p">(</span>woa<span class="p">,</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="kc">Inf</span><span class="p">)</span><span class="o">$</span>value
-theory <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">*</span> pi
+theory <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">*</span> <span class="kc">pi</span>
 </pre></div>
 </td></tr></table>
 
@@ -134,7 +133,7 @@ computer-type exponential notation is not conventional in written work.</p>
 
 <p>A trial function is below.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -158,16 +157,16 @@ computer-type exponential notation is not conventional in written work.</p>
         sign <span class="o">&lt;-</span> <span class="s">&quot;-&quot;</span>
         x <span class="o">&lt;-</span> <span class="o">-</span>x
     <span class="p">}</span>
-    exponent <span class="o">&lt;-</span> floor<span class="p">(</span>log10<span class="p">(</span>x<span class="p">))</span>
+    exponent <span class="o">&lt;-</span> <span class="kp">floor</span><span class="p">(</span><span class="kp">log10</span><span class="p">(</span>x<span class="p">))</span>
     <span class="kr">if</span> <span class="p">(</span>exponent<span class="p">)</span> <span class="p">{</span>
-        xx <span class="o">&lt;-</span> round<span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="o">^</span>exponent<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
-        e <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;\\\\times 10^{&quot;</span><span class="p">,</span> as.integer<span class="p">(</span>exponent<span class="p">),</span> <span class="s">&quot;}&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        xx <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="o">^</span>exponent<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
+        e <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;\\\\times 10^{&quot;</span><span class="p">,</span> <span class="kp">as.integer</span><span class="p">(</span>exponent<span class="p">),</span> <span class="s">&quot;}&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
     <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-        xx <span class="o">&lt;-</span> round<span class="p">(</span>x<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
+        xx <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>x<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
         e <span class="o">&lt;-</span> <span class="s">&quot;&quot;</span>
     <span class="p">}</span>
-    <span class="kr">if</span> <span class="p">(</span>showDollar<span class="p">)</span> paste<span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">,</span> sign<span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-    <span class="kr">else</span> paste<span class="p">(</span>sign<span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span>showDollar<span class="p">)</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">,</span> <span class="kp">sign</span><span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="kr">else</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">sign</span><span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table>

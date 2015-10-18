@@ -115,13 +115,13 @@
 
 <p>The basic procedure it to change a code fragment like</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>ylab<span class="o">=</span><span class="s">&quot;Depth&quot;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>ylab<span class="o">=</span><span class="s">&quot;Depth&quot;</span>
 </pre></div>
 </td></tr></table>
 
 <p>which is clearly not appropriate in all langauges, into</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>gettext<span class="p">(</span><span class="s">&quot;Depth&quot;</span><span class="p">,</span> domain<span class="o">=</span><span class="s">&quot;R-oce&quot;</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kp">gettext</span><span class="p">(</span><span class="s">&quot;Depth&quot;</span><span class="p">,</span> domain<span class="o">=</span><span class="s">&quot;R-oce&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -131,13 +131,13 @@
 
 <p>Enter the <code>oce</code> directory, launch R, and type as follows, to insert a file named <code>R-oce.pot</code> in the <code>po</code> directory.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>tools<span class="o">::</span>update_pkg_po<span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>tools<span class="o">::</span>update_pkg_po<span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>This create a file that has entries for all errors, warnings, and messages, as well as for <code>gettext()</code> entries.  The file will be named <code>po/R-oce.pot</code>, and will contain entry pairs such as the following.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="bash">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-bash" data-lang="bash">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>msgid <span class="s2">&quot;Depth&quot;</span>
 msgstr <span class="s2">&quot;&quot;</span>
 </pre></div>
@@ -149,7 +149,7 @@ msgstr <span class="s2">&quot;&quot;</span>
 
 <p>To start work on, say, a French translation table, type the following in the shell.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="bash">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-bash" data-lang="bash">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">cd </span>oce/po
 msginit --locale<span class="o">=</span>R-fr --input R-oce.pot
 </pre></div>
@@ -167,7 +167,7 @@ msginit --locale<span class="o">=</span>R-fr --input R-oce.pot
 
 <p>Simply change the <code>msgstr</code> item to the translated value, e.g. for French the <code>R-fr.po</code> file should contain</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="bash">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-bash" data-lang="bash">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>msgid <span class="s2">&quot;Depth&quot;</span>
 msgstr <span class="s2">&quot;Profondeur&quot;</span>
 </pre></div>
@@ -206,7 +206,7 @@ msgstr <span class="s2">&quot;Profondeur&quot;</span>
 
 <p>In most cases the system language will be set with system tools.  Still, <code>Sys.setenv()</code> can be handy for switching the language used in a plot (e.g. a French user may have the computer set up to work in French, but may prefer to graph data using English, for publication).  Commonly, <code>Sys.setenv()</code> will be done in the R startup file, or defined in the OS shell, e.g. below for a temporary use</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="bash">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-bash" data-lang="bash">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8 R --no-save &lt; spanish.R
 </pre></div>
 </td></tr></table>
 
@@ -216,7 +216,7 @@ msgstr <span class="s2">&quot;Profondeur&quot;</span>
 
 <p>If you would like Oce graphs to work in another language with which you have high familiarity, please contact me.  I will need you to write down a few relevant words in your language and send them to me via PDF or scanned hand-written document (MSword and OpenOffice formats cannot are not useful).  Minimally, the words should be the ones used on axes of the graphs you use, but it would help other users if you could translate the phrases listed below.  Also, translate <code>E</code>, <code>W</code>, <code>N</code>, and <code>S</code>, as used in longitude and latitude, as well as any other unit abbreviations that differ between English and your language.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="bash"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-bash" data-lang="bash"> 1
  2
  3
  4
@@ -254,7 +254,7 @@ Velocity
 
 <p>The following code demonstrates translations by default plots for various data types.  Mandarin requires a font-family specification.  The Mandarin translations came from online engines and may be laughably bad.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -267,17 +267,17 @@ Velocity
 11
 12
 13
-14</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
-datasets <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;adv&quot;</span><span class="p">,</span><span class="s">&quot;adp&quot;</span><span class="p">,</span><span class="s">&quot;cm&quot;</span><span class="p">,</span><span class="s">&quot;ctd&quot;</span><span class="p">,</span><span class="s">&quot;drifter&quot;</span><span class="p">,</span><span class="s">&quot;lisst&quot;</span><span class="p">,</span><span class="s">&quot;lobo&quot;</span><span class="p">,</span><span class="s">&quot;sealevel&quot;</span><span class="p">,</span><span class="s">&quot;section&quot;</span><span class="p">,</span><span class="s">&quot;tdr&quot;</span><span class="p">)</span>
-languages <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="s">&quot;es&quot;</span><span class="p">,</span><span class="s">&quot;de&quot;</span><span class="p">,</span><span class="s">&quot;fr&quot;</span><span class="p">,</span><span class="s">&quot;zh&quot;</span><span class="p">)</span>
+14</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+datasets <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;adv&quot;</span><span class="p">,</span><span class="s">&quot;adp&quot;</span><span class="p">,</span><span class="s">&quot;cm&quot;</span><span class="p">,</span><span class="s">&quot;ctd&quot;</span><span class="p">,</span><span class="s">&quot;drifter&quot;</span><span class="p">,</span><span class="s">&quot;lisst&quot;</span><span class="p">,</span><span class="s">&quot;lobo&quot;</span><span class="p">,</span><span class="s">&quot;sealevel&quot;</span><span class="p">,</span><span class="s">&quot;section&quot;</span><span class="p">,</span><span class="s">&quot;tdr&quot;</span><span class="p">)</span>
+languages <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="s">&quot;es&quot;</span><span class="p">,</span><span class="s">&quot;de&quot;</span><span class="p">,</span><span class="s">&quot;fr&quot;</span><span class="p">,</span><span class="s">&quot;zh&quot;</span><span class="p">)</span>
 <span class="kr">for</span> <span class="p">(</span>d <span class="kr">in</span> datasets<span class="p">)</span> <span class="p">{</span>
-    data<span class="p">(</span>list<span class="o">=</span>d<span class="p">)</span>
+    data<span class="p">(</span><span class="kt">list</span><span class="o">=</span>d<span class="p">)</span>
     <span class="kr">if</span> <span class="p">(</span>d <span class="o">==</span> <span class="s">&quot;section&quot;</span><span class="p">)</span>
         section <span class="o">&lt;-</span> sectionGrid<span class="p">(</span>section<span class="p">)</span>
     <span class="kr">for</span> <span class="p">(</span>l <span class="kr">in</span> languages<span class="p">)</span> <span class="p">{</span>
-        pdf<span class="p">(</span>paste<span class="p">(</span>d<span class="p">,</span><span class="s">&quot;-&quot;</span><span class="p">,</span>l<span class="p">,</span><span class="s">&quot;.pdf&quot;</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span> family<span class="o">=</span><span class="kr">if</span> <span class="p">(</span>l<span class="o">==</span><span class="s">&quot;zh&quot;</span><span class="p">)</span> <span class="s">&quot;GB1&quot;</span> <span class="kr">else</span> <span class="s">&quot;Helvetica&quot;</span><span class="p">)</span>
-        Sys.setenv<span class="p">(</span>LANGUAGE<span class="o">=</span>l<span class="p">)</span>
-        plot<span class="p">(</span>get<span class="p">(</span>d<span class="p">))</span>
+        pdf<span class="p">(</span><span class="kp">paste</span><span class="p">(</span>d<span class="p">,</span><span class="s">&quot;-&quot;</span><span class="p">,</span>l<span class="p">,</span><span class="s">&quot;.pdf&quot;</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span> family<span class="o">=</span><span class="kr">if</span> <span class="p">(</span>l<span class="o">==</span><span class="s">&quot;zh&quot;</span><span class="p">)</span> <span class="s">&quot;GB1&quot;</span> <span class="kr">else</span> <span class="s">&quot;Helvetica&quot;</span><span class="p">)</span>
+        <span class="kp">Sys.setenv</span><span class="p">(</span>LANGUAGE<span class="o">=</span>l<span class="p">)</span>
+        plot<span class="p">(</span><span class="kp">get</span><span class="p">(</span>d<span class="p">))</span>
         dev.off<span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -286,9 +286,9 @@ languages <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">
 
 <p>To make the above work, an up-to-date version of the <code>translation</code> branch must be installed, by executing the following in R:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>devtools<span class="p">)</span>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
 install_github<span class="p">(</span><span class="s">&quot;ocedata&quot;</span><span class="p">,</span> <span class="s">&quot;dankelley&quot;</span><span class="p">,</span> <span class="s">&quot;master&quot;</span><span class="p">)</span>
 install_github<span class="p">(</span><span class="s">&quot;oce&quot;</span><span class="p">,</span> <span class="s">&quot;dankelley&quot;</span><span class="p">,</span> <span class="s">&quot;languages&quot;</span><span class="p">)</span>
 </pre></div>

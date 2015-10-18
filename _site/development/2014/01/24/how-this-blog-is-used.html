@@ -95,18 +95,16 @@
 
 <p>Since Markdown errors will cause non-display of the item when it is eventually uploaded to github, it is important to test things locally first.  This is very easy.  In the commandline, type</p>
 
-<div class="highlight"><pre><code class="bash">jekyll serve --watch
-</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve --watch</code></pre></div>
 
 <p>to start a server.  It will state a local URL that holds the blog.  Cut and past that URL in a browser, and you will see a local copy of the blog.  Every time you edit a file, <code>jekyll</code> will update the blog, but you will need to do a browser refresh to see the results.</p>
 
 <p>Once things work well locally, type the following in a terminal to upload the blog to github.</p>
 
-<div class="highlight"><pre><code class="bash">make
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">make
 git add .
 git commit -m MSG
-git push
-</code></pre></div>
+git push</code></pre></div>
 
 <p>PS. the <code>make</code> part of the above is important, because it moves a tags file from a location where github will not find it, to another where it will be found.  Simply using <code>git</code> to upload files will give a blog that works in all respects except for tagging, but what would be the point of that?</p>
 

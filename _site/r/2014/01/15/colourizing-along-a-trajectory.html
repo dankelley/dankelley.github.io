@@ -102,7 +102,7 @@
 
 <p>The R code given below demonstrates this with fake data.  The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -119,11 +119,11 @@
 15
 16
 17
-18</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
-x <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">50</span><span class="p">)</span>
+18</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+x <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">50</span><span class="p">)</span>
 y <span class="o">&lt;-</span> x
-z <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out <span class="o">=</span> length<span class="p">(</span>x<span class="p">))</span>
-zlim <span class="o">&lt;-</span> range<span class="p">(</span>z<span class="p">)</span>
+z <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>x<span class="p">))</span>
+zlim <span class="o">&lt;-</span> <span class="kp">range</span><span class="p">(</span>z<span class="p">)</span>
 npalette <span class="o">&lt;-</span> <span class="m">10</span>
 mar <span class="o">&lt;-</span> par<span class="p">(</span><span class="s">&#39;mar&#39;</span><span class="p">)</span>
 
@@ -131,10 +131,10 @@ palette <span class="o">&lt;-</span> oceColorsJet<span class="p">(</span>npalett
 drawPalette<span class="p">(</span>zlim <span class="o">=</span> zlim<span class="p">,</span> col <span class="o">=</span> palette<span class="p">)</span>
 plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
 grid<span class="p">()</span>
-segments<span class="p">(</span>head<span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> head<span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
-  tail<span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> tail<span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
-  col <span class="o">=</span> palette<span class="p">[</span>findInterval<span class="p">(</span>z<span class="p">,</span> 
-    seq<span class="p">(</span>zlim<span class="p">[</span><span class="m">1</span><span class="p">],</span> zlim<span class="p">[</span><span class="m">2</span><span class="p">],</span> length.out <span class="o">=</span> npalette <span class="o">+</span> <span class="m">1</span><span class="p">))],</span>
+segments<span class="p">(</span><span class="kp">head</span><span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="kp">head</span><span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  <span class="kp">tail</span><span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="kp">tail</span><span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  col <span class="o">=</span> palette<span class="p">[</span><span class="kp">findInterval</span><span class="p">(</span>z<span class="p">,</span> 
+    <span class="kp">seq</span><span class="p">(</span>zlim<span class="p">[</span><span class="m">1</span><span class="p">],</span> zlim<span class="p">[</span><span class="m">2</span><span class="p">],</span> length.out <span class="o">=</span> npalette <span class="o">+</span> <span class="m">1</span><span class="p">))],</span>
   lwd <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
 points<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
 </pre></div>

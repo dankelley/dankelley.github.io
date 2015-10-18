@@ -103,7 +103,7 @@ If any readers have ideas, please let me know!
 
 ## Full code (with initial comments removed for brevity)
 
-<div class="highlight"><pre><code class="matlab"><span class="k">function</span><span class="w"> </span>y <span class="p">=</span><span class="w"> </span><span class="nf">filtfilt</span><span class="p">(</span>b, a, x<span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="k">function</span><span class="w"> </span>y <span class="p">=</span><span class="w"> </span><span class="nf">filtfilt</span><span class="p">(</span>b, a, x<span class="p">)</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">if</span> <span class="p">(</span><span class="n">nargin</span> !<span class="p">=</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">print_usage</span><span class="p">;</span>
@@ -114,8 +114,8 @@ If any readers have ideas, please let me know!
   <span class="n">endif</span>
 
   <span class="n">lx</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-  <span class="n">a</span> <span class="p">=</span> <span class="n">a</span><span class="p">(:).</span><span class="s">&#39;;</span>
-<span class="s">  b = b(:).&#39;</span><span class="p">;</span>
+  <span class="n">a</span> <span class="p">=</span> <span class="n">a</span><span class="p">(:).</span><span class="o">&#39;</span><span class="p">;</span>
+  <span class="n">b</span> <span class="p">=</span> <span class="n">b</span><span class="p">(:).</span><span class="o">&#39;</span><span class="p">;</span>
   <span class="n">lb</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
   <span class="n">la</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
   <span class="n">n</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">la</span><span class="p">);</span>
@@ -148,19 +148,17 @@ If any readers have ideas, please let me know!
     <span class="n">y</span> <span class="p">=</span> <span class="nb">rot90</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>               # <span class="n">rotate</span> <span class="n">it</span> <span class="n">back</span>
   <span class="n">endif</span>
 
-<span class="n">endfunction</span>
-</code></pre></div>
+<span class="n">endfunction</span></code></pre></div>
 
 
 ## Test
 
-<div class="highlight"><pre><code class="matlab"><span class="n">pkg</span> <span class="n">load</span> <span class="n">signal</span>
+<div class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">pkg</span> <span class="n">load</span> <span class="n">signal</span>
 <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]=</span><span class="n">butter</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>                  # <span class="mi">10</span> <span class="n">Hz</span> <span class="n">low</span><span class="o">-</span><span class="n">pass</span> <span class="n">filter</span>
 <span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">;</span>                         # <span class="mi">1</span> <span class="n">second</span> <span class="n">sample</span>
 <span class="n">load</span> <span class="n">x</span><span class="p">.</span><span class="n">dat</span> # <span class="n">created</span> <span class="n">by</span> <span class="n">the</span> <span class="n">R</span> <span class="n">code</span><span class="p">,</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">both</span> <span class="n">have</span> <span class="n">same</span> <span class="n">data</span>
 <span class="n">y</span> <span class="p">=</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> <span class="n">z</span> <span class="p">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">);</span> # <span class="n">apply</span> <span class="n">filter</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;;data;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;;filtfilt;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s">&#39;;filter;&#39;</span><span class="p">)</span>
-</code></pre></div>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;;data;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;;filtfilt;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="s">&#39;;filter;&#39;</span><span class="p">)</span></code></pre></div>
 
 
 

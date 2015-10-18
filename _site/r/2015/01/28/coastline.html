@@ -109,7 +109,7 @@
 
 <p>First, I wrote the following C file to translate the data to something that R can read.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -158,7 +158,7 @@ int main<span class="p">()</span>
 <span class="s">            if (tok1[0] == &#39;</span>E<span class="s">&#39;</span><span class="err">) {</span>
                 skip <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
             <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-                fscanf<span class="p">(</span><span class="kr">in</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> tok2<span class="p">);</span>
+                fscanf<span class="p">(</span><span class="kp">in</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> tok2<span class="p">);</span>
                 printf<span class="p">(</span><span class="s">&quot;  %s %s\n&quot;</span><span class="p">,</span> tok1<span class="p">,</span> tok2<span class="p">);</span>
             <span class="p">}</span>
         <span class="p">}</span>

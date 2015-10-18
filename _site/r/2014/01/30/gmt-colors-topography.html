@@ -103,7 +103,7 @@
 
 <h1 id="set-up-colours-as-suggested-on-the-menuggest-blog">1. Set up colours as suggested on the “menuggest” blog</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -115,34 +115,33 @@
 10
 11</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## test GMT colours as suggested by</span>
 <span class="c1">## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html</span>
-ocean.pal <span class="o">&lt;-</span> colorRampPalette<span class="p">(</span>c<span class="p">(</span><span class="s">&quot;#000000&quot;</span><span class="p">,</span><span class="s">&quot;#000209&quot;</span><span class="p">,</span><span class="s">&quot;#000413&quot;</span><span class="p">,</span><span class="s">&quot;#00061E&quot;</span><span class="p">,</span>
+ocean.pal <span class="o">&lt;-</span> colorRampPalette<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;#000000&quot;</span><span class="p">,</span><span class="s">&quot;#000209&quot;</span><span class="p">,</span><span class="s">&quot;#000413&quot;</span><span class="p">,</span><span class="s">&quot;#00061E&quot;</span><span class="p">,</span>
                                 <span class="s">&quot;#000728&quot;</span><span class="p">,</span><span class="s">&quot;#000932&quot;</span><span class="p">,</span><span class="s">&quot;#002650&quot;</span><span class="p">,</span><span class="s">&quot;#00426E&quot;</span><span class="p">,</span>
                                 <span class="s">&quot;#005E8C&quot;</span><span class="p">,</span><span class="s">&quot;#007AAA&quot;</span><span class="p">,</span><span class="s">&quot;#0096C8&quot;</span><span class="p">,</span><span class="s">&quot;#22A9C2&quot;</span><span class="p">,</span>
                                 <span class="s">&quot;#45BCBB&quot;</span><span class="p">,</span><span class="s">&quot;#67CFB5&quot;</span><span class="p">,</span><span class="s">&quot;#8AE2AE&quot;</span><span class="p">,</span><span class="s">&quot;#ACF6A8&quot;</span><span class="p">,</span>
                                 <span class="s">&quot;#BCF8B9&quot;</span><span class="p">,</span><span class="s">&quot;#CBF9CA&quot;</span><span class="p">,</span><span class="s">&quot;#DBFBDC&quot;</span><span class="p">,</span><span class="s">&quot;#EBFDED&quot;</span><span class="p">))</span>
-land.pal <span class="o">&lt;-</span> colorRampPalette<span class="p">(</span>c<span class="p">(</span><span class="s">&quot;#336600&quot;</span><span class="p">,</span><span class="s">&quot;#F3CA89&quot;</span><span class="p">,</span><span class="s">&quot;#D9A627&quot;</span><span class="p">,</span><span class="s">&quot;#A49019&quot;</span><span class="p">,</span>
+land.pal <span class="o">&lt;-</span> colorRampPalette<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;#336600&quot;</span><span class="p">,</span><span class="s">&quot;#F3CA89&quot;</span><span class="p">,</span><span class="s">&quot;#D9A627&quot;</span><span class="p">,</span><span class="s">&quot;#A49019&quot;</span><span class="p">,</span>
                                <span class="s">&quot;#9F7B0D&quot;</span><span class="p">,</span><span class="s">&quot;#996600&quot;</span><span class="p">,</span><span class="s">&quot;#B27676&quot;</span><span class="p">,</span><span class="s">&quot;#C2B0B0&quot;</span><span class="p">,</span>
                                <span class="s">&quot;#E5E5E5&quot;</span><span class="p">,</span><span class="s">&quot;#FFFFFF&quot;</span><span class="p">))</span>
-library<span class="p">(</span>oce<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## Loading required package: methods
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div>
+## Loading required package: maps</code></pre></div>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
 6</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>topoWorld<span class="p">)</span>
-waterBreaks <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">-10000</span><span class="p">,</span> <span class="m">-100</span><span class="p">,</span> by<span class="o">=</span><span class="m">50</span><span class="p">)</span>
-landBreaks <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> by<span class="o">=</span><span class="m">50</span><span class="p">)</span>
+waterBreaks <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">-10000</span><span class="p">,</span> <span class="m">-100</span><span class="p">,</span> by<span class="o">=</span><span class="m">50</span><span class="p">)</span>
+landBreaks <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> by<span class="o">=</span><span class="m">50</span><span class="p">)</span>
 imagep<span class="p">(</span>topoWorld<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-       breaks<span class="o">=</span>c<span class="p">(</span>waterBreaks<span class="p">,</span> <span class="m">0</span><span class="p">,</span> landBreaks<span class="p">),</span>
-       col<span class="o">=</span>c<span class="p">(</span>ocean.pal<span class="p">(</span>length<span class="p">(</span>waterBreaks<span class="p">)),</span> land.pal<span class="p">(</span>length<span class="p">(</span>landBreaks<span class="p">))))</span>
+       breaks<span class="o">=</span><span class="kt">c</span><span class="p">(</span>waterBreaks<span class="p">,</span> <span class="m">0</span><span class="p">,</span> landBreaks<span class="p">),</span>
+       col<span class="o">=</span><span class="kt">c</span><span class="p">(</span>ocean.pal<span class="p">(</span><span class="kp">length</span><span class="p">(</span>waterBreaks<span class="p">)),</span> land.pal<span class="p">(</span><span class="kp">length</span><span class="p">(</span>landBreaks<span class="p">))))</span>
 </pre></div>
 </td></tr></table>
 

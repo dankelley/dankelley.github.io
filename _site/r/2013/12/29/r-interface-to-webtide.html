@@ -108,14 +108,14 @@
 
 <p>The following code in the R language will produce a graph in which the top panel mimics the tidal-elevation graph produced by WebTide itself (see previous blog posting for comparison).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
-tStart <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2013-12-29 14:21:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-tEnd <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-01-13 15:21:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-time<span class="o">&lt;-</span>seq<span class="p">(</span>tStart<span class="p">,</span> tEnd<span class="p">,</span> by<span class="o">=</span><span class="m">15</span><span class="p">,</span> units<span class="o">=</span><span class="s">&quot;minutes&quot;</span><span class="p">)</span>
+5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+tStart <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2013-12-29 14:21:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+tEnd <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-01-13 15:21:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+time<span class="o">&lt;-</span><span class="kp">seq</span><span class="p">(</span>tStart<span class="p">,</span> tEnd<span class="p">,</span> by<span class="o">=</span><span class="m">15</span><span class="p">,</span> units<span class="o">=</span><span class="s">&quot;minutes&quot;</span><span class="p">)</span>
 prediction <span class="o">&lt;-</span> webtide<span class="p">(</span><span class="s">&quot;predict&quot;</span><span class="p">,</span> lon<span class="o">=</span><span class="m">-65.06747</span><span class="p">,</span> lat<span class="o">=</span><span class="m">45.36544</span><span class="p">,</span> time<span class="o">=</span>time<span class="p">)</span>
 </pre></div>
 </td></tr></table>
@@ -124,18 +124,18 @@ prediction <span class="o">&lt;-</span> webtide<span class="p">(</span><span cla
 
 <p>One of the advantages of accessing the tidal prediction from within oce is to make it easier to undertake further analysis, e.g. a node nearer Halifax has a mixed tide, with the following illustrating in terms of velocity and a so-called progressive vector.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
 6
 7</code></pre></div></td><td class="code"><div class="highlight"><pre>p <span class="o">&lt;-</span> webtide<span class="p">(</span><span class="s">&quot;predict&quot;</span><span class="p">,</span> node<span class="o">=</span><span class="m">14569</span><span class="p">)</span>
-par<span class="p">(</span>mfrow<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span>c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
 plot<span class="p">(</span>p<span class="o">$</span>u<span class="p">,</span> p<span class="o">$</span>v<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;o&quot;</span><span class="p">)</span>
-dt <span class="o">&lt;-</span> diff<span class="p">(</span>as.numeric<span class="p">(</span>p<span class="o">$</span>time<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]))</span>
-x <span class="o">&lt;-</span> dt <span class="o">*</span> cumsum<span class="p">(</span>p<span class="o">$</span>u<span class="p">)</span>
-y <span class="o">&lt;-</span> dt <span class="o">*</span> cumsum<span class="p">(</span>p<span class="o">$</span>v<span class="p">)</span>
+dt <span class="o">&lt;-</span> <span class="kp">diff</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>p<span class="o">$</span>time<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]))</span>
+x <span class="o">&lt;-</span> dt <span class="o">*</span> <span class="kp">cumsum</span><span class="p">(</span>p<span class="o">$</span>u<span class="p">)</span>
+y <span class="o">&lt;-</span> dt <span class="o">*</span> <span class="kp">cumsum</span><span class="p">(</span>p<span class="o">$</span>v<span class="p">)</span>
 plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;o&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>

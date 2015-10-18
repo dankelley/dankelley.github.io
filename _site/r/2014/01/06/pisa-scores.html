@@ -106,7 +106,7 @@
 
 <p>First, read the data and set up axes.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -121,14 +121,14 @@
 13
 14</code></pre></div></td><td class="code"><div class="highlight"><pre>regionHighlight <span class="o">&lt;-</span> <span class="s">&quot;Canada&quot;</span>
 d <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#39;PISA-summary-2012.csv&#39;</span><span class="p">,</span> skip<span class="o">=</span><span class="m">16</span><span class="p">,</span> header<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
-              col.names<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="s">&quot;region&quot;</span><span class="p">,</span>
+              col.names<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="s">&quot;region&quot;</span><span class="p">,</span>
                           <span class="s">&quot;math&quot;</span><span class="p">,</span><span class="s">&quot;mathLow&quot;</span><span class="p">,</span><span class="s">&quot;mathHigh&quot;</span><span class="p">,</span><span class="s">&quot;mathChange&quot;</span><span class="p">,</span>
                           <span class="s">&quot;reading&quot;</span><span class="p">,</span><span class="s">&#39;readingChange&#39;</span><span class="p">,</span>
                           <span class="s">&#39;science&#39;</span><span class="p">,</span><span class="s">&#39;scienceChange&#39;</span><span class="p">))</span>
-n <span class="o">&lt;-</span> length<span class="p">(</span>d<span class="o">$</span>math<span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span>c<span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">),</span> mgp<span class="o">=</span>c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-range <span class="o">&lt;-</span> range<span class="p">(</span>c<span class="p">(</span>d<span class="o">$</span>math<span class="p">,</span> d<span class="o">$</span>reading<span class="p">,</span> d<span class="o">$</span>science<span class="p">))</span>
-plot<span class="p">(</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span> range<span class="p">,</span>
+n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>d<span class="o">$</span>math<span class="p">)</span>
+par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+range <span class="o">&lt;-</span> <span class="kp">range</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>d<span class="o">$</span>math<span class="p">,</span> d<span class="o">$</span>reading<span class="p">,</span> d<span class="o">$</span>science<span class="p">))</span>
+plot<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span> <span class="kp">range</span><span class="p">,</span>
      type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
      ylab<span class="o">=</span><span class="s">&quot;PISA Score (2012)&quot;</span><span class="p">)</span>
 axis<span class="p">(</span><span class="m">2</span><span class="p">)</span>
@@ -138,10 +138,10 @@ box<span class="p">()</span>
 
 <p>Next, set parameters for label placement.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>dy <span class="o">&lt;-</span> diff<span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span> <span class="o">/</span> <span class="m">50</span>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>dy <span class="o">&lt;-</span> <span class="kp">diff</span><span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span> <span class="o">/</span> <span class="m">50</span>
 x0 <span class="o">&lt;-</span> <span class="m">0</span>
 dx <span class="o">&lt;-</span> <span class="m">1</span>
 cex <span class="o">&lt;-</span> <span class="m">0.65</span>
@@ -150,27 +150,27 @@ cex <span class="o">&lt;-</span> <span class="m">0.65</span>
 
 <p>Show Mathematics scores.  The gist is in the line containing the call to <code>approx()</code>, followed by the one calling <code>segments()</code>; this scheme draws lines between a numerical scale and evenly-spaced labels.  Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements.  For example, there is a remarkable gap in each measure, between the top performer and the second-top one.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
 6
 7
-8</code></pre></div></td><td class="code"><div class="highlight"><pre>o <span class="o">&lt;-</span> order<span class="p">(</span>d<span class="o">$</span>math<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-y <span class="o">&lt;-</span> approx<span class="p">(</span><span class="m">1</span><span class="o">:</span>n<span class="p">,</span> seq<span class="p">(</span>range<span class="p">[</span><span class="m">2</span><span class="p">],</span>range<span class="p">[</span><span class="m">1</span><span class="p">],</span>length.out<span class="o">=</span>n<span class="p">),</span> <span class="m">1</span><span class="o">:</span>n<span class="p">)</span><span class="o">$</span>y
-segments<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>math<span class="p">[</span>o<span class="p">],</span> rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
-lines<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> range<span class="p">(</span>d<span class="o">$</span>math<span class="p">))</span>
-text<span class="p">(</span>rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
-text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> range<span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Maths&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+8</code></pre></div></td><td class="code"><div class="highlight"><pre>o <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span>d<span class="o">$</span>math<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+y <span class="o">&lt;-</span> approx<span class="p">(</span><span class="m">1</span><span class="o">:</span>n<span class="p">,</span> <span class="kp">seq</span><span class="p">(</span><span class="kp">range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="kp">range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span>length.out<span class="o">=</span>n<span class="p">),</span> <span class="m">1</span><span class="o">:</span>n<span class="p">)</span><span class="o">$</span>y
+segments<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>math<span class="p">[</span>o<span class="p">],</span> <span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
+lines<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kp">range</span><span class="p">(</span>d<span class="o">$</span>math<span class="p">))</span>
+text<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
+text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> <span class="kp">range</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Maths&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>Show Reading scores</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -178,19 +178,19 @@ text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span>
 6
 7
 8</code></pre></div></td><td class="code"><div class="highlight"><pre>x0 <span class="o">&lt;-</span> x0 <span class="o">+</span> <span class="m">2</span> <span class="o">*</span> dx 
-o <span class="o">&lt;-</span> order<span class="p">(</span>d<span class="o">$</span>reading<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-segments<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>reading<span class="p">[</span>o<span class="p">],</span> rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
-lines<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> range<span class="p">(</span>d<span class="o">$</span>reading<span class="p">))</span>
-text<span class="p">(</span>rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
-text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> range<span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Reading&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+o <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span>d<span class="o">$</span>reading<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+segments<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>reading<span class="p">[</span>o<span class="p">],</span> <span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
+lines<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kp">range</span><span class="p">(</span>d<span class="o">$</span>reading<span class="p">))</span>
+text<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
+text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> <span class="kp">range</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Reading&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>Finally, show Science scores.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -198,13 +198,13 @@ text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span>
 6
 7
 8</code></pre></div></td><td class="code"><div class="highlight"><pre>x0 <span class="o">&lt;-</span> x0 <span class="o">+</span> <span class="m">2</span> <span class="o">*</span> dx 
-o <span class="o">&lt;-</span> order<span class="p">(</span>d<span class="o">$</span>science<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-segments<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>science<span class="p">[</span>o<span class="p">],</span> rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
-lines<span class="p">(</span>rep<span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> range<span class="p">(</span>d<span class="o">$</span>science<span class="p">))</span>
-text<span class="p">(</span>rep<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
-     col<span class="o">=</span>ifelse<span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
-text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> range<span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Science&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+o <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span>d<span class="o">$</span>science<span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+segments<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> n<span class="p">),</span> d<span class="o">$</span>science<span class="p">[</span>o<span class="p">],</span> <span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> 
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;gray&quot;</span><span class="p">))</span>
+lines<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kp">range</span><span class="p">(</span>d<span class="o">$</span>science<span class="p">))</span>
+text<span class="p">(</span><span class="kp">rep</span><span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> n<span class="p">),</span> y<span class="p">,</span> d<span class="o">$</span>region<span class="p">[</span>o<span class="p">],</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">,</span>
+     col<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>d<span class="o">$</span>region<span class="p">[</span>o<span class="p">]</span><span class="o">==</span>regionHighlight<span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
+text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span> <span class="kp">range</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span>dy<span class="p">,</span> <span class="s">&quot;Science&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -212,7 +212,7 @@ text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span>
 
 <p>The data can be downloaded from a link given above, but it requires google login.</p>
 
-<div class="highlight"><pre><code class="bash">,,<span class="s2">&quot;Mean score</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">,,<span class="s2">&quot;Mean score</span>
 <span class="s2">in PISA 2012, MATHS&quot;</span>,<span class="s2">&quot;Share</span>
 <span class="s2">of low achievers</span>
 <span class="s2">in mathematics</span>
@@ -293,8 +293,7 @@ text<span class="p">(</span>x0<span class="o">+</span>dx<span class="p">,</span>
 57,Albania,394,60.7,0.8,5.6,394,4.1,397,2.2
 63,Qatar,376,69.6,2,9.2,388,12,384,5.4
 64,Indonesia,375,75.7,0.3,0.7,396,2.3,382,-1.9
-65,Peru,368,74.6,0.6,1,384,5.2,373,1.3
-</code></pre></div>
+65,Peru,368,74.6,0.6,1,384,5.2,373,1.3</code></pre></div>
 
 
 

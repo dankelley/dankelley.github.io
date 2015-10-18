@@ -137,7 +137,7 @@ below, which plots the solution for <script type="math/tex">a=0.1</script> as th
 the theoretical solution as the blue line.  Readers might wish to try this with
 slightly larger and smaller values of <script type="math/tex">a</script>, to get a feel for the solution.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -153,23 +153,23 @@ slightly larger and smaller values of <script type="math/tex">a</script>, to get
 14
 15
 16
-17</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>deSolve<span class="p">)</span>
-de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+17</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>deSolve<span class="p">)</span>
+de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
     theta <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">1</span><span class="p">]</span>
     phi <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">2</span><span class="p">]</span>
-    list<span class="p">(</span>c<span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span>sin<span class="p">(</span>theta<span class="p">)))</span>
+    <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span><span class="kp">sin</span><span class="p">(</span>theta<span class="p">)))</span>
 <span class="p">}</span>
 
 a <span class="o">&lt;-</span> <span class="m">0.1</span>
-y0 <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
-t <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span> <span class="o">*</span> pi<span class="p">,</span> pi<span class="o">/</span><span class="m">100</span><span class="p">)</span>
-sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> t<span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
-ylim <span class="o">&lt;-</span> max<span class="p">(</span>range<span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> c<span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span>t<span class="p">),</span> 
-    ylab <span class="o">=</span> expression<span class="p">(</span>theta<span class="p">(</span>t<span class="p">)))</span>
+y0 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
+t <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span> <span class="o">*</span> <span class="kc">pi</span><span class="p">,</span> <span class="kc">pi</span><span class="o">/</span><span class="m">100</span><span class="p">)</span>
+sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> <span class="kp">t</span><span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
+ylim <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">range</span><span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> <span class="kt">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+par<span class="p">(</span>mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span><span class="kp">t</span><span class="p">),</span> 
+    ylab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span>theta<span class="p">(</span><span class="kp">t</span><span class="p">)))</span>
 grid<span class="p">()</span>
-lines<span class="p">(</span>t<span class="p">,</span> a <span class="o">*</span> sin<span class="p">(</span>t<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lty <span class="o">=</span> <span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> a <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="kp">t</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lty <span class="o">=</span> <span class="s">&quot;dashed&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -180,7 +180,7 @@ lines<span class="p">(</span>t<span class="p">,</span> a <span class="o">*</span
 <p>For more exploration, it is convenient to define the above as a stand-alone
 function that takes <code>a</code> as a parameter.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -198,23 +198,23 @@ function that takes <code>a</code> as a parameter.</p>
 16
 17
 18
-19</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>deSolve<span class="p">)</span>
+19</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>deSolve<span class="p">)</span>
 oscillator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>a <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> <span class="p">{</span>
-    de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>t<span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+    de <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> y<span class="p">,</span> parms<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
         theta <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">1</span><span class="p">]</span>
         phi <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">2</span><span class="p">]</span>
-        list<span class="p">(</span>c<span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span>sin<span class="p">(</span>theta<span class="p">)))</span>
+        <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>dthetadt <span class="o">=</span> phi<span class="p">,</span> dphidt <span class="o">=</span> <span class="o">-</span><span class="kp">sin</span><span class="p">(</span>theta<span class="p">)))</span>
     <span class="p">}</span>
-    y0 <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
-    t <span class="o">&lt;-</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">8</span> <span class="o">*</span> pi<span class="p">,</span> pi<span class="o">/</span><span class="m">100</span><span class="p">)</span>
-    sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> t<span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
-    ylim <span class="o">&lt;-</span> max<span class="p">(</span>range<span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> c<span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-    par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-    plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span>t<span class="p">),</span> 
-        ylab <span class="o">=</span> expression<span class="p">(</span>theta<span class="p">(</span>t<span class="p">)))</span>
+    y0 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> a<span class="p">)</span>
+    t <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">8</span> <span class="o">*</span> <span class="kc">pi</span><span class="p">,</span> <span class="kc">pi</span><span class="o">/</span><span class="m">100</span><span class="p">)</span>
+    sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>y <span class="o">=</span> y0<span class="p">,</span> times <span class="o">=</span> <span class="kp">t</span><span class="p">,</span> func <span class="o">=</span> de<span class="p">)</span>
+    ylim <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">range</span><span class="p">(</span>sol<span class="p">[,</span> <span class="m">2</span><span class="p">]))</span> <span class="o">*</span> <span class="kt">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+    par<span class="p">(</span>mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+    plot<span class="p">(</span>sol<span class="p">[,</span> <span class="m">1</span><span class="p">],</span> sol<span class="p">[,</span> <span class="m">2</span><span class="p">],</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> ylim <span class="o">=</span> ylim<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span><span class="kp">t</span><span class="p">),</span> 
+        ylab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span>theta<span class="p">(</span><span class="kp">t</span><span class="p">)))</span>
     grid<span class="p">()</span>
-    lines<span class="p">(</span>t<span class="p">,</span> a <span class="o">*</span> sin<span class="p">(</span>t<span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
-    legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> col <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> lwd <span class="o">=</span> <span class="m">1</span><span class="p">,</span> legend <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;linear&quot;</span><span class="p">,</span> 
+    lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> a <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="kp">t</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+    legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> col <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> lwd <span class="o">=</span> <span class="m">1</span><span class="p">,</span> legend <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;linear&quot;</span><span class="p">,</span> 
         <span class="s">&quot;nonlinear&quot;</span><span class="p">),</span> bg <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
@@ -224,7 +224,7 @@ oscillator <span class="o">&lt;-</span> <span class="kr">function</span><span cl
 
 <p>Start with a somewhat nonlinear problem</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -233,7 +233,7 @@ oscillator <span class="o">&lt;-</span> <span class="kr">function</span><span cl
 <p>Readers should try increasing <script type="math/tex">a</script> a bit at a time, e.g. the example below has
 a distinctly non-sinusoidal character.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1.999</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>oscillator<span class="p">(</span><span class="m">1.999</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 

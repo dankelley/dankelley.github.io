@@ -116,12 +116,12 @@
 
 <p>The first step is to load the data and extract dependent and independent variables, here <em>S</em> and <em>p</em>.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
-library<span class="p">(</span>signal<span class="p">)</span>
+5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>signal<span class="p">)</span>
 data<span class="p">(</span>ctd<span class="p">)</span>
 S <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;salinity&#39;</span><span class="p">]]</span>
 p <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;pressure&#39;</span><span class="p">]]</span>
@@ -130,17 +130,17 @@ p <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;
 
 <p>Next, one must create equispaced data, for filtering to make any sense at all.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>dp <span class="o">&lt;-</span> median<span class="p">(</span>diff<span class="p">(</span>p<span class="p">))</span>
-pp <span class="o">&lt;-</span> seq<span class="p">(</span>min<span class="p">(</span>p<span class="p">),</span> max<span class="p">(</span>p<span class="p">),</span> dp<span class="p">)</span>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>dp <span class="o">&lt;-</span> median<span class="p">(</span><span class="kp">diff</span><span class="p">(</span>p<span class="p">))</span>
+pp <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span>p<span class="p">),</span> <span class="kp">max</span><span class="p">(</span>p<span class="p">),</span> dp<span class="p">)</span>
 S0 <span class="o">&lt;-</span> approx<span class="p">(</span>p<span class="p">,</span> S<span class="p">,</span> pp<span class="p">)</span><span class="o">$</span>y
 </pre></div>
 </td></tr></table>
 
 <p>Now comes something that must be established by the actual task at hand: setting the critical frequency for the filter (as a ratio to Nyquist).  In this case, a somewhat arbitrary frequency is selected, and then both first-order and second-order filters are created.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3</code></pre></div></td><td class="code"><div class="highlight"><pre>W <span class="o">&lt;-</span> dp <span class="o">/</span> <span class="m">2</span>
 f1 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">1</span><span class="p">,</span> W<span class="p">)</span>
@@ -150,13 +150,13 @@ f2 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">2<
 
 <p>Now, set up for a three-panel plot.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
 </pre></div>
 </td></tr></table>
 
 <p>For the left-hand panel, show the raw data in black, and the two filters in red and blue.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -172,7 +172,7 @@ mtext<span class="p">(</span><span class="s">&quot;(a) &quot;</span><span class=
 
 <p>For the middle panel, detrended the profile, and then filter.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -190,7 +190,7 @@ mtext<span class="p">(</span><span class="s">&quot;(b) &quot;</span><span class=
 
 <p>For the right-hand panel, use a smoothing spline instead of a filter.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4

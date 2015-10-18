@@ -111,16 +111,15 @@
 
 <p><strong>Case 1</strong></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## Loading required package: methods
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps
-</code></pre></div>
+## Loading required package: maps</code></pre></div>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -128,7 +127,7 @@
 6
 7
 8</code></pre></div></td><td class="code"><div class="highlight"><pre>x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span>
-y <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> x<span class="o">/</span><span class="m">100</span> <span class="o">+</span> sin<span class="p">(</span>x<span class="o">/</span><span class="m">5</span><span class="p">)</span>
+y <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> x<span class="o">/</span><span class="m">100</span> <span class="o">+</span> <span class="kp">sin</span><span class="p">(</span>x<span class="o">/</span><span class="m">5</span><span class="p">)</span>
 yn <span class="o">&lt;-</span> y <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span> sd<span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
 L <span class="o">&lt;-</span> <span class="m">4</span>
 calc <span class="o">&lt;-</span> runlm<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> L<span class="o">=</span>L<span class="p">,</span> deriv<span class="o">=</span><span class="m">0</span><span class="p">)</span>
@@ -141,7 +140,7 @@ lines<span class="p">(</span>x<span class="p">,</span> calc<span class="p">,</sp
 <p><img src="http://dankelley.github.io/figs/2014-02-11-oce_runlm/runlm-case1.png" alt="center" /> 
 <strong>Case 2</strong></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -154,12 +153,12 @@ lines<span class="p">(</span>x<span class="p">,</span> calc<span class="p">,</sp
 plot<span class="p">(</span>ctd<span class="p">,</span> which<span class="o">=</span><span class="s">&quot;N2&quot;</span><span class="p">)</span>
 rho <span class="o">&lt;-</span> swRho<span class="p">(</span>ctd<span class="p">)</span>
 z <span class="o">&lt;-</span> swZ<span class="p">(</span>ctd<span class="p">)</span>
-zz <span class="o">&lt;-</span> seq<span class="p">(</span>min<span class="p">(</span>z<span class="p">),</span> max<span class="p">(</span>z<span class="p">),</span> <span class="m">0.1</span><span class="p">)</span>
-N2 <span class="o">&lt;-</span> <span class="m">-9.8</span> <span class="o">/</span> mean<span class="p">(</span>rho<span class="p">)</span> <span class="o">*</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> zz<span class="p">,</span> deriv<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+zz <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span>z<span class="p">),</span> <span class="kp">max</span><span class="p">(</span>z<span class="p">),</span> <span class="m">0.1</span><span class="p">)</span>
+N2 <span class="o">&lt;-</span> <span class="m">-9.8</span> <span class="o">/</span> <span class="kp">mean</span><span class="p">(</span>rho<span class="p">)</span> <span class="o">*</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> zz<span class="p">,</span> deriv<span class="o">=</span><span class="m">1</span><span class="p">)</span>
 lines<span class="p">(</span>N2<span class="p">,</span> <span class="o">-</span>zz<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span>
-       col<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span>
-       legend<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;swN2()&quot;</span><span class="p">,</span> <span class="s">&quot;using runlm()&quot;</span><span class="p">))</span>
+       col<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span>
+       legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;swN2()&quot;</span><span class="p">,</span> <span class="s">&quot;using runlm()&quot;</span><span class="p">))</span>
 </pre></div>
 </td></tr></table>
 

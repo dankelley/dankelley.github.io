@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Comparing World Ocean Atlases 2013 and 2013v2</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Comparing World Ocean Atlases 2013 and 2013v2</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        WOA-2013v2 will likely included in the upcoming release of the ``ocedata`` package, so I thought I should look into changes. Some results for SST and SSS are given here.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+The ocedata package [1] provides data that may be of use to oceanographers,
+either working with their own R code or working with the oce package [2]. One
+such dataset, called ``levitus``, holds sea surface temperature and salinity
+(SST and SSS), based on the 2013 version of the World Ocean Atlas.  An updated
+version of this atlas is suggested by the WOA authors to be an improvement [3],
+and so it will be used for an updated version of ``levitus`` in the upcoming
+version of ocedata.
+
+This blog item deals with differences between the two datasets.
+
+# Analysis
+
+First, the netcdf files for temperature and salinity were downloaded from
+online sources [4,5]. Then the data were loaded as follows.
+```{r}
+library(ncdf4)
+con <- nc_open("woa13_decav_t00_01v2.nc")
+## make a vector for later convenience
+longitude <- as.vector(ncvar_get(con, "lon"))
+latitude <- as.vector(ncvar_get(con, "lat"))
+SST <- ncvar_get(con, "t_an")[,,1]
+nc_close(con)
+con <- nc_open("woa13_decav_s00_01v2.nc")
+SSS <- ncvar_get(con, "s_an")[,,1]
+nc_close(con)
+```
+
+Next, load the levitus dataset from the existing ``ocedata`` package
+and compute the differences
+```{r,message=FALSE,warning=FALSE}
+library(oce)
+data("levitus", package="ocedata")
+library(MASS) # for truehist
+par(mfrow=c(2,1), mar=c(3, 3, 1, 1), mgp=c(2, 0.5, 0))
+dSST <- SST - levitus$SST
+dSSS <- SSS - levitus$SSS
+```
+
+The main differences are said to be in data-sparse regions, e.g. high latitudes,
+so an interesting check is to plot spatial patterns.
+```{r}
+par(mfrow=c(2,1), mar=c(3, 3, 1, 1), mgp=c(2, 0.5, 0))
+data(coastlineWorld)
+imagep(longitude, latitude, dSST, zlim=c(-3,3))
+polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
+        col='lightgray') 
+mtext("SST change", side=3, adj=1)
+imagep(longitude, latitude, dSSS, zlim=c(-3,3))
+polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
+        col='lightgray') 
+mtext("SSS change", side=3, adj=1)
+```
+
+The figures confirm that the differences are mainly in high latitudes, with
+estimates in Hudson's Bay being particularly altered.  A closer examination of
+the author's general locale may interest him, if nobody else...
+```{r}
+imagep(longitude, latitude, dSST, zlim=c(-3,3), xlim=c(-90,-30), ylim=c(30, 90), asp=1)
+polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
+        col='lightgray') 
+mtext("SST change", side=3, adj=1)
+imagep(longitude, latitude, dSSS, zlim=c(-3,3), xlim=c(-90,-30), ylim=c(30, 90), asp=1)
+polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]],
+        col='lightgray') 
+mtext("SSS change", side=3, adj=1)
+```
+
+
+# Conclusions
+
+The patterns of variation are as expected: the updated WOA differs mainly in
+high latitudes.  The differences seem mainly to arise in regions that are
+anomalous compared to other waters at similar latitudes. For example, the
+estimates for SST and SSS in Hudson's Bay are markedly different in the two
+atlases.  I am not too surprised by this, and I'm not too concerned either; I
+doubt that many researchers (other than some modelers) would have paid much
+attention to WOA estimates for Hudson's Bay. However, the changes in the
+northern Labrador Sea are quite concerning, given the importance of that region
+to Atlantic watermass formation, and the likelihood that WOA is used to
+initialize numerical models.
+
+# References and resources
+
+1. [Ocedata website](http://dankelley.github.io/ocedata/)   
+
+2. [Oce website](http://dankelley.github.io/oce/)   
+
+3. [NOAA document on WOA changes](http://data.nodc.noaa.gov/woa/WOA13/DOC/woa13v2_changes.pdf)
+
+4. [woa2013v2 temperature netcdf file](http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/1.00/woa13_decav_t00_01v2.nc)
+
+5. [woa2013v2 salinity netcdf file](http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/salinity/netcdf/decav/1.00/woa13_decav_s00_01v2.nc)
+
+6. Jekyll source code for this blog entry: [2015-08-22-woa-2013-2.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-08-22-woa-2013-2.Rmd)
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

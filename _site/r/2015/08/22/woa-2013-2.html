@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Comparing World Ocean Atlases 2013 and 2013v2</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<a class="pagination" href="/r/2015/08/25/email-graphs.html" title="email graphs">
+    Next <!-- &rarr; -->
+</a>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2015/05/10/ITS90-temperature-scale.html" title="ITS-90 temperature scale">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Comparing World Ocean Atlases 2013 and 2013v2</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Aug 22, 2015
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        WOA-2013v2 will likely included in the upcoming release of the ``ocedata`` package, so I thought I should look into changes. Some results for SST and SSS are given here.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The ocedata package [1] provides data that may be of use to oceanographers,
+either working with their own R code or working with the oce package [2]. One
+such dataset, called <code>levitus</code>, holds sea surface temperature and salinity
+(SST and SSS), based on the 2013 version of the World Ocean Atlas.  An updated
+version of this atlas is suggested by the WOA authors to be an improvement [3],
+and so it will be used for an updated version of <code>levitus</code> in the upcoming
+version of ocedata.</p>
+
+<p>This blog item deals with differences between the two datasets.</p>
+
+<h1 id="analysis">Analysis</h1>
+
+<p>First, the netcdf files for temperature and salinity were downloaded from
+online sources [4,5]. Then the data were loaded as follows.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>ncdf4<span class="p">)</span>
+con <span class="o">&lt;-</span> nc_open<span class="p">(</span><span class="s">&quot;woa13_decav_t00_01v2.nc&quot;</span><span class="p">)</span>
+<span class="c1">## make a vector for later convenience</span>
+longitude <span class="o">&lt;-</span> <span class="kp">as.vector</span><span class="p">(</span>ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;lon&quot;</span><span class="p">))</span>
+latitude <span class="o">&lt;-</span> <span class="kp">as.vector</span><span class="p">(</span>ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;lat&quot;</span><span class="p">))</span>
+SST <span class="o">&lt;-</span> ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;t_an&quot;</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+nc_close<span class="p">(</span>con<span class="p">)</span>
+con <span class="o">&lt;-</span> nc_open<span class="p">(</span><span class="s">&quot;woa13_decav_s00_01v2.nc&quot;</span><span class="p">)</span>
+SSS <span class="o">&lt;-</span> ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;s_an&quot;</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+nc_close<span class="p">(</span>con<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Next, load the levitus dataset from the existing <code>ocedata</code> package
+and compute the differences</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+data<span class="p">(</span><span class="s">&quot;levitus&quot;</span><span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>MASS<span class="p">)</span> <span class="c1"># for truehist</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+dSST <span class="o">&lt;-</span> SST <span class="o">-</span> levitus<span class="o">$</span>SST
+dSSS <span class="o">&lt;-</span> SSS <span class="o">-</span> levitus<span class="o">$</span>SSS
+</pre></div>
+</td></tr></table>
+
+<p>The main differences are said to be in data-sparse regions, e.g. high latitudes,
+so an interesting check is to plot spatial patterns.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+data<span class="p">(</span>coastlineWorld<span class="p">)</span>
+imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSST<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SST change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSSS<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SSS change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-3-1.png" alt="center" /> </p>
+
+<p>The figures confirm that the differences are mainly in high latitudes, with
+estimates in Hudson’s Bay being particularly altered.  A closer examination of
+the author’s general locale may interest him, if nobody else…</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSST<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SST change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-1.png" alt="center" /> </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSSS<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SSS change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-2.png" alt="center" /> </p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>The patterns of variation are as expected: the updated WOA differs mainly in
+high latitudes.  The differences seem mainly to arise in regions that are
+anomalous compared to other waters at similar latitudes. For example, the
+estimates for SST and SSS in Hudson’s Bay are markedly different in the two
+atlases.  I am not too surprised by this, and I’m not too concerned either; I
+doubt that many researchers (other than some modelers) would have paid much
+attention to WOA estimates for Hudson’s Bay. However, the changes in the
+northern Labrador Sea are quite concerning, given the importance of that region
+to Atlantic watermass formation, and the likelihood that WOA is used to
+initialize numerical models.</p>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p><a href="http://dankelley.github.io/ocedata/">Ocedata website</a>   </p>
+  </li>
+  <li>
+    <p><a href="http://dankelley.github.io/oce/">Oce website</a>   </p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/woa/WOA13/DOC/woa13v2_changes.pdf">NOAA document on WOA changes</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/1.00/woa13_decav_t00_01v2.nc">woa2013v2 temperature netcdf file</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/salinity/netcdf/decav/1.00/woa13_decav_s00_01v2.nc">woa2013v2 salinity netcdf file</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-08-22-woa-2013-2.Rmd">2015-08-22-woa-2013-2.Rmd</a></p>
+  </li>
+</ol>
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

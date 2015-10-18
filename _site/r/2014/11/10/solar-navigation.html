@@ -125,18 +125,18 @@ by the <code>altitude</code> component of the list returned by <code>oce::solarA
 <p>The first step is to define a function that returns the absolute value of the
 solar angle, which of course is a minimum at sunrise and sunset.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>library<span class="p">(</span>oce<span class="p">)</span>
+7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
 misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
 <span class="p">{</span>
     riseAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>rise<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
     setAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>set<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
-    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span>abs<span class="p">(</span>riseAlt<span class="p">)</span> <span class="o">+</span> abs<span class="p">(</span>setAlt<span class="p">))</span>
+    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="kp">abs</span><span class="p">(</span>riseAlt<span class="p">)</span> <span class="o">+</span> <span class="kp">abs</span><span class="p">(</span>setAlt<span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table>
@@ -151,30 +151,29 @@ function works.</p>
 yield an optimal match to specified sunrise and sunset times.  This function
 needs an initial value, or guess, and for that we pick 50W and 50N.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>start <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location</span>
-rise <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 11:06:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-set <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span><span class="s">&quot;2014-11-11 20:51:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>start <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location</span>
+rise <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-11-11 11:06:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
+set <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-11-11 20:51:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
 bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span class="p">,</span> misfit<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
 <p>An examination of the fit</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>str<span class="p">(</span>bestfit<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>str<span class="p">(</span>bestfit<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<div class="highlight"><pre><code class="text">## List of 5
+<div class="highlight"><pre><code class="language-text" data-lang="text">## List of 5
 ##  $ par        : num [1:2] -63.7 44.5
 ##  $ value      : num 0.000541
 ##  $ counts     : Named int [1:2] 203 NA
 ##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;function&quot; &quot;gradient&quot;
 ##  $ convergence: int 0
-##  $ message    : NULL
-</code></pre></div>
+##  $ message    : NULL</code></pre></div>
 
 <p>reveals the function value to be very low, indicating a sun just on the
 horizon.  The optimal values for longitude and latitude are stored in <code>par</code>.
@@ -186,7 +185,7 @@ resultant positions plotted.  In the present example, the times are reported to
 the nearest minute, so random values with standard deviation of 30 seconds will
 be used.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="r"> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
  3
  4
@@ -225,8 +224,8 @@ points<span class="p">(</span>bestfit<span class="o">$</span>par<span class="p">
 points<span class="p">(</span><span class="m">-63.571</span><span class="p">,</span> <span class="m">44.649</span><span class="p">,</span> pch<span class="o">=</span><span class="m">22</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&#39;yellow&#39;</span><span class="p">)</span>
 <span class="c1"># A legend summarizes all this work</span>
 legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> 
-       pch<span class="o">=</span>c<span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">21</span><span class="p">,</span> <span class="m">22</span><span class="p">),</span> pt.bg<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;pink&quot;</span><span class="p">,</span> <span class="s">&quot;yellow&quot;</span><span class="p">),</span>
-       legend<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;Best&quot;</span><span class="p">,</span> <span class="s">&quot;Range&quot;</span><span class="p">,</span> <span class="s">&quot;True&quot;</span><span class="p">))</span>
+       pch<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">21</span><span class="p">,</span> <span class="m">22</span><span class="p">),</span> pt.bg<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;pink&quot;</span><span class="p">,</span> <span class="s">&quot;yellow&quot;</span><span class="p">),</span>
+       legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Best&quot;</span><span class="p">,</span> <span class="s">&quot;Range&quot;</span><span class="p">,</span> <span class="s">&quot;True&quot;</span><span class="p">))</span>
 </pre></div>
 </td></tr></table>
 
