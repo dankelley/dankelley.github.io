@@ -26,7 +26,7 @@ through the water column, ideally at almost uniform speed, and, after that, by
 an ascent phase. In most cases, only the descent phase is of direct interest,
 so a first step in processing is usually to isolate this phase.
 
-The ``ctdTrim()`` function in the oce library [1] often does a good job of
+The ``ctdTrim()`` function in the oce library [2] often does a good job of
 locating the descent phase, and trimming data recovered before and after.
 However, this function is somewhat limited, employing an ad-hoc algorithm that
 has parameters that were calibrated on a limited dataset, guided by the eye of
@@ -112,7 +112,8 @@ shinyServer(function(input, output) {
 
 Here, notice the use of ``shinyServer()``. Again, this will seem mysterious at
 first, but a quick glance shows that a major task here is the creation of the
-``ctdTrimPlot()`` function.
+``ctdTrimPlot()`` function.  (Readers familiar with oce [2] will note that the
+margins are made very tight here, mainly to devote more space to the data.)
 
 Interested users should simply copy these files, and try them. If there are no
 ``.CNV`` files handy, comment out the ``file.choose()`` line and uncomment the
