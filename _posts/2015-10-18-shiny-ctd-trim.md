@@ -36,7 +36,7 @@ technician for a minute or two, to check the results, or to supplant them,
 based on visual inspection of the data.
 
 This suggests that CTD trimming might be good demonstration of shiny. As I'm
-just learning the system, my methodology is crude. I wanted to learn how to use
+just learning the system, the methodology is crude. I wanted to learn how to use
 slider bars, so I use ``sliderInput()`` to select the downcast. I wanted to
 learn how to use a file-choice dialog, so I used ``file.choose()`` for that.
 
@@ -54,7 +54,7 @@ library(shiny)
 runApp() # exit by striking ESC on the keyboard
 {% endhighlight %}
 
-Below is the contents of my ``ui.R`` file
+Below is the contents of the ``ui.R`` file
 
 {% highlight r linenos=table %}
 library(shiny)
@@ -72,7 +72,7 @@ This will look a bit mysterious, but anyone who spends 20 minutes with the
 will be shown below a plot that is create with a user-created function named
 ``ctdTrimPlot()``.
 
-Below is the contents of my ``server.R`` file
+Below is the contents of the ``server.R`` file
 
 {% highlight r linenos=table %}
 library(oce)
@@ -122,13 +122,6 @@ Interested users should simply copy these files, and try them. If there are no
 ``.CNV`` files handy, comment out the ``file.choose()`` line and uncomment the
 ``data(ctdRaw)`` line.
 
-Below are screenshots that show how the interface looks when launched, and then
-after the sliders have been used to trim. Notice that the "before" picture has
-wildly unphysical salinity and temperature characteristics. The dotted lines in
-the scan-pressure plot show the trimming that ``ctdTrim()`` would do, and the
-solid lines are the values as set at the moment (which are 0 and 100 percent,
-at the start). Slide the sliders to narrow in on the profile.
-
 Note that the code saves the trimmed data as an ``rda`` file in the local
 directory. A more sophisticated application would use a tailored file name.
 Another useful addition might be to use mouse drags on the scan-pressure plot,
@@ -140,13 +133,20 @@ plotting. Also, bear in mind the calculation of the cost of acquiring the data
 ... is a 1/4 second lag in an interface an issue for a dataset that cost an
 hour to acquire that that might yield great benefits to science?
 
-Below is a screenshot of the initial view of the application.
+Below is a screenshot of the initial view of the application.  Anyone who has
+looked at CTD data will note the wildly unphysical salinity and temperature
+characteristics. The dotted lines in the scan-pressure plot show the trimming
+that ``ctdTrim()`` would do, and the solid lines are the values as set at the
+moment (which are 0 and 100 percent, at the start). The user should adjust
+those sliders to narrow in on the profile.
 
 ![ctd_trim_fig_1.png]({{ site.url }}/assets/ctd_trim_fig_1.png)
 
-Below is a screenshot of a view after the sliders have been used to narrow in
-on the downcast. Notice that I selected a different range than was selected
-automatically by ``ctdTrim()``.
+Below is a screenshot of a view after the downcast has been selected.  It
+should be noted that I selected a different range than was selected
+automatically by ``ctdTrim()``, because I thought the automatic cutoff at the
+bottom of the profile came too late, i.e. during a time when the instrument was
+not moving through the water column.
 
 ![ctd_trim_fig_2.png]({{ site.url }}/assets/ctd_trim_fig_2.png)
 
