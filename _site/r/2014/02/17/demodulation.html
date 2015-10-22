@@ -136,7 +136,7 @@ plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> xc
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-signal.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-signal-1.png" alt="center" /> </p>
 
 <p>Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab <code>demod()</code> function (reference 1).</p>
 
@@ -171,14 +171,14 @@ phase <span class="o">&lt;-</span> <span class="m">180</span> <span class="o">/<
 plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> AMP<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
 lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> amp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> phase<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> PH<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> PH<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
+lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> phase<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> x<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">)</span>
 lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> amp <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> t <span class="o">+</span> phase<span class="o">*</span><span class="kc">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-results.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-results-1.png" alt="center" /> </p>
 
 <p>Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in <a href="http://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html">a previous blog item</a>.</p>
 
