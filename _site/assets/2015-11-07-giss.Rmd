@@ -81,7 +81,7 @@
         
     </span> <!-- post_date -->
     <div class=post_summary>
-        GISS has new data since 2014, with typical difference on the overlapping time window by about 0.1deg.
+        GISS has new data since 2014, with typical difference within the overlapping time window by about 0.1deg.
     </div> <!-- post_summary -->
 </div> <!-- slug -->
 
