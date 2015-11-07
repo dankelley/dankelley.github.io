@@ -1,4 +1,4 @@
-## ----fig.width=8, fig.height=8, dpi=150----------------------------------
+## ----fig.width=7, fig.height=7, dpi=120----------------------------------
 readGISS <- function(file)
 {
     lines <- readLines(file)
