@@ -17,47 +17,35 @@ I thought I'd like to check for myself, and reasoned that I may as well update
 the ``giss`` dataset in the ``ocedata`` R package.
 
 As always seems to be the case, the data format is changed a bit from autumn
-2014, when I downloaded GISS and put it into ``ocedata``. So, I had to write
-some new code, and thought it would make sense to plot the results, to check.
+2014, when I downloaded GISS and put it into ``ocedata``, so I had to write
+some new code.
 
-Along the way, I found a data file on my machine that I downloaded some time in
-the past, but my tests tell me that it is not the one I used for ``ocedata``.
-That means I have three datasets that I'd like to look at.
+I also found a data file on my machine that I downloaded some time in the past,
+but my tests tell me that it is not the one I used for ``ocedata``.  Thus, I
+have three datasets to explore.
 
 At the risk of providing fuel for debate about such things, I am presenting
 code and graphs that show what I found. I make no claims to accurate
 processing. For one thing, the only file for which I have a clear download
-history is the one dated today.
+history is the one dated today [3].
 
 # Procedure and results
 
-First, I downloaded the latest dataset from
-[NASA](http://data.giss.nasa.gov/gistemp/updates_v3/), storing it in a file
-named ``giss-2015-11-07.dat`` (available in a link given at the end of this
-posting). Then I found another file, evidently from 2014, which I copied
-locally and renamed ``giss-2014-xx-xx.dat`` (again, provided below). Note that
-the file formats differ slightly, in the asterisks near the end; the new format
-has spaces, which make it easier to read the data, whereas the old format is
-clearly designed for fixed-width data readers.
+First, I downloaded the latest dataset from [1], storing it in a file named
+``giss-2015-11-07.dat`` (provided in [3] here).  Then I found another file,
+evidently from 2014, which I copied locally and renamed ``giss-2014-xx-xx.dat``
+([4] here). Note that the file formats differ slightly, in the asterisks near
+the end; the new format has spaces, which make it easier to read the data,
+whereas the old format is clearly designed for fixed-width data readers.
 
 Then I wrote code to read the new file. Then I plotted timeseries (left column)
 and some differences (right column).
 
-As you can see, my code is ugly and ad-hoc. Actually, it may contain errors,
-and the main reason I'm posting this is to invite readers to email me if they
-see any errors.
-
-Pleae note that I have comments turned off because I don't have time to
-moderate them, and unmoderated comments on a blog that might touch on climate
-issues is a bit like dropping a lit match over a pool of gasoline and hoping
-for the best.
-
-# Conclusions
-
-The datassets differ. It would be a good idea to read the [NASA
-documentation](http://data.giss.nasa.gov/gistemp) on the evolution of the
-dataset.
-
+My code is ugly and ad-hoc. It may contain errors, and the main reason I'm
+posting this is to invite readers to email me if they see any errors.
+(Comments are turned off because I don't have time to moderate them, and
+unmoderated comments on a blog that might touch on climate issues is a bit like
+dropping a lit match over a pool of gasoline and hoping for the best.)
 
 ```{r fig.width=7, fig.height=7, dpi=120}
 readGISS <- function(file)
@@ -94,9 +82,9 @@ readGISS2014 <- function(file)
 
 library(ocedata)
 data(giss)
-gissNew <- readGISS("giss-20151107.dat")
-gissOld <- readGISS2014("giss-2014xxxx.dat") # no spaces between * fields
-## add 14 to get T.
+gissNew <- readGISS("giss-20151107.dat") # see [3] below
+gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
+## print some tests
 print(giss$index[1:12])
 print(gissOld$index[13:24])
 par(mar=c(1.7, 3, 1, 1), mgp=c(2, 0.7, 0), mfcol=c(3, 2))
@@ -135,15 +123,31 @@ abline(h=0, col='pink')
 legend("topright", lwd=1, legend=c("gissNew - gissOld"), bg="white", cex=3/4)
 ```
 
+
+# Conclusions
+
+The three datassets differ. Having taken poor notes on the two earlier ones, I
+cannot say for sure when they were downloaded, although the headers in these
+files are quite informative.
+
+I have read that there have been differences in data processing recently [x]
+
+, and
+that may explain some of the difference. 
+
+It would be a good idea to read the [NASA
+documentation](http://data.giss.nasa.gov/gistemp) on the evolution of the
+dataset.
+
 # References and resources
 
-1. Shiny website: [http://shiny.rstudio.com](http://shiny.rstudio.com)
+1. [data source](http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt)
 
-2. Oce website: [http://dankelley.github.io/oce/](http://dankelley.github.io/oce/)   
+2. [NASA documentation on dataset changes](http://data.giss.nasa.gov/gistemp)
 
-3. The newly-updated dataset is [here](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat)
+3. [gis-20151107.dat](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat)
 
-4. An old dataset, certainly not the one used for ``ocedata``, is [here](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat)
+4. [giss-2014xxxx.dat](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat)
 
 5. Jekyll source code for this blog entry: [2015-11-07-giss.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd)
 

@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-11-07T11:22:36-04:00</updated>
+    <updated>2015-11-07T11:32:25-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -26,46 +26,35 @@ I thought I’d like to check for myself, and reasoned that I may as well update
 the &lt;code&gt;giss&lt;/code&gt; dataset in the &lt;code&gt;ocedata&lt;/code&gt; R package.&lt;/p&gt;
 
 &lt;p&gt;As always seems to be the case, the data format is changed a bit from autumn
-2014, when I downloaded GISS and put it into &lt;code&gt;ocedata&lt;/code&gt;. So, I had to write
-some new code, and thought it would make sense to plot the results, to check.&lt;/p&gt;
+2014, when I downloaded GISS and put it into &lt;code&gt;ocedata&lt;/code&gt;, so I had to write
+some new code.&lt;/p&gt;
 
-&lt;p&gt;Along the way, I found a data file on my machine that I downloaded some time in
-the past, but my tests tell me that it is not the one I used for &lt;code&gt;ocedata&lt;/code&gt;.
-That means I have three datasets that I’d like to look at.&lt;/p&gt;
+&lt;p&gt;I also found a data file on my machine that I downloaded some time in the past,
+but my tests tell me that it is not the one I used for &lt;code&gt;ocedata&lt;/code&gt;.  Thus, I
+have three datasets to explore.&lt;/p&gt;
 
 &lt;p&gt;At the risk of providing fuel for debate about such things, I am presenting
 code and graphs that show what I found. I make no claims to accurate
 processing. For one thing, the only file for which I have a clear download
-history is the one dated today.&lt;/p&gt;
+history is the one dated today [3].&lt;/p&gt;
 
 &lt;h1 id=&quot;procedure-and-results&quot;&gt;Procedure and results&lt;/h1&gt;
 
-&lt;p&gt;First, I downloaded the latest dataset from
-&lt;a href=&quot;http://data.giss.nasa.gov/gistemp/updates_v3/&quot;&gt;NASA&lt;/a&gt;, storing it in a file
-named &lt;code&gt;giss-2015-11-07.dat&lt;/code&gt; (available in a link given at the end of this
-posting). Then I found another file, evidently from 2014, which I copied
-locally and renamed &lt;code&gt;giss-2014-xx-xx.dat&lt;/code&gt; (again, provided below). Note that
-the file formats differ slightly, in the asterisks near the end; the new format
-has spaces, which make it easier to read the data, whereas the old format is
-clearly designed for fixed-width data readers.&lt;/p&gt;
+&lt;p&gt;First, I downloaded the latest dataset from [1], storing it in a file named
+&lt;code&gt;giss-2015-11-07.dat&lt;/code&gt; (provided in [3] here).  Then I found another file,
+evidently from 2014, which I copied locally and renamed &lt;code&gt;giss-2014-xx-xx.dat&lt;/code&gt;
+([4] here). Note that the file formats differ slightly, in the asterisks near
+the end; the new format has spaces, which make it easier to read the data,
+whereas the old format is clearly designed for fixed-width data readers.&lt;/p&gt;
 
 &lt;p&gt;Then I wrote code to read the new file. Then I plotted timeseries (left column)
 and some differences (right column).&lt;/p&gt;
 
-&lt;p&gt;As you can see, my code is ugly and ad-hoc. Actually, it may contain errors,
-and the main reason I’m posting this is to invite readers to email me if they
-see any errors.&lt;/p&gt;
-
-&lt;p&gt;Pleae note that I have comments turned off because I don’t have time to
-moderate them, and unmoderated comments on a blog that might touch on climate
-issues is a bit like dropping a lit match over a pool of gasoline and hoping
-for the best.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
-
-&lt;p&gt;The datassets differ. It would be a good idea to read the &lt;a href=&quot;http://data.giss.nasa.gov/gistemp&quot;&gt;NASA
-documentation&lt;/a&gt; on the evolution of the
-dataset.&lt;/p&gt;
+&lt;p&gt;My code is ugly and ad-hoc. It may contain errors, and the main reason I’m
+posting this is to invite readers to email me if they see any errors.
+(Comments are turned off because I don’t have time to moderate them, and
+unmoderated comments on a blog that might touch on climate issues is a bit like
+dropping a lit match over a pool of gasoline and hoping for the best.)&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt; 1
  2
@@ -142,9 +131,9 @@ readGISS2014 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span cla
 3
 4
 5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;giss&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-gissNew &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; readGISS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;giss-20151107.dat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-gissOld &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; readGISS2014&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;giss-2014xxxx.dat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# no spaces between * fields&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## add 14 to get T.&lt;/span&gt;
+gissNew &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; readGISS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;giss-20151107.dat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# see [3] below&lt;/span&gt;
+gissOld &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; readGISS2014&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;giss-2014xxxx.dat&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# see [4] below&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## print some tests&lt;/span&gt;
 &lt;span class=&quot;kp&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;giss&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;index&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
@@ -231,20 +220,35 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
 
 &lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2015-11-07-giss/unnamed-chunk-1-1.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;The three datassets differ. Having taken poor notes on the two earlier ones, I
+cannot say for sure when they were downloaded, although the headers in these
+files are quite informative.&lt;/p&gt;
+
+&lt;p&gt;I have read that there have been differences in data processing recently [x]&lt;/p&gt;
+
+&lt;p&gt;, and
+that may explain some of the difference. &lt;/p&gt;
+
+&lt;p&gt;It would be a good idea to read the &lt;a href=&quot;http://data.giss.nasa.gov/gistemp&quot;&gt;NASA
+documentation&lt;/a&gt; on the evolution of the
+dataset.&lt;/p&gt;
+
 &lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Shiny website: &lt;a href=&quot;http://shiny.rstudio.com&quot;&gt;http://shiny.rstudio.com&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt&quot;&gt;data source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Oce website: &lt;a href=&quot;http://dankelley.github.io/oce/&quot;&gt;http://dankelley.github.io/oce/&lt;/a&gt;   &lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://data.giss.nasa.gov/gistemp&quot;&gt;NASA documentation on dataset changes&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;The newly-updated dataset is &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat&quot;&gt;gis-20151107.dat&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;An old dataset, certainly not the one used for &lt;code&gt;ocedata&lt;/code&gt;, is &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat&quot;&gt;giss-2014xxxx.dat&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd&quot;&gt;2015-11-07-giss.Rmd&lt;/a&gt;&lt;/p&gt;

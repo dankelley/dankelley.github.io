@@ -103,46 +103,35 @@ I thought I’d like to check for myself, and reasoned that I may as well update
 the <code>giss</code> dataset in the <code>ocedata</code> R package.</p>
 
 <p>As always seems to be the case, the data format is changed a bit from autumn
-2014, when I downloaded GISS and put it into <code>ocedata</code>. So, I had to write
-some new code, and thought it would make sense to plot the results, to check.</p>
+2014, when I downloaded GISS and put it into <code>ocedata</code>, so I had to write
+some new code.</p>
 
-<p>Along the way, I found a data file on my machine that I downloaded some time in
-the past, but my tests tell me that it is not the one I used for <code>ocedata</code>.
-That means I have three datasets that I’d like to look at.</p>
+<p>I also found a data file on my machine that I downloaded some time in the past,
+but my tests tell me that it is not the one I used for <code>ocedata</code>.  Thus, I
+have three datasets to explore.</p>
 
 <p>At the risk of providing fuel for debate about such things, I am presenting
 code and graphs that show what I found. I make no claims to accurate
 processing. For one thing, the only file for which I have a clear download
-history is the one dated today.</p>
+history is the one dated today [3].</p>
 
 <h1 id="procedure-and-results">Procedure and results</h1>
 
-<p>First, I downloaded the latest dataset from
-<a href="http://data.giss.nasa.gov/gistemp/updates_v3/">NASA</a>, storing it in a file
-named <code>giss-2015-11-07.dat</code> (available in a link given at the end of this
-posting). Then I found another file, evidently from 2014, which I copied
-locally and renamed <code>giss-2014-xx-xx.dat</code> (again, provided below). Note that
-the file formats differ slightly, in the asterisks near the end; the new format
-has spaces, which make it easier to read the data, whereas the old format is
-clearly designed for fixed-width data readers.</p>
+<p>First, I downloaded the latest dataset from [1], storing it in a file named
+<code>giss-2015-11-07.dat</code> (provided in [3] here).  Then I found another file,
+evidently from 2014, which I copied locally and renamed <code>giss-2014-xx-xx.dat</code>
+([4] here). Note that the file formats differ slightly, in the asterisks near
+the end; the new format has spaces, which make it easier to read the data,
+whereas the old format is clearly designed for fixed-width data readers.</p>
 
 <p>Then I wrote code to read the new file. Then I plotted timeseries (left column)
 and some differences (right column).</p>
 
-<p>As you can see, my code is ugly and ad-hoc. Actually, it may contain errors,
-and the main reason I’m posting this is to invite readers to email me if they
-see any errors.</p>
-
-<p>Pleae note that I have comments turned off because I don’t have time to
-moderate them, and unmoderated comments on a blog that might touch on climate
-issues is a bit like dropping a lit match over a pool of gasoline and hoping
-for the best.</p>
-
-<h1 id="conclusions">Conclusions</h1>
-
-<p>The datassets differ. It would be a good idea to read the <a href="http://data.giss.nasa.gov/gistemp">NASA
-documentation</a> on the evolution of the
-dataset.</p>
+<p>My code is ugly and ad-hoc. It may contain errors, and the main reason I’m
+posting this is to invite readers to email me if they see any errors.
+(Comments are turned off because I don’t have time to moderate them, and
+unmoderated comments on a blog that might touch on climate issues is a bit like
+dropping a lit match over a pool of gasoline and hoping for the best.)</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
@@ -219,9 +208,9 @@ readGISS2014 <span class="o">&lt;-</span> <span class="kr">function</span><span 
 3
 4
 5</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>giss<span class="p">)</span>
-gissNew <span class="o">&lt;-</span> readGISS<span class="p">(</span><span class="s">&quot;giss-20151107.dat&quot;</span><span class="p">)</span>
-gissOld <span class="o">&lt;-</span> readGISS2014<span class="p">(</span><span class="s">&quot;giss-2014xxxx.dat&quot;</span><span class="p">)</span> <span class="c1"># no spaces between * fields</span>
-<span class="c1">## add 14 to get T.</span>
+gissNew <span class="o">&lt;-</span> readGISS<span class="p">(</span><span class="s">&quot;giss-20151107.dat&quot;</span><span class="p">)</span> <span class="c1"># see [3] below</span>
+gissOld <span class="o">&lt;-</span> readGISS2014<span class="p">(</span><span class="s">&quot;giss-2014xxxx.dat&quot;</span><span class="p">)</span> <span class="c1"># see [4] below</span>
+<span class="c1">## print some tests</span>
 <span class="kp">print</span><span class="p">(</span>giss<span class="o">$</span>index<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">])</span>
 </pre></div>
 </td></tr></table>
@@ -308,20 +297,35 @@ legend<span class="p">(</span><span class="s">&quot;topright&quot;</span><span c
 
 <p><img src="http://dankelley.github.io/figs/2015-11-07-giss/unnamed-chunk-1-1.png" alt="center" /> </p>
 
+<h1 id="conclusions">Conclusions</h1>
+
+<p>The three datassets differ. Having taken poor notes on the two earlier ones, I
+cannot say for sure when they were downloaded, although the headers in these
+files are quite informative.</p>
+
+<p>I have read that there have been differences in data processing recently [x]</p>
+
+<p>, and
+that may explain some of the difference. </p>
+
+<p>It would be a good idea to read the <a href="http://data.giss.nasa.gov/gistemp">NASA
+documentation</a> on the evolution of the
+dataset.</p>
+
 <h1 id="references-and-resources">References and resources</h1>
 
 <ol>
   <li>
-    <p>Shiny website: <a href="http://shiny.rstudio.com">http://shiny.rstudio.com</a></p>
+    <p><a href="http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt">data source</a></p>
   </li>
   <li>
-    <p>Oce website: <a href="http://dankelley.github.io/oce/">http://dankelley.github.io/oce/</a>   </p>
+    <p><a href="http://data.giss.nasa.gov/gistemp">NASA documentation on dataset changes</a></p>
   </li>
   <li>
-    <p>The newly-updated dataset is <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat">here</a></p>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat">gis-20151107.dat</a></p>
   </li>
   <li>
-    <p>An old dataset, certainly not the one used for <code>ocedata</code>, is <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat">here</a></p>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat">giss-2014xxxx.dat</a></p>
   </li>
   <li>
     <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd">2015-11-07-giss.Rmd</a></p>

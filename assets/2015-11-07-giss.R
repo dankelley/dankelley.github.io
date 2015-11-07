@@ -33,9 +33,9 @@ readGISS2014 <- function(file)
 
 library(ocedata)
 data(giss)
-gissNew <- readGISS("giss-20151107.dat")
-gissOld <- readGISS2014("giss-2014xxxx.dat") # no spaces between * fields
-## add 14 to get T.
+gissNew <- readGISS("giss-20151107.dat") # see [3] below
+gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
+## print some tests
 print(giss$index[1:12])
 print(gissOld$index[13:24])
 par(mar=c(1.7, 3, 1, 1), mgp=c(2, 0.7, 0), mfcol=c(3, 2))
