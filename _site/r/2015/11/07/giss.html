@@ -117,11 +117,26 @@ history is the one dated today.</p>
 
 <h1 id="procedure-and-results">Procedure and results</h1>
 
-<p>Please note that the code given below is ugly and ad-hoc, and it may contain
-errors. I’d appreciate it if someone could email me any errors.  (I have
-comments turned off because I don’t have time to moderate them, and unmoderated
-comments on a blog that might touch on comment issues is like a lit match
-falling towards a pool of gasoline.)</p>
+<p>First, I downloaded the latest dataset from
+<a href="http://data.giss.nasa.gov/gistemp/updates_v3/">NASA</a>, storing it in a file
+named <code>giss-2015-11-07.dat</code> (available in a link given at the end of this
+posting). Then I found another file, evidently from 2014, which I copied
+locally and renamed <code>giss-2014-xx-xx.dat</code> (again, provided below). Note that
+the file formats differ slightly, in the asterisks near the end; the new format
+has spaces, which make it easier to read the data, whereas the old format is
+clearly designed for fixed-width data readers.</p>
+
+<p>Then I wrote code to read the new file. Then I plotted timeseries (left column)
+and some differences (right column).</p>
+
+<p>As you can see, my code is ugly and ad-hoc. Actually, it may contain errors,
+and the main reason I’m posting this is to invite readers to email me if they
+see any errors.</p>
+
+<p>Pleae note that I have comments turned off because I don’t have time to
+moderate them, and unmoderated comments on a blog that might touch on climate
+issues is a bit like dropping a lit match over a pool of gasoline and hoping
+for the best.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
@@ -155,11 +170,7 @@ falling towards a pool of gasoline.)</p>
 30
 31
 32
-33
-34
-35</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## http://data.giss.nasa.gov/gistemp/updates_v3/</span>
-<span class="kp">rm</span><span class="p">(</span><span class="kt">list</span><span class="o">=</span><span class="kp">ls</span><span class="p">())</span>
-readGISS <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">file</span><span class="p">)</span>
+33</code></pre></div></td><td class="code"><div class="highlight"><pre>readGISS <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">file</span><span class="p">)</span>
 <span class="p">{</span>
     lines <span class="o">&lt;-</span> <span class="kp">readLines</span><span class="p">(</span><span class="kp">file</span><span class="p">)</span>
     yearLine <span class="o">&lt;-</span> <span class="kp">grep</span><span class="p">(</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> lines<span class="p">)</span>
