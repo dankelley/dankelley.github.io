@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>updating the GISS dataset</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>updating the GISS dataset</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        GISS has new data since 2014, with typical difference on the overlapping time window by about 0.1deg.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+I was watching a video of David Suzuki being interviewed on Australian TV, and
+there were some questions about the "pause" in temperature in the GISS dataset.
+I thought I'd like to check for myself, and reasoned that I may as well update
+the ``giss`` dataset in the ``ocedata`` R package.
+
+As always seems to be the case, the data format is changed a bit from autumn
+2014, when I downloaded GISS and put it into ``ocedata``. So, I had to write
+some new code, and thought it would make sense to plot the results, to check.
+
+Along the way, I found a data file on my machine that I downloaded some time in
+the past, but my tests tell me that it is not the one I used for ``ocedata``.
+That means I have three datasets that I'd like to look at.
+
+At the risk of providing fuel for debate about such things, I am presenting
+code and graphs that show what I found. I make no claims to accurate
+processing. For one thing, the only file for which I have a clear download
+history is the one dated today.
+
+# Procedure and results
+
+Please note that the code given below is ugly and ad-hoc, and it may contain
+errors. I'd appreciate it if someone could email me any errors.  (I have
+comments turned off because I don't have time to moderate them, and unmoderated
+comments on a blog that might touch on comment issues is like a lit match
+falling towards a pool of gasoline.)
+
+
+```{r}
+## http://data.giss.nasa.gov/gistemp/updates_v3/
+rm(list=ls())
+readGISS <- function(file)
+{
+    lines <- readLines(file)
+    yearLine <- grep("Year", lines)
+    l <- lines[seq.int(head(yearLine,1)+1, tail(yearLine,1)-1)]
+    l <- l[grep("Year", l, invert=TRUE)]
+    l <- l[grep("^$", l, invert=TRUE)]
+    l <- gsub("\\*+", "  NA", l)
+    d <- read.table(text=l)
+    yearorig <- d$V1
+    months <- cbind(d$V2, d$V3, d$V4, d$V5, 
+                    d$V6, d$V7, d$V8, d$V9, 
+                    d$V10, d$V11, d$V12, d$V13) 
+    index <- as.vector(t(months)) / 100
+    ## the 1/24 centres in months (at least roughly)
+    year <- seq(yearorig[1], length.out=length(index), by=1/12) + 1/24
+    keep <- !is.na(index)
+    data.frame(year[keep], index[keep])
+}
+readGISS2014 <- function(file)
+{
+    l <- readLines(file) # http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt
+    l <- l[grep("^[1-2].*", l)]            # ignore headers at start, and every 20 years
+    ## year is in char 1 to 4; data in 0.01degC are in char 8 to 65
+    startyear <- scan(textConnection(l[1]), n=1)
+    l <- substr(l, 8, 65)
+    l <- l[grep("\\*+", l, invert=TRUE)]    # ignore lines with missing month data
+    index <- 0.01 * scan(textConnection(l))
+    year <- 1/24 + seq(startyear, by=1/12, length.out=length(index))
+    data.frame(year=year, index=index)
+}
+
+library(ocedata)
+data(giss)
+gissNew <- readGISS("giss-20151107.dat")
+gissOld <- readGISS2014("giss-2014xxxx.dat") # no spaces between * fields
+## add 14 to get T.
+print(giss$index[1:12])
+print(gissOld$index[13:24])
+par(mar=c(1.7, 3, 1, 1), mgp=c(2, 0.7, 0), mfcol=c(3, 2))
+plot(giss$year, giss$index, type='l', ylab="Index [degC]")
+legend("topleft", lwd=1, legend=c("giss in ocedata"), bg="white", cex=3/4)
+grid()
+## store the scale
+xlim <- range(giss$year)
+ylim <- range(giss$index)
+
+plot(gissOld$year, gissOld$index, type='l', ylab="Index [degC]", xlim=xlim, ylim=ylim)
+legend("topleft", lwd=1, legend=c("gissOld"), bg="white", cex=3/4)
+grid()
+plot(gissNew$year, gissNew$index, type='l', ylab="Index [degC]", xlim=xlim, ylim=ylim)
+legend("topleft", lwd=1, legend=c("gissNew"), bg="white", cex=3/4)
+grid()
+
+start <- max(c(min(giss$year),min(gissOld$year),min(gissNew$year)))
+end <- min(c(max(giss$year),max(gissOld$year),max(gissNew$year)))
+look <- start<=giss$year&giss$year<=end
+lookOld <- start<=gissOld$year&gissOld$year<=end
+lookNew <- start<=gissNew$year&gissNew$year<=end
+
+plot.new() # skip a panel
+
+plot(gissOld$year[lookOld], gissOld$index[lookOld]-giss$index[look],
+     type='l', ylab="index change [degC]", xlim=xlim, ylim=c(-0.3, 0.3))
+grid()
+abline(h=0, col='pink')
+legend("topright", lwd=1, legend=c("gissOld - ocedata"), bg="white", cex=3/4)
+
+plot(gissOld$year[lookOld], gissNew$index[lookNew]-gissOld$index[lookOld],
+     type='l', ylab="index change [degC]", xlim=xlim, ylim=c(-0.3, 0.3))
+grid()
+abline(h=0, col='pink')
+legend("topright", lwd=1, legend=c("gissNew - gissOld"), bg="white", cex=3/4)
+```
+
+# References and resources
+
+1. Shiny website: [http://shiny.rstudio.com](http://shiny.rstudio.com)
+
+2. Oce website: [http://dankelley.github.io/oce/](http://dankelley.github.io/oce/)   
+
+3. The newly-updated dataset is [here](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat)
+
+4. An old dataset, certainly not the one used for ``ocedata``, is [here](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat)
+
+5. Jekyll source code for this blog entry: [2015-11-07-giss.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd)
+
+
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
