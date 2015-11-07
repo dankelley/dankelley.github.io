@@ -38,7 +38,7 @@ comments on a blog that might touch on comment issues is like a lit match
 falling towards a pool of gasoline.)
 
 
-```{r fig.width=7, fig.height=7, dep=100}
+```{r fig.width=7, fig.height=7, dep=150}
 ## http://data.giss.nasa.gov/gistemp/updates_v3/
 rm(list=ls())
 readGISS <- function(file)

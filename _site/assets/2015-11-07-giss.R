@@ -1,4 +1,4 @@
-## ----fig.width=7, fig.height=7, dep=100----------------------------------
+## ----fig.width=7, fig.height=7, dep=150----------------------------------
 ## http://data.giss.nasa.gov/gistemp/updates_v3/
 rm(list=ls())
 readGISS <- function(file)
