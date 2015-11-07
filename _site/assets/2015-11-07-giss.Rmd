@@ -72,6 +72,11 @@
         <a href="/tags/R/index.html" class="tag">
             R
         </a>
+         &#183; 
+        
+        <a href="/tags/climate/index.html" class="tag">
+            climate
+        </a>
         
         
     </span> <!-- post_date -->
