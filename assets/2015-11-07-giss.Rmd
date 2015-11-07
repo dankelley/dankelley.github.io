@@ -52,6 +52,12 @@ moderate them, and unmoderated comments on a blog that might touch on climate
 issues is a bit like dropping a lit match over a pool of gasoline and hoping
 for the best.
 
+# Conclusions
+
+The datassets differ. It would be a good idea to read the [NASA
+documentation](http://data.giss.nasa.gov/gistemp) on the evolution of the
+dataset.
+
 
 ```{r fig.width=8, fig.height=8, dpi=150}
 readGISS <- function(file)

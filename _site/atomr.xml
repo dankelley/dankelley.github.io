@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-11-07T11:20:39-04:00</updated>
+    <updated>2015-11-07T11:21:49-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -60,6 +60,12 @@ see any errors.&lt;/p&gt;
 moderate them, and unmoderated comments on a blog that might touch on climate
 issues is a bit like dropping a lit match over a pool of gasoline and hoping
 for the best.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;The datassets differ. It would be a good idea to read the &lt;a href=&quot;http://data.giss.nasa.gov/gistemp&quot;&gt;NASA
+documentation&lt;/a&gt; on the evolution of the
+dataset.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt; 1
  2
