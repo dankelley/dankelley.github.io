@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2015-11-07T11:32:25-04:00</updated>
+    <updated>2015-11-07T11:38:34-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -222,18 +222,18 @@ legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
-&lt;p&gt;The three datassets differ. Having taken poor notes on the two earlier ones, I
+&lt;p&gt;The three datasets differ. Having taken poor notes on the two earlier ones, I
 cannot say for sure when they were downloaded, although the headers in these
 files are quite informative.&lt;/p&gt;
 
-&lt;p&gt;I have read that there have been differences in data processing recently [x]&lt;/p&gt;
+&lt;p&gt;One might prefer newer datasets to older ones, since (a) they contain new
+observations and (b) they presumably have more accurate old data, given ongoing
+work to improve analysis methods and data selection.  For that reason, the next
+update of &lt;code&gt;ocedata&lt;/code&gt; will use whatever version of GISS is available at the
+time of packaging.&lt;/p&gt;
 
-&lt;p&gt;, and
-that may explain some of the difference. &lt;/p&gt;
-
-&lt;p&gt;It would be a good idea to read the &lt;a href=&quot;http://data.giss.nasa.gov/gistemp&quot;&gt;NASA
-documentation&lt;/a&gt; on the evolution of the
-dataset.&lt;/p&gt;
+&lt;p&gt;Readers interested in recent changes to GISS (and this includes me!) might do
+well to start their reading with the NASA summary of changes [2].&lt;/p&gt;
 
 &lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 
