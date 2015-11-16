@@ -171,7 +171,9 @@ dropping a lit match over a pool of gasoline and hoping for the best.)</p>
 36
 37
 38
-39</pre></td><td class="code"><pre><span class="n">readGISS</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+39
+40
+41</pre></td><td class="code"><pre><span class="n">readGISS</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">lines</span> <span class="o">&lt;-</span> <span class="n">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">yearLine</span> <span class="o">&lt;-</span> <span class="n">grep</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
@@ -207,8 +209,10 @@ dropping a lit match over a pool of gasoline and hoping for the best.)</p>
 </span><span class="n">gissNew</span> <span class="o">&lt;-</span> <span class="n">readGISS</span><span class="p">(</span><span class="s2">"giss-20151107.dat"</span><span class="p">)</span> <span class="c1"># see [3] below
 </span><span class="n">gissOld</span> <span class="o">&lt;-</span> <span class="n">readGISS2014</span><span class="p">(</span><span class="s2">"giss-2014xxxx.dat"</span><span class="p">)</span> <span class="c1"># see [4] below
 </span><span class="n">load</span><span class="p">(</span><span class="s2">"giss-ocedata-until-20151116.rda"</span><span class="p">)</span> <span class="c1"># yields 'giss'; see [5] below
-## print some tests; note that we offset the old data dataset by 1 year because
-## of how missing-value data are handled in the two instances.
+## print some tests; note that we offset gissOld by 1 year because
+## readGISS2014() skips any year with missing data (including the
+## first year, which has a missing season) ... this function is just
+## a kludge for this blog item, so don't worry about this!
 </span><span class="n">print</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">])</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 

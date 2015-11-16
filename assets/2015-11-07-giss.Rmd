@@ -84,8 +84,10 @@ readGISS2014 <- function(file)
 gissNew <- readGISS("giss-20151107.dat") # see [3] below
 gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
 load("giss-ocedata-until-20151116.rda") # yields 'giss'; see [5] below
-## print some tests; note that we offset the old data dataset by 1 year because
-## of how missing-value data are handled in the two instances.
+## print some tests; note that we offset gissOld by 1 year because
+## readGISS2014() skips any year with missing data (including the
+## first year, which has a missing season) ... this function is just
+## a kludge for this blog item, so don't worry about this!
 print(giss$index[1:12])
 print(gissOld$index[13:24])
 par(mar=c(1.7, 3, 1, 1), mgp=c(2, 0.7, 0), mfcol=c(3, 2))
