@@ -31,8 +31,8 @@ readGISS2014 <- function(file)
     data.frame(year=year, index=index)
 }
 
-library(ocedata)
-data(giss)
+## Load data(giss) from ocedata, prior to 2015-11-16, then read the two text files
+load("giss-ocedata-until-20151116.rda") # see [5] below
 gissNew <- readGISS("giss-20151107.dat") # see [3] below
 gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
 ## print some tests

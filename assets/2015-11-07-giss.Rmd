@@ -80,8 +80,8 @@ readGISS2014 <- function(file)
     data.frame(year=year, index=index)
 }
 
-library(ocedata)
-data(giss)
+## Load data(giss) from ocedata, prior to 2015-11-16, then read the two text files
+load("giss-ocedata-until-20151116.rda") # see [5] below
 gissNew <- readGISS("giss-20151107.dat") # see [3] below
 gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
 ## print some tests
@@ -154,7 +154,9 @@ well to start their reading with the NASA summary of changes [2].
 
 4. [giss-2014xxxx.dat](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat)
 
-5. Jekyll source code for this blog entry: [2015-11-07-giss.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd)
+5. [giss-ocedata-until-20151116.rda](https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-ocedata-until-20151116.rda)
+
+6. Jekyll source code for this blog entry: [2015-11-07-giss.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd)
 
 
 
