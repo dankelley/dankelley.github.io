@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -109,15 +109,15 @@
 
 <p>First, I wrote the following C file to translate the data to something that R can read.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -136,44 +136,43 @@
 25
 26
 27
-28</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">#include &lt;stdio.h&gt;</span>
-char <span class="o">*</span>file <span class="o">=</span> <span class="s">&quot;/Users/kelley/mapdata/src/worldHires.line&quot;</span><span class="p">;</span>
-int main<span class="p">()</span>
+28</pre></td><td class="code"><pre><span class="c1">#include &lt;stdio.h&gt;
+</span><span class="n">char</span> <span class="o">*</span><span class="n">file</span> <span class="o">=</span> <span class="s2">"/Users/kelley/mapdata/src/worldHires.line"</span><span class="p">;</span>
+<span class="n">int</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
-    char tok1<span class="p">[</span><span class="m">100</span><span class="p">],</span> tok2<span class="p">[</span><span class="m">100</span><span class="p">];</span> <span class="o">//</span> needn<span class="s">&#39;t be anywhere near that long</span>
-<span class="s">    FILE *in = fopen(file, &quot;r&quot;);</span>
-<span class="s">    int ok;</span>
-<span class="s">    int count = 0;</span>
-<span class="s">    int skip = 1;</span>
-<span class="s">    while (1) { //count++ &lt; n) {</span>
-<span class="s">        if (skip) {</span>
-<span class="s">            fscanf(in, &quot;%s&quot;, tok1);</span>
-<span class="s">            if (feof(in))</span>
-<span class="s">                return(0);</span>
-<span class="s">            fscanf(in, &quot;%s&quot;, tok2);</span>
-<span class="s">            printf(&quot;NA NA\n&quot;);</span>
-<span class="s">            skip = 0;</span>
-<span class="s">        } else {</span>
-<span class="s">            fscanf(in, &quot;%s&quot;, tok1);</span>
-<span class="s">            if (tok1[0] == &#39;</span>E<span class="s">&#39;</span><span class="err">) {</span>
-                skip <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
-            <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-                fscanf<span class="p">(</span><span class="kp">in</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> tok2<span class="p">);</span>
-                printf<span class="p">(</span><span class="s">&quot;  %s %s\n&quot;</span><span class="p">,</span> tok1<span class="p">,</span> tok2<span class="p">);</span>
+    <span class="n">char</span> <span class="n">tok1</span><span class="p">[</span><span class="m">100</span><span class="p">],</span> <span class="n">tok2</span><span class="p">[</span><span class="m">100</span><span class="p">];</span> <span class="o">//</span> <span class="n">needn</span><span class="s1">'t be anywhere near that long
+    FILE *in = fopen(file, "r");
+    int ok;
+    int count = 0;
+    int skip = 1;
+    while (1) { //count++ &lt; n) {
+        if (skip) {
+            fscanf(in, "%s", tok1);
+            if (feof(in))
+                return(0);
+            fscanf(in, "%s", tok2);
+            printf("NA NA\n");
+            skip = 0;
+        } else {
+            fscanf(in, "%s", tok1);
+            if (tok1[0] == '</span><span class="n">E</span><span class="err">'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">skip</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">fscanf</span><span class="p">(</span><span class="k">in</span><span class="p">,</span> <span class="s2">"%s"</span><span class="p">,</span> <span class="n">tok2</span><span class="p">);</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s2">"  %s %s\n"</span><span class="p">,</span> <span class="n">tok1</span><span class="p">,</span> <span class="n">tok2</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Then, I created a datafile for plotting. It turns out that <code>mapdata</code> numbers are in radians, so a conversion was required.</p>
 
-<p>I plotted this “new” dataset and the “old” one (containined in <code>ocedata</code>) and the results are shown below. </p>
+<p>I plotted this “new” dataset and the “old” one (containined in <code>ocedata</code>) and the results are shown below.</p>
 
 <h1 id="results">Results</h1>
 
-<p><img src="http://dankelley.github.io/figs/2015-01-28-coastline/coastline.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-01-28-coastline/coastline.png" alt="center" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 

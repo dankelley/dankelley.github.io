@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -116,91 +116,84 @@
 
 <p>The first step is to load the data and extract dependent and independent variables, here <em>S</em> and <em>p</em>.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>signal<span class="p">)</span>
-data<span class="p">(</span>ctd<span class="p">)</span>
-S <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;salinity&#39;</span><span class="p">]]</span>
-p <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;pressure&#39;</span><span class="p">]]</span>
-</pre></div>
-</td></tr></table>
+5</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="n">data</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">&lt;-</span> <span class="n">ctd</span><span class="p">[[</span><span class="s1">'salinity'</span><span class="p">]]</span>
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="n">ctd</span><span class="p">[[</span><span class="s1">'pressure'</span><span class="p">]]</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, one must create equispaced data, for filtering to make any sense at all.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>dp <span class="o">&lt;-</span> median<span class="p">(</span><span class="kp">diff</span><span class="p">(</span>p<span class="p">))</span>
-pp <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span>p<span class="p">),</span> <span class="kp">max</span><span class="p">(</span>p<span class="p">),</span> dp<span class="p">)</span>
-S0 <span class="o">&lt;-</span> approx<span class="p">(</span>p<span class="p">,</span> S<span class="p">,</span> pp<span class="p">)</span><span class="o">$</span>y
-</pre></div>
-</td></tr></table>
+3</pre></td><td class="code"><pre><span class="n">dp</span> <span class="o">&lt;-</span> <span class="n">median</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="n">pp</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">dp</span><span class="p">)</span>
+<span class="n">S0</span> <span class="o">&lt;-</span> <span class="n">approx</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">pp</span><span class="p">)</span><span class="o">$</span><span class="n">y</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Now comes something that must be established by the actual task at hand: setting the critical frequency for the filter (as a ratio to Nyquist).  In this case, a somewhat arbitrary frequency is selected, and then both first-order and second-order filters are created.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>W <span class="o">&lt;-</span> dp <span class="o">/</span> <span class="m">2</span>
-f1 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">1</span><span class="p">,</span> W<span class="p">)</span>
-f2 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">2</span><span class="p">,</span> W<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+3</pre></td><td class="code"><pre><span class="n">W</span> <span class="o">&lt;-</span> <span class="n">dp</span> <span class="o">/</span> <span class="m">2</span>
+<span class="n">f1</span> <span class="o">&lt;-</span> <span class="n">butter</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">f2</span> <span class="o">&lt;-</span> <span class="n">butter</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Now, set up for a three-panel plot.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>For the left-hand panel, show the raw data in black, and the two filters in red and blue.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>plotProfile<span class="p">(</span>ctd<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;salinity&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-S0f1 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>f1<span class="p">,</span> S0<span class="p">)</span>
-S0f2 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>f2<span class="p">,</span> S0<span class="p">)</span>
-lines<span class="p">(</span>S0f1<span class="p">,</span> pp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-lines<span class="p">(</span>S0f2<span class="p">,</span> pp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-mtext<span class="p">(</span><span class="s">&quot;(a) &quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> line<span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+6</pre></td><td class="code"><pre><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="n">xtype</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span>
+<span class="n">S0f1</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">S0</span><span class="p">)</span>
+<span class="n">S0f2</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">S0</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">S0f1</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">S0f2</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">mtext</span><span class="p">(</span><span class="s2">"(a) "</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>For the middle panel, detrended the profile, and then filter.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>plotProfile<span class="p">(</span>ctd<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;salinity&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-Sd <span class="o">&lt;-</span> detrend<span class="p">(</span>pp<span class="p">,</span> S0<span class="p">)</span>
-S1f1 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>f1<span class="p">,</span> Sd<span class="o">$</span>Y<span class="p">)</span> <span class="o">+</span> Sd<span class="o">$</span>a <span class="o">+</span> Sd<span class="o">$</span>b <span class="o">*</span> pp
-S1f2 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>f2<span class="p">,</span> Sd<span class="o">$</span>Y<span class="p">)</span> <span class="o">+</span> Sd<span class="o">$</span>a <span class="o">+</span> Sd<span class="o">$</span>b <span class="o">*</span> pp
-lines<span class="p">(</span>S1f1<span class="p">,</span> pp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-lines<span class="p">(</span>S1f2<span class="p">,</span> pp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-mtext<span class="p">(</span><span class="s">&quot;(b) &quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> line<span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+7</pre></td><td class="code"><pre><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="n">xtype</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span>
+<span class="n">Sd</span> <span class="o">&lt;-</span> <span class="n">detrend</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">S0</span><span class="p">)</span>
+<span class="n">S1f1</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">Sd</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="n">Sd</span><span class="o">$</span><span class="n">a</span> <span class="o">+</span> <span class="n">Sd</span><span class="o">$</span><span class="n">b</span> <span class="o">*</span> <span class="n">pp</span>
+<span class="n">S1f2</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">Sd</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="n">Sd</span><span class="o">$</span><span class="n">a</span> <span class="o">+</span> <span class="n">Sd</span><span class="o">$</span><span class="n">b</span> <span class="o">*</span> <span class="n">pp</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">S1f1</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">S1f2</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">mtext</span><span class="p">(</span><span class="s2">"(b) "</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>For the right-hand panel, use a smoothing spline instead of a filter.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>spline <span class="o">&lt;-</span> smooth.spline<span class="p">(</span>pp<span class="p">,</span> S0<span class="p">,</span> df<span class="o">=</span><span class="m">3</span><span class="o">/</span>W<span class="p">)</span>
-S2 <span class="o">&lt;-</span> predict<span class="p">(</span>spline<span class="p">)</span><span class="o">$</span>y
-plotProfile<span class="p">(</span>ctd<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;salinity&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-lines<span class="p">(</span>S2<span class="p">,</span> pp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-mtext<span class="p">(</span><span class="s">&quot;(c) &quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> line<span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+5</pre></td><td class="code"><pre><span class="n">spline</span> <span class="o">&lt;-</span> <span class="n">smooth.spline</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="n">W</span><span class="p">)</span>
+<span class="n">S2</span> <span class="o">&lt;-</span> <span class="n">predict</span><span class="p">(</span><span class="n">spline</span><span class="p">)</span><span class="o">$</span><span class="n">y</span>
+<span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="n">xtype</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">S2</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">mtext</span><span class="p">(</span><span class="s2">"(c) "</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="m">-5</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 

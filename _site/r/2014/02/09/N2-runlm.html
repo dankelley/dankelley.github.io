@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -105,39 +105,37 @@
 
 <h1 id="methods">Methods</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps</code></pre></div>
+## Loading required package: maps</code></pre></figure>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
-11</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>ctd<span class="p">)</span>
-rho <span class="o">&lt;-</span> swRho<span class="p">(</span>ctd<span class="p">)</span>
-z <span class="o">&lt;-</span> swZ<span class="p">(</span>ctd<span class="p">)</span>
-drhodz <span class="o">&lt;-</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> deriv <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-g <span class="o">&lt;-</span> <span class="m">9.81</span>
-rho0 <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>rho<span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
-N2 <span class="o">&lt;-</span> <span class="o">-</span>g <span class="o">*</span> drhodz<span class="o">/</span>rho0
-plot<span class="p">(</span>ctd<span class="p">,</span> which <span class="o">=</span> <span class="s">&quot;N2&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>N2<span class="p">,</span> <span class="o">-</span>z<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">2</span><span class="p">,</span> col <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;brown&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> legend <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;spline&quot;</span><span class="p">,</span> 
-    <span class="s">&quot;runlm&quot;</span><span class="p">),</span> bg <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+11</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">rho</span> <span class="o">&lt;-</span> <span class="n">swRho</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="n">swZ</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">drhodz</span> <span class="o">&lt;-</span> <span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">deriv</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">&lt;-</span> <span class="m">9.81</span>
+<span class="n">rho0</span> <span class="o">&lt;-</span> <span class="n">mean</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+<span class="n">N2</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="n">g</span> <span class="o">*</span> <span class="n">drhodz</span><span class="o">/</span><span class="n">rho0</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="n">which</span> <span class="o">=</span> <span class="s2">"N2"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"brown"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">),</span> <span class="n">legend</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"spline"</span><span class="p">,</span> 
+    <span class="s2">"runlm"</span><span class="p">),</span> <span class="n">bg</span> <span class="o">=</span> <span class="s2">"white"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="/assets/2014-02-10_N2-runlm-a.png" alt="center" /> </p>
+<p><img src="/assets/2014-02-10_N2-runlm-a.png" alt="center" /></p>
 
 <h1 id="results">Results</h1>
 
@@ -153,41 +151,38 @@ legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><spa
 
 <p>It may be helpful to determine just how well the two methods can match.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>N2 <span class="o">&lt;-</span> swN2<span class="p">(</span>ctd<span class="p">)</span>
-N2fromderiv <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>L<span class="p">)</span> <span class="p">{</span>
-    <span class="o">-</span>g <span class="o">*</span> runlm<span class="p">(</span>z<span class="p">,</span> rho<span class="p">,</span> L <span class="o">=</span> L<span class="p">,</span> deriv <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span>rho0
+7</pre></td><td class="code"><pre><span class="n">N2</span> <span class="o">&lt;-</span> <span class="n">swN2</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">N2fromderiv</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">-</span><span class="n">g</span> <span class="o">*</span> <span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span> <span class="n">deriv</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="n">rho0</span>
 <span class="p">}</span>
-best <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span>L<span class="p">)</span> <span class="kp">sqrt</span><span class="p">(</span><span class="kp">mean</span><span class="p">((</span>N2 <span class="o">-</span> N2fromderiv<span class="p">(</span>L<span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span> interval <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> 
+<span class="n">best</span> <span class="o">&lt;-</span> <span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">((</span><span class="n">N2</span> <span class="o">-</span> <span class="n">N2fromderiv</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span> <span class="n">interval</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> 
     <span class="m">100</span><span class="p">))</span>
-<span class="kp">print</span><span class="p">(</span>best<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<span class="n">print</span><span class="p">(</span><span class="n">best</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## $minimum
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## $minimum
 ## [1] 6.161
 ## 
 ## $objective
-## [1] 7.854e-05</code></pre></div>
+## [1] 7.854e-05</code></pre></figure>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>N2best <span class="o">&lt;-</span> N2fromderiv<span class="p">(</span>best<span class="o">$</span>minimum<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">N2best</span> <span class="o">&lt;-</span> <span class="n">N2fromderiv</span><span class="p">(</span><span class="n">best</span><span class="o">$</span><span class="n">minimum</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This best-matching estimate is the red line.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>plotProfile<span class="p">(</span>ctd<span class="p">,</span> <span class="s">&quot;N2&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>N2best<span class="p">,</span> ctd<span class="p">[[</span><span class="s">&quot;pressure&quot;</span><span class="p">]],</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="s2">"N2"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">N2best</span><span class="p">,</span> <span class="n">ctd</span><span class="p">[[</span><span class="s2">"pressure"</span><span class="p">]],</span> <span class="n">col</span> <span class="o">=</span> <span class="s2">"red"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="/assets/2014-02-10_N2-runlm-b.png" alt="center" /> </p>
+<p><img src="/assets/2014-02-10_N2-runlm-b.png" alt="center" /></p>
 
 <h1 id="questions">Questions</h1>
 

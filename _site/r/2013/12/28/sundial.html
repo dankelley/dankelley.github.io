@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -111,15 +111,15 @@
 
 <p><a href="/assets/sundial_with_gnomon.png"><img src="/assets/sundial_with_gnomon-thumbnail.png" alt="graph" /></a></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -187,85 +187,84 @@
 74
 75
 76
-77</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## gnonom style sundial</span>
-<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span>
-    png<span class="p">(</span><span class="s">&quot;sundial_with_gnomon.png&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">7</span><span class="p">,</span> height<span class="o">=</span><span class="m">6</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> 
-        res<span class="o">=</span><span class="m">200</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">13</span><span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-sundial <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lon<span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> lat<span class="o">=</span><span class="m">44.65</span><span class="p">,</span>
-                    days<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;2014-03-20&quot;</span><span class="p">,</span> <span class="s">&quot;2014-06-20&quot;</span><span class="p">,</span> <span class="s">&quot;2014-09-23&quot;</span><span class="p">,</span> <span class="s">&quot;2014-12-21&quot;</span><span class="p">),</span>
-                    keys<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Spring equinox&quot;</span><span class="p">,</span> <span class="s">&quot;Summer solstice&quot;</span><span class="p">,</span>
-                           <span class="s">&quot;Autumn equinox&quot;</span><span class="p">,</span> <span class="s">&quot;Winter solstice&quot;</span><span class="p">),</span>
-                    debug<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+77</pre></td><td class="code"><pre><span class="c1">## gnonom style sundial
+</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span>
+    <span class="n">png</span><span class="p">(</span><span class="s2">"sundial_with_gnomon.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="m">7</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="m">6</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span> 
+        <span class="n">res</span><span class="o">=</span><span class="m">200</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="m">13</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+<span class="n">sundial</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="m">44.65</span><span class="p">,</span>
+                    <span class="n">days</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"2014-03-20"</span><span class="p">,</span> <span class="s2">"2014-06-20"</span><span class="p">,</span> <span class="s2">"2014-09-23"</span><span class="p">,</span> <span class="s2">"2014-12-21"</span><span class="p">),</span>
+                    <span class="n">keys</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"Spring equinox"</span><span class="p">,</span> <span class="s2">"Summer solstice"</span><span class="p">,</span>
+                           <span class="s2">"Autumn equinox"</span><span class="p">,</span> <span class="s2">"Winter solstice"</span><span class="p">),</span>
+                    <span class="n">debug</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
 <span class="p">{</span>
-    col <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span>
-    glwd <span class="o">&lt;-</span> <span class="m">8</span>
-    timezone <span class="o">&lt;-</span> <span class="kp">floor</span><span class="p">(</span><span class="m">0.5</span> <span class="o">+</span> lon <span class="o">/</span> <span class="m">15</span><span class="p">)</span>
-    L <span class="o">&lt;-</span> <span class="m">1</span>                           <span class="c1"># horiz gnomon length (arbitrary)</span>
-    nhours <span class="o">&lt;-</span> <span class="m">24</span>
-    first <span class="o">&lt;-</span> <span class="kc">TRUE</span>
-    <span class="kr">for</span> <span class="p">(</span>season <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span> <span class="p">{</span>
-        hours <span class="o">&lt;-</span> <span class="kp">seq.POSIXt</span><span class="p">(</span><span class="kp">as.POSIXct</span><span class="p">(</span>days<span class="p">[</span>season<span class="p">],</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">),</span>
-                            by<span class="o">=</span><span class="s">&quot;1 hour&quot;</span><span class="p">,</span> length.out<span class="o">=</span>nhours<span class="p">)</span>
-        <span class="kr">for</span> <span class="p">(</span>hour <span class="kr">in</span> <span class="kp">seq_along</span><span class="p">(</span>hours<span class="p">))</span> <span class="p">{</span>
-            t <span class="o">&lt;-</span> hours<span class="p">[</span>hour<span class="p">]</span>
-            tlocal <span class="o">&lt;-</span> t <span class="o">+</span> <span class="m">3600</span> <span class="o">*</span> timezone
-            sa <span class="o">&lt;-</span> sunAngle<span class="p">(</span><span class="kp">t</span><span class="p">,</span> lon<span class="o">=</span>lon<span class="p">,</span> lat<span class="o">=</span>lat<span class="p">)</span>
-            gy <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> L<span class="p">,</span> length.out<span class="o">=</span><span class="m">10</span><span class="p">)</span>
-            gx <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="kp">length</span><span class="p">(</span>gy<span class="p">))</span>
-            gz <span class="o">&lt;-</span> gy <span class="o">*</span> <span class="kp">tan</span><span class="p">(</span>lat <span class="o">*</span> <span class="kc">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
-            R <span class="o">&lt;-</span> gz <span class="o">/</span> <span class="kp">tan</span><span class="p">(</span><span class="o">-</span>sa<span class="o">$</span>altitude <span class="o">*</span> <span class="kc">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span> <span class="c1"># radius of shadow</span>
-            theta <span class="o">&lt;-</span> <span class="p">(</span><span class="m">90</span> <span class="o">-</span> sa<span class="o">$</span>azimuth<span class="p">)</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">/</span> <span class="m">180</span>
-            par<span class="p">(</span>mar<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
-            x <span class="o">&lt;-</span> gx <span class="o">+</span> R <span class="o">*</span> <span class="kp">cos</span><span class="p">(</span>theta<span class="p">)</span>
-            y <span class="o">&lt;-</span> gy <span class="o">+</span> R <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span>theta<span class="p">)</span>
-            len <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">sqrt</span><span class="p">(</span>x<span class="o">^</span><span class="m">2</span> <span class="o">+</span> y<span class="o">^</span><span class="m">2</span><span class="p">))</span>
-            x <span class="o">&lt;-</span> x <span class="o">/</span> len <span class="o">*</span> L
-            y <span class="o">&lt;-</span> y <span class="o">/</span> len <span class="o">*</span> L
-            <span class="kr">if</span> <span class="p">(</span>sa<span class="o">$</span>altitude <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kr">if</span> <span class="p">(</span>first<span class="p">)</span> <span class="p">{</span>
-                    first <span class="o">&lt;-</span> <span class="kc">FALSE</span>
-                    D <span class="o">&lt;-</span> L <span class="o">*</span> <span class="m">5</span>
-                    plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-                         xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="o">-</span>L<span class="p">,</span> L<span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="o">-</span>L<span class="o">/</span><span class="m">5</span><span class="p">,</span> L<span class="p">),</span>
-                         axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> col<span class="o">=</span><span class="kp">col</span><span class="p">[</span>season<span class="p">],</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-                    <span class="c1">## Draw gnomon as a gray bar</span>
-                    segments<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> L<span class="p">,</span> lwd<span class="o">=</span>glwd<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
-                    grid<span class="p">()</span>
-                    abline<span class="p">(</span>h<span class="o">=</span><span class="m">0</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1.5</span><span class="o">*</span>par<span class="p">(</span><span class="s">&#39;lwd&#39;</span><span class="p">),</span> lty<span class="o">=</span><span class="s">&#39;dotted&#39;</span><span class="p">)</span>
-                    abline<span class="p">(</span>v<span class="o">=</span><span class="m">0</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1.5</span><span class="o">*</span>par<span class="p">(</span><span class="s">&#39;lwd&#39;</span><span class="p">),</span> lty<span class="o">=</span><span class="s">&#39;dotted&#39;</span><span class="p">)</span>
-                    mtext<span class="p">(</span><span class="s">&quot;South&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">1</span><span class="p">,</span> at<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-                    mtext<span class="p">(</span><span class="s">&quot;West&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">2</span><span class="p">,</span> at<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-                    mtext<span class="p">(</span><span class="s">&quot;North&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> at<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-                    mtext<span class="p">(</span><span class="s">&quot;East&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">4</span><span class="p">,</span> at<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-                    legend<span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span> lwd<span class="o">=</span>glwd<span class="p">,</span> col<span class="o">=</span><span class="s">&quot;gray&quot;</span><span class="p">,</span>
-                           legend<span class="o">=</span><span class="s">&quot;Gnomon&quot;</span><span class="p">)</span>
-                    legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span>
-                           legend<span class="o">=</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;%.3fE %.3fN&quot;</span><span class="p">,</span> lon<span class="p">,</span> lat<span class="p">))</span>
-                    legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">,</span>
-                           legend<span class="o">=</span>keys<span class="p">)</span>
-                    box<span class="p">()</span>
-                    points<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-                    segments<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> x<span class="p">,</span> y<span class="p">,</span> col<span class="o">=</span><span class="kp">col</span><span class="p">[</span>season<span class="p">])</span>
-                <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-                    segments<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> x<span class="p">,</span> y<span class="p">,</span> col<span class="o">=</span><span class="kp">col</span><span class="p">[</span>season<span class="p">])</span>
-                    <span class="kr">if</span> <span class="p">(</span><span class="kp">debug</span><span class="p">)</span>
-                        points<span class="p">(</span>x<span class="p">,</span> y<span class="p">)</span>
+    <span class="n">col</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span>
+    <span class="n">glwd</span> <span class="o">&lt;-</span> <span class="m">8</span>
+    <span class="n">timezone</span> <span class="o">&lt;-</span> <span class="n">floor</span><span class="p">(</span><span class="m">0.5</span> <span class="o">+</span> <span class="n">lon</span> <span class="o">/</span> <span class="m">15</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">&lt;-</span> <span class="m">1</span>                           <span class="c1"># horiz gnomon length (arbitrary)
+</span>    <span class="n">nhours</span> <span class="o">&lt;-</span> <span class="m">24</span>
+    <span class="n">first</span> <span class="o">&lt;-</span> <span class="n">TRUE</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">season</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">hours</span> <span class="o">&lt;-</span> <span class="n">seq.POSIXt</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">days</span><span class="p">[</span><span class="n">season</span><span class="p">],</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">),</span>
+                            <span class="n">by</span><span class="o">=</span><span class="s2">"1 hour"</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="n">nhours</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">hour</span> <span class="k">in</span> <span class="n">seq_along</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">t</span> <span class="o">&lt;-</span> <span class="n">hours</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
+            <span class="n">tlocal</span> <span class="o">&lt;-</span> <span class="n">t</span> <span class="o">+</span> <span class="m">3600</span> <span class="o">*</span> <span class="n">timezone</span>
+            <span class="n">sa</span> <span class="o">&lt;-</span> <span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">)</span>
+            <span class="n">gy</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+            <span class="n">gx</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">gy</span><span class="p">))</span>
+            <span class="n">gz</span> <span class="o">&lt;-</span> <span class="n">gy</span> <span class="o">*</span> <span class="n">tan</span><span class="p">(</span><span class="n">lat</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
+            <span class="n">R</span> <span class="o">&lt;-</span> <span class="n">gz</span> <span class="o">/</span> <span class="n">tan</span><span class="p">(</span><span class="o">-</span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span> <span class="c1"># radius of shadow
+</span>            <span class="n">theta</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">90</span> <span class="o">-</span> <span class="n">sa</span><span class="o">$</span><span class="n">azimuth</span><span class="p">)</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="m">180</span>
+            <span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gx</span> <span class="o">+</span> <span class="n">R</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">gy</span> <span class="o">+</span> <span class="n">R</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+            <span class="n">len</span> <span class="o">&lt;-</span> <span class="n">max</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">^</span><span class="m">2</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">/</span> <span class="n">len</span> <span class="o">*</span> <span class="n">L</span>
+            <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">/</span> <span class="n">len</span> <span class="o">*</span> <span class="n">L</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">first</span> <span class="o">&lt;-</span> <span class="n">FALSE</span>
+                    <span class="n">D</span> <span class="o">&lt;-</span> <span class="n">L</span> <span class="o">*</span> <span class="m">5</span>
+                    <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span>
+                         <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="m">5</span><span class="p">,</span> <span class="n">L</span><span class="p">),</span>
+                         <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">[</span><span class="n">season</span><span class="p">],</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+                    <span class="c1">## Draw gnomon as a gray bar
+</span>                    <span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="n">glwd</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+                    <span class="n">grid</span><span class="p">()</span>
+                    <span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="o">*</span><span class="n">par</span><span class="p">(</span><span class="s1">'lwd'</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="s1">'dotted'</span><span class="p">)</span>
+                    <span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="o">*</span><span class="n">par</span><span class="p">(</span><span class="s1">'lwd'</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="s1">'dotted'</span><span class="p">)</span>
+                    <span class="n">mtext</span><span class="p">(</span><span class="s2">"South"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+                    <span class="n">mtext</span><span class="p">(</span><span class="s2">"West"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+                    <span class="n">mtext</span><span class="p">(</span><span class="s2">"North"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+                    <span class="n">mtext</span><span class="p">(</span><span class="s2">"East"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+                    <span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="n">glwd</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span>
+                           <span class="n">legend</span><span class="o">=</span><span class="s2">"Gnomon"</span><span class="p">)</span>
+                    <span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span>
+                           <span class="n">legend</span><span class="o">=</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"%.3fE %.3fN"</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">))</span>
+                    <span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">,</span>
+                           <span class="n">legend</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>
+                    <span class="n">box</span><span class="p">()</span>
+                    <span class="n">points</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+                    <span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">[</span><span class="n">season</span><span class="p">])</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">[</span><span class="n">season</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">debug</span><span class="p">)</span>
+                        <span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
                 <span class="p">}</span>
-                <span class="kr">if</span> <span class="p">(</span>season<span class="o">==</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span>
-                    xend <span class="o">&lt;-</span> <span class="kp">tail</span><span class="p">(</span>x<span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-                    yend <span class="o">&lt;-</span> <span class="kp">tail</span><span class="p">(</span>y<span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-                    text<span class="p">(</span><span class="m">1.05</span><span class="o">*</span>xend<span class="p">,</span> <span class="m">1.05</span><span class="o">*</span>yend<span class="p">,</span> <span class="kp">format</span><span class="p">(</span>tlocal<span class="p">,</span> <span class="s">&quot;%H&quot;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">season</span><span class="o">==</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">xend</span> <span class="o">&lt;-</span> <span class="n">tail</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+                    <span class="n">yend</span> <span class="o">&lt;-</span> <span class="n">tail</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+                    <span class="n">text</span><span class="p">(</span><span class="m">1.05</span><span class="o">*</span><span class="n">xend</span><span class="p">,</span> <span class="m">1.05</span><span class="o">*</span><span class="n">yend</span><span class="p">,</span> <span class="n">format</span><span class="p">(</span><span class="n">tlocal</span><span class="p">,</span> <span class="s2">"%H"</span><span class="p">))</span>
                 <span class="p">}</span>
 
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span>
-    dev.off<span class="p">()</span>
-</pre></div>
-</td></tr></table>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span>
+    <span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 
 

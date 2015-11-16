@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -102,15 +102,15 @@
 
 <p>Code for digitizing a plot on the screen is given below, without comment.  It can be saved to a file, for later use.  (I don’t bother commenting because the work of doing that is about equal to the work of making a package, which I may do, if anyone expresses interest.)</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -160,91 +160,88 @@
 56
 57
 58
-59</code></pre></div></td><td class="code"><div class="highlight"><pre>xaxis <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>values<span class="p">)</span>
+59</pre></td><td class="code"><pre><span class="n">xaxis</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 <span class="p">{</span>
-    n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>values<span class="p">)</span>
-    <span class="kp">message</span><span class="p">(</span><span class="s">&quot;click on the x axis at places where x=&quot;</span><span class="p">,</span> <span class="kp">paste</span><span class="p">(</span>values<span class="p">,</span> collapse<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">),</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
-    xy <span class="o">&lt;-</span> locator<span class="p">(</span>n<span class="p">)</span>
-    m <span class="o">&lt;-</span> lm<span class="p">(</span>values <span class="o">~</span> xy<span class="o">$</span>x<span class="p">)</span>
-    C <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>coef<span class="p">(</span>m<span class="p">))</span>
-    xa <span class="o">&lt;&lt;-</span> C<span class="p">[</span><span class="m">1</span><span class="p">]</span>
-    xb <span class="o">&lt;&lt;-</span> C<span class="p">[</span><span class="m">2</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="s2">"click on the x axis at places where x="</span><span class="p">,</span> <span class="n">paste</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">collapse</span><span class="o">=</span><span class="s2">","</span><span class="p">),</span> <span class="s2">"\n"</span><span class="p">)</span>
+    <span class="n">xy</span> <span class="o">&lt;-</span> <span class="n">locator</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">&lt;-</span> <span class="n">lm</span><span class="p">(</span><span class="n">values</span> <span class="o">~</span> <span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">xa</span> <span class="o">&lt;&lt;-</span> <span class="n">C</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+    <span class="n">xb</span> <span class="o">&lt;&lt;-</span> <span class="n">C</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
 <span class="p">}</span>
-yaxis <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>values<span class="p">)</span>
+<span class="n">yaxis</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 <span class="p">{</span>
-    n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>values<span class="p">)</span>
-    <span class="kp">message</span><span class="p">(</span><span class="s">&quot;click on the y axis at places where x=&quot;</span><span class="p">,</span> <span class="kp">paste</span><span class="p">(</span>values<span class="p">,</span> collapse<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">),</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
-    xy <span class="o">&lt;-</span> locator<span class="p">(</span>n<span class="p">)</span>
-    m <span class="o">&lt;-</span> lm<span class="p">(</span>values <span class="o">~</span> xy<span class="o">$</span>y<span class="p">)</span>
-    C <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>coef<span class="p">(</span>m<span class="p">))</span>
-    ya <span class="o">&lt;&lt;-</span> C<span class="p">[</span><span class="m">1</span><span class="p">]</span>
-    yb <span class="o">&lt;&lt;-</span> C<span class="p">[</span><span class="m">2</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="s2">"click on the y axis at places where x="</span><span class="p">,</span> <span class="n">paste</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">collapse</span><span class="o">=</span><span class="s2">","</span><span class="p">),</span> <span class="s2">"\n"</span><span class="p">)</span>
+    <span class="n">xy</span> <span class="o">&lt;-</span> <span class="n">locator</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">&lt;-</span> <span class="n">lm</span><span class="p">(</span><span class="n">values</span> <span class="o">~</span> <span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">ya</span> <span class="o">&lt;&lt;-</span> <span class="n">C</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+    <span class="n">yb</span> <span class="o">&lt;&lt;-</span> <span class="n">C</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
 <span class="p">}</span>
-topright <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span>
+<span class="n">topright</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="kp">message</span><span class="p">(</span><span class="s">&quot;click the top-right corner of plot box\n&quot;</span><span class="p">)</span>
-    xy <span class="o">&lt;-</span> locator<span class="p">(</span><span class="m">1</span><span class="p">)</span>
-    xout <span class="o">&lt;&lt;-</span> xy<span class="o">$</span>x
-    yout <span class="o">&lt;&lt;-</span> xy<span class="o">$</span>y
+    <span class="n">message</span><span class="p">(</span><span class="s2">"click the top-right corner of plot box\n"</span><span class="p">)</span>
+    <span class="n">xy</span> <span class="o">&lt;-</span> <span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">xout</span> <span class="o">&lt;&lt;-</span> <span class="n">xy</span><span class="o">$</span><span class="n">x</span>
+    <span class="n">yout</span> <span class="o">&lt;&lt;-</span> <span class="n">xy</span><span class="o">$</span><span class="n">y</span>
 <span class="p">}</span>
-data <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="o">=</span><span class="m">100</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kp">message</span><span class="p">(</span><span class="s">&quot;escape by clicking to right of or above top-right corner of box\n&quot;</span><span class="p">)</span>
-    x <span class="o">&lt;-</span> y <span class="o">&lt;-</span> <span class="kc">NULL</span>
-    i <span class="o">&lt;-</span> <span class="m">1</span>
-    <span class="kr">while</span> <span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span> <span class="p">{</span>
-        xy <span class="o">&lt;-</span> locator<span class="p">(</span><span class="m">1</span><span class="p">)</span>
-        xx <span class="o">&lt;-</span> xa <span class="o">+</span> xb <span class="o">*</span> xy<span class="o">$</span>x 
-        yy <span class="o">&lt;-</span> ya <span class="o">+</span> yb <span class="o">*</span> xy<span class="o">$</span>y 
-        <span class="kp">cat</span><span class="p">(</span><span class="s">&quot;i=&quot;</span><span class="p">,</span> i<span class="p">,</span> <span class="s">&quot;xy:&quot;</span><span class="p">,</span> xy<span class="o">$</span>x<span class="p">,</span> xy<span class="o">$</span>y<span class="p">,</span> <span class="s">&quot;-&gt;&quot;</span><span class="p">,</span> xx<span class="p">,</span> yy<span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
-        <span class="kr">if</span> <span class="p">(</span>xy<span class="o">$</span>x <span class="o">&gt;</span> xout <span class="o">||</span> xy<span class="o">$</span>y <span class="o">&gt;</span> yout<span class="p">)</span> <span class="p">{</span>
-            <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>x<span class="o">=</span>x<span class="p">,</span> y<span class="o">=</span>y<span class="p">))</span>
+    <span class="n">message</span><span class="p">(</span><span class="s2">"escape by clicking to right of or above top-right corner of box\n"</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">NULL</span>
+    <span class="n">i</span> <span class="o">&lt;-</span> <span class="m">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">TRUE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xy</span> <span class="o">&lt;-</span> <span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+        <span class="n">xx</span> <span class="o">&lt;-</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">xb</span> <span class="o">*</span> <span class="n">xy</span><span class="o">$</span><span class="n">x</span> 
+        <span class="n">yy</span> <span class="o">&lt;-</span> <span class="n">ya</span> <span class="o">+</span> <span class="n">yb</span> <span class="o">*</span> <span class="n">xy</span><span class="o">$</span><span class="n">y</span> 
+        <span class="n">cat</span><span class="p">(</span><span class="s2">"i="</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">"xy:"</span><span class="p">,</span> <span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="s2">"\n"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">xout</span> <span class="o">||</span> <span class="n">xy</span><span class="o">$</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">yout</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">))</span>
         <span class="p">}</span>
-        x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>x<span class="p">,</span> xx<span class="p">)</span>
-        y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>y<span class="p">,</span> yy<span class="p">)</span>
-        i <span class="o">&lt;-</span> i <span class="o">+</span> <span class="m">1</span>
-        <span class="kr">if</span> <span class="p">(</span>i <span class="o">&gt;</span> n<span class="p">)</span>
-            <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>x<span class="o">=</span>x<span class="p">,</span> y<span class="o">=</span>y<span class="p">))</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yy</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">&lt;-</span> <span class="n">i</span> <span class="o">+</span> <span class="m">1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">))</span>
     <span class="p">}</span>
 <span class="p">}</span>
-digitize <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>image<span class="p">,</span> xaxis<span class="p">,</span> yaxis<span class="p">)</span>
+<span class="n">digitize</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kn">library</span><span class="p">(</span>png<span class="p">)</span>
-    png <span class="o">&lt;-</span> readPNG<span class="p">(</span>image<span class="p">)</span>
-    par<span class="p">(</span>mar<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
-    plot<span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">)</span>
-    rasterImage<span class="p">(</span>png<span class="p">[,,</span><span class="m">1</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-    xaxis<span class="p">(</span>xaxis<span class="p">)</span>
-    yaxis<span class="p">(</span>yaxis<span class="p">)</span>
-    topright<span class="p">()</span>
-    data<span class="p">()</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+    <span class="n">library</span><span class="p">(</span><span class="n">png</span><span class="p">)</span>
+    <span class="n">png</span> <span class="o">&lt;-</span> <span class="n">readPNG</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+    <span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">)</span>
+    <span class="n">rasterImage</span><span class="p">(</span><span class="n">png</span><span class="p">[,,</span><span class="m">1</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+    <span class="n">xaxis</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+    <span class="n">yaxis</span><span class="p">(</span><span class="n">yaxis</span><span class="p">)</span>
+    <span class="n">topright</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">()</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="application">Application</h1>
 
 <p>As a test of this, let’s create some fake data</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kp">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
-x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
-y <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> x <span class="o">+</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+5</pre></td><td class="code"><pre><span class="n">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-03-12-digitizing-plots/make-data.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-03-12-digitizing-plots/make-data.png" alt="center" /></p>
 
 <p>and digitize the resultant image (saved in a PNG file).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>xy <span class="o">&lt;-</span> digitize<span class="p">(</span><span class="s">&quot;sample.png&quot;</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">10</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">xy</span> <span class="o">&lt;-</span> <span class="n">digitize</span><span class="p">(</span><span class="s2">"sample.png"</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">10</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 

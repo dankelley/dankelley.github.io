@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -46,7 +46,7 @@
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2014/06/08/Rcpp.html" title="using C++ within R">
+<a class="pagination" href="/r/2014/06/08/rcpp.html" title="using C++ within R">
     Next <!-- &rarr; -->
 </a>
 
@@ -104,91 +104,14 @@
 
 <p>The following code is direct from the help for <code>Colormap()</code>; all I’ve done is to put the example code into Rmarkdown to make for easier comparision with the resultant graphs.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
-## Loading required package: maps</code></pre></div>
+## Loading required package: maps</code></pre></figure>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 1. color scheme for points on xy plot</span>
-x <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">40</span><span class="p">)</span>
-y <span class="o">&lt;-</span> <span class="kp">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> x<span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
-mar <span class="o">&lt;-</span> par<span class="p">(</span><span class="s">&#39;mar&#39;</span><span class="p">)</span> <span class="c1"># prevent margin creep by drawPalette()</span>
-<span class="c1">## First, default breaks</span>
-<span class="kt">c</span> <span class="o">&lt;-</span> colormap<span class="p">(</span>y<span class="p">)</span>
-drawPalette<span class="p">(</span><span class="kt">c</span><span class="o">$</span>zlim<span class="p">,</span> col<span class="o">=</span><span class="kt">c</span><span class="o">$</span><span class="kp">col</span><span class="p">,</span> breaks<span class="o">=</span><span class="kt">c</span><span class="o">$</span>breaks<span class="p">)</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> bg<span class="o">=</span><span class="kt">c</span><span class="o">$</span>zcol<span class="p">,</span> pch<span class="o">=</span><span class="m">21</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-grid<span class="p">()</span>
-</pre></div>
-</td></tr></table>
-
-<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-11.png" alt="center" /> </p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2
-3
-4
-5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span>mar<span class="p">)</span>
-<span class="c1">## Second, 100 breaks, yielding a smoother palette</span>
-<span class="kt">c</span> <span class="o">&lt;-</span> colormap<span class="p">(</span>y<span class="p">,</span> breaks<span class="o">=</span><span class="m">100</span><span class="p">)</span>
-drawPalette<span class="p">(</span><span class="kt">c</span><span class="o">$</span>zlim<span class="p">,</span> col<span class="o">=</span><span class="kt">c</span><span class="o">$</span><span class="kp">col</span><span class="p">,</span> breaks<span class="o">=</span><span class="kt">c</span><span class="o">$</span>breaks<span class="p">)</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> bg<span class="o">=</span><span class="kt">c</span><span class="o">$</span>zcol<span class="p">,</span> pch<span class="o">=</span><span class="m">21</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-grid<span class="p">()</span>
-</pre></div>
-</td></tr></table>
-
-<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-12.png" alt="center" /> </p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2
-3
-4
-5
-6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span>mar<span class="p">)</span>
-
-<span class="c1">## Example 2. topographic image with a standard color scheme</span>
-par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-data<span class="p">(</span>topoWorld<span class="p">)</span>
-cm <span class="o">&lt;-</span> colormap<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;gmt_globe&quot;</span><span class="p">)</span>
-imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks<span class="o">=</span>cm<span class="o">$</span>breaks<span class="p">,</span> col<span class="o">=</span>cm<span class="o">$</span><span class="kp">col</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-13.png" alt="center" /> </p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2
-3
-4
-5
-6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 3. topographic image with modified colors</span>
-cm <span class="o">&lt;-</span> colormap<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;gmt_globe&quot;</span><span class="p">)</span>
-deep <span class="o">&lt;-</span> cm<span class="o">$</span>x0 <span class="o">&lt;</span> <span class="m">-4000</span>
-cm<span class="o">$</span>col0<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;black&#39;</span>
-cm<span class="o">$</span>col1<span class="p">[</span>deep<span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;black&#39;</span>
-cm <span class="o">&lt;-</span> colormap<span class="p">(</span>x0<span class="o">=</span>cm<span class="o">$</span>x0<span class="p">,</span> x1<span class="o">=</span>cm<span class="o">$</span>x1<span class="p">,</span> col0<span class="o">=</span>cm<span class="o">$</span>col0<span class="p">,</span> col1<span class="o">=</span>cm<span class="o">$</span>col1<span class="p">)</span>
-imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks<span class="o">=</span>cm<span class="o">$</span>breaks<span class="p">,</span> col<span class="o">=</span>cm<span class="o">$</span><span class="kp">col</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-14.png" alt="center" /> </p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -196,36 +119,106 @@ imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks<span clas
 6
 7
 8
-9</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Example 4. image of world topography with water colorized </span>
-<span class="c1">##            smoothly from violet at 8km depth to blue</span>
-<span class="c1">##            at 4km depth, then blending in 0.5km increments</span>
-<span class="c1">##            to white at the coast, with tan for land.</span>
-cm <span class="o">&lt;-</span> colormap<span class="p">(</span>x0<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span>
-               x1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span>
-               col0<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;violet&quot;</span><span class="p">,</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="s">&quot;tan&quot;</span><span class="p">),</span>
-               col1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;violet&quot;</span><span class="p">,</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="s">&quot;tan&quot;</span><span class="p">),</span>
-               n<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+9
+10</pre></td><td class="code"><pre><span class="c1">## Example 1. color scheme for points on xy plot
+</span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="m">40</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<span class="n">mar</span> <span class="o">&lt;-</span> <span class="n">par</span><span class="p">(</span><span class="s1">'mar'</span><span class="p">)</span> <span class="c1"># prevent margin creep by drawPalette()
+## First, default breaks
+</span><span class="n">c</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">drawPalette</span><span class="p">(</span><span class="n">c</span><span class="o">$</span><span class="n">zlim</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">col</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">breaks</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">zcol</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Warning: the condition has length &gt; 1 and only the first element will be
-## used</code></pre></div>
+<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-11.png" alt="center" /></p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Error: &#39;con&#39; is not a connection</code></pre></div>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>lon <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&#39;longitude&#39;</span><span class="p">]]</span>
-lat <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&#39;latitude&#39;</span><span class="p">]]</span>
-z <span class="o">&lt;-</span> topoWorld<span class="p">[[</span><span class="s">&#39;z&#39;</span><span class="p">]]</span>
-imagep<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> z<span class="p">,</span> breaks<span class="o">=</span>cm<span class="o">$</span>breaks<span class="p">,</span> col<span class="o">=</span>cm<span class="o">$</span><span class="kp">col</span><span class="p">)</span>
-contour<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> z<span class="p">,</span> levels<span class="o">=</span><span class="m">0</span><span class="p">,</span> add<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+5
+6</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">mar</span><span class="p">)</span>
+<span class="c1">## Second, 100 breaks, yielding a smoother palette
+</span><span class="n">c</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+<span class="n">drawPalette</span><span class="p">(</span><span class="n">c</span><span class="o">$</span><span class="n">zlim</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">col</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">breaks</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="n">c</span><span class="o">$</span><span class="n">zcol</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-15.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-12.png" alt="center" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">mar</span><span class="p">)</span>
+
+<span class="c1">## Example 2. topographic image with a standard color scheme
+</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+<span class="n">data</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"gmt_globe"</span><span class="p">)</span>
+<span class="n">imagep</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">breaks</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-13.png" alt="center" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="c1">## Example 3. topographic image with modified colors
+</span><span class="n">cm</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"gmt_globe"</span><span class="p">)</span>
+<span class="n">deep</span> <span class="o">&lt;-</span> <span class="n">cm</span><span class="o">$</span><span class="n">x0</span> <span class="o">&lt;</span> <span class="m">-4000</span>
+<span class="n">cm</span><span class="o">$</span><span class="n">col0</span><span class="p">[</span><span class="n">deep</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'black'</span>
+<span class="n">cm</span><span class="o">$</span><span class="n">col1</span><span class="p">[</span><span class="n">deep</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'black'</span>
+<span class="n">cm</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">x1</span><span class="p">,</span> <span class="n">col0</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col0</span><span class="p">,</span> <span class="n">col1</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col1</span><span class="p">)</span>
+<span class="n">imagep</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">breaks</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-14.png" alt="center" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="c1">## Example 4. image of world topography with water colorized 
+##            smoothly from violet at 8km depth to blue
+##            at 4km depth, then blending in 0.5km increments
+##            to white at the coast, with tan for land.
+</span><span class="n">cm</span> <span class="o">&lt;-</span> <span class="n">colormap</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span>
+               <span class="n">x1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-8000</span><span class="p">,</span> <span class="m">-4000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span>
+               <span class="n">col0</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"violet"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"white"</span><span class="p">,</span><span class="s2">"tan"</span><span class="p">),</span>
+               <span class="n">col1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"violet"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"white"</span><span class="p">,</span><span class="s2">"tan"</span><span class="p">),</span>
+               <span class="n">n</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Warning: the condition has length &gt; 1 and only the first element will be
+## used</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error: 'con' is not a connection</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="n">lon</span> <span class="o">&lt;-</span> <span class="n">topoWorld</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]]</span>
+<span class="n">lat</span> <span class="o">&lt;-</span> <span class="n">topoWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]]</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="n">topoWorld</span><span class="p">[[</span><span class="s1">'z'</span><span class="p">]]</span>
+<span class="n">imagep</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">breaks</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col</span><span class="p">)</span>
+<span class="n">contour</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-04-30-colormap/unnamed-chunk-15.png" alt="center" /></p>
 
 <h1 id="resources">Resources</h1>
 

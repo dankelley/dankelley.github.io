@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -131,15 +131,15 @@ written in black near the top of the graph. The red line is the estimate of
 eclipse maximum from e.g. [3] The red line is the estimate of eclipse maximum
 from [3].</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -157,37 +157,36 @@ from [3].</p>
 24
 25
 26
-27</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-angle <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> lon<span class="o">=</span><span class="m">15+40</span><span class="o">/</span><span class="m">60</span><span class="p">,</span> lat<span class="o">=</span><span class="m">78+12</span><span class="o">/</span><span class="m">60</span><span class="p">)</span>
+27</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+<span class="n">angle</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="m">15+40</span><span class="o">/</span><span class="m">60</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="m">78+12</span><span class="o">/</span><span class="m">60</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">## Default location is Longyearbyen, Svalbard</span>
-    sa <span class="o">&lt;-</span> sunAngle<span class="p">(</span><span class="kp">t</span><span class="p">,</span> lon<span class="p">,</span> lat<span class="p">)</span>
-    ma <span class="o">&lt;-</span> moonAngle<span class="p">(</span><span class="kp">t</span><span class="p">,</span> lon<span class="p">,</span> lat<span class="p">)</span>
-    saz <span class="o">&lt;-</span> sa<span class="o">$</span>azimuth
-    sal <span class="o">&lt;-</span> sa<span class="o">$</span>altitude
-    maz <span class="o">&lt;-</span> ma<span class="o">$</span>azimuth
-    mal <span class="o">&lt;-</span> ma<span class="o">$</span>altitude
-    scale <span class="o">&lt;-</span> <span class="kp">cos</span><span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span>ma<span class="o">$</span>altitude<span class="o">+</span>sa<span class="o">$</span>altitude<span class="p">)</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
-    <span class="kp">sqrt</span><span class="p">((</span><span class="kp">scale</span><span class="o">*</span><span class="p">(</span>saz<span class="o">-</span>maz<span class="p">))</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="p">(</span>sal<span class="o">-</span>mal<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+    <span class="c1">## Default location is Longyearbyen, Svalbard
+</span>    <span class="n">sa</span> <span class="o">&lt;-</span> <span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
+    <span class="n">ma</span> <span class="o">&lt;-</span> <span class="n">moonAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
+    <span class="n">saz</span> <span class="o">&lt;-</span> <span class="n">sa</span><span class="o">$</span><span class="n">azimuth</span>
+    <span class="n">sal</span> <span class="o">&lt;-</span> <span class="n">sa</span><span class="o">$</span><span class="n">altitude</span>
+    <span class="n">maz</span> <span class="o">&lt;-</span> <span class="n">ma</span><span class="o">$</span><span class="n">azimuth</span>
+    <span class="n">mal</span> <span class="o">&lt;-</span> <span class="n">ma</span><span class="o">$</span><span class="n">altitude</span>
+    <span class="n">scale</span> <span class="o">&lt;-</span> <span class="n">cos</span><span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">ma</span><span class="o">$</span><span class="n">altitude</span><span class="o">+</span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
+    <span class="n">sqrt</span><span class="p">((</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span><span class="n">saz</span><span class="o">-</span><span class="n">maz</span><span class="p">))</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">sal</span><span class="o">-</span><span class="n">mal</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="c1"># time is from reference 3</span>
-nasa <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2015-03-20 9:45:39&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-times <span class="o">&lt;-</span> nasa <span class="o">+</span> <span class="kp">seq</span><span class="p">(</span><span class="m">-1800</span><span class="p">,</span> <span class="m">1800</span><span class="p">,</span> <span class="m">30</span><span class="p">)</span>
-misfit <span class="o">&lt;-</span> <span class="kc">NULL</span>
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq_along</span><span class="p">(</span>times<span class="p">))</span> <span class="p">{</span>
-    misfit <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>misfit<span class="p">,</span> angle<span class="p">(</span>times<span class="p">[</span>i<span class="p">]))</span>
+<span class="c1"># time is from reference 3
+</span><span class="n">nasa</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2015-03-20 9:45:39"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span>
+<span class="n">times</span> <span class="o">&lt;-</span> <span class="n">nasa</span> <span class="o">+</span> <span class="n">seq</span><span class="p">(</span><span class="m">-1800</span><span class="p">,</span> <span class="m">1800</span><span class="p">,</span> <span class="m">30</span><span class="p">)</span>
+<span class="n">misfit</span> <span class="o">&lt;-</span> <span class="n">NULL</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">seq_along</span><span class="p">(</span><span class="n">times</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">misfit</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">misfit</span><span class="p">,</span> <span class="n">angle</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 <span class="p">}</span>
-oce.plot.ts<span class="p">(</span>times<span class="p">,</span> misfit<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Angular misfit [deg]&quot;</span><span class="p">)</span>
-o <span class="o">&lt;-</span> optimize<span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span> angle<span class="p">(</span>nasa<span class="o">+</span><span class="kp">t</span><span class="p">),</span> lower<span class="o">=</span><span class="m">-3600</span><span class="p">,</span> upper<span class="o">=</span><span class="m">3600</span><span class="p">)</span>
-eclipse <span class="o">&lt;-</span> nasa <span class="o">+</span> o<span class="o">$</span>minimum
-abline<span class="p">(</span>v<span class="o">=</span>eclipse<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span>
-abline<span class="p">(</span>v<span class="o">=</span>nasa<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Here: %s &quot;</span><span class="p">,</span> <span class="kp">format</span><span class="p">(</span>eclipse<span class="p">)),</span> line<span class="o">=</span><span class="m">-1</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
-mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;NASA: %s &quot;</span><span class="p">,</span> <span class="kp">format</span><span class="p">(</span>nasa<span class="p">)),</span> line<span class="o">=</span><span class="m">-2</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">misfit</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Angular misfit [deg]"</span><span class="p">)</span>
+<span class="n">o</span> <span class="o">&lt;-</span> <span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="n">angle</span><span class="p">(</span><span class="n">nasa</span><span class="o">+</span><span class="n">t</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="m">-3600</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="m">3600</span><span class="p">)</span>
+<span class="n">eclipse</span> <span class="o">&lt;-</span> <span class="n">nasa</span> <span class="o">+</span> <span class="n">o</span><span class="o">$</span><span class="n">minimum</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">eclipse</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">nasa</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"Here: %s "</span><span class="p">,</span> <span class="n">format</span><span class="p">(</span><span class="n">eclipse</span><span class="p">)),</span> <span class="n">line</span><span class="o">=</span><span class="m">-1</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
+<span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"NASA: %s "</span><span class="p">,</span> <span class="n">format</span><span class="p">(</span><span class="n">nasa</span><span class="p">)),</span> <span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-03-20-eclipse/unnamed-chunk-1-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-03-20-eclipse/unnamed-chunk-1-1.png" alt="center" /></p>
 
 <h1 id="results-and-discussion">Results and discussion</h1>
 

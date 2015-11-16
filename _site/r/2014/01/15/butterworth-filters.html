@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -96,65 +96,62 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases.  For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical.  This post simply illustrates this with made-up data that the reader can experiment with.  </p>
+<p>Butterworth filters with order other than 1 have an overshoot phenomenon that can be problematic in some cases.  For example, if smoothing is used on an estimate of kinetic energy, overshoots might yield negative values that are nonphysical.  This post simply illustrates this with made-up data that the reader can experiment with.</p>
 
 <h1 id="methods">Methods</h1>
 
 <p>First, create and plot some fake data, a top-hat function.  (Note the use of <code>par</code> to tighten the margins.)</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>signal<span class="p">)</span>
-n <span class="o">&lt;-</span> <span class="m">100</span>
-x <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span>n
-y <span class="o">&lt;-</span> <span class="kp">ifelse</span><span class="p">(</span><span class="m">0.3</span><span class="o">*</span>n <span class="o">&lt;</span> x <span class="o">&amp;</span> x <span class="o">&lt;</span> <span class="m">0.7</span><span class="o">*</span>n<span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-0.1</span><span class="p">,</span> <span class="m">1.1</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+6</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">ifelse</span><span class="p">(</span><span class="m">0.3</span><span class="o">*</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="m">0.7</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-0.1</span><span class="p">,</span> <span class="m">1.1</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, decide on the cutoff frequency for a low-pass filter.  Setting <code>W</code> to 0.1 means a cutoff at 1/10-th of the Nyquist frequency.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>W <span class="o">&lt;-</span> <span class="m">0.1</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">W</span> <span class="o">&lt;-</span> <span class="m">0.1</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Finally, filter with orders 1, 2 and 3, and add coloured lines indicating the results</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
 13
 14
-15</code></pre></div></td><td class="code"><div class="highlight"><pre>b1 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">1</span><span class="p">,</span> W<span class="p">)</span>
-y1 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>b1<span class="p">,</span> y<span class="p">)</span>
-points<span class="p">(</span>x<span class="p">,</span> y1<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+15</pre></td><td class="code"><pre><span class="n">b1</span> <span class="o">&lt;-</span> <span class="n">butter</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
 
-b2 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">2</span><span class="p">,</span> W<span class="p">)</span>
-y2 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>b2<span class="p">,</span> y<span class="p">)</span>
-points<span class="p">(</span>x<span class="p">,</span> y2<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">&lt;-</span> <span class="n">butter</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
 
-b3 <span class="o">&lt;-</span> butter<span class="p">(</span><span class="m">3</span><span class="p">,</span> W<span class="p">)</span>
-y3 <span class="o">&lt;-</span> filtfilt<span class="p">(</span>b3<span class="p">,</span> y<span class="p">)</span>
-points<span class="p">(</span>x<span class="p">,</span> y3<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;forestgreen&#39;</span><span class="p">)</span>
+<span class="n">b3</span> <span class="o">&lt;-</span> <span class="n">butter</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">&lt;-</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">b3</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'forestgreen'</span><span class="p">)</span>
 
-legend<span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> 
-        col<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;forestgreen&quot;</span><span class="p">),</span>
-        legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Signal&quot;</span><span class="p">,</span> <span class="s">&quot;Order 1&quot;</span><span class="p">,</span> <span class="s">&quot;Order 2&quot;</span><span class="p">,</span> <span class="s">&quot;Order 3&quot;</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> 
+        <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">,</span> <span class="s2">"forestgreen"</span><span class="p">),</span>
+        <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"Signal"</span><span class="p">,</span> <span class="s2">"Order 1"</span><span class="p">,</span> <span class="s2">"Order 2"</span><span class="p">,</span> <span class="s2">"Order 3"</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 

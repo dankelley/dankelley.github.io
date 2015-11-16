@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -91,7 +91,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>This follows up on the previous posting, using data provided by Akima (1972).  The four panels of the plot produced by the following code compare the original Akima spline formula with an improved version, and three styles of <code>spline()</code> fits.  </p>
+<p>This follows up on the previous posting, using data provided by Akima (1972).  The four panels of the plot produced by the following code compare the original Akima spline formula with an improved version, and three styles of <code>spline()</code> fits.</p>
 
 <p>As noted in the code, two <code>spline()</code> methods are useless for general tasks and are ignored here.  The <code>"period"</code> method sets the endpoint y-values equal, which will be useless in most applications.  The <code>"hyman"</code> method requires the y values to be increasing, which again is useless in most applications.</p>
 
@@ -99,15 +99,15 @@
 
 <p>The code first creates the data, the MD=1 case of Akima (1972), and defines <code>xx</code> as a finer-resolution version of <code>x</code> for plotting.  Then it defines a function <code>start</code> for common operations on each panel, and then it displays comparisons.  The idea of showing each in reference to the original akima method is to guide the eye, since plotting all in one panel makes a tangle that is difficult to grasp.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -143,53 +143,52 @@
 42
 43
 44
-45</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span> png<span class="p">(</span><span class="s">&quot;splines2.png&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">7</span><span class="p">,</span> height<span class="o">=</span><span class="m">7</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> res<span class="o">=</span><span class="m">150</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+45</pre></td><td class="code"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span> <span class="n">png</span><span class="p">(</span><span class="s2">"splines2.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="m">7</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="m">7</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="m">150</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="m">8</span><span class="p">)</span>
 
-<span class="c1">## Data from &quot;MD=1&quot; set of akima1972iasc</span>
-x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span>  <span class="m">6</span><span class="p">,</span>  <span class="m">6</span><span class="p">,</span>  <span class="m">7</span><span class="p">,</span>   <span class="m">8</span><span class="p">,</span>   <span class="m">9</span><span class="p">)</span>
-y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="m">150</span><span class="p">)</span>
+<span class="c1">## Data from "MD=1" set of akima1972iasc
+</span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span>  <span class="m">6</span><span class="p">,</span>  <span class="m">6</span><span class="p">,</span>  <span class="m">7</span><span class="p">,</span>   <span class="m">8</span><span class="p">,</span>   <span class="m">9</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="m">150</span><span class="p">)</span>
 
-<span class="c1">## A mesh for plotting</span>
-xx <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span>x<span class="p">),</span> <span class="kp">max</span><span class="p">(</span>x<span class="p">),</span> length.out<span class="o">=</span><span class="m">200</span><span class="p">)</span>
+<span class="c1">## A mesh for plotting
+</span><span class="n">xx</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">length.out</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
 
-<span class="kn">library</span><span class="p">(</span>akima<span class="p">)</span>                         <span class="c1"># for aspline()</span>
-
-start <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span>
+<span class="n">library</span><span class="p">(</span><span class="n">akima</span><span class="p">)</span>                         <span class="c1"># for aspline()
+</span>
+<span class="n">start</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">()</span>
 <span class="p">{</span>
-    plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">)</span>
-    grid<span class="p">()</span>
-    akima <span class="o">&lt;-</span> aspline<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> xx<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;original&quot;</span><span class="p">)</span>
-    lines<span class="p">(</span>akima<span class="o">$</span>x<span class="p">,</span> akima<span class="o">$</span>y<span class="p">,</span> lty<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">()</span>
+    <span class="n">akima</span> <span class="o">&lt;-</span> <span class="n">aspline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"original"</span><span class="p">)</span>
+    <span class="n">lines</span><span class="p">(</span><span class="n">akima</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">akima</span><span class="o">$</span><span class="n">y</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 <span class="p">}</span>
 
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
 
-start<span class="p">()</span>
-akima <span class="o">&lt;-</span> aspline<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> xx<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;improved&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>akima<span class="o">$</span>x<span class="p">,</span> akima<span class="o">$</span>y<span class="p">,</span> col<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;aspline/original&quot;</span><span class="p">,</span> <span class="s">&quot;aspline/improved&quot;</span><span class="p">),</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">start</span><span class="p">()</span>
+<span class="n">akima</span> <span class="o">&lt;-</span> <span class="n">aspline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"improved"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">akima</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">akima</span><span class="o">$</span><span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"aspline/original"</span><span class="p">,</span> <span class="s2">"aspline/improved"</span><span class="p">),</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
 
-start<span class="p">()</span>
-fun <span class="o">&lt;-</span> splinefun<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;fmm&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>xx<span class="p">,</span> fun<span class="p">(</span>xx<span class="p">),</span> col<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;aspline/original&quot;</span><span class="p">,</span> <span class="s">&quot;spline/fmm&quot;</span><span class="p">),</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
-
-
-start<span class="p">()</span>
-fun <span class="o">&lt;-</span> splinefun<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;natural&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>xx<span class="p">,</span> fun<span class="p">(</span>xx<span class="p">),</span> col<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;aspline/original&quot;</span><span class="p">,</span> <span class="s">&quot;spline/natural&quot;</span><span class="p">),</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">start</span><span class="p">()</span>
+<span class="n">fun</span> <span class="o">&lt;-</span> <span class="n">splinefun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"fmm"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">fun</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"aspline/original"</span><span class="p">,</span> <span class="s2">"spline/fmm"</span><span class="p">),</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
 
 
-start<span class="p">()</span>
-fun <span class="o">&lt;-</span> splinefun<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;monoH.FC&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>xx<span class="p">,</span> fun<span class="p">(</span>xx<span class="p">),</span> col<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1</span><span class="p">,</span> col<span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;aspline/original&quot;</span><span class="p">,</span> <span class="s">&quot;spline/monoH.FC&quot;</span><span class="p">),</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">start</span><span class="p">()</span>
+<span class="n">fun</span> <span class="o">&lt;-</span> <span class="n">splinefun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"natural"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">fun</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"aspline/original"</span><span class="p">,</span> <span class="s2">"spline/natural"</span><span class="p">),</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
 
 
-<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span> dev.off<span class="p">()</span>
-</pre></div>
-</td></tr></table>
+<span class="n">start</span><span class="p">()</span>
+<span class="n">fun</span> <span class="o">&lt;-</span> <span class="n">splinefun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"monoH.FC"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">fun</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"aspline/original"</span><span class="p">,</span> <span class="s2">"spline/monoH.FC"</span><span class="p">),</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span> <span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 

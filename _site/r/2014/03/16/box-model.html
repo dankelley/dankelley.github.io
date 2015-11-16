@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -125,87 +125,81 @@ is helpful since this is a form that works well with <code>lsoda()</code>, the R
 
 <p>The first step is to load the package containing <code>lsoda()</code>.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>deSolve<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">deSolve</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Readers who are following along might want to type <code>?lsoda</code> in an R console at this point, to get an idea of the reasoning being followed here.  The summary is that <code>lsoda()</code> takes initial conditions as its first argument, a vector of times at which to report the solution as its second argument, a function defining the differential equation(s) as its third argument, and a list containing model parameters in its fourth argument.</p>
 
 <p>We start by defining initial conditions, in line 1.  In this case, suppose that <code>h=0</code>, i.e. that the lake water level is equal to that of the sea.  Then, in line 2, we set parameters.  This is at the heart of the matter, and will be the most important part of any application of such a model.  Here, we take simple values: square lake of width 1 km (<code>A</code>=10^6 m^2), and outflow coefficient <code>gamma=</code>10 m^2/s.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>IC <span class="o">&lt;-</span> <span class="m">0</span>
-parms <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>A<span class="o">=</span><span class="m">1e6</span><span class="p">,</span> gamma<span class="o">=</span><span class="m">10</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">IC</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="n">parms</span> <span class="o">&lt;-</span> <span class="n">list</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="m">1e6</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="m">10</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Suppose we would like to examine the result of riverine input <code>F</code> of 1m^3/s lasting for a day, so that it makes sense to set up a time vector of, say, a week.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>sperday <span class="o">&lt;-</span> <span class="m">86400</span> <span class="c1"># seconds per day</span>
-times <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="o">*</span>sperday<span class="p">,</span> length.out<span class="o">=</span><span class="m">200</span><span class="p">)</span>
-<span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span>
+6</pre></td><td class="code"><pre><span class="n">sperday</span> <span class="o">&lt;-</span> <span class="m">86400</span> <span class="c1"># seconds per day
+</span><span class="n">times</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="o">*</span><span class="n">sperday</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="p">{</span>
-    ifelse <span class="p">(</span>t <span class="o">&gt;</span> sperday <span class="o">&amp;</span> t <span class="o">&lt;</span> <span class="m">2</span><span class="o">*</span>sperday<span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+    <span class="n">ifelse</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="n">sperday</span> <span class="o">&amp;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="m">2</span><span class="o">*</span><span class="n">sperday</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>(The length of <code>times</code> mainly matters to plotting; it has no effect on the accuray of the solution, i.e. we are not setting an integration time step here.)</p>
 
 <p>Next, set up the differential equation.  This has to follow a certain format.  The function must take time as first argument, current model state (a vector, generally) as second, and parameters, third.  The function returns a list of derivatives.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>DE <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> y<span class="p">,</span> parms<span class="p">)</span>
+6</pre></td><td class="code"><pre><span class="n">DE</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">parms</span><span class="p">)</span>
 <span class="p">{</span>
-    h <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">1</span><span class="p">]</span>
-    dhdt <span class="o">&lt;-</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span> <span class="o">-</span> parms<span class="o">$</span>gamma <span class="o">*</span> h<span class="p">)</span> <span class="o">/</span> parms<span class="o">$</span>A
-    <span class="kt">list</span><span class="p">(</span>dhdt<span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+    <span class="n">h</span> <span class="o">&lt;-</span> <span class="n">y</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+    <span class="n">dhdt</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">parms</span><span class="o">$</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">parms</span><span class="o">$</span><span class="n">A</span>
+    <span class="n">list</span><span class="p">(</span><span class="n">dhdt</span><span class="p">)</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here, the state is extracted into a variable named <code>h</code> and the derivative is stored in a variable named <code>dhdt</code>.  This is done merely for clarity of illustration here; experienced programmers are likely to write <code>DE</code> as a single-line function.</p>
 
 <p>Computing the model solution is now easy:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>sol <span class="o">&lt;-</span> lsoda<span class="p">(</span>IC<span class="p">,</span> times<span class="p">,</span> DE<span class="p">,</span> parms<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">sol</span> <span class="o">&lt;-</span> <span class="n">lsoda</span><span class="p">(</span><span class="n">IC</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">DE</span><span class="p">,</span> <span class="n">parms</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>defines <code>sol</code>, which has time as its first column and the solution as its second.  We may plot the results as follows (where time is indicated in days for simplicity).</p>
 
 <h1 id="results">Results</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.7</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
-h <span class="o">&lt;-</span> sol<span class="p">[,</span><span class="m">2</span><span class="p">]</span>
-Day <span class="o">&lt;-</span> times <span class="o">/</span> <span class="m">86400</span>
-plot<span class="p">(</span>Day<span class="p">,</span> <span class="bp">F</span><span class="p">(</span>times<span class="p">),</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;River input [m^3/s]&quot;</span><span class="p">)</span>
-plot<span class="p">(</span>Day<span class="p">,</span> h<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Lake level [m]&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+5</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.7</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+<span class="n">h</span> <span class="o">&lt;-</span> <span class="n">sol</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span>
+<span class="n">Day</span> <span class="o">&lt;-</span> <span class="n">times</span> <span class="o">/</span> <span class="m">86400</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Day</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"River input [m^3/s]"</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Day</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Lake level [m]"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-03-16-box-model/box-model.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-03-16-box-model/box-model.png" alt="center" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>Those interested in box models might like to alter the parameters and forcing function, to study the results.  </p>
+<p>Those interested in box models might like to alter the parameters and forcing function, to study the results.</p>
 
 <p>Adding more boxes is easy, and a good exercise for the reader.  Careful adjustment of parameters in multi-box models can yield reasonably useful alternatives to high-resolution numerical models, especially for exploratory work.</p>
 
-<p>It is also a simple matter to change the forcing and the model formulation.  For example, the outflow function could be made nonlinear, e.g. to account for hydraulic-control effects.  Adding time dependence to parameterizations is not difficult either, and it opens the possibility of using such models in wide applications, e.g. modelling dam-break situations.  </p>
+<p>It is also a simple matter to change the forcing and the model formulation.  For example, the outflow function could be made nonlinear, e.g. to account for hydraulic-control effects.  Adding time dependence to parameterizations is not difficult either, and it opens the possibility of using such models in wide applications, e.g. modelling dam-break situations.</p>
 
 <p>At a more advanced level, one can also use such a model in a data-assimilative way to infer parameter values from observations of quantities predicted by the model.  For example, if <em>F</em> were known for a given lake (and of course its area known also) then observations of lake level could yield a value of <code>gamma</code> as formulated here, or could suggest another formulation for lake outflow.</p>
 

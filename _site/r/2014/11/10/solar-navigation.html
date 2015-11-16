@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -125,21 +125,20 @@ by the <code>altitude</code> component of the list returned by <code>oce::solarA
 <p>The first step is to define a function that returns the absolute value of the
 solar angle, which of course is a minimum at sunrise and sunset.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-misfit <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>lonlat<span class="p">)</span>
+7</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+<span class="n">misfit</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">lonlat</span><span class="p">)</span>
 <span class="p">{</span>
-    riseAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>rise<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
-    setAlt <span class="o">&lt;-</span> sunAngle<span class="p">(</span>set<span class="p">,</span> longitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">1</span><span class="p">],</span> latitude<span class="o">=</span>lonlat<span class="p">[</span><span class="m">2</span><span class="p">],</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude
-    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="kp">abs</span><span class="p">(</span>riseAlt<span class="p">)</span> <span class="o">+</span> <span class="kp">abs</span><span class="p">(</span>setAlt<span class="p">))</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+    <span class="n">riseAlt</span> <span class="o">&lt;-</span> <span class="n">sunAngle</span><span class="p">(</span><span class="n">rise</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="n">lonlat</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">lonlat</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">useRefraction</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span><span class="o">$</span><span class="n">altitude</span>
+    <span class="n">setAlt</span> <span class="o">&lt;-</span> <span class="n">sunAngle</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="n">lonlat</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">lonlat</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">useRefraction</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span><span class="o">$</span><span class="n">altitude</span>
+    <span class="m">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">riseAlt</span><span class="p">)</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">setAlt</span><span class="p">))</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here, <code>useRefraction</code> is set to account for the bending of the sunlight near
 the horizon, which perturbs the observed sunrise and sunset times.  Note that
@@ -151,29 +150,27 @@ function works.</p>
 yield an optimal match to specified sunrise and sunset times.  This function
 needs an initial value, or guess, and for that we pick 50W and 50N.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre>start <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location</span>
-rise <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-11-11 11:06:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-set <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-11-11 20:51:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-bestfit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span class="p">,</span> misfit<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+4</pre></td><td class="code"><pre><span class="n">start</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">-50</span><span class="p">,</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># set this vaguely near the expected location
+</span><span class="n">rise</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2014-11-11 11:06:00"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span>
+<span class="n">set</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2014-11-11 20:51:00"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span>
+<span class="n">bestfit</span> <span class="o">&lt;-</span> <span class="n">optim</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">misfit</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>An examination of the fit</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>str<span class="p">(</span>bestfit<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">str</span><span class="p">(</span><span class="n">bestfit</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## List of 5
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## List of 5
 ##  $ par        : num [1:2] -63.7 44.5
 ##  $ value      : num 0.000541
 ##  $ counts     : Named int [1:2] 203 NA
-##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;function&quot; &quot;gradient&quot;
+##   ..- attr(*, "names")= chr [1:2] "function" "gradient"
 ##  $ convergence: int 0
-##  $ message    : NULL</code></pre></div>
+##  $ message    : NULL</code></pre></figure>
 
 <p>reveals the function value to be very low, indicating a sun just on the
 horizon.  The optimal values for longitude and latitude are stored in <code>par</code>.
@@ -185,15 +182,15 @@ resultant positions plotted.  In the present example, the times are reported to
 the nearest minute, so random values with standard deviation of 30 seconds will
 be used.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -205,31 +202,30 @@ be used.</p>
 18
 19
 20
-21</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>coastlineWorldFine<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
-plot<span class="p">(</span>coastlineWorldFine<span class="p">,</span> clon<span class="o">=</span><span class="m">-64</span><span class="p">,</span> clat<span class="o">=</span><span class="m">44.5</span><span class="p">,</span> span<span class="o">=</span><span class="m">800</span><span class="p">)</span>
-grid<span class="p">()</span>
+21</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorldFine</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">coastlineWorldFine</span><span class="p">,</span> <span class="n">clon</span><span class="o">=</span><span class="m">-64</span><span class="p">,</span> <span class="n">clat</span><span class="o">=</span><span class="m">44.5</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="m">800</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span>
 
-n <span class="o">&lt;-</span> <span class="m">25</span>                                <span class="c1"># use 25 perturbations</span>
-rises <span class="o">&lt;-</span> rise <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span> sd<span class="o">=</span><span class="m">30</span><span class="p">)</span>
-sets <span class="o">&lt;-</span> set <span class="o">+</span> rnorm<span class="p">(</span>n<span class="p">,</span> sd<span class="o">=</span><span class="m">30</span><span class="p">)</span>
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n<span class="p">)</span> <span class="p">{</span>
-    rise <span class="o">&lt;-</span> rises<span class="p">[</span>i<span class="p">]</span>
-    set <span class="o">&lt;-</span> sets<span class="p">[</span>i<span class="p">]</span>
-    fit <span class="o">&lt;-</span> optim<span class="p">(</span>start<span class="p">,</span> misfit<span class="p">)</span>
-    points<span class="p">(</span>fit<span class="o">$</span>par<span class="p">[</span><span class="m">1</span><span class="p">],</span> fit<span class="o">$</span>par<span class="p">[</span><span class="m">2</span><span class="p">],</span> pch<span class="o">=</span><span class="m">21</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&quot;pink&quot;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1.4</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">25</span>                                <span class="c1"># use 25 perturbations
+</span><span class="n">rises</span> <span class="o">&lt;-</span> <span class="n">rise</span> <span class="o">+</span> <span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">30</span><span class="p">)</span>
+<span class="n">sets</span> <span class="o">&lt;-</span> <span class="n">set</span> <span class="o">+</span> <span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">30</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rise</span> <span class="o">&lt;-</span> <span class="n">rises</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">set</span> <span class="o">&lt;-</span> <span class="n">sets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">fit</span> <span class="o">&lt;-</span> <span class="n">optim</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">misfit</span><span class="p">)</span>
+    <span class="n">points</span><span class="p">(</span><span class="n">fit</span><span class="o">$</span><span class="n">par</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">fit</span><span class="o">$</span><span class="n">par</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"pink"</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="c1"># Show the unperturbed fit</span>
-points<span class="p">(</span>bestfit<span class="o">$</span>par<span class="p">[</span><span class="m">1</span><span class="p">],</span> bestfit<span class="o">$</span>par<span class="p">[</span><span class="m">2</span><span class="p">],</span> pch<span class="o">=</span><span class="m">21</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
-<span class="c1"># Show the actual location of Halifax</span>
-points<span class="p">(</span><span class="m">-63.571</span><span class="p">,</span> <span class="m">44.649</span><span class="p">,</span> pch<span class="o">=</span><span class="m">22</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&#39;yellow&#39;</span><span class="p">)</span>
-<span class="c1"># A legend summarizes all this work</span>
-legend<span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> 
-       pch<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">21</span><span class="p">,</span> <span class="m">22</span><span class="p">),</span> pt.bg<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;pink&quot;</span><span class="p">,</span> <span class="s">&quot;yellow&quot;</span><span class="p">),</span>
-       legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Best&quot;</span><span class="p">,</span> <span class="s">&quot;Range&quot;</span><span class="p">,</span> <span class="s">&quot;True&quot;</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+<span class="c1"># Show the unperturbed fit
+</span><span class="n">points</span><span class="p">(</span><span class="n">bestfit</span><span class="o">$</span><span class="n">par</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">bestfit</span><span class="o">$</span><span class="n">par</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+<span class="c1"># Show the actual location of Halifax
+</span><span class="n">points</span><span class="p">(</span><span class="m">-63.571</span><span class="p">,</span> <span class="m">44.649</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">22</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">'yellow'</span><span class="p">)</span>
+<span class="c1"># A legend summarizes all this work
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span> 
+       <span class="n">pch</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">21</span><span class="p">,</span> <span class="m">22</span><span class="p">),</span> <span class="n">pt.bg</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"pink"</span><span class="p">,</span> <span class="s2">"yellow"</span><span class="p">),</span>
+       <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"Best"</span><span class="p">,</span> <span class="s2">"Range"</span><span class="p">,</span> <span class="s2">"True"</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-11-10-solar-navigation/find-halifax-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-11-10-solar-navigation/find-halifax-1.png" alt="center" /></p>
 
 <h1 id="results">Results</h1>
 

@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>oce runlm function</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<a class="pagination" href="/r/2014/02/13/valentine-moon.html" title="Valentines-day full moon">
+    Next <!-- &rarr; -->
+</a>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2014/02/10/oce-map-projection.html" title="oce map projection">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>oce runlm function</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Feb 11, 2014
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/oceanography/index.html" class="tag">
+            oceanography
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        The week-old ``runderiv()`` function has been replaced with a more useful ``runlm()`` function.  This post shows how to use it.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>As was expected, the <code>runderiv()</code> function has been both useful and deficient.  Useful because it offers a good replacement for <code>smooth.spline()</code> calculations of derivatives for things like N^2.  And deficient because it only calculated derivatives, not values!</p>
+
+<p>Both an extension and a renaming were called for.  The result is <code>runlm()</code>.</p>
+
+<h1 id="tests">Tests</h1>
+
+<p>Below are the examples from its manpage, with the results.</p>
+
+<p><strong>Case 1</strong></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="n">x</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="m">100</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="m">5</span><span class="p">)</span>
+<span class="n">yn</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">&lt;-</span> <span class="m">4</span>
+<span class="n">calc</span> <span class="o">&lt;-</span> <span class="n">runlm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">7</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">calc</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-02-11-oce_runlm/runlm-case1.png" alt="center" /> 
+<strong>Case 2</strong></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"N2"</span><span class="p">)</span>
+<span class="n">rho</span> <span class="o">&lt;-</span> <span class="n">swRho</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="n">swZ</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span>
+<span class="n">zz</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="m">0.1</span><span class="p">)</span>
+<span class="n">N2</span> <span class="o">&lt;-</span> <span class="m">-9.8</span> <span class="o">/</span> <span class="n">mean</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="o">-</span><span class="n">zz</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span>
+       <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">),</span>
+       <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"swN2()"</span><span class="p">,</span> <span class="s2">"using runlm()"</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-02-11-oce_runlm/runlm-case2.png" alt="center" /></p>
+
+<h1 id="comments">Comments</h1>
+
+<ol>
+  <li>
+    <p>The fit in Case 1 is almost spookily good.</p>
+  </li>
+  <li>
+    <p>The N^2 results suggest including this as a method for <code>swN2()</code>, perhaps the default method, but that’s for another day.</p>
+  </li>
+</ol>
+
+<h1 id="resources">Resources</h1>
+<ul>
+  <li>Source code: <a href="/assets/2014-02-11-runlm.R">2014-04-11-runlm.R</a></li>
+</ul>
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -46,7 +46,7 @@
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2014/02/09/N2-runlm.html" title="N2 with runlm()">
+<a class="pagination" href="/r/2014/02/09/n2-runlm.html" title="N2 with runlm()">
     Next <!-- &rarr; -->
 </a>
 
@@ -106,15 +106,15 @@
 
 <p>First, define <code>hodograph()</code>, with arguments that suffice for a simple problem of a periodic signal <em>x=x(t)</em> to be plotted in polar fashion with radius indicating <em>x</em> and angle indicating <em>t</em> modulo 1 year.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -155,86 +155,83 @@
 47
 48
 49
-50</code></pre></div></td><td class="code"><div class="highlight"><pre>hodograph <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kp">t</span><span class="p">,</span> rings<span class="p">,</span> ringlabels<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> tcut<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;daily&quot;</span><span class="p">,</span> <span class="s">&quot;yearly&quot;</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
+50</pre></td><td class="code"><pre><span class="n">hodograph</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rings</span><span class="p">,</span> <span class="n">ringlabels</span><span class="o">=</span><span class="n">TRUE</span><span class="p">,</span> <span class="n">tcut</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"daily"</span><span class="p">,</span> <span class="s2">"yearly"</span><span class="p">),</span> <span class="k">...</span><span class="p">)</span>
 <span class="p">{</span>
-    tcut <span class="o">&lt;-</span> <span class="kp">match.arg</span><span class="p">(</span>tcut<span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="kp">missing</span><span class="p">(</span><span class="kp">t</span><span class="p">))</span> <span class="p">{</span>
-        <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;x-y method not coded yet\n&quot;</span><span class="p">)</span>
-    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-        <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">missing</span><span class="p">(</span>y<span class="p">))</span> <span class="p">{</span>
-            <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;cannot give y if t is given\n&quot;</span><span class="p">)</span>
+    <span class="n">tcut</span> <span class="o">&lt;-</span> <span class="n">match.arg</span><span class="p">(</span><span class="n">tcut</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">missing</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">stop</span><span class="p">(</span><span class="s2">"x-y method not coded yet\n"</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">missing</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">stop</span><span class="p">(</span><span class="s2">"cannot give y if t is given\n"</span><span class="p">)</span>
         <span class="p">}</span>
-        <span class="kr">if</span> <span class="p">(</span>tcut<span class="o">==</span> <span class="s">&quot;yearly&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">## x=x(t)</span>
-            t <span class="o">&lt;-</span> <span class="kp">as.POSIXlt</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span>
-            start <span class="o">&lt;-</span> <span class="kp">ISOdatetime</span><span class="p">(</span><span class="m">1900</span><span class="o">+</span><span class="kp">as.POSIXlt</span><span class="p">(</span><span class="kp">t</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="o">$</span>year<span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span>
-                                 tz<span class="o">=</span><span class="kp">attr</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> <span class="s">&quot;tzone&quot;</span><span class="p">))</span>
-            day <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">julian</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> origin<span class="o">=</span>start<span class="p">))</span>
-            xx <span class="o">&lt;-</span> x <span class="o">*</span> <span class="kp">cos</span><span class="p">(</span>day <span class="o">/</span> <span class="m">365</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span><span class="p">)</span>
-            yy <span class="o">&lt;-</span> x <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span>day <span class="o">/</span> <span class="m">365</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span><span class="p">)</span>
-            <span class="c1">## axes</span>
-            <span class="kr">if</span> <span class="p">(</span><span class="kp">missing</span><span class="p">(</span>rings<span class="p">))</span>
-                rings <span class="o">&lt;-</span> <span class="kp">pretty</span><span class="p">(</span><span class="kp">sqrt</span><span class="p">(</span>xx<span class="o">^</span><span class="m">2</span> <span class="o">+</span> yy<span class="o">^</span><span class="m">2</span><span class="p">))</span>
-            rscale <span class="o">&lt;-</span> <span class="m">1.04</span> <span class="o">*</span> <span class="kp">max</span><span class="p">(</span>rings<span class="p">)</span>
-            theta <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">200</span><span class="p">)</span>
-            plot<span class="p">(</span>xx<span class="p">,</span> yy<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> xlim<span class="o">=</span>rscale<span class="o">*</span><span class="kt">c</span><span class="p">(</span><span class="m">-1.1</span><span class="p">,</span><span class="m">1.1</span><span class="p">),</span> ylim<span class="o">=</span>rscale<span class="o">*</span><span class="kt">c</span><span class="p">(</span><span class="m">-1.1</span><span class="p">,</span> <span class="m">1.1</span><span class="p">),</span>
-                 type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-            <span class="c1">## month lines</span>
-            month <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Jan&quot;</span><span class="p">,</span> <span class="s">&quot;Feb&quot;</span><span class="p">,</span> <span class="s">&quot;Mar&quot;</span><span class="p">,</span> <span class="s">&quot;Apr&quot;</span><span class="p">,</span> <span class="s">&quot;May&quot;</span><span class="p">,</span> <span class="s">&quot;Jun&quot;</span><span class="p">,</span> <span class="s">&quot;Jul&quot;</span><span class="p">,</span> <span class="s">&quot;Aug&quot;</span><span class="p">,</span> <span class="s">&quot;Sep&quot;</span><span class="p">,</span> <span class="s">&quot;Oct&quot;</span><span class="p">,</span> <span class="s">&quot;Nov&quot;</span><span class="p">,</span> <span class="s">&quot;Dec&quot;</span><span class="p">)</span>
-            day <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">)</span>
-            rscale <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span>rings<span class="p">)</span>
-            <span class="kr">for</span> <span class="p">(</span>m <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">## boundaries are for non leap years</span>
-                phi <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> <span class="p">(</span><span class="kp">sum</span><span class="p">(</span>day<span class="p">[</span><span class="m">1</span><span class="o">:</span>m<span class="p">])</span> <span class="o">-</span> day<span class="p">[</span><span class="m">1</span><span class="p">])</span> <span class="o">/</span> <span class="kp">sum</span><span class="p">(</span>day<span class="p">)</span>
-                lines<span class="p">(</span>rscale<span class="o">*</span><span class="m">1.1</span><span class="o">*</span><span class="kp">cos</span><span class="p">(</span>phi<span class="p">)</span><span class="o">*</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> rscale<span class="o">*</span><span class="m">1.1</span><span class="o">*</span><span class="kp">sin</span><span class="p">(</span>phi<span class="p">)</span><span class="o">*</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
-                phi <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span><span class="kc">pi</span><span class="o">*</span><span class="p">(</span><span class="m">0.5</span><span class="o">/</span><span class="m">12</span><span class="o">+</span><span class="p">(</span>m<span class="m">-1</span><span class="p">)</span><span class="o">/</span><span class="m">12</span><span class="p">)</span>
-                text<span class="p">(</span><span class="m">1.15</span><span class="o">*</span>rscale <span class="o">*</span> <span class="kp">cos</span><span class="p">(</span>phi<span class="p">),</span> <span class="m">1.15</span><span class="o">*</span>rscale <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span>phi<span class="p">),</span> month<span class="p">[</span>m<span class="p">])</span> 
+        <span class="k">if</span> <span class="p">(</span><span class="n">tcut</span><span class="o">==</span> <span class="s2">"yearly"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">## x=x(t)
+</span>            <span class="n">t</span> <span class="o">&lt;-</span> <span class="n">as.POSIXlt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">&lt;-</span> <span class="n">ISOdatetime</span><span class="p">(</span><span class="m">1900</span><span class="o">+</span><span class="n">as.POSIXlt</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="o">$</span><span class="n">year</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span>
+                                 <span class="n">tz</span><span class="o">=</span><span class="n">attr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">"tzone"</span><span class="p">))</span>
+            <span class="n">day</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">julian</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="n">start</span><span class="p">))</span>
+            <span class="n">xx</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">day</span> <span class="o">/</span> <span class="m">365</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+            <span class="n">yy</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">day</span> <span class="o">/</span> <span class="m">365</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+            <span class="c1">## axes
+</span>            <span class="k">if</span> <span class="p">(</span><span class="n">missing</span><span class="p">(</span><span class="n">rings</span><span class="p">))</span>
+                <span class="n">rings</span> <span class="o">&lt;-</span> <span class="n">pretty</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xx</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="n">yy</span><span class="o">^</span><span class="m">2</span><span class="p">))</span>
+            <span class="n">rscale</span> <span class="o">&lt;-</span> <span class="m">1.04</span> <span class="o">*</span> <span class="n">max</span><span class="p">(</span><span class="n">rings</span><span class="p">)</span>
+            <span class="n">theta</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
+            <span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">rscale</span><span class="o">*</span><span class="n">c</span><span class="p">(</span><span class="m">-1.1</span><span class="p">,</span><span class="m">1.1</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">rscale</span><span class="o">*</span><span class="n">c</span><span class="p">(</span><span class="m">-1.1</span><span class="p">,</span> <span class="m">1.1</span><span class="p">),</span>
+                 <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
+            <span class="c1">## month lines
+</span>            <span class="n">month</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Jan"</span><span class="p">,</span> <span class="s2">"Feb"</span><span class="p">,</span> <span class="s2">"Mar"</span><span class="p">,</span> <span class="s2">"Apr"</span><span class="p">,</span> <span class="s2">"May"</span><span class="p">,</span> <span class="s2">"Jun"</span><span class="p">,</span> <span class="s2">"Jul"</span><span class="p">,</span> <span class="s2">"Aug"</span><span class="p">,</span> <span class="s2">"Sep"</span><span class="p">,</span> <span class="s2">"Oct"</span><span class="p">,</span> <span class="s2">"Nov"</span><span class="p">,</span> <span class="s2">"Dec"</span><span class="p">)</span>
+            <span class="n">day</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">)</span>
+            <span class="n">rscale</span> <span class="o">&lt;-</span> <span class="n">max</span><span class="p">(</span><span class="n">rings</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">m</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">## boundaries are for non leap years
+</span>                <span class="n">phi</span> <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="n">m</span><span class="p">])</span> <span class="o">-</span> <span class="n">day</span><span class="p">[</span><span class="m">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">sum</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
+                <span class="n">lines</span><span class="p">(</span><span class="n">rscale</span><span class="o">*</span><span class="m">1.1</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">rscale</span><span class="o">*</span><span class="m">1.1</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+                <span class="n">phi</span> <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="m">0.5</span><span class="o">/</span><span class="m">12</span><span class="o">+</span><span class="p">(</span><span class="n">m</span><span class="m">-1</span><span class="p">)</span><span class="o">/</span><span class="m">12</span><span class="p">)</span>
+                <span class="n">text</span><span class="p">(</span><span class="m">1.15</span><span class="o">*</span><span class="n">rscale</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="m">1.15</span><span class="o">*</span><span class="n">rscale</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">month</span><span class="p">[</span><span class="n">m</span><span class="p">])</span> 
             <span class="p">}</span>
-            <span class="kr">for</span> <span class="p">(</span>r <span class="kr">in</span> rings<span class="p">)</span> <span class="p">{</span>
-                <span class="kr">if</span> <span class="p">(</span>r <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
-                    gx <span class="o">&lt;-</span> r <span class="o">*</span> <span class="kp">cos</span><span class="p">(</span>theta<span class="p">)</span>
-                    gy <span class="o">&lt;-</span> r <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span>theta<span class="p">)</span>
-                    lines<span class="p">(</span>gx<span class="p">,</span> gy<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
-                    <span class="kr">if</span> <span class="p">(</span>ringlabels<span class="p">)</span>
-                        text<span class="p">(</span>gx<span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="kp">format</span><span class="p">(</span>r<span class="p">))</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">r</span> <span class="k">in</span> <span class="n">rings</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">gx</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+                    <span class="n">gy</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+                    <span class="n">lines</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span> <span class="n">gy</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">ringlabels</span><span class="p">)</span>
+                        <span class="n">text</span><span class="p">(</span><span class="n">gx</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
                 <span class="p">}</span>
             <span class="p">}</span>
-            points<span class="p">(</span>xx<span class="p">,</span> yy<span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
-        <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-            <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;only tcut=\&quot;yearly\&quot; works at this time\n&quot;</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="k">...</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">stop</span><span class="p">(</span><span class="s2">"only tcut=\"yearly\" works at this time\n"</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This may be tested as follows</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>data<span class="p">(</span>co2<span class="p">)</span>
-year <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>time<span class="p">(</span>co2<span class="p">))</span>
-t0 <span class="o">&lt;-</span> <span class="kp">as.POSIXlt</span><span class="p">(</span><span class="s">&quot;1959-01-01 00:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-t <span class="o">&lt;-</span> t0 <span class="o">+</span> <span class="p">(</span>year <span class="o">-</span> year<span class="p">[</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span><span class="m">365</span><span class="o">*</span><span class="m">86400</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
-hodograph<span class="p">(</span>x<span class="o">=</span>co2<span class="o">-</span>co2<span class="p">[</span><span class="m">1</span><span class="p">],</span> t<span class="o">=</span><span class="kp">t</span><span class="p">,</span> tcut<span class="o">=</span><span class="s">&quot;yearly&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> ringlabels<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+6</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span>
+<span class="n">year</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="n">co2</span><span class="p">))</span>
+<span class="n">t0</span> <span class="o">&lt;-</span> <span class="n">as.POSIXlt</span><span class="p">(</span><span class="s2">"1959-01-01 00:00:00"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">&lt;-</span> <span class="n">t0</span> <span class="o">+</span> <span class="p">(</span><span class="n">year</span> <span class="o">-</span> <span class="n">year</span><span class="p">[</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span><span class="m">365</span><span class="o">*</span><span class="m">86400</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+<span class="n">hodograph</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">co2</span><span class="o">-</span><span class="n">co2</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">tcut</span><span class="o">=</span><span class="s2">"yearly"</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">ringlabels</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/hodograph.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/hodograph.png" alt="center" /></p>
 
 <h1 id="results">Results</h1>
 
 <p>The plot is informative.  I’ve looked at the <code>co2</code> data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>co2<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/timeseries.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/timeseries.png" alt="center" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 

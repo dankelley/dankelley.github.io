@@ -31,11 +31,12 @@ readGISS2014 <- function(file)
     data.frame(year=year, index=index)
 }
 
-library(ocedata)
-data(giss)
+## Read two text file, then load data(giss, package="ocedata") prior to 2015-11-16
 gissNew <- readGISS("giss-20151107.dat") # see [3] below
 gissOld <- readGISS2014("giss-2014xxxx.dat") # see [4] below
-## print some tests
+load("giss-ocedata-until-20151116.rda") # yields 'giss'; see [5] below
+## print some tests; note that we offset the old data dataset by 1 year because
+## of how missing-value data are handled in the two instances.
 print(giss$index[1:12])
 print(gissOld$index[13:24])
 par(mar=c(1.7, 3, 1, 1), mgp=c(2, 0.7, 0), mfcol=c(3, 2))
@@ -59,7 +60,12 @@ look <- start<=giss$year&giss$year<=end
 lookOld <- start<=gissOld$year&gissOld$year<=end
 lookNew <- start<=gissNew$year&gissNew$year<=end
 
-plot.new() # skip a panel
+plot(gissNew$year[lookNew], gissNew$index[lookNew]-giss$index[look],
+     type='l', ylab="index change [degC]", xlim=xlim, ylim=c(-0.3, 0.3))
+grid()
+abline(h=0, col='pink')
+legend("topright", lwd=1, legend=c("gissNew- ocedata"), bg="white", cex=3/4)
+
 
 plot(gissOld$year[lookOld], gissOld$index[lookOld]-giss$index[look],
      type='l', ylab="index change [degC]", xlim=xlim, ylim=c(-0.3, 0.3))

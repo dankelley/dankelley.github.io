@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -103,15 +103,15 @@ person names. In this case, I have put the data into the format (time, sender,
 recipient); obviously, it is also simple to put instead a subject line, lines
 of text, etc; it all depends on the purpose.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -141,49 +141,48 @@ of text, etc; it all depends on the purpose.</p>
 36
 37
 38
-39</code></pre></div></td><td class="code"><div class="highlight"><pre>data <span class="o">&lt;-</span> <span class="s">&quot;</span>
-<span class="s">2015-08-24 16:14:17,red,blue</span>
-<span class="s">2015-08-19 09:18:00,blue,red</span>
-<span class="s">2015-07-31 14:23:31,blue,purple</span>
-<span class="s">2015-07-31 13:48:56,beige,blue</span>
-<span class="s">2015-07-31 12:17:00,brown,beige</span>
-<span class="s">2015-07-31 11:15:00,purple,beige</span>
-<span class="s">2015-07-30 19:59:00,green,yellow</span>
-<span class="s">2015-07-30 08:09:00,orange,blue</span>
-<span class="s">2015-07-30 08:09:00,blue,orange</span>
-<span class="s">2015-07-30 07:59:00,orange,green</span>
-<span class="s">2015-07-30 07:56:00,orange,blue</span>
-<span class="s">2015-07-30 07:59:00,green,yellow</span>
-<span class="s">2015-07-29 21:04:00,yellow,green</span>
-<span class="s">2015-07-29 11:07:00,green,yellow</span>
-<span class="s">2015-07-28 15:22:00,yellow,green</span>
-<span class="s">2015-04-11 10:19:00,blue,pink</span>
-<span class="s">2015-04-11 10:13:00,pink,blue</span>
-<span class="s">2015-04-11 09:43:00,blue,pink</span>
-<span class="s">2015-04-01 08:40:00,blue,blue</span>
-<span class="s">&quot;</span>
-d <span class="o">&lt;-</span> read.csv<span class="p">(</span>text<span class="o">=</span>data<span class="p">,</span> header<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-t <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span>d<span class="o">$</span>V1<span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span>
-o <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span><span class="kp">t</span><span class="p">,</span> decreasing<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># just in case</span>
-t <span class="o">&lt;-</span> <span class="kp">t</span><span class="p">[</span>o<span class="p">]</span>
-from <span class="o">&lt;-</span> d<span class="o">$</span>V2<span class="p">[</span>o<span class="p">]</span>
-to <span class="o">&lt;-</span> d<span class="o">$</span>V3<span class="p">[</span>o<span class="p">]</span>
-n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>from<span class="p">)</span>
-day <span class="o">&lt;-</span> <span class="m">86400</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-timeSpan <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">max</span><span class="p">(</span><span class="kp">t</span><span class="p">))</span> <span class="o">-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span><span class="kp">t</span><span class="p">))</span>
-space <span class="o">&lt;-</span> <span class="m">0.1</span> <span class="o">*</span> timeSpan <span class="c1"># adjust as necessary</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span>n<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Email&quot;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">min</span><span class="p">(</span><span class="kp">t</span><span class="p">),</span> <span class="kp">max</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span><span class="m">+4</span><span class="o">*</span>space<span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> n<span class="m">+1</span><span class="p">))</span>
-tl <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span> <span class="o">+</span> space
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n<span class="p">)</span> <span class="p">{</span>
-    text<span class="p">(</span>tl <span class="o">+</span> <span class="m">0.3</span> <span class="o">*</span> space<span class="p">,</span> i<span class="p">,</span> <span class="kp">paste</span><span class="p">(</span>from<span class="p">[</span>i<span class="p">],</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> to<span class="p">[</span>i<span class="p">],</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
-    lines<span class="p">(</span><span class="kt">c</span><span class="p">(</span>tl<span class="p">,</span> <span class="kp">t</span><span class="p">[</span>i<span class="p">]),</span> <span class="kp">rep</span><span class="p">(</span>i<span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-    lines<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">t</span><span class="p">[</span>i<span class="p">],</span> <span class="kp">t</span><span class="p">[</span>i<span class="p">]),</span> <span class="kt">c</span><span class="p">(</span>i<span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+39</pre></td><td class="code"><pre><span class="n">data</span> <span class="o">&lt;-</span> <span class="s2">"
+2015-08-24 16:14:17,red,blue
+2015-08-19 09:18:00,blue,red
+2015-07-31 14:23:31,blue,purple
+2015-07-31 13:48:56,beige,blue
+2015-07-31 12:17:00,brown,beige
+2015-07-31 11:15:00,purple,beige
+2015-07-30 19:59:00,green,yellow
+2015-07-30 08:09:00,orange,blue
+2015-07-30 08:09:00,blue,orange
+2015-07-30 07:59:00,orange,green
+2015-07-30 07:56:00,orange,blue
+2015-07-30 07:59:00,green,yellow
+2015-07-29 21:04:00,yellow,green
+2015-07-29 11:07:00,green,yellow
+2015-07-28 15:22:00,yellow,green
+2015-04-11 10:19:00,blue,pink
+2015-04-11 10:13:00,pink,blue
+2015-04-11 09:43:00,blue,pink
+2015-04-01 08:40:00,blue,blue
+"</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="n">read.csv</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">V1</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span>
+<span class="n">o</span> <span class="o">&lt;-</span> <span class="n">order</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">decreasing</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span> <span class="c1"># just in case
+</span><span class="n">t</span> <span class="o">&lt;-</span> <span class="n">t</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+<span class="n">from</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">$</span><span class="n">V2</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+<span class="n">to</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">$</span><span class="n">V3</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">from</span><span class="p">)</span>
+<span class="n">day</span> <span class="o">&lt;-</span> <span class="m">86400</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<span class="n">timeSpan</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">space</span> <span class="o">&lt;-</span> <span class="m">0.1</span> <span class="o">*</span> <span class="n">timeSpan</span> <span class="c1"># adjust as necessary
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Email"</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="m">+4</span><span class="o">*</span><span class="n">space</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">n</span><span class="m">+1</span><span class="p">))</span>
+<span class="n">tl</span> <span class="o">&lt;-</span> <span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">space</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">text</span><span class="p">(</span><span class="n">tl</span> <span class="o">+</span> <span class="m">0.3</span> <span class="o">*</span> <span class="n">space</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">paste</span><span class="p">(</span><span class="n">from</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">to</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+    <span class="n">lines</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">tl</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">rep</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+    <span class="n">lines</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-08-25-email-graphs/unnamed-chunk-1-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2015-08-25-email-graphs/unnamed-chunk-1-1.png" alt="center" /></p>
 
 <p>This shows that there was a fair bit of activity in the Spring, and then much
 more intense work near the end of July.  The labels show sender and recipient;

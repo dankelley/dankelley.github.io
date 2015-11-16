@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -104,21 +104,21 @@ cabelling.</p>
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Setting up a cabelling experiment requires creating two watermasses of equal density, and if only S and T can be measured, that means calculating densities.  Using a TS diagram and graphical interpolation is one approach to that task, but another is to use R to do the calculation.  </p>
+<p>Setting up a cabelling experiment requires creating two watermasses of equal density, and if only S and T can be measured, that means calculating densities.  Using a TS diagram and graphical interpolation is one approach to that task, but another is to use R to do the calculation.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The code given below will do the calculation for specified <code>Sa</code>, <code>Ta</code> and <code>Sb</code>, where the second letter indicates the watermass.  The code uses <code>uniroot()</code> to find the temperature <code>Tb</code> that yields equal densities for watermasses <em>a</em> and <em>b</em>.  </p>
+<p>The code given below will do the calculation for specified <code>Sa</code>, <code>Ta</code> and <code>Sb</code>, where the second letter indicates the watermass.  The code uses <code>uniroot()</code> to find the temperature <code>Tb</code> that yields equal densities for watermasses <em>a</em> and <em>b</em>.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -135,34 +135,33 @@ cabelling.</p>
 23
 24
 25
-26</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1"># Alter next three lines as desired; a and b are watermasses.</span>
-Sa <span class="o">&lt;-</span> <span class="m">30</span>
-Ta <span class="o">&lt;-</span> <span class="m">10</span>
-Sb <span class="o">&lt;-</span> <span class="m">40</span>
-<span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="c1"># Should not need to edit below this line</span>
-rho0 <span class="o">&lt;-</span> swRho<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-Tb <span class="o">&lt;-</span> uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="bp">T</span><span class="p">)</span> rho0<span class="o">-</span>swRho<span class="p">(</span>Sb<span class="p">,</span><span class="bp">T</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> lower<span class="o">=</span><span class="m">0</span><span class="p">,</span> upper<span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="o">$</span>root
-Sc <span class="o">&lt;-</span> <span class="p">(</span>Sa <span class="o">+</span> Sb<span class="p">)</span> <span class="o">/</span><span class="m">2</span>
-Tc <span class="o">&lt;-</span> <span class="p">(</span>Ta <span class="o">+</span> Tb<span class="p">)</span> <span class="o">/</span><span class="m">2</span>
-<span class="c1">## density change, and equiv temp change</span>
-drho <span class="o">&lt;-</span> swRho<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">-</span> rho0
-dT <span class="o">&lt;-</span> drho <span class="o">/</span> rho0 <span class="o">/</span> swAlpha<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span> png<span class="p">(</span><span class="s">&quot;cabelling.png&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">7</span><span class="p">,</span> height<span class="o">=</span><span class="m">7</span><span class="p">,</span>
-                        unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> res<span class="o">=</span><span class="m">200</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">12</span><span class="p">)</span>
-plotTS<span class="p">(</span>as.ctd<span class="p">(</span><span class="kt">c</span><span class="p">(</span>Sa<span class="p">,</span> Sb<span class="p">,</span> Sc<span class="p">),</span> <span class="kt">c</span><span class="p">(</span>Ta<span class="p">,</span> Tb<span class="p">,</span> Tc<span class="p">),</span> <span class="m">0</span><span class="p">),</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-drawIsopycnals<span class="p">(</span>levels<span class="o">=</span>rho0<span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-segments<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> Sb<span class="p">,</span> Tb<span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-text<span class="p">(</span>Sb<span class="p">,</span> Tb<span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
-text<span class="p">(</span>Sa<span class="p">,</span> Ta<span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
-text<span class="p">(</span>Sc<span class="p">,</span> Tc<span class="p">,</span> <span class="s">&quot;c&quot;</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span>
-       legend<span class="o">=</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Sa=%.1f, Ta=%.1f, Sb=%.1f  -&gt;  Tb=%.1f, drho=%.2f, dT=%.2f&quot;</span><span class="p">,</span>
-                      Sa<span class="p">,</span> Ta<span class="p">,</span> Sb<span class="p">,</span> Tb<span class="p">,</span> drho<span class="p">,</span> dT<span class="p">),</span>
-       bg<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
-<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span> dev.off<span class="p">()</span>
-</pre></div>
-</td></tr></table>
+26</pre></td><td class="code"><pre><span class="c1"># Alter next three lines as desired; a and b are watermasses.
+</span><span class="n">Sa</span> <span class="o">&lt;-</span> <span class="m">30</span>
+<span class="n">Ta</span> <span class="o">&lt;-</span> <span class="m">10</span>
+<span class="n">Sb</span> <span class="o">&lt;-</span> <span class="m">40</span>
+<span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+<span class="c1"># Should not need to edit below this line
+</span><span class="n">rho0</span> <span class="o">&lt;-</span> <span class="n">swRho</span><span class="p">(</span><span class="n">Sa</span><span class="p">,</span> <span class="n">Ta</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="n">Tb</span> <span class="o">&lt;-</span> <span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="n">rho0</span><span class="o">-</span><span class="n">swRho</span><span class="p">(</span><span class="n">Sb</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="o">$</span><span class="n">root</span>
+<span class="n">Sc</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">Sa</span> <span class="o">+</span> <span class="n">Sb</span><span class="p">)</span> <span class="o">/</span><span class="m">2</span>
+<span class="n">Tc</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">Ta</span> <span class="o">+</span> <span class="n">Tb</span><span class="p">)</span> <span class="o">/</span><span class="m">2</span>
+<span class="c1">## density change, and equiv temp change
+</span><span class="n">drho</span> <span class="o">&lt;-</span> <span class="n">swRho</span><span class="p">(</span><span class="n">Sc</span><span class="p">,</span> <span class="n">Tc</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">rho0</span>
+<span class="n">dT</span> <span class="o">&lt;-</span> <span class="n">drho</span> <span class="o">/</span> <span class="n">rho0</span> <span class="o">/</span> <span class="n">swAlpha</span><span class="p">(</span><span class="n">Sc</span><span class="p">,</span> <span class="n">Tc</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span> <span class="n">png</span><span class="p">(</span><span class="s2">"cabelling.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="m">7</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="m">7</span><span class="p">,</span>
+                        <span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="m">200</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="m">12</span><span class="p">)</span>
+<span class="n">plotTS</span><span class="p">(</span><span class="n">as.ctd</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">Sa</span><span class="p">,</span> <span class="n">Sb</span><span class="p">,</span> <span class="n">Sc</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="n">Ta</span><span class="p">,</span> <span class="n">Tb</span><span class="p">,</span> <span class="n">Tc</span><span class="p">),</span> <span class="m">0</span><span class="p">),</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="n">drawIsopycnals</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="n">rho0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="n">Sa</span><span class="p">,</span> <span class="n">Ta</span><span class="p">,</span> <span class="n">Sb</span><span class="p">,</span> <span class="n">Tb</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">Sb</span><span class="p">,</span> <span class="n">Tb</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">Sa</span><span class="p">,</span> <span class="n">Ta</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">Sc</span><span class="p">,</span> <span class="n">Tc</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span>
+       <span class="n">legend</span><span class="o">=</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"Sa=%.1f, Ta=%.1f, Sb=%.1f  -&gt;  Tb=%.1f, drho=%.2f, dT=%.2f"</span><span class="p">,</span>
+                      <span class="n">Sa</span><span class="p">,</span> <span class="n">Ta</span><span class="p">,</span> <span class="n">Sb</span><span class="p">,</span> <span class="n">Tb</span><span class="p">,</span> <span class="n">drho</span><span class="p">,</span> <span class="n">dT</span><span class="p">),</span>
+       <span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span> <span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>If run non-interactively, the code will produce a PNG file like that given below.</p>
 
