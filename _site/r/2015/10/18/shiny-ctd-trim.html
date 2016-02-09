@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -133,14 +133,15 @@ Then, in rstudio, load one of the files, and click the “runApp” button that 
 should see. If that button does not appear, or if you’re using something other
 than rstudio, type following into the R console.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
-<span class="n">runApp</span><span class="p">()</span> <span class="err">#</span> <span class="n">exit</span> <span class="n">by</span> <span class="n">striking</span> <span class="n">ESC</span> <span class="n">on</span> <span class="n">the</span> <span class="n">keyboard</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+2</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
+runApp<span class="p">()</span> <span class="c1"># exit by striking ESC on the keyboard</span>
+</pre></div>
+</td></tr></table>
 
 <p>Below is the contents of the <code>ui.R</code> file</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
@@ -148,16 +149,17 @@ than rstudio, type following into the R console.</p>
 6
 7
 8
-9</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
-<span class="n">shinyUI</span><span class="p">(</span><span class="n">fluidPage</span><span class="p">(</span><span class="n">verticalLayout</span><span class="p">(</span>
-                                 <span class="n">plotOutput</span><span class="p">(</span><span class="s2">"ctdTrimPlot"</span><span class="p">),</span>
-                                 <span class="n">wellPanel</span><span class="p">(</span>
-                                           <span class="n">sliderInput</span><span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"top fraction percent:"</span><span class="p">,</span>
-                                                       <span class="n">min</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">max</span><span class="o">=</span><span class="m">100</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="m">0.1</span><span class="p">),</span>
-                                           <span class="n">sliderInput</span><span class="p">(</span><span class="s2">"bottom"</span><span class="p">,</span> <span class="s2">"bottom fraction percent:"</span><span class="p">,</span>
-                                                       <span class="n">min</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">max</span><span class="o">=</span><span class="m">100</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="m">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
-                                 <span class="p">)))</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+9</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
+shinyUI<span class="p">(</span>fluidPage<span class="p">(</span>verticalLayout<span class="p">(</span>
+                                 plotOutput<span class="p">(</span><span class="s">&quot;ctdTrimPlot&quot;</span><span class="p">),</span>
+                                 wellPanel<span class="p">(</span>
+                                           sliderInput<span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="s">&quot;top fraction percent:&quot;</span><span class="p">,</span>
+                                                       min<span class="o">=</span><span class="m">0</span><span class="p">,</span> max<span class="o">=</span><span class="m">100</span><span class="p">,</span> value<span class="o">=</span><span class="m">0</span><span class="p">,</span> step<span class="o">=</span><span class="m">0.1</span><span class="p">),</span>
+                                           sliderInput<span class="p">(</span><span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="s">&quot;bottom fraction percent:&quot;</span><span class="p">,</span>
+                                                       min<span class="o">=</span><span class="m">0</span><span class="p">,</span> max<span class="o">=</span><span class="m">100</span><span class="p">,</span> value<span class="o">=</span><span class="m">100</span><span class="p">,</span> step<span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
+                                 <span class="p">)))</span>
+</pre></div>
+</td></tr></table>
 
 <p>This will look a bit mysterious, but anyone who spends 20 minutes with the
 <a href="http://shiny.rstudio.com">shiny documentation</a> will get the gist: two sliders
@@ -166,15 +168,15 @@ will be shown below a plot that is create with a user-created function named
 
 <p>Below is the contents of the <code>server.R</code> file</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
@@ -201,43 +203,44 @@ will be shown below a plot that is create with a user-created function named
 33
 34
 35
-36</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">file</span> <span class="o">&lt;-</span> <span class="n">file.choose</span><span class="p">()</span>
-<span class="n">ctdRaw</span> <span class="o">&lt;-</span> <span class="n">read.oce</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-<span class="c1">## data(ctdRaw) # try this if you have no .CNV files to test
-</span><span class="n">shinyServer</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">top</span> <span class="o">&lt;-</span> <span class="n">reactive</span><span class="p">({</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">input</span><span class="o">$</span><span class="n">top</span><span class="p">)})</span>
-            <span class="n">bottom</span> <span class="o">&lt;-</span> <span class="n">reactive</span><span class="p">({</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">input</span><span class="o">$</span><span class="n">bottom</span><span class="p">)})</span>
-            <span class="n">trimmed</span> <span class="o">&lt;-</span> <span class="n">ctdRaw</span>
-            <span class="n">output</span><span class="o">$</span><span class="n">ctdTrimPlot</span> <span class="o">&lt;-</span> <span class="n">renderPlot</span><span class="p">({</span>
-                <span class="n">nf</span> <span class="o">&lt;-</span> <span class="n">layout</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> <span class="n">nrow</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">))</span>
-                <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">seq_along</span><span class="p">(</span><span class="n">ctdRaw</span><span class="p">[[</span><span class="s2">"pressure"</span><span class="p">]])</span>
-                <span class="n">indexStart</span> <span class="o">&lt;-</span> <span class="n">index</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> <span class="m">0.01</span><span class="o">*</span><span class="n">top</span><span class="p">()</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-                <span class="n">indexEnd</span> <span class="o">&lt;-</span> <span class="n">index</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> <span class="m">0.01</span><span class="o">*</span><span class="n">bottom</span><span class="p">()</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-                <span class="n">trimmed</span> <span class="o">&lt;-</span> <span class="n">ctdTrim</span><span class="p">(</span><span class="n">ctdRaw</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"index"</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">indexStart</span><span class="p">,</span> <span class="n">indexEnd</span><span class="p">))</span>
-                <span class="n">save</span><span class="p">(</span><span class="n">trimmed</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">"trimmed.rda"</span><span class="p">)</span>
-                <span class="n">plotProfile</span><span class="p">(</span><span class="n">trimmed</span><span class="p">,</span> <span class="n">xtype</span><span class="o">=</span><span class="s2">"temperature"</span><span class="p">,</span>
-                            <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-                <span class="n">plotProfile</span><span class="p">(</span><span class="n">trimmed</span><span class="p">,</span> <span class="n">xtype</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span>
-                            <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-                <span class="n">plotTS</span><span class="p">(</span><span class="n">trimmed</span><span class="p">,</span>
-                       <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.0</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-                <span class="n">plotScan</span><span class="p">(</span><span class="n">ctdRaw</span><span class="p">,</span>
-                         <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.5</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-                <span class="n">suggested</span> <span class="o">&lt;-</span> <span class="n">range</span><span class="p">(</span><span class="n">ctdTrim</span><span class="p">(</span><span class="n">ctdRaw</span><span class="p">)[[</span><span class="s2">"scan"</span><span class="p">]])</span>
-                <span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">suggested</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">))</span>
-                <span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">indexStart</span><span class="p">,</span> <span class="n">indexEnd</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">))</span>
-                <span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="n">suggested</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">indexStart</span><span class="p">,</span>
-                                     <span class="n">suggested</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">indexEnd</span><span class="p">),</span>
-                       <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">),</span> 
-                       <span class="n">lty</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
-                       <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"Start (suggested)"</span><span class="p">,</span>
-                                <span class="n">sprintf</span><span class="p">(</span><span class="s2">"Start (user): %.0f"</span><span class="p">,</span> <span class="n">indexStart</span><span class="p">),</span>
-                                <span class="s2">"End (suggested)"</span><span class="p">,</span>
-                                <span class="n">sprintf</span><span class="p">(</span><span class="s2">"End (user): %.0f"</span><span class="p">,</span> <span class="n">indexEnd</span><span class="p">)))</span>
-            <span class="p">},</span> <span class="n">pointsize</span><span class="o">=</span><span class="m">20</span><span class="p">)</span>
-<span class="p">})</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+36</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+file <span class="o">&lt;-</span> <span class="kp">file.choose</span><span class="p">()</span>
+ctdRaw <span class="o">&lt;-</span> read.oce<span class="p">(</span><span class="kp">file</span><span class="p">)</span>
+<span class="c1">## data(ctdRaw) # try this if you have no .CNV files to test</span>
+shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">)</span> <span class="p">{</span>
+            top <span class="o">&lt;-</span> reactive<span class="p">({</span><span class="kp">as.numeric</span><span class="p">(</span>input<span class="o">$</span>top<span class="p">)})</span>
+            bottom <span class="o">&lt;-</span> reactive<span class="p">({</span><span class="kp">as.numeric</span><span class="p">(</span>input<span class="o">$</span>bottom<span class="p">)})</span>
+            trimmed <span class="o">&lt;-</span> ctdRaw
+            output<span class="o">$</span>ctdTrimPlot <span class="o">&lt;-</span> renderPlot<span class="p">({</span>
+                nf <span class="o">&lt;-</span> layout<span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> nrow<span class="o">=</span><span class="m">2</span><span class="p">,</span> byrow<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+                index <span class="o">&lt;-</span> <span class="kp">seq_along</span><span class="p">(</span>ctdRaw<span class="p">[[</span><span class="s">&quot;pressure&quot;</span><span class="p">]])</span>
+                indexStart <span class="o">&lt;-</span> index<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> <span class="m">0.01</span><span class="o">*</span>top<span class="p">()</span> <span class="o">*</span> <span class="kp">diff</span><span class="p">(</span><span class="kp">range</span><span class="p">(</span>index<span class="p">))</span>
+                indexEnd <span class="o">&lt;-</span> index<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> <span class="m">0.01</span><span class="o">*</span>bottom<span class="p">()</span> <span class="o">*</span> <span class="kp">diff</span><span class="p">(</span><span class="kp">range</span><span class="p">(</span>index<span class="p">))</span>
+                trimmed <span class="o">&lt;-</span> ctdTrim<span class="p">(</span>ctdRaw<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;index&quot;</span><span class="p">,</span> parameters<span class="o">=</span><span class="kt">c</span><span class="p">(</span>indexStart<span class="p">,</span> indexEnd<span class="p">))</span>
+                <span class="kp">save</span><span class="p">(</span>trimmed<span class="p">,</span> file<span class="o">=</span><span class="s">&quot;trimmed.rda&quot;</span><span class="p">)</span>
+                plotProfile<span class="p">(</span>trimmed<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;temperature&quot;</span><span class="p">,</span>
+                            mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+                plotProfile<span class="p">(</span>trimmed<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;salinity&quot;</span><span class="p">,</span>
+                            mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+                plotTS<span class="p">(</span>trimmed<span class="p">,</span>
+                       mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2.2</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.0</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+                plotScan<span class="p">(</span>ctdRaw<span class="p">,</span>
+                         mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2.5</span><span class="p">,</span> <span class="m">2.5</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+                suggested <span class="o">&lt;-</span> <span class="kp">range</span><span class="p">(</span>ctdTrim<span class="p">(</span>ctdRaw<span class="p">)[[</span><span class="s">&quot;scan&quot;</span><span class="p">]])</span>
+                abline<span class="p">(</span>v<span class="o">=</span>suggested<span class="p">,</span> lty<span class="o">=</span><span class="m">2</span><span class="p">,</span> col<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">))</span>
+                abline<span class="p">(</span>v<span class="o">=</span><span class="kt">c</span><span class="p">(</span>indexStart<span class="p">,</span> indexEnd<span class="p">),</span> col<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">))</span>
+                legend<span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span>suggested<span class="p">[</span><span class="m">1</span><span class="p">],</span> indexStart<span class="p">,</span>
+                                     suggested<span class="p">[</span><span class="m">2</span><span class="p">],</span> indexEnd<span class="p">),</span>
+                       col<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> 
+                       lty<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
+                       legend<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Start (suggested)&quot;</span><span class="p">,</span>
+                                <span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Start (user): %.0f&quot;</span><span class="p">,</span> indexStart<span class="p">),</span>
+                                <span class="s">&quot;End (suggested)&quot;</span><span class="p">,</span>
+                                <span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;End (user): %.0f&quot;</span><span class="p">,</span> indexEnd<span class="p">)))</span>
+            <span class="p">},</span> pointsize<span class="o">=</span><span class="m">20</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</td></tr></table>
 
 <p>Here, notice the use of <code>shinyServer()</code>. Again, this will seem mysterious at
 first, but a quick glance shows that a major task here is the creation of the
@@ -283,7 +286,7 @@ not moving through the water column.</p>
     <p>Shiny website: <a href="http://shiny.rstudio.com">http://shiny.rstudio.com</a></p>
   </li>
   <li>
-    <p>Oce website: <a href="http://dankelley.github.io/oce/">http://dankelley.github.io/oce/</a></p>
+    <p>Oce website: <a href="http://dankelley.github.io/oce/">http://dankelley.github.io/oce/</a>   </p>
   </li>
   <li>
     <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-10-18-shiny-ctd-trim.Rmd">2015-10-18-shiny-ctd-trim.Rmd</a></p>

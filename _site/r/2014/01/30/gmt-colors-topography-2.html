@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -46,13 +46,13 @@
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2014/01/30/gmt-colors-topography.html" title="GMT topography colours (I)">
+<a class="pagination" href="/r/2014/02/03/splines.html" title="Spline wiggles (I)">
     Next <!-- &rarr; -->
 </a>
 
 <!-- | <a href='/blog'>Home</a> | -->
 
-<a class="pagination" href="/r/2014/01/25/canada-election-split.html" title="Vote splitting in Canada">
+<a class="pagination" href="/r/2014/01/30/gmt-colors-topography.html" title="GMT topography colours (I)">
     <!-- &larr; --> Previous
 </a>
 
@@ -104,11 +104,11 @@
 
 
 
-<p>This follows an item about GMT colours.  In the meantime I have found a <a href="http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html">website</a> illustrating the colours, and also the <a href="http://www.beamreach.org/maps/gmt/share/cpt">definition files</a> for those palettes.</p>
+<p>This follows an item about GMT colours.  In the meantime I have found a <a href="http://www.geos.ed.ac.uk/it/howto/GMT/CPT/palettes.html">website</a> illustrating the colours, and also the <a href="http://www.beamreach.org/maps/gmt/share/cpt">definition files</a> for those palettes.  </p>
 
 <p>The palette in question is named <code>GMT_relief</code>, and it is defined in a file that is as follows.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#	$Id: GMT_relief.cpt,v 1.1 2001/09/23 23:11:20 pwessel Exp $</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#	$Id: GMT_relief.cpt,v 1.1 2001/09/23 23:11:20 pwessel Exp $</span>
 <span class="c">#</span>
 <span class="c"># Colortable for whole earth relief used in Wessel topomaps</span>
 <span class="c"># Designed by P. Wessel and F. Martinez, SOEST</span>
@@ -132,19 +132,19 @@
 7000	253	249	216	8000	255	255	255
 F	255	255	255				
 B	0	0	0
-N	255	255	255</code></pre></figure>
+N	255	255	255</code></pre></div>
 
 <p>R code to read this file and construct 16-piece linear ramps between the levels is as follows.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
@@ -158,30 +158,31 @@ N	255	255	255</code></pre></figure>
 20
 21
 22
-23</pre></td><td class="code"><pre><span class="n">breakPerLevel</span> <span class="o">&lt;-</span> <span class="m">16</span> <span class="c1"># say
-</span><span class="n">d</span> <span class="o">&lt;-</span> <span class="n">read.table</span><span class="p">(</span><span class="s2">"GMT_relief.cpt"</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">"#"</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="m">17</span><span class="p">,</span>
-                <span class="n">col.names</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"l"</span><span class="p">,</span> <span class="s2">"lr"</span><span class="p">,</span> <span class="s2">"lg"</span><span class="p">,</span> <span class="s2">"lb"</span><span class="p">,</span>
-                            <span class="s2">"u"</span><span class="p">,</span> <span class="s2">"ur"</span><span class="p">,</span> <span class="s2">"ug"</span><span class="p">,</span> <span class="s2">"ub"</span><span class="p">))</span>
-<span class="n">nlevel</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">l</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">breakPerLevel</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">nlevel</span><span class="p">))</span>
-<span class="n">breaks</span> <span class="o">&lt;-</span> <span class="n">NULL</span>
-<span class="n">col</span> <span class="o">&lt;-</span> <span class="n">NULL</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">l</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nlevel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">lowerColor</span> <span class="o">&lt;-</span> <span class="n">rgb</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">lr</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">lg</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">lb</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">)</span>
-    <span class="n">upperColor</span> <span class="o">&lt;-</span> <span class="n">rgb</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">ur</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">ug</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">ub</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">)</span>
-    <span class="n">breaks</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">breaks</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">l</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">d</span><span class="o">$</span><span class="n">u</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">length.out</span><span class="o">=</span><span class="n">breakPerLevel</span><span class="p">))</span>
-    <span class="n">col</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">colorRampPalette</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">lowerColor</span><span class="p">,</span> <span class="n">upperColor</span><span class="p">))(</span><span class="n">breakPerLevel</span><span class="p">))</span>
+23</code></pre></div></td><td class="code"><div class="highlight"><pre>breakPerLevel <span class="o">&lt;-</span> <span class="m">16</span> <span class="c1"># say</span>
+d <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;GMT_relief.cpt&quot;</span><span class="p">,</span> comment<span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">,</span> nrows<span class="o">=</span><span class="m">17</span><span class="p">,</span>
+                col.names<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="s">&quot;lr&quot;</span><span class="p">,</span> <span class="s">&quot;lg&quot;</span><span class="p">,</span> <span class="s">&quot;lb&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;u&quot;</span><span class="p">,</span> <span class="s">&quot;ur&quot;</span><span class="p">,</span> <span class="s">&quot;ug&quot;</span><span class="p">,</span> <span class="s">&quot;ub&quot;</span><span class="p">))</span>
+nlevel <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>d<span class="o">$</span>l<span class="p">)</span>
+plot<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> breakPerLevel<span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> nlevel<span class="p">))</span>
+breaks <span class="o">&lt;-</span> <span class="kc">NULL</span>
+col <span class="o">&lt;-</span> <span class="kc">NULL</span>
+<span class="kr">for</span> <span class="p">(</span>l <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nlevel<span class="p">)</span> <span class="p">{</span>
+    lowerColor <span class="o">&lt;-</span> rgb<span class="p">(</span>d<span class="o">$</span>lr<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> d<span class="o">$</span>lg<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> d<span class="o">$</span>lb<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">)</span>
+    upperColor <span class="o">&lt;-</span> rgb<span class="p">(</span>d<span class="o">$</span>ur<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> d<span class="o">$</span>ug<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">,</span> d<span class="o">$</span>ub<span class="p">[</span>l<span class="p">]</span><span class="o">/</span><span class="m">255</span><span class="p">)</span>
+    breaks <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>breaks<span class="p">,</span> <span class="kp">seq</span><span class="p">(</span>d<span class="o">$</span>l<span class="p">[</span>l<span class="p">],</span> d<span class="o">$</span>u<span class="p">[</span>l<span class="p">],</span> length.out<span class="o">=</span>breakPerLevel<span class="p">))</span>
+    col <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="kp">col</span><span class="p">,</span> colorRampPalette<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lowerColor<span class="p">,</span> upperColor<span class="p">))(</span>breakPerLevel<span class="p">))</span>
 <span class="p">}</span>
-<span class="c1">## drop a colour to get length matchup for imagep()
-</span><span class="n">col</span> <span class="o">&lt;-</span> <span class="n">col</span><span class="p">[</span><span class="m">-1</span><span class="p">]</span>
-<span class="n">nbreaks</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">breaks</span><span class="p">)</span>
-<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.7</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-<span class="n">plot</span><span class="p">(</span><span class="m">2</span><span class="o">:</span><span class="n">nbreaks</span><span class="p">,</span> <span class="n">breaks</span><span class="p">[</span><span class="m">-1</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">()</span>
-<span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">data</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">)</span>
-<span class="n">imagep</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">,</span> <span class="n">breaks</span><span class="o">=</span><span class="n">breaks</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="c1">## drop a colour to get length matchup for imagep()</span>
+col <span class="o">&lt;-</span> <span class="kp">col</span><span class="p">[</span><span class="m">-1</span><span class="p">]</span>
+nbreaks <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>breaks<span class="p">)</span>
+par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0.7</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+plot<span class="p">(</span><span class="m">2</span><span class="o">:</span>nbreaks<span class="p">,</span> breaks<span class="p">[</span><span class="m">-1</span><span class="p">],</span> col<span class="o">=</span><span class="kp">col</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+grid<span class="p">()</span>
+<span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+data<span class="p">(</span>topoWorld<span class="p">)</span>
+imagep<span class="p">(</span>topoWorld<span class="p">,</span> breaks<span class="o">=</span>breaks<span class="p">,</span> col<span class="o">=</span><span class="kp">col</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <p>A graph of the results is below.</p>
 

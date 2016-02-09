@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -52,7 +52,7 @@
 
 <!-- | <a href='/blog'>Home</a> | -->
 
-<a class="pagination" href="/r/2015/05/10/its90-temperature-scale.html" title="ITS-90 temperature scale">
+<a class="pagination" href="/r/2015/05/10/ITS90-temperature-scale.html" title="ITS-90 temperature scale">
     <!-- &larr; --> Previous
 </a>
 
@@ -111,94 +111,99 @@ version of ocedata.</p>
 <p>First, the netcdf files for temperature and salinity were downloaded from
 online sources [4,5]. Then the data were loaded as follows.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
-<span class="n">con</span> <span class="o">&lt;-</span> <span class="n">nc_open</span><span class="p">(</span><span class="s2">"woa13_decav_t00_01v2.nc"</span><span class="p">)</span>
-<span class="c1">## make a vector for later convenience
-</span><span class="n">longitude</span> <span class="o">&lt;-</span> <span class="n">as.vector</span><span class="p">(</span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">))</span>
-<span class="n">latitude</span> <span class="o">&lt;-</span> <span class="n">as.vector</span><span class="p">(</span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">))</span>
-<span class="n">SST</span> <span class="o">&lt;-</span> <span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="s2">"t_an"</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
-<span class="n">nc_close</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
-<span class="n">con</span> <span class="o">&lt;-</span> <span class="n">nc_open</span><span class="p">(</span><span class="s2">"woa13_decav_s00_01v2.nc"</span><span class="p">)</span>
-<span class="n">SSS</span> <span class="o">&lt;-</span> <span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="s2">"s_an"</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
-<span class="n">nc_close</span><span class="p">(</span><span class="n">con</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>ncdf4<span class="p">)</span>
+con <span class="o">&lt;-</span> nc_open<span class="p">(</span><span class="s">&quot;woa13_decav_t00_01v2.nc&quot;</span><span class="p">)</span>
+<span class="c1">## make a vector for later convenience</span>
+longitude <span class="o">&lt;-</span> <span class="kp">as.vector</span><span class="p">(</span>ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;lon&quot;</span><span class="p">))</span>
+latitude <span class="o">&lt;-</span> <span class="kp">as.vector</span><span class="p">(</span>ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;lat&quot;</span><span class="p">))</span>
+SST <span class="o">&lt;-</span> ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;t_an&quot;</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+nc_close<span class="p">(</span>con<span class="p">)</span>
+con <span class="o">&lt;-</span> nc_open<span class="p">(</span><span class="s">&quot;woa13_decav_s00_01v2.nc&quot;</span><span class="p">)</span>
+SSS <span class="o">&lt;-</span> ncvar_get<span class="p">(</span>con<span class="p">,</span> <span class="s">&quot;s_an&quot;</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+nc_close<span class="p">(</span>con<span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <p>Next, load the levitus dataset from the existing <code>ocedata</code> package
 and compute the differences</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">data</span><span class="p">(</span><span class="s2">"levitus"</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span> <span class="c1"># for truehist
-</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-<span class="n">dSST</span> <span class="o">&lt;-</span> <span class="n">SST</span> <span class="o">-</span> <span class="n">levitus</span><span class="o">$</span><span class="n">SST</span>
-<span class="n">dSSS</span> <span class="o">&lt;-</span> <span class="n">SSS</span> <span class="o">-</span> <span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+data<span class="p">(</span><span class="s">&quot;levitus&quot;</span><span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>MASS<span class="p">)</span> <span class="c1"># for truehist</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+dSST <span class="o">&lt;-</span> SST <span class="o">-</span> levitus<span class="o">$</span>SST
+dSSS <span class="o">&lt;-</span> SSS <span class="o">-</span> levitus<span class="o">$</span>SSS
+</pre></div>
+</td></tr></table>
 
 <p>The main differences are said to be in data-sparse regions, e.g. high latitudes,
 so an interesting check is to plot spatial patterns.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-<span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span>
-<span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">dSST</span><span class="p">,</span> <span class="n">zlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
-<span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span> <span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span>
-        <span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span> 
-<span class="n">mtext</span><span class="p">(</span><span class="s2">"SST change"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">dSSS</span><span class="p">,</span> <span class="n">zlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
-<span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span> <span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span>
-        <span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span> 
-<span class="n">mtext</span><span class="p">(</span><span class="s2">"SSS change"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+data<span class="p">(</span>coastlineWorld<span class="p">)</span>
+imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSST<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SST change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSSS<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SSS change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-3-1.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-3-1.png" alt="center" /> </p>
 
 <p>The figures confirm that the differences are mainly in high latitudes, with
 estimates in Hudson’s Bay being particularly altered.  A closer examination of
 the author’s general locale may interest him, if nobody else…</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
-4</pre></td><td class="code"><pre><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">dSST</span><span class="p">,</span> <span class="n">zlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span> <span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span>
-        <span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span> 
-<span class="n">mtext</span><span class="p">(</span><span class="s2">"SST change"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSST<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SST change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-1.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-1.png" alt="center" /> </p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
-4</pre></td><td class="code"><pre><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">dSSS</span><span class="p">,</span> <span class="n">zlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span> <span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span>
-        <span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span> 
-<span class="n">mtext</span><span class="p">(</span><span class="s2">"SSS change"</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+4</code></pre></div></td><td class="code"><div class="highlight"><pre>imagep<span class="p">(</span>longitude<span class="p">,</span> latitude<span class="p">,</span> dSSS<span class="p">,</span> zlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">90</span><span class="p">),</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+polygon<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span>
+        col<span class="o">=</span><span class="s">&#39;lightgray&#39;</span><span class="p">)</span> 
+mtext<span class="p">(</span><span class="s">&quot;SSS change&quot;</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-2.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-08-22-woa-2013-2/unnamed-chunk-4-2.png" alt="center" /> </p>
 
 <h1 id="conclusions">Conclusions</h1>
 
@@ -217,10 +222,10 @@ initialize numerical models.</p>
 
 <ol>
   <li>
-    <p><a href="http://dankelley.github.io/ocedata/">Ocedata website</a></p>
+    <p><a href="http://dankelley.github.io/ocedata/">Ocedata website</a>   </p>
   </li>
   <li>
-    <p><a href="http://dankelley.github.io/oce/">Oce website</a></p>
+    <p><a href="http://dankelley.github.io/oce/">Oce website</a>   </p>
   </li>
   <li>
     <p><a href="http://data.nodc.noaa.gov/woa/WOA13/DOC/woa13v2_changes.pdf">NOAA document on WOA changes</a></p>

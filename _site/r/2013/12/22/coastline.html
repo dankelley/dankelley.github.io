@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -101,7 +101,7 @@
 
 <h1 id="part-1-coastal-applications">Part 1: coastal applications</h1>
 
-<p>The oce package has a world coastline file that is visibly crude on a scale suitable for continental-shelf work.  At the cost of about 1 Mbyte of storage, a candidate for a replacement is a 1:10million scale version downloaded from naturalearthdata.com (full link below).</p>
+<p>The oce package has a world coastline file that is visibly crude on a scale suitable for continental-shelf work.  At the cost of about 1 Mbyte of storage, a candidate for a replacement is a 1:10million scale version downloaded from naturalearthdata.com (full link below). </p>
 
 <p>As illustrated below with plots near two oceanographic centres, this candidate provides noticeably more detail.  (The code is in Appendix 1.)</p>
 
@@ -131,50 +131,51 @@
 
 <p>The R code to make the first figure is provided below.  Readers wishing to reproduce this will need to download the coastline file named in line 2, from the <a href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip&gt;">naturalearthdata website</a>.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
 13
 14
-15</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">&lt;-</span> <span class="n">read.oce</span><span class="p">(</span><span class="s2">"ne_10m_admin_0_countries.shp"</span><span class="p">)</span>
+15</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+d <span class="o">&lt;-</span> read.oce<span class="p">(</span><span class="s">&quot;ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
 
-<span class="c1">## Two panels illustrate two oceanographic centres.
-</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="c1">## Two panels illustrate two oceanographic centres.</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
 
-<span class="c1">## Left panel: Halifax NS, with grey for existing
-## world coastline and blue for the 1:10m version
-## under consideration.
-</span><span class="n">plot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span> <span class="n">clon</span><span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> <span class="n">clat</span><span class="o">=</span><span class="m">44.65</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
-<span class="n">lines</span><span class="p">(</span><span class="n">d</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]],</span> <span class="n">d</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]],</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span>
+<span class="c1">## Left panel: Halifax NS, with grey for existing</span>
+<span class="c1">## world coastline and blue for the 1:10m version</span>
+<span class="c1">## under consideration.</span>
+plot<span class="p">(</span>coastlineWorld<span class="p">,</span> clon<span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> clat<span class="o">=</span><span class="m">44.65</span><span class="p">,</span> span<span class="o">=</span><span class="m">200</span><span class="p">)</span>
+lines<span class="p">(</span>d<span class="p">[[</span><span class="s">&#39;longitude&#39;</span><span class="p">]],</span> d<span class="p">[[</span><span class="s">&#39;latitude&#39;</span><span class="p">]],</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1.4</span><span class="p">)</span>
 
-<span class="c1">## As left panel, but for Woods Hole MA.
-</span><span class="n">plot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span> <span class="n">clon</span><span class="o">=</span><span class="m">-70.70</span><span class="p">,</span> <span class="n">clat</span><span class="o">=</span><span class="m">41.65</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
-<span class="n">lines</span><span class="p">(</span><span class="n">d</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]],</span> <span class="n">d</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]],</span> <span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.4</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="c1">## As left panel, but for Woods Hole MA.</span>
+plot<span class="p">(</span>coastlineWorld<span class="p">,</span> clon<span class="o">=</span><span class="m">-70.70</span><span class="p">,</span> clat<span class="o">=</span><span class="m">41.65</span><span class="p">,</span> span<span class="o">=</span><span class="m">200</span><span class="p">)</span>
+lines<span class="p">(</span>d<span class="p">[[</span><span class="s">&#39;longitude&#39;</span><span class="p">]],</span> d<span class="p">[[</span><span class="s">&#39;latitude&#39;</span><span class="p">]],</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">1.4</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <h2 id="appendix-2">APPENDIX 2</h2>
 
 <p>The R code used to make the second figure is given below.  Readers should note that this will not work for them unless they first download the datasets, read the datasets with <code>read.oce()</code>, and <code>save()</code> the results in .rda files as named in the code.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
@@ -190,32 +191,33 @@
 22
 23
 24
-25</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">load</span><span class="p">(</span><span class="s2">"coastlineWorldFine.rda"</span><span class="p">)</span> 
-<span class="n">load</span><span class="p">(</span><span class="s2">"coastlineWorldMedium.rda"</span><span class="p">)</span>
-<span class="n">load</span><span class="p">(</span><span class="s2">"coastlineWorldCoarse.rda"</span><span class="p">)</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span>
-    <span class="n">png</span><span class="p">(</span><span class="s2">"world.png"</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">'in'</span><span class="p">,</span><span class="n">res</span><span class="o">=</span><span class="m">150</span><span class="p">,</span><span class="n">pointsize</span><span class="o">=</span><span class="m">7</span><span class="p">)</span>
-<span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
-<span class="n">system.time</span><span class="p">(</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span> 
-                    <span class="n">longitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">latitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
-                    <span class="n">projection</span><span class="o">=</span><span class="s2">"orthographic"</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span>
-                    <span class="n">orientation</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">))</span>
-<span class="n">system.time</span><span class="p">(</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorldFine</span><span class="p">,</span>
-                    <span class="n">longitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">latitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
-                    <span class="n">projection</span><span class="o">=</span><span class="s2">"orthographic"</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span>
-                    <span class="n">orientation</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="n">fill</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">))</span>
-<span class="n">system.time</span><span class="p">(</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorldMedium</span><span class="p">,</span>
-                    <span class="n">longitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">latitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
-                    <span class="n">projection</span><span class="o">=</span><span class="s2">"orthographic"</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span>
-                    <span class="n">orientation</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">))</span>
-<span class="n">system.time</span><span class="p">(</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorldCoarse</span><span class="p">,</span>
-                    <span class="n">longitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">latitudelim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
-                    <span class="n">projection</span><span class="o">=</span><span class="s2">"orthographic"</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span>
-                    <span class="n">orientation</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">))</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">interactive</span><span class="p">())</span>
-    <span class="n">dev.off</span><span class="p">()</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+25</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+<span class="kp">load</span><span class="p">(</span><span class="s">&quot;coastlineWorldFine.rda&quot;</span><span class="p">)</span> 
+<span class="kp">load</span><span class="p">(</span><span class="s">&quot;coastlineWorldMedium.rda&quot;</span><span class="p">)</span>
+<span class="kp">load</span><span class="p">(</span><span class="s">&quot;coastlineWorldCoarse.rda&quot;</span><span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span>
+    png<span class="p">(</span><span class="s">&quot;world.png&quot;</span><span class="p">,</span>width<span class="o">=</span><span class="m">7</span><span class="p">,</span>height<span class="o">=</span><span class="m">7</span><span class="p">,</span>unit<span class="o">=</span><span class="s">&#39;in&#39;</span><span class="p">,</span>res<span class="o">=</span><span class="m">150</span><span class="p">,</span>pointsize<span class="o">=</span><span class="m">7</span><span class="p">)</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> mar<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+<span class="kp">system.time</span><span class="p">(</span>mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> 
+                    longitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> latitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
+                    projection<span class="o">=</span><span class="s">&quot;orthographic&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+                    orientation<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> fill<span class="o">=</span><span class="s">&#39;grey&#39;</span><span class="p">))</span>
+<span class="kp">system.time</span><span class="p">(</span>mapPlot<span class="p">(</span>coastlineWorldFine<span class="p">,</span>
+                    longitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> latitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
+                    projection<span class="o">=</span><span class="s">&quot;orthographic&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+                    orientation<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span>fill<span class="o">=</span><span class="s">&#39;grey&#39;</span><span class="p">))</span>
+<span class="kp">system.time</span><span class="p">(</span>mapPlot<span class="p">(</span>coastlineWorldMedium<span class="p">,</span>
+                    longitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> latitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
+                    projection<span class="o">=</span><span class="s">&quot;orthographic&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+                    orientation<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> fill<span class="o">=</span><span class="s">&#39;grey&#39;</span><span class="p">))</span>
+<span class="kp">system.time</span><span class="p">(</span>mapPlot<span class="p">(</span>coastlineWorldCoarse<span class="p">,</span>
+                    longitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> latitudelim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">120</span><span class="p">),</span>
+                    projection<span class="o">=</span><span class="s">&quot;orthographic&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+                    orientation<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span><span class="m">-100</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> fill<span class="o">=</span><span class="s">&#39;grey&#39;</span><span class="p">))</span>
+<span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">interactive</span><span class="p">())</span>
+    dev.off<span class="p">()</span>
+</pre></div>
+</td></tr></table>
 
 
 

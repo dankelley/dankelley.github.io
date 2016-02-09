@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -96,29 +96,31 @@
 
 <p>The illuminated fraction of the moon can be calculated with <code>moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
 6
-7</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">mgp</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="c1"># tighten margins
-</span><span class="n">t</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-1"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span> <span class="o">+</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">28</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">3600</span><span class="p">,</span> <span class="m">3600</span><span class="p">)</span>
-<span class="n">f</span> <span class="o">&lt;-</span> <span class="n">moonAngle</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="m">-63.6</span><span class="p">,</span> 
-                    <span class="n">latitude</span><span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="o">$</span><span class="n">illuminatedFraction</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">"Day of 2013"</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Moon fraction"</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">()</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="c1"># tighten margins</span>
+t <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2013-12-1&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">28</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">3600</span><span class="p">,</span> <span class="m">3600</span><span class="p">)</span>
+f <span class="o">&lt;-</span> moonAngle<span class="p">(</span>t<span class="o">=</span><span class="kp">t</span><span class="p">,</span> longitude<span class="o">=</span><span class="m">-63.6</span><span class="p">,</span> 
+                    latitude<span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="o">$</span>illuminatedFraction
+plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> f<span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;Day of 2013&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Moon fraction&quot;</span><span class="p">)</span>
+grid<span class="p">()</span>
+</pre></div>
+</td></tr></table>
 
 <p>For interest, add full-moon time as indicated in an almanac.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
-3</pre></td><td class="code"><pre><span class="n">full</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-17 05:29:00"</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">"AST"</span><span class="p">)</span>
-<span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">full</span><span class="p">)</span>
-<span class="n">mtext</span><span class="p">(</span><span class="s2">"full"</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">full</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+3</code></pre></div></td><td class="code"><div class="highlight"><pre>full <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2013-12-17 05:29:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;AST&quot;</span><span class="p">)</span>
+abline<span class="p">(</span>v<span class="o">=</span>full<span class="p">)</span>
+mtext<span class="p">(</span><span class="s">&quot;full&quot;</span><span class="p">,</span> at<span class="o">=</span>full<span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <p><img src="/assets/moon.png" alt="moon phase diagram" /></p>
 

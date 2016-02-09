@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a href="/blog">Blog</a></li>
+            <li><a class="highlight" href="/blog">Blog</a></li>
             
 
         </ul>
@@ -102,15 +102,15 @@
 
 <p>The R code given below demonstrates this with fake data.  The core idea is to use <code>segments()</code>, here with <code>head()</code> and <code>tail()</code> to chop up the trajectory.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
@@ -119,27 +119,28 @@
 15
 16
 17
-18</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">length.out</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span>
-<span class="n">z</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">length.out</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="n">zlim</span> <span class="o">&lt;-</span> <span class="n">range</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-<span class="n">npalette</span> <span class="o">&lt;-</span> <span class="m">10</span>
-<span class="n">mar</span> <span class="o">&lt;-</span> <span class="n">par</span><span class="p">(</span><span class="s1">'mar'</span><span class="p">)</span>
+18</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+x <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">50</span><span class="p">)</span>
+y <span class="o">&lt;-</span> x
+z <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>x<span class="p">))</span>
+zlim <span class="o">&lt;-</span> <span class="kp">range</span><span class="p">(</span>z<span class="p">)</span>
+npalette <span class="o">&lt;-</span> <span class="m">10</span>
+mar <span class="o">&lt;-</span> par<span class="p">(</span><span class="s">&#39;mar&#39;</span><span class="p">)</span>
 
-<span class="n">palette</span> <span class="o">&lt;-</span> <span class="n">oceColorsJet</span><span class="p">(</span><span class="n">npalette</span><span class="p">)</span>
-<span class="n">drawPalette</span><span class="p">(</span><span class="n">zlim</span> <span class="o">=</span> <span class="n">zlim</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">palette</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s2">"l"</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">()</span>
-<span class="n">segments</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="n">head</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
-  <span class="n">tail</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="n">tail</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
-  <span class="n">col</span> <span class="o">=</span> <span class="n">palette</span><span class="p">[</span><span class="n">findInterval</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> 
-    <span class="n">seq</span><span class="p">(</span><span class="n">zlim</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">zlim</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">length.out</span> <span class="o">=</span> <span class="n">npalette</span> <span class="o">+</span> <span class="m">1</span><span class="p">))],</span>
-  <span class="n">lwd</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
-<span class="n">points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+palette <span class="o">&lt;-</span> oceColorsJet<span class="p">(</span>npalette<span class="p">)</span>
+drawPalette<span class="p">(</span>zlim <span class="o">=</span> zlim<span class="p">,</span> col <span class="o">=</span> palette<span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+grid<span class="p">()</span>
+segments<span class="p">(</span><span class="kp">head</span><span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="kp">head</span><span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  <span class="kp">tail</span><span class="p">(</span>x<span class="p">,</span> <span class="m">-1</span><span class="p">),</span> <span class="kp">tail</span><span class="p">(</span>y<span class="p">,</span> <span class="m">-1</span><span class="p">),</span>
+  col <span class="o">=</span> palette<span class="p">[</span><span class="kp">findInterval</span><span class="p">(</span>z<span class="p">,</span> 
+    <span class="kp">seq</span><span class="p">(</span>zlim<span class="p">[</span><span class="m">1</span><span class="p">],</span> zlim<span class="p">[</span><span class="m">2</span><span class="p">],</span> length.out <span class="o">=</span> npalette <span class="o">+</span> <span class="m">1</span><span class="p">))],</span>
+  lwd <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
+points<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">20</span><span class="p">,</span> cex<span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1.png" alt="center" /> </p>
 
 <h1 id="results">Results</h1>
 
