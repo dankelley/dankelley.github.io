@@ -1,6 +1,6 @@
 ---
 layout: post
-title: wind and waves during a Nor'Easter storm
+title: Wind and waves during a Nor'Easter storm
 tags: [R,weather]
 category: R
 year: 2016
