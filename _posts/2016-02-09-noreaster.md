@@ -122,10 +122,11 @@ abline(0, -1, col='lightgray')
 Although waves are not entirely related to *local* winds, it is interesting to
 compare them. The time-series plots indicate a correspondence of high wind and
 large waves. However, the wind-rose plot indicates that this is mainly true for
-certain directions. The strong winds from yesterday that caused the largest
-waves are indicated with the dark-red dot in the upper-right quadrant. This
-quadrant corresponds to winds that are called Nor'East, in the local parlance,
-and anyone who has spent much time at sea will not be surprised by this result.
+certain wind directions. The strong winds from February 8 that caused the
+largest waves are indicated with the dark-red dot in the lower-left quadrant.
+This quadrant corresponds to winds that locals call Nor'Eastly, and those
+locals who take to the sea will not be surprised by the wave heights indicated
+on the storm, or by their long period as indicated in the time-series plot.
 
 # References and resources
 
