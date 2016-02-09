@@ -26,7 +26,7 @@ theta <- 90 - windDirection # convert from CW-from-North to CCW-from-East
 windU <- -windSpeed * cos(theta*pi/180)
 windV <- -windSpeed * sin(theta*pi/180)
 
-## ------------------------------------------------------------------------
+## ----results='hide', message=FALSE, warning=FALSE------------------------
 library(oce)
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))

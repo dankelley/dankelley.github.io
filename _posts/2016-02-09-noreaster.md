@@ -62,19 +62,6 @@ windV <- -windSpeed * sin(theta*pi/180)
 
 {% highlight r linenos=table %}
 library(oce)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Loading required package: methods
-## Loading required package: gsw
-## Loading required package: testthat
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, windSpeed, ylab="Wind speed [m/s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))

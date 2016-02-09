@@ -57,7 +57,7 @@ windV <- -windSpeed * sin(theta*pi/180)
 ```
 
 ## Time-series graphs
-```{r}
+```{r results='hide', message=FALSE, warning=FALSE}
 library(oce)
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))

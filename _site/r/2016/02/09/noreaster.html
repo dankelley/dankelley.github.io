@@ -163,20 +163,14 @@ windV <span class="o">&lt;-</span> <span class="o">-</span>windSpeed <span class
 
 <h2 id="time-series-graphs">Time-series graphs</h2>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
-## Loading required package: gsw
-## Loading required package: testthat</code></pre></div>
-
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+6
+7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> airPressure<span class="o">/</span><span class="m">10</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Air press [kPa]&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> windSpeed<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Wind speed [m/s]&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> windDirection<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;wind dir&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
