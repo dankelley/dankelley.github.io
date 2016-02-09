@@ -95,7 +95,31 @@
 <p>Several buoys measure wave conditions off the coast of Nova Scotia. I was
 hoping to get data from the nearest one (ID 44258) but it did not have many
 non-missing data, so I instead chose one on La Have Bank (ID 44150).  This is
-owned and maintained by Environment Canada, and is located at 42.505N 64.018W. </p>
+owned and maintained by Environment Canada, and is located roughly south of
+Halifax and east of Cape Cod, near the 1000m isobath, as indicated on the map
+below.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+lon <span class="o">&lt;-</span> <span class="m">-64.018</span>
+lat <span class="o">&lt;-</span> <span class="m">42.505</span>
+data<span class="p">(</span>coastlineWorldFine<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>coastlineWorldFine<span class="p">,</span> longitudelim<span class="o">=</span>lon<span class="o">+</span><span class="kt">c</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> latitudelim<span class="o">=</span>lat<span class="o">+</span><span class="kt">c</span><span class="p">(</span><span class="m">-7</span><span class="p">,</span><span class="m">7</span><span class="p">))</span>
+points<span class="p">(</span>lon<span class="p">,</span> lat<span class="p">,</span> bg<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">2</span><span class="p">,</span> pch<span class="o">=</span><span class="m">21</span><span class="p">)</span>
+data<span class="p">(</span>topoWorld<span class="p">)</span>
+contour<span class="p">(</span>topoWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> topoWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span> topoWorld<span class="p">[[</span><span class="s">&quot;z&quot;</span><span class="p">]],</span>
+        levels<span class="o">=</span><span class="m">-1000</span><span class="p">,</span> lty<span class="o">=</span><span class="m">2</span><span class="p">,</span> drawlabels<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> add<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-2-1.png" alt="center" /> </p>
 
 <h1 id="procedure">Procedure</h1>
 
@@ -168,9 +192,7 @@ windV <span class="o">&lt;-</span> <span class="o">-</span>windSpeed <span class
 3
 4
 5
-6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+6</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> airPressure<span class="o">/</span><span class="m">10</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Air press [kPa]&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> windSpeed<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Wind speed [m/s]&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</span> windDirection<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;wind dir&quot;</span><span class="p">,</span> drawTimeRange<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
@@ -179,7 +201,7 @@ oce.plot.ts<span class="p">(</span><span class="kp">t</span><span class="p">,</s
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-3-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-5-1.png" alt="center" /> </p>
 
 <h2 id="wind-rose-graph">Wind-rose graph</h2>
 
@@ -219,7 +241,7 @@ abline<span class="p">(</span><span class="m">0</span><span class="p">,</span> <
 </pre></div>
 </td></tr></table>
 
-<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-4-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-6-1.png" alt="center" /> </p>
 
 <h1 id="discussion">Discussion</h1>
 

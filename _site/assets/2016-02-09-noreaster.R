@@ -1,3 +1,16 @@
+## ----echo=FALSE----------------------------------------------------------
+
+## ----results='hide', message=FALSE, warning=FALSE------------------------
+library(oce)
+lon <- -64.018
+lat <- 42.505
+data(coastlineWorldFine, package="ocedata")
+plot(coastlineWorldFine, longitudelim=lon+c(-5, 5), latitudelim=lat+c(-7,7))
+points(lon, lat, bg='red', cex=2, pch=21)
+data(topoWorld)
+contour(topoWorld[["longitude"]], topoWorld[["latitude"]], topoWorld[["z"]],
+        levels=-1000, lty=2, drawlabels=FALSE, add=TRUE)
+
 ## ----eval=FALSE----------------------------------------------------------
 ## download.file("http://www.ndbc.noaa.gov/data/realtime2/44150.txt", "44150.txt")
 
@@ -27,7 +40,6 @@ windU <- -windSpeed * cos(theta*pi/180)
 windV <- -windSpeed * sin(theta*pi/180)
 
 ## ----results='hide', message=FALSE, warning=FALSE------------------------
-library(oce)
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, windSpeed, ylab="Wind speed [m/s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))

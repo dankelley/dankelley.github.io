@@ -11,10 +11,29 @@ summary: Wave and wind conditions are summarized for the Nor'Easter that hit eas
 
 # Introduction
 
+
+
 Several buoys measure wave conditions off the coast of Nova Scotia. I was
 hoping to get data from the nearest one (ID 44258) but it did not have many
 non-missing data, so I instead chose one on La Have Bank (ID 44150).  This is
-owned and maintained by Environment Canada, and is located at 42.505N 64.018W. 
+owned and maintained by Environment Canada, and is located roughly south of
+Halifax and east of Cape Cod, near the 1000m isobath, as indicated on the map
+below.
+
+
+{% highlight r linenos=table %}
+library(oce)
+lon <- -64.018
+lat <- 42.505
+data(coastlineWorldFine, package="ocedata")
+plot(coastlineWorldFine, longitudelim=lon+c(-5, 5), latitudelim=lat+c(-7,7))
+points(lon, lat, bg='red', cex=2, pch=21)
+data(topoWorld)
+contour(topoWorld[["longitude"]], topoWorld[["latitude"]], topoWorld[["z"]],
+        levels=-1000, lty=2, drawlabels=FALSE, add=TRUE)
+{% endhighlight %}
+
+![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-2-1.png) 
 
 # Procedure
 
@@ -61,7 +80,6 @@ windV <- -windSpeed * sin(theta*pi/180)
 ## Time-series graphs
 
 {% highlight r linenos=table %}
-library(oce)
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, windSpeed, ylab="Wind speed [m/s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
@@ -70,7 +88,7 @@ oce.plot.ts(t, waveHeight, ylab="Height [m]", drawTimeRange=FALSE, mar=c(2, 3, 1
 oce.plot.ts(t, dominantWavePeriod, ylab="Period [s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-3-1.png) 
+![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-5-1.png) 
 
 ## Wind-rose graph
 
@@ -97,7 +115,7 @@ abline(0, 1, col='lightgray')
 abline(0, -1, col='lightgray')
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-4-1.png) 
+![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-6-1.png) 
 
 # Discussion
 
