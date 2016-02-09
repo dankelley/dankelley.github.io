@@ -108,14 +108,11 @@ this blog [1].
 ## Read data
 
 ```{r}
-d <- readLines("44150.txt)
+d <- readLines("44150.txt")
 names <- strsplit(gsub("^#", "", d[1]), " +")[[1]]
-names
-d <- tail(d, -2) # 2nd line holds units but we know them
 d <- gsub("MM", "NA", d) # whacky missing-value code
 d <- read.table(text=d, header=FALSE, col.names=names)
 t <- ISOdatetime(d$YY, d$MM, d$DD, d$hh, d$mm, 0, tz="UTC")
-head(d)
 windDirection <- d$WDIR
 windSpeed <- d$WSPD
 gust <- d$GST
@@ -180,8 +177,6 @@ certain directions. The strong winds from yesterday that caused the largest
 waves are indicated with the dark-red dot in the upper-right quadrant. This
 quadrant corresponds to winds that are called Nor'East, in the local parlance,
 and anyone who has spent much time at sea will not be surprised by this result.
-As for the tendency for large waves for wind coming from the east, that may be
-a fetch effect, for the buoy is off the east coast of Canada.
 
 # References and resources
 

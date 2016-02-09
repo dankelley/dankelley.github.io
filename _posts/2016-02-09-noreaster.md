@@ -21,16 +21,18 @@ owned and maintained by Environment Canada, and is located at 42.505N 64.018W.
 ## Data source
 
 I first downloaded the data as follows, in R:
-```{r eval=FALSE}
+
+{% highlight r linenos=table %}
 download.file("http://www.ndbc.noaa.gov/data/realtime2/44150.txt", "44150.txt")
-```
+{% endhighlight %}
 Since I did this on February 9, I got data for the month prior to the download.
 In case any reader wants to try working with those data, I've provided them on
 this blog [1].
 
 ## Read data
 
-```{r}
+
+{% highlight r linenos=table %}
 d <- readLines("44150.txt")
 names <- strsplit(gsub("^#", "", d[1]), " +")[[1]]
 d <- gsub("MM", "NA", d) # whacky missing-value code
@@ -54,18 +56,34 @@ theta <- 90 - windDirection # convert from CW-from-North to CCW-from-East
 ## multiply by -1 to convert from "wind from" to "wind to"
 windU <- -windSpeed * cos(theta*pi/180)
 windV <- -windSpeed * sin(theta*pi/180)
-```
+{% endhighlight %}
 
 ## Time-series graphs
-```{r}
+
+{% highlight r linenos=table %}
 library(oce)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: methods
+## Loading required package: gsw
+## Loading required package: testthat
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 par(mfrow=c(5,1))
 oce.plot.ts(t, airPressure/10, ylab="Air press [kPa]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, windSpeed, ylab="Wind speed [m/s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, windDirection, ylab="wind dir", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, waveHeight, ylab="Height [m]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
 oce.plot.ts(t, dominantWavePeriod, ylab="Period [s]", drawTimeRange=FALSE, mar=c(2, 3, 1, 1))
-```
+{% endhighlight %}
+
+![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-3-1.png) 
 
 ## Wind-rose graph
 
@@ -73,7 +91,8 @@ I like to plot winds in the oceanographic convention, i.e. with dots indicating
 the direction in which the air flows. I will colour-code the dots with an
 indication of the wave height.
 
-```{r}
+
+{% highlight r linenos=table %}
 cm <- colormap(waveHeight, zlim=c(0, 10), col=oceColorsJet)
 par(mar=c(3.5, 3.5, 1.5, 1), mgp=c(2, 0.7, 0))
 drawPalette(zlim=cm$zlim, col=cm$col)
@@ -89,7 +108,9 @@ abline(h=0, col='lightgray')
 abline(v=0, col='lightgray')
 abline(0, 1, col='lightgray')
 abline(0, -1, col='lightgray')
-```
+{% endhighlight %}
+
+![center](http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-4-1.png) 
 
 # Discussion
 
