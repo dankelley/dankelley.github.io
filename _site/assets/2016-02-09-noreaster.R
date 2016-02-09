@@ -7,7 +7,7 @@ lat <- 42.505
 data(coastlineWorldFine, package="ocedata")
 plot(coastlineWorldFine, longitudelim=lon+c(-5, 5), latitudelim=lat+c(-7,7))
 points(lon, lat, bg='red', cex=2, pch=21)
-data(topoWorld)
+data(topoWorld) # coarse resolution
 contour(topoWorld[["longitude"]], topoWorld[["latitude"]], topoWorld[["z"]],
         levels=-1000, lty=2, drawlabels=FALSE, add=TRUE)
 
