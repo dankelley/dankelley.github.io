@@ -14,12 +14,11 @@ summary: Wave and wind conditions are summarized for the Nor'Easter that hit eas
 
 
 Several buoys measure wave conditions off the coast of Nova Scotia. I was
-hoping to get data from the nearest one (ID 44258;
-<http://www.ndbc.noaa.gov/station_page.php?station=44150>) but it did not have
-many non-missing data, so I instead chose one on La Have Bank (ID 44150).  This
-is owned and maintained by Environment Canada, and is located roughly south of
-Halifax and east of Cape Cod, near the 1000m isobath, as indicated on the map
-below.
+hoping to get data from the nearest one (ID 44258) but it did not have many
+non-missing data, so I instead chose one on La Have Bank (ID 44150; see
+<http://www.ndbc.noaa.gov/station_page.php?station=44150>).  This is owned and
+maintained by Environment Canada, and is located roughly south of Halifax and
+east of Cape Cod, near the 1000m isobath, as indicated on the map below.
 
 
 {% highlight r linenos=table %}
