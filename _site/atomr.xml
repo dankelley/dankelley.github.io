@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-10T19:07:12-04:00</updated>
+    <updated>2016-02-10T19:08:19-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -22,7 +22,7 @@
 
 &lt;p&gt;Several buoys measure wave conditions off the coast of Nova Scotia. I was
 hoping to get data from the nearest one (ID 44258) but it did not have many
-non-missing data, so I instead chose one on La Have Bank (ID 44150; see
+non-missing data, so I instead chose one further offshore (ID 44150; see
 &lt;a href=&quot;http://www.ndbc.noaa.gov/station_page.php?station=44150&quot;&gt;http://www.ndbc.noaa.gov/station_page.php?station=44150&lt;/a&gt;).  This is owned and
 maintained by Environment Canada, and is located roughly south of Halifax and
 east of Cape Cod, near the 1000m isobath, as indicated on the map below.&lt;/p&gt;
