@@ -99,9 +99,9 @@
 # Introduction
 
 I posted an oce issue recently [1] that indicated my displeasure with the
-present defaults for the hues of Landsat plots that use
-\code{band="terralook"}.  Others have reported similar problems, and this was
-enough to motivate some experimentation.
+present defaults for the hues of Landsat plots that use `band="terralook"`.
+Others have reported similar problems, and this was enough to motivate some
+experimentation.
 
 I choose a region with which I am very familiar, namely the city in which I
 live, Halifax Nova Scotia. I happen to have two Landsat scenes on my computer,
@@ -118,8 +118,7 @@ should be blueish, greenish, or grayish.
 The scene also does not contain much in the way of red reference material, nor
 yellow. I suppose other Landsat images show fields or deserts that would be
 good for such colours, and I will on other people working on such domains to
-let me know whether \code{plot.landsat} will need further adjustment for those
-hues.
+let me know whether `plot.landsat` will need further adjustment for those hues.
 
 In my reference images, I have three main elements: green areas, snow-covered
 areas, which should have a light and neutral hue, and asphalt-covered areas
@@ -166,9 +165,9 @@ if (0==length(list.files(pattern="^Hs.rda$"))) {
 }
 ```
 
-At this stage, we have \code{landsat-class} objects named \code{Hw} and
-\code{Hs} to work with. It is convenient to set up a \code{demo} function that
-will plot a four-panel plot.
+At this stage, we have `landsat-class` objects named `Hw` and `Hs` to work
+with. It is convenient to set up a `demo` function that will plot a four-panel
+plot.
 ```{r eval=FALSE}
 demo <- function(red.f, green.f, blue.f, name="")
 {
@@ -192,7 +191,7 @@ demo <- function(red.f, green.f, blue.f, name="")
 }
 ```
 
-Now, we can try some tests. Leaving out \code{name} argument will produce
+Now, we can try some tests. Leaving out `name` argument will produce
 interactive plots, and indeed that is how I selected the values I show below.
 Note that I have hard-coded the plot sizes, rather than use Jekyll and
 Rmarkdown to do that.
@@ -239,10 +238,10 @@ demo(1.7, 1.7, 6, "landsat-3.png")
 
 # Conclusions
 
-These tests suggest that the values \code{red.f=1.7}, \code{green.f=1.7} and
-\code{blue.f=6} may be more reasonable as defaults than the present values of
-2, 2, and 5, respectively.  I will wait a week for any personal advice from
-colleagues, and consider switching the defaults after that time.
+These tests suggest that the values `red.f=1.7`, `green.f=1.7` and `blue.f=6`
+may be more reasonable as defaults than the present values of 2, 2, and 5,
+respectively.  I will wait a week for any personal advice from colleagues, and
+consider switching the defaults after that time.
 
 # References and resources
 

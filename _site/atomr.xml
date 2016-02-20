@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-20T13:02:26-04:00</updated>
+    <updated>2016-02-20T13:04:41-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -21,9 +21,9 @@
         <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;I posted an oce issue recently [1] that indicated my displeasure with the
-present defaults for the hues of Landsat plots that use
-\code{band=”terralook”}.  Others have reported similar problems, and this was
-enough to motivate some experimentation.&lt;/p&gt;
+present defaults for the hues of Landsat plots that use &lt;code&gt;band=&quot;terralook&quot;&lt;/code&gt;.
+Others have reported similar problems, and this was enough to motivate some
+experimentation.&lt;/p&gt;
 
 &lt;p&gt;I choose a region with which I am very familiar, namely the city in which I
 live, Halifax Nova Scotia. I happen to have two Landsat scenes on my computer,
@@ -40,8 +40,7 @@ should be blueish, greenish, or grayish.&lt;/p&gt;
 &lt;p&gt;The scene also does not contain much in the way of red reference material, nor
 yellow. I suppose other Landsat images show fields or deserts that would be
 good for such colours, and I will on other people working on such domains to
-let me know whether \code{plot.landsat} will need further adjustment for those
-hues.&lt;/p&gt;
+let me know whether &lt;code&gt;plot.landsat&lt;/code&gt; will need further adjustment for those hues.&lt;/p&gt;
 
 &lt;p&gt;In my reference images, I have three main elements: green areas, snow-covered
 areas, which should have a light and neutral hue, and asphalt-covered areas
@@ -111,9 +110,9 @@ band &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;At this stage, we have \code{landsat-class} objects named \code{Hw} and
-\code{Hs} to work with. It is convenient to set up a \code{demo} function that
-will plot a four-panel plot.&lt;/p&gt;
+&lt;p&gt;At this stage, we have &lt;code&gt;landsat-class&lt;/code&gt; objects named &lt;code&gt;Hw&lt;/code&gt; and &lt;code&gt;Hs&lt;/code&gt; to work
+with. It is convenient to set up a &lt;code&gt;demo&lt;/code&gt; function that will plot a four-panel
+plot.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt; 1
  2
@@ -157,7 +156,7 @@ will plot a four-panel plot.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;Now, we can try some tests. Leaving out \code{name} argument will produce
+&lt;p&gt;Now, we can try some tests. Leaving out &lt;code&gt;name&lt;/code&gt; argument will produce
 interactive plots, and indeed that is how I selected the values I show below.
 Note that I have hard-coded the plot sizes, rather than use Jekyll and
 Rmarkdown to do that.&lt;/p&gt;
@@ -207,10 +206,10 @@ revision for other scenes.&lt;/p&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
-&lt;p&gt;These tests suggest that the values \code{red.f=1.7}, \code{green.f=1.7} and
-\code{blue.f=6} may be more reasonable as defaults than the present values of
-2, 2, and 5, respectively.  I will wait a week for any personal advice from
-colleagues, and consider switching the defaults after that time.&lt;/p&gt;
+&lt;p&gt;These tests suggest that the values &lt;code&gt;red.f=1.7&lt;/code&gt;, &lt;code&gt;green.f=1.7&lt;/code&gt; and &lt;code&gt;blue.f=6&lt;/code&gt;
+may be more reasonable as defaults than the present values of 2, 2, and 5,
+respectively.  I will wait a week for any personal advice from colleagues, and
+consider switching the defaults after that time.&lt;/p&gt;
 
 &lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 

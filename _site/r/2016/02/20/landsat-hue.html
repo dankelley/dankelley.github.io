@@ -103,9 +103,9 @@
 <h1 id="introduction">Introduction</h1>
 
 <p>I posted an oce issue recently [1] that indicated my displeasure with the
-present defaults for the hues of Landsat plots that use
-\code{band=”terralook”}.  Others have reported similar problems, and this was
-enough to motivate some experimentation.</p>
+present defaults for the hues of Landsat plots that use <code>band="terralook"</code>.
+Others have reported similar problems, and this was enough to motivate some
+experimentation.</p>
 
 <p>I choose a region with which I am very familiar, namely the city in which I
 live, Halifax Nova Scotia. I happen to have two Landsat scenes on my computer,
@@ -122,8 +122,7 @@ should be blueish, greenish, or grayish.</p>
 <p>The scene also does not contain much in the way of red reference material, nor
 yellow. I suppose other Landsat images show fields or deserts that would be
 good for such colours, and I will on other people working on such domains to
-let me know whether \code{plot.landsat} will need further adjustment for those
-hues.</p>
+let me know whether <code>plot.landsat</code> will need further adjustment for those hues.</p>
 
 <p>In my reference images, I have three main elements: green areas, snow-covered
 areas, which should have a light and neutral hue, and asphalt-covered areas
@@ -193,9 +192,9 @@ band <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</sp
 </pre></div>
 </td></tr></table>
 
-<p>At this stage, we have \code{landsat-class} objects named \code{Hw} and
-\code{Hs} to work with. It is convenient to set up a \code{demo} function that
-will plot a four-panel plot.</p>
+<p>At this stage, we have <code>landsat-class</code> objects named <code>Hw</code> and <code>Hs</code> to work
+with. It is convenient to set up a <code>demo</code> function that will plot a four-panel
+plot.</p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
  2
@@ -239,7 +238,7 @@ will plot a four-panel plot.</p>
 </pre></div>
 </td></tr></table>
 
-<p>Now, we can try some tests. Leaving out \code{name} argument will produce
+<p>Now, we can try some tests. Leaving out <code>name</code> argument will produce
 interactive plots, and indeed that is how I selected the values I show below.
 Note that I have hard-coded the plot sizes, rather than use Jekyll and
 Rmarkdown to do that.</p>
@@ -289,10 +288,10 @@ revision for other scenes.</p>
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>These tests suggest that the values \code{red.f=1.7}, \code{green.f=1.7} and
-\code{blue.f=6} may be more reasonable as defaults than the present values of
-2, 2, and 5, respectively.  I will wait a week for any personal advice from
-colleagues, and consider switching the defaults after that time.</p>
+<p>These tests suggest that the values <code>red.f=1.7</code>, <code>green.f=1.7</code> and <code>blue.f=6</code>
+may be more reasonable as defaults than the present values of 2, 2, and 5,
+respectively.  I will wait a week for any personal advice from colleagues, and
+consider switching the defaults after that time.</p>
 
 <h1 id="references-and-resources">References and resources</h1>
 
