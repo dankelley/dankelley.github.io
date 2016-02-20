@@ -217,7 +217,7 @@ plot.</p>
 19
 20</code></pre></div></td><td class="code"><div class="highlight"><pre>demo <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">,</span> name<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">missing</span><span class="p">(</span>name<span class="p">))</span> png<span class="p">(</span>name<span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">3.1</span><span class="p">,</span> res<span class="o">=</span><span class="m">200</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">missing</span><span class="p">(</span>name<span class="p">))</span> png<span class="p">(</span>name<span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">3.1</span><span class="p">,</span> res<span class="o">=</span><span class="m">150</span><span class="p">)</span>
     par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
     mar <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.25</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.25</span><span class="p">)</span>
     mar <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
@@ -248,7 +248,7 @@ Rmarkdown to do that.</p>
 <p>Present-day default, much too green overall. Look especially at the
 snow-covered citadel/commons region near 63.58W and 44.65N.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;landsat-1.png&quot;</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-1.png&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -261,7 +261,7 @@ Point Pleasant Park, and along the railway cut line that crosses the city a
 little south of 44.63N. However, there a slight yellow-reddish hue overall (see
 especially the snow-covered citadel).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;landsat-2.png&quot;</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-2.png&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -294,7 +294,7 @@ for both the green-gray domain of Halifax and some other domain.  If any reader
 wants to help with that, please contact me directly (since I do not have
 comments turned on for this blog).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">1.7</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="s">&quot;landsat-3.png&quot;</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">1.7</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-3.png&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 

@@ -86,7 +86,7 @@ plot.
 {% highlight r linenos=table %}
 demo <- function(red.f, green.f, blue.f, name="")
 {
-    if (!missing(name)) png(name, unit="in", width=6, height=3.1, res=200)
+    if (!missing(name)) png(name, unit="in", width=6, height=3.1, res=150)
     par(mfrow=c(1,2))
     mar <- c(0.25, 0.25, 1, 0.25)
     mar <- c(2, 2, 1.5, 0.5)
@@ -118,7 +118,7 @@ snow-covered citadel/commons region near 63.58W and 44.65N.
 
 
 {% highlight r linenos=table %}
-demo(2, 2, 4, "landsat-1.png")
+demo(2, 2, 4, "2016-02-20-landsat-1.png")
 {% endhighlight %}
 ![center](http://dankelley.github.io/figs/2016-02-20-landsat-1.png) 
 
@@ -131,7 +131,7 @@ especially the snow-covered citadel).
 
 
 {% highlight r linenos=table %}
-demo(2, 1.7, 4, "landsat-2.png")
+demo(2, 1.7, 4, "2016-02-20-landsat-2.png")
 {% endhighlight %}
 ![center](http://dankelley.github.io/figs/2016-02-20-landsat-2.png) 
 
@@ -164,7 +164,7 @@ comments turned on for this blog).
 
 
 {% highlight r linenos=table %}
-demo(1.7, 1.7, 6, "landsat-3.png")
+demo(1.7, 1.7, 6, "2016-02-20-landsat-3.png")
 {% endhighlight %}
 ![center](http://dankelley.github.io/figs/2016-02-20-landsat-3.png) 
 
