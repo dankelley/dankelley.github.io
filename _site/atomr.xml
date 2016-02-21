@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T14:49:40-04:00</updated>
+    <updated>2016-02-21T14:53:15-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -145,16 +145,16 @@ demo&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Hs&lt;span class=&quot;p&quot;
 &lt;p&gt;First, here is the reference image from [1], as adjusted in great detail, using
 more sophisticated methods than are presently available in oce.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;2016-02-21-landsat-three-sisters.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2016-02-21-landsat-three-sisters.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
 summaries the relevant arguments to &lt;code&gt;plot.landsat()&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;2016-02-21-landsat-01.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-02.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-03.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-04.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2016-02-21-landsat-01.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-02.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-03.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-04.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
 adjustment of the &lt;code&gt;offset&lt;/code&gt; argument can be used effectively as well.&lt;/p&gt;
@@ -162,17 +162,17 @@ adjustment of the &lt;code&gt;offset&lt;/code&gt; argument can be used effective
 &lt;p&gt;Now, we apply the same arguments to the Halifax winter scene discussed in [1].
 Notice that Fig 2C is reasonably good.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;2016-02-21-landsat-05.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-06.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-07.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-08.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2016-02-21-landsat-05.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-06.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-07.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-08.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.
-&lt;img src=&quot;2016-02-21-landsat-09.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-10.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-11.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;2016-02-21-landsat-12.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/2016-02-21-landsat-09.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-10.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-11.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/2016-02-21-landsat-12.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
