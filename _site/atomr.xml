@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T14:55:48-04:00</updated>
+    <updated>2016-02-21T14:58:03-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -145,7 +145,7 @@ demo&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Hs&lt;span class=&quot;p&quot;
 &lt;p&gt;First, here is the reference image from [1], as adjusted in great detail, using
 more sophisticated methods than are presently available in oce.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/2016-02-21-landsat-three-sisters.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/figs/2016-02-21-landsat-three-sisters.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image

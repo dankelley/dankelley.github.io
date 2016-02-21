@@ -82,7 +82,7 @@ demo(Hs, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
 First, here is the reference image from [1], as adjusted in great detail, using
 more sophisticated methods than are presently available in oce.
 
-![center]({{ site.url }}/2016-02-21-landsat-three-sisters.png) 
+![center]({{ site.url }}/figs/2016-02-21-landsat-three-sisters.png) 
 
 Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
