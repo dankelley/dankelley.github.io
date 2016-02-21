@@ -14,7 +14,7 @@
 ##     dim <- dim(l[["red"]])
 ##     w <- 6
 ##     h <- round(w * dim[2] / dim[1], 2) # proper ratios can yield horiz. stripes
-##     if (!is.null(name)) png(name, unit="in", width=w, height=h, res=100, pointsize=10)
+##     if (!is.null(name)) png(name, unit="in", width=w, height=h, res=720, pointsize=10)
 ##     plot(l, band="terralook", mar=c(2, 2, 1.5, 1),
 ##          red.f=red.f, green.f=green.f, blue.f=blue.f, offset=offset)
 ##     mtext(label, font=2, side=3, line=0, adj=1)
