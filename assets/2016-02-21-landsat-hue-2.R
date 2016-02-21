@@ -40,7 +40,7 @@
 ## ## Next, try altering the offset in the linear relationship,
 ## ## as opposed to the multiplicative factor. This is done with
 ## ## the `offset` argument, rather than with `red.f`, etc.
-## demo(ts, 1.7, 1.6, 6, c(0, -0.05, -0.2, 0), "2016-02-21-landsat-04.png", "Fig. 1D")
+## demo(ts, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
 ## 
 ## ## For reference, apply these values to the Halifax
 ## ## winter test image.
