@@ -162,8 +162,10 @@ Oregon Cascades [1].</p>
 52
 53
 54
-55</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^d$&quot;</span><span class="p">)))</span> d <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80450292013225LGN00&quot;</span><span class="p">)</span>
+55
+56</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
+<span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^d$&quot;</span><span class="p">)))</span>
+    d <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80450292013225LGN00&quot;</span><span class="p">)</span>
 
 <span class="c1">## http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/</span>
 

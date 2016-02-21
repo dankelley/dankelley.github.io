@@ -1,6 +1,7 @@
 ## ----eval=FALSE----------------------------------------------------------
 ## library(oce)
-## if (0 == length(ls(pattern="^d$"))) d <- read.landsat("/data/archive/landsat/LC80450292013225LGN00")
+## if (0 == length(ls(pattern="^d$")))
+##     d <- read.landsat("/data/archive/landsat/LC80450292013225LGN00")
 ## 
 ## ## http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/
 ## 
