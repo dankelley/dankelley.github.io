@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T14:47:07-04:00</updated>
+    <updated>2016-02-21T14:48:18-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -197,7 +197,7 @@ defaults for &lt;code&gt;plot.landsat()&lt;/code&gt;, namely &lt;/p&gt;
     
     
     <entry>
-        <title>Adjusting default hues of Landsat terralook images</title>
+        <title>Adjusting default hues of Landsat terralook images [part 1]</title>
         <link href="http://dankelley.github.io/r/2016/02/20/landsat-hue.html"/>
         <updated>2016-02-20T00:00:00-04:00</updated>
         <id>http://dankelley.github.io/blog/r/2016/02/20/landsat-hue</id>

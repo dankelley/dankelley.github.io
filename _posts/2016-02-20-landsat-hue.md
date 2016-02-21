@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Adjusting default hues of Landsat terralook images
+title: Adjusting default hues of Landsat terralook images [part 1]
 tags: [R,oce,satellites,landsat]
 category: R
 year: 2016
