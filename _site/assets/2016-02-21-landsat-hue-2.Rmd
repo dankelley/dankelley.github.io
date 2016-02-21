@@ -1,13 +1,100 @@
----
-layout: post
-title: Adjusting default hues of Landsat terralook images [part 2]
-tags: [R,oce,satellites,landsat]
-category: R
-year: 2016
-month: 02
-day: 21
-summary: Landsat colours are adjusted to give pleasing results for the two Halifax scenes described in Part I, along with a scene from the Oregon Cascades [1].
----
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Adjusting default hues of Landsat terralook images [part 2]</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Adjusting default hues of Landsat terralook images [part 2]</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+         &#183; 
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/satellites/index.html" class="tag">
+            satellites
+        </a>
+         &#183; 
+        
+        <a href="/tags/landsat/index.html" class="tag">
+            landsat
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Landsat colours are adjusted to give pleasing results for the two Halifax scenes described in Part I, along with a scene from the Oregon Cascades [1].
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
 
 # Introduction
 
@@ -17,8 +104,7 @@ conclusions. Importantly, the present analysis revises the two Halifax
 examples, and adds a well-studied case for the Three Sisters peaks in the
 Oregon Cascades [1].
 
-
-{% highlight r linenos=table %}
+```{R eval=FALSE}
 library(oce)
 if (0 == length(ls(pattern="^d$")))
     d <- read.landsat("/data/archive/landsat/LC80450292013225LGN00")
@@ -76,23 +162,24 @@ demo(Hs, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-09.png", "Fig. 3A")
 demo(Hs, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-10.png", "Fig. 3B")
 demo(Hs, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-11.png", "Fig. 3C")
 demo(Hs, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
-{% endhighlight %}
+
+```
 
 # Results and discussion
 
 First, here is the reference image from [1], as adjusted in great detail, using
 more sophisticated methods than are presently available in oce.
 
-![center]({{ site.url }}/figs/2016-02-21-landsat-three-sisters.png) 
+![center](/figs/2016-02-21-landsat-three-sisters.png) 
 
 Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
 summaries the relevant arguments to `plot.landsat()`.
 
-![center]({{ site.url }}/figs/2016-02-21-landsat-01.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-02.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-03.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-04.png)
+![center](/figs/2016-02-21-landsat-01.png)
+![center](/figs/2016-02-21-landsat-02.png)
+![center](/figs/2016-02-21-landsat-03.png)
+![center](/figs/2016-02-21-landsat-04.png)
 
 Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
 adjustment of the `offset` argument can be used effectively as well.
@@ -100,26 +187,25 @@ adjustment of the `offset` argument can be used effectively as well.
 Now, we apply the same arguments to the Halifax winter scene discussed in [1].
 Notice that Fig 2C is reasonably good.
 
-![center]({{ site.url }}/figs/2016-02-21-landsat-05.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-06.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-07.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-08.png)
+![center](/figs/2016-02-21-landsat-05.png)
+![center](/figs/2016-02-21-landsat-06.png)
+![center](/figs/2016-02-21-landsat-07.png)
+![center](/figs/2016-02-21-landsat-08.png)
 
 Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.
-![center]({{ site.url }}/figs/2016-02-21-landsat-09.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-10.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-11.png)
-![center]({{ site.url }}/figs/2016-02-21-landsat-12.png)
+![center](/figs/2016-02-21-landsat-09.png)
+![center](/figs/2016-02-21-landsat-10.png)
+![center](/figs/2016-02-21-landsat-11.png)
+![center](/figs/2016-02-21-landsat-12.png)
 
 # Conclusions
 
 The 'C' variants of the figures are all reasonably good, and this suggests new
 defaults for `plot.landsat()`, namely 
-
-{% highlight r linenos=table %}
+```{R eval=FALSE}
 plot.landsat(..., red.f=2.2, green.f=1.6, blue.f=5, offset=rep(0,4), ...)
-{% endhighlight %}
+```
 where `offset` is unchanged from before.
 
 
@@ -130,4 +216,17 @@ where `offset` is unchanged from before.
 1. Article on hand-tuning the colour of a Landsat image, the data for which are also used here in Figure 1 <http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/>
 2. Part I of this series <http://dankelley.github.io/r/2016/02/20/landsat-hue.html>
 3. Jekyll source code for this blog entry: [2016-02-21-landsat-hue-2.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-02-21-landsat-hue-2.Rmd)
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
 
