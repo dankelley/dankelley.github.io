@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T14:58:03-04:00</updated>
+    <updated>2016-02-21T14:59:36-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -162,17 +162,17 @@ adjustment of the &lt;code&gt;offset&lt;/code&gt; argument can be used effective
 &lt;p&gt;Now, we apply the same arguments to the Halifax winter scene discussed in [1].
 Notice that Fig 2C is reasonably good.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/2016-02-21-landsat-05.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-06.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-07.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-08.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/figs/2016-02-21-landsat-05.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-06.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-07.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-08.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.
-&lt;img src=&quot;/2016-02-21-landsat-09.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-10.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-11.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/2016-02-21-landsat-12.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-09.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-10.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-11.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-12.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 

@@ -99,17 +99,17 @@ adjustment of the `offset` argument can be used effectively as well.
 Now, we apply the same arguments to the Halifax winter scene discussed in [1].
 Notice that Fig 2C is reasonably good.
 
-![center]({{ site.url }}/2016-02-21-landsat-05.png)
-![center]({{ site.url }}/2016-02-21-landsat-06.png)
-![center]({{ site.url }}/2016-02-21-landsat-07.png)
-![center]({{ site.url }}/2016-02-21-landsat-08.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-05.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-06.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-07.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-08.png)
 
 Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.
-![center]({{ site.url }}/2016-02-21-landsat-09.png)
-![center]({{ site.url }}/2016-02-21-landsat-10.png)
-![center]({{ site.url }}/2016-02-21-landsat-11.png)
-![center]({{ site.url }}/2016-02-21-landsat-12.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-09.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-10.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-11.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-12.png)
 
 # Conclusions
 
