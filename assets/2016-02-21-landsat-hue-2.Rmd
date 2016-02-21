@@ -88,10 +88,10 @@ Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
 summaries the relevant arguments to `plot.landsat()`.
 
-![center]({{ site.url }}/2016-02-21-landsat-01.png)
-![center]({{ site.url }}/2016-02-21-landsat-02.png)
-![center]({{ site.url }}/2016-02-21-landsat-03.png)
-![center]({{ site.url }}/2016-02-21-landsat-04.png)
+![center]({{ site.url }}/assets/2016-02-21-landsat-01.png)
+![center]({{ site.url }}/assets/2016-02-21-landsat-02.png)
+![center]({{ site.url }}/assets/2016-02-21-landsat-03.png)
+![center]({{ site.url }}/assets/2016-02-21-landsat-04.png)
 
 Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
 adjustment of the `offset` argument can be used effectively as well.
