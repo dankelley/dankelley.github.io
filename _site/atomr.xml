@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T14:59:36-04:00</updated>
+    <updated>2016-02-21T15:02:03-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -151,10 +151,10 @@ more sophisticated methods than are presently available in oce.&lt;/p&gt;
 above for methodology, but note that the line at the top of each image
 summaries the relevant arguments to &lt;code&gt;plot.landsat()&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/2016-02-21-landsat-01.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/assets/2016-02-21-landsat-02.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/assets/2016-02-21-landsat-03.png&quot; alt=&quot;center&quot; /&gt;
-&lt;img src=&quot;/assets/2016-02-21-landsat-04.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/figs/2016-02-21-landsat-01.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-02.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-03.png&quot; alt=&quot;center&quot; /&gt;
+&lt;img src=&quot;/figs/2016-02-21-landsat-04.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
 adjustment of the &lt;code&gt;offset&lt;/code&gt; argument can be used effectively as well.&lt;/p&gt;
