@@ -206,7 +206,7 @@ demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">2.2</span
 <span class="c1">## Next, try altering the offset in the linear relationship,</span>
 <span class="c1">## as opposed to the multiplicative factor. This is done with </span>
 <span class="c1">## the `offset` argument, rather than with `red.f`, etc.</span>
-demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-04.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1D&quot;</span><span class="p">)</span>
+demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-04.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1D&quot;</span><span class="p">)</span>
 
 <span class="c1">## For reference, apply these values to the Halifax</span>
 <span class="c1">## winter test image.</span>
@@ -214,13 +214,13 @@ demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span
 demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-05.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2A&quot;</span><span class="p">)</span>
 demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-06.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2B&quot;</span><span class="p">)</span>
 demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-07.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2C&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-08.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2D&quot;</span><span class="p">)</span>
+demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-08.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2D&quot;</span><span class="p">)</span>
 
 <span class="kp">load</span><span class="p">(</span><span class="s">&quot;Hs.rda&quot;</span><span class="p">)</span>
 demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-09.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3A&quot;</span><span class="p">)</span>
 demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-10.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3B&quot;</span><span class="p">)</span>
 demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-11.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3C&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-12.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3D&quot;</span><span class="p">)</span>
+demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-12.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3D&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -240,16 +240,33 @@ summaries the relevant arguments to <code>plot.landsat()</code>.</p>
 <img src="/figs/2016-02-21-landsat-03.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-04.png" alt="center" /></p>
 
-<p>Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
-adjustment of the <code>offset</code> argument can be used effectively as well.</p>
+<p>The blueness of the land in Fig 1A is alleviated in Fig 1B, although at the
+expense of an overall green tinge.  Increasing the red factor, as in Fig 1C,
+improves the land colour somewhat, but I found it difficult to find a
+combination of colour factors that retained a red hue to the land without
+having tinged clouds.  Fig 1D is the result of manipulating the offset in the
+colour transformation function, as well as the factor.  To my eye, Fig 1D
+strikes the best compromise of the four trials for this region, with land
+having a brownish hue and forest a greenish one, and with enough colour
+variation throughout to discern features.  (This last point may be more
+important, in a practical sense, than strict veracity.)</p>
 
-<p>Now, we apply the same arguments to the Halifax winter scene discussed in [1].
-Notice that Fig 2C is reasonably good.</p>
+<p>But will this ‘D’ set of parameters work in other regions? to test that, I
+returned to the two Halifax images from [1]. Start with the winter image.</p>
 
 <p><img src="/figs/2016-02-21-landsat-05.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-06.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-07.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-08.png" alt="center" /></p>
+
+<p>Fig 2A is as in [1] and it has green hues that are natural, and also that
+permit detection of vegetation in various regions of Halifax that I know to be
+green in winter. Fig 2B has little to commend it, so it needs no further
+comment. The snow in Fig 2C is distractingly pink, and in 2D is (to a lesser
+extent) distractingly green. I still prefer 2A, but both 2C and 2D achieve the
+practical aim of discerning between regions with green and bare trees.</p>
+
+<p>FIXME: can I remove a bit of green tinge in 2D without wrecking 1D?</p>
 
 <p>Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.

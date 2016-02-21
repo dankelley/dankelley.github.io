@@ -147,7 +147,7 @@ demo(ts, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-03.png", "Fig. 1C")
 ## Next, try altering the offset in the linear relationship,
 ## as opposed to the multiplicative factor. This is done with 
 ## the `offset` argument, rather than with `red.f`, etc.
-demo(ts, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
+demo(ts, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
 
 ## For reference, apply these values to the Halifax
 ## winter test image.
@@ -155,13 +155,13 @@ load("Hw.rda")
 demo(Hw, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-05.png", "Fig. 2A")
 demo(Hw, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-06.png", "Fig. 2B")
 demo(Hw, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-07.png", "Fig. 2C")
-demo(Hw, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-08.png", "Fig. 2D")
+demo(Hw, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-08.png", "Fig. 2D")
 
 load("Hs.rda")
 demo(Hs, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-09.png", "Fig. 3A")
 demo(Hs, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-10.png", "Fig. 3B")
 demo(Hs, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-11.png", "Fig. 3C")
-demo(Hs, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
+demo(Hs, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
 
 ```
 
@@ -181,16 +181,35 @@ summaries the relevant arguments to `plot.landsat()`.
 ![center](/figs/2016-02-21-landsat-03.png)
 ![center](/figs/2016-02-21-landsat-04.png)
 
-Of these, Fig 1C is arguably the best, although Fig 1D illustrates that
-adjustment of the `offset` argument can be used effectively as well.
+The blueness of the land in Fig 1A is alleviated in Fig 1B, although at the
+expense of an overall green tinge.  Increasing the red factor, as in Fig 1C,
+improves the land colour somewhat, but I found it difficult to find a
+combination of colour factors that retained a red hue to the land without
+having tinged clouds.  Fig 1D is the result of manipulating the offset in the
+colour transformation function, as well as the factor.  To my eye, Fig 1D
+strikes the best compromise of the four trials for this region, with land
+having a brownish hue and forest a greenish one, and with enough colour
+variation throughout to discern features.  (This last point may be more
+important, in a practical sense, than strict veracity.)
 
-Now, we apply the same arguments to the Halifax winter scene discussed in [1].
-Notice that Fig 2C is reasonably good.
+But will this 'D' set of parameters work in other regions? to test that, I
+returned to the two Halifax images from [1]. Start with the winter image.
+
 
 ![center](/figs/2016-02-21-landsat-05.png)
 ![center](/figs/2016-02-21-landsat-06.png)
 ![center](/figs/2016-02-21-landsat-07.png)
 ![center](/figs/2016-02-21-landsat-08.png)
+
+Fig 2A is as in [1] and it has green hues that are natural, and also that
+permit detection of vegetation in various regions of Halifax that I know to be
+green in winter. Fig 2B has little to commend it, so it needs no further
+comment. The snow in Fig 2C is distractingly pink, and in 2D is (to a lesser
+extent) distractingly green. I still prefer 2A, but both 2C and 2D achieve the
+practical aim of discerning between regions with green and bare trees.
+
+
+FIXME: can I remove a bit of green tinge in 2D without wrecking 1D?
 
 Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
 3C is reasonably good.

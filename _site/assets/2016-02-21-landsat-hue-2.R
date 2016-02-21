@@ -41,7 +41,7 @@
 ## ## Next, try altering the offset in the linear relationship,
 ## ## as opposed to the multiplicative factor. This is done with
 ## ## the `offset` argument, rather than with `red.f`, etc.
-## demo(ts, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
+## demo(ts, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
 ## 
 ## ## For reference, apply these values to the Halifax
 ## ## winter test image.
@@ -49,13 +49,13 @@
 ## demo(Hw, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-05.png", "Fig. 2A")
 ## demo(Hw, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-06.png", "Fig. 2B")
 ## demo(Hw, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-07.png", "Fig. 2C")
-## demo(Hw, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-08.png", "Fig. 2D")
+## demo(Hw, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-08.png", "Fig. 2D")
 ## 
 ## load("Hs.rda")
 ## demo(Hs, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-09.png", "Fig. 3A")
 ## demo(Hs, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-10.png", "Fig. 3B")
 ## demo(Hs, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-11.png", "Fig. 3C")
-## demo(Hs, 1.7, 1.6, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
+## demo(Hs, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
 ## 
 
 ## ----eval=FALSE----------------------------------------------------------
