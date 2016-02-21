@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-21T19:34:03-04:00</updated>
+    <updated>2016-02-21T19:46:16-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -180,29 +180,40 @@ returned to the two Halifax images from [1]. Start with the winter image.&lt;/p&
 &lt;p&gt;Fig 2A is as in [1] and it has green hues that are natural, and also that
 permit detection of vegetation in various regions of Halifax that I know to be
 green in winter. Fig 2B has little to commend it, so it needs no further
-comment. The snow in Fig 2C is distractingly pink, and in 2D is (to a lesser
-extent) distractingly green. I still prefer 2A, but both 2C and 2D achieve the
-practical aim of discerning between regions with green and bare trees.&lt;/p&gt;
+comment. The snow in Fig 2C is distractingly pink, but in 2D this hue is
+reduced.  Again, the “D” parameters yield reasonably pleasing results.&lt;/p&gt;
 
-&lt;p&gt;FIXME: can I remove a bit of green tinge in 2D without wrecking 1D?&lt;/p&gt;
-
-&lt;p&gt;Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
-3C is reasonably good.
+&lt;p&gt;Now, we apply the same arguments to the Halifax summer scene.
 &lt;img src=&quot;/figs/2016-02-21-landsat-09.png&quot; alt=&quot;center&quot; /&gt;
 &lt;img src=&quot;/figs/2016-02-21-landsat-10.png&quot; alt=&quot;center&quot; /&gt;
 &lt;img src=&quot;/figs/2016-02-21-landsat-11.png&quot; alt=&quot;center&quot; /&gt;
 &lt;img src=&quot;/figs/2016-02-21-landsat-12.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;Although 3C and 3D both show the green regions of the city well, the features
+are perhaps more discernible in 3D.&lt;/p&gt;
+
 &lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
 
-&lt;p&gt;The ‘C’ variants of the figures are all reasonably good, and this suggests new
+&lt;p&gt;The ‘D’ variants of the figures are all reasonably good, and this suggests new
 defaults for &lt;code&gt;plot.landsat()&lt;/code&gt;, namely &lt;/p&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot.landsat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; red.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; green.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; blue.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; offset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot.landsat&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; red.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; blue.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; green.f&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; offset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
-&lt;p&gt;where &lt;code&gt;offset&lt;/code&gt; is unchanged from before.&lt;/p&gt;
+&lt;p&gt;Even with just three test cases in consideration, it seems clear that these
+values are preferable to the old defaults of &lt;code&gt;red.f=2&lt;/code&gt;, &lt;code&gt;green.f=2&lt;/code&gt;,
+&lt;code&gt;blue.f=4&lt;/code&gt;, and &lt;code&gt;offset=c(0,0,0,0)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It should be noted that all of these schemes are simply linear transformations,
+and so cannot be expected to yield the flexibility achieved with nonlinear
+transformations, as in [1].&lt;/p&gt;
+
+&lt;p&gt;Another issue that deserves consideration (perhaps in Part III in this series)
+is whether the &lt;code&gt;terralook&lt;/code&gt; system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in &lt;code&gt;terralook&lt;/code&gt;, that
+band is discarded and instead red, blue, and nir are used for a basis set (see
+the help for &lt;code&gt;plot.landsat()&lt;/code&gt;.)&lt;/p&gt;
 
 &lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 

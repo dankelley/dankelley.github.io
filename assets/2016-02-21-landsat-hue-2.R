@@ -59,5 +59,5 @@
 ## 
 
 ## ----eval=FALSE----------------------------------------------------------
-## plot.landsat(..., red.f=2.2, green.f=1.6, blue.f=5, offset=rep(0,4), ...)
+## plot.landsat(..., red.f=1.7, blue.f=1.5, green.f=6, offset=c(0,-0.05,-0.2,0), ...)
 

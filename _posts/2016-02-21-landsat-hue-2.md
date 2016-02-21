@@ -117,31 +117,40 @@ returned to the two Halifax images from [1]. Start with the winter image.
 Fig 2A is as in [1] and it has green hues that are natural, and also that
 permit detection of vegetation in various regions of Halifax that I know to be
 green in winter. Fig 2B has little to commend it, so it needs no further
-comment. The snow in Fig 2C is distractingly pink, and in 2D is (to a lesser
-extent) distractingly green. I still prefer 2A, but both 2C and 2D achieve the
-practical aim of discerning between regions with green and bare trees.
+comment. The snow in Fig 2C is distractingly pink, but in 2D this hue is
+reduced.  Again, the "D" parameters yield reasonably pleasing results.
 
-
-FIXME: can I remove a bit of green tinge in 2D without wrecking 1D?
-
-Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
-3C is reasonably good.
+Now, we apply the same arguments to the Halifax summer scene.
 ![center]({{ site.url }}/figs/2016-02-21-landsat-09.png)
 ![center]({{ site.url }}/figs/2016-02-21-landsat-10.png)
 ![center]({{ site.url }}/figs/2016-02-21-landsat-11.png)
 ![center]({{ site.url }}/figs/2016-02-21-landsat-12.png)
 
+Although 3C and 3D both show the green regions of the city well, the features
+are perhaps more discernible in 3D.
+
 # Conclusions
 
-The 'C' variants of the figures are all reasonably good, and this suggests new
+The 'D' variants of the figures are all reasonably good, and this suggests new
 defaults for `plot.landsat()`, namely 
 
 {% highlight r linenos=table %}
-plot.landsat(..., red.f=2.2, green.f=1.6, blue.f=5, offset=rep(0,4), ...)
+plot.landsat(..., red.f=1.7, blue.f=1.5, green.f=6, offset=c(0,-0.05,-0.2,0), ...)
 {% endhighlight %}
-where `offset` is unchanged from before.
 
+Even with just three test cases in consideration, it seems clear that these
+values are preferable to the old defaults of `red.f=2`, `green.f=2`,
+`blue.f=4`, and `offset=c(0,0,0,0)`.
 
+It should be noted that all of these schemes are simply linear transformations,
+and so cannot be expected to yield the flexibility achieved with nonlinear
+transformations, as in [1].
+
+Another issue that deserves consideration (perhaps in Part III in this series)
+is whether the `terralook` system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in `terralook`, that
+band is discarded and instead red, blue, and nir are used for a basis set (see
+the help for `plot.landsat()`.)
 
 
 # References and resources

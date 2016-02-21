@@ -262,29 +262,40 @@ returned to the two Halifax images from [1]. Start with the winter image.</p>
 <p>Fig 2A is as in [1] and it has green hues that are natural, and also that
 permit detection of vegetation in various regions of Halifax that I know to be
 green in winter. Fig 2B has little to commend it, so it needs no further
-comment. The snow in Fig 2C is distractingly pink, and in 2D is (to a lesser
-extent) distractingly green. I still prefer 2A, but both 2C and 2D achieve the
-practical aim of discerning between regions with green and bare trees.</p>
+comment. The snow in Fig 2C is distractingly pink, but in 2D this hue is
+reduced.  Again, the “D” parameters yield reasonably pleasing results.</p>
 
-<p>FIXME: can I remove a bit of green tinge in 2D without wrecking 1D?</p>
-
-<p>Now, we apply the same arguments to the Halifax summer scene.  Notice that Fig
-3C is reasonably good.
+<p>Now, we apply the same arguments to the Halifax summer scene.
 <img src="/figs/2016-02-21-landsat-09.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-10.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-11.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-12.png" alt="center" /></p>
 
+<p>Although 3C and 3D both show the green regions of the city well, the features
+are perhaps more discernible in 3D.</p>
+
 <h1 id="conclusions">Conclusions</h1>
 
-<p>The ‘C’ variants of the figures are all reasonably good, and this suggests new
+<p>The ‘D’ variants of the figures are all reasonably good, and this suggests new
 defaults for <code>plot.landsat()</code>, namely </p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot.landsat<span class="p">(</span><span class="kc">...</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">2.2</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">1.6</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">5</span><span class="p">,</span> offset<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot.landsat<span class="p">(</span><span class="kc">...</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p>where <code>offset</code> is unchanged from before.</p>
+<p>Even with just three test cases in consideration, it seems clear that these
+values are preferable to the old defaults of <code>red.f=2</code>, <code>green.f=2</code>,
+<code>blue.f=4</code>, and <code>offset=c(0,0,0,0)</code>.</p>
+
+<p>It should be noted that all of these schemes are simply linear transformations,
+and so cannot be expected to yield the flexibility achieved with nonlinear
+transformations, as in [1].</p>
+
+<p>Another issue that deserves consideration (perhaps in Part III in this series)
+is whether the <code>terralook</code> system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in <code>terralook</code>, that
+band is discarded and instead red, blue, and nir are used for a basis set (see
+the help for <code>plot.landsat()</code>.)</p>
 
 <h1 id="references-and-resources">References and resources</h1>
 
