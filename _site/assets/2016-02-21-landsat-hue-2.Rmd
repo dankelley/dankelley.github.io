@@ -217,7 +217,11 @@ Although 3C and 3D both show the green regions of the city well, the features
 are perhaps more discernible in 3D.
 
 Finally, we test the suggested "D" coefficients with the larger Nova Scotia
-views, of which the Halifax images were small subregins.
+views, of which the Halifax images were small subregions. Having lived in Nova
+Scotia my whole life, and flown over it in various seasons, I can say that
+these colours look reasonably correct over land, in both summer and winter.
+
+
 ```{R eval=FALSE}
 if (0 == length(ls(pattern="^w$")))
     w <- read.landsat("/data/archive/landsat/LC80080292014065LGN00", band=band)
@@ -231,7 +235,6 @@ plot(s, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.
 dev.off()
 ```
 
-## Tests with larger Nova Scotia domains
 ![center](/figs/2016-02-21-landsat-winter-ns.png)
 ![center](/figs/2016-02-21-landsat-summer-ns.png)
 
