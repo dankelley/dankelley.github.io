@@ -274,6 +274,35 @@ reduced.  Again, the “D” parameters yield reasonably pleasing results.</p>
 <p>Although 3C and 3D both show the green regions of the city well, the features
 are perhaps more discernible in 3D.</p>
 
+<p>Finally, we test the suggested “D” coefficients with the larger Nova Scotia
+views, of which the Halifax images were small subregins.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^w$&quot;</span><span class="p">)))</span>
+    w <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80080292014065LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
+png<span class="p">(</span><span class="s">&quot;2016-02-21-landsat-winter-ns.png&quot;</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">6</span><span class="p">,</span> res<span class="o">=</span><span class="m">100</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">9</span><span class="p">)</span>
+plot<span class="p">(</span>w<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;terralook&quot;</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+dev.off<span class="p">()</span>
+<span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^s$&quot;</span><span class="p">)))</span>
+    s <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80070292014170LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
+png<span class="p">(</span><span class="s">&quot;2016-02-21-landsat-summer-ns.png&quot;</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">6</span><span class="p">,</span> res<span class="o">=</span><span class="m">100</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">9</span><span class="p">)</span>
+plot<span class="p">(</span>s<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;terralook&quot;</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+dev.off<span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="tests-with-larger-nova-scotia-domains">Tests with larger Nova Scotia domains</h2>
+<p><img src="/figs/2016-02-21-landsat-winter-ns.png" alt="center" />
+<img src="/figs/2016-02-21-landsat-summer-ns.png" alt="center" /></p>
+
 <h1 id="conclusions">Conclusions</h1>
 
 <p>The ‘D’ variants of the figures are all reasonably good, and this suggests new

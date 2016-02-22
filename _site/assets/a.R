@@ -1,44 +1,151 @@
-ab <- signal::butter(3, 0.1)
-t <- seq(0, 1, 0.01)
-x <- scan("x.dat")
-## below could be extracted to a function when working
-a <- ab$a
-b <- ab$b
-na <- length(a)
-nb <- length(b)
-kdc <- sum(b) / sum(a)
-if (!is.nan(kdc)) {
-  si <- rev(cumsum(rev(b - kdc * a)))
-} else {
-  si <- rep(0, length(a))
+library(oce)
+band <- c("red", "green", "nir") # lets us plot 'terralook'
+if (0 == length(ls(pattern="^w$")))
+    w <- read.landsat("/data/archive/landsat/LC80080292014065LGN00", band=band)
+png("winterNS.png", unit="in", width=6, height=6, res=100, pointsize=9)
+plot(w, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.2,0))
+dev.off()
+if (0 == length(ls(pattern="^s$")))
+    s <- read.landsat("/data/archive/landsat/LC80070292014170LGN00", band=band)
+png("summerNS.png", unit="in", width=6, height=6, res=100, pointsize=9)
+plot(s, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.2,0))
+dev.off()
+
+
+
+## http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/
+
+L <- c(0.24, 0.12)
+threeSisters <- c(-121.73, 44.13)
+ts <- landsatTrim(d, ll=threeSisters-L, ur=threeSisters+L)
+
+demo <- function(l, red.f, green.f, blue.f, offset=rep(0,4), name=NULL, label="")
+{
+    dim <- dim(l[["red"]])
+    w <- 6
+    h <- round(w * dim[2] / dim[1], 2) # proper ratios can yield horiz. stripes
+    if (!is.null(name))
+        png(name, unit="in", width=w, height=h, res=100, pointsize=9)
+    plot(l, band="terralook", mar=c(2, 2, 1.5, 1),
+         red.f=red.f, green.f=green.f, blue.f=blue.f, offset=offset)
+    mtext(label, font=2, side=3, line=0, adj=1)
+    mtext(sprintf("red.f=%g green.f=%g blue.f=%g offset=c(%g,%g,%g,%g)",
+                  red.f, green.f, blue.f, offset[1], offset[2], offset[3], offset[4]),
+          side=3, line=0, adj=0)
+    if (!is.null(name)) dev.off()
 }
-lx <- length(x)
-si <- si[-1]
-nx <- length(x)
-n <- max(na, nb)
-lrefl <- 3 * (n - 1)
-cat("si:", si, "\n")
-cat("lrefl:", lrefl, "\n")
-if (na < n)
-    a <- c(a, rep(0, length.out=n-na))
-if (nb < n)
-    b <- c(b, rep(0, length.out=n-nb))
-v <- c(2*x[1]-x[seq.int(lrefl+1,2,-1)],
-           x,
-           2*x[nx]-x[seq.int(nx-1,nx-lrefl,-1)])
-cat("si*v[1]:", si*v[1], "\n")
-cat("v[1:15] before first filter:", v[1:15], "\n")
-cat("Above should start:          -1.132546 -1.023766 -0.811650  -1.157909 ...\n")
 
-#v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
-v <- signal::filter(b, a, v, init.x=si*v[1])    # forward filter (WRONG OUTPUT)
-cat("v[1:15] after first filter:", v[1:15], "\n")
-cat("Above should start:        -1.13255  -1.13223  -1.12992 ...\n")
+## red.f, green.f and blue.f as in posting from yesterday
+demo(ts, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-01.png", "Fig. 1A")
 
-cat("si*v[length(v)]:", si*v[length(v)], "\n")
-v <- rev(signal::filter(b,a,rev(v),init.x=si*v[length(v)]))  # reverse filter
-cat("v[1:15] after second filter:", v[1:15], "\n")
-y <- v[seq.int(lrefl+1, lx+lrefl)]
-plot(t, x, type='l')
-lines(t, y, col='red')
+## Reducing blue factor removes the blue tinge to the land, 
+## at the expense of making the clouds unnaturally green. Also, 
+## various land areas are still not as red as in the reference
+## image.
+demo(ts, 1.7, 1.6, 3, rep(0,4), "2016-02-21-landsat-02.png", "Fig. 1B")
+
+## After some adjustment of red, green and blue together, the results can
+## be improved to some extent.
+demo(ts, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-03.png", "Fig. 1C")
+
+## Next, try altering the offset in the linear relationship,
+## as opposed to the multiplicative factor. This is done with 
+## the `offset` argument, rather than with `red.f`, etc.
+demo(ts, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-04.png", "Fig. 1D")
+
+## For reference, apply these values to the Halifax
+## winter test image.
+load("Hw.rda")
+demo(Hw, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-05.png", "Fig. 2A")
+demo(Hw, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-06.png", "Fig. 2B")
+demo(Hw, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-07.png", "Fig. 2C")
+demo(Hw, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-08.png", "Fig. 2D")
+
+load("Hs.rda")
+demo(Hs, 1.7, 1.6, 6, rep(0,4), "2016-02-21-landsat-09.png", "Fig. 3A")
+demo(Hs, 1.7, 1.6, 2, rep(0,4), "2016-02-21-landsat-10.png", "Fig. 3B")
+demo(Hs, 2.2, 1.6, 5, rep(0,4), "2016-02-21-landsat-11.png", "Fig. 3C")
+demo(Hs, 1.7, 1.5, 6, c(0,-0.05,-0.2,0), "2016-02-21-landsat-12.png", "Fig. 3D")
+
+```
+
+# Results and discussion
+
+First, here is the reference image from [1], as adjusted in great detail, using
+more sophisticated methods than are presently available in oce.
+
+![center]({{ site.url }}/figs/2016-02-21-landsat-three-sisters.png) 
+
+Now, below are the results from the 4 trials for this image. Refer to the code
+above for methodology, but note that the line at the top of each image
+summaries the relevant arguments to `plot.landsat()`.
+
+![center]({{ site.url }}/figs/2016-02-21-landsat-01.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-02.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-03.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-04.png)
+
+The blueness of the land in Fig 1A is alleviated in Fig 1B, although at the
+expense of an overall green tinge.  Increasing the red factor, as in Fig 1C,
+improves the land colour somewhat, but I found it difficult to find a
+combination of colour factors that retained a red hue to the land without
+having tinged clouds.  Fig 1D is the result of manipulating the offset in the
+colour transformation function, as well as the factor.  To my eye, Fig 1D
+strikes the best compromise of the four trials for this region, with land
+having a brownish hue and forest a greenish one, and with enough colour
+variation throughout to discern features.  (This last point may be more
+important, in a practical sense, than strict veracity.)
+
+But will this 'D' set of parameters work in other regions? to test that, I
+returned to the two Halifax images from [1]. Start with the winter image.
+
+
+![center]({{ site.url }}/figs/2016-02-21-landsat-05.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-06.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-07.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-08.png)
+
+Fig 2A is as in [1] and it has green hues that are natural, and also that
+permit detection of vegetation in various regions of Halifax that I know to be
+green in winter. Fig 2B has little to commend it, so it needs no further
+comment. The snow in Fig 2C is distractingly pink, but in 2D this hue is
+reduced.  Again, the "D" parameters yield reasonably pleasing results.
+
+Now, we apply the same arguments to the Halifax summer scene.
+![center]({{ site.url }}/figs/2016-02-21-landsat-09.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-10.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-11.png)
+![center]({{ site.url }}/figs/2016-02-21-landsat-12.png)
+
+Although 3C and 3D both show the green regions of the city well, the features
+are perhaps more discernible in 3D.
+
+# Conclusions
+
+The 'D' variants of the figures are all reasonably good, and this suggests new
+defaults for `plot.landsat()`, namely 
+```{R eval=FALSE}
+plot.landsat(..., red.f=1.7, blue.f=1.5, green.f=6, offset=c(0,-0.05,-0.2,0), ...)
+```
+
+Even with just three test cases in consideration, it seems clear that these
+values are preferable to the old defaults of `red.f=2`, `green.f=2`,
+`blue.f=4`, and `offset=c(0,0,0,0)`.
+
+It should be noted that all of these schemes are simply linear transformations,
+and so cannot be expected to yield the flexibility achieved with nonlinear
+transformations, as in [1].
+
+Another issue that deserves consideration (perhaps in Part III in this series)
+is whether the `terralook` system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in `terralook`, that
+band is discarded and instead red, blue, and nir are used for a basis set (see
+the help for `plot.landsat()`.)
+
+
+# References and resources
+
+1. Article on hand-tuning the colour of a Landsat image, the data for which are also used here in Figure 1 <http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/>
+2. Part I of this series <http://dankelley.github.io/r/2016/02/20/landsat-hue.html>
+3. Jekyll source code for this blog entry: [2016-02-21-landsat-hue-2.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-02-21-landsat-hue-2.Rmd)
 

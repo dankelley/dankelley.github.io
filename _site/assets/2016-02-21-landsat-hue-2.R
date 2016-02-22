@@ -59,5 +59,17 @@
 ## 
 
 ## ----eval=FALSE----------------------------------------------------------
+## if (0 == length(ls(pattern="^w$")))
+##     w <- read.landsat("/data/archive/landsat/LC80080292014065LGN00", band=band)
+## png("2016-02-21-landsat-winter-ns.png", unit="in", width=6, height=6, res=100, pointsize=9)
+## plot(w, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.2,0))
+## dev.off()
+## if (0 == length(ls(pattern="^s$")))
+##     s <- read.landsat("/data/archive/landsat/LC80070292014170LGN00", band=band)
+## png("2016-02-21-landsat-summer-ns.png", unit="in", width=6, height=6, res=100, pointsize=9)
+## plot(s, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.2,0))
+## dev.off()
+
+## ----eval=FALSE----------------------------------------------------------
 ## plot.landsat(..., red.f=1.7, blue.f=1.5, green.f=6, offset=c(0,-0.05,-0.2,0), ...)
 
