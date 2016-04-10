@@ -148,7 +148,7 @@ Sflag <span class="o">&lt;-</span> section<span class="p">[[</span><span class="
 
 <p>Next, plot salinity flag vs salinity</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>S<span class="p">,</span> Sflag<span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot<span class="p">(</span>S<span class="p">,</span> Sflag<span class="p">,</span> pch<span class="o">=</span>Sflag<span class="m">-1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -158,7 +158,7 @@ Sflag <span class="o">&lt;-</span> section<span class="p">[[</span><span class="
 salinities of bad data are generally in the range of the salinities of good
 data. Next, examine temperature and salinity together.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plotTS<span class="p">(</span>as.ctd<span class="p">(</span>as.ctd<span class="p">(</span>S<span class="p">,</span> <span class="bp">T</span><span class="p">,</span> p<span class="p">)))</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plotTS<span class="p">(</span>as.ctd<span class="p">(</span>S<span class="p">,</span> <span class="bp">T</span><span class="p">,</span> p<span class="p">),</span> pch<span class="o">=</span>Sflag<span class="m">-1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -172,7 +172,7 @@ assessed as being reasonable during the data-archiving process. </p>
 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
 2</code></pre></div></td><td class="code"><div class="highlight"><pre>ok <span class="o">&lt;-</span> Sflag <span class="o">==</span> <span class="m">2</span>
-plotTS<span class="p">(</span>as.ctd<span class="p">(</span>as.ctd<span class="p">(</span>S<span class="p">[</span>ok<span class="p">],</span> <span class="bp">T</span><span class="p">[</span>ok<span class="p">],</span> p<span class="p">[</span>ok<span class="p">])))</span>
+plotTS<span class="p">(</span>as.ctd<span class="p">(</span>S<span class="p">[</span>ok<span class="p">],</span> <span class="bp">T</span><span class="p">[</span>ok<span class="p">],</span> p<span class="p">[</span>ok<span class="p">]))</span>
 </pre></div>
 </td></tr></table>
 

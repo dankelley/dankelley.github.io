@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-04-10T12:46:52-03:00</updated>
+    <updated>2016-04-10T15:13:39-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -76,7 +76,7 @@ Sflag &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span cla
 
 &lt;p&gt;Next, plot salinity flag vs salinity&lt;/p&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Sflag&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Sflag&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pch&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Sflag&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -86,7 +86,7 @@ Sflag &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span cla
 salinities of bad data are generally in the range of the salinities of good
 data. Next, examine temperature and salinity together.&lt;/p&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; pch&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Sflag&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 
@@ -100,7 +100,7 @@ assessed as being reasonable during the data-archiving process. &lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1
 2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;ok &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Sflag &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
-plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;])))&lt;/span&gt;
+plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 

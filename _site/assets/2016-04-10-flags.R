@@ -14,14 +14,14 @@ p <- section[['pressure']]
 Sflag <- section[['salinityFlag']]
 
 ## ------------------------------------------------------------------------
-plot(S, Sflag)
+plot(S, Sflag, pch=Sflag-1)
 
 ## ------------------------------------------------------------------------
-plotTS(as.ctd(as.ctd(S, T, p)))
+plotTS(as.ctd(S, T, p), pch=Sflag-1)
 
 ## ------------------------------------------------------------------------
 ok <- Sflag == 2
-plotTS(as.ctd(as.ctd(S[ok], T[ok], p[ok])))
+plotTS(as.ctd(S[ok], T[ok], p[ok]))
 
 ## ------------------------------------------------------------------------
 section2 <- handleFlags(section)

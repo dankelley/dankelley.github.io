@@ -47,7 +47,7 @@ Sflag <- section[['salinityFlag']]
 
 Next, plot salinity flag vs salinity
 ```{r}
-plot(S, Sflag)
+plot(S, Sflag, pch=Sflag-1)
 ```
 
 This suggests that, apart from one distinct outlier at a salinity of 26, the
@@ -55,7 +55,7 @@ salinities of bad data are generally in the range of the salinities of good
 data. Next, examine temperature and salinity together.
 
 ```{r}
-plotTS(as.ctd(as.ctd(S, T, p)))
+plotTS(as.ctd(S, T, p), pch=Sflag-1)
 ```
 
 The last two plots suggest that one of the points marked as being bad (flag=4)
@@ -66,7 +66,7 @@ assessed as being reasonable during the data-archiving process.
 
 ```{r}
 ok <- Sflag == 2
-plotTS(as.ctd(as.ctd(S[ok], T[ok], p[ok])))
+plotTS(as.ctd(S[ok], T[ok], p[ok]))
 ```
 
 Another approach is to use `handleFlags` to select the good data
