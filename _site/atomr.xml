@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-04-10T12:45:42-03:00</updated>
+    <updated>2016-04-10T12:46:52-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -14,7 +14,7 @@
     
     
     <entry>
-        <title>handling oceanographic data-quality</title>
+        <title>Handling oceanographic data-quality flags</title>
         <link href="http://dankelley.github.io/r/2016/04/10/flags.html"/>
         <updated>2016-04-10T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2016/04/10/flags</id>
