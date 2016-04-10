@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>handling oceanographic data-quality</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>handling oceanographic data-quality</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Flags will be a key feature of the next release of the oce R package. This posting illustrates the basics of how flags can be used for hydrographic section data.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+**Preface.** The code of this blog posting will only work with the latest
+`development`-branch of the `oce` source. 
+
+
+# Introduction
+
+The `section` dataset from `oce` provides a good example of a dataset
+containing flags.
+
+# Methods
+
+```{r}
+library(oce)
+data(section)
+Sflag <- section[['salinityFlag']]
+```
+A good first step is to see what flags are being used
+```{r}
+table(Sflag)
+```
+This dataset uses the WHP convention for flags (see `?section`), in which a
+flag value of 2 is used to indicate data considered to be acceptable. Thus, the
+table indicates that only 3/4 of the salinity measurements are considered
+to be acceptable.  This makes this a good dataset to illustrate the handling
+of flags.
+
+First, extract some relevant data.
+
+```{r}
+S <- section[['salinity']]
+T <- section[['temperature']]
+theta <- section[['theta']]
+p <- section[['pressure']]
+Sflag <- section[['salinityFlag']]
+```
+
+Next, plot salinity flag vs salinity
+```{r}
+plot(S, Sflag)
+```
+
+This suggests that, apart from one distinct outlier at a salinity of 26, the
+salinities of bad data are generally in the range of the salinities of good
+data. Next, examine temperature and salinity together.
+
+```{r}
+plotTS(as.ctd(as.ctd(S, T, p)))
+```
+
+The last two plots suggest that one of the points marked as being bad (flag=4)
+is distinctly anomalous compared with all the other data. A detailed analysis
+could be made of that point (e.g. first isolate the station, then plot it in
+detail) but time may be better spent simply focussing on data that have been
+assessed as being reasonable during the data-archiving process. 
+
+```{r}
+ok <- Sflag == 2
+plotTS(as.ctd(as.ctd(S[ok], T[ok], p[ok])))
+```
+
+Another approach is to use `handleFlags` to select the good data
+```{r}
+section2 <- handleFlags(section)
+plotTS(section2)
+```
+where we have used the fact that `plotTS` can recognize section objects. The
+use of `handleFlags` is also recommended because it carries over to other types
+of plots, e.g. a salinity section. For example, a salinity section of all the 
+data is produced with
+```{r}
+plot(section, which="salinity")
+```
+while one of just the acceptable data is produced with
+```{r}
+plot(section2, which="salinity")
+```
+
+# Exercises
+
+1. Find which station has the very low salinity, and examine that station in more detail.
+2. Try as above, but only discarding data with `salinityFlag==4`, which are known to be
+   bad (i.e. retain both acceptable and questionable data).
+3. Continue step 2, with other types of analysis (e.g. examine spatial dependence).
+4. Look online for the source of the `section` dataset, to find out more about how the 
+   data-quality flags were assigned.
+
+
+# Resources
+
+* R source code used here: [2016-04-10-flags.Rmd](/assets/2016-04-10-flags.R).
+* Jekyll source code for this blog entry: [2016-04-10-flags.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-04-10-flags.Rmd)
+
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

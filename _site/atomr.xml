@@ -4,13 +4,162 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-02-22T14:44:50-04:00</updated>
+    <updated>2016-04-10T12:45:42-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>handling oceanographic data-quality</title>
+        <link href="http://dankelley.github.io/r/2016/04/10/flags.html"/>
+        <updated>2016-04-10T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2016/04/10/flags</id>
+        <content type="html">&lt;p&gt;&lt;strong&gt;Preface.&lt;/strong&gt; The code of this blog posting will only work with the latest
+&lt;code&gt;development&lt;/code&gt;-branch of the &lt;code&gt;oce&lt;/code&gt; source. &lt;/p&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;section&lt;/code&gt; dataset from &lt;code&gt;oce&lt;/code&gt; provides a good example of a dataset
+containing flags.&lt;/p&gt;
+
+&lt;h1 id=&quot;methods&quot;&gt;Methods&lt;/h1&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Loading required package: methods&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Loading required package: gsw&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Loading required package: testthat&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1
+2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+Sflag &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;salinityFlag&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;A good first step is to see what flags are being used&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kp&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sflag&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Sflag
+##    2    3    4 
+## 2298  440  103&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This dataset uses the WHP convention for flags (see &lt;code&gt;?section&lt;/code&gt;), in which a
+flag value of 2 is used to indicate data considered to be acceptable. Thus, the
+table indicates that only 3/4 of the salinity measurements are considered
+to be acceptable.  This makes this a good dataset to illustrate the handling
+of flags.&lt;/p&gt;
+
+&lt;p&gt;First, extract some relevant data.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1
+2
+3
+4
+5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;S &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;salinity&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;temperature&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+theta &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;theta&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;pressure&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+Sflag &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; section&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;salinityFlag&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Next, plot salinity flag vs salinity&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Sflag&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-4-1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This suggests that, apart from one distinct outlier at a salinity of 26, the
+salinities of bad data are generally in the range of the salinities of good
+data. Next, examine temperature and salinity together.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-5-1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The last two plots suggest that one of the points marked as being bad (flag=4)
+is distinctly anomalous compared with all the other data. A detailed analysis
+could be made of that point (e.g. first isolate the station, then plot it in
+detail) but time may be better spent simply focussing on data that have been
+assessed as being reasonable during the data-archiving process. &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1
+2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;ok &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; Sflag &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.ctd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; p&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;ok&lt;span class=&quot;p&quot;&gt;])))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-6-1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Another approach is to use &lt;code&gt;handleFlags&lt;/code&gt; to select the good data&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1
+2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;section2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; handleFlags&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+plotTS&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-7-1.png&quot; alt=&quot;center&quot; /&gt;
+where we have used the fact that &lt;code&gt;plotTS&lt;/code&gt; can recognize section objects. The
+use of &lt;code&gt;handleFlags&lt;/code&gt; is also recommended because it carries over to other types
+of plots, e.g. a salinity section. For example, a salinity section of all the 
+data is produced with&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; which&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;salinity&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Warning in sectionGrid(x, debug = debug - 1): Data flags are omitted from
+## the gridded section object. Use handleFlags() first to remove bad data.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-8-1.png&quot; alt=&quot;center&quot; /&gt;
+while one of just the acceptable data is produced with&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;section2&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; which&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;salinity&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Warning in sectionGrid(x, debug = debug - 1): Data flags are omitted from
+## the gridded section object. Use handleFlags() first to remove bad data.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-9-1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;exercises&quot;&gt;Exercises&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find which station has the very low salinity, and examine that station in more detail.&lt;/li&gt;
+  &lt;li&gt;Try as above, but only discarding data with &lt;code&gt;salinityFlag==4&lt;/code&gt;, which are known to be
+bad (i.e. retain both acceptable and questionable data).&lt;/li&gt;
+  &lt;li&gt;Continue step 2, with other types of analysis (e.g. examine spatial dependence).&lt;/li&gt;
+  &lt;li&gt;Look online for the source of the &lt;code&gt;section&lt;/code&gt; dataset, to find out more about how the 
+data-quality flags were assigned.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;R source code used here: &lt;a href=&quot;/assets/2016-04-10-flags.R&quot;&gt;2016-04-10-flags.Rmd&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-04-10-flags.Rmd&quot;&gt;2016-04-10-flags.Rmd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+    </entry>
+    
     
     
     <entry>
