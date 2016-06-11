@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>Inserting units in expressions for labels</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Inserting units in expressions for labels</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        I show how to construct an expression for e.g. an axis label, if the unit is stored in a variable.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+**Preface.** This is my shortest blog item ever, showing in a few lines something that took me over an hour to realize: use `[[1]]` in refering expressions stored in variables.
+
+
+# Introduction
+
+I wanted this for `oce`, which for [issue 981](https://github.com/dankelley/oce/issues/981) required a method of extracting units from objects, and inserting the values into expressions being constructed for the `mtext` calls that write axis labels.
+
+# Methods
+
+The code says it all: use `[[1]]`.
+
+```{r}
+par(mar=rep(0, 4))
+plot(0:5, 0:5, xlab="", ylab="", axes=FALSE, type='n')
+
+## Simple method
+text(1, 1, expression("A ["*m/s^2*"]"))
+
+## Unit stored in an expression: naive approach.
+u <- expression(m/s^2)
+text(1, 2, bquote("B ["*.(u)*"]"))
+
+## Unit stored in an expression: note the [[1]] selection!
+text(1, 3, bquote("C ["*.(u[[1]])*"]"))
+
+## Unit stored in an oce-formatted list
+U <- list(unit=expression(m/s^2), scale="")
+text(1, 4, bquote("D ["*.(U[[1]][[1]])*"]"))
+```
+
+
+# Resources
+
+* Jekyll source code for this blog entry: [2016-06-11-flags.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-06-11-flags.Rmd)
+
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

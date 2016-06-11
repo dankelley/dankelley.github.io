@@ -4,7 +4,7 @@ title: Handling oceanographic data-quality flags
 tags: [oce, R]
 category: R
 year: 2016
-month: 5
+month: 4
 day: 11
 summary: Flags will be a key feature of the next release of the oce R package. This posting illustrates the basics of how flags can be used for hydrographic section data.
 ---
