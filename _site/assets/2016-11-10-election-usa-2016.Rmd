@@ -89,15 +89,14 @@
 # Introduction
 
 There was much to learn from studying how the 2016 USA presidential election
-campaign unfolded. The final results have not been tallied to date, although it
-the outcome of clear now.
+campaign unfolded. The final results have not been tallied to date, although
+the outcome is clear now.
 
-As someone who works in the field of education, I am particularly curious about
-the correlation between educational level and voting preference. This is a
-matter covered in various exit polls and other studies, but I wanted to get
-into the data myself.
+As an educator, I am particularly curious about possible linkages between
+educational level and voting preference. This is a matter covered in various
+exit polls and other studies, but I wanted to get into the data myself.
 
-This essay tells how I assembled the data and produced a summary plot.
+This essay tells how I assembled and analyzed some relevant data.
 
 # Procedure
 
@@ -108,44 +107,46 @@ file, I created the file provided at note [4].  Finally, I ran the R code
 provided in note [5], to produce the graph shown in the next section.
 
 In this analysis, the focus was on the percentage of the population educated
-beyond the Bachelor level, since that proved to be the variable with highest
-explanatory power.
+beyond the Bachelor level, since that proved to be the educational variable
+with the highest explanatory power.
 
 As a measure of voting preference, I constructed an index defined as
 $(D-R)/(D+R)$, where $D$ is the number of votes cast for the Democrat, and $R$
-is the number cast for the Republican. This index would equal zero in a tied
-state, with positive values indicating a preference for the Clinton and
-negative ones a preference for Trump.  The index is bound, by definition, to
-lie between -1 and +1.  I did not perform regression analysis, because it is
-unclear what that would mean, for this index. (Indeed, I am not sure such an
-index is even used in this field of analysis; I used it because it has proven
-to be useful in my field of science.)
+is the number cast for the Republican. This index is zero in a tied state, with
+positive values indicating a preference for Clinton and negative values a
+preference for Trump.  By definition, the index is bound to lie between -1 and
++1.  I did not perform regression analysis, because it is not clear what that
+would mean if applied to this index. (Indeed, I am not sure such an index is
+even used in political analysis.)
 
 # Results
 
-The results of the analysis are presented below, with
-an educational level of 10.2% chosen by visual inspection. 
-Note that blue dots indicate a preference for Clinton over Trump.
+The results of the analysis (which may be reproduced by running [5] with datasets [2] and [4])
+are presented in the graph shown below. The vertical line indicates an
+educational level of 10.2%, which was chosen by visual inspection as a divider
+between Trump-favouring and Clinton-favouring educational levels.  The blue
+dots indicate a preference for Clinton over Trump.
 ![center](http://dankelley.github.io/figs/election2016-usa.png) 
 
+A noticeable feature is the isolated point indicating high educational level
+and strong preference for Clinton. This is the District of Columbia, which may
+have a particular reason to favour Clinton, since Trump has pledged to "drain
+the swamp."
 
-A noticeable feature is the isolated point indicating very high educational
-level and very strong preference for Clinton. This is the District of Columbia, 
-which I think has a particular reason to favour Clinton, since Trump has
-pledged to "drain the swamp." Apart from this point, there is a strong trend in
-the data, a simple summary of which is as follows.
+The overall data cloud reveals stronger trend of preference for Clinton in
+states with higher educational level.
 
-* There are 18 states in which 10.2% or more of the population holds an
-  advanced degree. Of each of these states, the votes for Hillary Clinton
-  exceeded those for Donald Trump.
-* There are 33 states in which fewer than 10.2% of the population hod an
-  advanced degree. Of these, Clinton was preferred in just 3 states, with the
-  remaining 30 states voting preferentially for Trump.
+Focussing on which candidate won the count, it is possible to construct a
+simple statement about the results of this election.
+
+* In 18 of the 18 states in which 10.2% or more of the population holds an
+  advanced degree, Clinton is favoured over Trump.
+
+* Trump is favoured in 30 of the remaining 33 states.
 
 # Conclusions
 
-The analysis revealed a clear tendency for Clinton to win the majority of votes
-in states with high educational levels.
+Clinton won a majority of the votes in states with high educational levels.
 
 # Further steps
 
