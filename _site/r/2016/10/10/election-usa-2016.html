@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<meta charset="UTF-8">
+<title>2016 US election by education level</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a class="highlight" href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2016/06/11/unit-expressions.html" title="Inserting units in expressions for labels">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>2016 US election by education level</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Oct 10, 2016
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/politics/index.html" class="tag">
+            politics
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        Education level is a strong predictor of party preference in the USA.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<h1 id="introduction">Introduction</h1>
+
+<p>There was much to learn from studying how the 2016 USA presidential election
+campaign unfolded. The final results have not been tallied to date, although it
+the outcome of clear now.</p>
+
+<p>As someone who works in the field of education, I am particularly curious about
+the correlation between educational level and voting preference. This is a
+matter covered in various exit polls and other studies, but I wanted to get
+into the data myself.</p>
+
+<p>This essay tells how I assembled the data and produced a summary plot.</p>
+
+<h1 id="procedure">Procedure</h1>
+
+<p>I downloaded state-by-state educational data from [1], and converted to a CSV
+file for easier processing (provided at note [2] below). Then I visited [3] and
+cut/pasted the results into a file. After editing the percent signs from the
+file, I created the file provided at note [4].  Finally, I ran the R code
+provided in note [5], to produce the graph shown in the next section.</p>
+
+<p>In this analysis, the focus was on the percentage of the population educated
+beyond the Bachelor level, since that proved to be the variable with highest
+explanatory power.</p>
+
+<p>As a measure of voting preference, I constructed an index defined as
+$(D-R)/(D+R)$, where $D$ is the number of votes cast for the Democrat, and $R$
+is the number cast for the Republican. This index would equal zero in a tied
+state, with positive values indicating a preference for the Clinton and
+negative ones a preference for Trump.  The index is bound, by definition, to
+lie between -1 and +1.  I did not perform regression analysis, because it is
+unclear what that would mean, for this index. (Indeed, I am not sure such an
+index is even used in this field of analysis; I used it because it has proven
+to be useful in my field of science.)</p>
+
+<h1 id="results">Results</h1>
+
+<p>The results of the analysis are presented below.
+<img src="http://dankelley.github.io/figs/election2016-usa.png" alt="center" /> </p>
+
+<p>A educational level of 10.2% was chosen as a cutoff, by visual inspection. The
+results may be interpreted as follows.</p>
+
+<ul>
+  <li>There are 18 states in which 10.2% or more of the population holds an
+advanced degree. Of each of these states, the votes for Hillary Clinton
+exceeded those for Donald Trump.</li>
+  <li>There are 33 states in which fewer than 10.2% of the population hod an
+advanced degree. Of these, Clinton was preferred in just 3 states, with the
+remaining 30 states voting preferentially for Trump.</li>
+</ul>
+
+<h1 id="further-steps">Further steps</h1>
+
+<p>I will revisit the data over the next days or weeks, as the data tallies become
+more complete. If readers are interested in more details, I would be happy to
+post more items to this blog. I have comments turned off for this blog, because
+they tend so often to become useless, especially in regards to politics.</p>
+
+<h1 id="reference-and-resources">Reference and resources</h1>
+
+<ol>
+  <li>
+    <p>Source of educational-level data: http://www.ers.usda.gov/webdocs/DataFiles/CountyLevel_Data_Sets_Download_Data__18026//Education.xls</p>
+  </li>
+  <li>
+    <p>Comma-separated file of educational level, created from [1]:
+<a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/12s0233.csv">12s0233.csv</a></p>
+  </li>
+  <li>
+    <p>Website with a table providing 2016 election results:
+<a href="http://www.nbcnews.com/politics/2016-election/president">http://www.nbcnews.com/politics/2016-election/president</a></p>
+  </li>
+  <li>
+    <p>Tab-separated file of voting records, created from [3]:
+<a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016votes.dat">election2016votes.dat</a></p>
+  </li>
+  <li>
+    <p>R code to read education and voting data and graph the results:
+<a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016.R">election2016.R</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-10-10-election-usa-2016.Rmd">2016-10-10-election-usa-2016.Rmd</a></p>
+  </li>
+</ol>
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+
