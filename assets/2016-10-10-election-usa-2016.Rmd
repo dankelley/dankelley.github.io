@@ -1,0 +1,87 @@
+---
+layout: post
+title: 2016 US election by education level
+tags: [politics,R]
+category: R
+year: 2016
+month: 10
+day: 10
+summary: Education level is a strong predictor of party preference in the USA.
+---
+
+# Introduction
+
+There was much to learn from studying how the 2016 USA presidential election
+campaign unfolded. The final results have not been tallied to date, although it
+the outcome of clear now.
+
+As someone who works in the field of education, I am particularly curious about
+the correlation between educational level and voting preference. This is a
+matter covered in various exit polls and other studies, but I wanted to get
+into the data myself.
+
+This essay tells how I assembled the data and produced a summary plot.
+
+# Procedure
+
+I downloaded state-by-state educational data from [1], and converted to a CSV
+file for easier processing (provided at note [2] below). Then I visited [3] and
+cut/pasted the results into a file. After editing the percent signs from the
+file, I created the file provided at note [4].  Finally, I ran the R code
+provided in note [5], to produce the graph shown in the next section.
+
+In this analysis, the focus was on the percentage of the population educated
+beyond the Bachelor level, since that proved to be the variable with highest
+explanatory power.
+
+As a measure of voting preference, I constructed an index defined as
+$(D-R)/(D+R)$, where $D$ is the number of votes cast for the Democrat, and $R$
+is the number cast for the Republican. This index would equal zero in a tied
+state, with positive values indicating a preference for the Clinton and
+negative ones a preference for Trump.  The index is bound, by definition, to
+lie between -1 and +1.  I did not perform regression analysis, because it is
+unclear what that would mean, for this index. (Indeed, I am not sure such an
+index is even used in this field of analysis; I used it because it has proven
+to be useful in my field of science.)
+
+# Results
+
+The results of the analysis are presented below.
+![center](http://dankelley.github.io/figs/election2016-usa.png) 
+
+A educational level of 10.2% was chosen as a cutoff, by visual inspection. The
+results may be interpreted as follows.
+
+* There are 18 states in which 10.2% or more of the population holds an
+  advanced degree. Of each of these states, the votes for Hillary Clinton
+  exceeded those for Donald Trump.
+* There are 33 states in which fewer than 10.2% of the population hod an
+  advanced degree. Of these, Clinton was preferred in just 3 states, with the
+  remaining 30 states voting preferentially for Trump.
+
+
+# Further steps
+
+I will revisit the data over the next days or weeks, as the data tallies become
+more complete. If readers are interested in more details, I would be happy to
+post more items to this blog. I have comments turned off for this blog, because
+they tend so often to become useless, especially in regards to politics.
+
+
+# Reference and resources
+
+1. Source of educational-level data: http://www.ers.usda.gov/webdocs/DataFiles/CountyLevel_Data_Sets_Download_Data__18026//Education.xls
+
+2. Comma-separated file of educational level, created from [1]:
+   [12s0233.csv](https://raw.github.com/dankelley/dankelley.github.io/master/assets/12s0233.csv)
+
+3. Website with a table providing 2016 election results:
+   [http://www.nbcnews.com/politics/2016-election/president](http://www.nbcnews.com/politics/2016-election/president)
+
+4. Tab-separated file of voting records, created from [3]:
+   [election2016votes.dat](https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016votes.dat)
+
+5. R code to read education and voting data and graph the results:
+   [election2016.R](https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016.R)
+
+6. Jekyll source code for this blog entry: [2016-10-10-election-usa-2016.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-10-10-election-usa-2016.Rmd)

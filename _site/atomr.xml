@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-06-11T09:48:35-03:00</updated>
+    <updated>2016-11-10T17:08:06-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -4204,7 +4204,7 @@ C++ compilation will be done as the package is being built.&lt;/p&gt;
 
 &lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
 
-&lt;p&gt;The following code is direct from the help for &lt;code&gt;Colormap()&lt;/code&gt;; all I’ve done is to put the example code into Rmarkdown to make for easier comparision with the resultant graphs.&lt;/p&gt;
+&lt;p&gt;The following code is direct from the help for &lt;code&gt;Colormap()&lt;/code&gt;; all I’ve done is to put the example code into Rmarkdown to make for easier comparison with the resultant graphs.&lt;/p&gt;
 
 &lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;oce&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
