@@ -1,3 +1,4 @@
+# make 2016-10-10-election-usa-2016.md
 thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.png \
     colorline-thumbnail.png webtideosx1-thumbnail.png webtideosx2-thumbnail.png \
     sundial_with_gnomon-thumbnail.png analemma-thumbnail.png \
