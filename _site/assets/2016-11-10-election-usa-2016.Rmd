@@ -172,7 +172,7 @@ they are so often problematic on any blog relating to politics.
 5. R code to read education and voting data and graph the results:
    [election2016.R](https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016.R)
 
-6. Jekyll source code for this blog entry: [2016-10-10-election-usa-2016.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-10-10-election-usa-2016.Rmd)
+6. Jekyll source code for this blog entry: [2016-11-10-election-usa-2016.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-11-10-election-usa-2016.Rmd)
 
 
 
