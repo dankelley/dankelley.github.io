@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-11-10T17:59:07-04:00</updated>
+    <updated>2016-11-10T18:01:09-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -123,101 +123,7 @@ they are so often problematic on any blog relating to politics.&lt;/p&gt;
         <link href="http://dankelley.github.io/r/2016/10/10/election-usa-2016.html"/>
         <updated>2016-10-10T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2016/10/10/election-usa-2016</id>
-        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;There was much to learn from studying how the 2016 USA presidential election
-campaign unfolded. The final results have not been tallied to date, although it
-the outcome of clear now.&lt;/p&gt;
-
-&lt;p&gt;As someone who works in the field of education, I am particularly curious about
-the correlation between educational level and voting preference. This is a
-matter covered in various exit polls and other studies, but I wanted to get
-into the data myself.&lt;/p&gt;
-
-&lt;p&gt;This essay tells how I assembled the data and produced a summary plot.&lt;/p&gt;
-
-&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
-
-&lt;p&gt;I downloaded state-by-state educational data from [1], and converted to a CSV
-file for easier processing (provided at note [2] below). Then I visited [3] and
-cut/pasted the results into a file. After editing the percent signs from the
-file, I created the file provided at note [4].  Finally, I ran the R code
-provided in note [5], to produce the graph shown in the next section.&lt;/p&gt;
-
-&lt;p&gt;In this analysis, the focus was on the percentage of the population educated
-beyond the Bachelor level, since that proved to be the variable with highest
-explanatory power.&lt;/p&gt;
-
-&lt;p&gt;As a measure of voting preference, I constructed an index defined as
-$(D-R)/(D+R)$, where $D$ is the number of votes cast for the Democrat, and $R$
-is the number cast for the Republican. This index would equal zero in a tied
-state, with positive values indicating a preference for the Clinton and
-negative ones a preference for Trump.  The index is bound, by definition, to
-lie between -1 and +1.  I did not perform regression analysis, because it is
-unclear what that would mean, for this index. (Indeed, I am not sure such an
-index is even used in this field of analysis; I used it because it has proven
-to be useful in my field of science.)&lt;/p&gt;
-
-&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
-
-&lt;p&gt;The results of the analysis are presented below, with
-an educational level of 10.2% chosen by visual inspection. 
-Note that blue dots indicate a preference for Clinton over Trump.
-&lt;img src=&quot;http://dankelley.github.io/figs/election2016-usa.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
-
-&lt;p&gt;A noticeable feature is the isolated point indicating very high educational
-level and very strong preference for Clinton. This is the District of Columbia, 
-which I think has a particular reason to favour Clinton, since Trump has
-pledged to “drain the swamp.” Apart from this point, there is a strong trend in
-the data, a simple summary of which is as follows.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There are 18 states in which 10.2% or more of the population holds an
-advanced degree. Of each of these states, the votes for Hillary Clinton
-exceeded those for Donald Trump.&lt;/li&gt;
-  &lt;li&gt;There are 33 states in which fewer than 10.2% of the population hod an
-advanced degree. Of these, Clinton was preferred in just 3 states, with the
-remaining 30 states voting preferentially for Trump.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
-
-&lt;p&gt;The analysis revealed a clear tendency for Clinton to win the majority of votes
-in states with high educational levels.&lt;/p&gt;
-
-&lt;h1 id=&quot;further-steps&quot;&gt;Further steps&lt;/h1&gt;
-
-&lt;p&gt;I plan to revisit the data over the next days or weeks, as the final votes are
-tallied. I would be happy to post more items to this blog, if readers contact
-me with requests. Please note that this blog does not permit comments, since
-they are so often problematic on any blog relating to politics.&lt;/p&gt;
-
-&lt;h1 id=&quot;reference-and-resources&quot;&gt;Reference and resources&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Source of educational-level data: http://www.ers.usda.gov/webdocs/DataFiles/CountyLevel_Data_Sets_Download_Data__18026//Education.xls&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Comma-separated file of educational level, created from [1]:
-&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/12s0233.csv&quot;&gt;12s0233.csv&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Website with a table providing 2016 election results:
-&lt;a href=&quot;http://www.nbcnews.com/politics/2016-election/president&quot;&gt;http://www.nbcnews.com/politics/2016-election/president&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Tab-separated file of voting records, created from [3]:
-&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016votes.dat&quot;&gt;election2016votes.dat&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;R code to read education and voting data and graph the results:
-&lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/election2016.R&quot;&gt;election2016.R&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-10-10-election-usa-2016.Rmd&quot;&gt;2016-10-10-election-usa-2016.Rmd&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+        <content type="html">&lt;p&gt;Sorry, I wrote the date incorrectly; please go &lt;a href=&quot;http://dankelley.github.io/r/2016/11/10/election-usa-2016.html&quot;&gt;here&lt;/a&gt; for this blog item. The present item will be removed in a few days.&lt;/p&gt;
 </content>
     </entry>
     
