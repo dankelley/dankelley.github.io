@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-11-10T17:36:51-04:00</updated>
+    <updated>2016-11-10T17:38:21-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -57,6 +57,7 @@ to be useful in my field of science.)&lt;/p&gt;
 
 &lt;p&gt;The results of the analysis are presented below, with
 an educational level of 10.2% chosen by visual inspection. 
+Note that blue dots indicate a preference for Clinton over Trump.
 &lt;img src=&quot;http://dankelley.github.io/figs/election2016-usa.png&quot; alt=&quot;center&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;A noticeable feature is the isolated point indicating very high educational
