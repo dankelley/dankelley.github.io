@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2016-11-10T20:40:19-04:00</updated>
+    <updated>2016-11-10T20:43:24-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -43,13 +43,13 @@ beyond the Bachelor level, since that proved to be the educational variable
 with the highest explanatory power.&lt;/p&gt;
 
 &lt;p&gt;As a measure of voting preference, I constructed an index defined as
-&lt;script type=&quot;math/tex&quot;&gt;(D-R)/(D+R)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt; is the number of votes cast for the Democrat, and &lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;
+&lt;em&gt;(D-R)/(D+R)&lt;/em&gt; where &lt;em&gt;D&lt;/em&gt; is the number of votes cast for the Democrat, and &lt;em&gt;R&lt;/em&gt;
 is the number cast for the Republican. This index is zero in a tied state, with
 positive values indicating a preference for Clinton and negative values a
 preference for Trump.  By definition, the index is bound to lie between -1 and
-+1.  I did not perform regression analysis, because it is not clear what that
-would mean if applied to this index. (Indeed, I am not sure such an index is
-even used in political analysis.)&lt;/p&gt;
++1, i.e. between 100% votes for the Republican and 100% for the Democrat.  I
+did not perform regression analysis, because it is not clear what that would
+mean if applied to this index.&lt;/p&gt;
 
 &lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
 
