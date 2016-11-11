@@ -13,7 +13,7 @@ latex: true
 
 # Introduction
 
-Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height $$\eta$$ instead.  This is illustrated here, using a $$\tanh$$ model for $$\eta=\eta(x)$$, with $$x$$ the distance along the transect.  The idea is to select $$x_ 0$$, the halfway point in the $$\tanh()$$ function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.
+Definitions of Gulf Stream location sometimes centre on thermal signature, but it might make sense to work with dynamic height $$\eta$$ instead.  This is illustrated here, using a $$\tanh$$ model for $$\eta=\eta(x)$$ with $$x$$ the distance along the transect.  The idea is to select $$x_ 0$$, the halfway point in the $$\tanh()$$ function, where the slope is maximum and where therefore the inferred geostrophic velocity peaks.
 
 # Methods and results
 
