@@ -178,6 +178,19 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/section-en-thumbnail.png)]({{ site.url }}/assets/section-en.png)
 [![tg]({{ site.url }}/assets/tdr-en-thumbnail.png)]({{ site.url }}/assets/tdr-en.png)
 
+### Spanish
+
+[![tg]({{ site.url }}/assets/adp-es-thumbnail.png)]({{ site.url }}/assets/adp-fr.png)
+[![tg]({{ site.url }}/assets/adv-es-thumbnail.png)]({{ site.url }}/assets/adv-fr.png)
+[![tg]({{ site.url }}/assets/cm-es-thumbnail.png)]({{ site.url }}/assets/cm-fr.png)
+[![tg]({{ site.url }}/assets/ctd-es-thumbnail.png)]({{ site.url }}/assets/ctd-fr.png)
+[![tg]({{ site.url }}/assets/drifter-es-thumbnail.png)]({{ site.url }}/assets/drifter-fr.png)
+[![tg]({{ site.url }}/assets/lisst-es-thumbnail.png)]({{ site.url }}/assets/lisst-fr.png)
+[![tg]({{ site.url }}/assets/lobo-es-thumbnail.png)]({{ site.url }}/assets/lobo-fr.png)
+[![tg]({{ site.url }}/assets/sealevel-es-thumbnail.png)]({{ site.url }}/assets/sealevel-fr.png)
+[![tg]({{ site.url }}/assets/section-es-thumbnail.png)]({{ site.url }}/assets/section-fr.png)
+[![tg]({{ site.url }}/assets/tdr-es-thumbnail.png)]({{ site.url }}/assets/tdr-fr.png)
+
 ### French
 
 [![tg]({{ site.url }}/assets/adp-fr-thumbnail.png)]({{ site.url }}/assets/adp-fr.png)
