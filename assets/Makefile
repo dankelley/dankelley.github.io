@@ -7,7 +7,7 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     gmt-topography-thumbnail.png \
     gmt_relief_2-thumbnail.png splines-thumbnail.png splines2-thumbnail.png \
     2014-02-19-filtfilt_octave-thumbnail.png \
-    2014-02-21-oce-translations-thumbnail.png \
+    2014-02-26-oce-translations-thumbnail.png \
     2014-01-15-colourizing-along-a-trajectory.png
 
 translation: force
@@ -51,8 +51,8 @@ splines2-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 splines2.png splines2-thumbnail.png
 2014-02-19-filtfilt_octave-thumbnail.png: force
 	/usr/local/bin/convert -thumbnail 600x600 2014-02-19-filtfilt_octave.png 2014-02-19-filtfilt_octave-thumbnail.png
-2014-02-21-oce-translations-thumbnail.png: force
-	/usr/local/bin/convert -thumbnail 600x600 2014-02-21-oce-translations.png 2014-02-21-oce-translations-thumbnail.png
+2014-02-26-oce-translations-thumbnail.png: force
+	/usr/local/bin/convert -thumbnail 600x600 2014-02-26-oce-translations.png 2014-02-26-oce-translations-thumbnail.png
 
 force:
 

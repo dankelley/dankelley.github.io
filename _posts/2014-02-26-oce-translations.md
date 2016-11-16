@@ -139,7 +139,7 @@ The following code demonstrates translations by default plots for various data t
 
 {% highlight R linenos=table %}
 library(oce)
-datasets <- c("adv","adp","cm","ctd","drifter","lisst","lobo","sealevel","section","tdr")
+datasets <- c("adv","adp","cm","ctd","argo","lisst","lobo","sealevel","section")
 languages <- c("en","es","de","fr","zh")
 for (d in datasets) {
     data(list=d)
@@ -171,12 +171,11 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/adv-en-thumbnail.png)]({{ site.url }}/assets/adv-en.png)
 [![tg]({{ site.url }}/assets/cm-en-thumbnail.png)]({{ site.url }}/assets/cm-en.png)
 [![tg]({{ site.url }}/assets/ctd-en-thumbnail.png)]({{ site.url }}/assets/ctd-en.png)
-[![tg]({{ site.url }}/assets/drifter-en-thumbnail.png)]({{ site.url }}/assets/drifter-en.png)
+[![tg]({{ site.url }}/assets/argo-en-thumbnail.png)]({{ site.url }}/assets/argo-en.png)
 [![tg]({{ site.url }}/assets/lisst-en-thumbnail.png)]({{ site.url }}/assets/lisst-en.png)
 [![tg]({{ site.url }}/assets/lobo-en-thumbnail.png)]({{ site.url }}/assets/lobo-en.png)
 [![tg]({{ site.url }}/assets/sealevel-en-thumbnail.png)]({{ site.url }}/assets/sealevel-en.png)
 [![tg]({{ site.url }}/assets/section-en-thumbnail.png)]({{ site.url }}/assets/section-en.png)
-[![tg]({{ site.url }}/assets/tdr-en-thumbnail.png)]({{ site.url }}/assets/tdr-en.png)
 
 ### Spanish
 
@@ -184,12 +183,11 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/adv-es-thumbnail.png)]({{ site.url }}/assets/adv-fr.png)
 [![tg]({{ site.url }}/assets/cm-es-thumbnail.png)]({{ site.url }}/assets/cm-fr.png)
 [![tg]({{ site.url }}/assets/ctd-es-thumbnail.png)]({{ site.url }}/assets/ctd-fr.png)
-[![tg]({{ site.url }}/assets/drifter-es-thumbnail.png)]({{ site.url }}/assets/drifter-fr.png)
+[![tg]({{ site.url }}/assets/argo-es-thumbnail.png)]({{ site.url }}/assets/argo-fr.png)
 [![tg]({{ site.url }}/assets/lisst-es-thumbnail.png)]({{ site.url }}/assets/lisst-fr.png)
 [![tg]({{ site.url }}/assets/lobo-es-thumbnail.png)]({{ site.url }}/assets/lobo-fr.png)
 [![tg]({{ site.url }}/assets/sealevel-es-thumbnail.png)]({{ site.url }}/assets/sealevel-fr.png)
 [![tg]({{ site.url }}/assets/section-es-thumbnail.png)]({{ site.url }}/assets/section-fr.png)
-[![tg]({{ site.url }}/assets/tdr-es-thumbnail.png)]({{ site.url }}/assets/tdr-fr.png)
 
 ### French
 
@@ -197,12 +195,11 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/adv-fr-thumbnail.png)]({{ site.url }}/assets/adv-fr.png)
 [![tg]({{ site.url }}/assets/cm-fr-thumbnail.png)]({{ site.url }}/assets/cm-fr.png)
 [![tg]({{ site.url }}/assets/ctd-fr-thumbnail.png)]({{ site.url }}/assets/ctd-fr.png)
-[![tg]({{ site.url }}/assets/drifter-fr-thumbnail.png)]({{ site.url }}/assets/drifter-fr.png)
+[![tg]({{ site.url }}/assets/argo-fr-thumbnail.png)]({{ site.url }}/assets/argo-fr.png)
 [![tg]({{ site.url }}/assets/lisst-fr-thumbnail.png)]({{ site.url }}/assets/lisst-fr.png)
 [![tg]({{ site.url }}/assets/lobo-fr-thumbnail.png)]({{ site.url }}/assets/lobo-fr.png)
 [![tg]({{ site.url }}/assets/sealevel-fr-thumbnail.png)]({{ site.url }}/assets/sealevel-fr.png)
 [![tg]({{ site.url }}/assets/section-fr-thumbnail.png)]({{ site.url }}/assets/section-fr.png)
-[![tg]({{ site.url }}/assets/tdr-fr-thumbnail.png)]({{ site.url }}/assets/tdr-fr.png)
 
 ### German
 
@@ -210,12 +207,11 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/adv-de-thumbnail.png)]({{ site.url }}/assets/adv-de.png)
 [![tg]({{ site.url }}/assets/cm-de-thumbnail.png)]({{ site.url }}/assets/cm-de.png)
 [![tg]({{ site.url }}/assets/ctd-de-thumbnail.png)]({{ site.url }}/assets/ctd-de.png)
-[![tg]({{ site.url }}/assets/drifter-de-thumbnail.png)]({{ site.url }}/assets/drifter-de.png)
+[![tg]({{ site.url }}/assets/argo-de-thumbnail.png)]({{ site.url }}/assets/argo-de.png)
 [![tg]({{ site.url }}/assets/lisst-de-thumbnail.png)]({{ site.url }}/assets/lisst-de.png)
 [![tg]({{ site.url }}/assets/lobo-de-thumbnail.png)]({{ site.url }}/assets/lobo-de.png)
 [![tg]({{ site.url }}/assets/sealevel-de-thumbnail.png)]({{ site.url }}/assets/sealevel-de.png)
 [![tg]({{ site.url }}/assets/section-de-thumbnail.png)]({{ site.url }}/assets/section-de.png)
-[![tg]({{ site.url }}/assets/tdr-de-thumbnail.png)]({{ site.url }}/assets/tdr-de.png)
 
 ### Mandarin
 
@@ -223,12 +219,11 @@ The results of the test code given above are shown below (click to enlarge).
 [![tg]({{ site.url }}/assets/adv-zh-thumbnail.png)]({{ site.url }}/assets/adv-zh.png)
 [![tg]({{ site.url }}/assets/cm-zh-thumbnail.png)]({{ site.url }}/assets/cm-zh.png)
 [![tg]({{ site.url }}/assets/ctd-zh-thumbnail.png)]({{ site.url }}/assets/ctd-zh.png)
-[![tg]({{ site.url }}/assets/drifter-zh-thumbnail.png)]({{ site.url }}/assets/drifter-zh.png)
+[![tg]({{ site.url }}/assets/argo-zh-thumbnail.png)]({{ site.url }}/assets/argo-zh.png)
 [![tg]({{ site.url }}/assets/lisst-zh-thumbnail.png)]({{ site.url }}/assets/lisst-zh.png)
 [![tg]({{ site.url }}/assets/lobo-zh-thumbnail.png)]({{ site.url }}/assets/lobo-zh.png)
 [![tg]({{ site.url }}/assets/sealevel-zh-thumbnail.png)]({{ site.url }}/assets/sealevel-zh.png)
 [![tg]({{ site.url }}/assets/section-zh-thumbnail.png)]({{ site.url }}/assets/section-zh.png)
-[![tg]({{ site.url }}/assets/tdr-zh-thumbnail.png)]({{ site.url }}/assets/tdr-zh.png)
 
 
 

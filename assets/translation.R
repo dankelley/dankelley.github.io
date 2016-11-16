@@ -1,5 +1,5 @@
 library(oce)
-datasets <-  c("adv", "adp", "cm", "ctd", "drifter", "lisst", "lobo", "sealevel", "section", "tdr")
+datasets <-  c("adv", "adp", "cm", "ctd", "argo", "lisst", "lobo", "sealevel", "section")
 languages <- c("en", "es", "de", "fr", "zh")
 for (d in datasets) {
     data(list=d)
