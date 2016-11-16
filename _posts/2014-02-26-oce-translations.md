@@ -155,12 +155,6 @@ for (d in datasets) {
 {% endhighlight %}
 
 
-To make the above work, an up-to-date version of the ``translation`` branch must be installed, by executing the following in R:
-{% highlight R linenos=table %}
-library(devtools)
-install_github("ocedata", "dankelley", "master")
-install_github("oce", "dankelley", "languages")
-{% endhighlight %}
 
 The results of the test code given above are shown below (click to enlarge).
 
