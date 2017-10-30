@@ -18,18 +18,20 @@ p <- "+proj=aeqd +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(cl45, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
+mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110), col=col)
@@ -42,13 +44,11 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=cass +lon_0=-45"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=cass +lon_0=-45"
 mapPlot(cl45, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=cc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(-40,40), col=col)
@@ -101,13 +101,11 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
 mapPlot(cl45, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=fahey"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -129,6 +127,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=geos +h=1e8"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem with meridians", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=gn_sinu +n=6 +m=3"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -149,19 +148,22 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=healpix"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem in Canada", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=rhealpix"
 mapPlot(coastlineWorld, projection=p, col=col)# +north_square=1 +south_square=2")
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
+mtext("Is this an acid trip?", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=igh"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Connection through cutout region", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Error plus weird at top", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=kav5"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -190,14 +192,11 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=lcca +lat_0=20 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=lcca +lat_0=20 +lon_0=-40"
 mapPlot(cl45, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
-
 
 p <- "+proj=leac +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
@@ -211,7 +210,6 @@ p <- "+proj=lsat +lsat=1 +path=200"
 mapPlot(coastlineWorld, projection=p, col=col,
             longitudelim=c(-180,-120), latitudelim=c(70,120))
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=mbt_s"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -257,7 +255,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=murd2 +lat_1=30 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=murd3 +lat_1=30 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45), col=col)
@@ -278,6 +275,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=nsper +h=90000000"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem in Antarctica", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=ob_tran"
 ## mapPlot(coastlineWorld, projection=p, longitudelim=c(-180,-120), latitudelim=c(-50,-20), col=col)
@@ -289,20 +287,20 @@ mtext("Usage?", line=line, adj=0, col=ecol, font=font)
 p <- "+proj=ocea"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Ugly Horizontal Lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=omerc +lat_1=30 +lon_1=-40 +lat_2=60"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=ortho"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem in Antarctica", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=pconic +lat_1=20 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=poly +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
@@ -371,7 +369,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=tcea +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
@@ -384,11 +381,11 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=tpeqd +lat_1=30 +lon_1=-80"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Extraneous lines", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=tpers +h=1e8"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Problem in Antarctica", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=ups +ellps=WGS84"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110), col=col)
