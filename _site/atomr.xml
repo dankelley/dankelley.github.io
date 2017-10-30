@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2017-10-30T19:23:56-03:00</updated>
+    <updated>2017-10-30T19:31:03-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -1828,10 +1828,7 @@ coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
 oce version 0.9-17, available on the CRAN archive. However, a CRAN member
 suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so I started exploring the use of the rgdal package. At the moment, this work
-is only on the git branch named &lt;code class=&quot;highlighter-rouge&quot;&gt;project_with_rgdal&lt;/code&gt;. The results with this
-version of oce seem to be very close to those with the previous system, with
-differences only in the cases where extraneous lines are seen.&lt;/p&gt;
+so later versions have the ‘oce’ package relying on the ‘rgdal’ package.&lt;/p&gt;
 
 &lt;p&gt;Note that only PROJ.4 projections that have inverses are available in oce.
 This is because oce needs to do inverse projections for some of its plotting
@@ -1841,7 +1838,7 @@ because they cause errors of various sorts; see &lt;a href=&quot;https://github.
 
 &lt;p&gt;I will not explain the methodology of projection here, nor the details of any
 given projection. Readers should consult the help for the &lt;code class=&quot;highlighter-rouge&quot;&gt;oce&lt;/code&gt; function
-&lt;code class=&quot;highlighter-rouge&quot;&gt;mapPlot()&lt;/code&gt; and the many websites detailing software that serives from
+&lt;code class=&quot;highlighter-rouge&quot;&gt;mapPlot()&lt;/code&gt; and the many websites detailing software that derives from
 PROJ.4.  In due course, they will be able to consult &lt;a href=&quot;http://dankelley.github.io/book.html&quot;&gt;my
 book&lt;/a&gt;.&lt;/p&gt;
 

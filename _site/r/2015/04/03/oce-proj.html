@@ -109,10 +109,7 @@ coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
 oce version 0.9-17, available on the CRAN archive. However, a CRAN member
 suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so I started exploring the use of the rgdal package. At the moment, this work
-is only on the git branch named <code class="highlighter-rouge">project_with_rgdal</code>. The results with this
-version of oce seem to be very close to those with the previous system, with
-differences only in the cases where extraneous lines are seen.</p>
+so later versions have the ‘oce’ package relying on the ‘rgdal’ package.</p>
 
 <p>Note that only PROJ.4 projections that have inverses are available in oce.
 This is because oce needs to do inverse projections for some of its plotting
@@ -122,7 +119,7 @@ because they cause errors of various sorts; see <a href="https://github.com/dank
 
 <p>I will not explain the methodology of projection here, nor the details of any
 given projection. Readers should consult the help for the <code class="highlighter-rouge">oce</code> function
-<code class="highlighter-rouge">mapPlot()</code> and the many websites detailing software that serives from
+<code class="highlighter-rouge">mapPlot()</code> and the many websites detailing software that derives from
 PROJ.4.  In due course, they will be able to consult <a href="http://dankelley.github.io/book.html">my
 book</a>.</p>
 
