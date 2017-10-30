@@ -1,0 +1,326 @@
+x <- rnorm(100) + sin((1:100)*2*pi/20)#
+ab <- signal::butter(2, 0.1)#
+a <- ab$a#
+b <- ab$b#
+na <- length(a)#
+nb <- length(b)#
+kdc <- sum(b) / sum(a);#
+if (!is.nan(kdc)) {#
+  si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na)#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb)#
+warning("NEXT cannot cbind because of lengths; I must be misreading the matlab\n")#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+x <- rnorm(100) + sin((1:100)*2*pi/20)#
+ab <- signal::butter(2, 0.05)#
+a <- ab$a#
+b <- ab$b#
+na <- length(a)#
+nb <- length(b)#
+kdc <- sum(b) / sum(a);#
+if (!is.nan(kdc)) {#
+  si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na)#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb)#
+warning("NEXT cannot cbind because of lengths; I must be misreading the matlab\n")#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na)#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb)#
+warning("NEXT cannot cbind because of lengths; I must be misreading the matlab\n")#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+x <- rnorm(100, sd=0.2) + sin((1:100)*2*pi/20)#
+ab <- signal::butter(2, 0.05)#
+a <- ab$a#
+b <- ab$b#
+na <- length(a)#
+nb <- length(b)#
+kdc <- sum(b) / sum(a);#
+if (!is.nan(kdc)) {#
+  si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+warning("NEXT cannot cbind because of lengths; I must be misreading the matlab\n")#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+warning("NEXT cannot cbind because of lengths; I must be misreading the matlab\n")#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+x <- rnorm(100, sd=0.2) + sin((1:100)*2*pi/20) + seq(from=0, to=1, length.out=100)#
+ab <- signal::butter(2, 0.05)#
+a <- ab$a#
+b <- ab$b#
+na <- length(a)#
+nb <- length(b)#
+kdc <- sum(b) / sum(a);#
+if (!is.nan(kdc)) {#
+  si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+str(2*x[1]-x[seq(lrefl+1,2,-1)])#
+str(x)#
+str(2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+#  v = [2*x(1)-x((lrefl+1):-1:2); x(:);#
+#       2*x(end)-x((end-1):-1:end-lrefl)]; # a column vector#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)
+x <- rnorm(100, sd=0.2) + sin((1:100)*2*pi/20) + seq(from=0, to=1, length.out=100)#
+ab <- signal::butter(2, 0.05)#
+a <- ab$a#
+b <- ab$b#
+na <- length(a)#
+nb <- length(b)#
+kdc <- sum(b) / sum(a);#
+if (!is.nan(kdc)) {#
+  si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+si <- rev(cumsum(rev(b - kdc * a)))#
+} else {#
+  si <- rep(0, length(a))#
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+}#
+lx <- length(x)#
+si <- si[-1]#
+nx <- length(x)#
+n <- max(na, nb)#
+lrefl <- 3 * (n - 1)#
+if (na < n)#
+    a <- c(a, rep(0, n-na))#
+if (nb < n)#
+    b <- c(b, rep(0, n-nb))#
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],#
+           x,#
+           2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])#
+v <- signal::filter(b,a,v,si*v[1])     # forward filter#
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter#
+y <- v[seq.int(lrefl+1, lx+lrefl)]#
+t <- seq_along(x)#
+plot(t, x, type='l')#
+lines(t, y, col='red')
+ab <- signal::butter(3, 0.1)
+t <- seq(0, 1, 0.01)
+x <- sin(2*pi*t*2.3)+0.25*rnorm(length(t))
+below could be extracted to a function when working
+a <- ab$a
+b <- ab$b
+na <- length(a)
+nb <- length(b)
+kdc <- sum(b) / sum(a)
+if (!is.nan(kdc)) {
+si <- rev(cumsum(rev(b - kdc * a)))
+} else {
+si <- rep(0, length(a))
+}
+lx <- length(x)
+si <- si[-1]
+nx <- length(x)
+n <- max(na, nb)
+lrefl <- 3 * (n - 1)
+if (na < n)
+a <- c(a, rep(0, n-na))
+if (nb < n)
+b <- c(b, rep(0, n-nb))
+v <- c(2*x[1]-x[seq(lrefl+1,2,-1)],
+x,
+2*x[nx]-x[seq(nx-1,nx-lrefl,-1)])
+v <- signal::filter(b,a,v,si*v[1])     # forward filter
+v <- rev(signal::filter(b,a,rev(v),si*v[nx]))  # reverse filter
+y <- v[seq.int(lrefl+1, lx+lrefl)]
+t <- seq_along(x)
+plot(t, x, type='l')
+lines(t, y, col='red')
+q()
