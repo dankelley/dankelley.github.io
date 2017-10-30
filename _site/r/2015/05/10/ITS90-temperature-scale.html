@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -108,33 +108,30 @@ will yield errors of practical significance.</p>
 <h1 id="functions">Functions</h1>
 <p>The following are functions for the conversion, as suggested in [1].</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>T90toT68 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>T90<span class="p">)</span> <span class="m">1.00024</span> <span class="o">*</span> T90
-T68toT90 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>T68<span class="p">)</span> T68 <span class="o">/</span> <span class="m">1.00024</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">)</span><span class="w"> </span><span class="m">1.00024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="w">
+</span><span class="nb">T</span><span class="m">68</span><span class="n">toT90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="nb">T</span><span class="m">68</span><span class="p">)</span><span class="w"> </span><span class="nb">T</span><span class="m">68</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1.00024</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="test-of-inferred-density">Test of inferred density</h1>
 
 <p>First, define some base quantities</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
-4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-S <span class="o">&lt;-</span> <span class="m">35</span>
-T90 <span class="o">&lt;-</span> <span class="m">20</span>
-p <span class="o">&lt;-</span> <span class="m">100</span>
-</pre></div>
-</td></tr></table>
+4
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">35</span><span class="w">
+</span><span class="nb">T</span><span class="m">90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>and then do some calculations, e.g.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>T90toT68<span class="p">(</span>T90<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 20.0048</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 20.0048</code></pre></figure>
 
 <p>This temperature difference, 0.0048, is several
 times larger than the 
@@ -143,28 +140,25 @@ stability over a year of drift.)</p>
 
 <p>Another test is of density:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>swRho<span class="p">(</span>S<span class="p">,</span> T90<span class="p">,</span> p<span class="p">)</span> <span class="c1"># incorrect</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="c1"># incorrect</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.199</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.199</code></pre></figure>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>swRho<span class="p">(</span>S<span class="p">,</span> T90toT68<span class="p">(</span>T90<span class="p">),</span> p<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.198</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.198</code></pre></figure>
 
 <p>Finally, the following tests the amount that salinity would need to be adjusted to 
 compensate (in density terms) for a temperature misapplication.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>rho0 <span class="o">&lt;-</span> swRho<span class="p">(</span>S<span class="p">,</span> T90toT68<span class="p">(</span>T90<span class="p">),</span> p<span class="p">)</span>
-uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span>S<span class="p">)</span> swRho<span class="p">(</span>S<span class="p">,</span> T90<span class="p">,</span> p<span class="p">)</span> <span class="o">-</span> rho0<span class="p">,</span> lower<span class="o">=</span><span class="m">34</span><span class="p">,</span> upper<span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span>root
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w">
+</span><span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho0</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="m">34</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span><span class="n">root</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 34.99833</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 34.99833</code></pre></figure>
 
 <p>In a practical application, one might compare this salinity difference,
 0.0016675,
@@ -184,7 +178,7 @@ article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10,
     <p><a href="http://www.seabird.com//sbe911plus-ctd">Seabird Electronics SBE911plus specifications</a></p>
   </li>
   <li>
-    <p><a href="http://dankelley.github.io/oce/">Oce website</a>   </p>
+    <p><a href="http://dankelley.github.io/oce/">Oce website</a></p>
   </li>
   <li>
     <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd">2015-05-10-ITS90-temperature-scale.Rmd</a></p>

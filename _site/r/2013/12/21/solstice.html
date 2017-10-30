@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -101,83 +101,79 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The <code>sunAngle()</code> function in the <code>oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
+<p>The <code class="highlighter-rouge">sunAngle()</code> function in the <code class="highlighter-rouge">oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
 
 <h1 id="methods">Methods</h1>
 
 <p>First, set up the problem; these may be the only lines that need editing for other places or times.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>t0 <span class="o">&lt;-</span> <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-12-21 10:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">)</span> <span class="c1"># morning of </span>
-xy <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>x<span class="o">=</span><span class="m">-63.60</span><span class="p">,</span> y<span class="o">=</span><span class="m">44.65</span><span class="p">)</span>          <span class="c1"># centre of map (Halifax)</span>
-D <span class="o">&lt;-</span> <span class="m">9</span>                                 <span class="c1"># map span in km</span>
-</pre></div>
-</td></tr></table>
+3
+</pre></td><td class="code"><pre><span class="n">t</span><span class="m">0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2014-12-21 10:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w"> </span><span class="c1"># morning of </span><span class="w">
+</span><span class="n">xy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="m">-63.60</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="w">          </span><span class="c1"># centre of map (Halifax)</span><span class="w">
+</span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span><span class="w">                                 </span><span class="c1"># map span in km</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, use <code>sunAngle()</code> from the <code>oce</code> package to find the time of the sunrise and the azimuth at that moment.  Here, <code>uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we use a search interval that should encompass sunrise at this longitude.</p>
+<p>Next, use <code class="highlighter-rouge">sunAngle()</code> from the <code class="highlighter-rouge">oce</code> package to find the time of the sunrise and the azimuth at that moment.  Here, <code class="highlighter-rouge">uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we use a search interval that should encompass sunrise at this longitude.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-sunrise <span class="o">&lt;-</span> uniroot<span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span>
-                   sunAngle<span class="p">(</span><span class="kp">t</span><span class="p">,</span> lat<span class="o">=</span>xy<span class="o">$</span>y<span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="p">,</span> useRefraction<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span>altitude<span class="p">,</span>
-                   interval<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>t0 <span class="o">+</span> <span class="m">3600</span><span class="o">*</span><span class="kt">c</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span><span class="m">5</span><span class="p">)))</span><span class="o">$</span>root
-sunrise <span class="o">&lt;-</span> numberAsPOSIXct<span class="p">(</span>sunrise<span class="p">)</span>
-azimuth <span class="o">&lt;-</span> <span class="m">90</span> <span class="o">-</span> sunAngle<span class="p">(</span>sunrise<span class="p">,</span> lat<span class="o">=</span>xy<span class="o">$</span>y<span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="p">)</span><span class="o">$</span>azimuth
-</pre></div>
-</td></tr></table>
+6
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">sunrise</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
+                   </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">useRefraction</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="o">$</span><span class="n">altitude</span><span class="p">,</span><span class="w">
+                   </span><span class="n">interval</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">t</span><span class="m">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">3600</span><span class="o">*</span><span class="nf">c</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span><span class="m">5</span><span class="p">)))</span><span class="o">$</span><span class="n">root</span><span class="w">
+</span><span class="n">sunrise</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numberAsPOSIXct</span><span class="p">(</span><span class="n">sunrise</span><span class="p">)</span><span class="w">
+</span><span class="n">azimuth</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">sunrise</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">azimuth</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>The span <code>D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
+<p>The span <code class="highlighter-rouge">D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>D <span class="o">&lt;-</span> D <span class="o">/</span> <span class="m">111</span>                           <span class="c1"># deg</span>
-Dlon <span class="o">&lt;-</span> D <span class="o">/</span> <span class="kp">cos</span><span class="p">(</span>xy<span class="o">$</span>y <span class="o">*</span> <span class="kc">pi</span> <span class="o">/</span> <span class="m">180</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">111</span><span class="w">                           </span><span class="c1"># deg</span><span class="w">
+</span><span class="n">Dlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Now it is time to show the results. The map is done with the <code>OpenStreetMap</code> package.  </p>
+<p>Now it is time to show the results. The map is done with the <code class="highlighter-rouge">OpenStreetMap</code> package.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
 13
-14</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>OpenStreetMap<span class="p">)</span>
-map <span class="o">&lt;-</span> openmap<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">+</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">-</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
-               <span class="kt">c</span><span class="p">(</span>lat<span class="o">=</span>xy<span class="o">$</span>y<span class="o">-</span>D<span class="o">/</span><span class="m">2</span><span class="p">,</span> lon<span class="o">=</span>xy<span class="o">$</span>x<span class="o">+</span>Dlon<span class="o">/</span><span class="m">2</span><span class="p">),</span>
-               minNumTiles<span class="o">=</span><span class="m">9</span><span class="p">)</span>
-plot<span class="p">(</span>map<span class="p">)</span>
-<span class="c1">## Draw lines along which sunrise or sunset can be sighted.</span>
-cx <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span>
-cy <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span>
-d <span class="o">&lt;-</span> <span class="kp">diff</span><span class="p">(</span>par<span class="p">(</span><span class="s">&#39;usr&#39;</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span> <span class="c1"># scales as the map</span>
-<span class="kr">for</span> <span class="p">(</span>o <span class="kr">in</span> d<span class="o">*</span><span class="kp">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">60</span><span class="p">))</span> <span class="p">{</span>
-    lines<span class="p">(</span>cx<span class="o">+</span><span class="kt">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span><span class="kp">cos</span><span class="p">(</span>azimuth<span class="o">*</span><span class="kc">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span>
-          cy<span class="o">+</span>o<span class="o">+</span><span class="kt">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span>d<span class="o">*</span><span class="kp">sin</span><span class="p">(</span>azimuth<span class="o">*</span><span class="kc">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-<span class="p">}</span>
-mtext<span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&quot;Solstice sunrise at &quot;</span><span class="p">,</span> <span class="kp">format</span><span class="p">(</span>sunrise<span class="m">-4</span><span class="o">*</span><span class="m">3600</span><span class="p">,</span> <span class="s">&quot;%Y-%m-%d %H:%M&quot;</span><span class="p">)),</span> font<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+14
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">OpenStreetMap</span><span class="p">)</span><span class="w">
+</span><span class="n">map</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">openmap</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="o">+</span><span class="n">D</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="o">-</span><span class="n">Dlon</span><span class="o">/</span><span class="m">2</span><span class="p">),</span><span class="w">
+               </span><span class="nf">c</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="o">-</span><span class="n">D</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="o">+</span><span class="n">Dlon</span><span class="o">/</span><span class="m">2</span><span class="p">),</span><span class="w">
+               </span><span class="n">minNumTiles</span><span class="o">=</span><span class="m">9</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">map</span><span class="p">)</span><span class="w">
+</span><span class="c1">## Draw lines along which sunrise or sunset can be sighted.</span><span class="w">
+</span><span class="n">cx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="s1">'usr'</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span><span class="w">
+</span><span class="n">cy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="s1">'usr'</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="s1">'usr'</span><span class="p">)[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">])</span><span class="w"> </span><span class="c1"># scales as the map</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">d</span><span class="o">*</span><span class="n">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">60</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">cx</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="n">azimuth</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span><span class="w">
+          </span><span class="n">cy</span><span class="o">+</span><span class="n">o</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="o">*</span><span class="nf">sin</span><span class="p">(</span><span class="n">azimuth</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Solstice sunrise at "</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">sunrise</span><span class="m">-4</span><span class="o">*</span><span class="m">3600</span><span class="p">,</span><span class="w"> </span><span class="s2">"%Y-%m-%d %H:%M"</span><span class="p">)),</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="m">2</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2013-12-21-solstice/solstice-map-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2013-12-21-solstice/solstice-map-1.png" alt="center" /></p>
 
 <h1 id="exercises">Exercises</h1>
 
 <ul>
-  <li>Try altering <code>t0</code> to see how closely this alignment holds over time.</li>
-  <li>As above, but setting <code>t0</code> to an equinox.</li>
+  <li>Try altering <code class="highlighter-rouge">t0</code> to see how closely this alignment holds over time.</li>
+  <li>As above, but setting <code class="highlighter-rouge">t0</code> to an equinox.</li>
   <li>Invent some sighting schemes for other times of the day, perhaps based on using
 local building (viewed at a distance computed from geometry) to check on
 noontime sun elevation.</li>

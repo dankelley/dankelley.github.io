@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -113,7 +113,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The <code>ocedata</code> R package has a dataset named <code>levitus</code>, which stores sea-surface temperature and salinity. Today, the development version of <code>ocedata</code> (available at <a href="https://github.com/dankelley/ocedata">github</a>) was updated from the 2009 version of this atlas to the 2013 version. Differences between the two datasets are illustrated here.</p>
+<p>The <code class="highlighter-rouge">ocedata</code> R package has a dataset named <code class="highlighter-rouge">levitus</code>, which stores sea-surface temperature and salinity. Today, the development version of <code class="highlighter-rouge">ocedata</code> (available at <a href="https://github.com/dankelley/ocedata">github</a>) was updated from the 2009 version of this atlas to the 2013 version. Differences between the two datasets are illustrated here.</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -121,51 +121,15 @@
 
 <p><strong>Temperature comparison.</strong></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="kp">load</span><span class="p">(</span><span class="s">&quot;~/ocedata-levitus-before-20150126.rda&quot;</span><span class="p">)</span>
-SST2009 <span class="o">&lt;-</span> levitus<span class="o">$</span>SST
-SST2009<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span> <span class="o">&lt;-</span> levitus<span class="o">$</span>SST<span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span>
-SST2009<span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span> <span class="o">&lt;-</span> levitus<span class="o">$</span>SST<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span>
-data<span class="p">(</span>levitus<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
-data<span class="p">(</span>coastlineWorld<span class="p">)</span>
-
-imagep<span class="p">(</span>levitus<span class="o">$</span>longitude<span class="p">,</span> levitus<span class="o">$</span>latitude<span class="p">,</span> levitus<span class="o">$</span>SST<span class="p">,</span> zlab<span class="o">=</span><span class="s">&quot;SST 2013&quot;</span><span class="p">,</span> col<span class="o">=</span>oceColorsJet<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-lines<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span>
-
-imagep<span class="p">(</span>levitus<span class="o">$</span>longitude<span class="p">,</span> levitus<span class="o">$</span>latitude<span class="p">,</span> levitus<span class="o">$</span>SST<span class="o">-</span>SST2009<span class="p">,</span> zlab<span class="o">=</span><span class="s">&quot;SST 2013-2009&quot;</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0.2</span><span class="p">))</span>
-lines<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span>
-
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-hist<span class="p">(</span>levitus<span class="o">$</span>SST<span class="o">-</span>SST2009<span class="p">,</span> breaks<span class="o">=</span><span class="m">100</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">),</span> xlab<span class="o">=</span><span class="s">&quot;Temperature change 2009-2013&quot;</span><span class="p">,</span> main<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p><strong>Salinity comparison.</strong></p>
-
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -173,25 +137,59 @@ hist<span class="p">(</span>levitus<span class="o">$</span>SST<span class="o">-<
 14
 15
 16
-17</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="kp">load</span><span class="p">(</span><span class="s">&quot;~/ocedata-levitus-before-20150126.rda&quot;</span><span class="p">)</span>
-SSS2009 <span class="o">&lt;-</span> levitus<span class="o">$</span>SSS
-SSS2009<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span> <span class="o">&lt;-</span> levitus<span class="o">$</span>SSS<span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span>
-SSS2009<span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span> <span class="o">&lt;-</span> levitus<span class="o">$</span>SSS<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span>
-data<span class="p">(</span>levitus<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;ocedata&quot;</span><span class="p">)</span>
-data<span class="p">(</span>coastlineWorld<span class="p">)</span>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">load</span><span class="p">(</span><span class="s2">"~/ocedata-levitus-before-20150126.rda"</span><span class="p">)</span><span class="w">
+</span><span class="n">SST2009</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="w">
+</span><span class="n">SST2009</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span><span class="w">
+</span><span class="n">SST2009</span><span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">levitus</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span><span class="w">
 
-imagep<span class="p">(</span>levitus<span class="o">$</span>longitude<span class="p">,</span> levitus<span class="o">$</span>latitude<span class="p">,</span> levitus<span class="o">$</span>SSS<span class="p">,</span> zlab<span class="o">=</span><span class="s">&quot;SSS 2013&quot;</span><span class="p">,</span> col<span class="o">=</span>oceColorsJet<span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-lines<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span>
-dev.off<span class="p">()</span>
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="p">,</span><span class="w"> </span><span class="n">zlab</span><span class="o">=</span><span class="s2">"SST 2013"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">oceColorsJet</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="w">
 
-imagep<span class="p">(</span>levitus<span class="o">$</span>longitude<span class="p">,</span> levitus<span class="o">$</span>latitude<span class="p">,</span> levitus<span class="o">$</span>SSS<span class="o">-</span>SSS2009<span class="p">,</span> zlab<span class="o">=</span><span class="s">&quot;SSS 2013-2009&quot;</span><span class="p">,</span> asp<span class="o">=</span><span class="m">1</span><span class="p">,</span> breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0.2</span><span class="p">))</span>
-lines<span class="p">(</span>coastlineWorld<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]],</span> coastlineWorld<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span>
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="o">-</span><span class="n">SST2009</span><span class="p">,</span><span class="w"> </span><span class="n">zlab</span><span class="o">=</span><span class="s2">"SST 2013-2009"</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0.2</span><span class="p">))</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="w">
 
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-hist<span class="p">(</span>levitus<span class="o">$</span>SSS<span class="o">-</span>SSS2009<span class="p">,</span> breaks<span class="o">=</span><span class="m">100</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">),</span> xlab<span class="o">=</span><span class="s">&quot;Salinity change 2009-2013&quot;</span><span class="p">,</span> main<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">hist</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span><span class="o">-</span><span class="n">SST2009</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">),</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Temperature change 2009-2013"</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Salinity comparison.</strong></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">load</span><span class="p">(</span><span class="s2">"~/ocedata-levitus-before-20150126.rda"</span><span class="p">)</span><span class="w">
+</span><span class="n">SSS2009</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="w">
+</span><span class="n">SSS2009</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span><span class="w">
+</span><span class="n">SSS2009</span><span class="p">[</span><span class="m">181</span><span class="o">:</span><span class="m">360</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">180</span><span class="p">,]</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">levitus</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span><span class="w">
+
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="p">,</span><span class="w"> </span><span class="n">zlab</span><span class="o">=</span><span class="s2">"SSS 2013"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">oceColorsJet</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="w">
+</span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="o">-</span><span class="n">SSS2009</span><span class="p">,</span><span class="w"> </span><span class="n">zlab</span><span class="o">=</span><span class="s2">"SSS 2013-2009"</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0.2</span><span class="p">))</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="w">
+
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">hist</span><span class="p">(</span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span><span class="o">-</span><span class="n">SSS2009</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">),</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Salinity change 2009-2013"</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 
@@ -199,13 +197,13 @@ hist<span class="p">(</span>levitus<span class="o">$</span>SSS<span class="o">-<
 
 <p><img src="http://dankelley.github.io/figs/2015-01-26-woa2013/T1.png" alt="center" /> 
 <img src="http://dankelley.github.io/figs/2015-01-26-woa2013/T2.png" alt="center" /> 
-<img src="http://dankelley.github.io/figs/2015-01-26-woa2013/T3.png" alt="center" /> </p>
+<img src="http://dankelley.github.io/figs/2015-01-26-woa2013/T3.png" alt="center" /></p>
 
 <p><strong>Salinity comparison.</strong></p>
 
 <p><img src="http://dankelley.github.io/figs/2015-01-26-woa2013/S1.png" alt="center" /> 
 <img src="http://dankelley.github.io/figs/2015-01-26-woa2013/S2.png" alt="center" /> 
-<img src="http://dankelley.github.io/figs/2015-01-26-woa2013/S3.png" alt="center" /> </p>
+<img src="http://dankelley.github.io/figs/2015-01-26-woa2013/S3.png" alt="center" /></p>
 
 
 

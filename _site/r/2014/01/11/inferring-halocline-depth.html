@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -101,21 +101,21 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which <em>dS/dp</em> is largest, where <em>S</em> is salinity and <em>p</em> is pressure (Kelley 2014 chapter 5).  Calculating the derivative using e.g. <code>diff(S)/diff(p)</code> can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.</p>
+<p>There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which <em>dS/dp</em> is largest, where <em>S</em> is salinity and <em>p</em> is pressure (Kelley 2014 chapter 5).  Calculating the derivative using e.g. <code class="highlighter-rouge">diff(S)/diff(p)</code> can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>Pasted below is test code that does this with the ctd dataset in the oce package. The function returns the pressure at which the smoothing spline has highest salinity derivative, and it can also plot the results (which is recommended). The parameter named deltap is used to set the value of <code>df</code> (degrees of freedom) for the spline. One might think of deltap as the thickness (in dbar) of the smoothing interval for each of the sub-components of the spline.</p>
+<p>Pasted below is test code that does this with the ctd dataset in the oce package. The function returns the pressure at which the smoothing spline has highest salinity derivative, and it can also plot the results (which is recommended). The parameter named deltap is used to set the value of <code class="highlighter-rouge">df</code> (degrees of freedom) for the spline. One might think of deltap as the thickness (in dbar) of the smoothing interval for each of the sub-components of the spline.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -135,41 +135,40 @@
 26
 27
 28
-29</code></pre></div></td><td class="code"><div class="highlight"><pre>findHalocline <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>ctd<span class="p">,</span> deltap<span class="o">=</span><span class="m">5</span><span class="p">,</span> plot<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-<span class="p">{</span>
-    S <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;salinity&#39;</span><span class="p">]]</span>
-    p <span class="o">&lt;-</span> ctd<span class="p">[[</span><span class="s">&#39;pressure&#39;</span><span class="p">]]</span>
-    n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>p<span class="p">)</span>
-    <span class="c1">## trim df to be no larger than n/2 and no smaller than 3.</span>
-    N <span class="o">&lt;-</span> deltap <span class="o">/</span> median<span class="p">(</span><span class="kp">diff</span><span class="p">(</span>p<span class="p">))</span>
-    df <span class="o">&lt;-</span> <span class="kp">min</span><span class="p">(</span>n<span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="kp">max</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> n <span class="o">/</span> N<span class="p">))</span>
-    spline <span class="o">&lt;-</span> smooth.spline<span class="p">(</span>S<span class="o">~</span>p<span class="p">,</span> df<span class="o">=</span>df<span class="p">)</span>
-    SS <span class="o">&lt;-</span> predict<span class="p">(</span>spline<span class="p">,</span> p<span class="p">)</span>
-    dSSdp <span class="o">&lt;-</span> predict<span class="p">(</span>spline<span class="p">,</span> p<span class="p">,</span> deriv<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-    H <span class="o">&lt;-</span> p<span class="p">[</span><span class="kp">which.max</span><span class="p">(</span>dSSdp<span class="o">$</span>y<span class="p">)]</span>
-    <span class="kr">if</span> <span class="p">(</span>plot<span class="p">)</span> <span class="p">{</span>
-        par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
-        plotProfile<span class="p">(</span>ctd<span class="p">,</span> xtype<span class="o">=</span><span class="s">&quot;salinity&quot;</span><span class="p">)</span>
-        lines<span class="p">(</span>SS<span class="o">$</span>y<span class="p">,</span> SS<span class="o">$</span>x<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-        abline<span class="p">(</span>h<span class="o">=</span>H<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-        mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;%.2f m&quot;</span><span class="p">,</span> H<span class="p">),</span> side<span class="o">=</span><span class="m">4</span><span class="p">,</span> at<span class="o">=</span>H<span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
-        mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot; deltap: %.0f, N: %.0f, df: %.0f&quot;</span><span class="p">,</span> deltap<span class="p">,</span> N<span class="p">,</span> df<span class="p">),</span>
-              side<span class="o">=</span><span class="m">1</span><span class="p">,</span> line<span class="o">=</span><span class="m">-1</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="kr">return</span><span class="p">(</span>H<span class="p">)</span>
-<span class="p">}</span>
+29
+</pre></td><td class="code"><pre><span class="n">findHalocline</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="n">deltap</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ctd</span><span class="p">[[</span><span class="s1">'salinity'</span><span class="p">]]</span><span class="w">
+    </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ctd</span><span class="p">[[</span><span class="s1">'pressure'</span><span class="p">]]</span><span class="w">
+    </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">
+    </span><span class="c1">## trim df to be no larger than n/2 and no smaller than 3.</span><span class="w">
+    </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">deltap</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">median</span><span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w">
+    </span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">N</span><span class="p">))</span><span class="w">
+    </span><span class="n">spline</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">smooth.spline</span><span class="p">(</span><span class="n">S</span><span class="o">~</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="w">
+    </span><span class="n">SS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">spline</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w">
+    </span><span class="n">dSSdp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">spline</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">deriv</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">which.max</span><span class="p">(</span><span class="n">dSSdp</span><span class="o">$</span><span class="n">y</span><span class="p">)]</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+        </span><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="n">xtype</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">)</span><span class="w">
+        </span><span class="n">lines</span><span class="p">(</span><span class="n">SS</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">SS</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
+        </span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span><span class="w">
+        </span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"%.2f m"</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span><span class="w">
+        </span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">" deltap: %.0f, N: %.0f, df: %.0f"</span><span class="p">,</span><span class="w"> </span><span class="n">deltap</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">),</span><span class="w">
+              </span><span class="n">side</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nf">return</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
   
-<span class="c1"># Plot two panels to see influence of deltap.</span>
-par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-data<span class="p">(</span>ctd<span class="p">)</span>
-findHalocline<span class="p">(</span>ctd<span class="p">)</span>
-findHalocline<span class="p">(</span>ctd<span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+</span><span class="c1"># Plot two panels to see influence of deltap.</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">findHalocline</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">findHalocline</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 
-<p>The graph shows results for a test dataset provided with the oce package, using two values for <code>deltap</code>.</p>
+<p>The graph shows results for a test dataset provided with the oce package, using two values for <code class="highlighter-rouge">deltap</code>.</p>
 
 <p><img src="/assets/halocline-depth.png" alt="graph of halocline depth" /></p>
 

@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -104,27 +104,24 @@ results.</p>
 <p>For example, one might like to explain how close the computed
 integral of the Witch of Agnesi function</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>woa <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> a<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="m">8</span> <span class="o">*</span> a<span class="o">^</span><span class="m">3</span> <span class="o">/</span> <span class="p">(</span>x<span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="m">4</span><span class="o">*</span>a<span class="o">^</span><span class="m">2</span><span class="p">)</span>
-integrate<span class="p">(</span>woa<span class="p">,</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="kc">Inf</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">woa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">integrate</span><span class="p">(</span><span class="n">woa</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## 12.56637 with absolute error &lt; 1.3e-09</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## 12.56637 with absolute error &lt; 1.3e-09</code></pre></figure>
 
 <p>is to the true value of $4\pi$. One way to do that is to compute the mismatch</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre>estimate <span class="o">&lt;-</span> integrate<span class="p">(</span>woa<span class="p">,</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="kc">Inf</span><span class="p">)</span><span class="o">$</span>value
-theory <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">*</span> <span class="kc">pi</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">estimate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">integrate</span><span class="p">(</span><span class="n">woa</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="o">$</span><span class="n">value</span><span class="w">
+</span><span class="n">theory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>and to write something like
-<code>
-\dots the misfit is \Sexpr{abs(estimate-theory)}
-</code>
-in latex. However, the slew of digits is not especially useful, and the
+<p>and to write something like</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\dots the misfit is \Sexpr{abs(estimate-theory)}
+</code></pre></div></div>
+<p>in latex. However, the slew of digits is not especially useful, and the
 computer-type exponential notation is not conventional in written work.</p>
 
 <p>It would be good to have a function that writes such results in latex format.</p>
@@ -133,15 +130,15 @@ computer-type exponential notation is not conventional in written work.</p>
 
 <p>A trial function is below.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -150,26 +147,25 @@ computer-type exponential notation is not conventional in written work.</p>
 15
 16
 17
-18</code></pre></div></td><td class="code"><div class="highlight"><pre>scinot <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> digits<span class="o">=</span><span class="m">2</span><span class="p">,</span> showDollar<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-<span class="p">{</span>
-    sign <span class="o">&lt;-</span> <span class="s">&quot;&quot;</span>
-    <span class="kr">if</span> <span class="p">(</span>x <span class="o">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
-        sign <span class="o">&lt;-</span> <span class="s">&quot;-&quot;</span>
-        x <span class="o">&lt;-</span> <span class="o">-</span>x
-    <span class="p">}</span>
-    exponent <span class="o">&lt;-</span> <span class="kp">floor</span><span class="p">(</span><span class="kp">log10</span><span class="p">(</span>x<span class="p">))</span>
-    <span class="kr">if</span> <span class="p">(</span>exponent<span class="p">)</span> <span class="p">{</span>
-        xx <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="o">^</span>exponent<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
-        e <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;\\\\times 10^{&quot;</span><span class="p">,</span> <span class="kp">as.integer</span><span class="p">(</span>exponent<span class="p">),</span> <span class="s">&quot;}&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-        xx <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>x<span class="p">,</span> digits<span class="o">=</span>digits<span class="p">)</span>
-        e <span class="o">&lt;-</span> <span class="s">&quot;&quot;</span>
-    <span class="p">}</span>
-    <span class="kr">if</span> <span class="p">(</span>showDollar<span class="p">)</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">,</span> <span class="kp">sign</span><span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-    <span class="kr">else</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">sign</span><span class="p">,</span> xx<span class="p">,</span> e<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+18
+</pre></td><td class="code"><pre><span class="n">scinot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">showDollar</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">sign</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">sign</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"-"</span><span class="w">
+        </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">x</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="n">exponent</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">xx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="n">exponent</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="n">digits</span><span class="p">)</span><span class="w">
+        </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="s2">"\\\\times 10^{"</span><span class="p">,</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">exponent</span><span class="p">),</span><span class="w"> </span><span class="s2">"}"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">xx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="n">digits</span><span class="p">)</span><span class="w">
+        </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">showDollar</span><span class="p">)</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="s2">"$"</span><span class="p">,</span><span class="w"> </span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="s2">"$"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+    </span><span class="k">else</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>and a latex/sweave test use is</p>
 <pre>

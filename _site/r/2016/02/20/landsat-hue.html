@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -107,7 +107,7 @@
 <h1 id="introduction">Introduction</h1>
 
 <p>I posted an oce issue recently [1] that indicated my displeasure with the
-present defaults for the hues of Landsat plots that use <code>band="terralook"</code>.
+present defaults for the hues of Landsat plots that use <code class="highlighter-rouge">band="terralook"</code>.
 Others have reported similar problems, and this was enough to motivate some
 experimentation.</p>
 
@@ -126,7 +126,7 @@ should be blueish, greenish, or grayish.</p>
 <p>The scene also does not contain much in the way of red reference material, nor
 yellow. I suppose other Landsat images show fields or deserts that would be
 good for such colours, and I will on other people working on such domains to
-let me know whether <code>plot.landsat</code> will need further adjustment for those hues.</p>
+let me know whether <code class="highlighter-rouge">plot.landsat</code> will need further adjustment for those hues.</p>
 
 <p>In my reference images, I have three main elements: green areas, snow-covered
 areas, which should have a light and neutral hue, and asphalt-covered areas
@@ -146,15 +146,15 @@ into the git repository holding this blog, so that savvy readers can reproduce
 the other steps of this posting without downloading 2Gb worth of Landsat
 files.)</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -169,46 +169,45 @@ files.)</p>
 21
 22
 23
-24</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="c1">## 1. Create local-view datasets</span>
-Hc <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-63.57</span><span class="p">,</span> <span class="m">44.63</span><span class="p">)</span>                 <span class="c1"># south end of Halifax, NS</span>
-Hd <span class="o">&lt;-</span> <span class="m">0.025</span> <span class="o">*</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="kp">cos</span><span class="p">(</span><span class="kc">pi</span><span class="o">*</span>Hc<span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="m">180</span><span class="p">),</span> <span class="m">1</span><span class="p">)</span> <span class="c1"># approx 5 km box</span>
-band <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;green&quot;</span><span class="p">,</span> <span class="s">&quot;nir&quot;</span><span class="p">)</span> <span class="c1"># lets us plot &#39;terralook&#39;</span>
-<span class="c1">## Wintertime</span>
-<span class="kr">if</span> <span class="p">(</span><span class="m">0</span><span class="o">==</span><span class="kp">length</span><span class="p">(</span><span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^Hw.rda$&quot;</span><span class="p">)))</span> <span class="p">{</span>
-    w <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80080292014065LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
-    Hw <span class="o">&lt;-</span> landsatTrim<span class="p">(</span>w<span class="p">,</span> ll<span class="o">=</span>Hc<span class="o">-</span>Hd<span class="p">,</span> ur<span class="o">=</span>Hc<span class="o">+</span>Hd<span class="p">)</span>
-    <span class="kp">save</span><span class="p">(</span>Hw<span class="p">,</span> file<span class="o">=</span><span class="s">&quot;Hw.rda&quot;</span><span class="p">)</span>
-    <span class="kp">rm</span><span class="p">(</span>w<span class="p">)</span>
-<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-    <span class="kp">load</span><span class="p">(</span><span class="s">&quot;Hw.rda&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+24
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="c1">## 1. Create local-view datasets</span><span class="w">
+</span><span class="n">Hc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-63.57</span><span class="p">,</span><span class="w"> </span><span class="m">44.63</span><span class="p">)</span><span class="w">                 </span><span class="c1"># south end of Halifax, NS</span><span class="w">
+</span><span class="n">Hd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.025</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="nf">cos</span><span class="p">(</span><span class="nb">pi</span><span class="o">*</span><span class="n">Hc</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="m">180</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># approx 5 km box</span><span class="w">
+</span><span class="n">band</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nir"</span><span class="p">)</span><span class="w"> </span><span class="c1"># lets us plot 'terralook'</span><span class="w">
+</span><span class="c1">## Wintertime</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="o">==</span><span class="nf">length</span><span class="p">(</span><span class="n">list.files</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"^Hw.rda$"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"/data/archive/landsat/LC80080292014065LGN00"</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="n">band</span><span class="p">)</span><span class="w">
+    </span><span class="n">Hw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">landsatTrim</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">ll</span><span class="o">=</span><span class="n">Hc</span><span class="o">-</span><span class="n">Hd</span><span class="p">,</span><span class="w"> </span><span class="n">ur</span><span class="o">=</span><span class="n">Hc</span><span class="o">+</span><span class="n">Hd</span><span class="p">)</span><span class="w">
+    </span><span class="n">save</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s2">"Hw.rda"</span><span class="p">)</span><span class="w">
+    </span><span class="n">rm</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">load</span><span class="p">(</span><span class="s2">"Hw.rda"</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<span class="c1">## Summertime</span>
-<span class="kr">if</span> <span class="p">(</span><span class="m">0</span><span class="o">==</span><span class="kp">length</span><span class="p">(</span><span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^Hs.rda$&quot;</span><span class="p">)))</span> <span class="p">{</span>
-    s <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80070292014170LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
-    Hs <span class="o">&lt;-</span> landsatTrim<span class="p">(</span>s<span class="p">,</span> ll<span class="o">=</span>Hc<span class="o">-</span>Hd<span class="p">,</span> ur<span class="o">=</span>Hc<span class="o">+</span>Hd<span class="p">)</span>
-    <span class="kp">save</span><span class="p">(</span>Hs<span class="p">,</span> file<span class="o">=</span><span class="s">&quot;Hs.rda&quot;</span><span class="p">)</span>
-    <span class="kp">rm</span><span class="p">(</span>s<span class="p">)</span>
-<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-    <span class="kp">load</span><span class="p">(</span><span class="s">&quot;Hs.rda&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+</span><span class="c1">## Summertime</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="o">==</span><span class="nf">length</span><span class="p">(</span><span class="n">list.files</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"^Hs.rda$"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"/data/archive/landsat/LC80070292014170LGN00"</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="n">band</span><span class="p">)</span><span class="w">
+    </span><span class="n">Hs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">landsatTrim</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ll</span><span class="o">=</span><span class="n">Hc</span><span class="o">-</span><span class="n">Hd</span><span class="p">,</span><span class="w"> </span><span class="n">ur</span><span class="o">=</span><span class="n">Hc</span><span class="o">+</span><span class="n">Hd</span><span class="p">)</span><span class="w">
+    </span><span class="n">save</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s2">"Hs.rda"</span><span class="p">)</span><span class="w">
+    </span><span class="n">rm</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">load</span><span class="p">(</span><span class="s2">"Hs.rda"</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>At this stage, we have <code>landsat-class</code> objects named <code>Hw</code> and <code>Hs</code> to work
-with. It is convenient to set up a <code>demo</code> function that will plot a four-panel
+<p>At this stage, we have <code class="highlighter-rouge">landsat-class</code> objects named <code class="highlighter-rouge">Hw</code> and <code class="highlighter-rouge">Hs</code> to work
+with. It is convenient to set up a <code class="highlighter-rouge">demo</code> function that will plot a four-panel
 plot.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -219,30 +218,29 @@ plot.</p>
 17
 18
 19
-20</code></pre></div></td><td class="code"><div class="highlight"><pre>demo <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">,</span> name<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">missing</span><span class="p">(</span>name<span class="p">))</span> png<span class="p">(</span>name<span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">3.1</span><span class="p">,</span> res<span class="o">=</span><span class="m">150</span><span class="p">)</span>
-    par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-    mar <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.25</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.25</span><span class="p">)</span>
-    mar <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
-    axes <span class="o">&lt;-</span> <span class="kc">TRUE</span>
-    cex <span class="o">&lt;-</span> <span class="m">0.8</span>
-    plot<span class="p">(</span>Hw<span class="p">,</span> band<span class="o">=</span><span class="s">&#39;terralook&#39;</span><span class="p">,</span> red.f<span class="o">=</span>red.f<span class="p">,</span> green.f<span class="o">=</span>green.f<span class="p">,</span> blue.f<span class="o">=</span>blue.f<span class="p">,</span>
-         mar<span class="o">=</span>mar<span class="p">,</span> axes<span class="o">=</span>axes<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;red.f=%g, green.f=%g, blue.f=%g&quot;</span><span class="p">,</span> red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">),</span>
-          side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    mtext<span class="p">(</span><span class="kp">format</span><span class="p">(</span>Hw<span class="p">[[</span><span class="s">&#39;time&#39;</span><span class="p">]],</span> <span class="s">&quot;%B %Y&quot;</span><span class="p">),</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    plot<span class="p">(</span>Hs<span class="p">,</span> band<span class="o">=</span><span class="s">&#39;terralook&#39;</span><span class="p">,</span> red.f<span class="o">=</span>red.f<span class="p">,</span> green.f<span class="o">=</span>green.f<span class="p">,</span> blue.f<span class="o">=</span>blue.f<span class="p">,</span>
-         mar<span class="o">=</span>mar<span class="p">,</span> axes<span class="o">=</span>axes<span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;red.f=%g, green.f=%g, blue.f=%g&quot;</span><span class="p">,</span> red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">),</span>
-          side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    mtext<span class="p">(</span><span class="kp">format</span><span class="p">(</span>Hs<span class="p">[[</span><span class="s">&#39;time&#39;</span><span class="p">]],</span> <span class="s">&quot;%B %Y&quot;</span><span class="p">),</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">,</span> cex<span class="o">=</span>cex<span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">missing</span><span class="p">(</span>name<span class="p">))</span> dev.off<span class="p">()</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
+20
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">missing</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="n">png</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="m">3.1</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="m">150</span><span class="p">)</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w">
+    </span><span class="n">mar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span><span class="w">
+    </span><span class="n">mar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
+    </span><span class="n">axes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+    </span><span class="n">cex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s1">'terralook'</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="n">blue.f</span><span class="p">,</span><span class="w">
+         </span><span class="n">mar</span><span class="o">=</span><span class="n">mar</span><span class="p">,</span><span class="w"> </span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"red.f=%g, green.f=%g, blue.f=%g"</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="p">),</span><span class="w">
+          </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="n">Hw</span><span class="p">[[</span><span class="s1">'time'</span><span class="p">]],</span><span class="w"> </span><span class="s2">"%B %Y"</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s1">'terralook'</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="n">blue.f</span><span class="p">,</span><span class="w">
+         </span><span class="n">mar</span><span class="o">=</span><span class="n">mar</span><span class="p">,</span><span class="w"> </span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"red.f=%g, green.f=%g, blue.f=%g"</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="p">),</span><span class="w">
+          </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="n">Hs</span><span class="p">[[</span><span class="s1">'time'</span><span class="p">]],</span><span class="w"> </span><span class="s2">"%B %Y"</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">missing</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Now, we can try some tests. Leaving out <code>name</code> argument will produce
+<p>Now, we can try some tests. Leaving out <code class="highlighter-rouge">name</code> argument will produce
 interactive plots, and indeed that is how I selected the values I show below.
 Note that I have hard-coded the plot sizes, rather than use Jekyll and
 Rmarkdown to do that.</p>
@@ -252,11 +250,10 @@ Rmarkdown to do that.</p>
 <p>Present-day default, much too green overall. Look especially at the
 snow-covered citadel/commons region near 63.58W and 44.65N.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-1.png&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-1.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-1.png" alt="center" /></p>
 
 <p><strong>Case 2.</strong></p>
 
@@ -265,11 +262,10 @@ Point Pleasant Park, and along the railway cut line that crosses the city a
 little south of 44.63N. However, there a slight yellow-reddish hue overall (see
 especially the snow-covered citadel).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-2.png&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-2.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-2.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-2.png" alt="center" /></p>
 
 <p><strong>Case 3.</strong></p>
 
@@ -298,15 +294,14 @@ for both the green-gray domain of Halifax and some other domain.  If any reader
 wants to help with that, please contact me directly (since I do not have
 comments turned on for this blog).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>demo<span class="p">(</span><span class="m">1.7</span><span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="s">&quot;2016-02-20-landsat-3.png&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-3.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-3.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2016-02-20-landsat-3.png" alt="center" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>These tests suggest that the values <code>red.f=1.7</code>, <code>green.f=1.7</code> and <code>blue.f=6</code>
+<p>These tests suggest that the values <code class="highlighter-rouge">red.f=1.7</code>, <code class="highlighter-rouge">green.f=1.7</code> and <code class="highlighter-rouge">blue.f=6</code>
 may be more reasonable as defaults than the present values of 2, 2, and 5,
 respectively.  I will wait a week for any personal advice from colleagues, and
 consider switching the defaults after that time.</p>
