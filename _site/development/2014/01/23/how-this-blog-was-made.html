@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -101,22 +101,22 @@
 
 <p>Any errors on the github server can yield blank pages, and the time delay of a minute or so makes it important to get things right locally before uploading.  The solution is simple: run a local jekyll server with the unix command</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve --watch</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve <span class="nt">--watch</span></code></pre></figure>
 
 <p>If there are errors, try stopping the server and running</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll build --trace</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll build <span class="nt">--trace</span></code></pre></figure>
 
-<p>Once things work well locally, do </p>
+<p>Once things work well locally, do</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">make
-git add .
-git commit -m MSG
-git push</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> MSG
+git push</code></pre></figure>
 
 <p>to upload to github.</p>
 
-<p>The method of generating tags (which I got from ocramius, who got it from erjjones) puts the tag-list files into <code>_site/tags</code> but jekyll will not serve the files from there.  They must go into <code>tags</code> at the top level.  The solution I am using is to continue using the ruby script that I found for creating tags, but to use a Makefile to shift the file locations.</p>
+<p>The method of generating tags (which I got from ocramius, who got it from erjjones) puts the tag-list files into <code class="highlighter-rouge">_site/tags</code> but jekyll will not serve the files from there.  They must go into <code class="highlighter-rouge">tags</code> at the top level.  The solution I am using is to continue using the ruby script that I found for creating tags, but to use a Makefile to shift the file locations.</p>
 
 
 

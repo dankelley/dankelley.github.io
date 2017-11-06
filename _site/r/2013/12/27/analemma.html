@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -96,27 +96,26 @@
 
 <p>Continuing on the theme of solar angles, the code given below produces an analemma diagram similar to that of Lynch (2012, figure 2).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-loc <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>lon<span class="o">=</span><span class="m">-0.0015</span><span class="p">,</span> lat<span class="o">=</span><span class="m">51.4778</span><span class="p">)</span>  <span class="c1"># Greenwich Observatory</span>
-t <span class="o">&lt;-</span> <span class="kp">seq.POSIXt</span><span class="p">(</span><span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2014-01-01 12:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">),</span>
-                <span class="kp">as.POSIXct</span><span class="p">(</span><span class="s">&quot;2015-01-01 12:00:00&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;UTC&quot;</span><span class="p">),</span>
-                by<span class="o">=</span><span class="s">&quot;1 d&quot;</span><span class="p">)</span>
-sa <span class="o">&lt;-</span> sunAngle<span class="p">(</span><span class="kp">t</span><span class="p">,</span> lon<span class="o">=</span>loc<span class="o">$</span>lon<span class="p">,</span> lat<span class="o">=</span>loc<span class="o">$</span>lat<span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="c1"># tighten margins</span>
-plot<span class="p">(</span>sa<span class="o">$</span>azimuth<span class="p">,</span> sa<span class="o">$</span>altitude<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">,</span>
-     xlab<span class="o">=</span><span class="s">&quot;Azimuth&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Altitude&quot;</span><span class="p">)</span>
-grid<span class="p">()</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">loc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="m">-0.0015</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">51.4778</span><span class="p">)</span><span class="w">  </span><span class="c1"># Greenwich Observatory</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq.POSIXt</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2014-01-01 12:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">),</span><span class="w">
+                </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2015-01-01 12:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">),</span><span class="w">
+                </span><span class="n">by</span><span class="o">=</span><span class="s2">"1 d"</span><span class="p">)</span><span class="w">
+</span><span class="n">sa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">loc</span><span class="o">$</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">loc</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="c1"># tighten margins</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sa</span><span class="o">$</span><span class="n">azimuth</span><span class="p">,</span><span class="w"> </span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'p'</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w">
+     </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Azimuth"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Altitude"</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><a href="/assets/analemma.png"><img src="/assets/analemma-thumbnail.png" alt="graph" /></a></p>
 

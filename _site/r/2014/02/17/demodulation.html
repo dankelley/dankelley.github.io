@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -98,87 +98,83 @@
 
 <p>First, create some fake data, a carrier signal with period 10, modulated over a long timescale, and with phase drifting linearly over time.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</code></pre></div></td><td class="code"><div class="highlight"><pre>period <span class="o">&lt;-</span> <span class="m">10</span>
-fc <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">/</span> period
-fs <span class="o">&lt;-</span> <span class="m">1</span>
-n <span class="o">&lt;-</span> <span class="m">200</span>
-t <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span>n
-AMP <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">+</span> <span class="kp">sin</span><span class="p">(</span><span class="m">0.5</span> <span class="o">*</span> fc <span class="o">*</span> <span class="kp">t</span><span class="p">)</span>
-PH  <span class="o">&lt;-</span> <span class="m">50</span> <span class="o">*</span> t <span class="o">/</span> <span class="kp">max</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span>
-noise <span class="o">&lt;-</span> rnorm<span class="p">(</span>n<span class="p">,</span> sd<span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
-signal <span class="o">&lt;-</span> AMP <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> t <span class="o">+</span> PH<span class="o">*</span><span class="kc">pi</span><span class="o">/</span><span class="m">180</span><span class="p">)</span>
-x <span class="o">&lt;-</span> signal <span class="o">+</span> noise
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="n">period</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="n">fc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">period</span><span class="w">
+</span><span class="n">fs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">200</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="w">
+</span><span class="n">AMP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="m">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
+</span><span class="n">PH</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
+</span><span class="n">noise</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span><span class="w">
+</span><span class="n">signal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">AMP</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PH</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">noise</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, create the base sine and cosine time-series, varying with the known frequency, and plot these.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</code></pre></div></td><td class="code"><div class="highlight"><pre>xc <span class="o">&lt;-</span> x <span class="o">*</span> <span class="kp">cos</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> <span class="kp">t</span><span class="p">)</span>
-xs <span class="o">&lt;-</span> x <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> <span class="kp">t</span><span class="p">)</span>
-par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.75</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> mfcol<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> x<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> <span class="kp">cos</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> <span class="kp">t</span><span class="p">),</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> xc<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+6
+</pre></td><td class="code"><pre><span class="n">xc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
+</span><span class="n">xs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.75</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">mfcol</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">xc</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-signal-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-signal-1.png" alt="center" /></p>
 
-<p>Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab <code>demod()</code> function (reference 1).</p>
+<p>Smooth the results, and infer amplitude and phase.  Here, the butterworth filter parameters are smoothing more than in the Matlab <code class="highlighter-rouge">demod()</code> function (reference 1).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</code></pre></div></td><td class="code"><div class="highlight"><pre>w <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> fc <span class="o">/</span> fs
-<span class="c1">## Here, we use more smoothing</span>
-w <span class="o">&lt;-</span> w <span class="o">/</span> <span class="m">5</span>
-filter <span class="o">&lt;-</span> signal<span class="o">::</span>butter<span class="p">(</span><span class="m">5</span><span class="p">,</span> w<span class="p">)</span>    <span class="c1"># FIXME: why extras on w?</span>
-xcs <span class="o">&lt;-</span> signal<span class="o">::</span>filtfilt<span class="p">(</span>filter<span class="p">,</span> xc<span class="p">)</span>
-xss <span class="o">&lt;-</span> signal<span class="o">::</span>filtfilt<span class="p">(</span>filter<span class="p">,</span> xs<span class="p">)</span>
-amp <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> <span class="kp">sqrt</span><span class="p">(</span>xcs<span class="o">^</span><span class="m">2</span> <span class="o">+</span> xss<span class="o">^</span><span class="m">2</span><span class="p">)</span>
-phase <span class="o">&lt;-</span> <span class="m">180</span> <span class="o">/</span> <span class="kc">pi</span> <span class="o">*</span> <span class="kp">atan2</span><span class="p">(</span>xcs<span class="p">,</span> xss<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+8
+</pre></td><td class="code"><pre><span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">fs</span><span class="w">
+</span><span class="c1">## Here, we use more smoothing</span><span class="w">
+</span><span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="n">filter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">signal</span><span class="o">::</span><span class="n">butter</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">    </span><span class="c1"># FIXME: why extras on w?</span><span class="w">
+</span><span class="n">xcs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">signal</span><span class="o">::</span><span class="n">filtfilt</span><span class="p">(</span><span class="n">filter</span><span class="p">,</span><span class="w"> </span><span class="n">xc</span><span class="p">)</span><span class="w">
+</span><span class="n">xss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">signal</span><span class="o">::</span><span class="n">filtfilt</span><span class="p">(</span><span class="n">filter</span><span class="p">,</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span><span class="w">
+</span><span class="n">amp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">xcs</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">xss</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">phase</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">atan2</span><span class="p">(</span><span class="n">xcs</span><span class="p">,</span><span class="w"> </span><span class="n">xss</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Finally, show the amplitude and phase (black for supplied, red for inferred), as well as the original time series (again, black) and the reconstructed signal (red).</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.75</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> mgp<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.7</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> mfcol<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> AMP<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> amp<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+8
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.75</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">mfcol</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">AMP</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
 
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> PH<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>
-lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> phase<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-plot<span class="p">(</span><span class="kp">t</span><span class="p">,</span> x<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">20</span><span class="p">)</span>
-lines<span class="p">(</span><span class="kp">t</span><span class="p">,</span> amp <span class="o">*</span> <span class="kp">sin</span><span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="kc">pi</span> <span class="o">*</span> fc <span class="o">*</span> t <span class="o">+</span> phase<span class="o">*</span><span class="kc">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span> col<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">PH</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">phase</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">phase</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-results-1.png" alt="center" /> </p>
+<p><img src="http://dankelley.github.io/figs/2014-02-17-demodulation/demodulation-results-1.png" alt="center" /></p>
 
 <p>Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in <a href="http://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html">a previous blog item</a>.</p>
 

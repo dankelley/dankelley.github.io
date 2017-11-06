@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -91,89 +91,82 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The base R system provides <code>lapply()</code> and related functions, and the package <code>plyr</code> provides alternatives that are worth considering.  It will be assumed that readers are familiar with <code>lapply()</code> and are willing to spend a few moments reading the <code>plyr</code> documentation, to see why the illustration here will use the <code>ldply()</code> function.</p>
+<p>The base R system provides <code class="highlighter-rouge">lapply()</code> and related functions, and the package <code class="highlighter-rouge">plyr</code> provides alternatives that are worth considering.  It will be assumed that readers are familiar with <code class="highlighter-rouge">lapply()</code> and are willing to spend a few moments reading the <code class="highlighter-rouge">plyr</code> documentation, to see why the illustration here will use the <code class="highlighter-rouge">ldply()</code> function.</p>
 
-<p>The test task will be extraction of latitude (and then both latitude and longitude) from the <code>section</code> dataset in the <code>oce</code> package.  (Users of that package may be aware that there is a built-in accessor for doing this, so results can easily be checked.)</p>
+<p>The test task will be extraction of latitude (and then both latitude and longitude) from the <code class="highlighter-rouge">section</code> dataset in the <code class="highlighter-rouge">oce</code> package.  (Users of that package may be aware that there is a built-in accessor for doing this, so results can easily be checked.)</p>
 
 <h1 id="methods">Methods</h1>
 
 <p>First, load the data</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-data<span class="p">(</span>section<span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">section</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, find latitudes using <code>lapply</code></p>
+<p>Next, find latitudes using <code class="highlighter-rouge">lapply</code></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>lat <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>section<span class="p">[[</span><span class="s">&quot;station&quot;</span><span class="p">]],</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]]))</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]]))</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, find latitudes with <code>ldply</code></p>
+<p>Next, find latitudes with <code class="highlighter-rouge">ldply</code></p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
-2</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>plyr<span class="p">)</span>
-lat <span class="o">&lt;-</span> ldply<span class="p">(</span>section<span class="p">[[</span><span class="s">&quot;station&quot;</span><span class="p">]],</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span><span class="w">
+</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 
-<p>The reader can check that the results match, although <code>ldply()</code> returns a data frame, not a vector as in the first method.  Tests of speed</p>
+<p>The reader can check that the results match, although <code class="highlighter-rouge">ldply()</code> returns a data frame, not a vector as in the first method.  Tests of speed</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>microbenchmark<span class="p">)</span>
-microbenchmark<span class="p">(</span>ldply<span class="p">(</span>section<span class="p">[[</span><span class="s">&quot;station&quot;</span><span class="p">]],</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])</span><span class="o">$</span>V1<span class="p">,</span> 
-    <span class="kp">unlist</span><span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>section<span class="p">[[</span><span class="s">&quot;station&quot;</span><span class="p">]],</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]])))</span>
-</pre></div>
-</td></tr></table>
+3
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span><span class="w">
+</span><span class="n">microbenchmark</span><span class="p">(</span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="o">$</span><span class="n">V</span><span class="m">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])))</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>yield the following</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
-7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">## Unit: milliseconds</span>
-<span class="c1">##                                                               expr   min</span>
-<span class="c1">##        ldply(section[[&quot;station&quot;]], function(x) x[[&quot;latitude&quot;]])$V1 18.99</span>
-<span class="c1">##  unlist(lapply(section[[&quot;station&quot;]], function(x) x[[&quot;latitude&quot;]])) 18.36</span>
-<span class="c1">##     lq median    uq   max neval</span>
-<span class="c1">##  20.26  20.56 21.02 36.05   100</span>
-<span class="c1">##  19.71  19.93 20.64 63.18   100</span>
-</pre></div>
-</td></tr></table>
+7
+</pre></td><td class="code"><pre><span class="c1">## Unit: milliseconds</span><span class="w">
+</span><span class="c1">##                                                               expr   min</span><span class="w">
+</span><span class="c1">##        ldply(section[["station"]], function(x) x[["latitude"]])$V1 18.99</span><span class="w">
+</span><span class="c1">##  unlist(lapply(section[["station"]], function(x) x[["latitude"]])) 18.36</span><span class="w">
+</span><span class="c1">##     lq median    uq   max neval</span><span class="w">
+</span><span class="c1">##  20.26  20.56 21.02 36.05   100</span><span class="w">
+</span><span class="c1">##  19.71  19.93 20.64 63.18   100</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>suggesting a difference too small to be of much practical interest.</p>
 
 <h1 id="discussion">Discussion</h1>
 
-<p>Since <code>ldply()</code> returns a data frame, it is more flexible than <code>unlist()</code>, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:</p>
+<p>Since <code class="highlighter-rouge">ldply()</code> returns a data frame, it is more flexible than <code class="highlighter-rouge">unlist()</code>, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>latlon <span class="o">&lt;-</span> ldply<span class="p">(</span>section<span class="p">[[</span><span class="s">&quot;station&quot;</span><span class="p">]],</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kt">c</span><span class="p">(</span>x<span class="p">[[</span><span class="s">&quot;latitude&quot;</span><span class="p">]],</span> x<span class="p">[[</span><span class="s">&quot;longitude&quot;</span><span class="p">]]))</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">latlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]]))</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>A station plot is produced as follows.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
-3</code></pre></div></td><td class="code"><div class="highlight"><pre>mapPlot<span class="p">(</span>coastlineWorld<span class="p">,</span> projection <span class="o">=</span> <span class="s">&quot;orthographic&quot;</span><span class="p">,</span> orientation <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">-40</span><span class="p">,</span> 
-    <span class="m">0</span><span class="p">))</span>
-mapPoints<span class="p">(</span>latlon<span class="o">$</span>V2<span class="p">,</span> latlon<span class="o">$</span>V1<span class="p">,</span> pch <span class="o">=</span> <span class="s">&quot;+&quot;</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+3
+</pre></td><td class="code"><pre><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orthographic"</span><span class="p">,</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">-40</span><span class="p">,</span><span class="w"> 
+    </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">mapPoints</span><span class="p">(</span><span class="n">latlon</span><span class="o">$</span><span class="n">V</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">latlon</span><span class="o">$</span><span class="n">V</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/plyr.png" alt="figure" /></p>
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>The effort of learning how to use the <code>plyr</code> package is likely to pay off in more flexible code, particularly because of the use of data frames in that package.  On this theme, note that the author of <code>plyr</code> is developing a similar package called <code>dplry</code>, which centres more closely on data frames and offers many new features; see <a href="http://blog.rstudio.org/2014/01/17/introducing-dplyr/">http://blog.rstudio.org/2014/01/17/introducing-dplyr/</a> for a blog item introducing <code>dplyr</code>.</p>
+<p>The effort of learning how to use the <code class="highlighter-rouge">plyr</code> package is likely to pay off in more flexible code, particularly because of the use of data frames in that package.  On this theme, note that the author of <code class="highlighter-rouge">plyr</code> is developing a similar package called <code class="highlighter-rouge">dplry</code>, which centres more closely on data frames and offers many new features; see <a href="http://blog.rstudio.org/2014/01/17/introducing-dplyr/">http://blog.rstudio.org/2014/01/17/introducing-dplyr/</a> for a blog item introducing <code class="highlighter-rouge">dplyr</code>.</p>
 
 
 

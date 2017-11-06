@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -101,55 +101,53 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Quite often I write <code>which(...)[1]</code> to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.</p>
+<p>Quite often I write <code class="highlighter-rouge">which(...)[1]</code> to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.</p>
 
 <h1 id="procedure">Procedure</h1>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
 13
 14
 15
-16</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>Rcpp<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>microbenchmark<span class="p">)</span>
-cppFunction<span class="p">(</span><span class="s">&#39;</span>
-<span class="s">            int firstZero(IntegerVector x) {</span>
-<span class="s">                int nx = x.size();</span>
-<span class="s">                for (int i = 0; i &lt; nx; ++i) {</span>
-<span class="s">                    if (0 == x[i]) {</span>
-<span class="s">                        return i+1;</span>
-<span class="s">                    }</span>
-<span class="s">                }</span>
-<span class="s">                return 0; // means none found</span>
-<span class="s">            }&#39;</span>
-            <span class="p">)</span>
-x <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">)</span>
-x<span class="p">[</span><span class="kp">seq.int</span><span class="p">(</span><span class="m">500</span><span class="p">,</span> <span class="m">10000</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
-microbenchmark<span class="p">(</span>firstZero<span class="p">(</span>x<span class="p">),</span> times<span class="o">=</span><span class="m">1000L</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+16
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">Rcpp</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span><span class="w">
+</span><span class="n">cppFunction</span><span class="p">(</span><span class="s1">'
+            int firstZero(IntegerVector x) {
+                int nx = x.size();
+                for (int i = 0; i &lt; nx; ++i) {
+                    if (0 == x[i]) {
+                        return i+1;
+                    }
+                }
+                return 0; // means none found
+            }'</span><span class="w">
+            </span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="p">[</span><span class="nf">seq.int</span><span class="p">(</span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="n">microbenchmark</span><span class="p">(</span><span class="n">firstZero</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="m">1000L</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
 ##          expr   min    lq median    uq  max neval
-##  firstZero(x) 23.46 23.75  23.87 24.14 1065  1000</code></pre></div>
+##  firstZero(x) 23.46 23.75  23.87 24.14 1065  1000</code></pre></figure>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>microbenchmark<span class="p">(</span><span class="kp">which</span><span class="p">(</span><span class="m">0</span><span class="o">==</span>x<span class="p">)[</span><span class="m">1</span><span class="p">],</span> times<span class="o">=</span><span class="m">1000L</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="m">0</span><span class="o">==</span><span class="n">x</span><span class="p">)[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="m">1000L</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
 ##              expr  min    lq median    uq  max neval
-##  which(0 == x)[1] 52.4 53.59  54.14 54.84 1124  1000</code></pre></div>
+##  which(0 == x)[1] 52.4 53.59  54.14 54.84 1124  1000</code></pre></figure>
 
 <h1 id="results">Results</h1>
 
@@ -161,7 +159,7 @@ times for the two methods.</p>
 
 <p>In light of variations in test results, and the added complexity of including
 C++ code in an R program, I advise carrying out data-tailored benchmarks before
-deciding to use Rcpp.  </p>
+deciding to use Rcpp.</p>
 
 <p>Note that the test does not account for the time to compile the C++ program,
 which can outweigh time savings in small problems.  However, this is irrelevant

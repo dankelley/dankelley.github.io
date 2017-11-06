@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -46,7 +46,7 @@
 
 <div class=topnav>
 
-<a class="pagination" href="/r/2016/10/10/election-usa-2016.html" title="2016 US election by education level">
+<a class="pagination" href="/r/2016/11/10/election-usa-2016.html" title="2016 US election by education level">
     Next <!-- &rarr; -->
 </a>
 
@@ -94,49 +94,48 @@
 
 
 
-<p><strong>Preface.</strong> This is my shortest blog item ever, showing in a few lines something that took me over an hour to realize: use <code>[[1]]</code> in refering expressions stored in variables.</p>
+<p><strong>Preface.</strong> This is my shortest blog item ever, showing in a few lines something that took me over an hour to realize: use <code class="highlighter-rouge">[[1]]</code> in refering expressions stored in variables.</p>
 
 <h1 id="introduction">Introduction</h1>
 
-<p>I wanted this for <code>oce</code>, which for <a href="https://github.com/dankelley/oce/issues/981">issue 981</a> required a method of extracting units from objects, and inserting the values into expressions being constructed for the <code>mtext</code> calls that write axis labels.</p>
+<p>I wanted this for <code class="highlighter-rouge">oce</code>, which for <a href="https://github.com/dankelley/oce/issues/981">issue 981</a> required a method of extracting units from objects, and inserting the values into expressions being constructed for the <code class="highlighter-rouge">mtext</code> calls that write axis labels.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The code says it all: use <code>[[1]]</code>.</p>
+<p>The code says it all: use <code class="highlighter-rouge">[[1]]</code>.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
 13
 14
 15
-16</code></pre></div></td><td class="code"><div class="highlight"><pre>par<span class="p">(</span>mar<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
-plot<span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> axes<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;n&#39;</span><span class="p">)</span>
+16
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">)</span><span class="w">
 
-<span class="c1">## Simple method</span>
-text<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="kp">expression</span><span class="p">(</span><span class="s">&quot;A [&quot;</span><span class="o">*</span>m<span class="o">/</span>s<span class="o">^</span><span class="m">2</span><span class="o">*</span><span class="s">&quot;]&quot;</span><span class="p">))</span>
+</span><span class="c1">## Simple method</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="s2">"A ["</span><span class="o">*</span><span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="o">^</span><span class="m">2</span><span class="o">*</span><span class="s2">"]"</span><span class="p">))</span><span class="w">
 
-<span class="c1">## Unit stored in an expression: naive approach.</span>
-u <span class="o">&lt;-</span> <span class="kp">expression</span><span class="p">(</span>m<span class="o">/</span>s<span class="o">^</span><span class="m">2</span><span class="p">)</span>
-text<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kp">bquote</span><span class="p">(</span><span class="s">&quot;B [&quot;</span><span class="o">*</span><span class="m">.</span><span class="p">(</span>u<span class="p">)</span><span class="o">*</span><span class="s">&quot;]&quot;</span><span class="p">))</span>
+</span><span class="c1">## Unit stored in an expression: naive approach.</span><span class="w">
+</span><span class="n">u</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">bquote</span><span class="p">(</span><span class="s2">"B ["</span><span class="o">*</span><span class="n">.</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="s2">"]"</span><span class="p">))</span><span class="w">
 
-<span class="c1">## Unit stored in an expression: note the [[1]] selection!</span>
-text<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="kp">bquote</span><span class="p">(</span><span class="s">&quot;C [&quot;</span><span class="o">*</span><span class="m">.</span><span class="p">(</span>u<span class="p">[[</span><span class="m">1</span><span class="p">]])</span><span class="o">*</span><span class="s">&quot;]&quot;</span><span class="p">))</span>
+</span><span class="c1">## Unit stored in an expression: note the [[1]] selection!</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">bquote</span><span class="p">(</span><span class="s2">"C ["</span><span class="o">*</span><span class="n">.</span><span class="p">(</span><span class="n">u</span><span class="p">[[</span><span class="m">1</span><span class="p">]])</span><span class="o">*</span><span class="s2">"]"</span><span class="p">))</span><span class="w">
 
-<span class="c1">## Unit stored in an oce-formatted list</span>
-U <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>unit<span class="o">=</span><span class="kp">expression</span><span class="p">(</span>m<span class="o">/</span>s<span class="o">^</span><span class="m">2</span><span class="p">),</span> scale<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-text<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="kp">bquote</span><span class="p">(</span><span class="s">&quot;D [&quot;</span><span class="o">*</span><span class="m">.</span><span class="p">(</span>U<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]])</span><span class="o">*</span><span class="s">&quot;]&quot;</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+</span><span class="c1">## Unit stored in an oce-formatted list</span><span class="w">
+</span><span class="n">U</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="nf">expression</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">scale</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">bquote</span><span class="p">(</span><span class="s2">"D ["</span><span class="o">*</span><span class="n">.</span><span class="p">(</span><span class="n">U</span><span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]])</span><span class="o">*</span><span class="s2">"]"</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2016-06-11-unit-expressions/unnamed-chunk-1-1.png" alt="center" /></p>
 

@@ -29,7 +29,7 @@
             <li><a href="/software.html">Software</a></li>
             
             
-            <li><a class="highlight" href="/blog">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
             
 
         </ul>
@@ -112,15 +112,15 @@ conclusions. Importantly, the present analysis revises the two Halifax
 examples, and adds a well-studied case for the Three Sisters peaks in the
 Oregon Cascades [1].</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
 10
 11
 12
@@ -168,76 +168,75 @@ Oregon Cascades [1].</p>
 54
 55
 56
-57</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>oce<span class="p">)</span>
-<span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^d$&quot;</span><span class="p">)))</span>
-    d <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80450292013225LGN00&quot;</span><span class="p">)</span>
+57
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">ls</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"^d$"</span><span class="p">)))</span><span class="w">
+    </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"/data/archive/landsat/LC80450292013225LGN00"</span><span class="p">)</span><span class="w">
 
-<span class="c1">## http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/</span>
+</span><span class="c1">## http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/</span><span class="w">
 
-L <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.24</span><span class="p">,</span> <span class="m">0.12</span><span class="p">)</span>
-threeSisters <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-121.73</span><span class="p">,</span> <span class="m">44.13</span><span class="p">)</span>
-ts <span class="o">&lt;-</span> landsatTrim<span class="p">(</span>d<span class="p">,</span> ll<span class="o">=</span>threeSisters<span class="o">-</span>L<span class="p">,</span> ur<span class="o">=</span>threeSisters<span class="o">+</span>L<span class="p">)</span>
+</span><span class="n">L</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.24</span><span class="p">,</span><span class="w"> </span><span class="m">0.12</span><span class="p">)</span><span class="w">
+</span><span class="n">threeSisters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-121.73</span><span class="p">,</span><span class="w"> </span><span class="m">44.13</span><span class="p">)</span><span class="w">
+</span><span class="n">ts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">landsatTrim</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">ll</span><span class="o">=</span><span class="n">threeSisters</span><span class="o">-</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">ur</span><span class="o">=</span><span class="n">threeSisters</span><span class="o">+</span><span class="n">L</span><span class="p">)</span><span class="w">
 
-demo <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">,</span> red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">,</span> offset<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> name<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> label<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="p">{</span>
-    dim <span class="o">&lt;-</span> <span class="kp">dim</span><span class="p">(</span>l<span class="p">[[</span><span class="s">&quot;red&quot;</span><span class="p">]])</span>
-    w <span class="o">&lt;-</span> <span class="m">6</span>
-    h <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>w <span class="o">*</span> <span class="kp">dim</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">/</span> <span class="kp">dim</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="m">2</span><span class="p">)</span> <span class="c1"># proper ratios can yield horiz. stripes</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">is.null</span><span class="p">(</span>name<span class="p">))</span>
-        png<span class="p">(</span>name<span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span>w<span class="p">,</span> height<span class="o">=</span>h<span class="p">,</span> res<span class="o">=</span><span class="m">100</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">9</span><span class="p">)</span>
-    plot<span class="p">(</span>l<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;terralook&quot;</span><span class="p">,</span> mar<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
-         red.f<span class="o">=</span>red.f<span class="p">,</span> green.f<span class="o">=</span>green.f<span class="p">,</span> blue.f<span class="o">=</span>blue.f<span class="p">,</span> offset<span class="o">=</span>offset<span class="p">)</span>
-    mtext<span class="p">(</span>label<span class="p">,</span> font<span class="o">=</span><span class="m">2</span><span class="p">,</span> side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-    mtext<span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;red.f=%g green.f=%g blue.f=%g offset=c(%g,%g,%g,%g)&quot;</span><span class="p">,</span>
-                  red.f<span class="p">,</span> green.f<span class="p">,</span> blue.f<span class="p">,</span> offset<span class="p">[</span><span class="m">1</span><span class="p">],</span> offset<span class="p">[</span><span class="m">2</span><span class="p">],</span> offset<span class="p">[</span><span class="m">3</span><span class="p">],</span> offset<span class="p">[</span><span class="m">4</span><span class="p">]),</span>
-          side<span class="o">=</span><span class="m">3</span><span class="p">,</span> line<span class="o">=</span><span class="m">0</span><span class="p">,</span> adj<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">is.null</span><span class="p">(</span>name<span class="p">))</span> dev.off<span class="p">()</span>
-<span class="p">}</span>
+</span><span class="n">demo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">dim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">l</span><span class="p">[[</span><span class="s2">"red"</span><span class="p">]])</span><span class="w">
+    </span><span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">6</span><span class="w">
+    </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dim</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dim</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># proper ratios can yield horiz. stripes</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w">
+        </span><span class="n">png</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pointsize</span><span class="o">=</span><span class="m">9</span><span class="p">)</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s2">"terralook"</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+         </span><span class="n">red.f</span><span class="o">=</span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="n">blue.f</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"red.f=%g green.f=%g blue.f=%g offset=c(%g,%g,%g,%g)"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">red.f</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">offset</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">offset</span><span class="p">[</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="n">offset</span><span class="p">[</span><span class="m">4</span><span class="p">]),</span><span class="w">
+          </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<span class="c1">## red.f, green.f and blue.f as in posting from yesterday</span>
-demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-01.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1A&quot;</span><span class="p">)</span>
+</span><span class="c1">## red.f, green.f and blue.f as in posting from yesterday</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-01.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 1A"</span><span class="p">)</span><span class="w">
 
-<span class="c1">## Reducing blue factor removes the blue tinge to the land, </span>
-<span class="c1">## at the expense of making the clouds unnaturally green. Also, </span>
-<span class="c1">## various land areas are still not as red as in the reference</span>
-<span class="c1">## image.</span>
-demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-02.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1B&quot;</span><span class="p">)</span>
+</span><span class="c1">## Reducing blue factor removes the blue tinge to the land, </span><span class="w">
+</span><span class="c1">## at the expense of making the clouds unnaturally green. Also, </span><span class="w">
+</span><span class="c1">## various land areas are still not as red as in the reference</span><span class="w">
+</span><span class="c1">## image.</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-02.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 1B"</span><span class="p">)</span><span class="w">
 
-<span class="c1">## After some adjustment of red, green and blue together, the results can</span>
-<span class="c1">## be improved to some extent.</span>
-demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-03.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1C&quot;</span><span class="p">)</span>
+</span><span class="c1">## After some adjustment of red, green and blue together, the results can</span><span class="w">
+</span><span class="c1">## be improved to some extent.</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="m">2.2</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-03.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 1C"</span><span class="p">)</span><span class="w">
 
-<span class="c1">## Next, try altering the offset in the linear relationship,</span>
-<span class="c1">## as opposed to the multiplicative factor. This is done with </span>
-<span class="c1">## the `offset` argument, rather than with `red.f`, etc.</span>
-demo<span class="p">(</span>ts<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-04.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 1D&quot;</span><span class="p">)</span>
+</span><span class="c1">## Next, try altering the offset in the linear relationship,</span><span class="w">
+</span><span class="c1">## as opposed to the multiplicative factor. This is done with </span><span class="w">
+</span><span class="c1">## the `offset` argument, rather than with `red.f`, etc.</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-04.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 1D"</span><span class="p">)</span><span class="w">
 
-<span class="c1">## For reference, apply these values to the Halifax</span>
-<span class="c1">## winter test image.</span>
-<span class="kp">load</span><span class="p">(</span><span class="s">&quot;Hw.rda&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-05.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2A&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-06.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2B&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-07.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2C&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hw<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-08.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 2D&quot;</span><span class="p">)</span>
+</span><span class="c1">## For reference, apply these values to the Halifax</span><span class="w">
+</span><span class="c1">## winter test image.</span><span class="w">
+</span><span class="n">load</span><span class="p">(</span><span class="s2">"Hw.rda"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-05.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 2A"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-06.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 2B"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="m">2.2</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-07.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 2C"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hw</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-08.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 2D"</span><span class="p">)</span><span class="w">
 
-<span class="kp">load</span><span class="p">(</span><span class="s">&quot;Hs.rda&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-09.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3A&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-10.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3B&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-11.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3C&quot;</span><span class="p">)</span>
-demo<span class="p">(</span>Hs<span class="p">,</span> <span class="m">1.7</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;2016-02-21-landsat-12.png&quot;</span><span class="p">,</span> <span class="s">&quot;Fig. 3D&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+</span><span class="n">load</span><span class="p">(</span><span class="s2">"Hs.rda"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-09.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 3A"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-10.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 3B"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="m">2.2</span><span class="p">,</span><span class="w"> </span><span class="m">1.6</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-11.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 3C"</span><span class="p">)</span><span class="w">
+</span><span class="n">demo</span><span class="p">(</span><span class="n">Hs</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="s2">"2016-02-21-landsat-12.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fig. 3D"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results-and-discussion">Results and discussion</h1>
 
 <p>First, here is the reference image from [1], as adjusted in great detail, using
 more sophisticated methods than are presently available in oce.</p>
 
-<p><img src="/figs/2016-02-21-landsat-three-sisters.png" alt="center" /> </p>
+<p><img src="/figs/2016-02-21-landsat-three-sisters.png" alt="center" /></p>
 
 <p>Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
-summaries the relevant arguments to <code>plot.landsat()</code>.</p>
+summaries the relevant arguments to <code class="highlighter-rouge">plot.landsat()</code>.</p>
 
 <p><img src="/figs/2016-02-21-landsat-01.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-02.png" alt="center" />
@@ -281,27 +280,26 @@ are perhaps more discernible in 3D.</p>
 <p>Finally, we test the suggested “D” coefficients with the larger Nova Scotia
 views, of which the Halifax images were small subregins.</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^w$&quot;</span><span class="p">)))</span>
-    w <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80080292014065LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
-png<span class="p">(</span><span class="s">&quot;2016-02-21-landsat-winter-ns.png&quot;</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">6</span><span class="p">,</span> res<span class="o">=</span><span class="m">100</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">9</span><span class="p">)</span>
-plot<span class="p">(</span>w<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;terralook&quot;</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
-dev.off<span class="p">()</span>
-<span class="kr">if</span> <span class="p">(</span><span class="m">0</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span><span class="kp">ls</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^s$&quot;</span><span class="p">)))</span>
-    s <span class="o">&lt;-</span> read.landsat<span class="p">(</span><span class="s">&quot;/data/archive/landsat/LC80070292014170LGN00&quot;</span><span class="p">,</span> band<span class="o">=</span>band<span class="p">)</span>
-png<span class="p">(</span><span class="s">&quot;2016-02-21-landsat-summer-ns.png&quot;</span><span class="p">,</span> unit<span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">6</span><span class="p">,</span> height<span class="o">=</span><span class="m">6</span><span class="p">,</span> res<span class="o">=</span><span class="m">100</span><span class="p">,</span> pointsize<span class="o">=</span><span class="m">9</span><span class="p">)</span>
-plot<span class="p">(</span>s<span class="p">,</span> band<span class="o">=</span><span class="s">&quot;terralook&quot;</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
-dev.off<span class="p">()</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">ls</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"^w$"</span><span class="p">)))</span><span class="w">
+    </span><span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"/data/archive/landsat/LC80080292014065LGN00"</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="n">band</span><span class="p">)</span><span class="w">
+</span><span class="n">png</span><span class="p">(</span><span class="s2">"2016-02-21-landsat-winter-ns.png"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pointsize</span><span class="o">=</span><span class="m">9</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s2">"terralook"</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">ls</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"^s$"</span><span class="p">)))</span><span class="w">
+    </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"/data/archive/landsat/LC80070292014170LGN00"</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="n">band</span><span class="p">)</span><span class="w">
+</span><span class="n">png</span><span class="p">(</span><span class="s2">"2016-02-21-landsat-summer-ns.png"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pointsize</span><span class="o">=</span><span class="m">9</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s2">"terralook"</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">dev.off</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="tests-with-larger-nova-scotia-domains">Tests with larger Nova Scotia domains</h2>
 <p><img src="/figs/2016-02-21-landsat-winter-ns.png" alt="center" />
@@ -310,25 +308,24 @@ dev.off<span class="p">()</span>
 <h1 id="conclusions">Conclusions</h1>
 
 <p>The ‘D’ variants of the figures are all reasonably good, and this suggests new
-defaults for <code>plot.landsat()</code>, namely </p>
+defaults for <code class="highlighter-rouge">plot.landsat()</code>, namely</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-r" data-lang="r">1</code></pre></div></td><td class="code"><div class="highlight"><pre>plot.landsat<span class="p">(</span><span class="kc">...</span><span class="p">,</span> red.f<span class="o">=</span><span class="m">1.7</span><span class="p">,</span> blue.f<span class="o">=</span><span class="m">1.5</span><span class="p">,</span> green.f<span class="o">=</span><span class="m">6</span><span class="p">,</span> offset<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">plot.landsat</span><span class="p">(</span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">...</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Even with just three test cases in consideration, it seems clear that these
-values are preferable to the old defaults of <code>red.f=2</code>, <code>green.f=2</code>,
-<code>blue.f=4</code>, and <code>offset=c(0,0,0,0)</code>.</p>
+values are preferable to the old defaults of <code class="highlighter-rouge">red.f=2</code>, <code class="highlighter-rouge">green.f=2</code>,
+<code class="highlighter-rouge">blue.f=4</code>, and <code class="highlighter-rouge">offset=c(0,0,0,0)</code>.</p>
 
 <p>It should be noted that all of these schemes are simply linear transformations,
 and so cannot be expected to yield the flexibility achieved with nonlinear
 transformations, as in [1].</p>
 
 <p>Another issue that deserves consideration (perhaps in Part III in this series)
-is whether the <code>terralook</code> system is the best for practical purposes. Note that
-in [1], the green band of the satellite was used, whereas in <code>terralook</code>, that
+is whether the <code class="highlighter-rouge">terralook</code> system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in <code class="highlighter-rouge">terralook</code>, that
 band is discarded and instead red, blue, and nir are used for a basis set (see
-the help for <code>plot.landsat()</code>.)</p>
+the help for <code class="highlighter-rouge">plot.landsat()</code>.)</p>
 
 <h1 id="references-and-resources">References and resources</h1>
 

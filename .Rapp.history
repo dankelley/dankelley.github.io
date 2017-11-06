@@ -1,0 +1,403 @@
+Sys.setenv(LANGUAGE="per");plot(blue)
+library(oce)
+q()
+tools:::.Build
+?tools
+q()
+par(mfrow=c(2,1), mar=rep(1, 4))
+library(oce)
+?mapPlot
+data(coastlineWorld)
+par(mfrow=c(2,1), mar=c(2, 2, 1, 1))#
+options(oceProj4Test=FALSE)#
+mapPlot(coastlineWorld, proj="+proj=moll") #
+mtext("using proj4 package")#
+options(oceProj4Test=TRUE)#
+mapPlot(coastlineWorld, proj="+proj=moll") #
+mtext("using internal proj4-style calculations")
+suppressStartMessages(library(oce))
+.Last.projection()
+library(mapproj)
+.Last.projection()
+q()
+1.6*2.2*20+16
+(1.6*2.2*20+16)-60
+q()
+suppressPackageStartupMessages(library(oce))
+options(warn=-1)
+data(section)
+GS <- subset(section, 113<=stationId&stationId<=128)
+plot(GSG, which="density")
+plot(GS, which="density")
+?plot.section
+plot(GS, which="sigmaTheta")
+plot(GS, which="sigmaTheta",levels=10)
+plot(GS, which="sigmaTheta",levels=23)
+plot(GS, which="sigmaTheta",levels=23:30)
+plot(GS, which="sigmaTheta",levels=seq(20,30,0.5))
+plot(GS, which="sigmaTheta",levels=seq(20,30,0.25))
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25))
+plot(GS, which=99, map.ylim=c(30,45), map.xlim==c(250,290), pch=1, xlab="x [km]")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+source("~/src/oce/R/section.R")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+source("~/src/oce/R/section.R")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+xlab=xlabswitch(which.xtype,
+source("~/src/oce/R/section.R")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+source("~/src/oce/R/section.R")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+source("~/src/oce/R/section.R")
+plot(GS, which="sigmaTheta", levels=seq(20,30,0.25), xlab="x [km]")
+library(oce)#
+data(coastlineWorld)#
+par(mar=c(2, 2, 2, 1))#
+lonlim <- c(-180, 180)#
+latlim <- c(60, 120)#
+p <- '+proj=stere +lat_0=90'#
+mapPlot(coastlineWorld, projection=p, longitudelim=lonlim, latitudelim=latlim, grid=FALSE)#
+mapGrid(15, 15)#
+mapAxis()#
+mtext(p, adj=1)
+library(oce)#
+data(coastlineWorld)#
+par(mar=c(2, 2, 2, 1))#
+lonlim <- c(-180, 180)#
+latlim <- c(60, 120)#
+p <- '+proj=stere +lat_0=90'#
+mapPlot(coastlineWorld, projection=p, longitudelim=lonlim, latitudelim=latlim, grid=FALSE)#
+mapGrid(15, 15)#
+mapAxis(debug=3)#
+mtext(p, adj=1)
+library(oce)#
+data(coastlineWorld)#
+par(mar=c(2, 2, 2, 1))#
+lonlim <- c(-180, 180)#
+latlim <- c(60, 120)#
+p <- '+proj=stere +lat_0=90'#
+mapPlot(coastlineWorld, projection=p, longitudelim=lonlim, latitudelim=latlim, grid=FALSE)#
+mapGrid(15, 15)#
+mapAxis(side=1,debug=3)#
+mtext(p, adj=1)
+?mapAxis
+q()
+base::source("/tmp/r-plugin-kelley/Rsource-21125-531B.R", echo=TRUE)
+a<-if(FALSE) 3
+a
+b
+b<-if(FALSE) 3
+b
+edit(plot)
+?plot
+plot
+plot.ts
+?xy.coords
+library(oce)
+example(plot.ctd)
+library(oce)
+data(coastlineWorld)
+?mapPlot
+lons <- seq(179, -179, -10)#
+ilon <- seq_along(lons)#
+par(mar=rep(1, 4))#
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}
+system.time({lons <- seq(179, -179, -10)#
+ilon <- seq_along(lons)#
+par(mar=rep(1, 4))#
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}})
+?mapPlot
+options(oceProj4Test=TRUE)
+system.time({lons <- seq(179, -179, -10)#
+ilon <- seq_along(lons)#
+par(mar=rep(1, 4))#
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}})
+options(oceProj4Test=!TRUE)
+system.time({lons <- seq(179, -179, -10)#
+ilon <- seq_along(lons)#
+par(mar=rep(1, 4))#
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}})
+197/33
+172/15
+options(oceProj4Test=TRUE)
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}
+lons <- seq(180, -180, -10)
+ilon <- seq_along(lons)
+par(mar=rep(1, 4))
+for (i in ilon) {
+p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+for (i in ilon[1]) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}
+lons <- seq(180, -180, -15)
+ilon <- seq_along(lons)
+par(mar=rep(1, 4))
+for (i in ilon[1]) {
+p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+for (i in ilon) {
+p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+lons <- seq(360, 0, -15)
+ilon <- seq_along(lons)
+par(mar=rep(1, 4))
+for (i in ilon) {
+p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+lons <- seq(360, 0, -7.5)
+ilon <- seq_along(lons)
+par(mar=rep(1, 4))
+for (i in ilon) {
+p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+mapPlot(coastlineWorld, projection=p, col='darkbrown')
+mapPlot(coastlineWorld, projection=p, col='brown')
+mapPlot(coastlineWorld, projection=p, col='brown', lwd=2)
+mapPlot(coastlineWorld, projection=p, col='brown', lwd=1.4)
+mapPlot(coastlineWorld, projection=p, col='blue', lwd=1.4)
+par(mar=rep(1, 4))#
+for (i in ilon) {#
+    p <- paste('+proj=ortho +lat_0=30 +lon_0=', lons[i], sep='')#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p, col='blue', lwd=1.4)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, col='blue, lwd=1.4,#
+                xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}
+}
+'
+"
+}
+''
+"
+par(mar=rep(0, 4))
+for (i in ilon) {
+p <- paste("+proj=ortho +lat_0=30 +lon_0=", lons[i], sep="")
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p, col="blue", lwd=1.4)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, col='blue, lwd=1.4,
+xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+"
+''
+'
+lons <- seq(360, 0, -7.5)
+ilon <- seq_along(lons)
+par(mar=rep(0, 4))
+for (i in ilon) {
+p <- paste("+proj=ortho +lat_0=30 +lon_0=", lons[i], sep="")
+if (i == 1) {
+mapPlot(coastlineWorld, projection=p, col="blue", lwd=1.4)
+xlim <- par("usr")[1:2]
+ylim <- par("usr")[3:4]
+} else {
+mapPlot(coastlineWorld, projection=p, col="blue", lwd=1.4,
+xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")
+}
+lons <- seq(360, 0, -15)#
+ilon <- seq_along(lons)#
+par(mar=rep(0, 4))#
+for (i in ilon) {#
+    p <- paste("+proj=ortho +lat_0=30 +lon_0=", lons[i], sep="")#
+    if (i == 1) {#
+        mapPlot(coastlineWorld, projection=p, col="blue", lwd=1.4)#
+        xlim <- par("usr")[1:2]#
+        ylim <- par("usr")[3:4]#
+    } else {#
+        mapPlot(coastlineWorld, projection=p, col="blue", lwd=1.4,#
+                xlim=xlim, ylim=ylim, xaxs="i", yaxs="i")#
+    }#
+}
+par(mfrow=c(2,1), mar=c(2, 2, 1, 1))
+options(oceProj4Test=FALSE)
+mapPlot(coastlineWorld, proj="+proj=moll")
+mtext("using proj4 package")
+options(oceProj4Test=TRUE)
+mapPlot(coastlineWorld, proj="+proj=moll")
+mtext("using internal proj4-style calculations")
+q()
+base::source("/tmp/r-plugin-kelley/Rsource-8837-DK-02.R", echo=TRUE)
+q()
+base::source("/tmp/r-plugin-kelley/Rsource-49344-20141110.R", echo=TRUE)
+q()
+help(optim)
+library(oce)
+help(sunAngle)
+base::source("/tmp/r-plugin-kelley/Rsource-55615-sunrise.R", echo=TRUE)
+set.Seed(20141110)
+help(set.seed)
+base::source("/tmp/r-plugin-kelley/Rsource-55615-sunrise.R", echo=TRUE)
+points(-63.571, 44.649, pch=22, cex=2, bg='yellow')
+base::source("/tmp/r-plugin-kelley/Rsource-55615-sunrise.R", echo=TRUE)
+legend("bottomright", pch=c(21, 21, 22),
+bg=c("pink", "red", "yellow"),
+legend=c("Best", "Cloud", "True"))
+legend("bottomright", pch=c(21, 21, 22),
+pt.bg=c("pink", "red", "yellow"),
+legend=c("Best", "Cloud", "True"))
+base::source("/tmp/r-plugin-kelley/Rsource-55615-sunrise.R", echo=TRUE)
+grid()
+base::source("/tmp/r-plugin-kelley/Rsource-55615-sunrise.R", echo=TRUE)
+setwd("/Users/kelley/dankelley.github.io")
+q()
+library(oce)
+misfit <- function(lonlat)
+{
+riseAlt <- sunAngle(rise, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude
+0.5 * (abs(riseAlt) + abs(setAlt))
+}
+start <- c(-50, 50) # set this vaguely near the expected location
+rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")
+set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")
+bestfit <- optim(start, misfit)
+data(coastlineWorldFine, package="ocedata")
+plot(coastlineWorldFine, clon=-64, clat=45, span=500)
+grid()
+n <- 25
+rises <- rise + rnorm(n, sd=30)
+sets <- set + rnorm(n, sd=30)
+set.seed(20141111) # this lets readers reproduce this exactly
+for (i in 1:n) {
+rise <- rises[i]
+set <- sets[i]
+fit <- optim(start, misfit)
+points(fit$par[1], fit$par[2], pch=21, bg="pink", cex=1.4)
+}
+points(bestfit$par[1], bestfit$par[2], pch=21, cex=2, bg="red")
+points(-63.571, 44.649, pch=22, cex=2, bg='yellow')
+legend("bottomright", bg="white",
+pch=c(21, 21, 22), pt.bg=c("pink", "red", "yellow"),
+legend=c("Best", "Cloud", "True"))
+q()
+base::source("/tmp/r-plugin-kelley/Rsource-1098-2014-11-10-solar-navigation-2.R", echo=TRUE)
+library(oce)#
+misfit <- function(lonlat)#
+{#
+    riseAlt <- sunAngle(rise, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude#
+    setAlt <- sunAngle(set, longitude=lonlat[1], latitude=lonlat[2], useRefraction=TRUE)$altitude#
+    0.5 * (abs(riseAlt) + abs(setAlt))#
+}
+start <- c(-50, 50) # set this vaguely near the expected location#
+rise <- as.POSIXct("2014-11-11 11:06:00", tz="UTC")#
+set <- as.POSIXct("2014-11-11 20:51:00", tz="UTC")#
+bestfit <- optim(start, misfit)
+data(coastlineWorldFine, package="ocedata")#
+plot(coastlineWorldFine, clon=-64, clat=45, span=500)#
+grid()#
+#
+n <- 25                                # use 25 perturbations#
+rises <- rise + rnorm(n, sd=30)#
+sets <- set + rnorm(n, sd=30)#
+set.seed(20141111) # this lets readers reproduce this exactly#
+for (i in 1:n) {#
+    rise <- rises[i]#
+    set <- sets[i]#
+    fit <- optim(start, misfit)#
+    points(fit$par[1], fit$par[2], pch=21, bg="pink", cex=1.4)#
+}#
+# Show the unperturbed fit#
+points(bestfit$par[1], bestfit$par[2], pch=21, cex=2, bg="red")#
+# Show the actual location of Halifax#
+points(-63.571, 44.649, pch=22, cex=2, bg='yellow')#
+# A legend summarizes all this work#
+legend("bottomright", bg="white", #
+       pch=c(21, 21, 22), pt.bg=c("red", "pink", "yellow"),#
+       legend=c("Best", "Range", "True"))
+q()
+plot(8/(x^2+4))
+plot(function(x)8/(x^2+4))
+plot(function(x)8/(x^2+4),0,100)
+plot(function(x)8/(x^2+4),-100,100)
+plot(function(x)8/(x^2+4),-10,10)
+plot(function(x)8/(x^2+4))
+q()
