@@ -53,20 +53,18 @@ p <- "+proj=aeqd +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
+mtext("Problem at top, unless coastlineCut() used", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(cl45, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110), col=col)
