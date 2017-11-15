@@ -125,7 +125,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=geos +h=1e8"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem with meridians", line=line, adj=0, col=ecol, font=font)
+mtext("Showing opposite side of the world?", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=gn_sinu +n=6 +m=3"
 mapPlot(coastlineWorld, projection=p, col=col)

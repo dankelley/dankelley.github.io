@@ -1,6 +1,3 @@
-Sys.setenv(LANGUAGE="per");plot(blue)
-library(oce)
-q()
 tools:::.Build
 ?tools
 q()
@@ -401,3 +398,10 @@ plot(function(x)8/(x^2+4),-100,100)
 plot(function(x)8/(x^2+4),-10,10)
 plot(function(x)8/(x^2+4))
 q()
+data(coastlineWorld)#
+mapPlot(coastlineWorld, projection='+proj=ortho +lon_0=-10', col='grey', grid=FALSE)#
+mapGrid(5, 5)
+library(oce)
+data(coastlineWorld)#
+mapPlot(coastlineWorld, projection='+proj=ortho +lon_0=-10', col='grey', grid=FALSE)#
+mapGrid(5, 5)
