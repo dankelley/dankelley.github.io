@@ -95,15 +95,15 @@
 
 Through the early months of 2015, efforts were made to incorporate PROJ.4
 projections into the oce R package. An earlier attempt had relied on the proj4
-package, but this package has the disadvantage of reporting an error if any
+R package, but this package has the disadvantage of reporting an error if any
 point in a polygon cannot be projected, so it had to be called pointwise on
 coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
-oce version 0.9-17, available on the CRAN archive. However, a CRAN member
+oce version 0.9-17. However, a CRAN member
 suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so later versions have the 'oce' package relying on the 'rgdal' package.
+so later versions of 'oce' rely on the 'rgdal' package.
 
-Note that only PROJ.4 projections that have inverses are available in oce.
+Oce only provides those PROJ.4 projections that have inverses.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
 because they cause errors of various sorts; see [oce issue
@@ -213,7 +213,7 @@ p <- "+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40"
+p <- "+proj=etmerc +ellps=WGS84 +lon_0=-40 +lat_0=30"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
