@@ -484,7 +484,7 @@ p <- "+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=tmerc +lon_0=-40 +lat_0=30"
+p <- "+proj=tmerc +lon_0=-40 +lat_1=20 +lat_2=50"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
