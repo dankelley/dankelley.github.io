@@ -239,11 +239,6 @@ p <- "+proj=loxim"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=lsat +lsat=1 +path=200"
-mapPlot(coastlineWorld, projection=p, col=col,
-            longitudelim=c(-180,-120), latitudelim=c(70,120))
-mtext(p, line=line, adj=1, col=pcol, font=font)
-
 p <- "+proj=mbt_s"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
