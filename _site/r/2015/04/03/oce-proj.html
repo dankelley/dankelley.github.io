@@ -466,25 +466,20 @@ book</a>.</p>
 2
 3
 4
+5
+6
+7
+8
 </pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=igh"</span><span class="w">
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Connection through cutout region"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Connection through cutout region"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-34.png" alt="center" /></p>
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"</span><span class="w">
+</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w">
+        </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"</span><span class="w">
-</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineCut</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="m">-40</span><span class="p">),</span><span class="w">
-        </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Still weird at top"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-35.png" alt="center" /></p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in lonlat2map(longitude, latitude, projection = projection): projection 'imw_p' is unknown; try one of: aea,aeqd,aitoff,bipc,bonne,cass,cc,cea,collg,crast,eck1,eck2,eck3,eck4,eck5,eck6,eqc,eqdc,euler,etmerc,fahey,fouc,fouc_s,gall,geos,gn_sinu,gnom,goode,hatano,healpix,rhealpix,igh,kav5,kav7,laea,lonlat,longlat,latlon,lcc,leac,loxim,mbt_s,mbt_fps,mbtfpp,mbtfpq,mbtfps,merc,mil_os,mill,moll,murd1,murd2,murd3,natearth,nell,nell_h,nsper,ob_tran,ocea,oea,omerc,ortho,pconic,poly,putp1,putp2,putp3,putp3p,putp4,putp4p,putp5,putp5p,putp6,putp6p,qsc,qua_aut,robin,rouss,sinu,somerc,stere,sterea,tcea,tissot,tmerc,tpeqd,tpers,ups,urm5,urmfps,utm,vandg,vitk1,wag1,wag2,wag3,wag4,wag5,wag6,weren,wink1,wintri</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -492,14 +487,23 @@ book</a>.</p>
 4
 5
 6
-</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"</span><span class="w">
-</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineCut</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="m">-40</span><span class="p">),</span><span class="w">
-        </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Still weird at top"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"</span><span class="w">
+</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineCut</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="m">-45</span><span class="p">),</span><span class="w">
+        </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in lonlat2map(longitude, latitude, projection = projection): projection 'imw_p' is unknown; try one of: aea,aeqd,aitoff,bipc,bonne,cass,cc,cea,collg,crast,eck1,eck2,eck3,eck4,eck5,eck6,eqc,eqdc,euler,etmerc,fahey,fouc,fouc_s,gall,geos,gn_sinu,gnom,goode,hatano,healpix,rhealpix,igh,kav5,kav7,laea,lonlat,longlat,latlon,lcc,leac,loxim,mbt_s,mbt_fps,mbtfpp,mbtfpq,mbtfps,merc,mil_os,mill,moll,murd1,murd2,murd3,natearth,nell,nell_h,nsper,ob_tran,ocea,oea,omerc,ortho,pconic,poly,putp1,putp2,putp3,putp3p,putp4,putp4p,putp5,putp5p,putp6,putp6p,qsc,qua_aut,robin,rouss,sinu,somerc,stere,sterea,tcea,tissot,tmerc,tpeqd,tpers,ups,urm5,urmfps,utm,vandg,vitk1,wag1,wag2,wag3,wag4,wag5,wag6,weren,wink1,wintri</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Still weird at top"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Using coastlineCut()"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="m">+0.9</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-36.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-34.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -508,7 +512,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-37.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-35.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -517,7 +521,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-38.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-36.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -526,7 +530,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"+proj=laea +lon_0=-40"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-39.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-37.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -535,7 +539,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"+proj=lonlat"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-40.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-38.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -544,36 +548,40 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"+proj=lonlat"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-41.png" alt="center" /></p>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcc +lat_1=30 +lat_2=70 +lon_0=-40"</span><span class="w">
-</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-42.png" alt="center" /></p>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcca +lat_0=20 +lon_0=-40"</span><span class="w">
-</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-43.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-39.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
-</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcca +lat_0=20 +lon_0=-40"</span><span class="w">
-</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">cl45</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
+5
+6
+</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcc +lat_1=30 +lat_2=70 +lon_0=-40"</span><span class="w">
+</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcca +lat_0=20 +lon_0=-40"</span><span class="w">
+</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in lonlat2map(longitude, latitude, projection = projection): projection 'lcca' is unknown; try one of: aea,aeqd,aitoff,bipc,bonne,cass,cc,cea,collg,crast,eck1,eck2,eck3,eck4,eck5,eck6,eqc,eqdc,euler,etmerc,fahey,fouc,fouc_s,gall,geos,gn_sinu,gnom,goode,hatano,healpix,rhealpix,igh,kav5,kav7,laea,lonlat,longlat,latlon,lcc,leac,loxim,mbt_s,mbt_fps,mbtfpp,mbtfpq,mbtfps,merc,mil_os,mill,moll,murd1,murd2,murd3,natearth,nell,nell_h,nsper,ob_tran,ocea,oea,omerc,ortho,pconic,poly,putp1,putp2,putp3,putp3p,putp4,putp4p,putp5,putp5p,putp6,putp6p,qsc,qua_aut,robin,rouss,sinu,somerc,stere,sterea,tcea,tissot,tmerc,tpeqd,tpers,ups,urm5,urmfps,utm,vandg,vitk1,wag1,wag2,wag3,wag4,wag5,wag6,weren,wink1,wintri</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"+proj=lcca +lat_0=20 +lon_0=-40"</span><span class="w">
+</span><span class="n">mapPlot</span><span class="p">(</span><span class="n">cl45</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in lonlat2map(longitude, latitude, projection = projection): projection 'lcca' is unknown; try one of: aea,aeqd,aitoff,bipc,bonne,cass,cc,cea,collg,crast,eck1,eck2,eck3,eck4,eck5,eck6,eqc,eqdc,euler,etmerc,fahey,fouc,fouc_s,gall,geos,gn_sinu,gnom,goode,hatano,healpix,rhealpix,igh,kav5,kav7,laea,lonlat,longlat,latlon,lcc,leac,loxim,mbt_s,mbt_fps,mbtfpp,mbtfpq,mbtfps,merc,mil_os,mill,moll,murd1,murd2,murd3,natearth,nell,nell_h,nsper,ob_tran,ocea,oea,omerc,ortho,pconic,poly,putp1,putp2,putp3,putp3p,putp4,putp4p,putp5,putp5p,putp6,putp6p,qsc,qua_aut,robin,rouss,sinu,somerc,stere,sterea,tcea,tissot,tmerc,tpeqd,tpers,ups,urm5,urmfps,utm,vandg,vitk1,wag1,wag2,wag3,wag4,wag5,wag6,weren,wink1,wintri</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Using coastlineCut()"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="m">+0.9</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-44.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-40.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -582,7 +590,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-45.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-41.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -591,7 +599,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-46.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-42.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -600,7 +608,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-47.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-43.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -609,7 +617,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-48.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-44.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -618,7 +626,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-49.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-45.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -627,7 +635,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-50.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-46.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -636,7 +644,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-51.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-47.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -645,7 +653,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-52.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-48.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -654,7 +662,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="w"> </span><span class="m">120</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-53.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-49.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -663,7 +671,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-54.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-50.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -672,7 +680,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-55.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-51.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -681,7 +689,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-56.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-52.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -690,7 +698,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-57.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-53.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -699,7 +707,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-58.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-54.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -708,7 +716,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-59.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-55.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -717,7 +725,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-60.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-56.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -726,7 +734,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-61.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-57.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -737,7 +745,7 @@ book</a>.</p>
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Problem in Antarctica"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-62.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-58.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -752,7 +760,7 @@ book</a>.</p>
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Usage?"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-63.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-59.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -763,7 +771,7 @@ book</a>.</p>
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Ugly Horizontal Lines"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-64.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-60.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -772,7 +780,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-65.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-61.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -783,7 +791,7 @@ book</a>.</p>
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Problem in Antarctica"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-66.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-62.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -792,7 +800,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-67.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-63.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -801,7 +809,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-68.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-64.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -810,7 +818,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-69.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-65.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -819,7 +827,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-70.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-66.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -828,7 +836,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-71.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-67.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -837,7 +845,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-72.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-68.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -846,7 +854,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-73.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-69.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -855,7 +863,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-74.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-70.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -864,7 +872,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-75.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-71.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -873,7 +881,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-76.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-72.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -882,7 +890,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-77.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-73.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -891,7 +899,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-78.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-74.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -900,7 +908,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-79.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-75.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -909,7 +917,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-80.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-76.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -918,7 +926,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-81.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-77.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -927,7 +935,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="w"> </span><span class="m">110</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-82.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-78.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -936,7 +944,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="w"> </span><span class="m">110</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-83.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-79.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -945,7 +953,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-84.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-80.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -954,7 +962,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-85.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-81.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -963,7 +971,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-86.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-82.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -972,7 +980,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-87.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-83.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -983,7 +991,7 @@ book</a>.</p>
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Problem in Antarctica"</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">ecol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-88.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-84.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -992,7 +1000,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="w"> </span><span class="m">110</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-89.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-85.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1001,7 +1009,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-90.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-86.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1010,7 +1018,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-91.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-87.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1019,7 +1027,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-92.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-88.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1028,7 +1036,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">45</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-93.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-89.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1037,7 +1045,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-94.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-90.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1046,7 +1054,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-95.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-91.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1055,7 +1063,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-96.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-92.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1064,7 +1072,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-97.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-93.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1073,7 +1081,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-98.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-94.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1082,7 +1090,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-99.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-95.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1091,7 +1099,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-100.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-96.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1100,7 +1108,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-101.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-97.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1109,7 +1117,7 @@ book</a>.</p>
 </span><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="p">)</span><span class="w">
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">pcol</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-102.png" alt="center" /></p>
+<p><img src="http://dankelley.github.io/figs/2015-04-03-oce-proj/unnamed-chunk-1-98.png" alt="center" /></p>
 
 <h1 id="references-and-resources">References and resources</h1>
 

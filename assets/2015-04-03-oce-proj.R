@@ -157,14 +157,14 @@ mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Connection through cutout region", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
-mapPlot(coastlineCut(coastlineWorld, -40),
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineWorld,
         projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
-mapPlot(coastlineCut(coastlineWorld, -40),
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineCut(coastlineWorld, -45),
         projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
