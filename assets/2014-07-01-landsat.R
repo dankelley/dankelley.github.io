@@ -1,4 +1,3 @@
-
 ## ----eval=FALSE----------------------------------------------------------
 ## library(oce)
 ## l <- read.landsat("LC80080292014065LGN00", band="tirs1")
@@ -13,5 +12,4 @@
 ## l@data$SST <- SST
 ## plot(l, band="SST", col=oceColorsJet)
 ## mtext(l[["time"]])
-
 

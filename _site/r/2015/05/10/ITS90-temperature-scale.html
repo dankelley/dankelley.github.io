@@ -143,47 +143,25 @@ stability over a year of drift.)</p>
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="c1"># incorrect</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.199</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90, p): must supply longitude</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1025.198</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90toT68(T90), p): must supply longitude</code></pre></figure>
 
 <p>Finally, the following tests the amount that salinity would need to be adjusted to 
 compensate (in density terms) for a temperature misapplication.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="code"><pre><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w">
-</span><span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho0</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="m">34</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span><span class="n">root</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="n">toT68</span><span class="p">(</span><span class="nb">T</span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 34.99833</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90toT68(T90), p): must supply longitude</code></pre></figure>
 
-<p>In a practical application, one might compare this salinity difference,
-0.0016675,
-with expected inaccuracies in measurement, or perhaps with the inter-sample “noise”.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho0</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="m">34</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span><span class="n">root</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="references-and-resources">References and resources</h1>
-
-<ol>
-  <li>
-    <p><a href="http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf">Seabird Electronics application note on temperature conversion</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.nodc.noaa.gov/woce/wdiu/wocedocs/newsltr/news10/news10.pdf">Saunders 1990</a>
-article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10, page 10.</p>
-  </li>
-  <li>
-    <p><a href="http://www.seabird.com//sbe911plus-ctd">Seabird Electronics SBE911plus specifications</a></p>
-  </li>
-  <li>
-    <p><a href="http://dankelley.github.io/oce/">Oce website</a></p>
-  </li>
-  <li>
-    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd">2015-05-10-ITS90-temperature-scale.Rmd</a></p>
-  </li>
-</ol>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90, p): must supply longitude</code></pre></figure>
 
 
 

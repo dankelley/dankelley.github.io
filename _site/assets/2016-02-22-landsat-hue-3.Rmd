@@ -266,7 +266,7 @@ the help for `plot.landsat()`.)
 # References and resources
 
 1. Article on hand-tuning the colour of a Landsat image, the data for which are also used here in Figure 1 <http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/>
-2. Part I of this series <http://dankelley.github.io/r/2016/02/20/landsat-hue.html>
+2. Part I of this series <https://dankelley.github.io/r/2016/02/20/landsat-hue.html>
 3. Jekyll source code for this blog entry: [2016-02-21-landsat-hue-2.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-02-21-landsat-hue-2.Rmd)
 
 

@@ -113,7 +113,7 @@ I will not explain the methodology of projection here, nor the details of any
 given projection. Readers should consult the help for the ``oce`` function
 ``mapPlot()`` and the many websites detailing software that derives from
 PROJ.4.  In due course, they will be able to consult [my
-book](http://dankelley.github.io/book.html).
+book](https://dankelley.github.io/book.html).
 
 ```{r,message=FALSE,warning=FALSE}
 library(oce)
@@ -564,7 +564,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 
 # References and resources
 
-1. [Oce website](http://dankelley.github.io/oce/)   
+1. [Oce website](https://dankelley.github.io/oce/)   
 
 2. Jekyll source code for this blog entry: [2015-04-03-oce-proj.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-04-03-oce-proj.Rmd)
 

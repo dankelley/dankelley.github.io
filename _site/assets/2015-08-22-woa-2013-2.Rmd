@@ -171,9 +171,9 @@ initialize numerical models.
 
 # References and resources
 
-1. [Ocedata website](http://dankelley.github.io/ocedata/)   
+1. [Ocedata website](https://dankelley.github.io/ocedata/)   
 
-2. [Oce website](http://dankelley.github.io/oce/)   
+2. [Oce website](https://dankelley.github.io/oce/)   
 
 3. [NOAA document on WOA changes](http://data.nodc.noaa.gov/woa/WOA13/DOC/woa13v2_changes.pdf)
 

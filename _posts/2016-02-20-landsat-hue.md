@@ -120,7 +120,7 @@ snow-covered citadel/commons region near 63.58W and 44.65N.
 {% highlight r linenos=table %}
 demo(2, 2, 4, "2016-02-20-landsat-1.png")
 {% endhighlight %}
-![center](http://dankelley.github.io/figs/2016-02-20-landsat-1.png) 
+![center](https://dankelley.github.io/figs/2016-02-20-landsat-1.png) 
 
 **Case 2.**
 
@@ -133,7 +133,7 @@ especially the snow-covered citadel).
 {% highlight r linenos=table %}
 demo(2, 1.7, 4, "2016-02-20-landsat-2.png")
 {% endhighlight %}
-![center](http://dankelley.github.io/figs/2016-02-20-landsat-2.png) 
+![center](https://dankelley.github.io/figs/2016-02-20-landsat-2.png) 
 
 **Case 3.**
 
@@ -166,7 +166,7 @@ comments turned on for this blog).
 {% highlight r linenos=table %}
 demo(1.7, 1.7, 6, "2016-02-20-landsat-3.png")
 {% endhighlight %}
-![center](http://dankelley.github.io/figs/2016-02-20-landsat-3.png) 
+![center](https://dankelley.github.io/figs/2016-02-20-landsat-3.png) 
 
 # Conclusions
 

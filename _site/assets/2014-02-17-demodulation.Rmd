@@ -140,7 +140,7 @@ plot(t, x, type='l', pch=20)
 lines(t, amp * sin(2 * pi * fc * t + phase*pi/180), col='red')
 ```
 
-Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in [a previous blog item](http://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html).
+Note that altering the smoothing properties alters the results somewhat.  Here, more smoothing is used than in the matlab code (reference 2).  For better results, it may make sense to detrend the data before filtering, as described in [a previous blog item](https://dankelley.github.io/r/2014/01/11/smoothing-hydrographic-profiles.html).
 
 
 # Resources

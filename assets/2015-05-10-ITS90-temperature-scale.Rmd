@@ -72,7 +72,7 @@ article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10,
 
 3. [Seabird Electronics SBE911plus specifications](http://www.seabird.com//sbe911plus-ctd)
 
-4. [Oce website](http://dankelley.github.io/oce/)   
+4. [Oce website](https://dankelley.github.io/oce/)   
 
 5. Jekyll source code for this blog entry: [2015-05-10-ITS90-temperature-scale.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd)
 
