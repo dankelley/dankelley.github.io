@@ -47,8 +47,6 @@ abline(0, 1/2, col=2)
 
 ![center](http://dankelley.github.io/figs/2017-12-21-spectrum-length/unnamed-chunk-1-1.png)
 
-For further testing:
-
 {% highlight r linenos=table %}
 print(head(speclenT))
 {% endhighlight %}

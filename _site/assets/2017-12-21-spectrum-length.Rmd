@@ -120,10 +120,6 @@ speclenF <- unlist(lapply(x, function(n) length(spec.pgram(rnorm(n),plot=FALSE,f
 plot(x, speclenF, type="s", xlab="x length", ylab="spectrum length")
 legend("topleft", lwd=par("lwd"), col=1:2, legend=c("spectrum() with fast=FALSE", "2:1 line"))
 abline(0, 1/2, col=2)
-```
-
-For further testing:
-```{r}
 print(head(speclenT))
 print(head(speclenF))
 all.equal(speclenF, floor(x/2))
