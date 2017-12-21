@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2017-12-21T14:08:31-04:00</updated>
+    <updated>2017-12-21T14:10:28-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -85,7 +85,7 @@ vary from the expected value of &lt;code class=&quot;highlighter-rouge&quot;&gt;
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
 &lt;p&gt;If the results of &lt;code class=&quot;highlighter-rouge&quot;&gt;spectrum&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;fft&lt;/code&gt; are to be put on an equal footing, e.g. for numerical
-comparisons, then it makes sense to call the former as e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;spectrum(\ldots, fast=FALSE)&lt;/code&gt;.&lt;/p&gt;
+comparisons, then it makes sense to call the former as e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;spectrum(..., fast=FALSE)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;reference-and-resources&quot;&gt;Reference and resources&lt;/h1&gt;
 

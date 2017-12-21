@@ -6,7 +6,7 @@ category: R
 year: 2017
 month: 12
 day: 21
-summary: Use spectrum(\ldots, fast=FALSE) to get simple spectrum lengths
+summary: Use spectrum(..., fast=FALSE) to get simple spectrum lengths
 latex: true
 ---
 
@@ -86,7 +86,7 @@ all.equal(speclenF, floor(x/2))
 # Conclusion
 
 If the results of `spectrum` and `fft` are to be put on an equal footing, e.g. for numerical
-comparisons, then it makes sense to call the former as e.g. `spectrum(\ldots, fast=FALSE)`.
+comparisons, then it makes sense to call the former as e.g. `spectrum(..., fast=FALSE)`.
 
 # Reference and resources
 
