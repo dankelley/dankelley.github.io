@@ -64,7 +64,7 @@ swRho(S, T90, p) # incorrect
 
 
 {% highlight text %}
-## [1] 1025.199
+## Error in swRho(S, T90, p): must supply longitude
 {% endhighlight %}
 
 
@@ -76,7 +76,7 @@ swRho(S, T90toT68(T90), p)
 
 
 {% highlight text %}
-## [1] 1025.198
+## Error in swRho(S, T90toT68(T90), p): must supply longitude
 {% endhighlight %}
 
 Finally, the following tests the amount that salinity would need to be adjusted to 
@@ -84,29 +84,23 @@ compensate (in density terms) for a temperature misapplication.
 
 {% highlight r linenos=table %}
 rho0 <- swRho(S, T90toT68(T90), p)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in swRho(S, T90toT68(T90), p): must supply longitude
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 uniroot(function(S) swRho(S, T90, p) - rho0, lower=34, upper=36)$root
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## [1] 34.99833
+## Error in swRho(S, T90, p): must supply longitude
 {% endhighlight %}
-In a practical application, one might compare this salinity difference,
-0.0016675,
-with expected inaccuracies in measurement, or perhaps with the inter-sample "noise".
-
-
-# References and resources
-
-1. [Seabird Electronics application note on temperature conversion](http://www.seabird.com/sites/default/files/documents/appnote42Feb14.pdf)
-
-2. [Saunders 1990](http://www.nodc.noaa.gov/woce/wdiu/wocedocs/newsltr/news10/news10.pdf)
-article on IPTS-68 to ITS-90 conversion, in WOCE newsletter Sept 1990 number 10, page 10.
-
-3. [Seabird Electronics SBE911plus specifications](http://www.seabird.com//sbe911plus-ctd)
-
-4. [Oce website](http://dankelley.github.io/oce/)   
-
-5. Jekyll source code for this blog entry: [2015-05-10-ITS90-temperature-scale.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-05-10-ITS90-temperature-scale.Rmd)
 

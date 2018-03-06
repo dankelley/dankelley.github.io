@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
-<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
 <meta charset="UTF-8">
 <title>2016 US election by education level</title>
 </head>
@@ -128,7 +128,7 @@ are presented in the graph shown below. The vertical line indicates an
 educational level of 10.2%, which was chosen by visual inspection as a divider
 between Trump-favouring and Clinton-favouring educational levels.  The blue
 dots indicate a preference for Clinton over Trump.
-![center](http://dankelley.github.io/figs/election2016-usa.png) 
+![center](https://dankelley.github.io/figs/election2016-usa.png) 
 
 A noticeable feature is the isolated point indicating high educational level
 and strong preference for Clinton. This is the District of Columbia, which may

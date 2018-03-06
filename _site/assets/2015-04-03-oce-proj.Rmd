@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
-<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
 <meta charset="UTF-8">
 <title>map projections in oce</title>
 </head>
@@ -95,15 +95,15 @@
 
 Through the early months of 2015, efforts were made to incorporate PROJ.4
 projections into the oce R package. An earlier attempt had relied on the proj4
-package, but this package has the disadvantage of reporting an error if any
+R package, but this package has the disadvantage of reporting an error if any
 point in a polygon cannot be projected, so it had to be called pointwise on
 coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
-oce version 0.9-17, available on the CRAN archive. However, a CRAN member
+oce version 0.9-17. However, a CRAN member
 suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so later versions have the 'oce' package relying on the 'rgdal' package.
+so later versions of 'oce' rely on the 'rgdal' package.
 
-Note that only PROJ.4 projections that have inverses are available in oce.
+Oce only provides those PROJ.4 projections that have inverses.
 This is because oce needs to do inverse projections for some of its plotting
 operations. Also note that a handful of projections have not been incorporated,
 because they cause errors of various sorts; see [oce issue
@@ -113,7 +113,7 @@ I will not explain the methodology of projection here, nor the details of any
 given projection. Readers should consult the help for the ``oce`` function
 ``mapPlot()`` and the many websites detailing software that derives from
 PROJ.4.  In due course, they will be able to consult [my
-book](http://dankelley.github.io/book.html).
+book](https://dankelley.github.io/book.html).
 
 ```{r,message=FALSE,warning=FALSE}
 library(oce)
@@ -135,20 +135,18 @@ p <- "+proj=aeqd +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
+mtext("Problem at top, unless coastlineCut() used", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(cl45, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110), col=col)
@@ -244,7 +242,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=geos +h=1e8"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem with meridians", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=gn_sinu +n=6 +m=3"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -262,13 +259,13 @@ p <- "+proj=hatano"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=healpix"
+p <- "+proj=healpix +a=1"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Problem in Canada", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=rhealpix"
-mapPlot(coastlineWorld, projection=p, col=col)# +north_square=1 +south_square=2")
+p <- "+proj=rhealpix +south_square=0 +north_square=1"
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Is this an acid trip?", line=line, adj=0, col=ecol, font=font)
 
@@ -277,10 +274,18 @@ mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Connection through cutout region", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineWorld,
+        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Error plus weird at top", line=line, adj=0, col=ecol, font=font)
+mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineCut(coastlineWorld, -45),
+        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
 
 p <- "+proj=kav5"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -321,11 +326,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=loxim"
 mapPlot(coastlineWorld, projection=p, col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=lsat +lsat=1 +path=200"
-mapPlot(coastlineWorld, projection=p, col=col,
-            longitudelim=c(-180,-120), latitudelim=c(70,120))
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=mbt_s"
@@ -491,7 +491,7 @@ p <- "+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=tmerc +lon_0=-40"
+p <- "+proj=tmerc +lon_0=-40 +lat_1=30 +lat_2=60"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
@@ -564,7 +564,7 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 
 # References and resources
 
-1. [Oce website](http://dankelley.github.io/oce/)   
+1. [Oce website](https://dankelley.github.io/oce/)   
 
 2. Jekyll source code for this blog entry: [2015-04-03-oce-proj.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-04-03-oce-proj.Rmd)
 

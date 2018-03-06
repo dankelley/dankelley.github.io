@@ -130,7 +130,11 @@ Although 3C and 3D both show the green regions of the city well, the features
 are perhaps more discernible in 3D.
 
 Finally, we test the suggested "D" coefficients with the larger Nova Scotia
-views, of which the Halifax images were small subregins.
+views, of which the Halifax images were small subregions. Having lived in Nova
+Scotia my whole life, and flown over it in various seasons, I can say that
+these colours look reasonably correct over land, in both summer and winter.
+
+
 
 {% highlight r linenos=table %}
 if (0 == length(ls(pattern="^w$")))
@@ -145,7 +149,6 @@ plot(s, band="terralook", red.f=1.7, green.f=1.5, blue.f=6, offset=c(0,-0.05,-0.
 dev.off()
 {% endhighlight %}
 
-## Tests with larger Nova Scotia domains
 ![center]({{ site.url }}/figs/2016-02-21-landsat-winter-ns.png)
 ![center]({{ site.url }}/figs/2016-02-21-landsat-summer-ns.png)
 
@@ -178,6 +181,6 @@ the help for `plot.landsat()`.)
 # References and resources
 
 1. Article on hand-tuning the colour of a Landsat image, the data for which are also used here in Figure 1 <http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/>
-2. Part I of this series <http://dankelley.github.io/r/2016/02/20/landsat-hue.html>
+2. Part I of this series <https://dankelley.github.io/r/2016/02/20/landsat-hue.html>
 3. Jekyll source code for this blog entry: [2016-02-21-landsat-hue-2.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-02-21-landsat-hue-2.Rmd)
 

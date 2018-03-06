@@ -18,20 +18,18 @@ p <- "+proj=aeqd +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(coastlineWorld, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
+mtext("Problem at top, unless coastlineCut() used", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=aitoff +lon_0=-45"
 mapPlot(cl45, projection=p,
         longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-mtext("Problem in top-left corner", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=bipc"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(70, 110), col=col)
@@ -127,7 +125,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=geos +h=1e8"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Problem with meridians", line=line, adj=0, col=ecol, font=font)
 
 p <- "+proj=gn_sinu +n=6 +m=3"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -145,13 +142,13 @@ p <- "+proj=hatano"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=healpix"
+p <- "+proj=healpix +a=1"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Problem in Canada", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=rhealpix"
-mapPlot(coastlineWorld, projection=p, col=col)# +north_square=1 +south_square=2")
+p <- "+proj=rhealpix +south_square=0 +north_square=1"
+mapPlot(coastlineWorld, projection=p)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Is this an acid trip?", line=line, adj=0, col=ecol, font=font)
 
@@ -160,10 +157,18 @@ mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Connection through cutout region", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-40"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineWorld,
+        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Error plus weird at top", line=line, adj=0, col=ecol, font=font)
+mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
+
+p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
+mapPlot(coastlineCut(coastlineWorld, -45),
+        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
+mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
 
 p <- "+proj=kav5"
 mapPlot(coastlineWorld, projection=p, col=col)
@@ -204,11 +209,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=loxim"
 mapPlot(coastlineWorld, projection=p, col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=lsat +lsat=1 +path=200"
-mapPlot(coastlineWorld, projection=p, col=col,
-            longitudelim=c(-180,-120), latitudelim=c(70,120))
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
 p <- "+proj=mbt_s"
@@ -374,7 +374,7 @@ p <- "+proj=tissot +lat_1=20 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=tmerc +lon_0=-40"
+p <- "+proj=tmerc +lon_0=-40 +lat_1=30 +lat_2=60"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 

@@ -154,7 +154,7 @@ not moving through the water column.
 
 1. Shiny website: [http://shiny.rstudio.com](http://shiny.rstudio.com)
 
-2. Oce website: [http://dankelley.github.io/oce/](http://dankelley.github.io/oce/)   
+2. Oce website: [https://dankelley.github.io/oce/](https://dankelley.github.io/oce/)   
 
 2. Jekyll source code for this blog entry: [2015-10-18-shiny-ctd-trim.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-10-18-shiny-ctd-trim.Rmd)
 

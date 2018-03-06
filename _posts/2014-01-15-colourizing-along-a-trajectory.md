@@ -41,7 +41,7 @@ segments(head(x, -1), head(y, -1),
 points(x, y, pch = 20, cex=1/3)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1.png) 
+![center](http://dankelley.github.io/figs/2014-01-15-colourizing-along-a-trajectory/unnamed-chunk-1-1.png)
 
 
 # Results

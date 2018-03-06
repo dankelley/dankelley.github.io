@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='/css/syntax.css' />
-<link rel='stylesheet' type='text/css' href='/css/style.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
 <meta charset="UTF-8">
 <title>Landsat thermal imaging</title>
 </head>
@@ -134,7 +134,7 @@ Generally, the ocean temperature hovers around freezing (i.e. -2C).  The anomalo
 
 The beautiful swirls south of Nova Scotia are typical of these coastal waters.
 
-![center](http://dankelley.github.io/figs/2014-07-01-landsat.png) 
+![center](https://dankelley.github.io/figs/2014-07-01-landsat.png) 
 
 # Resources
 
