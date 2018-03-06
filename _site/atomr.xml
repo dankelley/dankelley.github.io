@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2017-12-21T14:14:36-04:00</updated>
+    <updated>2018-03-06T08:49:55-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -2188,14 +2188,14 @@ R package, but this package has the disadvantage of reporting an error if any
 point in a polygon cannot be projected, so it had to be called pointwise on
 coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
-oce version 0.9-17. However, a CRAN member
-suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so later versions of ‘oce’ rely on the ‘rgdal’ package.&lt;/p&gt;
+oce version 0.9-17. However, a CRAN-core member suggested removing the PROJ.4
+code from oce when 0.9-17 was being vetted, and so later versions of ‘oce’ rely
+on the ‘rgdal’ package.&lt;/p&gt;
 
-&lt;p&gt;Oce only provides those PROJ.4 projections that have inverses.
-This is because oce needs to do inverse projections for some of its plotting
-operations. Also note that a handful of projections have not been incorporated,
-because they cause errors of various sorts; see &lt;a href=&quot;https://github.com/dankelley/oce/issues/635&quot;&gt;oce issue
+&lt;p&gt;Oce only provides those PROJ.4 projections that have inverses.  This is because
+oce needs to do inverse projections for some of its plotting operations. Also
+note that a handful of projections have not been incorporated, because they
+cause errors of various sorts; see &lt;a href=&quot;https://github.com/dankelley/oce/issues/635&quot;&gt;oce issue
 635&lt;/a&gt; for more on this.&lt;/p&gt;
 
 &lt;p&gt;I will not explain the methodology of projection here, nor the details of any

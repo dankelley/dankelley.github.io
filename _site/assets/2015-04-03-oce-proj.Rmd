@@ -99,14 +99,14 @@ R package, but this package has the disadvantage of reporting an error if any
 point in a polygon cannot be projected, so it had to be called pointwise on
 coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
-oce version 0.9-17. However, a CRAN member
-suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so later versions of 'oce' rely on the 'rgdal' package.
+oce version 0.9-17. However, a CRAN-core member suggested removing the PROJ.4
+code from oce when 0.9-17 was being vetted, and so later versions of 'oce' rely
+on the 'rgdal' package.
 
-Oce only provides those PROJ.4 projections that have inverses.
-This is because oce needs to do inverse projections for some of its plotting
-operations. Also note that a handful of projections have not been incorporated,
-because they cause errors of various sorts; see [oce issue
+Oce only provides those PROJ.4 projections that have inverses.  This is because
+oce needs to do inverse projections for some of its plotting operations. Also
+note that a handful of projections have not been incorporated, because they
+cause errors of various sorts; see [oce issue
 635](https://github.com/dankelley/oce/issues/635) for more on this.
 
 I will not explain the methodology of projection here, nor the details of any
