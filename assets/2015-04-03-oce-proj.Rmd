@@ -17,14 +17,14 @@ R package, but this package has the disadvantage of reporting an error if any
 point in a polygon cannot be projected, so it had to be called pointwise on
 coastline vectors, at significant time cost (minutes for many practical cases).
 The next step was to incorporate PROJ.4 code into oce itself.  This was used in
-oce version 0.9-17. However, a CRAN member
-suggested removing the PROJ.4 code from oce when 0.9-17 was being vetted, and
-so later versions of 'oce' rely on the 'rgdal' package.
+oce version 0.9-17. However, a CRAN-core member suggested removing the PROJ.4
+code from oce when 0.9-17 was being vetted, and so later versions of 'oce' rely
+on the 'rgdal' package.
 
-Oce only provides those PROJ.4 projections that have inverses.
-This is because oce needs to do inverse projections for some of its plotting
-operations. Also note that a handful of projections have not been incorporated,
-because they cause errors of various sorts; see [oce issue
+Oce only provides those PROJ.4 projections that have inverses.  This is because
+oce needs to do inverse projections for some of its plotting operations. Also
+note that a handful of projections have not been incorporated, because they
+cause errors of various sorts; see [oce issue
 635](https://github.com/dankelley/oce/issues/635) for more on this.
 
 I will not explain the methodology of projection here, nor the details of any
@@ -192,19 +192,6 @@ mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 mtext("Connection through cutout region", line=line, adj=0, col=ecol, font=font)
 
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
-mapPlot(coastlineWorld,
-        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
-
-p <- "+proj=imw_p +lat_1=10 +lat_2=70 +lon_0=-45"
-mapPlot(coastlineCut(coastlineWorld, -45),
-        projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Still weird at top", line=line, adj=0, col=ecol, font=font)
-mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
-
 p <- "+proj=kav5"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
@@ -228,15 +215,6 @@ mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
 p <- "+proj=lcc +lat_1=30 +lat_2=70 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=lcca +lat_0=20 +lon_0=-40"
-mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-
-p <- "+proj=lcca +lat_0=20 +lon_0=-40"
-mapPlot(cl45, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
-mtext(p, line=line, adj=1, col=pcol, font=font)
-mtext("Using coastlineCut()", line=line+0.9, adj=1, col=pcol, font=font)
 
 p <- "+proj=leac +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
