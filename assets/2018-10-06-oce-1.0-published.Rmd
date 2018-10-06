@@ -1,0 +1,23 @@
+---
+layout: post
+title: oce 1.0 published on CRAN
+tags: [R]
+category: R
+year: 2018
+month: 10
+day: 06
+summary: Oce version 1.0-1 has been submitted to the Comprehensive R Archive Network.
+latex: true
+---
+
+This version is basically version 0.9.24, renamed with first digit being 1, to
+indicate a plateau in development. It coincides with the upcoming publication
+of my book Oceanographic Analysis with R
+(http://dankelley.github.io/book.html). The book should be out before the end
+of October, 2018, and is presently available for pre-order from Springer at
+https://www.springer.com/us/book/9781493988426 and from Amazon at
+https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1_1?ie=UTF8&qid=1538313197&sr=8-1&keywords=dan+e+kelley&dpID=31BCT11P-rL&preST=_SY344_BO1,204,203,200_QL70_&dpSrc=srch.
+
+**Reference and resources**
+
+1. Jekyll source code for this blog entry: [2018-10-06-oce-1.0-published.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2018-10-06-oce-1.0-published.Rmd)
