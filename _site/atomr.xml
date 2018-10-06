@@ -4,13 +4,46 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2018-10-06T09:15:43-03:00</updated>
+    <updated>2018-10-06T09:21:49-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
         <email>dan.kelley@dal.ca</email>
     </author>
 
+    
+    
+    <entry>
+        <title>oce 1.0 published on CRAN</title>
+        <link href="http://dankelley.github.io/r/2018/10/06/oce-1.0-published.html"/>
+        <updated>2018-10-06T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2018/10/06/oce-1.0-published</id>
+        <content type="html">&lt;p&gt;This version is basically version 0.9.24, renamed with first digit being 1, to
+indicate a plateau in development. This major increase in the version number
+also coincides with the upcoming publication of my book &lt;em&gt;Oceanographic Analysis
+with R&lt;/em&gt; [1], due near the end of October, 2018, and available for pre-order
+from Springer [2] and Amazon [3].&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference and resources&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Book table of contents are at http://dankelley.github.io/book.html&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Springer ordering website https://www.springer.com/us/book/9781493988426&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Amazon ordering website https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1&lt;em&gt;1?ie=UTF8&amp;amp;qid=1538313197&amp;amp;sr=8-1&amp;amp;keywords=dan+e+kelley&amp;amp;dpID=31BCT11P-rL&amp;amp;preST=_SY344_BO1,204,203,200_QL70&lt;/em&gt;&amp;amp;dpSrc=srch&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2018-10-06-oce-1.0-published.Rmd&quot;&gt;2018-10-06-oce-1.0-published.Rmd&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+    </entry>
+    
     
     
     <entry>
