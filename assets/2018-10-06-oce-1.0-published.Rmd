@@ -18,11 +18,11 @@ from Springer [2] and Amazon [3].
 
 **Reference and resources**
 
-1. Book table of contents are at http://dankelley.github.io/book.html
+1. The book's table of contents are at: [http://dankelley.github.io/book.html](http://dankelley.github.io/book.html)
 
-2. Springer ordering website https://www.springer.com/us/book/9781493988426
+2. Springer ordering website: [https://www.springer.com/us/book/9781493988426](https://www.springer.com/us/book/9781493988426)
 
-3. Amazon ordering website https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1_1?ie=UTF8&qid=1538313197&sr=8-1&keywords=dan+e+kelley&dpID=31BCT11P-rL&preST=_SY344_BO1,204,203,200_QL70_&dpSrc=srch
+3. Amazon ordering website: [https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1_1?ie=UTF8&qid=1538313197&sr=8-1&keywords=dan+e+kelley&dpID=31BCT11P-rL&preST=_SY344_BO1,204,203,200_QL70_&dpSrc=srch](https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1_1?ie=UTF8&qid=1538313197&sr=8-1&keywords=dan+e+kelley&dpID=31BCT11P-rL&preST=_SY344_BO1,204,203,200_QL70_&dpSrc=srch)
 
 4. Jekyll source code for this blog entry: [2018-10-06-oce-1.0-published.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2018-10-06-oce-1.0-published.Rmd)
 
