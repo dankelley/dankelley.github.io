@@ -15,7 +15,7 @@ palette("R4")
 ## -----------------------------------------------------------------------------
 x <- 1:8
 palette("R4") # not needed unless R3 was previously selected
-plot(x, rep(0.9, 8), ylim=c(0.9,1.1), pch=20, cx=2, col=1:8)
+plot(x, rep(0.9, 8), ylim=c(0.9,1.1), pch=20, cex=2, col=1:8)
 palette("R3") # for the old scheme
-points(x, rep(1.1, 8), pch=20, cx=2, col=1:8)
+points(x, rep(1.1, 8), pch=20, cex=2, col=1:8)
 

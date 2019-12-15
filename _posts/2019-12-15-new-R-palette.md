@@ -49,59 +49,9 @@ Here's a simple example that shows the new scheme
 {% highlight r linenos=table %}
 x <- 1:8
 palette("R4") # not needed unless R3 was previously selected
-plot(x, rep(0.9, 8), ylim=c(0.9,1.1), pch=20, cx=2, col=1:8)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in plot.window(...): "cx" is not a graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in plot.xy(xy, type, ...): "cx" is not a graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in axis(side = side, at = at, labels = labels, ...): "cx" is not a
-## graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in axis(side = side, at = at, labels = labels, ...): "cx" is not a
-## graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in box(...): "cx" is not a graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in title(...): "cx" is not a graphical parameter
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
+plot(x, rep(0.9, 8), ylim=c(0.9,1.1), pch=20, cex=2, col=1:8)
 palette("R3") # for the old scheme
-points(x, rep(1.1, 8), pch=20, cx=2, col=1:8)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning in plot.xy(xy.coords(x, y), type = type, ...): "cx" is not a graphical
-## parameter
+points(x, rep(1.1, 8), pch=20, cex=2, col=1:8)
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2019-12-15-new-R-palette/unnamed-chunk-4-1.png)
