@@ -17,25 +17,9 @@ features.  Commonly, I write something like
 
 
 {% highlight r linenos=table %}
+# Not run here, so no graph
 plot(x, y1)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error in plot(x, y1): object 'x' not found
-{% endhighlight %}
-
-
-
-{% highlight r linenos=table %}
 points(x, y2, col=2)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error in points(x, y2, col = 2): object 'x' not found
 {% endhighlight %}
 which gives black circles for `y1` and a red one for `y2`.  That works
 reasonably well for `col` from 1 to 6, but `col=7` is a yellow that it very

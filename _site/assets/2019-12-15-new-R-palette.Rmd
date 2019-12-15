@@ -91,7 +91,8 @@
 It can be very handy to use numeric colours in R, to distinguish graphical
 features.  Commonly, I write something like
 
-```{r}
+```{r eval=FALSE}
+# Not run here, so no graph
 plot(x, y1)
 points(x, y2, col=2)
 ```
