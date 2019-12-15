@@ -5,17 +5,9 @@
 
 
 ## -----------------------------------------------------------------------------
-palette("R3")
-
-
-## ----echo=FALSE---------------------------------------------------------------
-palette("R4")
-
-
-## -----------------------------------------------------------------------------
 x <- 1:8
-palette("R4") # not needed unless R3 was previously selected
+palette("R4") # not actually needed unless R3 was previously selected
 plot(x, rep(0.9, 8), ylim=c(0.5,1.5), pch=20, cex=4, col=1:8)
-palette("R3") # for the old scheme
+palette("R3") # switch to the old scheme
 points(x, rep(1.1, 8), pch=20, cex=4, col=1:8)
 

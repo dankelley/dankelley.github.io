@@ -34,18 +34,9 @@ indicate importance (akin to glaring highlighter pen).
 The upcoming R-4 (4.0 is available now as a pre-release, but it is still in
 active development and therefore **not recommended** for routine work) will
 solve this. The default colours will be more visible, more balanced, and also
-better for those with certain vision challenges.
-
-In R-4.0, you can also use the old palettes, so there is no worry about
-compatibility with old plots.  A single function call,
-
-{% highlight r linenos=table %}
-palette("R3")
-{% endhighlight %}
-will switch to the old scheme, so scripts that need compatibility need only
-insert a line like this at the top, and the old colours will be used.
-
-
+better for those with certain vision challenges.  Several palettes are
+provided, including the one used prior to R 4.x (use `palette("R3")` to get the
+old scheme).
 
 # A practical example
 
@@ -53,13 +44,13 @@ Here's a simple example that shows the new scheme
 
 {% highlight r linenos=table %}
 x <- 1:8
-palette("R4") # not needed unless R3 was previously selected
+palette("R4") # not actually needed unless R3 was previously selected
 plot(x, rep(0.9, 8), ylim=c(0.5,1.5), pch=20, cex=4, col=1:8)
-palette("R3") # for the old scheme
+palette("R3") # switch to the old scheme
 points(x, rep(1.1, 8), pch=20, cex=4, col=1:8)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2019-12-15-new-R-palette/unnamed-chunk-4-1.png)
+![center](http://dankelley.github.io/figs/2019-12-15-new-R-palette/unnamed-chunk-2-1.png)
 
 Many viewers may find the new palette (lower dots) preferable to the old
 palette (upper dots).  For me, the biggest improvement is with the yellow dot,
