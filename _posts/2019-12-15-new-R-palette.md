@@ -10,7 +10,7 @@ summary: R version 4 will have a new default palette, and it solves the problem 
 ---
 
 
-# Introduction
+# The problem of R colours (before version 4.x)
 
 It can be very handy to use numeric colours in R, to distinguish graphical
 features.  Commonly, I write something like
@@ -29,6 +29,8 @@ others, which leads to an ugly unevenness in the results, and possibly to
 confusion, since some viewers might think that the glaring colours are used to
 indicate importance (akin to glaring highlighter pen).
 
+# The solution provided in R 4.x
+
 The upcoming R-4 (4.0 is available now as a pre-release, but it is still in
 active development and therefore **not recommended** for routine work) will
 solve this. The default colours will be more visible, more balanced, and also
@@ -44,6 +46,8 @@ will switch to the old scheme, so scripts that need compatibility need only
 insert a line like this at the top, and the old colours will be used.
 
 
+
+# A practical example
 
 Here's a simple example that shows the new scheme
 

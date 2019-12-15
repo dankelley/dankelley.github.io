@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2019-12-15T10:23:13-04:00</updated>
+    <updated>2019-12-15T10:32:18-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -18,7 +18,7 @@
         <link href="http://dankelley.github.io/r/2019/12/15/new-R-palette.html"/>
         <updated>2019-12-15T00:00:00-04:00</updated>
         <id>http://dankelley.github.io/blog/r/2019/12/15/new-R-palette</id>
-        <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+        <content type="html">&lt;h1 id=&quot;the-problem-of-r-colours-before-version-4x&quot;&gt;The problem of R colours (before version 4.x)&lt;/h1&gt;
 
 &lt;p&gt;It can be very handy to use numeric colours in R, to distinguish graphical
 features.  Commonly, I write something like&lt;/p&gt;
@@ -39,6 +39,8 @@ others, which leads to an ugly unevenness in the results, and possibly to
 confusion, since some viewers might think that the glaring colours are used to
 indicate importance (akin to glaring highlighter pen).&lt;/p&gt;
 
+&lt;h1 id=&quot;the-solution-provided-in-r-4x&quot;&gt;The solution provided in R 4.x&lt;/h1&gt;
+
 &lt;p&gt;The upcoming R-4 (4.0 is available now as a pre-release, but it is still in
 active development and therefore &lt;strong&gt;not recommended&lt;/strong&gt; for routine work) will
 solve this. The default colours will be more visible, more balanced, and also
@@ -53,6 +55,8 @@ compatibility with old plots.  A single function call,&lt;/p&gt;
 
 &lt;p&gt;will switch to the old scheme, so scripts that need compatibility need only
 insert a line like this at the top, and the old colours will be used.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-practical-example&quot;&gt;A practical example&lt;/h1&gt;
 
 &lt;p&gt;Here’s a simple example that shows the new scheme&lt;/p&gt;
 
