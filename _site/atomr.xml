@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2019-12-15T10:08:58-04:00</updated>
+    <updated>2019-12-15T10:14:43-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -32,11 +32,12 @@ features.  Commonly, I write something like&lt;/p&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;which gives black circles for &lt;code class=&quot;highlighter-rouge&quot;&gt;y1&lt;/code&gt; and a red one for &lt;code class=&quot;highlighter-rouge&quot;&gt;y2&lt;/code&gt;.  That works
-reasonably well for &lt;code class=&quot;highlighter-rouge&quot;&gt;col&lt;/code&gt; from 1 to 6, but &lt;code class=&quot;highlighter-rouge&quot;&gt;col=7&lt;/code&gt; is a yellow that it very
-difficult to see on a white background.  Also, some of the colours are more
-glaring than others, which leads to an ugly unevenness in the results, and
-possibly to confusion, since some viewers might think that the glaring colours
-are used to indicate importance (akin to glaring highlighter pen).&lt;/p&gt;
+reasonably well for &lt;code class=&quot;highlighter-rouge&quot;&gt;col&lt;/code&gt; from 1 to 6, but &lt;code class=&quot;highlighter-rouge&quot;&gt;col=7&lt;/code&gt; is a yellow that many
+viewers find very difficult to see on the white background that are preferred
+in technical publications.  Also, some of the colours are more glaring than
+others, which leads to an ugly unevenness in the results, and possibly to
+confusion, since some viewers might think that the glaring colours are used to
+indicate importance (akin to glaring highlighter pen).&lt;/p&gt;
 
 &lt;p&gt;The upcoming R-4 (4.0 is available now as a pre-release, but it is still in
 active development and therefore &lt;strong&gt;not recommended&lt;/strong&gt; for routine work) will
@@ -69,9 +70,9 @@ insert a line like this at the top, and the old colours will be used.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://dankelley.github.io/figs/2019-12-15-new-R-palette/unnamed-chunk-4-1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Many viewers may find the new palette (lower dots) preferable to the old palette
-(upper dots).  For me, the main gain is with the yellow, which is clearly
-visible in this new form.&lt;/p&gt;
+&lt;p&gt;Many viewers may find the new palette (lower dots) preferable to the old
+palette (upper dots).  For me, the biggest improvement is with the yellow dot,
+which is clearly visible in R-4.&lt;/p&gt;
 
 &lt;p&gt;It is worth noting that the new colours are similar enough to the old ones that
 text referring to the diagram may still be valid (&lt;code class=&quot;highlighter-rouge&quot;&gt;yellow'' is still

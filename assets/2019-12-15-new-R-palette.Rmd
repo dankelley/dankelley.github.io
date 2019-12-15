@@ -21,11 +21,12 @@ plot(x, y1)
 points(x, y2, col=2)
 ```
 which gives black circles for `y1` and a red one for `y2`.  That works
-reasonably well for `col` from 1 to 6, but `col=7` is a yellow that it very
-difficult to see on a white background.  Also, some of the colours are more
-glaring than others, which leads to an ugly unevenness in the results, and
-possibly to confusion, since some viewers might think that the glaring colours
-are used to indicate importance (akin to glaring highlighter pen).
+reasonably well for `col` from 1 to 6, but `col=7` is a yellow that many
+viewers find very difficult to see on the white background that are preferred
+in technical publications.  Also, some of the colours are more glaring than
+others, which leads to an ugly unevenness in the results, and possibly to
+confusion, since some viewers might think that the glaring colours are used to
+indicate importance (akin to glaring highlighter pen).
 
 The upcoming R-4 (4.0 is available now as a pre-release, but it is still in
 active development and therefore **not recommended** for routine work) will
@@ -53,9 +54,9 @@ palette("R3") # for the old scheme
 points(x, rep(1.1, 8), pch=20, cex=3, col=1:8)
 ```
 
-Many viewers may find the new palette (lower dots) preferable to the old palette
-(upper dots).  For me, the main gain is with the yellow, which is clearly
-visible in this new form.
+Many viewers may find the new palette (lower dots) preferable to the old
+palette (upper dots).  For me, the biggest improvement is with the yellow dot,
+which is clearly visible in R-4.
 
 It is worth noting that the new colours are similar enough to the old ones that
 text referring to the diagram may still be valid (``yellow'' is still
