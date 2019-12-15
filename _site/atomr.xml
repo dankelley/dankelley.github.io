@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2019-12-15T10:36:12-04:00</updated>
+    <updated>2019-12-15T10:38:30-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -71,8 +71,7 @@ palette (upper dots).  For me, the biggest improvement is with the yellow dot,
 which is clearly visible in R-4.&lt;/p&gt;
 
 &lt;p&gt;It is worth noting that the new colours are similar enough to the old ones that
-text referring to the diagram may still be valid (&lt;code class=&quot;highlighter-rouge&quot;&gt;yellow'' is still
-&lt;/code&gt;yellow’’).&lt;/p&gt;
+text referring to the diagram may still be valid (“yellow” is still “yellow”).&lt;/p&gt;
 
 &lt;p&gt;Reference [1] explains more about the new palettes in R-4, and it is worth reading,
 to learn about other new palettes that are coming, and about efforts to make
