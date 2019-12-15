@@ -50,9 +50,9 @@ Here's a simple example that shows the new scheme
 {% highlight r linenos=table %}
 x <- 1:8
 palette("R4") # not needed unless R3 was previously selected
-plot(x, rep(0.9, 8), ylim=c(0,2), pch=20, cex=3, col=1:8)
+plot(x, rep(0.9, 8), ylim=c(0.5,1.5), pch=20, cex=4, col=1:8)
 palette("R3") # for the old scheme
-points(x, rep(1.1, 8), pch=20, cex=3, col=1:8)
+points(x, rep(1.1, 8), pch=20, cex=4, col=1:8)
 {% endhighlight %}
 
 ![center](http://dankelley.github.io/figs/2019-12-15-new-R-palette/unnamed-chunk-4-1.png)
