@@ -102,21 +102,24 @@
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">memoise</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="test-conventional-function">Test conventional function</h2>
 
 <p>The demonstration will be for reading a CTD file.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
 ## Loading required package: maps</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="o">&lt;-</span><span class="n">read.oce</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="o">&lt;-</span><span class="n">read.oce</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: milliseconds
 ##                                                          expr   min    lq
@@ -129,12 +132,14 @@
 <p>Memoising <code class="highlighter-rouge">read.oce()</code> is simple</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">memoise</span><span class="p">(</span><span class="n">read.oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">memoise</span><span class="p">(</span><span class="n">read.oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="measure-the-speed-of-memoised-code">Measure the speed of memoised code</h2>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
 ##                                                   expr   min    lq median

@@ -1,0 +1,176 @@
+I"^e<h1 id="introduction">Introduction</h1>
+
+<p>Several buoys measure wave conditions off the coast of Nova Scotia. I was
+hoping to get data from the nearest one (ID 44258) but it did not have many
+non-missing data, so I instead chose one further offshore (ID 44150; see
+<a href="http://www.ndbc.noaa.gov/station_page.php?station=44150">http://www.ndbc.noaa.gov/station_page.php?station=44150</a>).  This is owned and
+maintained by Environment Canada, and is located roughly south of Halifax and
+east of Cape Cod, near the 1000m isobath, as indicated on the map below.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">-64.018</span><span class="w">
+</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">42.505</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorldFine</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">coastlineWorldFine</span><span class="p">,</span><span class="w"> </span><span class="n">longitudelim</span><span class="o">=</span><span class="n">lon</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">),</span><span class="w"> </span><span class="n">latitudelim</span><span class="o">=</span><span class="n">lat</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">-7</span><span class="p">,</span><span class="m">7</span><span class="p">))</span><span class="w">
+</span><span class="n">points</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">)</span><span class="w"> </span><span class="c1"># coarse resolution</span><span class="w">
+</span><span class="n">contour</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">topoWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">topoWorld</span><span class="p">[[</span><span class="s2">"z"</span><span class="p">]],</span><span class="w">
+        </span><span class="n">levels</span><span class="o">=</span><span class="m">-1000</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">drawlabels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-2-1.png" alt="center" /></p>
+
+<h1 id="procedure">Procedure</h1>
+
+<h2 id="data-source">Data source</h2>
+
+<p>I first downloaded the data as follows, in R:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">download.file</span><span class="p">(</span><span class="s2">"http://www.ndbc.noaa.gov/data/realtime2/44150.txt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"44150.txt"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Since I did this on February 9, I got data for the month prior to the download.
+In case any reader wants to try working with those data, I’ve provided them on
+this blog [1].</p>
+
+<h2 id="read-data">Read data</h2>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="s2">"44150.txt"</span><span class="p">)</span><span class="w">
+</span><span class="n">names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">strsplit</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"^#"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="s2">" +"</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"MM"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NA"</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="c1"># whacky missing-value code</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.table</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISOdatetime</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">YY</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">MM</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">DD</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">hh</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">windDirection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">WDIR</span><span class="w">
+</span><span class="n">windSpeed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">WSPD</span><span class="w">
+</span><span class="n">gust</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">GST</span><span class="w">
+</span><span class="n">waveHeight</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">WVHT</span><span class="w">
+</span><span class="n">dominantWavePeriod</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">DPD</span><span class="w">
+</span><span class="n">apd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">APD</span><span class="w"> </span><span class="c1"># ? maybe average wave period?</span><span class="w">
+</span><span class="n">mwd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">MWD</span><span class="w"> </span><span class="c1"># ? </span><span class="w">
+</span><span class="n">airPressure</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">PRES</span><span class="w">
+</span><span class="n">airTemperature</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">ATMP</span><span class="w">
+</span><span class="n">waterTemperature</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">WTMP</span><span class="w">
+</span><span class="n">dewPoint</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">DEWP</span><span class="w">
+</span><span class="n">visibility</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">VIS</span><span class="w">
+</span><span class="n">ptdy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">PTDY</span><span class="w">
+</span><span class="n">tide</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">TIDE</span><span class="w">
+</span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">windDirection</span><span class="w"> </span><span class="c1"># convert from CW-from-North to CCW-from-East</span><span class="w">
+</span><span class="c1">## multiply by -1 to convert from "wind from" to "wind to"</span><span class="w">
+</span><span class="n">windU</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">windSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">)</span><span class="w">
+</span><span class="n">windV</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">windSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="m">180</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="time-series-graphs">Time-series graphs</h2>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">airPressure</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Air press [kPa]"</span><span class="p">,</span><span class="w"> </span><span class="n">drawTimeRange</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">windSpeed</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Wind speed [m/s]"</span><span class="p">,</span><span class="w"> </span><span class="n">drawTimeRange</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">windDirection</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"wind dir"</span><span class="p">,</span><span class="w"> </span><span class="n">drawTimeRange</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">waveHeight</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Height [m]"</span><span class="p">,</span><span class="w"> </span><span class="n">drawTimeRange</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">dominantWavePeriod</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Period [s]"</span><span class="p">,</span><span class="w"> </span><span class="n">drawTimeRange</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-5-1.png" alt="center" /></p>
+
+<h2 id="wind-rose-graph">Wind-rose graph</h2>
+
+<p>I like to plot winds in the oceanographic convention, i.e. with dots indicating
+the direction in which the air flows. I will colour-code the dots with an
+indication of the wave height.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="n">cm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colormap</span><span class="p">(</span><span class="n">waveHeight</span><span class="p">,</span><span class="w"> </span><span class="n">zlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">oceColorsJet</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">drawPalette</span><span class="p">(</span><span class="n">zlim</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">zlim</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">col</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">windU</span><span class="p">,</span><span class="w"> </span><span class="n">windV</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="n">cm</span><span class="o">$</span><span class="n">zcol</span><span class="p">,</span><span class="w">
+     </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Eastward wind [m/s]"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Northward wind [m/s]"</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Colour indicates wave height [m]"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ring</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">circleX</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ring</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="m">20</span><span class="p">))</span><span class="w">
+    </span><span class="n">circleY</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ring</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="m">20</span><span class="p">))</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">circleX</span><span class="p">,</span><span class="w"> </span><span class="n">circleY</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-02-09-noreaster/unnamed-chunk-6-1.png" alt="center" /></p>
+
+<h1 id="discussion">Discussion</h1>
+
+<p>Although waves are not entirely related to <em>local</em> winds, it is interesting to
+compare them. The time-series plots indicate a correspondence of high wind and
+large waves. However, the wind-rose plot indicates that this is mainly true for
+certain wind directions. The strong winds from February 8 that caused the
+largest waves are indicated with the dark-red dot in the lower-left quadrant.
+This quadrant corresponds to winds that locals call Nor’Eastly, and those
+locals who take to the sea will not be surprised by the wave heights indicated
+on the storm, or by their long period as indicated in the time-series plot.</p>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/44150.txt">data source</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-02-09-noreaster.Rmd">2016-02-09-noreaster.Rmd</a></p>
+  </li>
+</ol>
+
+:ET

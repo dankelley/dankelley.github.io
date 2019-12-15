@@ -1,0 +1,161 @@
+I"oP<h1 id="introduction">Introduction</h1>
+
+<p>The function <code class="highlighter-rouge">lsoda()</code> from the <code class="highlighter-rouge">deSolve</code> package is a handy function for
+solving differential equations in R.  This is illustrated here with a classic
+example: the nonlinear oscillator.</p>
+
+<h1 id="theory">Theory</h1>
+
+<p>As explained in any introductory Physics textbook, the nondimensionalized
+oscillator equation <script type="math/tex">d\theta/dt + \sin\theta = 0</script> can be simplified to
+<script type="math/tex">d\theta/dt + \theta = 0</script> provided that <script type="math/tex">\theta \ll 1</script>, i.e. in the “small
+angle” limit.</p>
+
+<p>The linear form has solution <script type="math/tex">\theta = a \sin(t)</script> for initial conditions
+<script type="math/tex">\theta=0</script> and <script type="math/tex">d\theta/dt=a</script> at <script type="math/tex">t=0</script>.</p>
+
+<p>The nonlinear form is harder to solve analytically, but numerical integration
+can be applied to any situation of interest.  This is made simpler in the
+present statement of the problem in nondimensional form, since there is but a
+single parameter, <script type="math/tex">a</script>, that describes the system.</p>
+
+<p>A few questions may come to mind before proceeding further.  For example, it is
+clear that if <script type="math/tex">a\ll 1</script>, the numerical solution should match the solution to
+the linear equation.  But just how small must <script type="math/tex">a</script> be, for a given precision?
+A second question is about the qualitative form of the numerical solution, e.g
+is it still a sinusoid but a different frequency, or something of a different
+character?  Might there different classes of solutions in various ranges of
+<script type="math/tex">a</script>?</p>
+
+<p>Showing that such questions are easily answered with R is the point of the
+present exercise.</p>
+
+<h1 id="framing-the-de-for-solution-in-r">Framing the DE for solution in R</h1>
+
+<p>As an exercise, <code class="highlighter-rouge">lsoda()</code> from the <code class="highlighter-rouge">deSolve</code> package can be used to
+integrate the nonlinear DE without the small angle assumption.</p>
+
+<p>The first step is to break the second-order DE down into two first-order DEs,
+<script type="math/tex">\phi = d\theta/dt</script> and <script type="math/tex">d\phi/dt = -\sin\theta</script>, which are to be defined
+with a function named <code class="highlighter-rouge">func</code> that is used by the DE solver named <code class="highlighter-rouge">lsoda</code>.
+Of course, we also need initial conditions and a set of times at which to
+report the solution.  All of these things are set out in the R code given
+below, which plots the solution for <script type="math/tex">a=0.1</script> as the red dashed line, on top of
+the theoretical solution as the blue line.  Readers might wish to try this with
+slightly larger and smaller values of <script type="math/tex">a</script>, to get a feel for the solution.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">deSolve</span><span class="p">)</span><span class="w">
+</span><span class="n">de</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">parms</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+    </span><span class="n">phi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w">
+    </span><span class="nf">list</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">dthetadt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">dphidt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.1</span><span class="w">
+</span><span class="n">y0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">sol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lsoda</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">de</span><span class="p">)</span><span class="w">
+</span><span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">theta</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-1.png" alt="center" /></p>
+
+<h1 id="some-test-cases">Some test cases</h1>
+
+<p>For more exploration, it is convenient to define the above as a stand-alone
+function that takes <code class="highlighter-rouge">a</code> as a parameter.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">deSolve</span><span class="p">)</span><span class="w">
+</span><span class="n">oscillator</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">de</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">parms</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+        </span><span class="n">phi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w">
+        </span><span class="nf">list</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">dthetadt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">dphidt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="n">y0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w">
+    </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="m">100</span><span class="p">)</span><span class="w">
+    </span><span class="n">sol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lsoda</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">de</span><span class="p">)</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">sol</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> 
+        </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">theta</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="w">
+    </span><span class="n">grid</span><span class="p">()</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+    </span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"linear"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"nonlinear"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now, a few examples are easy to construct.</p>
+
+<p>Start with a somewhat nonlinear problem</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">oscillator</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-3.png" alt="center" /></p>
+
+<p>Readers should try increasing <script type="math/tex">a</script> a bit at a time, e.g. the example below has
+a distinctly non-sinusoidal character.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">oscillator</span><span class="p">(</span><span class="m">1.999</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-06-15-nonlinear-oscillator/unnamed-chunk-4.png" alt="center" /></p>
+
+<h1 id="exercises">Exercises</h1>
+
+<p>Further explore the behaviour in the neighborhood of <script type="math/tex">a=2</script>.  Are changes
+subtle or dramatic in that region?  Are there other regions of interest?
+Consult the literature if this problem interests you.</p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-06-15-nonlinear-oscillator.R">2014-06-15-nonlinear-oscillator.R</a></li>
+</ul>
+
+:ET

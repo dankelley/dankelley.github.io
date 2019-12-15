@@ -1,0 +1,79 @@
+I"1<h1 id="introduction">Introduction</h1>
+
+<p>The <code class="highlighter-rouge">mapdata</code> R package contains a coastline called <code class="highlighter-rouge">worldHires</code> which is contained within a text file with a bit over 2 million lines.  Since the <code class="highlighter-rouge">coastlineWorldFine</code> dataset in the <code class="highlighter-rouge">ocedata</code> package contains about 0.5 million points, I thought I would explore how much better the <code class="highlighter-rouge">mapdata</code> coastline might be.</p>
+
+<h1 id="methods">Methods</h1>
+
+<p>First, I wrote the following C file to translate the data to something that R can read.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="c1">#include &lt;stdio.h&gt;</span><span class="w">
+</span><span class="n">char</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/Users/kelley/mapdata/src/worldHires.line"</span><span class="p">;</span><span class="w">
+</span><span class="n">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">char</span><span class="w"> </span><span class="n">tok1</span><span class="p">[</span><span class="m">100</span><span class="p">],</span><span class="w"> </span><span class="n">tok2</span><span class="p">[</span><span class="m">100</span><span class="p">];</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">needn</span><span class="s1">'t be anywhere near that long
+    FILE *in = fopen(file, "r");
+    int ok;
+    int count = 0;
+    int skip = 1;
+    while (1) { //count++ &lt; n) {
+        if (skip) {
+            fscanf(in, "%s", tok1);
+            if (feof(in))
+                return(0);
+            fscanf(in, "%s", tok2);
+            printf("NA NA\n");
+            skip = 0;
+        } else {
+            fscanf(in, "%s", tok1);
+            if (tok1[0] == '</span><span class="n">E</span><span class="err">'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w">
+            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="n">fscanf</span><span class="p">(</span><span class="k">in</span><span class="p">,</span><span class="w"> </span><span class="s2">"%s"</span><span class="p">,</span><span class="w"> </span><span class="n">tok2</span><span class="p">);</span><span class="w">
+                </span><span class="n">printf</span><span class="p">(</span><span class="s2">"  %s %s\n"</span><span class="p">,</span><span class="w"> </span><span class="n">tok1</span><span class="p">,</span><span class="w"> </span><span class="n">tok2</span><span class="p">);</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Then, I created a datafile for plotting. It turns out that <code class="highlighter-rouge">mapdata</code> numbers are in radians, so a conversion was required.</p>
+
+<p>I plotted this “new” dataset and the “old” one (containined in <code class="highlighter-rouge">ocedata</code>) and the results are shown below.</p>
+
+<h1 id="results">Results</h1>
+
+<p><img src="http://dankelley.github.io/figs/2015-01-28-coastline/coastline.png" alt="center" /></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>There are some differences between the two, but nothing dramatic (e.g. no Northwest Arm of Halifax Harbour). Certainly it would be difficult to argue for exapanding the memory footprint of <code class="highlighter-rouge">ocedata</code> by a factor of 4.</p>
+
+:ET

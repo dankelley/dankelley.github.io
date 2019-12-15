@@ -126,7 +126,8 @@ is helpful since this is a form that works well with <code class="highlighter-ro
 <p>The first step is to load the package containing <code class="highlighter-rouge">lsoda()</code>.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">deSolve</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">deSolve</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Readers who are following along might want to type <code class="highlighter-rouge">?lsoda</code> in an R console at this point, to get an idea of the reasoning being followed here.  The summary is that <code class="highlighter-rouge">lsoda()</code> takes initial conditions as its first argument, a vector of times at which to report the solution as its second argument, a function defining the differential equation(s) as its third argument, and a list containing model parameters in its fourth argument.</p>
 
@@ -135,7 +136,8 @@ is helpful since this is a form that works well with <code class="highlighter-ro
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">IC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span><span class="n">parms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="m">1e6</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="o">=</span><span class="m">10</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">parms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="m">1e6</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Suppose we would like to examine the result of riverine input <code class="highlighter-rouge">F</code> of 1m^3/s lasting for a day, so that it makes sense to set up a time vector of, say, a week.</p>
 
@@ -150,7 +152,8 @@ is helpful since this is a form that works well with <code class="highlighter-ro
 </span><span class="nb">F</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="n">ifelse</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">sperday</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">sperday</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>(The length of <code class="highlighter-rouge">times</code> mainly matters to plotting; it has no effect on the accuray of the solution, i.e. we are not setting an integration time step here.)</p>
 
@@ -167,14 +170,16 @@ is helpful since this is a form that works well with <code class="highlighter-ro
     </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
     </span><span class="n">dhdt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="nb">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">parms</span><span class="o">$</span><span class="n">gamma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">parms</span><span class="o">$</span><span class="n">A</span><span class="w">
     </span><span class="nf">list</span><span class="p">(</span><span class="n">dhdt</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here, the state is extracted into a variable named <code class="highlighter-rouge">h</code> and the derivative is stored in a variable named <code class="highlighter-rouge">dhdt</code>.  This is done merely for clarity of illustration here; experienced programmers are likely to write <code class="highlighter-rouge">DE</code> as a single-line function.</p>
 
 <p>Computing the model solution is now easy:</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">sol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lsoda</span><span class="p">(</span><span class="n">IC</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">,</span><span class="w"> </span><span class="n">DE</span><span class="p">,</span><span class="w"> </span><span class="n">parms</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">sol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lsoda</span><span class="p">(</span><span class="n">IC</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">,</span><span class="w"> </span><span class="n">DE</span><span class="p">,</span><span class="w"> </span><span class="n">parms</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>defines <code class="highlighter-rouge">sol</code>, which has time as its first column and the solution as its second.  We may plot the results as follows (where time is indicated in days for simplicity).</p>
 
@@ -189,7 +194,8 @@ is helpful since this is a form that works well with <code class="highlighter-ro
 </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sol</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="w">
 </span><span class="n">Day</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">86400</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">Day</span><span class="p">,</span><span class="w"> </span><span class="nb">F</span><span class="p">(</span><span class="n">times</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"River input [m^3/s]"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">Day</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Lake level [m]"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">plot</span><span class="p">(</span><span class="n">Day</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Lake level [m]"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-03-16-box-model/box-model.png" alt="center" /></p>
 

@@ -122,7 +122,8 @@
     </span><span class="n">rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span><span class="w">  </span><span class="c1"># fresh water</span><span class="w">
     </span><span class="n">omega2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="o">^</span><span class="m">3</span><span class="o">/</span><span class="n">rho</span><span class="w">
     </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">omega2</span><span class="p">)</span><span class="o">/</span><span class="n">k</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>It makes sense to plot a function to be optimized, if only to check that it has been coded correctly, so that is the next step.  Readers who are familiar with gravity-capillary waves may know that the speed is minimum at wavelengths of about 2 cm, or wavenumbers of approximately $2\pi/0.02=300$; this suggests an x range for the plot.</p>
 
@@ -131,7 +132,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
 </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">phaseSpeed</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Wavenumber"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Phase speed"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">phaseSpeed</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Wavenumber"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Phase speed"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/optimize.png" alt="graph" /></p>
 
@@ -142,7 +144,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">o</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="n">phaseSpeed</span><span class="p">,</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="w">
 </span><span class="n">phaseSpeed</span><span class="p">(</span><span class="n">o</span><span class="o">$</span><span class="n">minimum</span><span class="p">)</span><span class="w">
-</span><span class="c1">## [1] 0.2321</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="c1">## [1] 0.2321</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This speed is not especially fast; it would take about a heartbeat to move past your hand.</p>
 

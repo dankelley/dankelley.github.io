@@ -1,0 +1,70 @@
+I"O<h1 id="introduction">Introduction</h1>
+
+<p>The <code class="highlighter-rouge">memoise</code> package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The <code class="highlighter-rouge">microbenchmark</code> package shows timing results.</p>
+
+<h1 id="methods-and-results">Methods and results</h1>
+
+<h2 id="setup">Setup</h2>
+
+<p>First, load the package being tested, and also a benchmarking package.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">memoise</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="test-conventional-function">Test conventional function</h2>
+
+<p>The demonstration will be for reading a CTD file.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="o">&lt;-</span><span class="n">read.oce</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: milliseconds
+##                                                          expr   min    lq
+##  d &lt;- read.oce("/data/arctic/beaufort/2012/d201211_0002.cnv") 277.8 281.2
+##  median    uq   max neval
+##   283.3 288.4 349.2   100</code></pre></figure>
+
+<h2 id="memoise-the-function">Memoise the function</h2>
+
+<p>Memoising <code class="highlighter-rouge">read.oce()</code> is simple</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">memoise</span><span class="p">(</span><span class="n">read.oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="measure-the-speed-of-memoised-code">Measure the speed of memoised code</h2>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">microbenchmark</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="s2">"/data/arctic/beaufort/2012/d201211_0002.cnv"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Unit: microseconds
+##                                                   expr   min    lq median
+##  d &lt;- r("/data/arctic/beaufort/2012/d201211_0002.cnv") 100.9 104.2  107.2
+##     uq    max neval
+##  111.8 302339   100</code></pre></figure>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>In this example, the speedup was by a factor of about 3000.</p>
+
+<p>The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using <code class="highlighter-rouge">memoise()</code> would reduce that half minute to a hundredth of a second – easily converting an annoyingly slow operation to what feels like zero time in an interactive session.</p>
+
+<h1 id="resources">Resources</h1>
+<ul>
+  <li><a href="/assets/2014-04-12-memoise.R">R code used in this blog item</a></li>
+  <li><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2014-04-12-memoise.Rmd">Jekyll source code for this blog item</a></li>
+</ul>
+:ET

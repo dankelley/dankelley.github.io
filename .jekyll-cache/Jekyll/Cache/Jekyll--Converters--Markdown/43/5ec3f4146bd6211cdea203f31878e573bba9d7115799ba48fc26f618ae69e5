@@ -1,0 +1,65 @@
+I"3<h1 id="introduction">Introduction</h1>
+
+<p>The <code class="highlighter-rouge">tirs1</code> band of landsat-8 imagery (see [1]) is a near-thermal band, from which a quantity called ``brightness temperature’’ may be inferred.</p>
+
+<p>As explained in [2], the brightness temperature in Kelvin is computed with <script type="math/tex">T=K_2 / ln(K_1/\lambda_L + 1)</script> where <script type="math/tex">K_1</script> and <script type="math/tex">K_2</script> are stored in the image metadata, and <script type="math/tex">\lambda_L=M_L*d+A_L</script>, where again <script type="math/tex">M_L</script> and <script type="math/tex">A_L</script> are stored in the metadata.  In this last expression, <script type="math/tex">d</script> is the image value, which when read with the <code class="highlighter-rouge">oce</code> package must be multiplied by a scale factor for the formulae to work.</p>
+
+<h1 id="methods">Methods</h1>
+
+<p>Note in the code that the SST is computed in Celcius, and inserted into the data object before plotting.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.landsat</span><span class="p">(</span><span class="s2">"LC80080292014065LGN00"</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s2">"tirs1"</span><span class="p">)</span><span class="w">
+</span><span class="n">tirs1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="p">[[</span><span class="s2">"tirs1"</span><span class="p">]]</span><span class="w">
+</span><span class="n">ML</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="o">@</span><span class="n">metadata</span><span class="o">$</span><span class="n">header</span><span class="o">$</span><span class="n">radiance_mult_band_10</span><span class="w">
+</span><span class="n">AL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="o">@</span><span class="n">metadata</span><span class="o">$</span><span class="n">header</span><span class="o">$</span><span class="n">radiance_add_band_10</span><span class="w">
+</span><span class="n">K1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="o">@</span><span class="n">metadata</span><span class="o">$</span><span class="n">header</span><span class="o">$</span><span class="n">k1_constant_band_10</span><span class="w">
+</span><span class="n">K2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="o">@</span><span class="n">metadata</span><span class="o">$</span><span class="n">header</span><span class="o">$</span><span class="n">k2_constant_band_10</span><span class="w">
+</span><span class="n">Llambda</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ML</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tirs1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">AL</span><span class="w">
+</span><span class="n">SSTkelvin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">K2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">K1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Llambda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">SST</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SSTkelvin</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">273.15</span><span class="w">                 </span><span class="c1"># convert Kelvin to Celcius</span><span class="w">
+</span><span class="n">l</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">SST</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SST</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">band</span><span class="o">=</span><span class="s2">"SST"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="n">oceColorsJet</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">l</span><span class="p">[[</span><span class="s2">"time"</span><span class="p">]])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h1 id="results">Results</h1>
+
+<p>The figure below shows the results.  This image is from winter, so the land (Nova Scotia) is colder than the ocean.</p>
+
+<p>The high land is especially cold, as those familiar with the topography can tell at a glance.  Homogenous blue patches indicate frozen lakes.</p>
+
+<p>Generally, the ocean temperature hovers around freezing (i.e. -2C).  The anomalously cold patches in the Bay of Fundy are probably a signature of ice.  Some of the orange colour suggests temperatures a much as 1C below freezing.  Whether this indicates a difficulty in the algorithm or the interpretation is a matter for Landsat experts.</p>
+
+<p>The beautiful swirls south of Nova Scotia are typical of these coastal waters.</p>
+
+<p><img src="https://dankelley.github.io/figs/2014-07-01-landsat.png" alt="center" /></p>
+
+<h1 id="resources">Resources</h1>
+
+<ol>
+  <li>
+    <p>Landsat bands are explained at <a href="http://landsat.gsfc.nasa.gov/?page_id=5377">http://landsat.gsfc.nasa.gov/?page_id=5377</a>.</p>
+  </li>
+  <li>
+    <p>The conversion to brightness temperature is described at <a href="http://landsat.usgs.gov/Landsat8_Using_Product.php">http://landsat.usgs.gov/Landsat8_Using_Product.php</a></p>
+  </li>
+  <li>
+    <p>Source code: <a href="/assets/2014-07-01-landsat.R">2014-07-01-landsat.R</a>.</p>
+  </li>
+</ol>
+
+:ET

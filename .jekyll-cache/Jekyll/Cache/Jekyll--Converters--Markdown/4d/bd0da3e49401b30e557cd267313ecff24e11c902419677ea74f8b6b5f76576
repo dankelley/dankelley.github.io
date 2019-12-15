@@ -1,0 +1,253 @@
+I"q�<h1 id="introduction">Introduction</h1>
+
+<p>I was watching a video of David Suzuki being interviewed on Australian TV, and
+there were some questions about the “pause” in temperature in the GISS dataset.
+I thought I’d like to check for myself, and reasoned that I may as well update
+the <code class="highlighter-rouge">giss</code> dataset in the <code class="highlighter-rouge">ocedata</code> R package.</p>
+
+<p>As always seems to be the case, the data format is changed a bit from autumn
+2014, when I downloaded GISS and put it into <code class="highlighter-rouge">ocedata</code>, so I had to write
+some new code.</p>
+
+<p>I also found a data file on my machine that I downloaded some time in the past,
+but my tests tell me that it is not the one I used for <code class="highlighter-rouge">ocedata</code>.  Thus, I
+have three datasets to explore.</p>
+
+<p>At the risk of providing fuel for debate about such things, I am presenting
+code and graphs that show what I found. I make no claims to accurate
+processing. For one thing, the only file for which I have a clear download
+history is the one dated today [3].</p>
+
+<h1 id="procedure-and-results">Procedure and results</h1>
+
+<p>First, I downloaded the latest dataset from [1], storing it in a file named
+<code class="highlighter-rouge">giss-2015-11-07.dat</code> (provided in [3] here).  Then I found another file,
+evidently from 2014, which I copied locally and renamed <code class="highlighter-rouge">giss-2014-xx-xx.dat</code>
+([4] here). Note that the file formats differ slightly, in the asterisks near
+the end; the new format has spaces, which make it easier to read the data,
+whereas the old format is clearly designed for fixed-width data readers.</p>
+
+<p>Then I wrote code to read the new file. Then I plotted timeseries (left column)
+and some differences (right column).</p>
+
+<p>My code is ugly and ad-hoc. It may contain errors, and the main reason I’m
+posting this is to invite readers to email me if they see any errors.
+(Comments are turned off because I don’t have time to moderate them, and
+unmoderated comments on a blog that might touch on climate issues is a bit like
+dropping a lit match over a pool of gasoline and hoping for the best.)</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td><td class="code"><pre><span class="n">readGISS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">lines</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w">
+    </span><span class="n">yearLine</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grep</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">,</span><span class="w"> </span><span class="n">lines</span><span class="p">)</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lines</span><span class="p">[</span><span class="nf">seq.int</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">yearLine</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="m">+1</span><span class="p">,</span><span class="w"> </span><span class="n">tail</span><span class="p">(</span><span class="n">yearLine</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="m">-1</span><span class="p">)]</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="p">[</span><span class="n">grep</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)]</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="p">[</span><span class="n">grep</span><span class="p">(</span><span class="s2">"^$"</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)]</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\\*+"</span><span class="p">,</span><span class="w"> </span><span class="s2">"  NA"</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w">
+    </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.table</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">l</span><span class="p">)</span><span class="w">
+    </span><span class="n">yearorig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V1</span><span class="w">
+    </span><span class="n">months</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">V2</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V3</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V4</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V5</span><span class="p">,</span><span class="w"> 
+                    </span><span class="n">d</span><span class="o">$</span><span class="n">V6</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V7</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V8</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V9</span><span class="p">,</span><span class="w"> 
+                    </span><span class="n">d</span><span class="o">$</span><span class="n">V10</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V11</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V12</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">$</span><span class="n">V13</span><span class="p">)</span><span class="w"> 
+    </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">months</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">100</span><span class="w">
+    </span><span class="c1">## the 1/24 centres in months (at least roughly)</span><span class="w">
+    </span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">yearorig</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">index</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="m">12</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">24</span><span class="w">
+    </span><span class="n">keep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="w">
+    </span><span class="n">data.frame</span><span class="p">(</span><span class="n">year</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span><span class="w"> </span><span class="n">index</span><span class="p">[</span><span class="n">keep</span><span class="p">])</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">readGISS2014</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="c1"># http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="p">[</span><span class="n">grep</span><span class="p">(</span><span class="s2">"^[1-2].*"</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">)]</span><span class="w">            </span><span class="c1"># ignore headers at start, and every 20 years</span><span class="w">
+    </span><span class="c1">## year is in char 1 to 4; data in 0.01degC are in char 8 to 65</span><span class="w">
+    </span><span class="n">startyear</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scan</span><span class="p">(</span><span class="n">textConnection</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">substr</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">)</span><span class="w">
+    </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">l</span><span class="p">[</span><span class="n">grep</span><span class="p">(</span><span class="s2">"\\*+"</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">invert</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)]</span><span class="w">    </span><span class="c1"># ignore lines with missing month data</span><span class="w">
+    </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.01</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scan</span><span class="p">(</span><span class="n">textConnection</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="w">
+    </span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">24</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">startyear</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="o">/</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">index</span><span class="p">))</span><span class="w">
+    </span><span class="n">data.frame</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1">## Read two text file, then load data(giss, package="ocedata") prior to 2015-11-16</span><span class="w">
+</span><span class="n">gissNew</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readGISS</span><span class="p">(</span><span class="s2">"giss-20151107.dat"</span><span class="p">)</span><span class="w"> </span><span class="c1"># see [3] below</span><span class="w">
+</span><span class="n">gissOld</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readGISS2014</span><span class="p">(</span><span class="s2">"giss-2014xxxx.dat"</span><span class="p">)</span><span class="w"> </span><span class="c1"># see [4] below</span><span class="w">
+</span><span class="n">load</span><span class="p">(</span><span class="s2">"giss-ocedata-until-20151116.rda"</span><span class="p">)</span><span class="w"> </span><span class="c1"># yields 'giss'; see [5] below</span><span class="w">
+</span><span class="c1">## print some tests; note that we offset gissOld by 1 year because</span><span class="w">
+</span><span class="c1">## readGISS2014() skips any year with missing data (including the</span><span class="w">
+</span><span class="c1">## first year, which has a missing season) ... this function is just</span><span class="w">
+</span><span class="c1">## a kludge for this blog item, so don't worry about this!</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##  [1] -0.12 -0.13 -0.01 -0.01 -0.01 -0.25 -0.10 -0.06 -0.16 -0.21 -0.26
+## [12] -0.17</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">print</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="m">13</span><span class="o">:</span><span class="m">24</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##  [1] -0.20 -0.24 -0.01 -0.05 -0.06 -0.32 -0.14 -0.12 -0.26 -0.29 -0.38
+## [12] -0.30</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">mfcol</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Index [degC]"</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"giss in ocedata"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="c1">## store the scale</span><span class="w">
+</span><span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="p">)</span><span class="w">
+</span><span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">gissOld</span><span class="o">$</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Index [degC]"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"gissOld"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">gissNew</span><span class="o">$</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Index [degC]"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"gissNew"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+
+</span><span class="n">start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="p">),</span><span class="nf">min</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="p">),</span><span class="nf">min</span><span class="p">(</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="p">)))</span><span class="w">
+</span><span class="n">end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="p">),</span><span class="nf">max</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="p">),</span><span class="nf">max</span><span class="p">(</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="p">)))</span><span class="w">
+</span><span class="n">look</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">start</span><span class="o">&lt;=</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="o">&amp;</span><span class="n">giss</span><span class="o">$</span><span class="n">year</span><span class="o">&lt;=</span><span class="n">end</span><span class="w">
+</span><span class="n">lookOld</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">start</span><span class="o">&lt;=</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="o">&amp;</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="o">&lt;=</span><span class="n">end</span><span class="w">
+</span><span class="n">lookNew</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">start</span><span class="o">&lt;=</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="o">&amp;</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="o">&lt;=</span><span class="n">end</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gissNew</span><span class="o">$</span><span class="n">year</span><span class="p">[</span><span class="n">lookNew</span><span class="p">],</span><span class="w"> </span><span class="n">gissNew</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">lookNew</span><span class="p">]</span><span class="o">-</span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">look</span><span class="p">],</span><span class="w">
+     </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"index change [degC]"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">))</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'pink'</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"gissNew- ocedata"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="p">[</span><span class="n">lookOld</span><span class="p">],</span><span class="w"> </span><span class="n">gissOld</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">lookOld</span><span class="p">]</span><span class="o">-</span><span class="n">giss</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">look</span><span class="p">],</span><span class="w">
+     </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"index change [degC]"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">))</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'pink'</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"gissOld - ocedata"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gissOld</span><span class="o">$</span><span class="n">year</span><span class="p">[</span><span class="n">lookOld</span><span class="p">],</span><span class="w"> </span><span class="n">gissNew</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">lookNew</span><span class="p">]</span><span class="o">-</span><span class="n">gissOld</span><span class="o">$</span><span class="n">index</span><span class="p">[</span><span class="n">lookOld</span><span class="p">],</span><span class="w">
+     </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"index change [degC]"</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">))</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'pink'</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"gissNew - gissOld"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2015-11-07-giss/unnamed-chunk-1-1.png" alt="center" /></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>The three datasets differ. Having taken poor notes on the two earlier ones, I
+cannot say for sure when they were downloaded, although the headers in these
+files are quite informative.</p>
+
+<p>One might prefer newer datasets to older ones, since (a) they contain new
+observations and (b) they presumably have more accurate old data, given ongoing
+work to improve analysis methods and data selection.  For that reason, the next
+update of <code class="highlighter-rouge">ocedata</code> will use whatever version of GISS is available at the
+time of packaging.</p>
+
+<p>Readers interested in recent changes to GISS (and this includes me!) might do
+well to start their reading with the NASA summary of changes [2].</p>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p><a href="http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt">data source</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.giss.nasa.gov/gistemp">NASA documentation on dataset changes</a></p>
+  </li>
+  <li>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-20151107.dat">gis-20151107.dat</a></p>
+  </li>
+  <li>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-2014xxxx.dat">giss-2014xxxx.dat</a></p>
+  </li>
+  <li>
+    <p><a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/giss-ocedata-until-20151116.rda">giss-ocedata-until-20151116.rda</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-11-07-giss.Rmd">2015-11-07-giss.Rmd</a></p>
+  </li>
+</ol>
+
+:ET

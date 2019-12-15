@@ -193,7 +193,8 @@ files.)</p>
     </span><span class="n">rm</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w">
 </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="n">load</span><span class="p">(</span><span class="s2">"Hs.rda"</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>At this stage, we have <code class="highlighter-rouge">landsat-class</code> objects named <code class="highlighter-rouge">Hw</code> and <code class="highlighter-rouge">Hs</code> to work
 with. It is convenient to set up a <code class="highlighter-rouge">demo</code> function that will plot a four-panel
@@ -238,7 +239,8 @@ plot.</p>
           </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
     </span><span class="n">mtext</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="n">Hs</span><span class="p">[[</span><span class="s1">'time'</span><span class="p">]],</span><span class="w"> </span><span class="s2">"%B %Y"</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">cex</span><span class="p">)</span><span class="w">
     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">missing</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="n">dev.off</span><span class="p">()</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Now, we can try some tests. Leaving out <code class="highlighter-rouge">name</code> argument will produce
 interactive plots, and indeed that is how I selected the values I show below.
@@ -251,7 +253,8 @@ Rmarkdown to do that.</p>
 snow-covered citadel/commons region near 63.58W and 44.65N.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-1.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-1.png"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="https://dankelley.github.io/figs/2016-02-20-landsat-1.png" alt="center" /></p>
 
@@ -263,7 +266,8 @@ little south of 44.63N. However, there a slight yellow-reddish hue overall (see
 especially the snow-covered citadel).</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-2.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-2.png"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="https://dankelley.github.io/figs/2016-02-20-landsat-2.png" alt="center" /></p>
 
@@ -295,7 +299,8 @@ wants to help with that, please contact me directly (since I do not have
 comments turned on for this blog).</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-3.png"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">demo</span><span class="p">(</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s2">"2016-02-20-landsat-3.png"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="https://dankelley.github.io/figs/2016-02-20-landsat-3.png" alt="center" /></p>
 

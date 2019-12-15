@@ -1,0 +1,224 @@
+I"�`<h1 id="introduction">Introduction</h1>
+
+<p>The ocedata package [1] provides data that may be of use to oceanographers,
+either working with their own R code or working with the oce package [2]. One
+such dataset, called <code class="highlighter-rouge">levitus</code>, holds sea surface temperature and salinity
+(SST and SSS), based on the 2013 version of the World Ocean Atlas.  An updated
+version of this atlas is suggested by the WOA authors to be an improvement [3],
+and so it will be used for an updated version of <code class="highlighter-rouge">levitus</code> in the upcoming
+version of ocedata.</p>
+
+<p>This blog item deals with differences between the two datasets.</p>
+
+<h1 id="analysis">Analysis</h1>
+
+<p>First, the netcdf files for temperature and salinity were downloaded from
+online sources [4,5]. Then the data were loaded as follows.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span><span class="w">
+</span><span class="n">con</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nc_open</span><span class="p">(</span><span class="s2">"woa13_decav_t00_01v2.nc"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in R_nc4_open: No such file or directory</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in nc_open("woa13_decav_t00_01v2.nc"): Error in nc_open trying to open file woa13_decav_t00_01v2.nc</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="c1">## make a vector for later convenience</span><span class="w">
+</span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ncvar_get(con, "lon"): object 'con' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">latitude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="w"> </span><span class="s2">"lat"</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ncvar_get(con, "lat"): object 'con' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">SST</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="w"> </span><span class="s2">"t_an"</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ncvar_get(con, "t_an"): object 'con' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">nc_close</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in nc_close(con): object 'con' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">con</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nc_open</span><span class="p">(</span><span class="s2">"woa13_decav_s00_01v2.nc"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in R_nc4_open: No such file or directory</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in nc_open("woa13_decav_s00_01v2.nc"): Error in nc_open trying to open file woa13_decav_s00_01v2.nc</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">SSS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncvar_get</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="w"> </span><span class="s2">"s_an"</span><span class="p">)[,,</span><span class="m">1</span><span class="p">]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ncvar_get(con, "s_an"): object 'con' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">nc_close</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in nc_close(con): object 'con' not found</code></pre></figure>
+
+<p>Next, load the levitus dataset from the existing <code class="highlighter-rouge">ocedata</code> package
+and compute the differences</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"levitus"</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s2">"ocedata"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span><span class="w"> </span><span class="c1"># for truehist</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">dSST</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SST</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SST</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in eval(expr, envir, enclos): object 'SST' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">dSSS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SSS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">levitus</span><span class="o">$</span><span class="n">SSS</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in eval(expr, envir, enclos): object 'SSS' not found</code></pre></figure>
+
+<p>The main differences are said to be in data-sparse regions, e.g. high latitudes,
+so an interesting check is to plot spatial patterns.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span><span class="w">
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">dSST</span><span class="p">,</span><span class="w"> </span><span class="n">zlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in inherits(x, "POSIXt"): object 'longitude' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w">
+        </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w"> </span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], : plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="s2">"SST change"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in mtext("SST change", side = 3, adj = 1): plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">dSSS</span><span class="p">,</span><span class="w"> </span><span class="n">zlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in imagep(longitude, latitude, dSSS, zlim = c(-3, 3)): object 'longitude' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w">
+        </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w"> </span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], : plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="s2">"SSS change"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in mtext("SSS change", side = 3, adj = 1): plot.new has not been called yet</code></pre></figure>
+
+<p>The figures confirm that the differences are mainly in high latitudes, with
+estimates in Hudson’s Bay being particularly altered.  A closer examination of
+the author’s general locale may interest him, if nobody else…</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">dSST</span><span class="p">,</span><span class="w"> </span><span class="n">zlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in imagep(longitude, latitude, dSST, zlim = c(-3, 3), xlim = c(-90, : object 'longitude' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w">
+        </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w"> </span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], : plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="s2">"SST change"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in mtext("SST change", side = 3, adj = 1): plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">imagep</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">dSSS</span><span class="p">,</span><span class="w"> </span><span class="n">zlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="m">-30</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">),</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in imagep(longitude, latitude, dSSS, zlim = c(-3, 3), xlim = c(-90, : object 'longitude' not found</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">polygon</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w">
+        </span><span class="n">col</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">)</span><span class="w"> </span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in polygon(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], : plot.new has not been called yet</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">mtext</span><span class="p">(</span><span class="s2">"SSS change"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in mtext("SSS change", side = 3, adj = 1): plot.new has not been called yet</code></pre></figure>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>The patterns of variation are as expected: the updated WOA differs mainly in
+high latitudes.  The differences seem mainly to arise in regions that are
+anomalous compared to other waters at similar latitudes. For example, the
+estimates for SST and SSS in Hudson’s Bay are markedly different in the two
+atlases.  I am not too surprised by this, and I’m not too concerned either; I
+doubt that many researchers (other than some modelers) would have paid much
+attention to WOA estimates for Hudson’s Bay. However, the changes in the
+northern Labrador Sea are quite concerning, given the importance of that region
+to Atlantic watermass formation, and the likelihood that WOA is used to
+initialize numerical models.</p>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p><a href="https://dankelley.github.io/ocedata/">Ocedata website</a></p>
+  </li>
+  <li>
+    <p><a href="https://dankelley.github.io/oce/">Oce website</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/woa/WOA13/DOC/woa13v2_changes.pdf">NOAA document on WOA changes</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/1.00/woa13_decav_t00_01v2.nc">woa2013v2 temperature netcdf file</a></p>
+  </li>
+  <li>
+    <p><a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/salinity/netcdf/decav/1.00/woa13_decav_s00_01v2.nc">woa2013v2 salinity netcdf file</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-08-22-woa-2013-2.Rmd">2015-08-22-woa-2013-2.Rmd</a></p>
+  </li>
+</ol>
+
+:ET

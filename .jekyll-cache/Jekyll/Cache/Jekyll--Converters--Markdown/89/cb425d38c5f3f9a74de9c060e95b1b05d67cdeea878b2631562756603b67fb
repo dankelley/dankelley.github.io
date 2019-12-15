@@ -1,0 +1,77 @@
+I"Y<h1 id="introduction">Introduction</h1>
+
+<p>Recently, oce has been gaining flexibility in terms of conductivities stored in
+data files. This is necessitated by the fact that RBR files store conductivity
+in mS/cm, whereas calculations for seawater properties use the unitless
+conductivity ratio.  With the CTD code under examination for this work, it
+might make sense to also handle temperatures stored in files. The two choices
+for that seem to be the IPTS-68 and ITS-90 conventions [1,2], and a natural
+question is whether using ITS-90 temperatures in formula designed for IPTS-68
+will yield errors of practical significance.</p>
+
+<h1 id="functions">Functions</h1>
+<p>The following are functions for the conversion, as suggested in [1].</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">T90toT68</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">T90</span><span class="p">)</span><span class="w"> </span><span class="m">1.00024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T90</span><span class="w">
+</span><span class="n">T68toT90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">T68</span><span class="p">)</span><span class="w"> </span><span class="n">T68</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1.00024</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h1 id="test-of-inferred-density">Test of inferred density</h1>
+
+<p>First, define some base quantities</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">35</span><span class="w">
+</span><span class="n">T90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>and then do some calculations, e.g.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">T90toT68</span><span class="p">(</span><span class="n">T90</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 20.0048</code></pre></figure>
+
+<p>This temperature difference, 0.0048, is several
+times larger than the 
+SBE911plus initial accuracy of 0.001 C as stated at [3]. (It is about double the stated
+stability over a year of drift.)</p>
+
+<p>Another test is of density:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">T90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="c1"># incorrect</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90, p): must supply longitude</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">T90toT68</span><span class="p">(</span><span class="n">T90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90toT68(T90), p): must supply longitude</code></pre></figure>
+
+<p>Finally, the following tests the amount that salinity would need to be adjusted to 
+compensate (in density terms) for a temperature misapplication.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">T90toT68</span><span class="p">(</span><span class="n">T90</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90toT68(T90), p): must supply longitude</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">uniroot</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">T90</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho0</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="m">34</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="m">36</span><span class="p">)</span><span class="o">$</span><span class="n">root</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in swRho(S, T90, p): must supply longitude</code></pre></figure>
+
+:ET

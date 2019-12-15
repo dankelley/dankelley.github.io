@@ -1,0 +1,75 @@
+I"é*<p>The winter solstice has been on many minds lately.  The days are about to start getting longer â€¦ but just how fast will they do that?</p>
+
+<p>This post provides R that calculates and graphs day length and its variation, using <code class="highlighter-rouge">uniroot()</code> to find sunrises and sunsets as indicated by solar altitude that is calculated with <code class="highlighter-rouge">sunAngle()</code> in the oce package.</p>
+
+<p>The day of the solstice is indicated with vertical lines. All times are in UTC, which is the conventional system for scientific work and the one required by <code class="highlighter-rouge">sunAngle()</code>.</p>
+
+<p><img src="/assets/daylength.png" alt="daylength graph" /></p>
+
+<p>The first step in making the graph shown above is to load the <code class="highlighter-rouge">oce</code> library and create a function that measures daylength by finding sunrise and sunset times.  Note that <code class="highlighter-rouge">uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code class="highlighter-rouge">t</code>, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">daylength</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="m">-63.60</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
+    </span><span class="n">alt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
+        </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="o">=</span><span class="n">lat</span><span class="p">)</span><span class="o">$</span><span class="n">altitude</span><span class="w">
+    </span><span class="n">rise</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">uniroot</span><span class="p">(</span><span class="n">alt</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="n">t</span><span class="m">-86400</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="n">t</span><span class="p">)</span><span class="o">$</span><span class="n">root</span><span class="w">
+    </span><span class="n">set</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">uniroot</span><span class="p">(</span><span class="n">alt</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="n">t</span><span class="m">+86400</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="o">$</span><span class="n">root</span><span class="w">
+    </span><span class="n">set</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rise</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Next, use <code class="highlighter-rouge">lappy()</code> to find the daylength for December, 2013.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">t0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-01 12:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq.POSIXt</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s2">"1 day"</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">1</span><span class="o">*</span><span class="m">31</span><span class="p">)</span><span class="w">
+</span><span class="n">dayLength</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">daylength</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Set up to plot two panels, with narrowed margins.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Plot daylength in the top panel, indicating the day of the solstice with vertical lines.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">dayLength</span><span class="o">/</span><span class="m">3600</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w">
+     </span><span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Day length (hours)"</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">solstice</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-21"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">solstice</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">86400</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Plot daylength difference in the bottom panel, again indicating the solstice.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="m">-1</span><span class="p">],</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="n">dayLength</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w">
+     </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Day in 2013"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Seconds gained per day"</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">solstice</span><span class="o">+</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">86400</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+:ET

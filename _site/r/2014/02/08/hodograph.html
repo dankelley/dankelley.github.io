@@ -205,7 +205,8 @@
             </span><span class="n">stop</span><span class="p">(</span><span class="s2">"only tcut=\"yearly\" works at this time\n"</span><span class="p">)</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This may be tested as follows</p>
 
@@ -217,10 +218,11 @@
 6
 </pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span><span class="w">
 </span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="n">co2</span><span class="p">))</span><span class="w">
-</span><span class="n">t</span><span class="m">0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXlt</span><span class="p">(</span><span class="s2">"1959-01-01 00:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="m">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">year</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="m">365</span><span class="o">*</span><span class="m">86400</span><span class="w">
+</span><span class="n">t0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXlt</span><span class="p">(</span><span class="s2">"1959-01-01 00:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">year</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="m">365</span><span class="o">*</span><span class="m">86400</span><span class="w">
 </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span><span class="w">
-</span><span class="n">hodograph</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">co2</span><span class="o">-</span><span class="n">co2</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">tcut</span><span class="o">=</span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ringlabels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">hodograph</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">co2</span><span class="o">-</span><span class="n">co2</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">tcut</span><span class="o">=</span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ringlabels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/hodograph.png" alt="center" /></p>
 
@@ -229,7 +231,8 @@
 <p>The plot is informative.  I’ve looked at the <code class="highlighter-rouge">co2</code> data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-02-08-hodograph/timeseries.png" alt="center" /></p>
 

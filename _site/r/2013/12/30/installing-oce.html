@@ -102,12 +102,14 @@
 <p>Several of the blog items have used the oce package.  The official version of this can be installed from within R by</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">install.packages</span><span class="p">(</span><span class="s2">"oce"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">install.packages</span><span class="p">(</span><span class="s2">"oce"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>and more up-to-date versions can be installed using the <code class="highlighter-rouge">devtools</code> package written by Hadley Wickham, which is itself installed with</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>after which installing the latest development version of oce is accomplished with</p>
 
@@ -116,7 +118,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span><span class="w">
 </span><span class="n">install_github</span><span class="p">(</span><span class="s1">'ocedata'</span><span class="p">,</span><span class="w"> </span><span class="s1">'dankelley'</span><span class="p">,</span><span class="w"> </span><span class="s1">'master'</span><span class="p">)</span><span class="w">
-</span><span class="n">install_github</span><span class="p">(</span><span class="s1">'oce'</span><span class="p">,</span><span class="w"> </span><span class="s1">'dankelley'</span><span class="p">,</span><span class="w"> </span><span class="s1">'develop'</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">install_github</span><span class="p">(</span><span class="s1">'oce'</span><span class="p">,</span><span class="w"> </span><span class="s1">'dankelley'</span><span class="p">,</span><span class="w"> </span><span class="s1">'develop'</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Note that the <code class="highlighter-rouge">ocedata</code> package does not need to be updated frequently, as it only updated when new datasets are added to oce. The official version of oce is only updated every few months, but the branch named <code class="highlighter-rouge">develop</code> (used above) may be updated several times a day, if the author is adding new features or fixing bugs.</p>
 

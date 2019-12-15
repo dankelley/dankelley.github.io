@@ -1,0 +1,140 @@
+I"†+<p><strong>Preface.</strong> The code of this blog posting will only work with the latest
+<code class="highlighter-rouge">development</code>-branch of the <code class="highlighter-rouge">oce</code> source.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The <code class="highlighter-rouge">section</code> dataset from <code class="highlighter-rouge">oce</code> provides a good example of a dataset
+containing flags.</p>
+
+<h1 id="methods">Methods</h1>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: gsw</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: testthat</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">section</span><span class="p">)</span><span class="w">
+</span><span class="n">Sflag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'salinityFlag'</span><span class="p">]]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>A good first step is to see what flags are being used</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">table</span><span class="p">(</span><span class="n">Sflag</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Sflag
+##    2    3    4 
+## 2298  440  103</code></pre></figure>
+
+<p>This dataset uses the WHP convention for flags (see <code class="highlighter-rouge">?section</code>), in which a
+flag value of 2 is used to indicate data considered to be acceptable. Thus, the
+table indicates that only 3/4 of the salinity measurements are considered
+to be acceptable.  This makes this a good dataset to illustrate the handling
+of flags.</p>
+
+<p>First, extract some relevant data.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'salinity'</span><span class="p">]]</span><span class="w">
+</span><span class="nb">T</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'temperature'</span><span class="p">]]</span><span class="w">
+</span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'theta'</span><span class="p">]]</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'pressure'</span><span class="p">]]</span><span class="w">
+</span><span class="n">Sflag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">section</span><span class="p">[[</span><span class="s1">'salinityFlag'</span><span class="p">]]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Next, plot salinity flag vs salinity</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">Sflag</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="n">Sflag</span><span class="m">-1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-4-1.png" alt="center" /></p>
+
+<p>This suggests that, apart from one distinct outlier at a salinity of 26, the
+salinities of bad data are generally in the range of the salinities of good
+data. Next, examine temperature and salinity together.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">plotTS</span><span class="p">(</span><span class="n">as.ctd</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="n">Sflag</span><span class="m">-1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-5-1.png" alt="center" /></p>
+
+<p>The last two plots suggest that one of the points marked as being bad (flag=4)
+is distinctly anomalous compared with all the other data. A detailed analysis
+could be made of that point (e.g. first isolate the station, then plot it in
+detail) but time may be better spent simply focussing on data that have been
+assessed as being reasonable during the data-archiving process.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sflag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="n">plotTS</span><span class="p">(</span><span class="n">as.ctd</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">ok</span><span class="p">],</span><span class="w"> </span><span class="nb">T</span><span class="p">[</span><span class="n">ok</span><span class="p">],</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">ok</span><span class="p">]))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-6-1.png" alt="center" /></p>
+
+<p>Another approach is to use <code class="highlighter-rouge">handleFlags</code> to select the good data</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">section2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">handleFlags</span><span class="p">(</span><span class="n">section</span><span class="p">)</span><span class="w">
+</span><span class="n">plotTS</span><span class="p">(</span><span class="n">section2</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-7-1.png" alt="center" />
+where we have used the fact that <code class="highlighter-rouge">plotTS</code> can recognize section objects. The
+use of <code class="highlighter-rouge">handleFlags</code> is also recommended because it carries over to other types
+of plots, e.g. a salinity section. For example, a salinity section of all the 
+data is produced with</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">section</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Warning in sectionGrid(x, debug = debug - 1): Data flags are omitted from
+## the gridded section object. Use handleFlags() first to remove bad data.</code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-8-1.png" alt="center" />
+while one of just the acceptable data is produced with</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">section2</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Warning in sectionGrid(x, debug = debug - 1): Data flags are omitted from
+## the gridded section object. Use handleFlags() first to remove bad data.</code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-9-1.png" alt="center" /></p>
+
+<h1 id="exercises">Exercises</h1>
+
+<ol>
+  <li>Find which station has the very low salinity, and examine that station in more detail.</li>
+  <li>Try as above, but only discarding data with <code class="highlighter-rouge">salinityFlag==4</code>, which are known to be
+bad (i.e. retain both acceptable and questionable data).</li>
+  <li>Continue step 2, with other types of analysis (e.g. examine spatial dependence).</li>
+  <li>Look online for the source of the <code class="highlighter-rouge">section</code> dataset, to find out more about how the 
+data-quality flags were assigned.</li>
+</ol>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>R source code used here: <a href="/assets/2016-04-10-flags.R">2016-04-10-flags.Rmd</a>.</li>
+  <li>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2016-04-10-flags.Rmd">2016-04-10-flags.Rmd</a></li>
+</ul>
+
+:ET

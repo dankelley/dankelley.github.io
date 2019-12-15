@@ -136,7 +136,8 @@ than rstudio, type following into the R console.</p>
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span><span class="w">
-</span><span class="n">runApp</span><span class="p">()</span><span class="w"> </span><span class="c1"># exit by striking ESC on the keyboard</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">runApp</span><span class="p">()</span><span class="w"> </span><span class="c1"># exit by striking ESC on the keyboard</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Below is the contents of the <code class="highlighter-rouge">ui.R</code> file</p>
 
@@ -157,7 +158,8 @@ than rstudio, type following into the R console.</p>
                                                        </span><span class="n">min</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="o">=</span><span class="m">0.1</span><span class="p">),</span><span class="w">
                                            </span><span class="n">sliderInput</span><span class="p">(</span><span class="s2">"bottom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bottom fraction percent:"</span><span class="p">,</span><span class="w">
                                                        </span><span class="n">min</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span><span class="w">
-                                 </span><span class="p">)))</span></pre></td></tr></tbody></table></code></pre></figure>
+                                 </span><span class="p">)))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This will look a bit mysterious, but anyone who spends 20 minutes with the
 <a href="http://shiny.rstudio.com">shiny documentation</a> will get the gist: two sliders
@@ -237,7 +239,8 @@ will be shown below a plot that is create with a user-created function named
                                 </span><span class="s2">"End (suggested)"</span><span class="p">,</span><span class="w">
                                 </span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"End (user): %.0f"</span><span class="p">,</span><span class="w"> </span><span class="n">indexEnd</span><span class="p">)))</span><span class="w">
             </span><span class="p">},</span><span class="w"> </span><span class="n">pointsize</span><span class="o">=</span><span class="m">20</span><span class="p">)</span><span class="w">
-</span><span class="p">})</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">})</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here, notice the use of <code class="highlighter-rouge">shinyServer()</code>. Again, this will seem mysterious at
 first, but a quick glance shows that a major task here is the creation of the

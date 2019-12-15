@@ -106,7 +106,8 @@
 <h1 id="methods">Methods</h1>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
@@ -129,11 +130,12 @@
 </span><span class="n">drhodz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">deriv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span><span class="n">g</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9.81</span><span class="w">
 </span><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">N</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drhodz</span><span class="o">/</span><span class="n">rho0</span><span class="w">
+</span><span class="n">N2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drhodz</span><span class="o">/</span><span class="n">rho0</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"N2"</span><span class="p">)</span><span class="w">
-</span><span class="n">lines</span><span class="p">(</span><span class="n">N</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
 </span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"brown"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"spline"</span><span class="p">,</span><span class="w"> 
-    </span><span class="s2">"runlm"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+    </span><span class="s2">"runlm"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/2014-02-10_N2-runlm-a.png" alt="center" /></p>
 
@@ -158,13 +160,14 @@
 5
 6
 7
-</pre></td><td class="code"><pre><span class="n">N</span><span class="m">2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swN2</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
-</span><span class="n">N</span><span class="m">2</span><span class="n">fromderiv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</pre></td><td class="code"><pre><span class="n">N2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swN2</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">N2fromderiv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">deriv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="n">rho0</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span><span class="n">best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">((</span><span class="n">N</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">N</span><span class="m">2</span><span class="n">fromderiv</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> 
+</span><span class="n">best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">((</span><span class="n">N2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">N2fromderiv</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> 
     </span><span class="m">100</span><span class="p">))</span><span class="w">
-</span><span class="n">print</span><span class="p">(</span><span class="n">best</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">print</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## $minimum
 ## [1] 6.161
@@ -173,14 +176,16 @@
 ## [1] 7.854e-05</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">N</span><span class="m">2</span><span class="n">best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">N</span><span class="m">2</span><span class="n">fromderiv</span><span class="p">(</span><span class="n">best</span><span class="o">$</span><span class="n">minimum</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">N2best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">N2fromderiv</span><span class="p">(</span><span class="n">best</span><span class="o">$</span><span class="n">minimum</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This best-matching estimate is the red line.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="s2">"N2"</span><span class="p">)</span><span class="w">
-</span><span class="n">lines</span><span class="p">(</span><span class="n">N</span><span class="m">2</span><span class="n">best</span><span class="p">,</span><span class="w"> </span><span class="n">ctd</span><span class="p">[[</span><span class="s2">"pressure"</span><span class="p">]],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">lines</span><span class="p">(</span><span class="n">N2best</span><span class="p">,</span><span class="w"> </span><span class="n">ctd</span><span class="p">[[</span><span class="s2">"pressure"</span><span class="p">]],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/2014-02-10_N2-runlm-b.png" alt="center" /></p>
 

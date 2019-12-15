@@ -1,0 +1,39 @@
+I"¨<p>A previous posting explained how to install WebTide on an OSX machine. This one shows how to hook up to an installed WebTide database, so that R code can get tidal predictions.</p>
+
+<p>The following code in the R language will produce a graph in which the top panel mimics the tidal-elevation graph produced by WebTide itself (see previous blog posting for comparison).</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">tStart</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-29 14:21:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">tEnd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2014-01-13 15:21:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">time</span><span class="o">&lt;-</span><span class="n">seq</span><span class="p">(</span><span class="n">tStart</span><span class="p">,</span><span class="w"> </span><span class="n">tEnd</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="s2">"minutes"</span><span class="p">)</span><span class="w">
+</span><span class="n">prediction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">webtide</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="m">-65.06747</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">45.36544</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><a href="/assets/webtide1.png"><img src="/assets/webtide-thumbnail1.png" alt="graph" /></a></p>
+
+<p>One of the advantages of accessing the tidal prediction from within oce is to make it easier to undertake further analysis, e.g. a node nearer Halifax has a mixed tide, with the following illustrating in terms of velocity and a so-called progressive vector.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">webtide</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">=</span><span class="m">14569</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="o">$</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="o">$</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span><span class="w">
+</span><span class="n">dt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">p</span><span class="o">$</span><span class="n">time</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]))</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">p</span><span class="o">$</span><span class="n">u</span><span class="p">)</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">p</span><span class="o">$</span><span class="n">v</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><a href="/assets/webtide2.png"><img src="/assets/webtide-thumbnail2.png" alt="graph" /></a></p>
+
+:ET

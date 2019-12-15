@@ -102,19 +102,22 @@
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
-</span><span class="n">data</span><span class="p">(</span><span class="n">section</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">data</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, find latitudes using <code class="highlighter-rouge">lapply</code></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]]))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]]))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, find latitudes with <code class="highlighter-rouge">ldply</code></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span><span class="w">
-</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="results">Results</h1>
 
@@ -124,8 +127,9 @@
 2
 3
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span><span class="w">
-</span><span class="n">microbenchmark</span><span class="p">(</span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="o">$</span><span class="n">V</span><span class="m">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])))</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">microbenchmark</span><span class="p">(</span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])</span><span class="o">$</span><span class="n">V1</span><span class="p">,</span><span class="w"> 
+    </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]])))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>yield the following</p>
 
@@ -142,7 +146,8 @@
 </span><span class="c1">##  unlist(lapply(section[["station"]], function(x) x[["latitude"]])) 18.36</span><span class="w">
 </span><span class="c1">##     lq median    uq   max neval</span><span class="w">
 </span><span class="c1">##  20.26  20.56 21.02 36.05   100</span><span class="w">
-</span><span class="c1">##  19.71  19.93 20.64 63.18   100</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="c1">##  19.71  19.93 20.64 63.18   100</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>suggesting a difference too small to be of much practical interest.</p>
 
@@ -151,7 +156,8 @@
 <p>Since <code class="highlighter-rouge">ldply()</code> returns a data frame, it is more flexible than <code class="highlighter-rouge">unlist()</code>, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">latlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]]))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">latlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]]))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>A station plot is produced as follows.</p>
 
@@ -160,7 +166,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">mapPlot</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orthographic"</span><span class="p">,</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">-40</span><span class="p">,</span><span class="w"> 
     </span><span class="m">0</span><span class="p">))</span><span class="w">
-</span><span class="n">mapPoints</span><span class="p">(</span><span class="n">latlon</span><span class="o">$</span><span class="n">V</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">latlon</span><span class="o">$</span><span class="n">V</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">mapPoints</span><span class="p">(</span><span class="n">latlon</span><span class="o">$</span><span class="n">V2</span><span class="p">,</span><span class="w"> </span><span class="n">latlon</span><span class="o">$</span><span class="n">V1</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/plyr.png" alt="figure" /></p>
 

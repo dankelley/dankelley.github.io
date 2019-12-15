@@ -1,0 +1,139 @@
+I"s3<h1 id="introduction">Introduction</h1>
+
+<p>Today there was a solar eclipse that was not visible on my side of the
+Atlantic, but was seen on the European side, either as a partial eclipse,
+towards the south, or a total one, towards the north [1]. Eclipses being rare
+and solar power being a new thing, this event caused unprecedented reduction of
+solar power [2].</p>
+
+<p>A good spot for viewing the total eclipse was Longyearbyen, on Svalbard, and
+readers seeking good images might want to include that name in web searches. (I
+could not find open-source images at the time of writing, but of course that
+was not really my goal in this blog posting…)</p>
+
+<p>I thought it might be interesting to see whether the sun and moon functions in
+the oce package could reproduce the eclipse timing, so I constructed a function
+to measure the mismatch between sun and moon position in the sky, and set up an
+optimization problem to find the time of least mismatch.</p>
+
+<p>The oce functions <code class="highlighter-rouge">sunAngle()</code> and <code class="highlighter-rouge">moonAngle()</code> are at the heart of the
+work. Each returns a list that contains, among other things, <code class="highlighter-rouge">altitude</code> and
+<code class="highlighter-rouge">azimuth</code>. I set up a mismatch function to calculate a combination of these,
+with a scale factor (line 11 of the code) to account for a sort of
+converging-meridian effect of azimuth. This function is unity at the horizon,
+where a degree change in azimuth is the same angular distance as a degree
+change of altitude, and it falls to 0 at the zenith.</p>
+
+<p>Below is the code, and the graph it makes. The black line is the estimated time
+when sun and moon centres are nearest each other in the sky, and the time is
+written in black near the top of the graph. The red line is the estimate of
+eclipse maximum from e.g. [3] The red line is the estimate of eclipse maximum
+from [3].</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span><span class="w">
+</span><span class="n">angle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="m">15+40</span><span class="o">/</span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">78+12</span><span class="o">/</span><span class="m">60</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="c1">## Default location is Longyearbyen, Svalbard</span><span class="w">
+    </span><span class="n">sa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">)</span><span class="w">
+    </span><span class="n">ma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">moonAngle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">)</span><span class="w">
+    </span><span class="n">saz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sa</span><span class="o">$</span><span class="n">azimuth</span><span class="w">
+    </span><span class="n">sal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span><span class="w">
+    </span><span class="n">maz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ma</span><span class="o">$</span><span class="n">azimuth</span><span class="w">
+    </span><span class="n">mal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ma</span><span class="o">$</span><span class="n">altitude</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="m">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">ma</span><span class="o">$</span><span class="n">altitude</span><span class="o">+</span><span class="n">sa</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="p">)</span><span class="w">
+    </span><span class="nf">sqrt</span><span class="p">((</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span><span class="n">saz</span><span class="o">-</span><span class="n">maz</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">sal</span><span class="o">-</span><span class="n">mal</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="c1"># time is from reference 3</span><span class="w">
+</span><span class="n">nasa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2015-03-20 9:45:39"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="n">times</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nasa</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-1800</span><span class="p">,</span><span class="w"> </span><span class="m">1800</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w">
+</span><span class="n">misfit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NULL</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">times</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">misfit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">misfit</span><span class="p">,</span><span class="w"> </span><span class="n">angle</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">oce.plot.ts</span><span class="p">(</span><span class="n">times</span><span class="p">,</span><span class="w"> </span><span class="n">misfit</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Angular misfit [deg]"</span><span class="p">)</span><span class="w">
+</span><span class="n">o</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="n">angle</span><span class="p">(</span><span class="n">nasa</span><span class="o">+</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">lower</span><span class="o">=</span><span class="m">-3600</span><span class="p">,</span><span class="w"> </span><span class="n">upper</span><span class="o">=</span><span class="m">3600</span><span class="p">)</span><span class="w">
+</span><span class="n">eclipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nasa</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">o</span><span class="o">$</span><span class="n">minimum</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">eclipse</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">nasa</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"Here: %s "</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">eclipse</span><span class="p">)),</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"NASA: %s "</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">nasa</span><span class="p">)),</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2015-03-20-eclipse/unnamed-chunk-1-1.png" alt="center" /></p>
+
+<h1 id="results-and-discussion">Results and discussion</h1>
+
+<p>The present method suggests the maximum eclipse occured 3 minutes after the NASA estimate (see [3]).</p>
+
+<p>I’m not too sure why this is, so I’ve put some thoughts in the exercises.</p>
+
+<h1 id="exercises">Exercises</h1>
+
+<ol>
+  <li>
+    <p>Verify or correct the <code class="highlighter-rouge">scale</code> factor in line 11 of the code.</p>
+  </li>
+  <li>
+    <p>Determine why the times disagree by a few minutes.</p>
+  </li>
+  <li>
+    <p>Determine whether oce code is now out of synch with UTC. I notice on the
+NASA site [3] they show TD (terrestrial dynamical time) being about a minute
+after UTC [4].  I wonder whether TD may be a replacement for the time I used
+in the oce code, which was based on algorithms from the 1970s?</p>
+  </li>
+</ol>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>
+    <p>Overview of eclipse (<a href="http://en.wikipedia.org/wiki/Solar_eclipse_of_March_20,_2015#cite_note-6">wikipedia</a>).</p>
+  </li>
+  <li>
+    <p>Effect of eclipse on power grids (<a href="http://www.reuters.com/article/2015/03/20/us-solar-eclipse-germany-idUSKBN0MG0S620150320">reuters</a>).</p>
+  </li>
+  <li>
+    <p>Image from
+<a href="http://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF">NASA</a>
+showing eclipse details, including timing.</p>
+  </li>
+  <li>
+    <p>Time types at <a href="http://eclipse.gsfc.nasa.gov/LEcat5/time.html">NASA</a></p>
+  </li>
+  <li>
+    <p>R source code used here: <a href="/assets/2015-03-20-eclipse.R">2015-03-20-eclipse.R</a>.</p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2015-03-20-eclipse.Rmd">2015-03-20-eclipse.Rmd</a></p>
+  </li>
+</ol>
+
+:ET

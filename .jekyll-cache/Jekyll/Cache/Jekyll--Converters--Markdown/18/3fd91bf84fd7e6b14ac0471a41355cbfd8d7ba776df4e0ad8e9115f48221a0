@@ -1,0 +1,139 @@
+I"šb<h1 id="introduction">Introduction</h1>
+
+<p>This blog started because I was interested in the sunrise position on the winter solstice of 2013.  With the Spring equinox, Iâ€™m trying something different: plotting the paths of the sun and moon through the day.</p>
+
+<p>The code shown here produces a daily graph, and I have a cron job running on a machine so that this graph is visible to anyone at <a href="http://emit.phys.ocean.dal.ca/~kelley/sunmoon">my website</a>.</p>
+
+<h1 id="procedure">Procedure</h1>
+
+<p>The Oce package has functions called <code class="highlighter-rouge">moonAngle()</code> and <code class="highlighter-rouge">sunAngle()</code> that do the calculations.  The rest of this code sets up and graphs the results.  The horizon is on the outer edge of the circle.  Hours (local time) are marked along the sun and moon paths.  East-west and North-south lines are shown, and they intersect at the zenith.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+</pre></td><td class="code"><pre><span class="n">angles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="n">Sys.Date</span><span class="p">(),</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="m">-63.61</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">44.67</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"America/Halifax"</span><span class="p">,</span><span class="w"> </span><span class="n">sun</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="n">tUTC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">day</span><span class="p">,</span><span class="w"> </span><span class="s2">"00:00:00"</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">),</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">240</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s2">"6 min"</span><span class="p">)</span><span class="w">
+    </span><span class="nf">attributes</span><span class="p">(</span><span class="n">tUTC</span><span class="p">)</span><span class="o">$</span><span class="n">tzone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"UTC"</span><span class="w">
+    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sun</span><span class="p">)</span><span class="w"> </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">tUTC</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">moonAngle</span><span class="p">(</span><span class="n">tUTC</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">)</span><span class="w">
+    </span><span class="n">invisible</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">a</span><span class="o">$</span><span class="n">altitude</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="w">
+    </span><span class="n">a</span><span class="o">$</span><span class="n">altitude</span><span class="p">[</span><span class="n">invisible</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+    </span><span class="n">a</span><span class="o">$</span><span class="n">azimuth</span><span class="p">[</span><span class="n">invisible</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+    </span><span class="nf">list</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">altitude</span><span class="o">=</span><span class="n">a</span><span class="o">$</span><span class="n">altitude</span><span class="p">,</span><span class="w"> </span><span class="n">azimuth</span><span class="o">=</span><span class="n">a</span><span class="o">$</span><span class="n">azimuth</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">day</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.Date</span><span class="p">()</span><span class="w">
+</span><span class="n">tz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"America/Halifax"</span><span class="w">
+</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">angles</span><span class="p">()</span><span class="w">
+</span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">angles</span><span class="p">(</span><span class="n">sun</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.04</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">s</span><span class="o">$</span><span class="n">altitude</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="n">altitude</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span><span class="w">
+</span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+</span><span class="n">radiusx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w">
+</span><span class="n">radiusy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Horizon and labels+lines for EW and NS</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">radiusx</span><span class="p">,</span><span class="w"> </span><span class="n">radiusy</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span><span class="w">
+</span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.06</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="n">xpd</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># xpd so can go in margin</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="n">D</span><span class="p">,</span><span class="w">  </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"W"</span><span class="p">,</span><span class="w"> </span><span class="n">xpd</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w">  </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w"> </span><span class="n">xpd</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w">  </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w"> </span><span class="n">xpd</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Moon</span><span class="w">
+</span><span class="n">mx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="n">azimuth</span><span class="p">))</span><span class="w">
+</span><span class="n">my</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="n">azimuth</span><span class="p">))</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="w"> </span><span class="n">my</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">s</span><span class="o">$</span><span class="n">t</span><span class="w">
+</span><span class="n">mlt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"%s %02d:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span><span class="w">
+</span><span class="n">ti</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">mlt</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="n">which.min</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">t</span><span class="p">))))</span><span class="w">
+</span><span class="n">points</span><span class="p">(</span><span class="n">mx</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">my</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="n">mx</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">my</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Sun</span><span class="w">
+</span><span class="n">sx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">*</span><span class="w">  </span><span class="nf">cos</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s</span><span class="o">$</span><span class="n">azimuth</span><span class="p">))</span><span class="w">
+</span><span class="n">sy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s</span><span class="o">$</span><span class="n">altitude</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">*</span><span class="w">  </span><span class="nf">sin</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s</span><span class="o">$</span><span class="n">azimuth</span><span class="p">))</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">sx</span><span class="p">,</span><span class="w"> </span><span class="n">sy</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">slt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"%s %02d:00:00"</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span><span class="w">
+</span><span class="n">si</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">slt</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="n">which.min</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">t</span><span class="p">))))</span><span class="w">
+</span><span class="n">points</span><span class="p">(</span><span class="n">sx</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">sy</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="n">sx</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">sy</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
+
+</span><span class="n">mtext</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Halifax NS"</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s1">'\n'</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">)</span><span class="w">
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Red sun\nBlue moon"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-03-22-sun-moon/sunmoon.png" alt="center" /></p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>
+    <p><a href="http://emit.phys.ocean.dal.ca/~kelley/sunmoon/">Website</a> with daily graph for Halifax, Nova Scotia.</p>
+  </li>
+  <li>
+    <p>Source code: <a href="/assets/2014-03-22-sun-moon.R">2014-03-22-sun-moon.R</a></p>
+  </li>
+</ul>
+:ET

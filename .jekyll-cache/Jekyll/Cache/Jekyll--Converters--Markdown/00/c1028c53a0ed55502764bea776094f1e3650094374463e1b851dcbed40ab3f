@@ -1,0 +1,48 @@
+I"�<p>This blog item explains how to install WebTide, a tidal prediction application, on an OSX machine. The work requires moderate expertise, being carried out in the console, and requiring that a C compiler be found on the host machine.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>WebTide comes with a friendly graphical user interface that makes it easy to get tidal predictions at various locations around the world.  Anyone with an interest in oceanography is likely to find it a useful application.  Although the interface is slightly quirky (particularly for map navigation), it only takes a few minutes to learn.  (An upcoming blog entry will explain how to avoid the WebTide interface, using the <code class="highlighter-rouge">oce</code> R package to access the data that underly WebTide.)</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>Step 1. Download the linux-without-Java-VM version from the <a href="http://www.bio.gc.ca/science/research-recherche/ocean/webtide/index-eng.php">Bedford Institute of Oceanography</a> website, and store the results in the <code class="highlighter-rouge">~/Downloads</code> directory.</p>
+
+<p>Step 2. Open a terminal or console window, and type the following to enter the WebTide directory and start the process of installing WebTide.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/Downloads
+sh WebTide_unix_0_7.sh</code></pre></figure>
+
+<p>After a moment, a dialog box will pop up, asking where WebTide is to be installed. To install a version just for you, supply <code class="highlighter-rouge">/Users/USERNAME/WebTide</code>, where <code class="highlighter-rouge">USERNAME</code> is your username. To install a version for all accounts on the computer, use the default, which is <code class="highlighter-rouge">/usr/local/WebTide</code>. A second dialog box addresses the issue of symlinks. Click the box indicating that these are not to be used. After a few moments, a final dialog box will appear, stating that the work has been completed. Click the button named <code class="highlighter-rouge">Finish</code>.</p>
+
+<p>Step 3. Now for the OSX-specific part of the work. You will need the gcc compiler to do this. It is available for free on the Apple website, as the Xcode development tools. (If you have been using the computer for science, it is quite likely you have already installed a  compiler, so just try the steps below, before bothering with a re-install of Xcode.) In a console, type the following to enter the source directory (here assumed to be configured for a single user) and to compile two programs.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/WebTide/Tidecor_src
+gcc <span class="nt">-O2</span> <span class="nt">-o</span> tidecor webtidecor2.5.1.c <span class="nt">-lm</span>
+gcc <span class="nt">-O2</span> <span class="nt">-o</span> constituentinterpolator constituentinterpolator1.1.c <span class="nt">-lm</span></code></pre></figure>
+
+<p>In the two <code class="highlighter-rouge">gcc</code> lines shown above, it may be necessary to change the names of the <code class="highlighter-rouge">".c"</code> files, to match whatever you find in this <code class="highlighter-rouge">tidecor_src</code> directory. You may ignore the warning messages that are likely to appear, but if errors appear, you will need to interrupt this tutorial to find out what is wrong.  Possibly leaving a comment on this site would encourage another reader to offer a solution; possibly the scientists at the Bedford Institute of Oceanography (named on the website) could help.</p>
+
+<p>Step 4. Move these newly-compiled programs from the source directory into the bin directory, by typing</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mv </span>tidecor ../bin
+<span class="nb">mv </span>constituentinterpolator ../bin</code></pre></figure>
+
+<h1 id="using-webtide">Using WebTide</h1>
+
+<p>If you installed WebTide to your home directory, launch WebTide by typing the following in a console window</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~/WebTide/WebTide</code></pre></figure>
+
+<p>and use the GUI from that point on. If you installed it to <code class="highlighter-rouge">/usr/local/WebTide</code>, type the following instead</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/usr/local/WebTide/WebTide</code></pre></figure>
+
+<p>The main WebTide window looks like the following.</p>
+
+<p><a href="/assets/webtideosx1.png"><img src="/assets/webtideosx1-thumbnail.png" alt="graph" /></a></p>
+
+<p>There is little point in explaining the details of the menu and mouse actions here, since WebTide provides its own documentation.  In most cases, the action will be to click the mouse on spot on the map, to set a so-called “marker” for a location at which calculations are to be done.  The diagram shown here has a marker in the Bay of Fundy.  Once a marker has been set, the user may wish to click a menu item (see at the right-hand side) to get a tidal prediction, as shown in the screenshot below.</p>
+
+<p><a href="/assets/webtideosx2.png"><img src="/assets/webtideosx2-thumbnail.png" alt="graph" /></a></p>
+:ET

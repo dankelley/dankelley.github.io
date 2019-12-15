@@ -116,12 +116,14 @@
 <p>The basic procedure it to change a code fragment like</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">ylab</span><span class="o">=</span><span class="s2">"Depth"</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">ylab</span><span class="o">=</span><span class="s2">"Depth"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>which is clearly not appropriate in all languages, into</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">gettext</span><span class="p">(</span><span class="s2">"Depth"</span><span class="p">,</span><span class="w"> </span><span class="n">domain</span><span class="o">=</span><span class="s2">"R-oce"</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">gettext</span><span class="p">(</span><span class="s2">"Depth"</span><span class="p">,</span><span class="w"> </span><span class="n">domain</span><span class="o">=</span><span class="s2">"R-oce"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>which yields an entry in a translation table that can then be tailored for any desired language.  (The <code class="highlighter-rouge">gettext()</code> call should not really need to set the <code class="highlighter-rouge">domain</code>, but I found it necessary for some items, and decided to include it everywhere.)</p>
 
@@ -130,14 +132,16 @@
 <p>Enter the <code class="highlighter-rouge">oce</code> directory, launch R, and type as follows, to insert a file named <code class="highlighter-rouge">R-oce.pot</code> in the <code class="highlighter-rouge">po</code> directory.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">tools</span><span class="o">::</span><span class="n">update_pkg_po</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">tools</span><span class="o">::</span><span class="n">update_pkg_po</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This create a file that has entries for all errors, warnings, and messages, as well as for <code class="highlighter-rouge">gettext()</code> entries.  The file will be named <code class="highlighter-rouge">po/R-oce.pot</code>, and will contain entry pairs such as the following.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre>msgid <span class="s2">"Depth"</span>
-msgstr <span class="s2">""</span></pre></td></tr></tbody></table></code></pre></figure>
+msgstr <span class="s2">""</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>The first of these is a key, and the second is a replacement string (discussed presently).  The details of the file format, and much else relating to <code class="highlighter-rouge">gettext</code> are available at the <a href="http://www.gnu.org/software/gettext/manual/gettext.html">GNU site</a>.</p>
 
@@ -148,7 +152,8 @@ msgstr <span class="s2">""</span></pre></td></tr></tbody></table></code></pre></
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="nb">cd </span>oce/po
-msginit <span class="nt">--locale</span><span class="o">=</span>R-fr <span class="nt">--input</span> R-oce.pot</pre></td></tr></tbody></table></code></pre></figure>
+msginit <span class="nt">--locale</span><span class="o">=</span>R-fr <span class="nt">--input</span> R-oce.pot
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>This creates an English-French translation table in a file named <code class="highlighter-rouge">po/R-fr.po</code>.  This must be done just once for each language to be translated.  The key is the <code class="highlighter-rouge">fr</code> part of the name, which is the <a href="http://en.wikipedia.org/wiki/ISO_639">ISO-639</a> code for French.</p>
 
@@ -165,7 +170,8 @@ msginit <span class="nt">--locale</span><span class="o">=</span>R-fr <span class
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre>msgid <span class="s2">"Depth"</span>
-msgstr <span class="s2">"Profondeur"</span></pre></td></tr></tbody></table></code></pre></figure>
+msgstr <span class="s2">"Profondeur"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>for this entry.</p>
 
@@ -201,7 +207,8 @@ msgstr <span class="s2">"Profondeur"</span></pre></td></tr></tbody></table></cod
 <p>In most cases the system language will be set with system tools.  Still, <code class="highlighter-rouge">Sys.setenv()</code> can be handy for switching the language used in a plot (e.g. a French user may have the computer set up to work in French, but may prefer to graph data using English, for publication).  Commonly, <code class="highlighter-rouge">Sys.setenv()</code> will be done in the R startup file, or defined in the OS shell, e.g. below for a temporary use</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8 R <span class="nt">--no-save</span> &lt; spanish.R</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="nv">LANG</span><span class="o">=</span>es_ES.UTF-8 R <span class="nt">--no-save</span> &lt; spanish.R
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="part-2-helping-me-with-the-translation-effort">PART 2: Helping me with the translation effort</h1>
 
@@ -238,7 +245,8 @@ Pressure
 Sea Level
 Speed
 Temperature
-Velocity</pre></td></tr></tbody></table></code></pre></figure>
+Velocity
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>The easiest way to provide translated items is in a UTF-8 file containing translated phrases that I can copy and paste into the source files.</p>
 
@@ -273,7 +281,8 @@ Velocity</pre></td></tr></tbody></table></code></pre></figure>
         </span><span class="n">plot</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
         </span><span class="n">dev.off</span><span class="p">()</span><span class="w">
     </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>The results of the test code given above are shown below (click to enlarge).</p>
 

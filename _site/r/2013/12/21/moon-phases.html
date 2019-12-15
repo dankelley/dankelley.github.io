@@ -109,7 +109,8 @@
 </span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">moonAngle</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="o">=</span><span class="m">-63.6</span><span class="p">,</span><span class="w"> 
                     </span><span class="n">latitude</span><span class="o">=</span><span class="m">44.65</span><span class="p">)</span><span class="o">$</span><span class="n">illuminatedFraction</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"Day of 2013"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"Moon fraction"</span><span class="p">)</span><span class="w">
-</span><span class="n">grid</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">grid</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>For interest, add full-moon time as indicated in an almanac.</p>
 
@@ -118,7 +119,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">full</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.POSIXct</span><span class="p">(</span><span class="s2">"2013-12-17 05:29:00"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s2">"AST"</span><span class="p">)</span><span class="w">
 </span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">full</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"full"</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="n">full</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"full"</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="n">full</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="/assets/moon.png" alt="moon phase diagram" /></p>
 

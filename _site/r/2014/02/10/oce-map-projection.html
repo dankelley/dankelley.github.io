@@ -115,7 +115,8 @@
 <p>First, load libraries and extract the coastline.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
@@ -131,7 +132,8 @@
 </span><span class="n">library</span><span class="p">(</span><span class="n">mapproj</span><span class="p">)</span><span class="w">
 </span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span><span class="w">
 </span><span class="n">lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]]</span><span class="w">
-</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]]</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Next, plot with existing (mapproj) projection.</p>
 
@@ -140,7 +142,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
 </span><span class="n">xy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mapproject</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]],</span><span class="w"> </span><span class="n">proj</span><span class="o">=</span><span class="s2">"mollweide"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png" alt="center" /></p>
 
@@ -151,7 +154,8 @@
 3
 </pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
 </span><span class="n">xy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">project</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">),</span><span class="w"> </span><span class="s2">"+proj=moll"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">xy</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">xy</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png" alt="center" /></p>
 

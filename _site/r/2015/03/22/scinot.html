@@ -107,7 +107,8 @@ integral of the Witch of Agnesi function</p>
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">woa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
-</span><span class="n">integrate</span><span class="p">(</span><span class="n">woa</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">integrate</span><span class="p">(</span><span class="n">woa</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## 12.56637 with absolute error &lt; 1.3e-09</code></pre></figure>
 
@@ -116,7 +117,8 @@ integral of the Witch of Agnesi function</p>
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="n">estimate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">integrate</span><span class="p">(</span><span class="n">woa</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="o">$</span><span class="n">value</span><span class="w">
-</span><span class="n">theory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">theory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>and to write something like</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\dots the misfit is \Sexpr{abs(estimate-theory)}
@@ -165,7 +167,8 @@ computer-type exponential notation is not conventional in written work.</p>
     </span><span class="p">}</span><span class="w">
     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">showDollar</span><span class="p">)</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="s2">"$"</span><span class="p">,</span><span class="w"> </span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="s2">"$"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
     </span><span class="k">else</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>and a latex/sweave test use is</p>
 <pre>

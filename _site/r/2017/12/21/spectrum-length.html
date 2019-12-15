@@ -139,22 +139,26 @@ vary from the expected value of <code class="highlighter-rouge">floor(length(dat
 </span><span class="n">speclenF</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">spec.pgram</span><span class="p">(</span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">plot</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="n">fast</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="o">$</span><span class="n">freq</span><span class="p">)))</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">speclenF</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">"x length"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s2">"spectrum length"</span><span class="p">)</span><span class="w">
 </span><span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="n">par</span><span class="p">(</span><span class="s2">"lwd"</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"spectrum() with fast=FALSE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2:1 line"</span><span class="p">))</span><span class="w">
-</span><span class="n">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2017-12-21-spectrum-length/unnamed-chunk-1-1.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">speclenT</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">speclenT</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 6 7 7 7 8 9</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">speclenF</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">print</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">speclenF</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] 6 6 7 7 8 8</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">all.equal</span><span class="p">(</span><span class="n">speclenF</span><span class="p">,</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="m">2</span><span class="p">))</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">all.equal</span><span class="p">(</span><span class="n">speclenF</span><span class="p">,</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="m">2</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## [1] TRUE</code></pre></figure>
 

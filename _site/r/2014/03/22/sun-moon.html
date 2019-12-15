@@ -105,7 +105,8 @@
 <p>The Oce package has functions called <code class="highlighter-rouge">moonAngle()</code> and <code class="highlighter-rouge">sunAngle()</code> that do the calculations.  The rest of this code sets up and graphs the results.  The horizon is on the outer edge of the circle.  Hours (local time) are marked along the sun and moon paths.  East-west and North-south lines are shown, and they intersect at the zenith.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
@@ -216,7 +217,8 @@
 </span><span class="n">text</span><span class="p">(</span><span class="n">sx</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="n">sy</span><span class="p">[</span><span class="n">ti</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">24</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="o">/</span><span class="m">4</span><span class="p">)</span><span class="w">
 
 </span><span class="n">mtext</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Halifax NS"</span><span class="p">,</span><span class="w"> </span><span class="n">day</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s1">'\n'</span><span class="p">),</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">)</span><span class="w">
-</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Red sun\nBlue moon"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Red sun\nBlue moon"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-03-22-sun-moon/sunmoon.png" alt="center" /></p>
 

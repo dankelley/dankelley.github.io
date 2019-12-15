@@ -1,0 +1,24 @@
+I"»<p>This version is basically version 0.9.24, renamed with first digit being 1, to
+indicate a plateau in development. This major increase in the version number
+also coincides with the upcoming publication of my book <em>Oceanographic Analysis
+with R</em> [1], due near the end of October, 2018, and available for pre-order
+from Springer [2] and Amazon [3].</p>
+
+<p><strong>Reference and resources</strong></p>
+
+<ol>
+  <li>
+    <p>The bookâ€™s table of contents are at: <a href="http://dankelley.github.io/book.html">http://dankelley.github.io/book.html</a></p>
+  </li>
+  <li>
+    <p>Springer ordering website: <a href="https://www.springer.com/us/book/9781493988426">https://www.springer.com/us/book/9781493988426</a></p>
+  </li>
+  <li>
+    <p>Amazon ordering website: <a href="https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1_1?ie=UTF8&amp;qid=1538313197&amp;sr=8-1&amp;keywords=dan+e+kelley&amp;dpID=31BCT11P-rL&amp;preST=_SY344_BO1,204,203,200_QL70_&amp;dpSrc=srch">https://www.amazon.com/Oceanographic-Analysis-R-Dan-Kelley/dp/1493988425/ref=sr_1<em>1?ie=UTF8&amp;qid=1538313197&amp;sr=8-1&amp;keywords=dan+e+kelley&amp;dpID=31BCT11P-rL&amp;preST=_SY344_BO1,204,203,200_QL70</em>&amp;dpSrc=srch</a></p>
+  </li>
+  <li>
+    <p>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2018-10-06-oce-1.0-published.Rmd">2018-10-06-oce-1.0-published.Rmd</a></p>
+  </li>
+</ol>
+
+:ET

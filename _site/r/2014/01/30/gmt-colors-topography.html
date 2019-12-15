@@ -124,7 +124,8 @@
 </span><span class="n">land.pal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#336600"</span><span class="p">,</span><span class="s2">"#F3CA89"</span><span class="p">,</span><span class="s2">"#D9A627"</span><span class="p">,</span><span class="s2">"#A49019"</span><span class="p">,</span><span class="w">
                                </span><span class="s2">"#9F7B0D"</span><span class="p">,</span><span class="s2">"#996600"</span><span class="p">,</span><span class="s2">"#B27676"</span><span class="p">,</span><span class="s2">"#C2B0B0"</span><span class="p">,</span><span class="w">
                                </span><span class="s2">"#E5E5E5"</span><span class="p">,</span><span class="s2">"#FFFFFF"</span><span class="p">))</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
 ## Loading required package: mapproj
@@ -141,7 +142,8 @@
 </span><span class="n">landBreaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">50</span><span class="p">)</span><span class="w">
 </span><span class="n">imagep</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w">
        </span><span class="n">breaks</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">waterBreaks</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">landBreaks</span><span class="p">),</span><span class="w">
-       </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">ocean.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">waterBreaks</span><span class="p">)),</span><span class="w"> </span><span class="n">land.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">landBreaks</span><span class="p">))))</span></pre></td></tr></tbody></table></code></pre></figure>
+       </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">ocean.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">waterBreaks</span><span class="p">)),</span><span class="w"> </span><span class="n">land.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">landBreaks</span><span class="p">))))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2014-01-30-gmt-colors-topography/gmt.png" alt="center" /></p>
 

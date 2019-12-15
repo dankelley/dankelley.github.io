@@ -1,0 +1,66 @@
+I"K<h1 id="introduction">Introduction</h1>
+
+<p>Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.</p>
+
+<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code class="highlighter-rouge">proj4</code> package instead of <code class="highlighter-rouge">mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
+
+<h1 id="test-case">Test case</h1>
+
+<p>First, load libraries and extract the coastline.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps
+## Loading required package: proj4</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">proj4</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">mapproj</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">)</span><span class="w">
+</span><span class="n">lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]]</span><span class="w">
+</span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Next, plot with existing (mapproj) projection.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">xy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mapproject</span><span class="p">(</span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">]],</span><span class="w"> </span><span class="n">coastlineWorld</span><span class="p">[[</span><span class="s1">'latitude'</span><span class="p">]],</span><span class="w"> </span><span class="n">proj</span><span class="o">=</span><span class="s2">"mollweide"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png" alt="center" /></p>
+
+<p>Finally, plot with proposed (proj4) projection.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">xy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">project</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">),</span><span class="w"> </span><span class="s2">"+proj=moll"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">xy</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">'l'</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png" alt="center" /></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>At least in this example, the <code class="highlighter-rouge">proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
+
+<p>I will do some more tests to see if this is a fluke case, but if I think <code class="highlighter-rouge">proj4</code> is promising, I will see how to invent a scheme for handling the <code class="highlighter-rouge">mapproj</code> arguments called <code class="highlighter-rouge">parameters</code> and <code class="highlighter-rouge">orientation</code> with <code class="highlighter-rouge">proj4</code>.  THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
+
+<h1 id="resources">Resources</h1>
+<ul>
+  <li>Source code: <a href="/assets/2014-02-10-oce-map-projection.R">2014-04-10-oce-map-projection.R</a></li>
+</ul>
+:ET

@@ -1,0 +1,54 @@
+I",<p>I enjoyed the <a href="http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html">blog posting</a> by “me nugget”, which I ran across on R-bloggers, and so I decided to try that author’s GMT colourscheme.  This revealed some intriguing patterns in the Oce dataset named <code class="highlighter-rouge">topoWorld</code>.  The following code produces a graph to illustrate.</p>
+
+<h1 id="1-set-up-colours-as-suggested-on-the-menuggest-blog">1. Set up colours as suggested on the “menuggest” blog</h1>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="c1">## test GMT colours as suggested by</span><span class="w">
+</span><span class="c1">## http://menugget.blogspot.ca/2014/01/importing-bathymetry-and-coastline-data.html</span><span class="w">
+</span><span class="n">ocean.pal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#000000"</span><span class="p">,</span><span class="s2">"#000209"</span><span class="p">,</span><span class="s2">"#000413"</span><span class="p">,</span><span class="s2">"#00061E"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"#000728"</span><span class="p">,</span><span class="s2">"#000932"</span><span class="p">,</span><span class="s2">"#002650"</span><span class="p">,</span><span class="s2">"#00426E"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"#005E8C"</span><span class="p">,</span><span class="s2">"#007AAA"</span><span class="p">,</span><span class="s2">"#0096C8"</span><span class="p">,</span><span class="s2">"#22A9C2"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"#45BCBB"</span><span class="p">,</span><span class="s2">"#67CFB5"</span><span class="p">,</span><span class="s2">"#8AE2AE"</span><span class="p">,</span><span class="s2">"#ACF6A8"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"#BCF8B9"</span><span class="p">,</span><span class="s2">"#CBF9CA"</span><span class="p">,</span><span class="s2">"#DBFBDC"</span><span class="p">,</span><span class="s2">"#EBFDED"</span><span class="p">))</span><span class="w">
+</span><span class="n">land.pal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#336600"</span><span class="p">,</span><span class="s2">"#F3CA89"</span><span class="p">,</span><span class="s2">"#D9A627"</span><span class="p">,</span><span class="s2">"#A49019"</span><span class="p">,</span><span class="w">
+                               </span><span class="s2">"#9F7B0D"</span><span class="p">,</span><span class="s2">"#996600"</span><span class="p">,</span><span class="s2">"#B27676"</span><span class="p">,</span><span class="s2">"#C2B0B0"</span><span class="p">,</span><span class="w">
+                               </span><span class="s2">"#E5E5E5"</span><span class="p">,</span><span class="s2">"#FFFFFF"</span><span class="p">))</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">)</span><span class="w">
+</span><span class="n">waterBreaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-10000</span><span class="p">,</span><span class="w"> </span><span class="m">-100</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">50</span><span class="p">)</span><span class="w">
+</span><span class="n">landBreaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">50</span><span class="p">)</span><span class="w">
+</span><span class="n">imagep</span><span class="p">(</span><span class="n">topoWorld</span><span class="p">,</span><span class="w"> </span><span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w">
+       </span><span class="n">breaks</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">waterBreaks</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">landBreaks</span><span class="p">),</span><span class="w">
+       </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">ocean.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">waterBreaks</span><span class="p">)),</span><span class="w"> </span><span class="n">land.pal</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">landBreaks</span><span class="p">))))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="http://dankelley.github.io/figs/2014-01-30-gmt-colors-topography/gmt.png" alt="center" /></p>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-01-30-gmt-colors-topography.R">2014-01-30-gmt-colors-topography.R</a></li>
+</ul>
+:ET

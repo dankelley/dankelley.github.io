@@ -1,0 +1,102 @@
+I"*<h1 id="introduction">Introduction</h1>
+
+<p>The default <code class="highlighter-rouge">swN2()</code> calculation in Oce uses a smoothing spline.  One disadvantage of this is that few readers will know how it works.  A possible alternative is to compute d(rho)/dz using the slope inferred from a running-window linear regression.  Such a slope is provided by the new Oce function <code class="highlighter-rouge">runlm()</code>, which is tested here.  (Note that <code class="highlighter-rouge">runlm()</code> is new enough that its argument list may change as a result of tests like the present one.)</p>
+
+<h1 id="methods">Methods</h1>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Loading required package: methods
+## Loading required package: mapproj
+## Loading required package: maps</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="n">data</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swRho</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swZ</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">drhodz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">deriv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">g</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9.81</span><span class="w">
+</span><span class="n">rho0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">N2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drhodz</span><span class="o">/</span><span class="n">rho0</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"N2"</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomright"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"brown"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"spline"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"runlm"</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/2014-02-10_N2-runlm-a.png" alt="center" /></p>
+
+<h1 id="results">Results</h1>
+
+<p>The reuults look similar <em>but</em> see the question below.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>Quantitative measures could be calculated of course, but this first test suggests that the benefits of <code class="highlighter-rouge">smooth.spline()</code> may be had with <code class="highlighter-rouge">runlm()</code>.</p>
+
+<p><strong>Caution.</strong> <code class="highlighter-rouge">runlm()</code> is still so young that its argument list and action are likely to change at any time.  For example, as I was writing this posting I changes the order of the last two arguments, I made the default <code class="highlighter-rouge">window="hanning"</code>, and I changed the auto-selection of <code class="highlighter-rouge">L</code>; these changes seemed more sensible for application to things like N2.</p>
+
+<h1 id="what-lengthscale-to-use">What lengthscale to use?</h1>
+
+<p>It may be helpful to determine just how well the two methods can match.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="n">N2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">swN2</span><span class="p">(</span><span class="n">ctd</span><span class="p">)</span><span class="w">
+</span><span class="n">N2fromderiv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">runlm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">deriv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="n">rho0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">((</span><span class="n">N2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">N2fromderiv</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="m">100</span><span class="p">))</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## $minimum
+## [1] 6.161
+## 
+## $objective
+## [1] 7.854e-05</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">N2best</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">N2fromderiv</span><span class="p">(</span><span class="n">best</span><span class="o">$</span><span class="n">minimum</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This best-matching estimate is the red line.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">plotProfile</span><span class="p">(</span><span class="n">ctd</span><span class="p">,</span><span class="w"> </span><span class="s2">"N2"</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">N2best</span><span class="p">,</span><span class="w"> </span><span class="n">ctd</span><span class="p">[[</span><span class="s2">"pressure"</span><span class="p">]],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/2014-02-10_N2-runlm-b.png" alt="center" /></p>
+
+<h1 id="questions">Questions</h1>
+
+<ol>
+  <li>Why is there a systematic offset in the last figure?</li>
+</ol>
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Source code: <a href="/assets/2014-02-10-N2-runlm.R">2014-04-07-N2-runlm.R</a></li>
+</ul>
+:ET

@@ -1,0 +1,81 @@
+I"ð*<h1 id="introduction">Introduction</h1>
+
+<p>An interesting paper (Smith and Wessel, 1990) points out a weakness in using splines in cases with data gaps.  Their illustration of the problem with isobaths was particularly compelling.  I cannot reproduce their Fig 1b here, owing to copyright problems, but I digitized the data so I could test two R functions for splines.  Readers can follow along with the code given in this post.</p>
+
+<h1 id="methods">Methods</h1>
+
+<p>The first step is to load the data.  (Ignore the extra digits, which simply result from naive copying of digitized values.  I suppose the error is of order 2 percent or so, given the scanning of the diagram and my ability to position the pointer on my computer screen.)</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">23.17400</span><span class="p">,</span><span class="w"> </span><span class="m">25.09559</span><span class="p">,</span><span class="w"> </span><span class="m">31.15092</span><span class="p">,</span><span class="w"> </span><span class="m">40.75568</span><span class="p">,</span><span class="w">
+              </span><span class="m">46.42938</span><span class="p">,</span><span class="w"> </span><span class="m">124.68628</span><span class="p">,</span><span class="w"> </span><span class="m">132.20556</span><span class="p">,</span><span class="w"> </span><span class="m">136.81277</span><span class="p">,</span><span class="w">
+              </span><span class="m">141.37564</span><span class="p">,</span><span class="w"> </span><span class="m">145.08263</span><span class="p">,</span><span class="w"> </span><span class="m">149.38977</span><span class="p">)</span><span class="w">
+</span><span class="n">topography</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-98.99976</span><span class="p">,</span><span class="w"> </span><span class="m">-97.44730</span><span class="p">,</span><span class="w"> </span><span class="m">-100.15198</span><span class="p">,</span><span class="w"> </span><span class="m">-98.66016</span><span class="p">,</span><span class="w">
+                </span><span class="m">-98.66016</span><span class="p">,</span><span class="w"> </span><span class="m">-193.94266</span><span class="p">,</span><span class="w"> </span><span class="m">-296.89045</span><span class="p">,</span><span class="w"> </span><span class="m">-392.63991</span><span class="p">,</span><span class="w">
+                </span><span class="m">-493.85330</span><span class="p">,</span><span class="w"> </span><span class="m">-591.21586</span><span class="p">,</span><span class="w"> </span><span class="m">-692.82951</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Next, plot the data.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">interactive</span><span class="p">())</span><span class="w"> </span><span class="n">png</span><span class="p">(</span><span class="s2">"splines.png"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="s2">"in"</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="m">150</span><span class="p">,</span><span class="w"> </span><span class="n">pointsize</span><span class="o">=</span><span class="m">8</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mgp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">topography</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-700</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">16</span><span class="p">)</span><span class="w">
+</span><span class="n">grid</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now, set up a grid, and show the results of <code class="highlighter-rouge">smooth.spline()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">distance</span><span class="p">),</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">distance</span><span class="p">),</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">smooth.spline</span><span class="p">(</span><span class="n">topography</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">distance</span><span class="p">)</span><span class="w">
+</span><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">ps</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">ps</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now, load the Akima package to get <code class="highlighter-rouge">aspline()</code>, which presumably stems from Akima (1970).</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">akima</span><span class="p">)</span><span class="w">
+</span><span class="n">akima</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">aspline</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">topography</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">akima</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">akima</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Finally, draw a legend and finish up.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="n">par</span><span class="p">(</span><span class="s1">'lwd'</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span><span class="w">
+       </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">),</span><span class="w">
+       </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"smooth.spline"</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspline"</span><span class="p">))</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">interactive</span><span class="p">())</span><span class="w"> </span><span class="n">dev.off</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h1 id="results">Results</h1>
+
+<p><a href="/assets/splines.png"><img src="/assets/splines-thumbnail.png" alt="graph" /></a></p>
+
+<p>At least on this problem, <code class="highlighter-rouge">aspline()</code> does a much better job than <code class="highlighter-rouge">smooth.spline()</code>.</p>
+
+<h1 id="citations">Citations</h1>
+
+<p>W. H. F. Smith and P. Wessel, 1990.  Gridding with continuous curvature splines in tension.  Geophysics, 55(3): 293-305.</p>
+
+<p>Hiroshi Akima, 1970.  A new method of interpolation and smooth curve fitting based on local procedures.  Journal of the Association for Computing Machinery, 17(4): 589-602.</p>
+
+:ET
