@@ -30,17 +30,54 @@ library(oce)
 
 
 {% highlight text %}
-## Loading required package: methods
-## Loading required package: mapproj
-## Loading required package: maps
-## Loading required package: proj4
+## Loading required package: gsw
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: testthat
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Loading required package: sf
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Linking to GEOS 3.8.0, GDAL 2.4.2, PROJ 6.2.1
 {% endhighlight %}
 
 
 
 {% highlight r linenos=table %}
 library(proj4)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in library(proj4): there is no package called 'proj4'
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 library(mapproj)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in library(mapproj): there is no package called 'mapproj'
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 data(coastlineWorld)
 lon <- coastlineWorld[['longitude']]
 lat <- coastlineWorld[['latitude']]
@@ -52,10 +89,25 @@ Next, plot with existing (mapproj) projection.
 {% highlight r linenos=table %}
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 xy <- mapproject(coastlineWorld[['longitude']], coastlineWorld[['latitude']], proj="mollweide")
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in mapproject(coastlineWorld[["longitude"]], coastlineWorld[["latitude"]], : could not find function "mapproject"
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 plot(xy$x, xy$y, type='l', asp=1)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-existing.png) 
+
+
+{% highlight text %}
+## Error in plot(xy$x, xy$y, type = "l", asp = 1): object 'xy' not found
+{% endhighlight %}
 
 Finally, plot with proposed (proj4) projection.
 
@@ -63,10 +115,25 @@ Finally, plot with proposed (proj4) projection.
 {% highlight r linenos=table %}
 par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
 xy <- project(cbind(lon,lat), "+proj=moll")
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in project(cbind(lon, lat), "+proj=moll"): could not find function "project"
+{% endhighlight %}
+
+
+
+{% highlight r linenos=table %}
 plot(xy[,1], xy[,2], type='l', asp=1)
 {% endhighlight %}
 
-![center](http://dankelley.github.io/figs/2014-02-10-oce-map-projection/projection-proposed.png) 
+
+
+{% highlight text %}
+## Error in plot(xy[, 1], xy[, 2], type = "l", asp = 1): object 'xy' not found
+{% endhighlight %}
 
 # Conclusions
 
