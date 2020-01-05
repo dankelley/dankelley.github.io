@@ -104,8 +104,7 @@ results differ.  (This requires version 0.8.1 of the `st` package, which is
 presently only available on github.)
 
 This blog posting tests the `sf` branch of oce against the projections used in
-the [2015-04-03-oce-proj
-posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html) posting.  My
+the [2015-04-03-oce-proj posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html).  My
 quick scan shows that this works as expected, although there are a *lot* of
 messages from the underlying proj system (i.e. the `libproj` system library)
 that read

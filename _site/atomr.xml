@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-01-05T12:03:11-04:00</updated>
+    <updated>2020-01-05T12:15:32-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -31,8 +31,7 @@ results differ.  (This requires version 0.8.1 of the &lt;code class=&quot;highli
 presently only available on github.)&lt;/p&gt;
 
 &lt;p&gt;This blog posting tests the &lt;code class=&quot;highlighter-rouge&quot;&gt;sf&lt;/code&gt; branch of oce against the projections used in
-the &lt;a href=&quot;http://dankelley.github.io/r/2015/04/03/oce-proj.html&quot;&gt;2015-04-03-oce-proj
-posting&lt;/a&gt; posting.  My
+the &lt;a href=&quot;http://dankelley.github.io/r/2015/04/03/oce-proj.html&quot;&gt;2015-04-03-oce-proj posting&lt;/a&gt;.  My
 quick scan shows that this works as expected, although there are a &lt;em&gt;lot&lt;/em&gt; of
 messages from the underlying proj system (i.e. the &lt;code class=&quot;highlighter-rouge&quot;&gt;libproj&lt;/code&gt; system library)
 that read&lt;/p&gt;
