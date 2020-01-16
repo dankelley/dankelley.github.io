@@ -23,15 +23,7 @@ presently only available on github.)
 
 This blog posting tests the `sf` branch of oce against the projections used in
 the [2015-04-03-oce-proj posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html).  My
-quick scan shows that this works as expected, although there are a *lot* of
-messages from the underlying proj system (i.e. the `libproj` system library)
-that read
-
-```
-proj_create_operations: Source and target ellipsoid do not belong to the same celestial body
-```
-
-I intend to look into what these mean.
+quick scan shows that this works as expected.
 
 
 ```{r,message=FALSE,warning=FALSE}

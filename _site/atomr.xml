@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-01-16T09:24:52-04:00</updated>
+    <updated>2020-01-16T09:26:38-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -32,14 +32,7 @@ presently only available on github.)&lt;/p&gt;
 
 &lt;p&gt;This blog posting tests the &lt;code class=&quot;highlighter-rouge&quot;&gt;sf&lt;/code&gt; branch of oce against the projections used in
 the &lt;a href=&quot;http://dankelley.github.io/r/2015/04/03/oce-proj.html&quot;&gt;2015-04-03-oce-proj posting&lt;/a&gt;.  My
-quick scan shows that this works as expected, although there are a &lt;em&gt;lot&lt;/em&gt; of
-messages from the underlying proj system (i.e. the &lt;code class=&quot;highlighter-rouge&quot;&gt;libproj&lt;/code&gt; system library)
-that read&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;proj_create_operations: Source and target ellipsoid do not belong to the same celestial body
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I intend to look into what these mean.&lt;/p&gt;
+quick scan shows that this works as expected.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
