@@ -1,5 +1,13 @@
-## proj -l=ccon  # list info on ccon
+## ----eval=FALSE---------------------------------------------------------------
 ## proj -l       # list names of all projections
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## proj -l=ccon  # list info on ccon
+
+
+## ----echo=FALSE---------------------------------------------------------------
+# Oce projections tested in previous blog postings.
 oceTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
 "aeqd +lon_0=-45",
@@ -99,6 +107,10 @@ oceTest <- c(
 "wink1",
 "wintri")
 oceTest <- paste0("+proj=", oceTest)
+
+
+## ----echo=FALSE---------------------------------------------------------------
+# proj projections from 'proj -l', after omitting things that are not projections, e.g. shift operators.
 projTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
 "aeqd",
@@ -263,14 +275,15 @@ projTest <- c(
 "wintri")
 projTest <- paste0("+proj=", projTest)
 
-## Overlap
+
+## -----------------------------------------------------------------------------
 oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
 projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
 oceNotInProj <- oceName[!(oceName %in% projName)]
 projNotInOce <- projName[!(projName %in% oceName)]
-oceNotInProj
-projNotInOce
 
+
+## -----------------------------------------------------------------------------
 options(warn=-1)
 zero <- cbind(0, 0)
 ll <- sf::st_crs("+proj=longlat")$proj4string
@@ -296,6 +309,11 @@ for (projOld in oceTest) {
     cat("\n")
 }
 
+
+## -----------------------------------------------------------------------------
+options(warn=-1)
+zero <- cbind(0, 0)
+ll <- sf::st_crs("+proj=longlat")$proj4string
 for (projOld in projTest) {
     cat("old:", projOld, "\n")
     xy <- try(rgdal::project(zero, projOld), silent=TRUE)
@@ -317,5 +335,4 @@ for (projOld in projTest) {
     }
     cat("\n")
 }
-
 

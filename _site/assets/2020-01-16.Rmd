@@ -1,5 +1,111 @@
-## proj -l=ccon  # list info on ccon
-## proj -l       # list names of all projections
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
+<meta charset="UTF-8">
+<title>oce map projections available in PROJ6</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>oce map projections available in PROJ6</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        This blog posting tests whether the projections used in a previous posting about oce will work with the `sf` scheme.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+# Introduction
+
+This will test the existing oce projections, and also the new proj projections
+given by typing the following in a unix console.
+```{r eval=FALSE}
+proj -l       # list names of all projections
+```
+
+Note that you can find information on any given projection with e.g.
+```{r eval=FALSE}
+proj -l=ccon  # list info on ccon
+```
+
+```{r echo=FALSE}
+# Oce projections tested in previous blog postings.
 oceTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
 "aeqd +lon_0=-45",
@@ -99,6 +205,10 @@ oceTest <- c(
 "wink1",
 "wintri")
 oceTest <- paste0("+proj=", oceTest)
+```
+
+```{r echo=FALSE}
+# proj projections from 'proj -l', after omitting things that are not projections, e.g. shift operators.
 projTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
 "aeqd",
@@ -262,15 +372,25 @@ projTest <- c(
 "wink2",
 "wintri")
 projTest <- paste0("+proj=", projTest)
+```
 
-## Overlap
+# Overlap
+
+A test of the overlap between oce projections and proj projections can be done with
+```{r}
 oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
 projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
 oceNotInProj <- oceName[!(oceName %in% projName)]
 projNotInOce <- projName[!(projName %in% oceName)]
-oceNotInProj
-projNotInOce
+```
 
+These functions are in oce, but not in proj: **`r paste(oceNotInProj, collapse=', ')`**.
+
+These functions are in proj, but not in oce: **`r paste(projNotInOce, collapse=', ')`**.
+
+# Test oce list
+
+```{r}
 options(warn=-1)
 zero <- cbind(0, 0)
 ll <- sf::st_crs("+proj=longlat")$proj4string
@@ -295,7 +415,14 @@ for (projOld in oceTest) {
     }
     cat("\n")
 }
+```
 
+# Test proj list
+
+```{r}
+options(warn=-1)
+zero <- cbind(0, 0)
+ll <- sf::st_crs("+proj=longlat")$proj4string
 for (projOld in projTest) {
     cat("old:", projOld, "\n")
     xy <- try(rgdal::project(zero, projOld), silent=TRUE)
@@ -317,5 +444,27 @@ for (projOld in projTest) {
     }
     cat("\n")
 }
+```
 
+# References and resources
+
+1. [Oce website](https://dankelley.github.io/oce/)
+
+2. [proj website](https://proj.org/operations/projections/index.html)
+
+3. Jekyll source code for this blog entry: [2020-04-16.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-01-16.Rmd)
+
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
 
