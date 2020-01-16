@@ -7,7 +7,7 @@ par(mar=rep(2, 4))
 line <- 0.25
 pcol <- "blue"
 ecol <- "red"
-font <- 2
+font <- 1
 col <- "lightgray"
 
 p <- "+proj=aea +lat_1=10 +lat_2=60 +lon_0=-40"
@@ -228,7 +228,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 p <- "+proj=murd1 +lat_1=30 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
-
 
 p <- "+proj=murd2 +lat_1=30 +lat_2=60 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80,0), latitudelim=c(0,45), col=col)
