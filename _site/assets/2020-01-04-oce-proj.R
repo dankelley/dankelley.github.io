@@ -169,11 +169,11 @@ p <- "+proj=laea +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=laea +lon_0=-40", line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=lonlat"
+p <- "+proj=longlat"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=latlon"
+p <- "+proj=latlong"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
 

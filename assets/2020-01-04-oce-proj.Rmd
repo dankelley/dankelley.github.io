@@ -25,6 +25,11 @@ This blog posting tests the `sf` branch of oce against the projections used in
 the [2015-04-03-oce-proj posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html).  My
 quick scan shows that this works as expected.
 
+Note that the old projection names `latlon` and `lonlat` are now called
+`latlong` and `longlat` in the updated underlying PROJ library, so the examples
+here are changed, even though `oce` still handles the old names (and issues
+a warning about the internal name change).
+
 
 ```{r,message=FALSE,warning=FALSE}
 library(oce)
@@ -197,11 +202,11 @@ p <- "+proj=laea +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=laea +lon_0=-40", line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=lonlat"
+p <- "+proj=longlat"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
 
-p <- "+proj=latlon"
+p <- "+proj=latlong"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext("+proj=lonlat", line=line, adj=1, col=pcol, font=font)
 
