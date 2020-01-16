@@ -5,7 +5,7 @@ tags: [oce, map, R]
 category: R
 year: 2020
 month: 1
-day: 4
+day: 16
 summary: This blog posting tests whether the projections used in a previous posting about oce will work with the `sf` scheme.
 ---
 
