@@ -460,6 +460,6 @@ mtext(p, line=line, adj=1, col=pcol, font=font)
 
 1. [Oce website](https://dankelley.github.io/oce/)
 
-2. Jekyll source code for this blog entry: [2005-01-04-oce-proj.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2025-01-04-oce-proj.Rmd)
+2. Jekyll source code for this blog entry: [2020-01-04-oce-proj.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-01-04-oce-proj.Rmd)
 
 

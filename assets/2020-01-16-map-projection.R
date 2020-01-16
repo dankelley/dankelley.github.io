@@ -1,28 +1,12 @@
----
-layout: post
-title: oce map projections available in PROJ6
-tags: [oce, map, R]
-category: R
-year: 2020
-month: 1
-day: 16
-summary: This blog posting tests whether the projections used in a previous posting about oce will work with the `sf` scheme.
----
+## ----eval=FALSE---------------------------------------------------------------
+## proj -l       # list names of all projections
 
-# Introduction
 
-This will test the existing oce projections, and also the new proj projections
-given by typing the following in a unix console.
-```{r eval=FALSE}
-proj -l       # list names of all projections
-```
+## ----eval=FALSE---------------------------------------------------------------
+## proj -l=ccon  # list info on ccon
 
-Note that you can find information on any given projection with e.g.
-```{r eval=FALSE}
-proj -l=ccon  # list info on ccon
-```
 
-```{r echo=FALSE}
+## ----echo=FALSE---------------------------------------------------------------
 # Oce projections tested in previous blog postings.
 oceTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
@@ -123,9 +107,9 @@ oceTest <- c(
 "wink1",
 "wintri")
 oceTest <- paste0("+proj=", oceTest)
-```
 
-```{r echo=FALSE}
+
+## ----echo=FALSE---------------------------------------------------------------
 # proj projections from 'proj -l', after omitting things that are not projections, e.g. shift operators.
 projTest <- c(
 "aea +lat_1=10 +lat_2=60 +lon_0=-40",
@@ -290,25 +274,16 @@ projTest <- c(
 "wink2",
 "wintri")
 projTest <- paste0("+proj=", projTest)
-```
 
-# Overlap
 
-A test of the overlap between oce projections and proj projections can be done with
-```{r}
+## -----------------------------------------------------------------------------
 oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
 projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
 oceNotInProj <- oceName[!(oceName %in% projName)]
 projNotInOce <- projName[!(projName %in% oceName)]
-```
 
-These functions are in oce, but not in proj: **`r paste(oceNotInProj, collapse=', ')`**.
 
-These functions are in proj, but not in oce: **`r paste(projNotInOce, collapse=', ')`**.
-
-# Test oce list
-
-```{r}
+## -----------------------------------------------------------------------------
 options(warn=-1)
 zero <- cbind(0, 0)
 ll <- sf::st_crs("+proj=longlat")$proj4string
@@ -333,11 +308,9 @@ for (projOld in oceTest) {
     }
     cat("\n")
 }
-```
 
-# Test proj list
 
-```{r}
+## -----------------------------------------------------------------------------
 options(warn=-1)
 zero <- cbind(0, 0)
 ll <- sf::st_crs("+proj=longlat")$proj4string
@@ -362,14 +335,4 @@ for (projOld in projTest) {
     }
     cat("\n")
 }
-```
-
-# References and resources
-
-1. [Oce website](https://dankelley.github.io/oce/)
-
-2. [proj website](https://proj.org/operations/projections/index.html)
-
-3. Jekyll source code for this blog entry: [2020-04-16.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-01-16.Rmd)
-
 

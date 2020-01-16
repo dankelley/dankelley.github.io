@@ -72,4 +72,4 @@ oar-toc: force
 	-/usr/local/bin/convert -resize 45% oar-toc-2.png tmp.png
 	-mv tmp.png oar-toc-2.png
 
-md:2014-01-15-colourizing-along-a-trajectory.md 2014-01-30-gmt-colors-topography.md 2014-02-08-hodograph.md 2014-02-10-oce-map-projection.md 2014-02-11-oce_runlm.md 2014-02-13-valentine-moon.md 2014-02-17-demodulation.md 2014-02-19-filtfilt.md 2014-03-05-error-bars-in-r.md 2014-03-12-digitizing-plots.md 2014-03-16-box-model.md 2014-03-22-sun-moon.md 2014-04-12-memoise.md 2014-04-30-colormap.md 2014-06-08-Rcpp.md 2014-06-08-slumping-model.md 2014-06-22-gulf-stream-center.md 2014-11-10-solar-navigation.md
+md:2014-01-15-colourizing-along-a-trajectory.md 2014-01-30-gmt-colors-topography.md 2014-02-08-hodograph.md 2014-02-10-oce-map-projection.md 2014-02-11-oce_runlm.md 2014-02-13-valentine-moon.md 2014-02-17-demodulation.md 2014-02-19-filtfilt.md 2014-03-05-error-bars-in-r.md 2014-03-12-digitizing-plots.md 2014-03-16-box-model.md 2014-03-22-sun-moon.md 2014-04-12-memoise.md 2014-04-30-colormap.md 2014-06-08-Rcpp.md 2014-06-08-slumping-model.md 2014-06-22-gulf-stream-center.md 2014-11-10-solar-navigation.md 2020-01-04-oce-proj.md 2020-01-16-map-projection.md

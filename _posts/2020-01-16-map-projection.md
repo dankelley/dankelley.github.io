@@ -11,14 +11,17 @@ summary: This blog posting tests whether the projections used in a previous post
 
 # Introduction
 
-This will test the existing oce projections, and also the new proj projections
-given by typing the following in a unix console.
+The goal is to test the existing oce projections, and also the new proj
+projections. The latter are recovered by typing the following in a unix
+console.
 
 {% highlight r linenos=table %}
 proj -l       # list names of all projections
 {% endhighlight %}
+but note that a handfull are actually transformations, not projections, and
+they are not tested here.
 
-Note that you can find information on any given projection with e.g.
+It is possible to get more information on any given projection with e.g.
 
 {% highlight r linenos=table %}
 proj -l=ccon  # list info on ccon
@@ -1283,6 +1286,6 @@ for (projOld in projTest) {
 
 2. [proj website](https://proj.org/operations/projections/index.html)
 
-3. Jekyll source code for this blog entry: [2020-04-16.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-01-16.Rmd)
+3. Jekyll source code for this blog entry: [2020-04-16-map-projection.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-01-16-map-projection.Rmd)
 
 
