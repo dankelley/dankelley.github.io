@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-01-16T16:46:11-04:00</updated>
+    <updated>2020-01-18T12:18:40-04:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -1362,13 +1362,11 @@ results differ.  (This requires version 0.8.1 of the &lt;code class=&quot;highli
 presently only available on github.)&lt;/p&gt;
 
 &lt;p&gt;This blog posting tests the &lt;code class=&quot;highlighter-rouge&quot;&gt;sf&lt;/code&gt; branch of oce against the projections used in
-the &lt;a href=&quot;http://dankelley.github.io/r/2015/04/03/oce-proj.html&quot;&gt;2015-04-03-oce-proj posting&lt;/a&gt;.  My
-quick scan shows that this works as expected.&lt;/p&gt;
+the &lt;a href=&quot;http://dankelley.github.io/r/2015/04/03/oce-proj.html&quot;&gt;2015-04-03-oce-proj
+posting&lt;/a&gt;.  My quick scan
+shows that this works as expected.&lt;/p&gt;
 
-&lt;p&gt;Note that the old projection names &lt;code class=&quot;highlighter-rouge&quot;&gt;latlon&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lonlat&lt;/code&gt; are now called
-&lt;code class=&quot;highlighter-rouge&quot;&gt;latlong&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;longlat&lt;/code&gt; in the updated underlying PROJ library, so the examples
-here are changed, even though &lt;code class=&quot;highlighter-rouge&quot;&gt;oce&lt;/code&gt; still handles the old names (and issues
-a warning about the internal name change).&lt;/p&gt;
+&lt;p&gt;Note that this version of &lt;code class=&quot;highlighter-rouge&quot;&gt;oce&lt;/code&gt; accepts &lt;code class=&quot;highlighter-rouge&quot;&gt;lonlat&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;longlat&lt;/code&gt; as synonyms, and the same for &lt;code class=&quot;highlighter-rouge&quot;&gt;latlon&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;latlong&lt;/code&gt;.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2

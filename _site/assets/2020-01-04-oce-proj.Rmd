@@ -81,7 +81,7 @@
         
     </span> <!-- post_date -->
     <div class=post_summary>
-        This blog posting tests a trial version of oce (in the `sf` branch) that uses map-projection algorithms provided by the `sf` package, as opposed to the `rgdal` package (which is removing support for the function previously used by oce).
+        This blog posting tests a trial version of oce (in the `sf` branch) that tests the map-projection algorithms provided by the `sf` package against those provided by the `rgdal` package. This may be a step along the way to converting to `sf`, based on my impression that `rgdal` was going to deprecate the function that was being used in `oce`. Although the latest news is that this deprecation will not be taking place, it still makes sense to compare the two schemes, and to have code in `oce` that will make it easy to switch schemes, if one or the other becomes unavailable.
     </div> <!-- post_summary -->
 </div> <!-- slug -->
 
@@ -104,13 +104,11 @@ results differ.  (This requires version 0.8.1 of the `st` package, which is
 presently only available on github.)
 
 This blog posting tests the `sf` branch of oce against the projections used in
-the [2015-04-03-oce-proj posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html).  My
-quick scan shows that this works as expected.
+the [2015-04-03-oce-proj
+posting](http://dankelley.github.io/r/2015/04/03/oce-proj.html).  My quick scan
+shows that this works as expected.
 
-Note that the old projection names `latlon` and `lonlat` are now called
-`latlong` and `longlat` in the updated underlying PROJ library, so the examples
-here are changed, even though `oce` still handles the old names (and issues
-a warning about the internal name change).
+Note that this version of `oce` accepts `lonlat` and `longlat` as synonyms, and the same for `latlon` and `latlong`.
 
 
 ```{r,message=FALSE,warning=FALSE}
