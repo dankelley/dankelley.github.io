@@ -33,14 +33,7 @@ proj -l=ccon  # list info on ccon
 
 # Overlap
 
-A test of the overlap between oce projections and proj projections can be done with
 
-{% highlight r linenos=table %}
-oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
-projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
-oceNotInProj <- oceName[!(oceName %in% projName)]
-projNotInOce <- projName[!(projName %in% oceName)]
-{% endhighlight %}
 
 These functions are in oce, but not in proj: **longlat, latlong**.
 

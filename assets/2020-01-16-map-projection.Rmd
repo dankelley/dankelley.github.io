@@ -297,8 +297,7 @@ projTest <- paste0("+proj=", projTest)
 
 # Overlap
 
-A test of the overlap between oce projections and proj projections can be done with
-```{r}
+```{r echo=FALSE}
 oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
 projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
 oceNotInProj <- oceName[!(oceName %in% projName)]

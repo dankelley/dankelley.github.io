@@ -276,7 +276,7 @@ projTest <- c(
 projTest <- paste0("+proj=", projTest)
 
 
-## -----------------------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 oceName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", oceTest)
 projName <- gsub("^\\+proj=([a-z_+]*).*$", "\\1", projTest)
 oceNotInProj <- oceName[!(oceName %in% projName)]
