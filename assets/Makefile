@@ -6,8 +6,7 @@ thumbnails: pisa-scores-thumbnail.png webtide1-thumbnail.png webtide2-thumbnail.
     vote-split-thumbnail.png smooth-profile-thumbnail.png \
     gmt-topography-thumbnail.png \
     gmt_relief_2-thumbnail.png splines-thumbnail.png splines2-thumbnail.png \
-    2014-02-19-filtfilt_octave-thumbnail.png \
-    2014-02-26-oce-translations-thumbnail.png
+    2014-02-19-filtfilt_octave-thumbnail.png
 
 translation: force
 	for tran in adp-de.pdf adp-en.pdf adp-es.pdf adp-fr.pdf adp-zh.pdf adv-de.pdf adv-en.pdf adv-es.pdf adv-fr.pdf adv-zh.pdf argo-de.pdf argo-en.pdf argo-es.pdf argo-fr.pdf argo-zh.pdf cm-de.pdf cm-en.pdf cm-es.pdf cm-fr.pdf cm-zh.pdf ctd-de.pdf ctd-en.pdf ctd-es.pdf ctd-fr.pdf ctd-zh.pdf lisst-de.pdf lisst-en.pdf lisst-es.pdf lisst-fr.pdf lisst-zh.pdf lobo-de.pdf lobo-en.pdf lobo-es.pdf lobo-fr.pdf lobo-zh.pdf sealevel-de.pdf sealevel-en.pdf sealevel-es.pdf sealevel-fr.pdf sealevel-zh.pdf section-de.pdf section-en.pdf section-es.pdf section-fr.pdf section-zh.pdf tdr-de.pdf tdr-en.pdf tdr-es.pdf tdr-fr.pdf tdr-zh.pdf ; do \
@@ -72,4 +71,5 @@ oar-toc: force
 	-/usr/local/bin/convert -resize 45% oar-toc-2.png tmp.png
 	-mv tmp.png oar-toc-2.png
 
-md:2014-01-15-colourizing-along-a-trajectory.md 2014-01-30-gmt-colors-topography.md 2014-02-08-hodograph.md 2014-02-10-oce-map-projection.md 2014-02-11-oce_runlm.md 2014-02-13-valentine-moon.md 2014-02-17-demodulation.md 2014-02-19-filtfilt.md 2014-03-05-error-bars-in-r.md 2014-03-12-digitizing-plots.md 2014-03-16-box-model.md 2014-03-22-sun-moon.md 2014-04-12-memoise.md 2014-04-30-colormap.md 2014-06-08-Rcpp.md 2014-06-08-slumping-model.md 2014-06-22-gulf-stream-center.md 2014-11-10-solar-navigation.md 2020-01-04-oce-proj.md 2020-01-16-map-projection.md
+md:2014-01-15-colourizing-along-a-trajectory.md 2014-01-30-gmt-colors-topography.md 2014-02-08-hodograph.md 2014-02-10-oce-map-projection.md 2014-02-11-oce_runlm.md 2014-02-13-valentine-moon.md 2014-02-17-demodulation.md 2014-02-19-filtfilt.md 2014-03-05-error-bars-in-r.md 2014-03-12-digitizing-plots.md 2014-03-16-box-model.md 2014-03-22-sun-moon.md 2014-04-12-memoise.md 2014-04-30-colormap.md 2014-06-08-Rcpp.md 2014-06-08-slumping-model.md 2014-06-22-gulf-stream-center.md 2014-11-10-solar-navigation.md 2020-01-04-oce-proj.md 2020-01-16-map-projection.md 2020-03-03-oce-update-magneticField.md
+
