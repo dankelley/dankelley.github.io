@@ -1,4 +1,4 @@
-I"Çc<p>The <a href="http://www.theguardian.com/news/datablog/2013/dec/03/pisa-results-country-best-reading-maths-science">Guardian Newspaper</a> has an interesting article about the <a href="http://www.oecd.org/pisa/">Pisa</a> (Program for International Student Assessment) scores for 2012, and it includes <a href="https://docs.google.com/spreadsheet/ccc?key=0AoBYy67QwoevdHIyc2Rha2VYamZ0LUl0Xy1TdUszRkE&amp;usp=sharing#gid=0">data</a>. Since I was interested to see how my own region scored, I downloaded the data into a file called PISA-summary-2012.csv and created a plot summarizing scores in all the sampled regions, with Canada highlighted.</p>
+I"íc<p>The <a href="http://www.theguardian.com/news/datablog/2013/dec/03/pisa-results-country-best-reading-maths-science">Guardian Newspaper</a> has an interesting article about the <a href="http://www.oecd.org/pisa/">Pisa</a> (Program for International Student Assessment) scores for 2012, and it includes <a href="https://docs.google.com/spreadsheet/ccc?key=0AoBYy67QwoevdHIyc2Rha2VYamZ0LUl0Xy1TdUszRkE&amp;usp=sharing#gid=0">data</a>. Since I was interested to see how my own region scored, I downloaded the data into a file called PISA-summary-2012.csv and created a plot summarizing scores in all the sampled regions, with Canada highlighted.</p>
 
 <h1 id="graphical-summary">Graphical summary</h1>
 
@@ -52,7 +52,7 @@
 </span><span class="n">cex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.65</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Show Mathematics scores.  The gist is in the line containing the call to <code class="highlighter-rouge">approx()</code>, followed by the one calling <code class="highlighter-rouge">segments()</code>; this scheme draws lines between a numerical scale and evenly-spaced labels.  Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements.  For example, there is a remarkable gap in each measure, between the top performer and the second-top one.</p>
+<p>Show Mathematics scores.  The gist is in the line containing the call to <code class="language-plaintext highlighter-rouge">approx()</code>, followed by the one calling <code class="language-plaintext highlighter-rouge">segments()</code>; this scheme draws lines between a numerical scale and evenly-spaced labels.  Thus, the eye is guided not just to the order of the ranking, but also the differences between ranked elements.  For example, there is a remarkable gap in each measure, between the top performer and the second-top one.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

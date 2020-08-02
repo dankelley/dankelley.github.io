@@ -1,12 +1,12 @@
-I"mB<h1 id="introduction">Introduction</h1>
+I"ÃC<h1 id="introduction">Introduction</h1>
 
-<p>This follows up on the previous posting, using data provided by Akima (1972).  The four panels of the plot produced by the following code compare the original Akima spline formula with an improved version, and three styles of <code class="highlighter-rouge">spline()</code> fits.</p>
+<p>This follows up on the previous posting, using data provided by Akima (1972).  The four panels of the plot produced by the following code compare the original Akima spline formula with an improved version, and three styles of <code class="language-plaintext highlighter-rouge">spline()</code> fits.</p>
 
-<p>As noted in the code, two <code class="highlighter-rouge">spline()</code> methods are useless for general tasks and are ignored here.  The <code class="highlighter-rouge">"period"</code> method sets the endpoint y-values equal, which will be useless in most applications.  The <code class="highlighter-rouge">"hyman"</code> method requires the y values to be increasing, which again is useless in most applications.</p>
+<p>As noted in the code, two <code class="language-plaintext highlighter-rouge">spline()</code> methods are useless for general tasks and are ignored here.  The <code class="language-plaintext highlighter-rouge">"period"</code> method sets the endpoint y-values equal, which will be useless in most applications.  The <code class="language-plaintext highlighter-rouge">"hyman"</code> method requires the y values to be increasing, which again is useless in most applications.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The code first creates the data, the MD=1 case of Akima (1972), and defines <code class="highlighter-rouge">xx</code> as a finer-resolution version of <code class="highlighter-rouge">x</code> for plotting.  Then it defines a function <code class="highlighter-rouge">start</code> for common operations on each panel, and then it displays comparisons.  The idea of showing each in reference to the original akima method is to guide the eye, since plotting all in one panel makes a tangle that is difficult to grasp.</p>
+<p>The code first creates the data, the MD=1 case of Akima (1972), and defines <code class="language-plaintext highlighter-rouge">xx</code> as a finer-resolution version of <code class="language-plaintext highlighter-rouge">x</code> for plotting.  Then it defines a function <code class="language-plaintext highlighter-rouge">start</code> for common operations on each panel, and then it displays comparisons.  The idea of showing each in reference to the original akima method is to guide the eye, since plotting all in one panel makes a tangle that is difficult to grasp.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -108,13 +108,13 @@
 
 <ol>
   <li>
-    <p><code class="highlighter-rouge">spline()</code> with <code class="highlighter-rouge">method="natural"</code> or <code class="highlighter-rouge">"fmm"</code> produces undesirable wiggles (for x between 5 and 6).</p>
+    <p><code class="language-plaintext highlighter-rouge">spline()</code> with <code class="language-plaintext highlighter-rouge">method="natural"</code> or <code class="language-plaintext highlighter-rouge">"fmm"</code> produces undesirable wiggles (for x between 5 and 6).</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">spline()</code> with <code class="highlighter-rouge">method="monoH.FC"</code> produces results that re very similar to <code class="highlighter-rouge">aspline()</code> with <code class="highlighter-rouge">method="original"</code>.</p>
+    <p><code class="language-plaintext highlighter-rouge">spline()</code> with <code class="language-plaintext highlighter-rouge">method="monoH.FC"</code> produces results that re very similar to <code class="language-plaintext highlighter-rouge">aspline()</code> with <code class="language-plaintext highlighter-rouge">method="original"</code>.</p>
   </li>
   <li>
-    <p>Arguably, <code class="highlighter-rouge">aspline()</code> with <code class="highlighter-rouge">method="original"</code> produces results most similar to what one might draw by hand; as just noted, <code class="highlighter-rouge">spline()</code> with <code class="highlighter-rouge">method="monoH.FC"</code> produces essentially equivalent results.</p>
+    <p>Arguably, <code class="language-plaintext highlighter-rouge">aspline()</code> with <code class="language-plaintext highlighter-rouge">method="original"</code> produces results most similar to what one might draw by hand; as just noted, <code class="language-plaintext highlighter-rouge">spline()</code> with <code class="language-plaintext highlighter-rouge">method="monoH.FC"</code> produces essentially equivalent results.</p>
   </li>
   <li>
     <p>It would be a bad idea to base general selection on just this one test, but the code provided here is easy to modify for real data (alter lines 5 and 6), so this posting may be useful to readers.</p>

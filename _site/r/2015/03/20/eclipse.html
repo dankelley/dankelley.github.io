@@ -117,9 +117,9 @@ the oce package could reproduce the eclipse timing, so I constructed a function
 to measure the mismatch between sun and moon position in the sky, and set up an
 optimization problem to find the time of least mismatch.</p>
 
-<p>The oce functions <code class="highlighter-rouge">sunAngle()</code> and <code class="highlighter-rouge">moonAngle()</code> are at the heart of the
-work. Each returns a list that contains, among other things, <code class="highlighter-rouge">altitude</code> and
-<code class="highlighter-rouge">azimuth</code>. I set up a mismatch function to calculate a combination of these,
+<p>The oce functions <code class="language-plaintext highlighter-rouge">sunAngle()</code> and <code class="language-plaintext highlighter-rouge">moonAngle()</code> are at the heart of the
+work. Each returns a list that contains, among other things, <code class="language-plaintext highlighter-rouge">altitude</code> and
+<code class="language-plaintext highlighter-rouge">azimuth</code>. I set up a mismatch function to calculate a combination of these,
 with a scale factor (line 11 of the code) to account for a sort of
 converging-meridian effect of azimuth. This function is unity at the horizon,
 where a degree change in azimuth is the same angular distance as a degree
@@ -199,7 +199,7 @@ from [3].</p>
 
 <ol>
   <li>
-    <p>Verify or correct the <code class="highlighter-rouge">scale</code> factor in line 11 of the code.</p>
+    <p>Verify or correct the <code class="language-plaintext highlighter-rouge">scale</code> factor in line 11 of the code.</p>
   </li>
   <li>
     <p>Determine why the times disagree by a few minutes.</p>

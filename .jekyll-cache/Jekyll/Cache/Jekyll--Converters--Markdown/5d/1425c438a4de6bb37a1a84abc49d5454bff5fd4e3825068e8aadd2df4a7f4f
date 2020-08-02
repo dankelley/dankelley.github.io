@@ -1,11 +1,11 @@
-I"»`<h1 id="introduction">Introduction</h1>
+I"ô`<h1 id="introduction">Introduction</h1>
 
 <p>The ocedata package [1] provides data that may be of use to oceanographers,
 either working with their own R code or working with the oce package [2]. One
-such dataset, called <code class="highlighter-rouge">levitus</code>, holds sea surface temperature and salinity
+such dataset, called <code class="language-plaintext highlighter-rouge">levitus</code>, holds sea surface temperature and salinity
 (SST and SSS), based on the 2013 version of the World Ocean Atlas.  An updated
 version of this atlas is suggested by the WOA authors to be an improvement [3],
-and so it will be used for an updated version of <code class="highlighter-rouge">levitus</code> in the upcoming
+and so it will be used for an updated version of <code class="language-plaintext highlighter-rouge">levitus</code> in the upcoming
 version of ocedata.</p>
 
 <p>This blog item deals with differences between the two datasets.</p>
@@ -71,7 +71,7 @@ online sources [4,5]. Then the data were loaded as follows.</p>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in nc_close(con): object 'con' not found</code></pre></figure>
 
-<p>Next, load the levitus dataset from the existing <code class="highlighter-rouge">ocedata</code> package
+<p>Next, load the levitus dataset from the existing <code class="language-plaintext highlighter-rouge">ocedata</code> package
 and compute the differences</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1

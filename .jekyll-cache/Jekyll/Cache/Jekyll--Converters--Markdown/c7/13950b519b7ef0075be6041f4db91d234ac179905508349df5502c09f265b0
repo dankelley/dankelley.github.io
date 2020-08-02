@@ -1,6 +1,6 @@
-I"I3<h1 id="introduction">Introduction</h1>
+I"ô3<h1 id="introduction">Introduction</h1>
 
-<p>The <code class="highlighter-rouge">sunAngle()</code> function in the <code class="highlighter-rouge">oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
+<p>The <code class="language-plaintext highlighter-rouge">sunAngle()</code> function in the <code class="language-plaintext highlighter-rouge">oce</code> package provides a handy way to determine sunrise/sunset azimuth angles, and this is used to find alignments for the winter solstice in Halifax, NS.</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -14,7 +14,7 @@
 </span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span><span class="w">                                 </span><span class="c1"># map span in km</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, use <code class="highlighter-rouge">sunAngle()</code> from the <code class="highlighter-rouge">oce</code> package to find the time of the sunrise and the azimuth at that moment.  Here, <code class="highlighter-rouge">uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we use a search interval that should encompass sunrise at this longitude.</p>
+<p>Next, use <code class="language-plaintext highlighter-rouge">sunAngle()</code> from the <code class="language-plaintext highlighter-rouge">oce</code> package to find the time of the sunrise and the azimuth at that moment.  Here, <code class="language-plaintext highlighter-rouge">uniroot()</code> is used to find the time when the altitude is zero (the sun is on the horizon), and we use a search interval that should encompass sunrise at this longitude.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -30,7 +30,7 @@
 </span><span class="n">azimuth</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sunAngle</span><span class="p">(</span><span class="n">sunrise</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">=</span><span class="n">xy</span><span class="o">$</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">azimuth</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>The span <code class="highlighter-rouge">D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
+<p>The span <code class="language-plaintext highlighter-rouge">D</code> is given in kilometres, which we convert to degrees of latitude and longitude.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -38,7 +38,7 @@
 </span><span class="n">Dlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">xy</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">180</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Now it is time to show the results. The map is done with the <code class="highlighter-rouge">OpenStreetMap</code> package.</p>
+<p>Now it is time to show the results. The map is done with the <code class="language-plaintext highlighter-rouge">OpenStreetMap</code> package.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -75,8 +75,8 @@
 <h1 id="exercises">Exercises</h1>
 
 <ul>
-  <li>Try altering <code class="highlighter-rouge">t0</code> to see how closely this alignment holds over time.</li>
-  <li>As above, but setting <code class="highlighter-rouge">t0</code> to an equinox.</li>
+  <li>Try altering <code class="language-plaintext highlighter-rouge">t0</code> to see how closely this alignment holds over time.</li>
+  <li>As above, but setting <code class="language-plaintext highlighter-rouge">t0</code> to an equinox.</li>
   <li>Invent some sighting schemes for other times of the day, perhaps based on using
 local building (viewed at a distance computed from geometry) to check on
 noontime sun elevation.</li>

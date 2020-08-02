@@ -1,5 +1,4 @@
-I"
-<p>The illuminated fraction of the moon can be calculated with <code class="highlighter-rouge">moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
+I"<p>The illuminated fraction of the moon can be calculated with <code class="language-plaintext highlighter-rouge">moonAngle()</code> in the oce package, as illustrated graphically and in R code below.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

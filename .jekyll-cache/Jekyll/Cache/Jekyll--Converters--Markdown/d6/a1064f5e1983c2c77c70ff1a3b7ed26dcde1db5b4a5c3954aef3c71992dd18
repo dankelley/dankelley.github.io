@@ -1,12 +1,12 @@
-I"¿<p><strong>Preface.</strong> This is my shortest blog item ever, showing in a few lines something that took me over an hour to realize: use <code class="highlighter-rouge">[[1]]</code> in refering expressions stored in variables.</p>
+I"<p><strong>Preface.</strong> This is my shortest blog item ever, showing in a few lines something that took me over an hour to realize: use <code class="language-plaintext highlighter-rouge">[[1]]</code> in refering expressions stored in variables.</p>
 
 <h1 id="introduction">Introduction</h1>
 
-<p>I wanted this for <code class="highlighter-rouge">oce</code>, which for <a href="https://github.com/dankelley/oce/issues/981">issue 981</a> required a method of extracting units from objects, and inserting the values into expressions being constructed for the <code class="highlighter-rouge">mtext</code> calls that write axis labels.</p>
+<p>I wanted this for <code class="language-plaintext highlighter-rouge">oce</code>, which for <a href="https://github.com/dankelley/oce/issues/981">issue 981</a> required a method of extracting units from objects, and inserting the values into expressions being constructed for the <code class="language-plaintext highlighter-rouge">mtext</code> calls that write axis labels.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>The code says it all: use <code class="highlighter-rouge">[[1]]</code>.</p>
+<p>The code says it all: use <code class="language-plaintext highlighter-rouge">[[1]]</code>.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

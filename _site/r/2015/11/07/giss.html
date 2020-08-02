@@ -104,14 +104,14 @@
 <p>I was watching a video of David Suzuki being interviewed on Australian TV, and
 there were some questions about the “pause” in temperature in the GISS dataset.
 I thought I’d like to check for myself, and reasoned that I may as well update
-the <code class="highlighter-rouge">giss</code> dataset in the <code class="highlighter-rouge">ocedata</code> R package.</p>
+the <code class="language-plaintext highlighter-rouge">giss</code> dataset in the <code class="language-plaintext highlighter-rouge">ocedata</code> R package.</p>
 
 <p>As always seems to be the case, the data format is changed a bit from autumn
-2014, when I downloaded GISS and put it into <code class="highlighter-rouge">ocedata</code>, so I had to write
+2014, when I downloaded GISS and put it into <code class="language-plaintext highlighter-rouge">ocedata</code>, so I had to write
 some new code.</p>
 
 <p>I also found a data file on my machine that I downloaded some time in the past,
-but my tests tell me that it is not the one I used for <code class="highlighter-rouge">ocedata</code>.  Thus, I
+but my tests tell me that it is not the one I used for <code class="language-plaintext highlighter-rouge">ocedata</code>.  Thus, I
 have three datasets to explore.</p>
 
 <p>At the risk of providing fuel for debate about such things, I am presenting
@@ -122,8 +122,8 @@ history is the one dated today [3].</p>
 <h1 id="procedure-and-results">Procedure and results</h1>
 
 <p>First, I downloaded the latest dataset from [1], storing it in a file named
-<code class="highlighter-rouge">giss-2015-11-07.dat</code> (provided in [3] here).  Then I found another file,
-evidently from 2014, which I copied locally and renamed <code class="highlighter-rouge">giss-2014-xx-xx.dat</code>
+<code class="language-plaintext highlighter-rouge">giss-2015-11-07.dat</code> (provided in [3] here).  Then I found another file,
+evidently from 2014, which I copied locally and renamed <code class="language-plaintext highlighter-rouge">giss-2014-xx-xx.dat</code>
 ([4] here). Note that the file formats differ slightly, in the asterisks near
 the end; the new format has spaces, which make it easier to read the data,
 whereas the old format is clearly designed for fixed-width data readers.</p>
@@ -322,7 +322,7 @@ files are quite informative.</p>
 <p>One might prefer newer datasets to older ones, since (a) they contain new
 observations and (b) they presumably have more accurate old data, given ongoing
 work to improve analysis methods and data selection.  For that reason, the next
-update of <code class="highlighter-rouge">ocedata</code> will use whatever version of GISS is available at the
+update of <code class="language-plaintext highlighter-rouge">ocedata</code> will use whatever version of GISS is available at the
 time of packaging.</p>
 
 <p>Readers interested in recent changes to GISS (and this includes me!) might do

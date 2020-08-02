@@ -97,13 +97,13 @@
 
 <p>The winter solstice has been on many minds lately.  The days are about to start getting longer … but just how fast will they do that?</p>
 
-<p>This post provides R that calculates and graphs day length and its variation, using <code class="highlighter-rouge">uniroot()</code> to find sunrises and sunsets as indicated by solar altitude that is calculated with <code class="highlighter-rouge">sunAngle()</code> in the oce package.</p>
+<p>This post provides R that calculates and graphs day length and its variation, using <code class="language-plaintext highlighter-rouge">uniroot()</code> to find sunrises and sunsets as indicated by solar altitude that is calculated with <code class="language-plaintext highlighter-rouge">sunAngle()</code> in the oce package.</p>
 
-<p>The day of the solstice is indicated with vertical lines. All times are in UTC, which is the conventional system for scientific work and the one required by <code class="highlighter-rouge">sunAngle()</code>.</p>
+<p>The day of the solstice is indicated with vertical lines. All times are in UTC, which is the conventional system for scientific work and the one required by <code class="language-plaintext highlighter-rouge">sunAngle()</code>.</p>
 
 <p><img src="/assets/daylength.png" alt="daylength graph" /></p>
 
-<p>The first step in making the graph shown above is to load the <code class="highlighter-rouge">oce</code> library and create a function that measures daylength by finding sunrise and sunset times.  Note that <code class="highlighter-rouge">uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code class="highlighter-rouge">t</code>, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
+<p>The first step in making the graph shown above is to load the <code class="language-plaintext highlighter-rouge">oce</code> library and create a function that measures daylength by finding sunrise and sunset times.  Note that <code class="language-plaintext highlighter-rouge">uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code class="language-plaintext highlighter-rouge">t</code>, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -127,7 +127,7 @@
 </span><span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, use <code class="highlighter-rouge">lappy()</code> to find the daylength for December, 2013.</p>
+<p>Next, use <code class="language-plaintext highlighter-rouge">lappy()</code> to find the daylength for December, 2013.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

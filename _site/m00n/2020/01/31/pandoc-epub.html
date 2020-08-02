@@ -101,7 +101,7 @@ but I’ve not tested that yet). The fact that R bookdown uses epub is good
 enough to convince me that it’s a useful format, kindle notwithstanding.</p>
 
 <p>In building the book, I saw the output (I added back-slashes to indicate line continuation)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/pandoc \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/pandoc \
 +RTS -K512m -RTS \
 m00n.utf8.md \
 --to epub3 \
@@ -111,22 +111,22 @@ m00n.utf8.md \
 --filter /usr/local/bin/pandoc-citeproc
 </code></pre></div></div>
 
-<p>Although I have not looked in detail at the <code class="highlighter-rouge">pandoc</code> documentation, I think
+<p>Although I have not looked in detail at the <code class="language-plaintext highlighter-rouge">pandoc</code> documentation, I think
 I can make some educated guesses as to what is going on:</p>
 
 <ul>
-  <li>Line 1 just states the full pathname of <code class="highlighter-rouge">pandoc</code>.</li>
-  <li>Line 2 is a trick to prevent some DOS attacks (according to <code class="highlighter-rouge">man pandoc</code>)</li>
+  <li>Line 1 just states the full pathname of <code class="language-plaintext highlighter-rouge">pandoc</code>.</li>
+  <li>Line 2 is a trick to prevent some DOS attacks (according to <code class="language-plaintext highlighter-rouge">man pandoc</code>)</li>
   <li>Line 3 names the input Markdown file</li>
   <li>Line 4 says we want epub format (version 3 I guess)</li>
   <li>Line 5 seems to give some hints on formatting</li>
   <li>Line 6 names the desired output file</li>
   <li>Line 7 indicates that sections ought to be numbered</li>
-  <li>Line 8 runs the input through <code class="highlighter-rouge">pandoc-citeproc</code>, for cross-references</li>
+  <li>Line 8 runs the input through <code class="language-plaintext highlighter-rouge">pandoc-citeproc</code>, for cross-references</li>
 </ul>
 
-<p>So, let’s try making our own epub file.  First, create a file named <code class="highlighter-rouge">a.md</code> containing</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hi kids.
+<p>So, let’s try making our own epub file.  First, create a file named <code class="language-plaintext highlighter-rouge">a.md</code> containing</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hi kids.
 
 1. This is a test.
 2. Just a test.
@@ -134,13 +134,13 @@ I can make some educated guesses as to what is going on:</p>
 Oh, isn’t $\pi$ a sweetie-pie.
 </code></pre></div></div>
 
-<p>Second, run <code class="highlighter-rouge">pandoc</code> with</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc a.md --o=epub3 --output=a.epub --metadata title=‘test’
+<p>Second, run <code class="language-plaintext highlighter-rouge">pandoc</code> with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc a.md --o=epub3 --output=a.epub --metadata title=‘test’
 </code></pre></div></div>
-<p>where the <code class="highlighter-rouge">title</code> part is to prevent an error.  (The error suggested how to solve
-the problem. There is also something called <code class="highlighter-rouge">pagetitle</code> that seems related.)</p>
+<p>where the <code class="language-plaintext highlighter-rouge">title</code> part is to prevent an error.  (The error suggested how to solve
+the problem. There is also something called <code class="language-plaintext highlighter-rouge">pagetitle</code> that seems related.)</p>
 
-<p>And that’s it.  You’ll have a file <code class="highlighter-rouge">a.epub</code> that you can read on a variety of
+<p>And that’s it.  You’ll have a file <code class="language-plaintext highlighter-rouge">a.epub</code> that you can read on a variety of
 devices. And it ought to render well on all of them, adjusting to screen size
 and geometry.  It has nice navigation features for going between pages, etc.
 This will all be familiar to people who read books this way.</p>

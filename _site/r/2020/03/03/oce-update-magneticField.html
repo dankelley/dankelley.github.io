@@ -46,6 +46,10 @@
 
 <div class=topnav>
 
+<a class="pagination" href="/r/2020/08/02/oce-proj.html" title="map projections in rgdal and sf">
+    Next <!-- &rarr; -->
+</a>
+
 <!-- | <a href='/blog'>Home</a> | -->
 
 <a class="pagination" href="/m00n/2020/01/31/pandoc-epub.html" title="making epub files with pandoc">
@@ -92,13 +96,13 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The <code class="highlighter-rouge">magneticField()</code> function in the <code class="highlighter-rouge">oce</code> packages uses formulae for the
+<p>The <code class="language-plaintext highlighter-rouge">magneticField()</code> function in the <code class="language-plaintext highlighter-rouge">oce</code> packages uses formulae for the
 International Geomagnetic Reference Field (IGRF) provided by the International
 Association of Geomagnetism and Aeronomy (IAGA, Ref. 1) to compute the earth’s
 magnetic field.</p>
 
 <p>The formulae are provided in a standalone Fortran program (Ref. 2) and this
-must manipulated to get it into a form that can be used by <code class="highlighter-rouge">oce</code>.  This posting
+must manipulated to get it into a form that can be used by <code class="language-plaintext highlighter-rouge">oce</code>.  This posting
 outlines the procedure for that manipulation. It was written as I was updating
 from IAGA version 12 to version 13, but the similarity of the Fortran code in
 those two versions may suggest that these notes may be helpful for a future
@@ -114,29 +118,29 @@ for the code has remnants that go back to 1960s style of coding.</p>
 <ol>
   <li>In a unix shell:
     <ol>
-      <li><code class="highlighter-rouge">git checkout develop       # switch to develop branch</code></li>
-      <li><code class="highlighter-rouge">git pull                   # get the latest updates</code></li>
-      <li><code class="highlighter-rouge">git checkout magneticField # switch branch</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git checkout develop       # switch to develop branch</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git pull                   # get the latest updates</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git checkout magneticField # switch branch</code></li>
       <li>`git pull                   # get updates</li>
-      <li><code class="highlighter-rouge">git merge --no-ff develop  # now we have the "develop" updates and are ready to code</code></li>
-      <li><code class="highlighter-rouge">cd src                     # got to right directory</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git merge --no-ff develop  # now we have the "develop" updates and are ready to code</code></li>
+      <li><code class="language-plaintext highlighter-rouge">cd src                     # got to right directory</code></li>
     </ol>
   </li>
   <li>In R:
     <ol>
-      <li><code class="highlighter-rouge">download.file("https://www.ngdc.noaa.gov/IAGA/vmod/igrf13.f", "igrf13.f")</code></li>
+      <li><code class="language-plaintext highlighter-rouge">download.file("https://www.ngdc.noaa.gov/IAGA/vmod/igrf13.f", "igrf13.f")</code></li>
     </ol>
   </li>
   <li>In a unix shell:
     <ol>
-      <li><code class="highlighter-rouge">git add igrf13.f</code></li>
-      <li><code class="highlighter-rouge">git commit -m "download igrf13.f"</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git add igrf13.f</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git commit -m "download igrf13.f"</code></li>
     </ol>
   </li>
-  <li>In an editor, change <code class="highlighter-rouge">igrf13.f</code> in stages. To make it easier to follow changes, it makes sense to store explanations in git comments, and so I am listing some explanatory below, in hopes that they cn be used in a future version.
+  <li>In an editor, change <code class="language-plaintext highlighter-rouge">igrf13.f</code> in stages. To make it easier to follow changes, it makes sense to store explanations in git comments, and so I am listing some explanatory below, in hopes that they cn be used in a future version.
     <ol>
-      <li>Delete the main program, the DMDDEC subroutine, and the DDECDM subroutine.  Commit note: <code class="highlighter-rouge">"delete MAIN, DMDDEC and DDECDM"</code>.</li>
-      <li>Notice that in line 58 and many lines thereafter, there is a comment at the end. On line 58, it is ` 1900<code class="highlighter-rouge"> (space, then the number). This is following an old Fortran convention that any characters appearing in columns 73 to 80 is ignored. When R tries to compile the code, a warning will be issued for every one of these lines. Since the CRAN team does not approve of warnings, these lines should all be edited.  Do *not* remove material in column 72, because that will entirely break the fortran code. Be careful, since you are editing about 500 lines, and doing this without a decent programming editor is a recipe for errors.  Commit note: </code>“remove column 73-80 comments”`.</li>
+      <li>Delete the main program, the DMDDEC subroutine, and the DDECDM subroutine.  Commit note: <code class="language-plaintext highlighter-rouge">"delete MAIN, DMDDEC and DDECDM"</code>.</li>
+      <li>Notice that in line 58 and many lines thereafter, there is a comment at the end. On line 58, it is ` 1900<code class="language-plaintext highlighter-rouge"> (space, then the number). This is following an old Fortran convention that any characters appearing in columns 73 to 80 is ignored. When R tries to compile the code, a warning will be issued for every one of these lines. Since the CRAN team does not approve of warnings, these lines should all be edited.  Do *not* remove material in column 72, because that will entirely break the fortran code. Be careful, since you are editing about 500 lines, and doing this without a decent programming editor is a recipe for errors.  Commit note: </code>“remove column 73-80 comments”`.</li>
     </ol>
   </li>
   <li>At this stage, the code should compile without errors, but it is likely to have lots of warnings, e.g. the following. You ought to check that you get <em>only</em> these warnings, because if more crop up, that will mean some more thought will be required.
@@ -167,18 +171,18 @@ igrf13.f:631:0:</p>
 <p>631 |        fn    = n
       | 
 Warning: ‘fn’ may be used uninitialized in this function [-Wmaybe-uninitialized]</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 6. Since we want `oce` to build *without* warnings, these must be addressed.  It's a bit pointless to explain the details of how to fix these (it's a Fortran lesson) so I'll just give the diff, which will tell what I did:
-<span class="err">```diff</span>
+```diff
 diff --git a/src/igrf13.f b/src/igrf13.f
-<span class="gh">index fd31699c..d227a008 100644
-</span><span class="gd">--- a/src/igrf13.f
-</span><span class="gi">+++ b/src/igrf13.f
-</span><span class="p">@@ -536,6 +536,15 @@</span> c
+index fd31699c..d227a008 100644
+--- a/src/igrf13.f
++++ b/src/igrf13.f
+@@ -536,6 +536,15 @@ c
        x     = 0.0
        y     = 0.0
        z     = 0.0
-<span class="gi">+c *** oce: give several fn, three and gn initial values, to prevent
++c *** oce: give several fn, three and gn initial values, to prevent
 +c *** oce: warnings issued during compilation by R. (It seems likely
 +c *** oce: that the original code was either using knowledge that
 +c *** oce: things would always be assigned, or was using the
@@ -187,50 +191,50 @@ diff --git a/src/igrf13.f b/src/igrf13.f
 +      three = 0.0
 +      gn = 0.0
 +
-</span>       if (date.lt.1900.0.or.date.gt.2030.0) go to 11
+       if (date.lt.1900.0.or.date.gt.2030.0) go to 11
        if (date.gt.2025.0) write (6,960) date
    960 format (/' This version of the IGRF is intended for use up',
-<span class="p">@@ -543,7 +552,7 @@</span> c
+@@ -543,7 +552,7 @@ c
       2        ' but may be of reduced accuracy'/)
        if (date.ge.2020.0) go to 1
        t     = 0.2*(date - 1900.0)                                             
-<span class="gd">-      ll    = t
-</span><span class="gi">+      ll    = int(t)
-</span>       one   = ll
+-      ll    = t
++      ll    = int(t)
+       one   = ll
        t     = t - one
  c
-<span class="p">@@ -557,7 +566,7 @@</span> c
+@@ -557,7 +566,7 @@ c
        else
         nmx   = 13
         nc    = nmx*(nmx+2)
-<span class="gd">-       ll    = 0.2*(date - 1995.0)
-</span><span class="gi">+       ll    = int(0.2*(date - 1995.0))
-</span> c
+-       ll    = 0.2*(date - 1995.0)
++       ll    = int(0.2*(date - 1995.0))
+ c
  c     19 is the number of SH models that extend to degree 10
  c
-<span class="p">@@ -623,7 +632,7 @@</span> c
+@@ -623,7 +632,7 @@ c
        p(3)  = st
        q(1)  = 0.0
        q(3)  =  ct
-<span class="gd">-      do 10 k=2,kmx                                                       
-</span><span class="gi">+      do k=2,kmx                                                       
-</span>        if (n.ge.m) go to 4
+-      do 10 k=2,kmx                                                       
++      do k=2,kmx                                                       
+        if (n.ge.m) go to 4
         m     = 0
         n     = n + 1
-<span class="p">@@ -668,6 +677,7 @@</span> c
+@@ -668,6 +677,7 @@ c
         z     = z - (fn + 1.0)*one*p(k)
         l     = l + 1
     10 m     = m + 1
-<span class="gi">+       end do
-</span> c
++       end do
+ c
  c     conversion to coordinate system specified by itype
  c
 </code></pre></div></div>
 <p>We must remove all code that writes messages to the terminal output. There is a way to do that in C, so I suspect there is a way also in Fortran, but I cannot be bothered to look that up, and instead I will just comment all those lines out.  (I am commenting them out instead of deleting them because if bugs arise, we might want to reinvigorate these lines.)
-Commit note: <code class="highlighter-rouge">" remove fortran warnings, comment-out write()"</code></p>
+Commit note: <code class="language-plaintext highlighter-rouge">" remove fortran warnings, comment-out write()"</code></p>
 <ol>
-  <li>If things are compiling without warnings, edit <code class="highlighter-rouge">src/magdec.f</code> to handle the new function. Doing that should be obvious to someone familiar with fortran.  Commit note: <code class="highlighter-rouge">"let fortran see new igrf13.f code"</code>)</li>
-  <li>In an editor, alter <code class="highlighter-rouge">R/misc.R</code> so that the new version (here, number 13) is (a) in the of permitted versions and (b) is the new default.</li>
+  <li>If things are compiling without warnings, edit <code class="language-plaintext highlighter-rouge">src/magdec.f</code> to handle the new function. Doing that should be obvious to someone familiar with fortran.  Commit note: <code class="language-plaintext highlighter-rouge">"let fortran see new igrf13.f code"</code>)</li>
+  <li>In an editor, alter <code class="language-plaintext highlighter-rouge">R/misc.R</code> so that the new version (here, number 13) is (a) in the of permitted versions and (b) is the new default.</li>
   <li>Try a test build. It it produces errors or warnings, you’ll need to do some detective work to find out why.  (Anyone who knows both R and Fortran will have no issues in this, I think.)</li>
 </ol>
 
@@ -247,7 +251,7 @@ ensure that it is still relevant.</p>
 
 <h1 id="checking-the-results">Checking the results</h1>
 
-<p>The tests shown by <code class="highlighter-rouge">?magneticField</code> produce some useful graphs, which are reproduced below.</p>
+<p>The tests shown by <code class="language-plaintext highlighter-rouge">?magneticField</code> produce some useful graphs, which are reproduced below.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">oce</span><span class="p">)</span>

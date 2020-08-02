@@ -1,6 +1,6 @@
-I"1<h1 id="introduction">Introduction</h1>
+I"�<h1 id="introduction">Introduction</h1>
 
-<p>The <code class="highlighter-rouge">mapdata</code> R package contains a coastline called <code class="highlighter-rouge">worldHires</code> which is contained within a text file with a bit over 2 million lines.  Since the <code class="highlighter-rouge">coastlineWorldFine</code> dataset in the <code class="highlighter-rouge">ocedata</code> package contains about 0.5 million points, I thought I would explore how much better the <code class="highlighter-rouge">mapdata</code> coastline might be.</p>
+<p>The <code class="language-plaintext highlighter-rouge">mapdata</code> R package contains a coastline called <code class="language-plaintext highlighter-rouge">worldHires</code> which is contained within a text file with a bit over 2 million lines.  Since the <code class="language-plaintext highlighter-rouge">coastlineWorldFine</code> dataset in the <code class="language-plaintext highlighter-rouge">ocedata</code> package contains about 0.5 million points, I thought I would explore how much better the <code class="language-plaintext highlighter-rouge">mapdata</code> coastline might be.</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -64,9 +64,9 @@
 </span><span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Then, I created a datafile for plotting. It turns out that <code class="highlighter-rouge">mapdata</code> numbers are in radians, so a conversion was required.</p>
+<p>Then, I created a datafile for plotting. It turns out that <code class="language-plaintext highlighter-rouge">mapdata</code> numbers are in radians, so a conversion was required.</p>
 
-<p>I plotted this “new” dataset and the “old” one (containined in <code class="highlighter-rouge">ocedata</code>) and the results are shown below.</p>
+<p>I plotted this “new” dataset and the “old” one (containined in <code class="language-plaintext highlighter-rouge">ocedata</code>) and the results are shown below.</p>
 
 <h1 id="results">Results</h1>
 
@@ -74,6 +74,6 @@
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>There are some differences between the two, but nothing dramatic (e.g. no Northwest Arm of Halifax Harbour). Certainly it would be difficult to argue for exapanding the memory footprint of <code class="highlighter-rouge">ocedata</code> by a factor of 4.</p>
+<p>There are some differences between the two, but nothing dramatic (e.g. no Northwest Arm of Halifax Harbour). Certainly it would be difficult to argue for exapanding the memory footprint of <code class="language-plaintext highlighter-rouge">ocedata</code> by a factor of 4.</p>
 
 :ET

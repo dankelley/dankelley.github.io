@@ -1,4 +1,4 @@
-I"öz<h1 id="introduction">Introduction</h1>
+I"¡{<h1 id="introduction">Introduction</h1>
 
 <p>The motivation and methodology was discusssed in Part I [2] and so here I will
 just give code and resulting diagrams, and then make some tentative
@@ -131,7 +131,7 @@ more sophisticated methods than are presently available in oce.</p>
 
 <p>Now, below are the results from the 4 trials for this image. Refer to the code
 above for methodology, but note that the line at the top of each image
-summaries the relevant arguments to <code class="highlighter-rouge">plot.landsat()</code>.</p>
+summaries the relevant arguments to <code class="language-plaintext highlighter-rouge">plot.landsat()</code>.</p>
 
 <p><img src="/figs/2016-02-21-landsat-01.png" alt="center" />
 <img src="/figs/2016-02-21-landsat-02.png" alt="center" />
@@ -205,25 +205,25 @@ these colours look reasonably correct over land, in both summer and winter.</p>
 <h1 id="conclusions">Conclusions</h1>
 
 <p>The â€˜Dâ€™ variants of the figures are all reasonably good, and this suggests new
-defaults for <code class="highlighter-rouge">plot.landsat()</code>, namely</p>
+defaults for <code class="language-plaintext highlighter-rouge">plot.landsat()</code>, namely</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">plot.landsat</span><span class="p">(</span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">red.f</span><span class="o">=</span><span class="m">1.7</span><span class="p">,</span><span class="w"> </span><span class="n">blue.f</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">green.f</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-0.05</span><span class="p">,</span><span class="m">-0.2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">...</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Even with just three test cases in consideration, it seems clear that these
-values are preferable to the old defaults of <code class="highlighter-rouge">red.f=2</code>, <code class="highlighter-rouge">green.f=2</code>,
-<code class="highlighter-rouge">blue.f=4</code>, and <code class="highlighter-rouge">offset=c(0,0,0,0)</code>.</p>
+values are preferable to the old defaults of <code class="language-plaintext highlighter-rouge">red.f=2</code>, <code class="language-plaintext highlighter-rouge">green.f=2</code>,
+<code class="language-plaintext highlighter-rouge">blue.f=4</code>, and <code class="language-plaintext highlighter-rouge">offset=c(0,0,0,0)</code>.</p>
 
 <p>It should be noted that all of these schemes are simply linear transformations,
 and so cannot be expected to yield the flexibility achieved with nonlinear
 transformations, as in [1].</p>
 
 <p>Another issue that deserves consideration (perhaps in Part III in this series)
-is whether the <code class="highlighter-rouge">terralook</code> system is the best for practical purposes. Note that
-in [1], the green band of the satellite was used, whereas in <code class="highlighter-rouge">terralook</code>, that
+is whether the <code class="language-plaintext highlighter-rouge">terralook</code> system is the best for practical purposes. Note that
+in [1], the green band of the satellite was used, whereas in <code class="language-plaintext highlighter-rouge">terralook</code>, that
 band is discarded and instead red, blue, and nir are used for a basis set (see
-the help for <code class="highlighter-rouge">plot.landsat()</code>.)</p>
+the help for <code class="language-plaintext highlighter-rouge">plot.landsat()</code>.)</p>
 
 <h1 id="references-and-resources">References and resources</h1>
 

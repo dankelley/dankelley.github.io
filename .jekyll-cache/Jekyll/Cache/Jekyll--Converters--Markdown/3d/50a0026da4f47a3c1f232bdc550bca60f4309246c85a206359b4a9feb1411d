@@ -1,6 +1,6 @@
-I"L<h1 id="introduction">Introduction</h1>
+I"_<h1 id="introduction">Introduction</h1>
 
-<p>Quite often I write <code class="highlighter-rouge">which(...)[1]</code> to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.</p>
+<p>Quite often I write <code class="language-plaintext highlighter-rouge">which(...)[1]</code> to find the first element of a vector matching some condition.  One has to wonder whether that’s wasteful, though, since there is no need to do any tests once one works.  I decided to try using C++, using Rcpp, to see if speed advances could be made.</p>
 
 <h1 id="procedure">Procedure</h1>
 

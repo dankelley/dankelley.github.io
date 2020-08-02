@@ -110,7 +110,7 @@
 
 <p><a href="/assets/smooth-profile.png"><img src="/assets/smooth-profile-thumbnail.png" alt="graph" /></a></p>
 
-<p>The first step in making the graph shown above is to load the <code class="highlighter-rouge">oce</code> library and create a function that measures daylength by finding sunrise and sunset times.  Note that <code class="highlighter-rouge">uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code class="highlighter-rouge">t</code>, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
+<p>The first step in making the graph shown above is to load the <code class="language-plaintext highlighter-rouge">oce</code> library and create a function that measures daylength by finding sunrise and sunset times.  Note that <code class="language-plaintext highlighter-rouge">uniroot()</code>, which is used to find times of zero solar altitude, needs lower and upper limits on <code class="language-plaintext highlighter-rouge">t</code>, and these are calculated by looking back and then forward a half-day.  This works well for application to Halifax, but in other timezones other offsets would be needed.  Interested readers might want to devised a method based on the longitude, which can be transformed into a timezone.</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -206,7 +206,7 @@
 
 <p>Filtering a non-detrended profile is a generally a bad idea.  There is almost always a zero-offset problem, and also most properties vary dramatically with depth, so detrending is required as well as zero offsetting.  The advantage of detrending is illustrated in the left-hand and middle panels.</p>
 
-<p>Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required.  However, a disadvantage of splines is that there is no simple way to describe the method to those who are not familiar with them.  In some branches of the literature, splines will be understood by readers, and in others, they will be a mystery that will waste a review cycle for the education of referees. There is also a problem in describing the spline simply in terms that have physical meaning.  For example, spline smoothness is here controlled by setting the <code class="highlighter-rouge">df</code> argument, but this has no simple analogy to physics, as perhaps the half-power frequency of a filter might (in terms of spectral models of finestructure, say).</p>
+<p>Smoothing splines provide an attractive alternative to filtering, especially in the not-uncommon cases in which derivative are required.  However, a disadvantage of splines is that there is no simple way to describe the method to those who are not familiar with them.  In some branches of the literature, splines will be understood by readers, and in others, they will be a mystery that will waste a review cycle for the education of referees. There is also a problem in describing the spline simply in terms that have physical meaning.  For example, spline smoothness is here controlled by setting the <code class="language-plaintext highlighter-rouge">df</code> argument, but this has no simple analogy to physics, as perhaps the half-power frequency of a filter might (in terms of spectral models of finestructure, say).</p>
 
 
 

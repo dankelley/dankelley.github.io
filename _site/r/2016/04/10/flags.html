@@ -95,11 +95,11 @@
 
 
 <p><strong>Preface.</strong> The code of this blog posting will only work with the latest
-<code class="highlighter-rouge">development</code>-branch of the <code class="highlighter-rouge">oce</code> source.</p>
+<code class="language-plaintext highlighter-rouge">development</code>-branch of the <code class="language-plaintext highlighter-rouge">oce</code> source.</p>
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The <code class="highlighter-rouge">section</code> dataset from <code class="highlighter-rouge">oce</code> provides a good example of a dataset
+<p>The <code class="language-plaintext highlighter-rouge">section</code> dataset from <code class="language-plaintext highlighter-rouge">oce</code> provides a good example of a dataset
 containing flags.</p>
 
 <h1 id="methods">Methods</h1>
@@ -130,7 +130,7 @@ containing flags.</p>
 ##    2    3    4 
 ## 2298  440  103</code></pre></figure>
 
-<p>This dataset uses the WHP convention for flags (see <code class="highlighter-rouge">?section</code>), in which a
+<p>This dataset uses the WHP convention for flags (see <code class="language-plaintext highlighter-rouge">?section</code>), in which a
 flag value of 2 is used to indicate data considered to be acceptable. Thus, the
 table indicates that only 3/4 of the salinity measurements are considered
 to be acceptable.  This makes this a good dataset to illustrate the handling
@@ -182,7 +182,7 @@ assessed as being reasonable during the data-archiving process.</p>
 
 <p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-6-1.png" alt="center" /></p>
 
-<p>Another approach is to use <code class="highlighter-rouge">handleFlags</code> to select the good data</p>
+<p>Another approach is to use <code class="language-plaintext highlighter-rouge">handleFlags</code> to select the good data</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -191,8 +191,8 @@ assessed as being reasonable during the data-archiving process.</p>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p><img src="http://dankelley.github.io/figs/2016-04-10-flags/unnamed-chunk-7-1.png" alt="center" />
-where we have used the fact that <code class="highlighter-rouge">plotTS</code> can recognize section objects. The
-use of <code class="highlighter-rouge">handleFlags</code> is also recommended because it carries over to other types
+where we have used the fact that <code class="language-plaintext highlighter-rouge">plotTS</code> can recognize section objects. The
+use of <code class="language-plaintext highlighter-rouge">handleFlags</code> is also recommended because it carries over to other types
 of plots, e.g. a salinity section. For example, a salinity section of all the 
 data is produced with</p>
 
@@ -219,10 +219,10 @@ while one of just the acceptable data is produced with</p>
 
 <ol>
   <li>Find which station has the very low salinity, and examine that station in more detail.</li>
-  <li>Try as above, but only discarding data with <code class="highlighter-rouge">salinityFlag==4</code>, which are known to be
+  <li>Try as above, but only discarding data with <code class="language-plaintext highlighter-rouge">salinityFlag==4</code>, which are known to be
 bad (i.e. retain both acceptable and questionable data).</li>
   <li>Continue step 2, with other types of analysis (e.g. examine spatial dependence).</li>
-  <li>Look online for the source of the <code class="highlighter-rouge">section</code> dataset, to find out more about how the 
+  <li>Look online for the source of the <code class="language-plaintext highlighter-rouge">section</code> dataset, to find out more about how the 
 data-quality flags were assigned.</li>
 </ol>
 

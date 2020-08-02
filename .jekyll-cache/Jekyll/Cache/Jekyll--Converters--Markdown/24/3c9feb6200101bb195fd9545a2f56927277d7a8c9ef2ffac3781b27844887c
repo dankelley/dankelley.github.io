@@ -1,12 +1,12 @@
-I"A<h1 id="introduction">Introduction</h1>
+I"�A<h1 id="introduction">Introduction</h1>
 
-<p>Error propagation can be a fair bit of work with a calculator, but it’s easy with R.  Just use R in repeated calculation with perturbed quantities, and inspect the range of results.  Two methods are shown below for inspecting the range: <code class="highlighter-rouge">sd()</code> and <code class="highlighter-rouge">quantile()</code>, the latter using the fact that area under a normal distribution is 0.68 when calculated between -1 and 1 standard deviation.</p>
+<p>Error propagation can be a fair bit of work with a calculator, but it’s easy with R.  Just use R in repeated calculation with perturbed quantities, and inspect the range of results.  Two methods are shown below for inspecting the range: <code class="language-plaintext highlighter-rouge">sd()</code> and <code class="language-plaintext highlighter-rouge">quantile()</code>, the latter using the fact that area under a normal distribution is 0.68 when calculated between -1 and 1 standard deviation.</p>
 
 <h1 id="tests">Tests</h1>
 
 <h2 id="case-1-scale-factor">Case 1: scale factor</h2>
 
-<p>In this case, the answer is simple.  If <code class="highlighter-rouge">A</code> has uncertainty equal to 0.1, then <code class="highlighter-rouge">10A</code> has uncertainty 1.0.</p>
+<p>In this case, the answer is simple.  If <code class="language-plaintext highlighter-rouge">A</code> has uncertainty equal to 0.1, then <code class="language-plaintext highlighter-rouge">10A</code> has uncertainty 1.0.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -130,10 +130,10 @@
 
 <ol>
   <li>
-    <p>How large should <code class="highlighter-rouge">n</code> be, to get results to some desired resolution?</p>
+    <p>How large should <code class="language-plaintext highlighter-rouge">n</code> be, to get results to some desired resolution?</p>
   </li>
   <li>
-    <p>If the function is highly nonlinear, perhaps the <code class="highlighter-rouge">mean(result)</code> should be replaced by <code class="highlighter-rouge">median(result)</code>, or something.</p>
+    <p>If the function is highly nonlinear, perhaps the <code class="language-plaintext highlighter-rouge">mean(result)</code> should be replaced by <code class="language-plaintext highlighter-rouge">median(result)</code>, or something.</p>
   </li>
 </ol>
 

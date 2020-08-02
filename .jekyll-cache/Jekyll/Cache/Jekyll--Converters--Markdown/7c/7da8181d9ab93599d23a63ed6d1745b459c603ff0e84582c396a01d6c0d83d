@@ -1,14 +1,14 @@
-I"&\<h1 id="introduction">Introduction</h1>
+I"_\<h1 id="introduction">Introduction</h1>
 
 <p>The polar graph known as a hodograph can be useful for vector plots, and also for showing varition within nearly-cyclical time series data.  The Oce R package should have a function to create hodographs, but as usual my first step is to start by writing isolated code, testing to find the right match between the function and real-world needs.</p>
 
-<p>The code chunk given below is such a test, with the build-in dataset named <code class="highlighter-rouge">co2</code>, which is a time-series starting in 1959.  The hodograph is for the variation of CO2 from its value in 1959, so the data start at zero radius.  Climatologists will why this makes sense, and climate-change deniars will think it’s part of a hoax.</p>
+<p>The code chunk given below is such a test, with the build-in dataset named <code class="language-plaintext highlighter-rouge">co2</code>, which is a time-series starting in 1959.  The hodograph is for the variation of CO2 from its value in 1959, so the data start at zero radius.  Climatologists will why this makes sense, and climate-change deniars will think it’s part of a hoax.</p>
 
 <p>I will leave documentation of the function for a later time, conscious of the fact that the argument list and the aesthtics of the output are likely to change with use.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>First, define <code class="highlighter-rouge">hodograph()</code>, with arguments that suffice for a simple problem of a periodic signal <em>x=x(t)</em> to be plotted in polar fashion with radius indicating <em>x</em> and angle indicating <em>t</em> modulo 1 year.</p>
+<p>First, define <code class="language-plaintext highlighter-rouge">hodograph()</code>, with arguments that suffice for a simple problem of a periodic signal <em>x=x(t)</em> to be plotted in polar fashion with radius indicating <em>x</em> and angle indicating <em>t</em> modulo 1 year.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -132,7 +132,7 @@
 
 <h1 id="results">Results</h1>
 
-<p>The plot is informative.  I’ve looked at the <code class="highlighter-rouge">co2</code> data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.</p>
+<p>The plot is informative.  I’ve looked at the <code class="language-plaintext highlighter-rouge">co2</code> data before, without really noticing the interannual variation, which is clearly seen as variation in the spacing of the spiraling data trace.  For comparison, consider a conventional time-series plot.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">plot</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span>

@@ -91,7 +91,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The <code class="highlighter-rouge">memoise</code> package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The <code class="highlighter-rouge">microbenchmark</code> package shows timing results.</p>
+<p>The <code class="language-plaintext highlighter-rouge">memoise</code> package can be very handy for caching the results of slow calculations.  In interactive work, the slowest calculations can be reading data, so that is demonstrated here.  The <code class="language-plaintext highlighter-rouge">microbenchmark</code> package shows timing results.</p>
 
 <h1 id="methods-and-results">Methods and results</h1>
 
@@ -129,7 +129,7 @@
 
 <h2 id="memoise-the-function">Memoise the function</h2>
 
-<p>Memoising <code class="highlighter-rouge">read.oce()</code> is simple</p>
+<p>Memoising <code class="language-plaintext highlighter-rouge">read.oce()</code> is simple</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">memoise</span><span class="p">(</span><span class="n">read.oce</span><span class="p">)</span>
@@ -151,7 +151,7 @@
 
 <p>In this example, the speedup was by a factor of about 3000.</p>
 
-<p>The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using <code class="highlighter-rouge">memoise()</code> would reduce that half minute to a hundredth of a second – easily converting an annoyingly slow operation to what feels like zero time in an interactive session.</p>
+<p>The operation tested here is quick enough for interactive work, but this is a 1-dbar file, and the time would be increased to several seconds for raw CTD data, and increased to perhaps a half minute or so if a whole section of CTD profiles is to be read.  Using <code class="language-plaintext highlighter-rouge">memoise()</code> would reduce that half minute to a hundredth of a second – easily converting an annoyingly slow operation to what feels like zero time in an interactive session.</p>
 
 <h1 id="resources">Resources</h1>
 <ul>

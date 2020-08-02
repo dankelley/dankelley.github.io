@@ -1,21 +1,21 @@
-I"±<h1 id="introduction">Introduction</h1>
+I"²<h1 id="introduction">Introduction</h1>
 
-<p>For several years, oce has used the <code class="highlighter-rouge">rgdal::transform()</code> function for
-map-projection calculations. This cannot continue, given that the <code class="highlighter-rouge">rgdal</code>
-developers intend to deprecate <code class="highlighter-rouge">transform()</code>. Lately, I have been exploring the
-possibility of switching to <code class="highlighter-rouge">sf::st_transform()</code> for map-projection
-calculations. This work is being done in the <code class="highlighter-rouge">sf</code> branch of oce.  In the
+<p>For several years, oce has used the <code class="language-plaintext highlighter-rouge">rgdal::transform()</code> function for
+map-projection calculations. This cannot continue, given that the <code class="language-plaintext highlighter-rouge">rgdal</code>
+developers intend to deprecate <code class="language-plaintext highlighter-rouge">transform()</code>. Lately, I have been exploring the
+possibility of switching to <code class="language-plaintext highlighter-rouge">sf::st_transform()</code> for map-projection
+calculations. This work is being done in the <code class="language-plaintext highlighter-rouge">sf</code> branch of oce.  In the
 present initial phase of the transition, calculations are done with both
-<code class="highlighter-rouge">rgdal::transform()</code> and <code class="highlighter-rouge">sf::st_transform()</code>, and warnings are issued if the
-results differ.  (This requires version 0.8.1 of the <code class="highlighter-rouge">st</code> package, which is
+<code class="language-plaintext highlighter-rouge">rgdal::transform()</code> and <code class="language-plaintext highlighter-rouge">sf::st_transform()</code>, and warnings are issued if the
+results differ.  (This requires version 0.8.1 of the <code class="language-plaintext highlighter-rouge">st</code> package, which is
 presently only available on github.)</p>
 
-<p>This blog posting tests the <code class="highlighter-rouge">sf</code> branch of oce against the projections used in
+<p>This blog posting tests the <code class="language-plaintext highlighter-rouge">sf</code> branch of oce against the projections used in
 the <a href="http://dankelley.github.io/r/2015/04/03/oce-proj.html">2015-04-03-oce-proj
 posting</a>.  My quick scan
 shows that this works as expected.</p>
 
-<p>Note that this version of <code class="highlighter-rouge">oce</code> accepts <code class="highlighter-rouge">lonlat</code> and <code class="highlighter-rouge">longlat</code> as synonyms, and the same for <code class="highlighter-rouge">latlon</code> and <code class="highlighter-rouge">latlong</code>.</p>
+<p>Note that this version of <code class="language-plaintext highlighter-rouge">oce</code> accepts <code class="language-plaintext highlighter-rouge">lonlat</code> and <code class="language-plaintext highlighter-rouge">longlat</code> as synonyms, and the same for <code class="language-plaintext highlighter-rouge">latlon</code> and <code class="language-plaintext highlighter-rouge">latlong</code>.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

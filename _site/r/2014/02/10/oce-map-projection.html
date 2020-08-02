@@ -108,7 +108,7 @@
 
 <p>Soon after map projections were added to Oce, bug reports showed that coastline plots in some projections were subject to anomalous lines that run horizontally on the plot.  A ad-hoc scheme was code to try to prevent this, but it does not always work.  Problems are compounded for filled coastlines.</p>
 
-<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code class="highlighter-rouge">proj4</code> package instead of <code class="highlighter-rouge">mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
+<p>I had thought this was a basic problem of all projection coding, until I happened to try using the <code class="language-plaintext highlighter-rouge">proj4</code> package instead of <code class="language-plaintext highlighter-rouge">mapproj</code> to carry out the projections.  The result is that the annoying lines went away.</p>
 
 <h1 id="test-case">Test case</h1>
 
@@ -180,9 +180,9 @@
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>At least in this example, the <code class="highlighter-rouge">proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
+<p>At least in this example, the <code class="language-plaintext highlighter-rouge">proj4</code> package produces better coastlines, somehow being clever enough to cut the polygons that cross the “edge” of the earth.</p>
 
-<p>I will do some more tests to see if this is a fluke case, but if I think <code class="highlighter-rouge">proj4</code> is promising, I will see how to invent a scheme for handling the <code class="highlighter-rouge">mapproj</code> arguments called <code class="highlighter-rouge">parameters</code> and <code class="highlighter-rouge">orientation</code> with <code class="highlighter-rouge">proj4</code>.  THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
+<p>I will do some more tests to see if this is a fluke case, but if I think <code class="language-plaintext highlighter-rouge">proj4</code> is promising, I will see how to invent a scheme for handling the <code class="language-plaintext highlighter-rouge">mapproj</code> arguments called <code class="language-plaintext highlighter-rouge">parameters</code> and <code class="language-plaintext highlighter-rouge">orientation</code> with <code class="language-plaintext highlighter-rouge">proj4</code>.  THis seems to be a bit tricky, at first glance, but let’s keep the cart behind the horse for now.</p>
 
 <h1 id="resources">Resources</h1>
 <ul>

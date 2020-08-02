@@ -1,20 +1,20 @@
-I"Ê)<h1 id="introduction">Introduction</h1>
+I"®*<h1 id="introduction">Introduction</h1>
 
 <p>I was doing some thinking about how best to work with rotating spectra in R,
-and wanted to drop all the way down to using <code class="highlighter-rouge">fft()</code> instead of <code class="highlighter-rouge">spectrum()</code>.
+and wanted to drop all the way down to using <code class="language-plaintext highlighter-rouge">fft()</code> instead of <code class="language-plaintext highlighter-rouge">spectrum()</code>.
 For a while, I was confused about some of the results, because the lengths of
-spectra created with <code class="highlighter-rouge">fft</code> were not what I expected. Then I saw that the
-problem was that I was using the default value of <code class="highlighter-rouge">fast</code> in the <code class="highlighter-rouge">spectrum()</code>
+spectra created with <code class="language-plaintext highlighter-rouge">fft</code> were not what I expected. Then I saw that the
+problem was that I was using the default value of <code class="language-plaintext highlighter-rouge">fast</code> in the <code class="language-plaintext highlighter-rouge">spectrum()</code>
 function. The content of this post illustrates this.</p>
 
 <h1 id="results-and-discussion">Results and discussion</h1>
 
-<p>By default, the R <code class="highlighter-rouge">spectrum()</code> function sets the argument <code class="highlighter-rouge">fast=TRUE</code>. This
+<p>By default, the R <code class="language-plaintext highlighter-rouge">spectrum()</code> function sets the argument <code class="language-plaintext highlighter-rouge">fast=TRUE</code>. This
 causes R to increase the speed of processing, but it also leads to spectrum
 lengths that can be surprising.</p>
 
-<p>The following illustrates how the length of spectra computed with <code class="highlighter-rouge">spectrum</code>
-vary from the expected value of <code class="highlighter-rouge">floor(length(data)/2)</code>.</p>
+<p>The following illustrates how the length of spectra computed with <code class="language-plaintext highlighter-rouge">spectrum</code>
+vary from the expected value of <code class="language-plaintext highlighter-rouge">floor(length(data)/2)</code>.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -66,8 +66,8 @@ vary from the expected value of <code class="highlighter-rouge">floor(length(dat
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>If the results of <code class="highlighter-rouge">spectrum</code> and <code class="highlighter-rouge">fft</code> are to be put on an equal footing, e.g. for numerical
-comparisons, then it makes sense to call the former as e.g. <code class="highlighter-rouge">spectrum(..., fast=FALSE)</code>.</p>
+<p>If the results of <code class="language-plaintext highlighter-rouge">spectrum</code> and <code class="language-plaintext highlighter-rouge">fft</code> are to be put on an equal footing, e.g. for numerical
+comparisons, then it makes sense to call the former as e.g. <code class="language-plaintext highlighter-rouge">spectrum(..., fast=FALSE)</code>.</p>
 
 <h1 id="reference-and-resources">Reference and resources</h1>
 

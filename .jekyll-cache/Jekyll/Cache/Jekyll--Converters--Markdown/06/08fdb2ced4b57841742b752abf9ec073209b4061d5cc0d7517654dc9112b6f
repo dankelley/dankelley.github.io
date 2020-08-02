@@ -1,4 +1,4 @@
-I"À°<h1 id="introduction">Introduction</h1>
+I"æ°<h1 id="introduction">Introduction</h1>
 
 <p>Through the early months of 2015, efforts were made to incorporate PROJ.4
 projections into the oce R package. An earlier attempt had relied on the proj4
@@ -17,8 +17,8 @@ cause errors of various sorts; see <a href="https://github.com/dankelley/oce/iss
 635</a> for more on this.</p>
 
 <p>I will not explain the methodology of projection here, nor the details of any
-given projection. Readers should consult the help for the <code class="highlighter-rouge">oce</code> function
-<code class="highlighter-rouge">mapPlot()</code> and the many websites detailing software that derives from
+given projection. Readers should consult the help for the <code class="language-plaintext highlighter-rouge">oce</code> function
+<code class="language-plaintext highlighter-rouge">mapPlot()</code> and the many websites detailing software that derives from
 PROJ.4.  In due course, they will be able to consult <a href="https://dankelley.github.io/book.html">my
 book</a>.</p>
 

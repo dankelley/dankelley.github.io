@@ -101,11 +101,11 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which <em>dS/dp</em> is largest, where <em>S</em> is salinity and <em>p</em> is pressure (Kelley 2014 chapter 5).  Calculating the derivative using e.g. <code class="highlighter-rouge">diff(S)/diff(p)</code> can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.</p>
+<p>There are no agreed-upon methods for inferring halocline depth, but a reasonable method might involve locating the depth at which <em>dS/dp</em> is largest, where <em>S</em> is salinity and <em>p</em> is pressure (Kelley 2014 chapter 5).  Calculating the derivative using e.g. <code class="language-plaintext highlighter-rouge">diff(S)/diff(p)</code> can be problematic because of sensitivity to noise, especially for data that have not been bin-averaged. Achieving smoothness with conventional filtering has problems at the end-points, which is particularly troublesome for a near-surface halocline (see the next blog entry). A possible solution to such problems is to calculate the derivative with a smoothing spline.</p>
 
 <h1 id="methods">Methods</h1>
 
-<p>Pasted below is test code that does this with the ctd dataset in the oce package. The function returns the pressure at which the smoothing spline has highest salinity derivative, and it can also plot the results (which is recommended). The parameter named deltap is used to set the value of <code class="highlighter-rouge">df</code> (degrees of freedom) for the spline. One might think of deltap as the thickness (in dbar) of the smoothing interval for each of the sub-components of the spline.</p>
+<p>Pasted below is test code that does this with the ctd dataset in the oce package. The function returns the pressure at which the smoothing spline has highest salinity derivative, and it can also plot the results (which is recommended). The parameter named deltap is used to set the value of <code class="language-plaintext highlighter-rouge">df</code> (degrees of freedom) for the spline. One might think of deltap as the thickness (in dbar) of the smoothing interval for each of the sub-components of the spline.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -169,7 +169,7 @@
 
 <h1 id="results">Results</h1>
 
-<p>The graph shows results for a test dataset provided with the oce package, using two values for <code class="highlighter-rouge">deltap</code>.</p>
+<p>The graph shows results for a test dataset provided with the oce package, using two values for <code class="language-plaintext highlighter-rouge">deltap</code>.</p>
 
 <p><img src="/assets/halocline-depth.png" alt="graph of halocline depth" /></p>
 

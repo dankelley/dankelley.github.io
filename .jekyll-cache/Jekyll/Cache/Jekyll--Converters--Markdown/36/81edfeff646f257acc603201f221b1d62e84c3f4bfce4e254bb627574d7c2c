@@ -1,4 +1,4 @@
-I"­E<h1 id="introduction">Introduction</h1>
+I"~F<h1 id="introduction">Introduction</h1>
 
 <p>Solar altitude is a function of time, longitude and latitude, and so it may be
 possible to infer location based on measurements of solar altitude over time.</p>
@@ -17,9 +17,9 @@ is very strong.</p>
 is at 7:06AM (11:06 UTC), and sunset at 4:51PM (20:51 UTC).</p>
 
 <p>Rather than devising an inverse formula to infer location from time and solar
-altitude, the R function <code class="highlighter-rouge">optim</code> may be used to find the longitude and
+altitude, the R function <code class="language-plaintext highlighter-rouge">optim</code> may be used to find the longitude and
 latitude that minimize angle the sun makes to the horizon.  That angle is given
-by the <code class="highlighter-rouge">altitude</code> component of the list returned by <code class="highlighter-rouge">oce::solarAngle()</code>.</p>
+by the <code class="language-plaintext highlighter-rouge">altitude</code> component of the list returned by <code class="language-plaintext highlighter-rouge">oce::solarAngle()</code>.</p>
 
 <p>The first step is to define a function that returns the absolute value of the
 solar angle, which of course is a minimum at sunrise and sunset.</p>
@@ -40,13 +40,13 @@ solar angle, which of course is a minimum at sunrise and sunset.</p>
 </span><span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Here, <code class="highlighter-rouge">useRefraction</code> is set to account for the bending of the sunlight near
+<p>Here, <code class="language-plaintext highlighter-rouge">useRefraction</code> is set to account for the bending of the sunlight near
 the horizon, which perturbs the observed sunrise and sunset times.  Note that
-the sunrise and sunset times (<code class="highlighter-rouge">rise</code> and <code class="highlighter-rouge">set</code>) must be defined in order
-for <code class="highlighter-rouge">misfit</code> to work.  Use <code class="highlighter-rouge">help(sunAngle)</code> for more about how this
+the sunrise and sunset times (<code class="language-plaintext highlighter-rouge">rise</code> and <code class="language-plaintext highlighter-rouge">set</code>) must be defined in order
+for <code class="language-plaintext highlighter-rouge">misfit</code> to work.  Use <code class="language-plaintext highlighter-rouge">help(sunAngle)</code> for more about how this
 function works.</p>
 
-<p>The goal is to use <code class="highlighter-rouge">optim</code> to find values of longitude and latitude that
+<p>The goal is to use <code class="language-plaintext highlighter-rouge">optim</code> to find values of longitude and latitude that
 yield an optimal match to specified sunrise and sunset times.  This function
 needs an initial value, or guess, and for that we pick 50W and 50N.</p>
 
@@ -75,8 +75,8 @@ needs an initial value, or guess, and for that we pick 50W and 50N.</p>
 ##  $ message    : NULL</code></pre></figure>
 
 <p>reveals the function value to be very low, indicating a sun just on the
-horizon.  The optimal values for longitude and latitude are stored in <code class="highlighter-rouge">par</code>.
-See <code class="highlighter-rouge">help("optim")</code> to learn more about the return value.</p>
+horizon.  The optimal values for longitude and latitude are stored in <code class="language-plaintext highlighter-rouge">par</code>.
+See <code class="language-plaintext highlighter-rouge">help("optim")</code> to learn more about the return value.</p>
 
 <p>It can be helpful to show the results on a map.  To explore the dependence on
 sunrise and sunset times, random values can be added to those times and

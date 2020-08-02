@@ -1,8 +1,8 @@
-I"x<h1 id="introduction">Introduction</h1>
+I"ý<h1 id="introduction">Introduction</h1>
 
 <p>R provides functions for both one-dimensional and multi-dimensional optimization.  The second topic is much more complicated than the former (see e.g. Nocedal 1999) and will be left for another day.</p>
 
-<p>A convenient function for 1D optimization is <code class="highlighter-rouge">optimize()</code>, also known as <code class="highlighter-rouge">optimise()</code>.  Its first argument is a function whose minimum (or maximum) is sought, and the second is a two-element vector giving the range of values of the independent variable to be searched.  (See <code class="highlighter-rouge">?optimize</code> for more.)</p>
+<p>A convenient function for 1D optimization is <code class="language-plaintext highlighter-rouge">optimize()</code>, also known as <code class="language-plaintext highlighter-rouge">optimise()</code>.  Its first argument is a function whose minimum (or maximum) is sought, and the second is a two-element vector giving the range of values of the independent variable to be searched.  (See <code class="language-plaintext highlighter-rouge">?optimize</code> for more.)</p>
 
 <h1 id="application">Application</h1>
 
@@ -36,7 +36,7 @@
 
 <p><img src="/assets/optimize.png" alt="graph" /></p>
 
-<p>The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to <code class="highlighter-rouge">optimize()</code>.</p>
+<p>The results suggest that the range of $k$ illustrate contains the minimum, so we provide that to <code class="language-plaintext highlighter-rouge">optimize()</code>.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -52,16 +52,16 @@
 
 <ol>
   <li>
-    <p>Use <code class="highlighter-rouge">str(o)</code> to learn about the contents of the optimized solution.</p>
+    <p>Use <code class="language-plaintext highlighter-rouge">str(o)</code> to learn about the contents of the optimized solution.</p>
   </li>
   <li>
-    <p>Use <code class="highlighter-rouge">abline()</code> to indicate the wavenumber at the speed minimum.</p>
+    <p>Use <code class="language-plaintext highlighter-rouge">abline()</code> to indicate the wavenumber at the speed minimum.</p>
   </li>
   <li>
     <p>Try other functions that are of interest to you, e.g. find the angle that maximizes $\sin\theta\cos\theta$, which yields the throwing angle that achieves furthest distance in frictionless air over flat terrain.</p>
   </li>
   <li>
-    <p>Use the multi-dimensional optimizer named <code class="highlighter-rouge">optim()</code> on this problem.</p>
+    <p>Use the multi-dimensional optimizer named <code class="language-plaintext highlighter-rouge">optim()</code> on this problem.</p>
   </li>
 </ol>
 

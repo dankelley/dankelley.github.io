@@ -111,7 +111,7 @@ through the water column, ideally at almost uniform speed, and, after that, by
 an ascent phase. In most cases, only the descent phase is of direct interest,
 so a first step in processing is usually to isolate this phase.</p>
 
-<p>The <code class="highlighter-rouge">ctdTrim()</code> function in the oce library [2] often does a good job of
+<p>The <code class="language-plaintext highlighter-rouge">ctdTrim()</code> function in the oce library [2] often does a good job of
 locating the descent phase, and trimming data recovered before and after.
 However, this function is somewhat limited, employing an ad-hoc algorithm that
 has parameters that were calibrated on a limited dataset, guided by the eye of
@@ -122,8 +122,8 @@ based on visual inspection of the data.</p>
 
 <p>This suggests that CTD trimming might be good demonstration of shiny. As I’m
 just learning the system, the methodology is crude. I wanted to learn how to use
-slider bars, so I use <code class="highlighter-rouge">sliderInput()</code> to select the downcast. I wanted to
-learn how to use a file-choice dialog, so I used <code class="highlighter-rouge">file.choose()</code> for that.</p>
+slider bars, so I use <code class="language-plaintext highlighter-rouge">sliderInput()</code> to select the downcast. I wanted to
+learn how to use a file-choice dialog, so I used <code class="language-plaintext highlighter-rouge">file.choose()</code> for that.</p>
 
 <p>I am not going to explain the code in any detail. Readers unfamiliar with R
 will understand very little, I fear, but my purpose is not to replace the
@@ -139,7 +139,7 @@ than rstudio, type following into the R console.</p>
 </span><span class="n">runApp</span><span class="p">()</span><span class="w"> </span><span class="c1"># exit by striking ESC on the keyboard</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Below is the contents of the <code class="highlighter-rouge">ui.R</code> file</p>
+<p>Below is the contents of the <code class="language-plaintext highlighter-rouge">ui.R</code> file</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -164,9 +164,9 @@ than rstudio, type following into the R console.</p>
 <p>This will look a bit mysterious, but anyone who spends 20 minutes with the
 <a href="http://shiny.rstudio.com">shiny documentation</a> will get the gist: two sliders
 will be shown below a plot that is create with a user-created function named
-<code class="highlighter-rouge">ctdTrimPlot()</code>.</p>
+<code class="language-plaintext highlighter-rouge">ctdTrimPlot()</code>.</p>
 
-<p>Below is the contents of the <code class="highlighter-rouge">server.R</code> file</p>
+<p>Below is the contents of the <code class="language-plaintext highlighter-rouge">server.R</code> file</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -242,16 +242,16 @@ will be shown below a plot that is create with a user-created function named
 </span><span class="p">})</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Here, notice the use of <code class="highlighter-rouge">shinyServer()</code>. Again, this will seem mysterious at
+<p>Here, notice the use of <code class="language-plaintext highlighter-rouge">shinyServer()</code>. Again, this will seem mysterious at
 first, but a quick glance shows that a major task here is the creation of the
-<code class="highlighter-rouge">ctdTrimPlot()</code> function.  (Readers familiar with oce [2] will note that the
+<code class="language-plaintext highlighter-rouge">ctdTrimPlot()</code> function.  (Readers familiar with oce [2] will note that the
 margins are made very tight here, mainly to devote more space to the data.)</p>
 
 <p>Interested users should simply copy these files, and try them. If there are no
-<code class="highlighter-rouge">.CNV</code> files handy, comment out the <code class="highlighter-rouge">file.choose()</code> line and uncomment the
-<code class="highlighter-rouge">data(ctdRaw)</code> line.</p>
+<code class="language-plaintext highlighter-rouge">.CNV</code> files handy, comment out the <code class="language-plaintext highlighter-rouge">file.choose()</code> line and uncomment the
+<code class="language-plaintext highlighter-rouge">data(ctdRaw)</code> line.</p>
 
-<p>Note that the code saves the trimmed data as an <code class="highlighter-rouge">rda</code> file in the local
+<p>Note that the code saves the trimmed data as an <code class="language-plaintext highlighter-rouge">rda</code> file in the local
 directory. A more sophisticated application would use a tailored file name.
 Another useful addition might be to use mouse drags on the scan-pressure plot,
 instead of a slider. But these things are for another day.  For now, the goal
@@ -265,7 +265,7 @@ hour to acquire that that might yield great benefits to science?</p>
 <p>Below is a screenshot of the initial view of the application.  Anyone who has
 looked at CTD data will note the wildly unphysical salinity and temperature
 characteristics. The dotted lines in the scan-pressure plot show the trimming
-that <code class="highlighter-rouge">ctdTrim()</code> would do, and the solid lines are the values as set at the
+that <code class="language-plaintext highlighter-rouge">ctdTrim()</code> would do, and the solid lines are the values as set at the
 moment (which are 0 and 100 percent, at the start). The user should adjust
 those sliders to narrow in on the profile.</p>
 
@@ -273,7 +273,7 @@ those sliders to narrow in on the profile.</p>
 
 <p>Below is a screenshot of a view after the downcast has been selected.  It
 should be noted that I selected a different range than was selected
-automatically by <code class="highlighter-rouge">ctdTrim()</code>, because I thought the automatic cutoff at the
+automatically by <code class="language-plaintext highlighter-rouge">ctdTrim()</code>, because I thought the automatic cutoff at the
 bottom of the profile came too late, i.e. during a time when the instrument was
 not moving through the water column.</p>
 

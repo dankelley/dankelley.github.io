@@ -1,8 +1,8 @@
-I"†&<h1 id="introduction">Introduction</h1>
+I"¶'<h1 id="introduction">Introduction</h1>
 
-<p>The base R system provides <code class="highlighter-rouge">lapply()</code> and related functions, and the package <code class="highlighter-rouge">plyr</code> provides alternatives that are worth considering.  It will be assumed that readers are familiar with <code class="highlighter-rouge">lapply()</code> and are willing to spend a few moments reading the <code class="highlighter-rouge">plyr</code> documentation, to see why the illustration here will use the <code class="highlighter-rouge">ldply()</code> function.</p>
+<p>The base R system provides <code class="language-plaintext highlighter-rouge">lapply()</code> and related functions, and the package <code class="language-plaintext highlighter-rouge">plyr</code> provides alternatives that are worth considering.  It will be assumed that readers are familiar with <code class="language-plaintext highlighter-rouge">lapply()</code> and are willing to spend a few moments reading the <code class="language-plaintext highlighter-rouge">plyr</code> documentation, to see why the illustration here will use the <code class="language-plaintext highlighter-rouge">ldply()</code> function.</p>
 
-<p>The test task will be extraction of latitude (and then both latitude and longitude) from the <code class="highlighter-rouge">section</code> dataset in the <code class="highlighter-rouge">oce</code> package.  (Users of that package may be aware that there is a built-in accessor for doing this, so results can easily be checked.)</p>
+<p>The test task will be extraction of latitude (and then both latitude and longitude) from the <code class="language-plaintext highlighter-rouge">section</code> dataset in the <code class="language-plaintext highlighter-rouge">oce</code> package.  (Users of that package may be aware that there is a built-in accessor for doing this, so results can easily be checked.)</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -14,13 +14,13 @@
 </span><span class="n">data</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, find latitudes using <code class="highlighter-rouge">lapply</code></p>
+<p>Next, find latitudes using <code class="language-plaintext highlighter-rouge">lapply</code></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]]))</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Next, find latitudes with <code class="highlighter-rouge">ldply</code></p>
+<p>Next, find latitudes with <code class="language-plaintext highlighter-rouge">ldply</code></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -30,7 +30,7 @@
 
 <h1 id="results">Results</h1>
 
-<p>The reader can check that the results match, although <code class="highlighter-rouge">ldply()</code> returns a data frame, not a vector as in the first method.  Tests of speed</p>
+<p>The reader can check that the results match, although <code class="language-plaintext highlighter-rouge">ldply()</code> returns a data frame, not a vector as in the first method.  Tests of speed</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -62,7 +62,7 @@
 
 <h1 id="discussion">Discussion</h1>
 
-<p>Since <code class="highlighter-rouge">ldply()</code> returns a data frame, it is more flexible than <code class="highlighter-rouge">unlist()</code>, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:</p>
+<p>Since <code class="language-plaintext highlighter-rouge">ldply()</code> returns a data frame, it is more flexible than <code class="language-plaintext highlighter-rouge">unlist()</code>, which returns a vector.  For example, the following creates a data frame with columns for lat and lon:</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="n">latlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ldply</span><span class="p">(</span><span class="n">section</span><span class="p">[[</span><span class="s2">"station"</span><span class="p">]],</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="s2">"latitude"</span><span class="p">]],</span><span class="w"> </span><span class="n">x</span><span class="p">[[</span><span class="s2">"longitude"</span><span class="p">]]))</span>
@@ -82,5 +82,5 @@
 
 <h1 id="conclusions">Conclusions</h1>
 
-<p>The effort of learning how to use the <code class="highlighter-rouge">plyr</code> package is likely to pay off in more flexible code, particularly because of the use of data frames in that package.  On this theme, note that the author of <code class="highlighter-rouge">plyr</code> is developing a similar package called <code class="highlighter-rouge">dplry</code>, which centres more closely on data frames and offers many new features; see <a href="http://blog.rstudio.org/2014/01/17/introducing-dplyr/">http://blog.rstudio.org/2014/01/17/introducing-dplyr/</a> for a blog item introducing <code class="highlighter-rouge">dplyr</code>.</p>
+<p>The effort of learning how to use the <code class="language-plaintext highlighter-rouge">plyr</code> package is likely to pay off in more flexible code, particularly because of the use of data frames in that package.  On this theme, note that the author of <code class="language-plaintext highlighter-rouge">plyr</code> is developing a similar package called <code class="language-plaintext highlighter-rouge">dplry</code>, which centres more closely on data frames and offers many new features; see <a href="http://blog.rstudio.org/2014/01/17/introducing-dplyr/">http://blog.rstudio.org/2014/01/17/introducing-dplyr/</a> for a blog item introducing <code class="language-plaintext highlighter-rouge">dplyr</code>.</p>
 :ET
