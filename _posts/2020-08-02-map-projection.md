@@ -6,7 +6,7 @@ category: R
 year: 2020
 month: 8
 day: 2
-summary: This blog posting tests whether the projections used in a previous posting about oce will work with the `sf` scheme as of Aug 2, 2020, and is an update to a similar test on Jan 16, 2020, after removing tests of `eqearth`, `geoc`, `healpix`, `helmert` and `rhealpix`, which now fail with `sf`. Of these problematic projections, only `healpix` and `rhealpix` were provided by the latest CRAN release of `oce`, and they will be removed from the development version, since they never were useful, as `oce::mapPlot()` plotted in the off-world regions (see http://dankelley.github.io/r/2020/01/04/oce-proj.html).
+summary: This blog posting tests whether the projections used in a previous posting about oce will work with the `sf` scheme as of Aug 2, 2020, and is an update to a similar test on Jan 16, 2020, after removing tests of `geoc`, `healpix`, `helmert` and `rhealpix`, which now fail with `sf`. Of these problematic projections, only `healpix` and `rhealpix` were provided by the latest CRAN release of `oce`, and they will be removed from the development version, since they never were useful, as `oce::mapPlot()` plotted in the off-world regions (see http://dankelley.github.io/r/2020/01/04/oce-proj.html).
 
 ---
 
