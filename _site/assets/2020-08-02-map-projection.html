@@ -577,6 +577,19 @@ for (projOld in oceTest) {
 ## sf    with old: (0,0) -&gt; (0,0)
 ## sf    with new: (0,0) -&gt; (0,0)
 ## 
+## projOld &#39;+proj=eqearth&#39;
+## gdal with old: (0,0) -&gt; (0,0)</code></pre>
+<pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth</code></pre>
+<pre><code>## projNew &#39;+proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs&#39;
+##   is projNew bad? FALSE 
+## new: +proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
+## sf    with old: (0,0) -&gt; (0,0)
+## sf    with new: (0,0) -&gt; (0,0)
+## 
 ## projOld &#39;+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40&#39;
 ## gdal with old: (0,0) -&gt; (5478194,1441354)
 ## projNew &#39;+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40 +datum=WGS84 +units=m +no_defs&#39;
@@ -868,9 +881,8 @@ for (projOld in oceTest) {
 ## projOld &#39;+proj=nsper +h=90000000&#39;
 ## gdal with old: (0,0) -&gt; (0,0)</code></pre>
 <pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
-## conversion method: Vertical Perspective
-
-## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Vertical Perspective</code></pre>
+<pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
 ## conversion method: Vertical Perspective</code></pre>
 <pre><code>## projNew &#39;+proj=nsper +lat_0=0 +lon_0=0 +h=90000000 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs&#39;
 ##   is projNew bad? FALSE 
@@ -1408,6 +1420,17 @@ for (projOld in projTest) {
 ## sf    with old: (0,0) -&gt; (0,0)
 ## sf    with new: (0,0) -&gt; (0,0)
 ## 
+## old: +proj=eqearth 
+## gdal with old: (0,0) -&gt; (0,0)</code></pre>
+<pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth</code></pre>
+<pre><code>## new: +proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
+## sf    with old: (0,0) -&gt; (0,0)
+## sf    with new: (0,0) -&gt; (0,0)
+## 
 ## old: +proj=euler +lat_1=67 +lat_2=75 
 ## gdal with old: (0,0) -&gt; (0,0)
 ## new: +proj=euler +lat_1=67 +lat_2=75 +datum=WGS84 +units=m +no_defs 
@@ -1729,9 +1752,8 @@ for (projOld in projTest) {
 ## old: +proj=nsper +h=90000000 
 ## gdal with old: (0,0) -&gt; (0,0)</code></pre>
 <pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
-## conversion method: Vertical Perspective
-
-## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Vertical Perspective</code></pre>
+<pre><code>## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
 ## conversion method: Vertical Perspective</code></pre>
 <pre><code>## new: +proj=nsper +lat_0=0 +lon_0=0 +h=90000000 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
 ## sf    with old: (0,0) -&gt; (0,0)
