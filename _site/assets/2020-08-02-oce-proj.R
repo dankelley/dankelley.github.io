@@ -92,6 +92,10 @@ p <- "+proj=eqc"
 mapPlot(coastlineWorld, projection=p, col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)
 
+p <- "+proj=eqearth"
+mapPlot(coastlineWorld, projection=p, col=col)
+mtext(p, line=line, adj=1, col=pcol, font=font)
+
 p <- "+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40"
 mapPlot(coastlineWorld, projection=p, longitudelim=c(-80, 0), latitudelim=c(0, 60), col=col)
 mtext(p, line=line, adj=1, col=pcol, font=font)

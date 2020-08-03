@@ -238,6 +238,33 @@ for (projOld in oceTest) {
 ## sf    with old: (0,0) -> (0,0)
 ## sf    with new: (0,0) -> (0,0)
 ## 
+## projOld '+proj=eqearth'
+## gdal with old: (0,0) -> (0,0)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## projNew '+proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
+##   is projNew bad? FALSE 
+## new: +proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
+## sf    with old: (0,0) -> (0,0)
+## sf    with new: (0,0) -> (0,0)
+## 
 ## projOld '+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40'
 ## gdal with old: (0,0) -> (5478194,1441354)
 ## projNew '+proj=euler +lat_1=45 +lat_2=50 +lon_0=-40 +datum=WGS84 +units=m +no_defs'
@@ -1088,6 +1115,31 @@ for (projOld in projTest) {
 ## old: +proj=eqdc +lat_1=55 +lat_2=60 
 ## gdal with old: (0,0) -> (0,0)
 ## new: +proj=eqdc +lat_0=0 +lon_0=0 +lat_1=55 +lat_2=60 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
+## sf    with old: (0,0) -> (0,0)
+## sf    with new: (0,0) -> (0,0)
+## 
+## old: +proj=eqearth 
+## gdal with old: (0,0) -> (0,0)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning in CPL_crs_parameters(x): GDAL Error 1: PROJ: proj_as_wkt: Unsupported
+## conversion method: Equal Earth
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## new: +proj=eqearth +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
 ## sf    with old: (0,0) -> (0,0)
 ## sf    with new: (0,0) -> (0,0)
 ## 

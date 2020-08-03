@@ -27,6 +27,7 @@ oceTest <- c(
 "eck5",
 "eck6",
 "eqc",
+"eqearth",
 "euler +lat_1=45 +lat_2=50 +lon_0=-40",
 "etmerc +ellps=WGS84 +lon_0=-40",
 "etmerc +ellps=WGS84 +lon_0=-40",
@@ -147,6 +148,7 @@ projTest <- c(
 ## fails 2020-08-02 ## "eqearth",
 "eqc",
 "eqdc +lat_1=55 +lat_2=60",            # https://proj.org/operations/projections/eqdc.html
+"eqearth",
 "euler +lat_1=67 +lat_2=75",           # https://proj.org/operations/projections/euler.html
 "etmerc",
 "fahey",
