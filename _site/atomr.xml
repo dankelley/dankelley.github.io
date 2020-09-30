@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-09-30T19:47:56-03:00</updated>
+    <updated>2020-09-30T20:10:05-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -18,12 +18,7 @@
         <link href="http://dankelley.github.io/r/2020/09/30/dislike-ggplot.html"/>
         <updated>2020-09-30T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2020/09/30/dislike-ggplot</id>
-        <content type="html">&lt;p&gt;The following comparison explains my preference for base graphics over
-ggplot[2] graphics …&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Base graphics&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;With base graphics, running&lt;/p&gt;
+        <content type="html">&lt;p&gt;With base graphics, a histogram of 100 million points&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -31,11 +26,14 @@ ggplot[2] graphics …&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system.time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;produces&lt;/p&gt;
+&lt;p&gt;takes just&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;     user  system elapsed
     0.044   0.004   0.052
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;whereas with ggplot&lt;/p&gt;
+&lt;p&gt;which means that the result is ready as my pinkie finger is rising from the
+‘Return’ key.&lt;/p&gt;
+
+&lt;p&gt;In contrast, if I use ggplot as in&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -43,17 +41,27 @@ ggplot[2] graphics …&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system.time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_histogram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)})&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;we get&lt;/p&gt;
+&lt;p&gt;I find I have to wait &lt;em&gt;much&lt;/em&gt; longer.  The results are&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
      user  system elapsed
    43.877  13.766  60.200
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;so this sub-second task has ballooned to a full minute.  Since this is not a
+large dataset in my line of work, the test shows that my brand-new machine acts
+more like something from the 1980s.&lt;/p&gt;
 
-&lt;p&gt;In this case, the base-graphics result is completed while my finger is still
-rising from the ‘return’ key, while with ggplot, I have to wait a full minute.&lt;/p&gt;
+&lt;p&gt;I liked the eighties, but I don’t want to go back to its computing power.&lt;/p&gt;
 
-&lt;p&gt;I prefer using tools that don’t make my brand-new machine act like something
-from the 1980s.&lt;/p&gt;
+&lt;p&gt;And now that I’m revealing myself to be a cranky old fart, I’ll add two more
+complaints about ggplot defaults:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The function ought to choose an appropriate binwidth, instead of saying that
+it has chosen a poor default.&lt;/li&gt;
+  &lt;li&gt;While the ggplot graph looks pretty enough for a magazine, this default
+low-contrast style can be a problem for some viewers and some
+printing/reproduction methods.&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
 
