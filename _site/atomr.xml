@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-08-24T08:30:29-03:00</updated>
+    <updated>2020-09-30T19:40:44-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -14,11 +14,59 @@
     
     
     <entry>
+        <title>Why I use base graphics instead of ggplot2</title>
+        <link href="http://dankelley.github.io/r/2020/09/30/dislike-ggplot.html"/>
+        <updated>2020-09-30T00:00:00-03:00</updated>
+        <id>http://dankelley.github.io/blog/r/2020/09/30/dislike-ggplot</id>
+        <content type="html">&lt;p&gt;The following comparison explains my preference for base graphics over
+ggplot[2] graphics …&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Base graphics&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Running&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1e8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system.time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;produces&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;     user  system elapsed
+    0.044   0.004   0.052
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ggplot2 graphics&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Error in ggplot(d): could not find function &quot;ggplot&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Timing stopped at: 0 0 0.002&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;produces&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+     user  system elapsed
+   43.877  13.766  60.200
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;references-and-resources&quot;&gt;References and resources&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Jekyll source code for this blog entry: &lt;a href=&quot;https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-09-30-dislike-ggplot.Rmd&quot;&gt;2020-09-30-dislike-ggplot.Rmd&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+    </entry>
+    
+    
+    
+    <entry>
         <title>map projections in rgdal and sf</title>
         <link href="http://dankelley.github.io/r/2020/08/02/oce-proj.html"/>
         <updated>2020-08-02T00:00:00-03:00</updated>
         <id>http://dankelley.github.io/blog/r/2020/08/02/oce-proj</id>
-        <content type="html">&lt;p&gt;&lt;strong&gt;Executive Summary.&lt;/strong&gt; a transition of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; would require the removal of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pconic&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; projections, all of which cause errors in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt;. The loss of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pconic&lt;/code&gt; projections is not of much concern, since these were interrupted projections that were not handled properly by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce::mapPlot()&lt;/code&gt; anyway (see http://dankelley.github.io/r/2020/01/04/oce-proj.html for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; examples; the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt; case was ignored in that blog item). The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt; projection seems unlikely to enjoy wide usage, since it is showing a near-earth satellite view.  Thus, the loss of these 4 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce&lt;/code&gt; projections should not stand in the way of a transition from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rgdal&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; \ldots and the benefits of switching to the newer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; package are convincing, in terms of accuracy and future availability.&lt;/p&gt;
+        <content type="html">&lt;p&gt;&lt;strong&gt;Executive Summary.&lt;/strong&gt; a transition of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; will require the removal of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pconic&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; projections, all of which cause errors in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt;. The loss of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pconic&lt;/code&gt; projections is not of much concern, since these were interrupted projections that were not handled properly by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce::mapPlot()&lt;/code&gt; anyway (see http://dankelley.github.io/r/2020/01/04/oce-proj.html for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;healpix&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rhealpix&lt;/code&gt; examples; the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt; case was ignored in that blog item). The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nesper&lt;/code&gt; projection seems unlikely to enjoy wide usage, since it is showing a near-earth satellite view.  Thus, the loss of these 4 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oce&lt;/code&gt; projections should not stand in the way of a transition from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rgdal&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; \ldots and the benefits of switching to the newer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; package are convincing, in terms of accuracy and future availability.&lt;/p&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 

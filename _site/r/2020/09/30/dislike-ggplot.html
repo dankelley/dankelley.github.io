@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
+<meta charset="UTF-8">
+<title>Why I use base graphics instead of ggplot2</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+<a class="pagination" href="/r/2020/08/02/oce-proj.html" title="map projections in rgdal and sf">
+    <!-- &larr; --> Previous
+</a>
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Why I use base graphics instead of ggplot2</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        Sep 30, 2020
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        ggplot can be slow ... 1970s slow.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+<p>The following comparison explains my preference for base graphics over
+ggplot[2] graphics …</p>
+
+<p><strong>Base graphics</strong></p>
+
+<p>Running</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rnorm</span><span class="p">(</span><span class="m">1e8</span><span class="p">))</span><span class="w">
+</span><span class="n">system.time</span><span class="p">(</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>produces</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     user  system elapsed
+    0.044   0.004   0.052
+</code></pre></div></div>
+
+<p><strong>ggplot2 graphics</strong></p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ggplot(d): could not find function "ggplot"</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Timing stopped at: 0 0 0.002</code></pre></figure>
+
+<p>produces</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+     user  system elapsed
+   43.877  13.766  60.200
+</code></pre></div></div>
+
+<h1 id="references-and-resources">References and resources</h1>
+
+<ol>
+  <li>Jekyll source code for this blog entry: <a href="https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-09-30-dislike-ggplot.Rmd">2020-09-30-dislike-ggplot.Rmd</a></li>
+</ol>
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

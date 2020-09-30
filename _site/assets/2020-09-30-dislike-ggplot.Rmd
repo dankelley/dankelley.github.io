@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/syntax.css' />
+<link rel='stylesheet' type='text/css' href='https://dankelley.github.io/css/style.css' />
+<meta charset="UTF-8">
+<title>Why I use base graphics instead of ggplot2</title>
+</head>
+
+<body>
+<div class="navbar">
+    <!-- <div class="navbar-inner"> -->
+        <!-- <a class="brand" href="/index.html">Dan Kelley</a> -->
+        <!-- <div class="nav">Dan Kelley</div> -->
+        <ul class="navbar">
+            
+            <li><a href="/index.html">Dan Kelley</a></li>
+            
+
+            
+            <li><a href="/papers.html">Papers</a></li>
+            
+
+            
+            <li><a href="/book.html">Book</a></li>
+            
+
+            
+            <li><a href="/software.html">Software</a></li>
+            
+            
+            <li><a href="/blog">Blog</a></li>
+            
+
+        </ul>
+        <!-- </div> -->
+</div>
+
+<div id="content">
+    
+
+
+
+
+<!-- <div class="span8"> -->
+
+<div class=topnav>
+
+<!-- | <a href='/blog'>Home</a> | -->
+
+</div> <!-- topnav -->
+
+
+<div class="page-header">
+
+    <div class=post_title>Why I use base graphics instead of ggplot2</div>
+<!-- </div> --> <!-- span8 -->
+
+<!-- <div class="span4"> -->
+
+<div class=slug>
+    <span class=post_date>
+        
+    </span> <!-- post_date -->
+    <span class=post_tags>
+        
+        <a href="/tags/oce/index.html" class="tag">
+            oce
+        </a>
+         &#183; 
+        
+        <a href="/tags/map/index.html" class="tag">
+            map
+        </a>
+         &#183; 
+        
+        <a href="/tags/R/index.html" class="tag">
+            R
+        </a>
+        
+        
+    </span> <!-- post_date -->
+    <div class=post_summary>
+        ggplot can be slow ... 1970s slow.
+    </div> <!-- post_summary -->
+</div> <!-- slug -->
+
+<!-- </div> -->
+<!-- span4 -->
+</div> <!-- page-header -->
+
+
+
+The following comparison explains my preference for base graphics over
+ggplot[2] graphics ...
+
+**Base graphics**
+
+Running
+```{r eval=FALSE}
+library(ggplot2)
+d <- data.frame(x=rnorm(1e8))
+system.time(hist(x))
+```
+produces
+```
+     user  system elapsed
+    0.044   0.004   0.052
+```
+
+**ggplot2 graphics**
+
+```{r echo=FALSE}
+system.time({p<-ggplot(d) + aes(x=x) + geom_histogram();print(p)})
+```
+produces
+```
+  `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+     user  system elapsed
+   43.877  13.766  60.200
+```
+
+
+# References and resources
+
+1. Jekyll source code for this blog entry: [2020-09-30-dislike-ggplot.Rmd](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2020-09-30-dislike-ggplot.Rmd)
+
+
+
+
+
+
+</div>
+
+<p class="footnote">This website is written in <a
+href="http://jekyllrb.com">Jekyll</a>, and the source is available on <a
+href="https://github.com/dankelley/dankelley.github.io">GitHub</a>.</p>
+
+</body>
+</html>
+

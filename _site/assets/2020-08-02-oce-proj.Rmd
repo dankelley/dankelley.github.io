@@ -91,7 +91,7 @@
 
 
 
-**Executive Summary.** a transition of `oce` to `sf` would require the removal of `healpix`, `nesper`, `pconic` and `rhealpix` projections, all of which cause errors in `sf`. The loss of `healpix`, `rhealpix` and `pconic` projections is not of much concern, since these were interrupted projections that were not handled properly by `oce::mapPlot()` anyway (see http://dankelley.github.io/r/2020/01/04/oce-proj.html for the `healpix` and `rhealpix` examples; the `nesper` case was ignored in that blog item). The `nesper` projection seems unlikely to enjoy wide usage, since it is showing a near-earth satellite view.  Thus, the loss of these 4 `oce` projections should not stand in the way of a transition from `rgdal` to `sf` \ldots and the benefits of switching to the newer `sf` package are convincing, in terms of accuracy and future availability.
+**Executive Summary.** a transition of `oce` to `sf` will require the removal of `healpix`, `nesper`, `pconic` and `rhealpix` projections, all of which cause errors in `sf`. The loss of `healpix`, `rhealpix` and `pconic` projections is not of much concern, since these were interrupted projections that were not handled properly by `oce::mapPlot()` anyway (see http://dankelley.github.io/r/2020/01/04/oce-proj.html for the `healpix` and `rhealpix` examples; the `nesper` case was ignored in that blog item). The `nesper` projection seems unlikely to enjoy wide usage, since it is showing a near-earth satellite view.  Thus, the loss of these 4 `oce` projections should not stand in the way of a transition from `rgdal` to `sf` \ldots and the benefits of switching to the newer `sf` package are convincing, in terms of accuracy and future availability.
 
 # Introduction
 
