@@ -4,7 +4,7 @@
     <title>Dan Kelley Blog/R</title>
     <link href="http://dankelley.github.io/atomr.xml" rel="self"/>
     <link href="http://dankelley.github.io"/>
-    <updated>2020-09-30T20:10:05-03:00</updated>
+    <updated>2020-09-30T20:12:54-03:00</updated>
     <id>http://dankelley.github.io/</id>
     <author>
         <name>Dan Kelley Blog/R</name>
@@ -50,7 +50,8 @@
 large dataset in my line of work, the test shows that my brand-new machine acts
 more like something from the 1980s.&lt;/p&gt;
 
-&lt;p&gt;I liked the eighties, but I don’t want to go back to its computing power.&lt;/p&gt;
+&lt;p&gt;Don’t get me wrong.  I liked the eighties.  But I don’t want to go back to 
+1980s computing power.&lt;/p&gt;
 
 &lt;p&gt;And now that I’m revealing myself to be a cranky old fart, I’ll add two more
 complaints about ggplot defaults:&lt;/p&gt;

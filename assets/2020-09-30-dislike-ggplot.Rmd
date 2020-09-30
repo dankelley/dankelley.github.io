@@ -37,7 +37,8 @@ so this sub-second task has ballooned to a full minute.  Since this is not a
 large dataset in my line of work, the test shows that my brand-new machine acts
 more like something from the 1980s.
 
-I liked the eighties, but I don't want to go back to its computing power.
+Don't get me wrong.  I liked the eighties.  But I don't want to go back to 
+1980s computing power.
 
 And now that I'm revealing myself to be a cranky old fart, I'll add two more
 complaints about ggplot defaults:
