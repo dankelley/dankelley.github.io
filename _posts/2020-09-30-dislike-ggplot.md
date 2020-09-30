@@ -14,10 +14,9 @@ ggplot[2] graphics ...
 
 **Base graphics**
 
-Running
+With base graphics, running
 
 {% highlight r linenos=table %}
-library(ggplot2)
 d <- data.frame(x=rnorm(1e8))
 system.time(hist(x))
 {% endhighlight %}
@@ -26,26 +25,24 @@ produces
      user  system elapsed
     0.044   0.004   0.052
 ```
+whereas with ggplot
 
-**ggplot2 graphics**
-
-
-{% highlight text %}
-## Error in ggplot(d): could not find function "ggplot"
+{% highlight r linenos=table %}
+library(ggplot2)
+system.time({p<-ggplot(d) + aes(x=x) + geom_histogram();print(p)})
 {% endhighlight %}
-
-
-
-{% highlight text %}
-## Timing stopped at: 0 0 0.002
-{% endhighlight %}
-produces
+we get
 ```
   `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
      user  system elapsed
    43.877  13.766  60.200
 ```
 
+In this case, the base-graphics result is completed while my finger is still
+rising from the 'return' key, while with ggplot, I have to wait a full minute.
+
+I prefer using tools that don't make my brand-new machine act like something
+from the 1980s.
 
 # References and resources
 
