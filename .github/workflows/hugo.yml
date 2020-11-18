@@ -1,0 +1,20 @@
+name: Deploy to github page
+on:
+push:
+    branches:
+    - master
+
+jobs:
+hugo-action:
+    runs-on: macOS-latest
+    name: Build Hugo Pages
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Hugo site and deploy 2 github page
+      uses: wxdlong/hugo-action@master
+      with:
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+        cname: 'https://ycat.top'
+        branch: 'master'
