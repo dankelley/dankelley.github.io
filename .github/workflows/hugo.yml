@@ -16,5 +16,5 @@ jobs:
         uses: wxdlong/hugo-action@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-        cname: 'http://dankelley.github.io'
-        branch: 'master'
+          cname: 'http://dankelley.github.io'
+          branch: 'master'
