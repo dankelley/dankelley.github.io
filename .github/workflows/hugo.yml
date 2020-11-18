@@ -6,12 +6,13 @@ on:
 
 jobs:
   hugo-action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Build Hugo Pages
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-    - name: Hugo site and deploy to github page
+
+    - name: Hugo site and deploy 2 github page
       uses: wxdlong/hugo-action@master
       with:
         access_token: ${{ secrets.ACCESS_TOKEN }}
