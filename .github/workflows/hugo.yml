@@ -1,16 +1,16 @@
 name: Deploy to github page
 on:
-push:
+  push:
     branches:
-    - master
+      - master
 
 jobs:
-hugo-action:
+  hugo-action:
     runs-on: macOS-latest
     name: Build Hugo Pages
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v1
 
     - name: Hugo site and deploy 2 github page
       uses: wxdlong/hugo-action@master
