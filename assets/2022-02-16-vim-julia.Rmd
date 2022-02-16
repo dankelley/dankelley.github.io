@@ -24,33 +24,32 @@ same time.
    a block of code ended with a blank line or with the end of file.)
 
 4. Move from paragraph to paragraph, running each.  Or, just don't use
-   paragraphs.
+   paragraphs, in which case use either `C-c C-c` or `<space>j`, as you wish.
 
 # Setup
 
 This requires editing some dot files.  I am not going to explain the details of
 how this works, and I cannot claim that this will work on all systems.
 
-1. Edit your `~/.zshrc` file (if you use the Z shell, or `~/.bashrc` if you use
-   bash, etc), adding the following.  (I got this from
-   https://proceed-to-decode.com/posts/vim-tmux-julia but the instructions
-   there assumed you were not already in tmux.)
+## Edit `~/.zshrc` (or similar)
+
+If you use the Z shell, edit your `~/.zshrc` file, adding the following (see
+e.g. References 1 and 2). (If you use another shell, edit the appropriate file
+in a similar way.)
 
 ```
 function J() {
-    tmux  send-keys "vim $1" Enter \; \
-        split-window -v \; \
-        rename-window julia \; \
-        send-keys "julia" Enter \; \
-        select-pane -t 0 \;
-        }
+tmux send-keys "vim $1" Enter \; \
+split-window -v \; \
+rename-window julia \; \
+send-keys "julia" Enter \; \
+select-pane -t 0 \;
+}
 ```
 
 2. Edit your `~/.vimrc` file, adding the following to your Plug setup.  I got
-   much of this from https://www.youtube.com/watch?v=GazrDjcdeG4 at 15:52,
-   although there are lots of other sources dealing with this sort of thing.
-   The remapping of <Space>j is something I made up, corresponding to <Space>r
-   in R mode.
+   much of this from references 1 and 2. The remapping of <Space>j is something
+   I made up, corresponding to <Space>r in R mode.
 ```
 " Slime
 let g:slime_target = "tmux"
@@ -64,6 +63,11 @@ autocmd Filetype julia nnoremap <Space>j :SlimeSendCurrentLine<cr>
 
 # References and resources
 
-1. Jekyll source code for this blog entry: [2022-02-16-vim-jullia](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2022-02-16-vim-julia.Rmd)
+1. https://proceed-to-decode.com/posts/vim-tmux-julia
+
+2. https://www.youtube.com/watch?v=GazrDjcdeG4 starting at 15:52
+
+3. Jekyll source code for this blog entry:
+   [2022-02-16-vim-jullia](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2022-02-16-vim-julia.Rmd)
 
 
