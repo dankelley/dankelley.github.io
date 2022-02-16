@@ -6,7 +6,7 @@ category: julia
 year: 2022
 month: 2
 day: 16
-summary:I show how I set up neovim so that I could run Julia from within the editor.  This presumes that tmux is running.
+summary: I show how I set up neovim so that I could run Julia from within the editor.  This presumes that tmux is running.
 ---
 
 # How to use this setup
@@ -60,4 +60,10 @@ let g:slime_dont_ask_default = 1
 autocmd Filetype julia xnoremap <Space>j :SlimeSendCurrentLine<cr>
 autocmd Filetype julia nnoremap <Space>j :SlimeSendCurrentLine<cr>
 ```
+
+
+# References and resources
+
+1. Jekyll source code for this blog entry: [2022-02-16-vim-jullia](https://raw.github.com/dankelley/dankelley.github.io/master/assets/2022-02-16-vim-julia.Rmd)
+
 
