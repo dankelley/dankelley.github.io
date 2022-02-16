@@ -50,8 +50,8 @@ select-pane -t 0 \;
 **Step 2:** edit `~/.vimrc` (or similar) file
 
 Edit your `~/.vimrc` file, adding the following to your Plug setup.  I got much
-of this from references 1 and 2. The remapping of <Space>j is something I made
-up, corresponding to <Space>r in R mode.
+of this from references 1 and 2. The remapping of `<Space>j` is something I made
+up, corresponding to `<Space>r` in R mode.
 
 ```
 " Slime
