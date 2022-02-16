@@ -62,7 +62,7 @@ force:
 	#Next line added 2014-12-13 to get figure inclusion in the 2013*solstice entry
 	-rm -rf ../figs/`basename $@ .md`
 	# FIXME: check that we have figures!
-	-mv figs/`basename $@ .md` ../figs
+	#-mv figs/`basename $@ .md` ../figs
 	echo "Now cd .. ; make ; git add . ; git commit -m . ; git push"
 
 
