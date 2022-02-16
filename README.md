@@ -16,3 +16,6 @@ topic, of course). This will create some files, and at the end you'll see
 a message telling you what to do next, namely to go up a directory, type `make`
 and then git add/commit/push.
 
+Visit https://dankelley.github.io/blog/ (perhaps after waiting 10 minutes) to
+see if it worked.
+
